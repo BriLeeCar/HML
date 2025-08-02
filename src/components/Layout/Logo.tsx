@@ -8,20 +8,9 @@ export const Logo = ({ ...props }: Props) => (
 			props.className,
 		)}
 	>
-		{/* <img
-			className='w-[2rem] relative h-[2rem] overflow-hidden shrink-0'
-			alt=''
-			src='lucide/plane.svg'
-		/> */}
-		<div className='relative leading-[150%]'>
-			<span>
-				<span>help</span>
-				<span className='text-[0.75rem]'>{` `}</span>
-			</span>
-			<i className='font-bold'>
-				<span>me</span>
-				<span className='text-[0.75rem]'>{` `}</span>
-			</i>
+		<div className='flex items-center font-serif'>
+			<span>help</span>
+			<span className='italic font-bold mr-0.5'>me</span>
 			<span>leave</span>
 		</div>
 	</div>

@@ -9,7 +9,12 @@ export const Layout = ({ className, children }: Props<'body'>) => {
 	return (
 		<body className={className}>
 			<Header />
-			<main className={cn('md:container pb-12 md:p-6 px-10', css)}>
+			<main
+				className={cn(
+					'md:not-[*:#homeIllistration]:container pb-12 md:p-6 px-10',
+					css,
+				)}
+			>
 				{children}
 			</main>
 			<Footer className={css} />
