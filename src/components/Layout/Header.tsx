@@ -74,7 +74,6 @@ const RightNav = () => {
 		<div className='hidden lg:flex flex-col items-start justify-end gap-4 whitespace-nowrap fixed left-6 bottom-6'>
 			{/* Add navigation items here */}
 			<RightIcon />
-			<a href='/signup'>Sign Up</a>
 		</div>
 	);
 };
