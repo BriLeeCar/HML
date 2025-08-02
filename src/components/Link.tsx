@@ -1,10 +1,13 @@
 import NextLink from 'next/link';
-import { cn } from '../util/cn';
+import { cn } from '~/util/cn';
 
-export const Link = ({
-	size = 'md',
-	...props
-}: Props<typeof NextLink> & { size: 'sm' | 'md' | 'lg' }) => {
+/**
+ * 
+ * @param size - The size of the link, can be 'sm', 'md', or 'lg'. Defaults to 'md'.
+ * @param props - Additional properties to apply to the link.
+
+ */
+export const Link = ({ size = 'md', ...props }: Props.Link) => {
 	return (
 		<NextLink
 			{...props}

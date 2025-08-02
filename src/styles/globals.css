@@ -1,28 +1,69 @@
 @import 'tailwindcss';
 
 :root {
-	--background: #ffffff;
-	--foreground: #171717;
+	--background: light-dark(white, #0a0a0a);
+	--foreground: light-dark(#171717, #f1f0f1);
 }
 
 @theme inline {
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
+	--color-accent-50: var(--color-purple-50);
+	--color-accent-100: var(--color-purple-100);
+	--color-accent-200: var(--color-purple-200);
+	--color-accent-300: var(--color-purple-300);
+	--color-accent-400: var(--color-purple-400);
+	--color-accent-500: var(--color-purple-500);
+	--color-accent-600: var(--color-purple-600);
+	--color-accent-700: var(--color-purple-700);
+	--color-accent-800: var(--color-purple-800);
+	--color-accent-900: var(--color-purple-900);
+	--color-accent-950: var(--color-purple-950);
+
+	--color-zinc-150: #f1f0f1;
+
 	--font-sans: var(--font-inter-sans);
-	--font-serif: var(--font-playfair-display);
+	--font-serif: var(--font-playfair);
+	--font-playfair: var(--font-playfair);
+
+	--heading-accent-line-color: currentColor;
+	--heading-accent-text-color: initial;
+	--heading-accent-bg-color: initial;
+
+	--height-fill: -webkit-fill-available;
 }
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--background: #0a0a0a;
-		--foreground: #ededed;
+		--background: var(--color-zinc-950);
+		--foreground: var(--color-zinc-150);
 	}
 }
 
+html {
+	background: var(--background);
+	@media (prefers-color-scheme: dark) {
+		background: var(--color-zinc-950);
+	}
+}
 body {
 	background: var(--background);
+	&:has(.modal) {
+		overflow: hidden;
+	}
+	main > *:first-child {
+		margin-top: 0;
+	}
+}
+
+body,
+html {
 	color: var(--foreground);
 	font-family: Inter;
+	min-width: 100vw;
+	min-height: 100vh;
+	margin: 0;
+	padding: 0;
 }
 
 a:-webkit-any-link:focus-visible {
@@ -36,4 +77,67 @@ button:focus-visible {
 	outline-offset: 0.35rem;
 	border-radius: 0.25rem;
 	text-decoration-color: --alpha(var(--color-purple-500) / 0.5);
+}
+
+hgroup {
+	*:is(h1, h2, h3, h4, h5, h6) {
+		/* border-bottom: 2px solid var(--heading-accent-line-color); */
+		padding-bottom: 0px;
+		margin-bottom: 1px;
+		position: relative;
+		/* text-decoration: 1px solid var(--heading-accent-line-color) underline; */
+		/* text-underline-offset: 3px; */
+		text-shadow:
+			1px 1px 0px var(--color-background),
+			2px 0px 0px var(--color-background);
+	}
+}
+
+@media screen and (min-width: var(--breakpoint-lg)) {
+	header {
+		box-shadow:
+			0 -5px 10px hsl(0deg 0% 0% / 10%),
+			0 0px 10px hsl(0deg 0% 0% / 20%);
+	}
+}
+
+@utility heading-accent-line-* {
+	--heading-accent-line-color: --value(--color-*);
+}
+
+@utility heading-accent-text-* {
+	/* --heading-accent-text-color: --value(--color-*);
+	--heading-accent-bg-color: --value(--color-background);
+
+	color: var(--heading-accent-text-color, var(--foreground));
+	line-height: 1;
+	text-decoration: underline 1.5px solid var(--heading-accent-line-color);
+	text-underline-offset: 3px;
+	background-color: var(--heading-accent-bg-color, var(--background)); */
+	&::after {
+		content: ' ';
+	}
+}
+
+@utility modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 100vh;
+	z-index: 1000;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+@utility click {
+	cursor: pointer;
+}
+
+@utility focus-button {
+	&:focus {
+		outline: 3px solid var(--color-purple-500);
+		outline-offset: 0.35rem;
+		border-radius: 0.25rem;
+		text-decoration-color: --alpha(var(--color-purple-500) / 0.5);
+	}
 }

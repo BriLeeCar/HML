@@ -1,4 +1,4 @@
-export const EnvelopeIcon = ({ solid }: Props.Icon) => {
+export const EnvelopeIcon = ({ solid }: Props.IconPath) => {
 	return solid ? (
 		<>
 			<path d='m12.3 13.52 9.11-6.83C20.57 5.1 18.92 4 17 4H7C5.08 4 3.43 5.1 2.59 6.69l9.11 6.83c.18.13.42.13.6 0' />

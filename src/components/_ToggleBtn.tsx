@@ -1,8 +1,8 @@
 'use client';
 
 import { MouseEvent, useState } from 'react';
-import { cn } from '../util/cn';
-import { Icon, IconKeys } from './Icon';
+import { cn } from '~/util/cn';
+import { Icon } from './Icon';
 
 export const ToggleBtn = ({
 	isToggled = false,
@@ -11,7 +11,7 @@ export const ToggleBtn = ({
 	...props
 }: Omit<Props<'button'>, 'title'> & {
 	isToggled?: boolean;
-	icon: IconKeys;
+	icon: IconKey;
 	title: Array<string>;
 }) => {
 	const [toggled, setToggled] = useState(isToggled);

@@ -1,4 +1,4 @@
-export const SearchIcon = ({ solid }: Props.Icon) => {
+export const SearchIcon = ({ solid }: Props.IconPath) => {
 	return solid ? (
 		<>
 			<path d='M10 18c1.85 0 3.54-.63 4.9-1.69l4.4 4.4c.2.2.45.29.71.29s.51-.1.71-.29a.996.996 0 0 0 0-1.41l-4.4-4.4a8 8 0 0 0 1.69-4.9c0-4.41-3.59-8-8-8S2 5.59 2 10s3.59 8 8 8' />

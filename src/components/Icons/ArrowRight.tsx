@@ -1,4 +1,4 @@
-export const ArrowRightIcon = ({ solid }: Props.Icon) => {
+export const ArrowRightIcon = ({ solid }: Props.IconPath) => {
 	return solid ? (
 		<>
 			<path d='M6 12c0 .55.45 1 1 1h5v2.4c0 .64.74.98 1.23.58l4.08-3.4c.36-.3.36-.85 0-1.15l-4.08-3.4a.75.75 0 0 0-1.23.58v2.4H7c-.55 0-1 .45-1 1Z' />

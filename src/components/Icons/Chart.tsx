@@ -1,4 +1,4 @@
-export const ChartIcon = ({ solid }: Props.Icon) => {
+export const ChartIcon = ({ solid }: Props.IconPath) => {
 	return solid ? (
 		<>
 			<path d='M8.5 10h8A2.5 2.5 0 0 0 19 7.5v-1A2.5 2.5 0 0 0 16.5 4h-8A2.5 2.5 0 0 0 6 6.5v1A2.5 2.5 0 0 0 8.5 10M17 6.5v1c0 .28-.22.5-.5.5H12V6h4.5c.28 0 .5.22.5.5M19.5 12h-11A2.5 2.5 0 0 0 6 14.5v1A2.5 2.5 0 0 0 8.5 18h11a2.5 2.5 0 0 0 2.5-2.5v-1a2.5 2.5 0 0 0-2.5-2.5m.5 3.5c0 .28-.22.5-.5.5H16v-2h3.5c.28 0 .5.22.5.5z' />

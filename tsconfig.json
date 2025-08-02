@@ -21,9 +21,11 @@
 		"paths": {
 			"@/*": ["./src/app/*"],
 			"~/components/*": ["./src/components/*"],
+			"~/components": ["./src/components/index.ts"],
 			"~/styles/*": ["./src/styles/*"],
 			"~/cn": ["./src/util/cn.ts"],
-			"~/util/*": ["./src/util/*"]
+			"~/util/*": ["./src/util/*"],
+			"~/data/*": ["./src/data/*"]
 		},
 		"typeRoots": ["./node_modules/@types", "./@types"]
 	},

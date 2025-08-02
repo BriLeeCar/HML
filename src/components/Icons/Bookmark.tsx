@@ -1,4 +1,4 @@
-export const BookmarkIcon = ({ solid }: Props.Icon) => {
+export const BookmarkIcon = ({ solid }: Props.IconPath) => {
 	return solid ? (
 		<path d='M15.5 3h-7C6.57 3 5 4.57 5 6.5v13.05c0 .37.21.71.54.89.15.08.31.12.46.11.2 0 .4-.06.57-.18L11.43 17c.34-.24.8-.24 1.14 0l4.86 3.37c.31.21.7.24 1.03.06.33-.17.54-.51.54-.89V6.5C19 4.57 17.43 3 15.5 3' />
 	) : (

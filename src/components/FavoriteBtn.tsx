@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '../util/cn';
+import { cn } from '~/util/cn';
 import { ToggleBtn } from './_ToggleBtn';
 
 export const FavoriteBtn = ({
