@@ -1,3 +1,4 @@
+@layer theme, base, mui, components, utilities;
 @import 'tailwindcss';
 
 :root {
@@ -8,6 +9,7 @@
 @theme inline {
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
+
 	--color-accent-50: var(--color-purple-50);
 	--color-accent-100: var(--color-purple-100);
 	--color-accent-200: var(--color-purple-200);
@@ -22,9 +24,8 @@
 
 	--color-zinc-150: #f1f0f1;
 
-	--font-sans: var(--font-inter-sans);
-	--font-serif: var(--font-playfair);
-	--font-playfair: var(--font-playfair);
+	--font-sans: var(--font-roboto);
+	--font-serif: var(--font-roboto-serif);
 
 	--heading-accent-line-color: currentColor;
 	--heading-accent-text-color: initial;
@@ -59,7 +60,7 @@ body {
 body,
 html {
 	color: var(--foreground);
-	font-family: Inter;
+	font-family: var(--font-roboto);
 	min-width: 100vw;
 	min-height: 100vh;
 	margin: 0;

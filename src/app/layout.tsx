@@ -1,20 +1,24 @@
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
+import { ThemeProvider } from '@mui/material/styles';
 import type { Metadata } from 'next';
-import { Inter, Noto_Serif } from 'next/font/google';
+import { Roboto, Roboto_Serif } from 'next/font/google';
+import { cn } from '~/cn';
 import { Layout } from '~/components/Layout/Base';
+import theme from '~/styles/theme';
 import '../styles/globals.css';
 
-const interSans = Inter({
-	variable: '--font-inter-sans',
-	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-	subsets: ['latin'],
+const roboto = Roboto({
+	variable: '--font-roboto',
+	weight: 'variable',
+	subsets: ['latin', 'latin-ext'],
+	style: ['italic', 'normal'],
 });
 
-const abril = Noto_Serif({
-	variable: '--font-playfair',
+const robotoSerif = Roboto_Serif({
+	variable: '--font-roboto-serif',
 	weight: 'variable',
-	subsets: ['latin'],
-	style: 'normal',
-	display: 'swap',
+	subsets: ['latin', 'latin-ext'],
+	style: ['italic', 'normal'],
 });
 
 export const metadata: Metadata = {
@@ -31,9 +35,19 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<Layout className={`${interSans.variable} ${abril.variable}`}>
-				{children}
-			</Layout>
+			<AppRouterCacheProvider options={{ enableCssLayer: true }}>
+				<ThemeProvider theme={theme}>
+					<Layout
+						className={cn(
+							'overflow-x-hidden',
+							roboto.variable,
+							robotoSerif.variable,
+						)}
+					>
+						{children}
+					</Layout>
+				</ThemeProvider>
+			</AppRouterCacheProvider>
 		</html>
 	);
 }

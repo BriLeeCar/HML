@@ -25,7 +25,7 @@ Section.Heading = ({
 	size = 'md',
 	...props
 }: Props.Heading & { brow?: ReactNode }) => {
-	return (
+	return brow ? (
 		<hgroup>
 			<Heading
 				{...props}
@@ -38,12 +38,23 @@ Section.Heading = ({
 			>
 				{children}
 			</Heading>
-			{brow && (
-				<p className='font-medium uppercase text-xs tracking-wide px-4 text-end text-zinc-500'>
-					{brow}
-				</p>
-			)}
+
+			<p className='font-medium uppercase text-xs tracking-wide px-4 text-end text-zinc-500'>
+				{brow}
+			</p>
 		</hgroup>
+	) : (
+		<Heading
+			{...props}
+			level={level}
+			size={size}
+			className={cn(
+				brow && 'border-b-2 border-accent-200 leading-none mb-0.5 ',
+				props.className,
+			)}
+		>
+			{children}
+		</Heading>
 	);
 };
 

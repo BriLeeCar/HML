@@ -13,7 +13,7 @@ export const LinkColumn = ({ column }: { column: NavColumn }) => {
 	return (
 		<>
 			<MdLinkColumn column={column} />
-			<SmLinkColumn column={column} open={open} setOpen={setOpen} />
+			{/* <SmLinkColumn column={column} open={open} setOpen={setOpen} /> */}
 		</>
 	);
 };
@@ -56,8 +56,10 @@ const SmLinkColumn = ({
 	return (
 		<div className='md:hidden flex flex-col items-center justify-start w-full my-0.25 '>
 			<button
-				className='flex uppercase tracking-widest  bg-foreground w-full click hover:bg-foreground/80 font-medium items-center text-background'
+				className='flex uppercase tracking-widest  bg-zinc-200 w-full click hover:bg-foreground/80 font-medium items-center text-foreground'
 				onClick={() => setOpen(!open)}
+				aria-expanded={open}
+				aria-controls={`footer-nav-${column.columnTitle.toLowerCase().replace(/\s+/g, '-')}`}
 			>
 				<TouchTarget>
 					<span className='basis-full py-6 '>{column.columnTitle}</span>
@@ -73,7 +75,7 @@ const SmLinkColumn = ({
 			</button>
 			<AnimatePresence>
 				{open && (
-					<motion.div
+					<motion.menu
 						layout
 						initial={{
 							height: 0,
@@ -95,7 +97,7 @@ const SmLinkColumn = ({
 								/>
 							);
 						})}
-					</motion.div>
+					</motion.menu>
 				)}
 			</AnimatePresence>
 		</div>

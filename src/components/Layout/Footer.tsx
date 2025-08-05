@@ -43,20 +43,21 @@ export const Footer = ({ className }: Props<'footer'>) => {
 				className,
 			)}
 		>
-			<div className='flex flex-col md:flex-row items-center  w-full'>
+			<nav className='flex flex-col md:flex-row items-center  w-full'>
 				<LayoutGroup>
 					{Links.map((column, i) => (
 						<LinkColumn key={i} column={column} />
 					))}
 				</LayoutGroup>
-			</div>
+			</nav>
 			<div className='mb-10 md:mb-16 md:my-2 flex flex-col md:flex-row justify-around w-full'>
 				<Logo className='hidden md:flex ' />
 				<Copyright />
 				<LanguageSelector />
 				<button
-					className='bg-foreground/50 text-background rounded-full items-center flex justify-center pb-1 px-0.5 absolute bottom-4 left-4 cursor-pointer hover:bg-foreground'
+					className='bg-zinc-200 dark:bg-zinc-800 text-foreground shadow-sm rounded-full items-center flex justify-center pb-1 px-0.5 absolute bottom-4 left-4 cursor-pointer hover:bg-foreground hover:text-background transition-all'
 					onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+					title='Scroll to top'
 				>
 					<Icon IconName='ChevronDownIcon' className='rotate-180 h-10 w-auto' />
 				</button>

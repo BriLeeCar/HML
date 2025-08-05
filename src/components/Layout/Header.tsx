@@ -1,6 +1,6 @@
 'use client';
 import { AnimatePresence, motion } from 'motion/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { usePortal } from '~/util/useModal';
 import { Icon } from '../Icon';
 import { Logo } from './Logo';
@@ -8,6 +8,8 @@ import { Logo } from './Logo';
 export const Header = () => {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const Mod = usePortal('menuModalPortal');
+
+	useEffect(() => {});
 
 	const handleMenuClick = () => {
 		if (menuOpen) {
@@ -18,14 +20,20 @@ export const Header = () => {
 	};
 
 	return (
-		<header className='w-3xl mx-auto flex items-start bg-zinc-150 dark:bg-zinc-950 lg:p-4 top-0 p-2 justify-between text-gray-700 dark:text-zinc-300  '>
-			<Logo className='whitespace-nowrap absolute left-6' />
+		<header className='w-full max-w-screen mx-auto flex items-start max-sm:bg-zinc-150 dark:bg-transparent lg:p-4 top-0 p-2 justify-between text-gray-700 dark:text-zinc-300 max-lg:sticky z-2 left-0'>
+			<Logo className='whitespace-nowrap lg:absolute left-6' />
 			<MobileMenuBtn handleMenuClick={handleMenuClick} />
 			<TopNav />
 			<RightNav />
-			<Mod.Portal isOpen={menuOpen} handleClick={handleMenuClick}>
-				Hey
-			</Mod.Portal>
+			<AnimatePresence>
+				<Mod.Portal
+					key='menuPortal'
+					isOpen={menuOpen}
+					handleClick={handleMenuClick}
+				>
+					Hey
+				</Mod.Portal>
+			</AnimatePresence>
 		</header>
 	);
 };
@@ -45,7 +53,7 @@ const MobileMenuBtn = ({
 	return (
 		<button
 			id='mobileMenuBtn'
-			className='text-gray-700 hover:text-gray-900 lg:hidden click'
+			className='dark:text-white text-gray-700 hover:text-gray-900 lg:hidden click'
 			onClick={handleMenuClick}
 		>
 			<Icon IconName='HamburgerIcon' className='h-10 w-10' />

@@ -51,7 +51,6 @@ export const usePortal = (elId: string) => {
 		handleClick: () => void;
 		isOpen: boolean;
 	}) => {
-		console.log('usePortal', elRef.current, isOpen);
 		return elRef.current
 			? createPortal(
 					<ModalWrapper isOpen={isOpen} handleClick={handleClick}>
@@ -81,6 +80,7 @@ const ModalWrapper = ({
 			<>
 				{isOpen && (
 					<motion.span
+						key='portalModal'
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
