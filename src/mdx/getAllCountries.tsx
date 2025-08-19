@@ -1,5 +1,1 @@
-import path from "path";
-
-export const getAllCountries = () => {
-    
-}
+export const getAllCountries = () => {};

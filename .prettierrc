@@ -3,5 +3,18 @@
 	"singleQuote": true,
 	"useTabs": true,
 	"tabWidth": 2,
-	"plugins": ["prettier-plugin-tailwindcss", "prettier-plugin-organize-imports"]
+	"experimentalTernaries": true,
+	"experimentalOperatorPosition": "start",
+	"trailingComma": "es5",
+	"bracketSameLine": true,
+	"singleAttributePerLine": true,
+	"printWidth": 70,
+	"semi": false,
+	"quoteProps": "as-needed",
+	"plugins": [
+		"prettier-plugin-organize-imports",
+		"prettier-plugin-tailwindcss"
+	],
+	"tailwindStyleSheet": "./src/styles/global.css",
+	"tailwindFunctions": ["cn", "cva"]
 }

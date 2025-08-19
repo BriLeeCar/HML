@@ -1,5 +1,5 @@
-import { ElementType } from 'react';
-import { cn } from '~/util/cn';
+import { ElementType } from 'react'
+import { cn } from '~/util/cn'
 
 /**
  *
@@ -16,23 +16,23 @@ export const Heading = ({
 	size = 'md',
 	...props
 }: Props.Heading) => {
-	const Tag = `h${level}` as ElementType;
+	const Tag = `h${level}` as ElementType
 	return (
 		<Tag
 			{...props}
 			className={cn(
-				`text-gray-900 dark:text-purple-200 font-serif mt-6 font-normal mb-2`,
-				size === 'title'
-					? 'text-5xl'
-					: size === 'lg'
-						? 'text-3xl'
-						: size === 'md'
-							? 'text-2xl'
-							: size === 'sm'
-								? 'text-xl'
-								: 'text-sm',
-				props.className,
+				`text-primary-foreground dark:text-accent-foreground mt-6 mb-2 font-serif font-normal`,
+				level == 2
+					&& 'scroll-m-20 border-b-1 pb-2 font-semibold tracking-tight italic first:mt-0',
+				size == 'title' ? 'text-7xl'
+				: size == '2xl' ? 'text-5xl'
+				: size == 'xl' ? 'text-4xl'
+				: size == 'lg' ? 'text-3xl'
+				: size == 'md' ? 'text-2xl'
+				: size == 'sm' ? 'text-xl'
+				: 'text-sm',
+				props.className
 			)}
 		/>
-	);
-};
+	)
+}

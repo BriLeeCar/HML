@@ -1,8 +1,22 @@
-import type { NextConfig } from 'next';
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
 	pageExtensions: ['tsx', 'ts', 'jsx', 'js', 'mdx'],
+	images: {
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'flagcdn.com',
+				port: '',
+				pathname: '/**',
+			},
+			{
+				protocol: 'https',
+				hostname: 'images.unsplash.com',
+			},
+		],
+	},
 	/* config options here */
-};
+}
 
-export default nextConfig;
+export default nextConfig

@@ -1,17 +1,25 @@
-import { createContext, ReactNode } from 'react';
+'use client'
 
-type UserPrefs = {
-	theme?: 'light' | 'dark';
-	favorites: string[];
-	bookmarks: string[];
-};
-export const UserContext = createContext<UserPrefs>({
-	favorites: [],
-	bookmarks: [],
-});
+import { ThemeProvider as NextThemesProvider } from 'next-themes'
+import { ReactNode } from 'react'
 
-export const Providers = ({children}: {children: ReactNode}) => {
-    <UserContext.Provider value={{favorites: [], bookmarks: []}}>
-        {children}
-    </UserContext.Provider>
+const ThemeProvider = ({
+	children,
+	...props
+}: React.ComponentProps<typeof NextThemesProvider>) => {
+	return (
+		<NextThemesProvider {...props}>{children}</NextThemesProvider>
+	)
+}
+
+export const Providers = ({ children }: { children: ReactNode }) => {
+	return (
+		<ThemeProvider
+			attribute={'class'}
+			defaultTheme='system'
+			enableSystem
+			disableTransitionOnChange>
+			{children}
+		</ThemeProvider>
+	)
 }
