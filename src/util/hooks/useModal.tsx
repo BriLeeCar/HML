@@ -4,7 +4,8 @@ import { motion } from 'motion/react'
 import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { cn } from '~/cn'
-import { Icon, TouchTarget } from '~/components'
+import { Icon } from '~/components'
+import { TouchTarget } from '~/components/ui'
 
 /**
  *
