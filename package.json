@@ -6,8 +6,7 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint",
-		"add": "npx shadcn@latest add %npm_config_c%"
+		"lint": "eslint . "
 	},
 	"dependencies": {
 		"@headlessui/react": "^2.2.7",
@@ -35,6 +34,7 @@
 	"devDependencies": {
 		"@eslint/eslintrc": "^3.3.1",
 		"@eslint/js": "^9.33.0",
+		"@next/eslint-plugin-next": "^15.5.0",
 		"@tailwindcss/postcss": "^4.1.12",
 		"@types/node": "^24.3.0",
 		"@types/react": "^19.1.10",
@@ -42,6 +42,8 @@
 		"clsx": "^2.1.1",
 		"eslint": "^9.33.0",
 		"eslint-config-next": "^15.5.0",
+		"eslint-plugin-react": "^7.37.5",
+		"globals": "^16.3.0",
 		"prettier": "^3.6.2",
 		"prettier-plugin-organize-imports": "^4.2.0",
 		"prettier-plugin-tailwindcss": "^0.6.14",
