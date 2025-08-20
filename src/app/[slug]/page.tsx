@@ -1,4 +1,13 @@
+import fs from 'fs'
 import { MDXProcessor } from '~/MDX/ProcessMDX'
+
+export const generateStaticParams = async () => {
+	const pages = fs.readdirSync('src/data/pages')
+	return pages.map((page) => {
+		const slug = page.replace('.mdx', '')
+		return { slug }
+	})
+}
 
 const Page = async ({
 	params,

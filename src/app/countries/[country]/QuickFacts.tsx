@@ -2,17 +2,19 @@ import { tCountryRest } from '~/data/baseCountryApi'
 
 export const QuickFacts = ({ ...props }: tCountryRest) => {
 	return (
-		<aside>
-			<h2 className='text-xl font-semibold'>Quick Facts</h2>
-			<ul className='list-disc pl-5'>
+		<aside className='bg-card border-border flex grow basis-[80%] flex-wrap items-start justify-start gap-1 rounded-lg border-1 p-4 shadow-md'>
+			<ul className='mt-0 grow basis-1/3 list-disc pl-5'>
 				<Fact label='Country Code'>{props.cca2}</Fact>
 				<Fact label='UN Member'>{props.unMember ? '✅' : '❌'}</Fact>
 				<Fact label='Name'>
-					{props.name.common} ({props.name.official})
+					{props.name.common}
+					<br />({props.name.official})
 				</Fact>
 				<Fact label='Population'>
 					{props.population.toLocaleString()}
 				</Fact>
+			</ul>
+			<ul className='mt-0 grow basis-1/3 list-disc pl-5'>
 				<Fact label='Region'>
 					{props.subregion} ({props.region})
 				</Fact>
@@ -37,26 +39,6 @@ export const QuickFacts = ({ ...props }: tCountryRest) => {
 					<strong>Languages</strong>:{' '}
 					{Object.values(props.languages).join(', ')}
 				</li>
-				<li>
-					<a
-						href={props.maps.googleMaps}
-						target='_blank'
-						rel='noopener noreferrer'>
-						View on Google Maps
-					</a>
-				</li>
-				<li>
-					<a
-						href={props.maps.openStreetMaps}
-						target='_blank'
-						rel='noopener noreferrer'>
-						View on OpenStreetMaps
-					</a>
-				</li>
-			</ul>
-
-			<ul className='grid grid-cols-2 gap-4'>
-				<F label='Capital'>{props.capital[0]}</F>
 			</ul>
 		</aside>
 	)
@@ -77,19 +59,6 @@ const Fact = ({
 				</>
 			)}
 			{props.children || props.value?.toString() || 'N/A'}
-		</li>
-	)
-}
-
-const F = ({
-	label,
-	...props
-}: Props & {
-	label: string
-}) => {
-	return (
-		<li>
-			<strong>{label}</strong>: {props.children || 'N/A'}
 		</li>
 	)
 }
