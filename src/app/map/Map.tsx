@@ -121,7 +121,7 @@ export const Path = ({
 				onClick={() => {
 					if (canClick)
 						redirect(
-							`/countries/${name.toLowerCase()}`,
+							`/countries/${abb.toLowerCase()}`,
 							'push' as RedirectType
 						)
 				}}

@@ -43,6 +43,12 @@ type tMapAction =
 	  }
 // #endregion ?
 
+const redirectLink = (
+	country: Omit<tCountryPaths[string], 'path'>
+) => {
+	return `/countries/${country.abbr.toLowerCase()}`
+}
+
 const mapReducer = (state: tMapState, action: tMapAction) => {
 	if (action.type) {
 		switch (action.type) {
@@ -177,8 +183,8 @@ export const WorldMap = ({
 
 	const dragControl = useDragControls()
 
-	const handleSelected = (country: string) => {
-		redirect(`/countries/${country}`)
+	const handleSelected = (country: tCountryPaths[string]) => {
+		redirect(redirectLink(country))
 	}
 
 	if (!countriesWithData) return null

@@ -6,9 +6,10 @@ import { Button, Input } from '~/components/ui'
 import { tCountryPaths } from './Map'
 
 // #region ? TYPES
-type tCountry = {
+export type tCountry = {
 	abbr: string
 	name: string
+	path: string
 	tier: 0 | 1 | 2 | 3 | 999
 	haveData: boolean
 }
@@ -49,7 +50,7 @@ export const Search = ({
 	actionSelected,
 }: {
 	countries: tCountryPaths
-	actionSelected: (country: string) => void
+	actionSelected: (country: tCountryPaths[string]) => void
 }) => {
 	const [searchState, searchDispatch] = useReducer(searchReducer, {
 		countries: Object.keys(countries).map((key) => {
@@ -97,7 +98,7 @@ export const Search = ({
 										key={res.abbr}
 										item={res}
 										onClick={() => {
-											actionSelected(res.name)
+											actionSelected(res)
 											searchDispatch({ type: 'toggle' })
 										}}
 									/>
