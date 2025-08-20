@@ -17,13 +17,13 @@ export const NowBtn = ({
 			size={'sm'}
 			{...props}
 			className={cn(
-				'click mb-4 h-auto w-full flex-col items-center justify-center gap-0 py-2 whitespace-normal sm:flex-row sm:gap-1.25 md:justify-around md:gap-2',
+				'click mb-4 h-auto w-full flex-col items-center justify-center gap-0 py-2 whitespace-normal sm:flex-row sm:gap-1.25 md:justify-around md:gap-2 lg:justify-center',
 				props.className || ''
 			)}>
-			<span className='text-xl font-black uppercase sm:text-5xl'>
+			<span className='text-xl font-black uppercase sm:text-5xl lg:text-end'>
 				<span className='sm:hidden'>Help Me Leave </span>NOW
 			</span>
-			<span className='text-sm uppercase md:w-1/2 md:text-end md:text-base/4 lg:w-full'>
+			<span className='text-sm uppercase md:w-1/2 md:text-end md:text-base/4 lg:text-start lg:text-lg'>
 				I Desperate Need to Seek Safety
 			</span>
 		</Button>
@@ -78,7 +78,7 @@ export const MapBtn = () => {
 				onClick={handleClick}
 				variant={'outline'}
 				size={'lg'}
-				className='text-primary-foreground fixed right-10 hidden items-center rounded-lg text-2xl font-extrabold min-[1200px]:flex'>
+				className='text-foreground fixed right-10 hidden items-center rounded-lg text-2xl font-extrabold min-[1200px]:flex'>
 				Explore the Map{' '}
 				<Icon
 					IconName='ChevronRightIcon'
