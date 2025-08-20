@@ -26,8 +26,7 @@
 			"~/cn": ["./src/util/cn.ts"],
 			"~/util/*": ["./src/util/*"],
 			"~/data/*": ["./src/data/*"],
-			"~/MDX/*": ["./src/mdx/*"],
-			"auth": ["./auth.ts"]
+			"~/MDX/*": ["./src/mdx/*"]
 		},
 		"typeRoots": ["./node_modules/@types", "./@types"]
 	},

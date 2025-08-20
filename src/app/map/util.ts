@@ -45,7 +45,9 @@ export type tCountryPathData = {
 	haveData: boolean
 	tier: 0 | 1 | 2 | 3 | 999
 }
-
+export type tCountryPathDataWithName = tCountryPathData & {
+	name: tCountryKeys
+}
 export type tCountryKeys = keyof typeof countryPaths
 export type tCountryPaths = Record<tCountryKeys, tCountryPathData>
 // #endregion ! --------------------
@@ -56,8 +58,7 @@ export type tMapSVGProps = {
 } & MotionProps
 
 export type tMapPathElProps = Omit<Props<'path'>, 'name'>
-	& tCountryPathData & {
-		name: tCountryKeys
+	& tCountryPathDataWithName & {
 		canClick?: boolean
 		handleInView?: (country: string, inView: boolean) => void
 	}
@@ -68,11 +69,7 @@ export const isUS = ({
 	tier,
 	abbr,
 	name,
-}: {
-	tier?: tCountryPathData['tier']
-	abbr?: tCountryPathData['abbr']
-	name?: tCountryKeys
-}) => {
+}: Pick<tCountryPathDataWithName, 'tier' | 'abbr' | 'name'>) => {
 	return (
 		tier == 999 || abbr == 'US' || name == 'United States of America'
 	)

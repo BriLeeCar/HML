@@ -1,13 +1,7 @@
+import { tCountryPaths } from '@/map/util'
 import countryPaths from '~/data/mapPathData.json'
 
-export const getCountriesWithData = (): {
-	[key: string]: {
-		abbr: string
-		tier: 0 | 1 | 2 | 3 | 999
-		haveData: boolean
-		path: string
-	}
-} => {
+export const getCountriesWithData = (): tCountryPaths => {
 	const countryKeys = Object.keys(countryPaths).filter((country) => {
 		return (
 			countryPaths[country as keyof typeof countryPaths].haveData
@@ -16,7 +10,7 @@ export const getCountriesWithData = (): {
 		)
 	})
 
-	const countriesWithData = {}
+	const countriesWithData = {} as tCountryPaths
 	countryKeys.forEach((country) => {
 		const { abbr, tier, haveData, path } =
 			countryPaths[country as keyof typeof countryPaths]

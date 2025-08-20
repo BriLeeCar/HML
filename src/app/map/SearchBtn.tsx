@@ -3,21 +3,19 @@ import { ReactNode, useReducer } from 'react'
 import { cn } from '~/cn'
 import { Icon } from '~/components/Icon'
 import { Button, Input } from '~/components/ui'
-import { tCountryPaths } from './Map'
+import {
+	tCountryKeys,
+	tCountryPathData,
+	tCountryPathDataWithName,
+	tCountryPaths,
+} from './util'
 
 // #region ? TYPES
-export type tCountry = {
-	abbr: string
-	name: string
-	path: string
-	tier: 0 | 1 | 2 | 3 | 999
-	haveData: boolean
-}
 
 type tSearchState = {
 	searchQuery: string
 	isOpen: boolean
-	countries: Array<tCountry>
+	countries: Array<tCountryPathDataWithName>
 }
 type tSearchAction =
 	| { type: 'toggle' }
@@ -50,14 +48,14 @@ export const Search = ({
 	actionSelected,
 }: {
 	countries: tCountryPaths
-	actionSelected: (country: tCountryPaths[string]) => void
+	actionSelected: (country: tCountryPathData) => void
 }) => {
 	const [searchState, searchDispatch] = useReducer(searchReducer, {
 		countries: Object.keys(countries).map((key) => {
 			return {
-				...countries[key],
+				...countries[key as tCountryKeys],
 				name: key,
-			}
+			} as tCountryPathDataWithName
 		}),
 		searchQuery: '',
 		isOpen: false,
@@ -158,7 +156,8 @@ const SearchInput = ({
 const SearchItem = ({
 	item,
 	...props
-}: Props<'button'> & MotionProps & { item: tCountry }) => {
+}: Props<'button'>
+	& MotionProps & { item: tCountryPathDataWithName }) => {
 	return (
 		<motion.button
 			{...props}
