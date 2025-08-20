@@ -12,7 +12,7 @@ export const HeadingText = () => {
 	)
 }
 
-export const WithDashed = ({ ...props }: Props<'svg'>) => {
+const WithDashed = ({ ...props }: Props<'svg'>) => {
 	return (
 		<svg
 			{...props}

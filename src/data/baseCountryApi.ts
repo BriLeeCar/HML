@@ -29,17 +29,29 @@ export const countryBasics = async ({
 					:	c.cca2.toLowerCase() === searchString
 				)
 			}
-
-			const countryData = zCountryRest.parse(rawData[0])
-			if (countryData.currencies !== undefined) {
-				const exchangeRates = await getExchangeRate()
-				Object.keys(countryData.currencies).forEach((key) => {
-					Object.assign(countryData.currencies[key], {
-						exchangeRate: exchangeRates[key],
+			try {
+				const countryStatus = zCountryRest.safeParse(rawData[0])
+				if (!countryStatus.success) {
+					console.error(
+						'Country data validation failed:',
+						countryStatus.error.issues
+					)
+					return null
+				}
+				const countryData = countryStatus.data
+				if (countryData.currencies !== undefined) {
+					const exchangeRates = await getExchangeRate()
+					Object.keys(countryData.currencies).forEach((key) => {
+						Object.assign(countryData.currencies[key], {
+							exchangeRate: exchangeRates[key],
+						})
 					})
-				})
+				}
+				return countryData
+			} catch (error) {
+				console.error('Error processing country data:', error)
+				return null
 			}
-			return countryData
 		}
 	}
 }

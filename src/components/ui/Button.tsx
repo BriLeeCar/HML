@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import { cn } from '~/cn'
 
-export const buttonVariants = cva(
+const buttonVariants = cva(
 	[
 		'click',
 		// !! FOCUS VISUALS

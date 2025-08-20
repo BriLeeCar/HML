@@ -37,5 +37,3 @@ export const zTransform: {
 		.string()
 		.transform((val) => toTitleCase(val) as string),
 }
-
-export type tContinents = z.infer<typeof zContinents>

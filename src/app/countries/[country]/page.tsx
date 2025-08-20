@@ -1,44 +1,42 @@
 import fs from 'fs'
 import Image from 'next/image'
+import { notFound } from 'next/navigation'
 import { Heading } from '~/components/Heading'
 import { countryBasics } from '~/data/baseCountryApi'
+import countryPaths from '~/data/mapPathData.json'
 import { MDXProcessor } from '~/MDX/ProcessMDX'
 import { toTitleCase } from '~/util/text'
 import { QuickFacts } from './QuickFacts'
 
 export const generateStaticParams = async () => {
-	const countries = fs.readdirSync('src/data/country')
-	return countries.map((country) => {
-		const countryName = country.replace('.mdx', '')
-		return { country: countryName }
+	return Object.keys(countryPaths).map((countryName) => {
+		return {
+			country:
+				countryPaths[countryName as keyof typeof countryPaths].abbr,
+		}
 	})
 }
 
 const CountryPage = async ({ params }: Slug<{ country: string }>) => {
 	const { country: countryName } = await params
-	const data = await countryBasics({ country: countryName })
-	const content = new MDXProcessor(
-		`src/data/country/${countryName}.mdx`,
-		'path'
-	).removeTitle()
+	const data = await countryBasics({ abbr: countryName })
 
-	if (!data) {
-		return (
-			<div className='mx-auto max-w-3xl px-4 py-8'>
-				<Heading
-					level={2}
-					size={'title'}>
-					Country not found
-				</Heading>
-			</div>
-		)
+	if (!data || data == null) {
+		notFound()
 	}
+
+	const content =
+		fs.existsSync(`src/data/country/${countryName}.mdx`)
+		&& new MDXProcessor(
+			`src/data/country/${countryName}.mdx`,
+			'path'
+		).removeTitle()
 	return (
 		<div className='mx-auto max-w-3xl px-4 py-8'>
 			<Heading
 				level={2}
 				size={'title'}>
-				{toTitleCase(countryName)}
+				{toTitleCase(data.name.common)}
 			</Heading>
 			<aside className='flex items-center gap-2'>
 				<Image
@@ -50,11 +48,13 @@ const CountryPage = async ({ params }: Slug<{ country: string }>) => {
 				/>
 				{data && <QuickFacts {...data} />}
 			</aside>
-			<div className='flex items-start justify-center gap-4 py-4 sm:flex-row sm:gap-8'>
-				<section>
-					<content.Provider />
-				</section>
-			</div>
+			{content && (
+				<div className='flex items-start justify-center gap-4 py-4 sm:flex-row sm:gap-8'>
+					<section>
+						<content.Provider />
+					</section>
+				</div>
+			)}
 		</div>
 	)
 }

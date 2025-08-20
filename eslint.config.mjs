@@ -10,16 +10,12 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript")
-];
-
 const tslintConfig = tseslint.config(
-  ...eslintConfig,
+
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
   tseslint.configs.recommended,
   {
     rules: {
-      "no-unused-expresions": 0,
       "@typescript-eslint/no-unused-expressions": [2, {
         allowShortCircuit: true,
         allowTernary: true
