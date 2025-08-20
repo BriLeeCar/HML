@@ -1,3 +1,4 @@
+import { tCountryKeys } from '@/map/util'
 import fs from 'fs'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
@@ -11,26 +12,28 @@ import { QuickFacts } from './QuickFacts'
 export const generateStaticParams = async () => {
 	return Object.keys(countryPaths).map((countryName) => {
 		return {
-			country:
-				countryPaths[countryName as keyof typeof countryPaths].abbr,
+			country: countryPaths[countryName as tCountryKeys].abbr,
 		}
 	})
 }
 
+const CheckForMDX = (country: string) => {
+	if (fs.existsSync(`src/data/country/${country}.mdx`)) {
+		return new MDXProcessor(`src/data/country/${country}.mdx`, 'path')
+	}
+}
+
 const CountryPage = async ({ params }: Slug<{ country: string }>) => {
-	const { country: countryName } = await params
-	const data = await countryBasics({ abbr: countryName })
+	const { country } = await params
+	const data = await countryBasics({ abbr: country })
 
 	if (!data || data == null) {
 		notFound()
 	}
 
-	const content =
-		fs.existsSync(`src/data/country/${countryName}.mdx`)
-		&& new MDXProcessor(
-			`src/data/country/${countryName}.mdx`,
-			'path'
-		).removeTitle()
+	const content = CheckForMDX(country)
+	content?.removeTitle()
+
 	return (
 		<div className='mx-auto max-w-3xl px-4 py-8'>
 			<Heading
