@@ -1,3 +1,4 @@
+import fs from 'fs'
 import Image from 'next/image'
 import { Heading } from '~/components/Heading'
 import { countryBasics } from '~/data/baseCountryApi'
@@ -5,11 +6,19 @@ import { MDXProcessor } from '~/MDX/ProcessMDX'
 import { toTitleCase } from '~/util/text'
 import { QuickFacts } from './QuickFacts'
 
+export const generateStaticParams = async () => {
+	const countries = fs.readdirSync('src/data/country')
+	return countries.map((country) => {
+		const countryName = country.replace('.mdx', '')
+		return { country: countryName }
+	})
+}
+
 const CountryPage = async ({ params }: Slug<{ country: string }>) => {
 	const { country: countryName } = await params
 	const data = await countryBasics({ country: countryName })
 	const content = new MDXProcessor(
-		`src/data/country/${countryName}/base.mdx`,
+		`src/data/country/${countryName}.mdx`,
 		'path'
 	).removeTitle()
 

@@ -1,6 +1,7 @@
 import fs from 'fs'
 import { Heading } from '~/components/Heading'
 import { MDXProcessor } from '~/MDX/ProcessMDX'
+import { toTitleCase } from '~/util/text'
 
 export const generateStaticParams = async () => {
 	const pages = fs.readdirSync('src/data/pages')
@@ -27,7 +28,7 @@ const Page = async ({
 				level={1}
 				size={'title'}
 				className='font-serif font-medium tracking-tight italic'>
-				{data.title || slug.replace(/-/g, ' ')}
+				{data.title || toTitleCase(slug.replace(/-/g, ' '))}
 			</Heading>
 			<data.Provider />
 		</main>
