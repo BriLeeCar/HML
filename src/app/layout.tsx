@@ -1,5 +1,8 @@
 import type { Metadata } from 'next'
 import { Open_Sans } from 'next/font/google'
+// import 'rehype-callouts/theme/github'
+// import 'rehype-callouts/theme/obsidian'
+import 'rehype-callouts/theme/vitepress'
 import { cn } from '~/cn'
 import '~/styles/globals.css'
 import { Providers } from './providers'
@@ -19,11 +22,11 @@ const openSans = Open_Sans({
 	adjustFontFallback: true,
 })
 
-export default function RootLayout({
+const RootLayout = async ({
 	children,
 }: Readonly<{
 	children: React.ReactNode
-}>) {
+}>) => {
 	return (
 		<html
 			lang='en'
@@ -44,3 +47,5 @@ export default function RootLayout({
 		</html>
 	)
 }
+
+export default RootLayout

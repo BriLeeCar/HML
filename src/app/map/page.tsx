@@ -4,6 +4,7 @@ import { WorldMap } from './Base'
 
 const Map = async () => {
 	const countriesWithData: { [key: string]: tCountryRest } = {}
+
 	await Promise.all(
 		Object.keys(countryPaths)
 			.filter(

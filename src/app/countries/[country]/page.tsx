@@ -7,7 +7,6 @@ import { QuickFacts } from './QuickFacts'
 const CountryPage = async ({ params }: Slug<{ country: string }>) => {
 	const { country: countryName } = await params
 	const data = await countryBasics({ country: countryName })
-	console.log(data)
 
 	if (!data) {
 		return (

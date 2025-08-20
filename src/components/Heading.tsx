@@ -21,10 +21,10 @@ export const Heading = ({
 		<Tag
 			{...props}
 			className={cn(
-				`text-primary-foreground dark:text-accent-foreground mt-6 mb-2 font-serif font-normal`,
+				`text-foreground dark:text-accent-foreground mt-6 mb-2 font-serif font-bold [:is(h1,h2,h3,h4,h5,h6)>*:first-child>*:is(h1,h2,h3,h4,h5,h6)]:text-red-500`,
 				level == 2
-					&& 'scroll-m-20 border-b-1 pb-2 font-semibold tracking-tight italic first:mt-0',
-				size == 'title' ? 'text-7xl'
+					&& 'scroll-m-20 border-b-1 pb-2 font-semibold tracking-tight first:mt-0',
+				size == 'title' ? 'font-heading text-7xl'
 				: size == '2xl' ? 'text-5xl'
 				: size == 'xl' ? 'text-4xl'
 				: size == 'lg' ? 'text-3xl'
