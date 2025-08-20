@@ -269,9 +269,7 @@ export const WorldMap = ({
 								})
 							}
 							handleInView={handleInView}
-							canClick={
-								haveData && tier !== 999 && !mapState.dragging.current
-							}
+							canClick={tier !== 999 && !mapState.dragging.current}
 						/>
 					)
 				})}

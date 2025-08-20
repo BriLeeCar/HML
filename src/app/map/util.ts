@@ -69,7 +69,9 @@ export const isUS = ({
 	tier,
 	abbr,
 	name,
-}: Pick<tCountryPathDataWithName, 'tier' | 'abbr' | 'name'>) => {
+}: Partial<
+	Pick<tCountryPathDataWithName, 'tier' | 'abbr' | 'name'>
+>) => {
 	return (
 		tier == 999 || abbr == 'US' || name == 'United States of America'
 	)

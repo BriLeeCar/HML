@@ -72,7 +72,6 @@ const zCountryRest = z.object({
 	unMember: z.boolean(),
 	cca2: zTransform.toUpperCase,
 	cca3: z.number().or(z.string()),
-	cioc: zTransform.toUpperCase,
 	currencies: z.record(
 		z.string(),
 		z.object({

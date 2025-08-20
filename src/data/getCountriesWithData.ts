@@ -1,19 +1,18 @@
-import { tCountryPaths } from '@/map/util'
+import { isUS, tCountryKeys, tCountryPaths } from '@/map/util'
 import countryPaths from '~/data/mapPathData.json'
 
 export const getCountriesWithData = (): tCountryPaths => {
-	const countryKeys = Object.keys(countryPaths).filter((country) => {
-		return (
-			countryPaths[country as keyof typeof countryPaths].haveData
-			&& countryPaths[country as keyof typeof countryPaths].tier
-				!== 999
-		)
+	const countries = countryPaths as tCountryPaths
+
+	const countryKeys = Object.keys(countries).filter((country) => {
+		const key = country as tCountryKeys
+		return !isUS({ tier: countries[key].tier })
 	})
 
 	const countriesWithData = {} as tCountryPaths
 	countryKeys.forEach((country) => {
 		const { abbr, tier, haveData, path } =
-			countryPaths[country as keyof typeof countryPaths]
+			countries[country as tCountryKeys]
 		Object.assign(countriesWithData, {
 			[country]: {
 				abbr,

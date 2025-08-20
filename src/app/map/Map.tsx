@@ -39,7 +39,7 @@ export const MapSvg = ({ ...props }: tMapSVGProps) => {
 	)
 }
 
-const mapCVA = cva(['transition-all'], {
+const mapCVA = cva(['click transition-all hover:opacity-50'], {
 	variants: {
 		tier: {
 			1: ['fill-red-500'],
@@ -49,7 +49,7 @@ const mapCVA = cva(['transition-all'], {
 			999: '',
 		},
 		haveData: {
-			true: 'click hover:opacity-50',
+			true: '',
 			false: 'fill-zinc-300 dark:fill-neutral-900',
 		},
 	},
