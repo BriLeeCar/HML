@@ -21,8 +21,6 @@ const redirectLink = (country: Omit<tCountryPathData, 'path'>) => {
 	return `/countries/${country.abbr.toLowerCase()}`
 }
 
-type countryK = keyof typeof countryPaths
-
 const mapReducer = (
 	state: tMapReducer['state'],
 	action: tMapReducer['action']
@@ -247,14 +245,14 @@ export const WorldMap = ({
 					})
 				}
 				dragConstraints={mapState.boundaries}>
-				{Object.keys(countryPaths).map((countryName: countryK) => {
+				{Object.keys(countryPaths).map((countryName) => {
 					const { path, tier, haveData, abbr } = countryPaths[
-						countryName
+						countryName as tCountryKeys
 					] as tCountryPathData
 					return (
 						<MapPathEl
 							key={countryName}
-							name={countryName}
+							name={countryName as tCountryKeys}
 							abbr={abbr}
 							tier={tier}
 							haveData={haveData}
