@@ -1,4 +1,5 @@
 import fs from 'fs'
+import { Heading } from '~/components/Heading'
 import { MDXProcessor } from '~/MDX/ProcessMDX'
 
 export const generateStaticParams = async () => {
@@ -15,10 +16,19 @@ const Page = async ({
 	params: Promise<{ slug: string }>
 }) => {
 	const { slug } = await params
-	const data = new MDXProcessor(`src/data/pages/${slug}.mdx`, 'path')
+	const data = new MDXProcessor(
+		`src/data/pages/${slug}.mdx`,
+		'path'
+	).removeTitle()
 
 	return (
 		<main className='mx-auto max-w-2xl px-4 py-8'>
+			<Heading
+				level={1}
+				size={'title'}
+				className='font-serif font-medium tracking-tight italic'>
+				{data.title || slug.replace(/-/g, ' ')}
+			</Heading>
 			<data.Provider />
 		</main>
 	)

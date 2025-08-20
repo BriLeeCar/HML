@@ -3,6 +3,7 @@ import { cn } from '~/cn'
 import { Heading } from './Heading'
 import { Link } from './Link'
 import { Large, List, P } from './Text'
+import { Button } from './ui'
 
 export const mdxComponents = {
 	h1: ({ ...props }: Props<'h1'>) => (
@@ -142,6 +143,32 @@ export const mdxComponents = {
 		<td
 			className='border-muted-foreground/50 px-4 py-2 not-[tr:last-of-type_td]:border-b'
 			{...props}
+		/>
+	),
+	Button: ({ ...props }: Props<typeof Button>) => {
+		return (
+			<Button
+				variant='primary'
+				size='sm'
+				as='link'
+				href={props.href}
+				{...props}
+				className={cn(
+					'text-xl font-black text-white uppercase',
+					'click my-4 h-auto w-full gap-0 py-2 whitespace-normal',
+					props.className || ''
+				)}>
+				{props.children}
+			</Button>
+		)
+	},
+	sup: ({ ...props }: Props<'sup'>) => (
+		<sup
+			{...props}
+			className={cn(
+				'text-accent-primary *:text-xs *:no-underline *:[a]:decoration-0',
+				props.className
+			)}
 		/>
 	),
 }

@@ -162,3 +162,14 @@
 	}
 	@apply mx-auto max-w-2xl;
 }
+
+[data-footnotes] {
+	margin-inline: auto;
+	max-width: 75%;
+	background-color: var(--color-card);
+	border-radius: var(--radius-lg);
+	@apply border-border *:[ol]:marker:text-accent-primary border shadow-md **:[a]:italic **:[a]:decoration-0 *:[ol]:marker:text-xs;
+	.data-footnote-backref {
+		@apply text-accent-primary/50 no-underline decoration-0;
+	}
+}

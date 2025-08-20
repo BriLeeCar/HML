@@ -1,5 +1,6 @@
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
+import Link from 'next/link'
 
 import { cn } from '~/cn'
 
@@ -55,25 +56,61 @@ export const buttonVariants = cva(
 	}
 )
 
+type tBtnProps<T extends 'button' | 'link'> = VariantProps<
+	typeof buttonVariants
+> & {
+	as?: T
+	asChild?: boolean
+} & (T extends 'link' ? Omit<Props.Link, 'as'>
+	: T extends 'button' ? Props<'button'>
+	: never)
+
 export const Button = ({
 	className,
 	variant,
 	size,
 	asChild = false,
+	as,
 	...props
-}: Props<'button'>
-	& VariantProps<typeof buttonVariants> & {
-		asChild?: boolean
-	}) => {
-	const Comp = asChild ? Slot : 'button'
-
+}: tBtnProps<'link' | 'button'>) => {
+	if (as === 'link') {
+		const linkProps = props as Props.Link
+		return (
+			<Link
+				{...linkProps}
+				href={linkProps.href}
+				data-slot='button'
+				className={cn(buttonVariants({ variant, size, className }))}>
+				<TouchTarget>{props.children}</TouchTarget>
+			</Link>
+		)
+	}
+	const Tag = asChild ? Slot : 'button'
+	const buttonProps = props as Props<'button'>
 	return (
-		<Comp
+		<Tag
 			data-slot='button'
 			className={cn(buttonVariants({ variant, size, className }))}
-			{...props}>
+			{...buttonProps}>
 			<TouchTarget>{props.children}</TouchTarget>
-		</Comp>
+		</Tag>
+	)
+}
+
+export const NowBtn = ({ ...props }: Props<'button'>) => {
+	return (
+		<Button
+			variant={'primary'}
+			size={'sm'}
+			{...props}
+			className={cn(
+				'click mb-4 h-auto w-full flex-col items-center justify-center gap-0 py-2 whitespace-normal sm:flex-row sm:gap-1.25 md:justify-around md:gap-2 lg:justify-center',
+				props.className || ''
+			)}>
+			<span className='text-xl font-black uppercase sm:text-5xl lg:text-end'>
+				{props.children}
+			</span>
+		</Button>
 	)
 }
 
