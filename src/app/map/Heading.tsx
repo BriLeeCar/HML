@@ -1,14 +1,14 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { cn } from '~/cn'
 import { Heading } from '~/components/Heading'
-import { tCountryRest } from '~/data/baseCountryApi'
+import { zodCountryRest } from '~/data/baseCountryApi'
 
 export const CountryHeading = ({
 	countriesWithData,
 	hovered,
 	hoveredData,
 }: {
-	countriesWithData: { [key: string]: tCountryRest }
+	countriesWithData: { [key: string]: zodCountryRest }
 	hovered: string | null
 	hoveredData: {
 		abbr: string

@@ -1,9 +1,9 @@
-import { countryBasics, tCountryRest } from '~/data/baseCountryApi'
+import { countryBasics, zodCountryRest } from '~/data/baseCountryApi'
 import countryPaths from '~/data/mapPathData.json'
 import { WorldMap } from './Base'
 
 const Map = async () => {
-	const countriesWithData: { [key: string]: tCountryRest } = {}
+	const countriesWithData: { [key: string]: zodCountryRest } = {}
 
 	await Promise.all(
 		Object.keys(countryPaths)

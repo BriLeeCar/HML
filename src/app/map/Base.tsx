@@ -5,51 +5,28 @@ import { redirect } from 'next/navigation'
 import { useEffect, useReducer } from 'react'
 import { cn } from '~/cn'
 import { Icon } from '~/components/Icon'
-import { tCountryRest } from '~/data/baseCountryApi'
+import { type zodCountryRest } from '~/data/baseCountryApi'
 import { getCountriesWithData } from '~/data/getCountriesWithData'
 import countryPaths from '~/data/mapPathData.json'
 import { CountryHeading } from './Heading'
-import { Map, Path, tCountryPaths } from './Map'
+import { MapPathEl, MapSvg } from './Map'
 import { Search } from './SearchBtn'
+import type {
+	tCountryKeys,
+	tCountryPathData,
+	tMapReducer,
+} from './util'
 
-// #region ? TYPES
-type tMapState = {
-	hovered: string | null
-	selected: string | null
-	inViewCountries: string[]
-	dragging: { first: boolean; current: boolean }
-	boundaries: Record<string, number>
-	hasVisited: boolean
-}
-
-type tMapAction =
-	| {
-			type: 'visited'
-			details: { country: string; inView: boolean }
-	  }
-	| {
-			type: 'set-boundaries'
-	  }
-	| { type: 'visitCookie' }
-	| { type: 'countryHover'; details: string }
-	| { type: 'clearHover' }
-	| {
-			type: 'setDragging'
-			details: { first: boolean; current: boolean }
-	  }
-	| {
-			type: 'selected'
-			details?: string | null
-	  }
-// #endregion ?
-
-const redirectLink = (
-	country: Omit<tCountryPaths[string], 'path'>
-) => {
+const redirectLink = (country: Omit<tCountryPathData, 'path'>) => {
 	return `/countries/${country.abbr.toLowerCase()}`
 }
 
-const mapReducer = (state: tMapState, action: tMapAction) => {
+type countryK = keyof typeof countryPaths
+
+const mapReducer = (
+	state: tMapReducer['state'],
+	action: tMapReducer['action']
+) => {
 	if (action.type) {
 		switch (action.type) {
 			case 'visited':
@@ -133,7 +110,7 @@ const mapReducer = (state: tMapState, action: tMapAction) => {
 export const WorldMap = ({
 	countriesWithData,
 }: {
-	countriesWithData: { [key: string]: tCountryRest }
+	countriesWithData: { [key: string]: zodCountryRest }
 }) => {
 	const [mapState, mapDispatch] = useReducer(mapReducer, {
 		hovered: null,
@@ -183,7 +160,7 @@ export const WorldMap = ({
 
 	const dragControl = useDragControls()
 
-	const handleSelected = (country: tCountryPaths[string]) => {
+	const handleSelected = (country: tCountryPathData) => {
 		redirect(redirectLink(country))
 	}
 
@@ -241,13 +218,11 @@ export const WorldMap = ({
 				hovered={mapState.hovered}
 				hoveredData={
 					mapState.hovered ?
-						countryPaths[
-							mapState.hovered as keyof typeof countryPaths
-						]
+						countryPaths[mapState.hovered as tCountryKeys]
 					:	null
 				}
 			/>
-			<Map
+			<MapSvg
 				drag
 				dragControls={dragControl}
 				dragMomentum={false}
@@ -272,15 +247,15 @@ export const WorldMap = ({
 					})
 				}
 				dragConstraints={mapState.boundaries}>
-				{Object.keys(countryPaths).map((countryName) => {
+				{Object.keys(countryPaths).map((countryName: countryK) => {
 					const { path, tier, haveData, abbr } = countryPaths[
-						countryName as keyof typeof countryPaths
-					] as tCountryPaths[string]
+						countryName
+					] as tCountryPathData
 					return (
-						<Path
+						<MapPathEl
 							key={countryName}
 							name={countryName}
-							abb={abbr}
+							abbr={abbr}
 							tier={tier}
 							haveData={haveData}
 							path={path}
@@ -302,7 +277,7 @@ export const WorldMap = ({
 						/>
 					)
 				})}
-			</Map>
+			</MapSvg>
 			<Search
 				countries={getCountriesWithData()}
 				actionSelected={handleSelected}

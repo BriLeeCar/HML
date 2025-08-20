@@ -111,4 +111,4 @@ const zCountryRest = z.object({
 	}),
 })
 
-export type tCountryRest = z.infer<typeof zCountryRest>
+export type zodCountryRest = z.infer<typeof zCountryRest>

@@ -1,30 +1,18 @@
 'use client'
 
 import { cva } from 'class-variance-authority'
-import { motion, MotionProps, useInView } from 'motion/react'
+import { motion, useInView } from 'motion/react'
 import { redirect, RedirectType } from 'next/navigation'
 import { useEffect, useRef } from 'react'
 import { cn } from '~/cn'
+import { isUS, tMapPathElProps, tMapSVGProps } from './util'
 
 const svgBase = {
 	width: 700,
 	height: 346,
 }
 
-export type tCountryPaths = {
-	[key: string]: {
-		abbr: string
-		path: string
-		haveData: boolean
-		tier: 0 | 1 | 2 | 3 | 999
-	}
-}
-
-export const Map = ({
-	...props
-}: {
-	className?: string
-} & MotionProps) => {
+export const MapSvg = ({ ...props }: tMapSVGProps) => {
 	return (
 		<motion.svg
 			{...props}
@@ -74,35 +62,35 @@ const mapCVA = cva(['transition-all'], {
 	],
 })
 
-export const Path = ({
-	handleInView,
+export const MapPathEl = ({
 	canClick = true,
 	...props
-}: Omit<Props<'path'>, 'name'> & {
-	tier: 0 | 1 | 2 | 3 | 999
-	haveData: boolean
-	path: string
-	name: string
-	abb: string
-	canClick?: boolean
-	handleInView?: (country: string, inView: boolean) => void
-}) => {
+}: tMapPathElProps) => {
 	const pathRef = useRef(null)
 	const isInView = useInView(pathRef)
+	const {
+		path,
+		tier,
+		haveData,
+		name,
+		abbr,
+		handleInView,
+		className,
+		...rest
+	} = props
 
 	useEffect(() => {
-		if (isInView && props.haveData && props.tier !== 999) {
-			handleInView && handleInView(props.name, true)
+		if (isInView && haveData && !isUS({ tier: tier, abbr, name })) {
+			handleInView && handleInView(name, true)
 		} else {
-			handleInView && handleInView(props.name, false)
+			handleInView && handleInView(name, false)
 		}
-	}, [isInView, props.haveData, props.name, props.tier, handleInView])
+	}, [isInView, haveData, name, tier, handleInView, abbr])
 
-	const { path, tier, haveData, name, abb, ...rest } = props
 	const classes = cn(
 		'stroke-background stroke-0.5 focus:outline-none dark:stroke-neutral-800',
 		mapCVA({ tier, haveData }),
-		props.className
+		className
 	)
 
 	return (
@@ -114,14 +102,14 @@ export const Path = ({
 				d={path}
 				aria-label={name}
 				className={cn(classes)}
-				id={abb}
+				id={abbr}
 				data-country={name}
-				data-abb={abb}
+				data-abb={abbr}
 				data-tier={tier}
 				onClick={() => {
 					if (canClick)
 						redirect(
-							`/countries/${abb.toLowerCase()}`,
+							`/countries/${abbr.toLowerCase()}`,
 							'push' as RedirectType
 						)
 				}}

@@ -1,6 +1,6 @@
-import { tCountryRest } from '~/data/baseCountryApi'
+import { zodCountryRest } from '~/data/baseCountryApi'
 
-export const QuickFacts = ({ ...props }: tCountryRest) => {
+export const QuickFacts = ({ ...props }: zodCountryRest) => {
 	return (
 		<aside className='bg-card border-border flex grow basis-[80%] flex-wrap items-start justify-start gap-1 rounded-lg border-1 p-4 shadow-md'>
 			<ul className='mt-0 grow basis-1/3 list-disc pl-5'>
