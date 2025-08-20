@@ -61,7 +61,8 @@ type tBtnProps<T extends 'button' | 'link'> = VariantProps<
 > & {
 	as?: T
 	asChild?: boolean
-} & (T extends 'link' ? Omit<Props.Link, 'as'>
+} & (T extends 'link' ?
+		Omit<Props.Link, 'as'> & { as: 'link'; href: string }
 	: T extends 'button' ? Props<'button'>
 	: never)
 
@@ -94,23 +95,6 @@ export const Button = ({
 			{...buttonProps}>
 			<TouchTarget>{props.children}</TouchTarget>
 		</Tag>
-	)
-}
-
-export const NowBtn = ({ ...props }: Props<'button'>) => {
-	return (
-		<Button
-			variant={'primary'}
-			size={'sm'}
-			{...props}
-			className={cn(
-				'click mb-4 h-auto w-full flex-col items-center justify-center gap-0 py-2 whitespace-normal sm:flex-row sm:gap-1.25 md:justify-around md:gap-2 lg:justify-center',
-				props.className || ''
-			)}>
-			<span className='text-xl font-black uppercase sm:text-5xl lg:text-end'>
-				{props.children}
-			</span>
-		</Button>
 	)
 }
 

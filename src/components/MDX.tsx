@@ -145,13 +145,12 @@ export const mdxComponents = {
 			{...props}
 		/>
 	),
-	Button: ({ ...props }: Props<typeof Button>) => {
+	Button: ({ ...props }: Props<typeof Button> & { href: string }) => {
 		return (
 			<Button
 				variant='primary'
 				size='sm'
 				as='link'
-				href={props.href}
 				{...props}
 				className={cn(
 					'text-xl font-black text-white uppercase',
