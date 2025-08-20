@@ -12,7 +12,8 @@ import { QuickFacts } from './QuickFacts'
 export const generateStaticParams = async () => {
 	return Object.keys(countryPaths).map((countryName) => {
 		return {
-			country: countryPaths[countryName as tCountryKeys].abbr,
+			country:
+				countryPaths[countryName as tCountryKeys].abbr.toLowerCase(),
 		}
 	})
 }
