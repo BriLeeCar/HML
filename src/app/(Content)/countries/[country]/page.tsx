@@ -22,7 +22,6 @@ const CheckForMDX = (country: string) => {
 }
 const CheckForSectionMDX = (country: string, section: string) => {
 	const file = `src/data/country/${country}/${section}.mdx`
-	console.log('Checking for section MDX:', file)
 	if (fs.existsSync(file)) {
 		return new MDXProcessor(file, 'path')
 	}
@@ -36,6 +35,8 @@ const CountryPage = async ({
 }) => {
 	const { country } = await params
 	const { section } = await searchParams
+	console.log(section)
+	console.log(fs.readdirSync(`src/data/country/${country}`))
 
 	const data = await countryBasics({ abbr: country })
 
