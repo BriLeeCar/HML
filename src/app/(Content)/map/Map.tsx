@@ -89,7 +89,7 @@ export const MapPathEl = ({
 
 	const classes = cn(
 		'stroke-background stroke-0.5 focus:outline-none dark:stroke-neutral-800',
-		// @ts-expect-error
+		// @ts-expect-error cva typing issue. Tiers are predefined as 1,2,3,0,999
 		mapCVA({ tier, haveData }),
 		className
 	)
