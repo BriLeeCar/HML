@@ -1,6 +1,6 @@
 // import type { zodCountryRest } from "~/data/baseCountryApi"
 import { type MotionProps } from 'motion/react'
-import countryPaths from '~/data/mapPathData.json'
+import mapData from '~/data/countryDataWithPaths.json'
 
 // #region ! ---------- MAP REDUCER ----------
 type tMapState = {
@@ -48,7 +48,10 @@ export type tCountryPathData = {
 export type tCountryPathDataWithName = tCountryPathData & {
 	name: tCountryKeys
 }
-export type tCountryKeys = keyof typeof countryPaths
+export type tCountryKeys =
+	Pick<(typeof mapData)[number], 'name'> extends string ?
+		(typeof mapData)[number]['name']
+	:	never
 export type tCountryPaths = Record<tCountryKeys, tCountryPathData>
 // #endregion ! --------------------
 

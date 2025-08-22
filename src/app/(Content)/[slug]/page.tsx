@@ -26,7 +26,7 @@ const Page = async ({
 		<main className='mx-auto max-w-2xl px-4 py-8'>
 			<Heading
 				level={1}
-				size={'title'}
+				size={'2xl'}
 				className='font-serif font-medium tracking-tight italic'>
 				{data.title || toTitleCase(slug.replace(/-/g, ' '))}
 			</Heading>

@@ -1,26 +1,24 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
+import { defineConfig } from "eslint/config";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import js from "@eslint/js";
 import { FlatCompat } from "@eslint/eslintrc";
-import tseslint from 'typescript-eslint'
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
+const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
-	baseDirectory: __dirname,
+    baseDirectory: __dirname,
+    recommendedConfig: js.configs.recommended,
+    allConfig: js.configs.all
 });
 
-const tslintConfig = tseslint.config(
-	...compat.extends("next/core-web-vitals", "next/typescript"),
-	{
-		rules: {
-			"@typescript-eslint/no-unused-expressions": [2, {
-				allowShortCircuit: true,
-				allowTernary: true
-			}]
-		},
-		"files": ["**/*.ts", "**/*.tsx"]
-	}
-)
-
-export default tslintConfig;
+export default defineConfig([{
+    extends: compat.extends("next/core-web-vitals", "next/typescript"),
+    files: ["src/**/*.{ts,jsx,tsx}"],
+    rules: {
+        "@typescript-eslint/no-unused-expressions": ["error", {
+            "allowShortCircuit": true,
+            "allowTernary": true
+        }],
+    }
+}]);

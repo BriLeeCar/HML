@@ -71,7 +71,7 @@ export const Search = ({
 			)
 
 	return (
-		<span className={cn('fixed top-4 right-4 z-50 flex gap-2')}>
+		<span className={cn('fixed right-4 bottom-4 z-50 flex gap-2')}>
 			<AnimatePresence>
 				{searchState.isOpen && (
 					<SearchInput>

@@ -102,7 +102,15 @@ export class MDXProcessor {
 					options={{
 						parseFrontmatter: true,
 						mdxOptions: {
-							remarkPlugins: [mdxAnnotations.remark, gfm],
+							remarkPlugins: [
+								mdxAnnotations.remark,
+								[
+									gfm,
+									{
+										firstLineBlank: true,
+									},
+								],
+							],
 							rehypePlugins: [
 								mdxAnnotations.rehype,
 								[

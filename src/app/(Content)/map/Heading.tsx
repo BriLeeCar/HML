@@ -1,33 +1,15 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { cn } from '~/cn'
 import { Heading } from '~/components/Heading'
-import { zodCountryRest } from '~/data/baseCountryApi'
+import { CountryStore } from '~/data/stores/countryStore'
 
 export const CountryHeading = ({
-	countriesWithData,
 	hovered,
 	hoveredData,
 }: {
-	countriesWithData: { [key: string]: zodCountryRest }
 	hovered: string | null
-	hoveredData: {
-		abbr: string
-		haveData: boolean
-		path: string
-		tier: number
-	} | null
+	hoveredData: CountryStore['countries'][number] | null
 }) => {
-	// const handleSearch = (country: tCountryRest | null) => {
-	// 	if (!country) return
-	// 	redirect(
-	// 		`/countries/${country.name.common}`,
-	// 		'push' as RedirectType
-	// 	)
-	// }
-
-	if (countriesWithData) {
-	}
-
 	return (
 		<AnimatePresence initial={false}>
 			<span className='absolute bottom-10 left-0 z-10 flex w-full max-w-[75vw] items-center rounded-r-lg'>
@@ -47,12 +29,13 @@ export const CountryHeading = ({
 							size='xl'>
 							{hovered ? hovered : 'Hover over a country'}
 							{hoveredData
-								&& [1, 2, 3].includes(hoveredData.tier) && (
+								&& [1, 2, 3].includes(
+									hoveredData.tier ? hoveredData.tier : 0
+								) && (
 									<span
 										className={cn(
 											'block grow text-end text-2xl font-bold italic',
-											hoveredData.tier == 1
-												&& 'text-primary-foreground'
+											hoveredData.tier == 1 && 'text-accent-primary'
 										)}>
 										tier {hoveredData?.tier}
 									</span>

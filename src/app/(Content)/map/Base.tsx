@@ -6,14 +6,15 @@ import { useEffect, useReducer } from 'react'
 import { cn } from '~/cn'
 import { Icon } from '~/components/Icon'
 import { type zodCountryRest } from '~/data/baseCountryApi'
-import { getCountriesWithData } from '~/data/getCountriesWithData'
-import countryPaths from '~/data/mapPathData.json'
+import mapData from '~/data/countryDataWithPaths.json'
+import { useCountryStore } from '~/data/stores/countryStore'
 import { CountryHeading } from './Heading'
 import { MapPathEl, MapSvg } from './Map'
 import { Search } from './SearchBtn'
 import type {
 	tCountryKeys,
 	tCountryPathData,
+	tCountryPaths,
 	tMapReducer,
 } from './util'
 
@@ -71,7 +72,7 @@ const mapReducer = (
 					return {
 						...state,
 						boundaries: {
-							top: 0,
+							top: -5,
 							bottom: 0,
 							left: -rect.right + rect.left + window.innerWidth,
 							right: 0,
@@ -146,6 +147,12 @@ export const WorldMap = ({
 		}
 	}, [])
 
+	const store = useCountryStore()
+	mapData.forEach((country) => {
+		if (!country.abbr) return
+		store.verifyCountry(country.abbr.toLowerCase())
+	})
+
 	const handleInView = (country: string, inView: boolean) => {
 		mapDispatch({
 			type: 'visited',
@@ -166,8 +173,9 @@ export const WorldMap = ({
 
 	return (
 		<div
+			id='map'
 			className={cn(
-				'flex h-full w-full max-w-screen items-center justify-center overflow-hidden',
+				'fixed top-0 left-0 flex h-full max-h-screen w-full max-w-screen items-center justify-center overflow-hidden',
 				mapState.dragging.current ? 'cursor-grabbing' : 'cursor-grab'
 			)}>
 			{!mapState.hasVisited && (
@@ -212,11 +220,11 @@ export const WorldMap = ({
 				</motion.div>
 			)}
 			<CountryHeading
-				countriesWithData={countriesWithData}
 				hovered={mapState.hovered}
 				hoveredData={
 					mapState.hovered ?
-						countryPaths[mapState.hovered as tCountryKeys]
+						store.countries.find((c) => c.abbr === mapState.hovered)
+						|| null
 					:	null
 				}
 			/>
@@ -245,37 +253,41 @@ export const WorldMap = ({
 					})
 				}
 				dragConstraints={mapState.boundaries}>
-				{Object.keys(countryPaths).map((countryName) => {
-					const { path, tier, haveData, abbr } = countryPaths[
-						countryName as tCountryKeys
-					] as tCountryPathData
-					return (
-						<MapPathEl
-							key={countryName}
-							name={countryName as tCountryKeys}
-							abbr={abbr}
-							tier={tier}
-							haveData={haveData}
-							path={path}
-							onMouseEnter={() =>
-								mapDispatch({
-									type: 'countryHover',
-									details: countryName,
-								})
-							}
-							onMouseLeave={() =>
-								mapDispatch({
-									type: 'clearHover',
-								})
-							}
-							handleInView={handleInView}
-							canClick={tier !== 999 && !mapState.dragging.current}
-						/>
-					)
-				})}
+				{mapData
+					.filter((ea) => ea.path)
+					.map((country) => {
+						const { path, tier, haveData, abbr, name } = country
+						return (
+							<MapPathEl
+								key={name}
+								name={name as tCountryKeys}
+								abbr={abbr}
+								tier={(tier as tCountryPathData['tier']) ?? 0}
+								haveData={haveData ?? false}
+								path={path || ''}
+								onMouseEnter={() =>
+									mapDispatch({
+										type: 'countryHover',
+										details: name!,
+									})
+								}
+								onMouseLeave={() =>
+									mapDispatch({
+										type: 'clearHover',
+									})
+								}
+								handleInView={handleInView}
+								canClick={tier !== 999 && !mapState.dragging.current}
+							/>
+						)
+					})}
 			</MapSvg>
 			<Search
-				countries={getCountriesWithData()}
+				countries={
+					store.countries.filter(
+						(ea) => ea.path
+					) as unknown as tCountryPaths
+				}
 				actionSelected={handleSelected}
 			/>
 		</div>

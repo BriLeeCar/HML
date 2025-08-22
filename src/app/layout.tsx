@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
 import { Open_Sans } from 'next/font/google'
-// import 'rehype-callouts/theme/github'
-// import 'rehype-callouts/theme/obsidian'
 import 'rehype-callouts/theme/vitepress'
 import { cn } from '~/cn'
 import '~/styles/globals.css'
@@ -30,6 +28,7 @@ const RootLayout = async ({
 	return (
 		<html
 			lang='en'
+			className={openSans.variable}
 			suppressHydrationWarning>
 			<head>
 				<link
@@ -39,8 +38,7 @@ const RootLayout = async ({
 			</head>
 			<body
 				className={cn(
-					openSans.variable,
-					'bg-background text-foreground font-sans antialiased'
+					'text-foreground relative font-sans antialiased'
 				)}>
 				<Providers>{children}</Providers>
 			</body>
