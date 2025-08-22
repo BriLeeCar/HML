@@ -89,6 +89,7 @@ export const MapPathEl = ({
 
 	const classes = cn(
 		'stroke-background stroke-0.5 focus:outline-none dark:stroke-neutral-800',
+		// @ts-expect-error
 		mapCVA({ tier, haveData }),
 		className
 	)

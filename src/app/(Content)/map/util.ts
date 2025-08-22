@@ -43,15 +43,13 @@ export type tCountryPathData = {
 	abbr: string
 	path: string
 	haveData: boolean
-	tier: 0 | 1 | 2 | 3 | 999
+	tier: number
 }
 export type tCountryPathDataWithName = tCountryPathData & {
 	name: tCountryKeys
 }
-export type tCountryKeys =
-	Pick<(typeof mapData)[number], 'name'> extends string ?
-		(typeof mapData)[number]['name']
-	:	never
+export type tCountryKeys = (typeof mapData)[number]['name'] & string
+
 export type tCountryPaths = Record<tCountryKeys, tCountryPathData>
 // #endregion ! --------------------
 
