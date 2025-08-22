@@ -1,9 +1,12 @@
 import fs from 'fs'
 import { notFound } from 'next/navigation'
+import path, { join } from 'path'
 import { countryBasics } from '~/data/baseCountryApi'
 import countryPaths from '~/data/countryDataWithPaths.json'
 import { MDXProcessor } from '~/MDX/ProcessMDX'
 import { Base } from './Base'
+
+const thisDir = join(process.cwd(), 'src', 'data', 'country')
 
 export const generateStaticParams = async () => {
 	return countryPaths
@@ -16,14 +19,37 @@ export const generateStaticParams = async () => {
 }
 
 const CheckForMDX = (country: string) => {
-	if (fs.existsSync(`src/data/country/${country}.mdx`)) {
-		return new MDXProcessor(`src/data/country/${country}.mdx`, 'path')
+	const file = path.join('src', 'data', 'country', `${country}.mdx`)
+	try {
+		if (fs.existsSync(path.join(process.cwd(), file))) {
+			return new MDXProcessor(file, 'path')
+		} else {
+			console.log(`No section file found for ${country}`)
+			return null
+		}
+	} catch (e) {
+		console.error(`Error checking for section file: ${e}`)
+		return null
 	}
 }
 const CheckForSectionMDX = (country: string, section: string) => {
-	const file = `src/data/country/${country}/${section}.mdx`
-	if (fs.existsSync(file)) {
-		return new MDXProcessor(file, 'path')
+	const file = path.join(
+		'src',
+		'data',
+		'country',
+		country,
+		`${section}.mdx`
+	)
+	try {
+		if (fs.existsSync(path.join(process.cwd(), file))) {
+			return new MDXProcessor(file, 'path')
+		} else {
+			console.log(`No section file found for ${country} - ${section}`)
+			return null
+		}
+	} catch (e) {
+		console.error(`Error checking for section file: ${e}`)
+		return null
 	}
 }
 
@@ -35,8 +61,6 @@ const CountryPage = async ({
 }) => {
 	const { country } = await params
 	const { section } = await searchParams
-	console.log(section)
-	console.log(fs.readdirSync(`src/data/country/${country}`))
 
 	const data = await countryBasics({ abbr: country })
 
@@ -48,6 +72,8 @@ const CountryPage = async ({
 		section ?
 			CheckForSectionMDX(country, section)
 		:	CheckForMDX(country)
+
+	console.log(content)
 
 	return (
 		<Base

@@ -19,6 +19,7 @@ export class MDXProcessor {
 		public source: MDXRemoteProps['source'],
 		type?: 'path' | 'raw'
 	) {
+		console.log('MDXProcessor', source, type)
 		this.sourceType = type ?? this.setType(source)
 		this.raw = this.setRaw(source)
 	}
