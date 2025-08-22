@@ -1,12 +1,10 @@
 import fs from 'fs'
 import { notFound } from 'next/navigation'
-import path, { join } from 'path'
+import path from 'path'
 import { countryBasics } from '~/data/baseCountryApi'
 import countryPaths from '~/data/countryDataWithPaths.json'
 import { MDXProcessor } from '~/MDX/ProcessMDX'
 import { Base } from './Base'
-
-const thisDir = join(process.cwd(), 'src', 'data', 'country')
 
 export const generateStaticParams = async () => {
 	return countryPaths
