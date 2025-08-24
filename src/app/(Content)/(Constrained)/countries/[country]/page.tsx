@@ -6,7 +6,7 @@ import countryPaths from '~/data/countryDataWithPaths.json'
 import { MDXProcessor } from '~/MDX/ProcessMDX'
 import { Base } from './Base'
 
-export const generateStaticParams = async () => {
+export const generateStaticParams = () => {
 	return countryPaths
 		.filter((ea) => ea.abbr)
 		.map((ea) => {
@@ -22,11 +22,10 @@ const CheckForMDX = (country: string) => {
 		if (fs.existsSync(path.join(process.cwd(), file))) {
 			return new MDXProcessor(file, 'path')
 		} else {
-			console.log(`No section file found for ${country}`)
 			return null
 		}
-	} catch (e) {
-		console.error(`Error checking for section file: ${e}`)
+	} catch (e: unknown) {
+		console.error(`Error checking for section file: ${e as string}`)
 		return null
 	}
 }
@@ -70,8 +69,6 @@ const CountryPage = async ({
 		section ?
 			CheckForSectionMDX(country, section)
 		:	CheckForMDX(country)
-
-	console.log(content)
 
 	return (
 		<Base

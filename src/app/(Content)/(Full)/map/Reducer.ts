@@ -6,34 +6,6 @@ export const mapReducer = (
 ) => {
 	if (action.type) {
 		switch (action.type) {
-			case 'visited':
-				const {
-					country,
-					inView,
-				}: { country: string; inView: boolean } = action.details
-
-				if (
-					(inView && state.inViewCountries.includes(country))
-					|| (!inView && !state.inViewCountries.includes(country))
-				) {
-					return state
-				}
-				const newInViewCountries = state.inViewCountries.filter(
-					(c) => c != country
-				)
-				if (!inView) {
-					return {
-						...state,
-						inViewCountries: newInViewCountries,
-					}
-				}
-
-				return {
-					...state,
-					inViewCountries: [...newInViewCountries, country]
-						.filter((ea) => ea)
-						.sort(),
-				}
 			case 'selected':
 				return {
 					...state,

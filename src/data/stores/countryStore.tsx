@@ -1,102 +1,72 @@
-import { createContext, ReactNode, useContext, useRef } from 'react'
-import { useStore } from 'zustand/react'
-import { createStore } from 'zustand/vanilla'
-import countryData from '../countryDataWithPaths.json'
+import { createContext, ReactNode, useContext, useMemo } from 'react'
+import { countryBasics } from '../baseCountryApi'
+import countries from '../countries.json'
 
-export const createCountryStore = (
-	initState: CountryStoreState = defaultInitCountryStore
-) => {
-	return createStore<CountryStore>()((set) => ({
-		...initState,
-		verifyCountry: (countryAbbr: string) => {
-			const country = countryData.find(
-				(c) => c.abbr === countryAbbr.toUpperCase()
-			)
-			if (country) {
-				return set((state) => {
-					if (state.countries.some((c) => c.abbr === country.abbr)) {
-						return state
-					}
-					return {
-						countries: [...state.countries, country].sort(
-							(a, b) => a.name?.localeCompare(b.name || '') || 1
-						),
-					}
-				})
-			}
-			return set((state) => state)
-		},
-		addCountry: (countryAbbr: string) =>
-			set((state) => {
-				if (
-					state.countries.some(
-						(c) => c.abbr === countryAbbr.toUpperCase()
-					)
-				) {
-					return state
-				}
-				const country = countryData.find(
-					(c) => c.abbr === countryAbbr.toUpperCase()
-				)
-				if (country) {
-					return { countries: [...state.countries, country] }
-				}
-				return state
-			}),
-	}))
-}
+const CountriesContext = createContext<typeof countries | null>(null)
 
-export const countryStoreUtils = {
-	findCountry: (store: CountryStore, countryAbbr: string) => {
-		return store.countries.find(
-			(c) => c.abbr === countryAbbr.toUpperCase()
+const countryContextActions = (store: typeof countries) => ({
+	find: (type: 'abbr' | 'name', countrySearch: string) => {
+		return store?.find(
+			(c) => countrySearch.toLowerCase() == c[type].toLowerCase()
 		)
 	},
+	getMapPaths: () => {
+		return store!.filter((c) => c.svgPath)
+	},
+	fetch: async (countryAbbr: string) => {
+		return await countryBasics({
+			abbr: countryAbbr,
+		})
+	},
+	eq: (countryKey: keyof (typeof countries)[0], value: string) => {
+		return store?.find((c) => c[countryKey] === value)
+	},
+	tier: {
+		isNow: (country: tCountry) => country.tier == 'now',
+		isSoon: (country: tCountry) => country.tier == 'soon',
+		isNone: (country: tCountry) => country.tier == 'None',
+		isTiered: (country: tCountry) => country.tier != 'None',
+	},
+	getSafety: (countryAbbr: string) => {
+		const country = store?.find(
+			(c) => c.abbr.toLowerCase() === countryAbbr.toLowerCase()
+		)
+		return {
+			pride: country?.homophobia,
+			racism: country?.['least racist'],
+		}
+	},
+})
+
+export const useCountries = () => {
+	const context = useContext(CountriesContext)
+	if (!context) {
+		throw new Error(
+			'useCountries must be used within a CountriesProvider'
+		)
+	}
+
+	const storeCountries = useMemo(() => {
+		return {
+			countries: context,
+			...countryContextActions(countries),
+		}
+	}, [context])
+
+	return storeCountries
 }
 
-const CountryStoreContext = createContext<
-	CountryStoreApi | undefined
->(undefined)
-
-export const CountryStoreProvider = ({
+export const CountriesProvider = ({
 	children,
 }: {
 	children: ReactNode
 }) => {
-	const storeRef = useRef<CountryStoreApi | null>(null)
-	if (storeRef.current === null) {
-		storeRef.current = createCountryStore()
-	}
-
 	return (
-		<CountryStoreContext.Provider value={storeRef.current}>
+		<CountriesContext.Provider value={countries}>
 			{children}
-		</CountryStoreContext.Provider>
+		</CountriesContext.Provider>
 	)
 }
 
-export const useCountryStore = () => {
-	const store = useContext(CountryStoreContext)
-	if (!store) {
-		throw new Error(
-			'useCountryStore must be used within a CountryStoreProvider'
-		)
-	}
-
-	return useStore(store)
-}
-
-type CountryStoreState = {
-	countries: typeof countryData
-}
-
-export type CountryStore = CountryStoreState & CountryStoreActions
-type CountryStoreApi = ReturnType<typeof createCountryStore>
-type CountryStoreActions = {
-	addCountry: (countryAbbr: string) => void
-	verifyCountry: (countryAbbr: string) => void
-}
-
-const defaultInitCountryStore: CountryStoreState = {
-	countries: [] as unknown as typeof countryData,
-}
+export type tCountryStore = typeof countries
+export type tCountry = (typeof countries)[0]

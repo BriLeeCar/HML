@@ -53,11 +53,12 @@ const NavMenuItem = ({
 		<Link
 			{...props}
 			className={cn(
-				'hover:bg-foreground/10 flex h-full gap-3 rounded-lg px-3 transition-all',
+				'hover:bg-background/50 flex h-full gap-3 rounded-lg px-3 transition-all',
 				active
 					&& 'text-background bg-foreground/80 hover:bg-foreground/80',
 				props.className
 			)}
+			{...(active && { 'data-active': '' })}
 			title={props.children as string}>
 			<Icon className={cn('h-4 w-4 stroke-[1.25px]')} />
 			<TouchTarget>
@@ -75,7 +76,7 @@ export const NavMenu = () => {
 			className={cn(
 				// 'xs:bg-purple-200 sm:bg-red-200 md:bg-blue-200 lg:bg-amber-200 xl:bg-green-200',
 				'flex w-full overflow-hidden',
-				'text-sidebar-foreground z-99 text-xs font-semibold tracking-tight uppercase italic'
+				'text-sidebar-foreground z-99 bg-zinc-200/70 py-2 text-xs font-semibold tracking-tight uppercase italic dark:bg-zinc-900'
 			)}>
 			<Link href='/'>
 				<HML className='text-foreground flex h-full w-auto items-center gap-0 px-4 py-1 text-3xl font-bold -tracking-widest' />

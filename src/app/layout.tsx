@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Open_Sans } from 'next/font/google'
+import { IBM_Plex_Mono, Open_Sans } from 'next/font/google'
 import 'rehype-callouts/theme/vitepress'
 import { cn } from '~/cn'
 import '~/styles/globals.css'
@@ -20,7 +20,15 @@ const openSans = Open_Sans({
 	adjustFontFallback: true,
 })
 
-const RootLayout = async ({
+const ibmPlexMono = IBM_Plex_Mono({
+	variable: '--font-ibm-plex-mono',
+	weight: ['100', '200', '300', '400', '500', '600', '700'],
+	subsets: ['latin', 'latin-ext'],
+	style: ['normal', 'italic'],
+	adjustFontFallback: true,
+})
+
+const RootLayout = ({
 	children,
 }: Readonly<{
 	children: React.ReactNode
@@ -28,7 +36,7 @@ const RootLayout = async ({
 	return (
 		<html
 			lang='en'
-			className={openSans.variable}
+			className={cn(openSans.variable, ibmPlexMono.variable)}
 			suppressHydrationWarning>
 			<head>
 				<link

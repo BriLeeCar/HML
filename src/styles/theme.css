@@ -7,7 +7,7 @@
 	--theme-white: oklch(0.985 0 0);
 
 	--background: white;
-	--foreground: var(--theme-black);
+	--foreground: oklch(0.145 0 0);
 
 	--card: white;
 	--card-foreground: var(--theme-black);
