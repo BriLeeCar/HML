@@ -5,6 +5,7 @@ const unsplash = createApi({
 	accessKey: process.env.UNSPLASH_ACCESS_KEY!,
 })
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const zImageOptions = z.object({
 	w: z.number().min(1).max(4000).optional(),
 	h: z.number().min(1).max(4000).optional(),
