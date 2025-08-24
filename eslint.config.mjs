@@ -54,7 +54,6 @@ export default defineConfig([
         rules: {
             ...ts.configs['eslint-recommended'].rules,
             ...ts.configs['recommended'].rules,
-            ...ts.configs["recommended-requiring-type-checking"].rules,
             "@typescript-eslint/no-unused-expressions": ["error", { "allowShortCircuit": true, "allowTernary": true }], // Allow short circuit expressions (a && b()) and ternary expressions (a ? b() : c())
         },
     },

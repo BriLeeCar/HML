@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import countries from '~/data/countries.json'
 import { tCountry } from '~/data/stores/countryStore'
 import { getUnsplashPhoto } from '~/data/unsplashApi'
