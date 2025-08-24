@@ -2,8 +2,6 @@ import { NextResponse } from 'next/server'
 import { createApi } from 'unsplash-js'
 import z from 'zod/v4'
 
-type tImageOptions = z.infer<typeof zImageOptions>
-
 const unsplash = createApi({
 	accessKey: process.env.UNSPLASH_ACCESS_KEY!,
 })
@@ -77,11 +75,9 @@ const GET = async (request: Request) => {
 			status: 500,
 		})
 	}
-	return response.errors ? null : (
-			new NextResponse(JSON.stringify(response.response), {
-				status: 200,
-			})
-		)
+	return new NextResponse(JSON.stringify(response.response), {
+		status: 200,
+	})
 }
 
 export { GET }

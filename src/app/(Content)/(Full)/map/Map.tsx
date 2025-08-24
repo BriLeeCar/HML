@@ -60,20 +60,11 @@ export const MapPathEl = ({
 	...props
 }: tMapPathElProps) => {
 	const pathRef = useRef(null)
-	const {
-		svgPath,
-		tier,
-		name,
-		abbr,
-		handleInView,
-		className,
-		...rest
-	} = props as {
+	const { svgPath, tier, name, abbr, className, ...rest } = props as {
 		svgPath: string | null
 		name: string
 		abbr: string
 		tier: 'now' | 'soon' | 'None' | null
-		handleInView?: (country: string, inView: boolean) => void
 		className?: string
 	}
 

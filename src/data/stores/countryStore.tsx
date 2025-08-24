@@ -51,7 +51,7 @@ export const useCountries = () => {
 			countries: context,
 			...countryContextActions(countries),
 		}
-	}, [])
+	}, [context])
 
 	return storeCountries
 }
@@ -68,6 +68,5 @@ export const CountriesProvider = ({
 	)
 }
 
-type tCountryActionStore = ReturnType<typeof countryContextActions>
 export type tCountryStore = typeof countries
 export type tCountry = (typeof countries)[0]

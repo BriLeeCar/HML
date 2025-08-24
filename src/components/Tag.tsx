@@ -68,7 +68,7 @@ export const Tag = ({
 	tag: string
 }) => {
 	const tagType = (): tBadgeColors => {
-		const fromTagGroup = Object.entries(tagGroups).find(([_, tags]) =>
+		const fromTagGroup = Object.entries(tagGroups).find(([, tags]) =>
 			tags.includes(tag.toLowerCase())
 		)
 

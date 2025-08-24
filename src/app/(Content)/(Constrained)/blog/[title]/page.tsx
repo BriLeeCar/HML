@@ -7,7 +7,6 @@ import { mdxComponents } from '~/components/MDX'
 import { Section } from '~/components/Section'
 import { Tag } from '~/components/Tag'
 import { MDXProvider } from '~/MDX/MDXProvider'
-import { MDXProcessor } from '~/MDX/ProcessMDX'
 import { toTitleCase } from '~/util/text'
 
 const BlogEntry = async ({
@@ -16,10 +15,6 @@ const BlogEntry = async ({
 	params: Promise<{ title: string }>
 }) => {
 	const { title } = await params
-	const content = new MDXProcessor(
-		`src/data/blog/${title}.mdx`,
-		'path'
-	).removeTitle()
 
 	const data = readFileSync(
 		path.join(
