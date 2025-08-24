@@ -17,13 +17,7 @@ const BlogEntry = async ({
 	const { title } = await params
 
 	const data = readFileSync(
-		path.join(
-			process.cwd(),
-			'src',
-			'data',
-			'blog',
-			(title as string) + '.mdx'
-		),
+		path.join(process.cwd(), 'src', 'data', 'blog', title + '.mdx'),
 		'utf-8'
 	)
 

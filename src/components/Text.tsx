@@ -38,7 +38,7 @@ export const List = ({
 	)
 }
 
-export const Large = ({ ...props }) => {
+export const Large = ({ ...props }: Props<'span'>) => {
 	return (
 		<span
 			{...props}

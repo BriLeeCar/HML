@@ -3,7 +3,7 @@ import { Heading } from '~/components/Heading'
 import { MDXProcessor } from '~/MDX/ProcessMDX'
 import { toTitleCase } from '~/util/text'
 
-export const generateStaticParams = async () => {
+export const generateStaticParams = () => {
 	const pages = fs.readdirSync('src/data/pages')
 	return pages.map((page) => {
 		const slug = page.replace('.mdx', '')

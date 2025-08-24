@@ -4,6 +4,7 @@ import gfm from 'remark-gfm'
 import { customCallouts } from './callouts'
 
 export const remarkPlugins = [
+	// eslint-disable-next-line  @typescript-eslint/unbound-method
 	mdxAnnotations.remark,
 	[
 		gfm,
@@ -14,6 +15,7 @@ export const remarkPlugins = [
 ]
 
 export const rehypePlugins = [
+	// eslint-disable-next-line  @typescript-eslint/unbound-method
 	mdxAnnotations.rehype,
 	[
 		callouts,
@@ -24,4 +26,5 @@ export const rehypePlugins = [
 	],
 ]
 
+// eslint-disable-next-line  @typescript-eslint/unbound-method
 export const recmaPlugins = [mdxAnnotations.recma]

@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import countries from '~/data/countries.json'
 import { tCountry } from '~/data/stores/countryStore'
 import { getUnsplashPhoto } from '~/data/unsplashApi'
-import { getBaseUrl } from '~/util/baseUrl'
 import { Base } from './Base'
 
 export type tPhotoCountry = tCountry & {
@@ -18,9 +18,7 @@ const ExplorerPage = async () => {
 
 	await Promise.all(
 		photoCountries.map(async (country) => {
-			const photo = await fetch(
-				getBaseUrl('api/unsplash?id=' + country.image?.id)
-			).then((res) => res.json())
+			const photo = await getUnsplashPhoto(country.image.id)
 
 			const isUN = await fetch(
 				'https://restcountries.com/v3.1/alpha/'

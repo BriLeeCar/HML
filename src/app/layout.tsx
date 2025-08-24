@@ -28,7 +28,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 	adjustFontFallback: true,
 })
 
-const RootLayout = async ({
+const RootLayout = ({
 	children,
 }: Readonly<{
 	children: React.ReactNode
