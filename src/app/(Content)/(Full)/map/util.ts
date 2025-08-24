@@ -1,12 +1,12 @@
 // import type { zodCountryRest } from "~/data/baseCountryApi"
 import { type MotionProps } from 'motion/react'
 import mapData from '~/data/countryDataWithPaths.json'
+import { tCountry } from '~/data/stores/countryStore'
 
 // #region ! ---------- MAP REDUCER ----------
 type tMapState = {
 	hovered: string | null
 	selected: string | null
-	inViewCountries: string[]
 	dragging: { first: boolean; current: boolean }
 	boundaries: Record<string, number>
 	hasVisited: boolean
@@ -42,15 +42,10 @@ export type tMapReducer = {
 export type tCountryPathData = {
 	abbr: string
 	path: string
-	haveData: boolean
-	tier: number
+	tier: 'now' | 'soon' | 'None'
 }
-export type tCountryPathDataWithName = tCountryPathData & {
-	name: tCountryKeys
-}
-export type tCountryKeys = (typeof mapData)[number]['name'] & string
 
-export type tCountryPaths = Record<tCountryKeys, tCountryPathData>
+export type tCountryKeys = (typeof mapData)[number]['name'] & string
 // #endregion ! --------------------
 
 // #region ! ---------- COMPONENTS ----------
@@ -59,21 +54,9 @@ export type tMapSVGProps = {
 } & MotionProps
 
 export type tMapPathElProps = Omit<Props<'path'>, 'name'>
-	& tCountryPathDataWithName & {
+	& Partial<tCountry> & {
 		canClick?: boolean
 		handleInView?: (country: string, inView: boolean) => void
 	}
 
 // #endregion ! --------------------
-
-export const isUS = ({
-	tier,
-	abbr,
-	name,
-}: Partial<
-	Pick<tCountryPathDataWithName, 'tier' | 'abbr' | 'name'>
->) => {
-	return (
-		tier == 999 || abbr == 'US' || name == 'United States of America'
-	)
-}

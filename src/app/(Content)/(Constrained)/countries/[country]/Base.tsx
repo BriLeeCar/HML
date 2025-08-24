@@ -1,13 +1,11 @@
 'use client'
 
-import { Heading } from '~/components/Heading'
+import { Heading } from '~/components'
+import { IconAttributes } from '~/components/Country/IconAttributes'
+import { Section } from '~/components/Section'
 import { zodCountryRest } from '~/data/baseCountryApi'
-import {
-	CountryStore,
-	useCountryStore,
-} from '~/data/stores/countryStore'
+import { tCountry, useCountries } from '~/data/stores/countryStore'
 import { toTitleCase } from '~/util/text'
-import { IconAttributes } from './IconnedStats'
 import { Stats } from './Stats'
 import { SubMenu } from './SubMenu'
 
@@ -22,16 +20,18 @@ export const Base = ({
 	section?: string
 	children: React.ReactNode
 }) => {
-	const store = useCountryStore()
-	store.verifyCountry(country.toUpperCase())
+	const store = useCountries()
 
 	return (
 		<>
 			<span className='relative'>
 				<IconAttributes
-					un={countryData.unMember}
-					pride
-					trans
+					country={
+						store.countries.find(
+							(c) => c.abbr.toLowerCase() === country.toLowerCase()
+						) as tCountry & { un: boolean }
+					}
+					className='absolute right-0 bottom-0'
 				/>
 				<Heading
 					size='title'
@@ -48,15 +48,13 @@ export const Base = ({
 					country={country}
 				/>
 			</section>
-			<section className='border-border dark:bg-card/50 w-full grow rounded-lg border-1 bg-zinc-100 p-6 shadow-sm'>
-				{children}
-			</section>
+			<Section className='w-full grow'>{children}</Section>
 			{!section && (
 				<Stats
 					countryStats={
 						store.countries.find(
 							(c) => c.abbr === country.toUpperCase()
-						) as CountryStore['countries'][number]
+						) as tCountry
 					}
 				/>
 			)}

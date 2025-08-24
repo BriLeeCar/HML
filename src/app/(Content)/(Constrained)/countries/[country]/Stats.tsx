@@ -1,4 +1,4 @@
-import { CountryStore } from '~/data/stores/countryStore'
+import { tCountry } from '~/data/stores/countryStore'
 
 const Stat = ({ title, stat }: Record<string, string | number>) => {
 	return (
@@ -14,21 +14,21 @@ const Stat = ({ title, stat }: Record<string, string | number>) => {
 export const Stats = ({
 	countryStats,
 }: {
-	countryStats: CountryStore['countries'][number]
+	countryStats: tCountry
 }) => {
 	return (
 		countryStats && (
 			<section className='flex w-full items-end justify-around py-6'>
-				{countryStats['safety index'] && (
+				{countryStats['crime']['index'] && (
 					<Stat
 						title='Safety Index'
-						stat={countryStats['safety index']}
+						stat={countryStats['crime']['safety']}
 					/>
 				)}
-				{countryStats['health care index'] && (
+				{countryStats['health']['index'] && (
 					<Stat
 						title='Health Index'
-						stat={countryStats['health care index']}
+						stat={countryStats['health']['index']}
 					/>
 				)}
 				{countryStats['cost of living'] && (
@@ -37,10 +37,10 @@ export const Stats = ({
 						stat={countryStats['cost of living']}
 					/>
 				)}
-				{countryStats['total'] && (
+				{countryStats['quality']['index'] && (
 					<Stat
 						title='Quality Index'
-						stat={countryStats['total']}
+						stat={countryStats['quality']['index']}
 					/>
 				)}
 			</section>

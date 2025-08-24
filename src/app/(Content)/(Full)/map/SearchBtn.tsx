@@ -3,15 +3,14 @@ import { ReactNode, useReducer } from 'react'
 import { cn } from '~/cn'
 import { Icon } from '~/components/Icon'
 import { Button, Input } from '~/components/ui'
-import { CountryStore } from '~/data/stores/countryStore'
-import { tCountryPathData, tCountryPathDataWithName } from './util'
+import { tCountry, tCountryStore } from '~/data/stores/countryStore'
 
 // #region ? TYPES
 
 type tSearchState = {
 	searchQuery: string
 	isOpen: boolean
-	countries: Array<tCountryPathDataWithName>
+	countries: tCountryStore
 }
 type tSearchAction =
 	| { type: 'toggle' }
@@ -43,15 +42,15 @@ export const Search = ({
 	countries,
 	actionSelected,
 }: {
-	countries: CountryStore['countries']
-	actionSelected: (country: tCountryPathData) => void
+	countries: tCountryStore
+	actionSelected: (country: tCountry) => void
 }) => {
 	const [searchState, searchDispatch] = useReducer(searchReducer, {
 		countries: countries.map((country) => {
 			return {
 				...country,
-				name: country.name?.replace(/ \(.+\)/, ''), // Remove parenthesis content
-			} as tCountryPathDataWithName
+				name: country.name?.replace(/ \(.+\)/, ''),
+			} as tCountry
 		}),
 		searchQuery: '',
 		isOpen: false,
@@ -109,7 +108,7 @@ export const Search = ({
 				onClick={() => {
 					searchDispatch({ type: 'toggle' })
 				}}
-				className='bg-accent hover:bg-accent/50 border-border border-1'
+				className='border-1 border-current/10'
 			/>
 		</span>
 	)
@@ -119,6 +118,7 @@ const Btn = ({ ...props }) => {
 	return (
 		<Button
 			{...props}
+			variant={'ghost'}
 			type='button'
 			size='icon'>
 			<Icon
@@ -156,8 +156,7 @@ const SearchInput = ({
 const SearchItem = ({
 	item,
 	...props
-}: Props<'button'>
-	& MotionProps & { item: tCountryPathDataWithName }) => {
+}: Props<'button'> & MotionProps & { item: tCountry }) => {
 	return (
 		<motion.button
 			{...props}
@@ -167,7 +166,7 @@ const SearchItem = ({
 			exit={{ height: 0 }}
 			className={cn(
 				'bg-muted click border-border block overflow-hidden rounded-sm border-1 px-2 py-1 hover:brightness-90',
-				item.tier == 1 && 'font-bold text-red-400'
+				item.tier == 'now' && 'font-bold text-red-400'
 			)}>
 			{item.name}
 		</motion.button>

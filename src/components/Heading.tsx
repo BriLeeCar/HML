@@ -36,3 +36,42 @@ export const Heading = ({
 		/>
 	)
 }
+
+const HGroup = ({ ...props }: Props<typeof Heading>) => {
+	return (
+		<hgroup
+			{...props}
+			className={cn('mb-6 has-[+figure>img]:mb-2', props.className)}>
+			{props.children}
+		</hgroup>
+	)
+}
+
+const HGroupHead = ({ ...props }: Props<typeof Heading>) => {
+	const Tag = `h${props.level ?? 2}` as ElementType
+	return (
+		<Tag
+			{...props}
+			className={cn(
+				'font-serif text-3xl/7 font-bold text-gray-900 sm:truncate sm:text-5xl sm:tracking-tight dark:text-white',
+				props.className
+			)}
+		/>
+	)
+}
+
+const HGroupSub = ({ ...props }: Props<'p'>) => {
+	return (
+		<p
+			{...props}
+			className={cn(
+				'text-muted-foreground text-sm font-medium',
+				props.className
+			)}
+		/>
+	)
+}
+
+HGroup.Head = HGroupHead
+HGroup.Sub = HGroupSub
+export { HGroup }

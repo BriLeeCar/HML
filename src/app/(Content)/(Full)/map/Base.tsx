@@ -1,20 +1,26 @@
 'use client'
 
-import { motion, useDragControls } from 'motion/react'
-import { redirect } from 'next/navigation'
+import {
+	AnimatePresence,
+	motion,
+	useDragControls,
+} from 'motion/react'
+import { redirect, type RedirectType } from 'next/navigation'
 import { useEffect, useReducer } from 'react'
 import { cn } from '~/cn'
 import { Icon } from '~/components/Icon'
 import { type zodCountryRest } from '~/data/baseCountryApi'
-import mapData from '~/data/countryDataWithPaths.json'
-import { useCountryStore } from '~/data/stores/countryStore'
+import {
+	type tCountry,
+	useCountries,
+} from '~/data/stores/countryStore'
 import { CountryHeading } from './Heading'
 import { MapPathEl, MapSvg } from './Map'
 import { mapReducer } from './Reducer'
 import { Search } from './SearchBtn'
 import type { tCountryKeys, tCountryPathData } from './util'
 
-const redirectLink = (country: Omit<tCountryPathData, 'path'>) => {
+const redirectLink = (country: tCountry) => {
 	return `/countries/${country.abbr.toLowerCase()}`
 }
 export const WorldMap = ({
@@ -25,7 +31,6 @@ export const WorldMap = ({
 	const [mapState, mapDispatch] = useReducer(mapReducer, {
 		hovered: null,
 		selected: null,
-		inViewCountries: [],
 		dragging: { first: false, current: false },
 		boundaries: {
 			top: 0,
@@ -35,6 +40,8 @@ export const WorldMap = ({
 		},
 		hasVisited: true,
 	})
+
+	const countries = useCountries()
 
 	useEffect(() => {
 		if (!localStorage.getItem('hasVisitedMap')) {
@@ -58,26 +65,11 @@ export const WorldMap = ({
 		}
 	}, [])
 
-	const store = useCountryStore()
-	mapData.forEach((country) => {
-		if (!country.abbr) return
-		store.verifyCountry(country.abbr.toLowerCase())
-	})
-
-	const handleInView = (country: string, inView: boolean) => {
-		mapDispatch({
-			type: 'visited',
-			details: {
-				country,
-				inView,
-			},
-		})
-	}
-
+	// const store = useCountryStore()
 	const dragControl = useDragControls()
 
-	const handleSelected = (country: tCountryPathData) => {
-		redirect(redirectLink(country))
+	const handleSelected = (country: tCountry) => {
+		redirect(redirectLink(country), 'push' as RedirectType)
 	}
 
 	if (!countriesWithData) return null
@@ -130,15 +122,17 @@ export const WorldMap = ({
 					</motion.span>
 				</motion.div>
 			)}
-			<CountryHeading
-				hovered={mapState.hovered}
-				hoveredData={
-					mapState.hovered ?
-						store.countries.find((c) => c.abbr === mapState.hovered)
-						|| null
-					:	null
-				}
-			/>
+			<AnimatePresence>
+				<CountryHeading
+					key={mapState.hovered || 'no-hover'}
+					hovered={mapState.hovered}
+					hoveredData={
+						mapState.hovered ?
+							countries.eq('abbr', mapState.hovered) || null
+						:	null
+					}
+				/>
+			</AnimatePresence>
 			<MapSvg
 				drag
 				dragControls={dragControl}
@@ -164,37 +158,33 @@ export const WorldMap = ({
 					})
 				}
 				dragConstraints={mapState.boundaries}>
-				{mapData
-					.filter((ea) => ea.path)
-					.map((country) => {
-						const { path, tier, haveData, abbr, name } = country
-						return (
-							<MapPathEl
-								key={name}
-								name={name as tCountryKeys}
-								abbr={abbr}
-								tier={(tier as tCountryPathData['tier']) ?? 0}
-								haveData={haveData ?? false}
-								path={path || ''}
-								onMouseEnter={() =>
-									mapDispatch({
-										type: 'countryHover',
-										details: name!,
-									})
-								}
-								onMouseLeave={() =>
-									mapDispatch({
-										type: 'clearHover',
-									})
-								}
-								handleInView={handleInView}
-								canClick={tier !== 999 && !mapState.dragging.current}
-							/>
-						)
-					})}
+				{countries.getMapPaths().map((country) => {
+					const { svgPath, tier, abbr, name } = country
+					return (
+						<MapPathEl
+							key={name}
+							name={name as tCountryKeys}
+							abbr={abbr}
+							tier={(tier as tCountryPathData['tier']) ?? 0}
+							svgPath={svgPath || ''}
+							onMouseEnter={() =>
+								mapDispatch({
+									type: 'countryHover',
+									details: name!,
+								})
+							}
+							onMouseLeave={() =>
+								mapDispatch({
+									type: 'clearHover',
+								})
+							}
+							canClick={tier !== 'None' && !mapState.dragging.current}
+						/>
+					)
+				})}
 			</MapSvg>
 			<Search
-				countries={store.countries.filter((ea) => ea.path)}
+				countries={countries.getMapPaths()}
 				actionSelected={handleSelected}
 			/>
 		</div>

@@ -22,7 +22,6 @@ const CheckForMDX = (country: string) => {
 		if (fs.existsSync(path.join(process.cwd(), file))) {
 			return new MDXProcessor(file, 'path')
 		} else {
-			console.log(`No section file found for ${country}`)
 			return null
 		}
 	} catch (e) {
@@ -70,8 +69,6 @@ const CountryPage = async ({
 		section ?
 			CheckForSectionMDX(country, section)
 		:	CheckForMDX(country)
-
-	console.log(content)
 
 	return (
 		<Base

@@ -1,6 +1,6 @@
-import { tCountryKeys } from '@/(Content)/map/util'
+import { tCountryKeys } from '@/(Content)/(Full)/map/util'
 import countryPaths from '~/data/countryDataWithPaths.json'
-import { MapPathEl, MapSvg } from '../(Content)/map/Map'
+import { MapPathEl, MapSvg } from '../(Content)/(Full)/map/Map'
 import { MapBtn, NowBtn, SmallBtns } from './Buttons'
 import { HeadingText } from './HeadingText'
 import { Img } from './SidebarImg'

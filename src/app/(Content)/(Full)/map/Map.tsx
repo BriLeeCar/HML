@@ -1,11 +1,11 @@
 'use client'
 
 import { cva } from 'class-variance-authority'
-import { motion, useInView } from 'motion/react'
+import { motion } from 'motion/react'
 import { redirect, RedirectType } from 'next/navigation'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { cn } from '~/cn'
-import { isUS, tMapPathElProps, tMapSVGProps } from './util'
+import { tMapPathElProps, tMapSVGProps } from './util'
 
 const svgBase = {
 	width: 700,
@@ -39,68 +39,56 @@ export const MapSvg = ({ ...props }: tMapSVGProps) => {
 	)
 }
 
-const mapCVA = cva(['click transition-all hover:opacity-50'], {
-	variants: {
-		tier: {
-			1: ['fill-red-500'],
-			2: [],
-			3: [],
-			0: ['fill-red-900'],
-			999: '',
-		},
-		haveData: {
-			true: '',
-			false: 'fill-zinc-300 dark:fill-neutral-900',
-		},
-	},
-	compoundVariants: [
-		{
-			tier: 999,
-			haveData: true,
-			className: 'cursor-not-allowed fill-[#FEC4C4]',
-		},
+const mapCVA = cva(
+	[
+		'click fill-zinc-300 transition-all hover:opacity-50 dark:fill-neutral-900',
 	],
-})
+	{
+		variants: {
+			tier: {
+				now: ['fill-red-500 dark:fill-red-700'],
+				soon: [],
+				None: 'cursor-not-allowed fill-[#FEC4C4] hover:opacity-100 dark:fill-[#48484822]',
+				null: [],
+			},
+		},
+	}
+)
 
 export const MapPathEl = ({
 	canClick = true,
 	...props
 }: tMapPathElProps) => {
 	const pathRef = useRef(null)
-	const isInView = useInView(pathRef)
 	const {
-		path,
+		svgPath,
 		tier,
-		haveData,
 		name,
 		abbr,
 		handleInView,
 		className,
 		...rest
-	} = props
-
-	useEffect(() => {
-		if (isInView && haveData && !isUS({ tier: tier, abbr, name })) {
-			handleInView && handleInView(name, true)
-		} else {
-			handleInView && handleInView(name, false)
-		}
-	}, [isInView, haveData, name, tier, handleInView, abbr])
+	} = props as {
+		svgPath: string | null
+		name: string
+		abbr: string
+		tier: 'now' | 'soon' | 'None' | null
+		handleInView?: (country: string, inView: boolean) => void
+		className?: string
+	}
 
 	const classes = cn(
 		'stroke-background stroke-0.5 focus:outline-none dark:stroke-neutral-800',
-		// @ts-expect-error cva typing issue. Tiers are predefined as 1,2,3,0,999
-		mapCVA({ tier, haveData }),
+		tier && mapCVA({ tier }),
 		className
 	)
 
 	return (
 		<>
-			{/* @ts-expect-error typing conflict between framer-motion and HTML */}
-			<motion.path
+			<path
 				{...rest}
 				ref={pathRef}
-				d={path}
+				d={svgPath!}
 				aria-label={name}
 				className={cn(classes)}
 				id={abbr}
@@ -110,7 +98,7 @@ export const MapPathEl = ({
 				onClick={() => {
 					if (canClick)
 						redirect(
-							`/countries/${abbr.toLowerCase()}`,
+							`/countries/${abbr?.toLowerCase()}`,
 							'push' as RedirectType
 						)
 				}}
