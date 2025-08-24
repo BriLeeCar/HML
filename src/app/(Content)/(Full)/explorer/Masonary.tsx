@@ -17,18 +17,18 @@ export const Masonry = ({
 		tPhotoCountry[]
 	>)
 
-	const breakpoints = [
-		{ min: '320px', columns: 2 },
-		{ min: '640px', columns: 3 },
-		{ min: '1024px', columns: 4 },
-	] as {
-		min?: string
-		max?: string
-		columns: number
-	}[]
-
 	useEffect(() => {
 		const updateSize = () => {
+			const breakpoints = [
+				{ min: '320px', columns: 2 },
+				{ min: '640px', columns: 3 },
+				{ min: '1024px', columns: 4 },
+			] as {
+				min?: string
+				max?: string
+				columns: number
+			}[]
+
 			let newColumns = columns.length
 			if (breakpoints) {
 				for (let i = 0; i < breakpoints.length; i++) {
@@ -44,7 +44,10 @@ export const Masonry = ({
 						: i == breakpoints.length - 1 ? Infinity
 						: parseInt(breakpoints[i + 1].min || 'Infinity')
 
-					if (window.innerWidth >= min && window.innerWidth <= max) {
+					if (
+						globalThis.window.innerWidth >= min
+						&& globalThis.window.innerWidth <= max
+					) {
 						newColumns = bp.columns
 					}
 				}
@@ -64,9 +67,10 @@ export const Masonry = ({
 				setColumns([...newColsArray.filter((c) => c !== undefined)])
 			}
 		}
-		window.addEventListener('resize', updateSize)
+		globalThis.window.addEventListener('resize', updateSize)
 		updateSize()
-		return () => window.removeEventListener('resize', updateSize)
+		return () =>
+			globalThis.window.removeEventListener('resize', updateSize)
 	}, [countries, columns.length])
 
 	return (

@@ -20,9 +20,6 @@ const nextConfig: NextConfig = {
 			},
 		],
 	},
-	eslint: {
-		dirs: ['src'],
-	},
 	devIndicators: false,
 }
 

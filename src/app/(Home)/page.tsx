@@ -22,15 +22,14 @@ const Home = async () => {
 					{countryPaths
 						.filter((ea) => ea.path)
 						.map((country) => {
-							const { path, tier, haveData, abbr, name } = country
+							const { path, tier, abbr, name } = country
 
 							return (
 								<MapPathEl
 									key={name}
 									name={name as tCountryKeys}
 									abbr={abbr}
-									tier={tier || 999}
-									haveData={haveData || false}
+									tier={tier as unknown as string}
 									path={path || ''}
 								/>
 							)
