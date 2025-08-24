@@ -67,7 +67,7 @@ export const Masonry = ({
 		window.addEventListener('resize', updateSize)
 		updateSize()
 		return () => window.removeEventListener('resize', updateSize)
-	}, [breakpoints, countries, columns.length])
+	}, [countries, columns.length])
 
 	return (
 		<motion.div

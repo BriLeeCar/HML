@@ -1,5 +1,6 @@
 'use client'
 
+import { tPhotoCountry } from '@/(Content)/(Full)/explorer/page'
 import { Heading } from '~/components'
 import { IconAttributes } from '~/components/Country/IconAttributes'
 import { Section } from '~/components/Section'
@@ -29,7 +30,7 @@ export const Base = ({
 					country={
 						store.countries.find(
 							(c) => c.abbr.toLowerCase() === country.toLowerCase()
-						) as tCountry & { un: boolean }
+						) as tPhotoCountry
 					}
 					className='absolute right-0 bottom-0'
 				/>
