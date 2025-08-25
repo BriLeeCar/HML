@@ -36,7 +36,7 @@ export const Base = ({
 					size='title'
 					className='mb-0 italic'
 					level={1}>
-					{toTitleCase(countryName)}
+					{toTitleCase(country.name)}
 				</Heading>
 			</span>
 			<aside className='relative mb-6 w-max'></aside>

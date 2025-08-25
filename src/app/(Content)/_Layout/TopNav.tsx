@@ -81,13 +81,13 @@ export const NavMenu = () => {
 			<Link href='/'>
 				<HML className='text-foreground flex h-full w-auto items-center gap-0 px-4 py-1 text-3xl font-bold -tracking-widest' />
 			</Link>
-			<menu className='flex w-full items-center gap-1'>
+			<menu className='flex w-full items-center justify-around'>
 				{links.map((link, index) => (
 					<NavMenuItem
 						key={index}
 						href={link.href}
 						active={active === link.href}
-						className='flex grow items-center justify-start gap-2'
+						className='flex items-center justify-between gap-2'
 						Icon={link.Icon}
 						title={link.text}>
 						{link.text}

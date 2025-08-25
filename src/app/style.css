@@ -1,6 +1,9 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+@source inline("bg-yellow-{400,500,600,700}");
+@source inline("decoration-{yellow,red,purple}-{400,500,600,700}/{25,50,75}");
+
 /* #region THEME */
 :root {
 	--radius: 0.625rem;
@@ -301,11 +304,7 @@
 				background-color: transparent;
 				color: var(--text-foreground);
 				&[data-active] {
-					text-decoration-color: var(--color-red-500);
 					font-style: normal;
-					svg {
-						color: var(--color-red-300);
-					}
 				}
 
 				&:hover {

@@ -17,7 +17,7 @@ export const Link = ({ size = 'md', ...props }: Props.Link) => {
 				: 'text-lg',
 				'underline decoration-2 underline-offset-2',
 				'cursor-pointer',
-				'decoration-accent-primary hover:decoration-accent-primary/30 transition-colors',
+				'decoration-muted-foreground/40 transition-colors hover:decoration-current',
 				props.className
 			)}>
 			{props.children}

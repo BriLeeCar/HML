@@ -111,10 +111,10 @@ class DB {
 					abbr: country.abbr,
 					name: country.name,
 					unMember: country.unMember,
-					homophobia:
+					prideScore:
 						country.communities?.prideScore
 						&& country.communities?.prideScore > 0,
-					trans: country.communities?.transSafety,
+					transSafety: country.communities?.transSafety,
 				}
 			})
 			.filter((ea: tExplorerFilters) =>
@@ -122,17 +122,26 @@ class DB {
 			)
 	}
 
-	filterByCommunities(communities: Array<keyof tExplorerFilters>) {
-		return this.countries.filter((country) => {
-			return (
-				country.communities
-				&& Object.entries(communities).every(([key, value]) => {
-					return (
-						country.communities[key as keyof tCommunities] === value
-					)
-				})
-			)
+	filterByCommunities(
+		communities: Array<keyof tExplorerFilters>,
+		country: tCountry & tCountryETCData
+	) {
+		const { prideScore, transSafety } = country.communities || {}
+		const results = communities.map((key) => {
+			if (key === 'prideScore' && prideScore && prideScore > 0) {
+				// console.log(country.name, key, country)
+				return true
+			} else if (key === 'transSafety' && transSafety === true) {
+				// console.log(country.name, key, country)
+				return true
+			} else if (key === 'unMember' && country.unMember === true) {
+				// console.log(country.name, key, country)
+				return true
+			} else return false
 		})
+		console.log('results', results)
+		if (results.some((r) => r === false)) return false
+		return true
 	}
 
 	getCountryStats(country: tCountry & tCountryETCData) {
@@ -275,7 +284,7 @@ export type tExplorerFilters = {
 	abbr: string
 	name: string
 	unMember: boolean
-	homophobia: boolean | 0 | null
-	trans: boolean
+	prideScore: boolean | 0 | null
+	transSafety: boolean
 }
 // #endregion ?
