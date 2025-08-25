@@ -1,5 +1,4 @@
-import { Icon } from '~/components/Icon'
-import { Button } from '~/components/ui'
+import { Button, Icon } from '~/components'
 
 export const Filter = ({
 	count,

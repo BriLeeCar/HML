@@ -1,4 +1,4 @@
-import { tCountry } from '~/data/stores/countryStore'
+import { tDB } from '~/server/db/db'
 
 const Stat = ({ title, stat }: Record<string, string | number>) => {
 	return (
@@ -14,35 +14,22 @@ const Stat = ({ title, stat }: Record<string, string | number>) => {
 export const Stats = ({
 	countryStats,
 }: {
-	countryStats: tCountry
+	countryStats: ReturnType<tDB['getCountryStats']>
 }) => {
 	return (
 		countryStats && (
 			<section className='flex w-full items-end justify-around py-6'>
-				{countryStats['crime']['index'] && (
-					<Stat
-						title='Safety Index'
-						stat={countryStats['crime']['safety']}
-					/>
-				)}
-				{countryStats['health']['index'] && (
-					<Stat
-						title='Health Index'
-						stat={countryStats['health']['index']}
-					/>
-				)}
-				{countryStats['cost of living'] && (
-					<Stat
-						title='Cost of Living'
-						stat={countryStats['cost of living']}
-					/>
-				)}
-				{countryStats['quality']['index'] && (
-					<Stat
-						title='Quality Index'
-						stat={countryStats['quality']['index']}
-					/>
-				)}
+				{countryStats.map((stat) => {
+					return (
+						stat.value && (
+							<Stat
+								key={stat.title}
+								title={stat.title}
+								stat={stat.value}
+							/>
+						)
+					)
+				})}
 			</section>
 		)
 	)

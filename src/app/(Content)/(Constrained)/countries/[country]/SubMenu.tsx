@@ -9,7 +9,7 @@ import {
 } from '@/(Content)/_Layout/SVG'
 import Link from 'next/link'
 import { ReactNode } from 'react'
-import { cn } from '~/cn'
+import { cn } from '~/lib/cn'
 
 export const SubMenu = ({
 	country,

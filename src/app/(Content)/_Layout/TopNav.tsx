@@ -2,8 +2,8 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { cn } from '~/cn'
-import { TouchTarget } from '~/components/ui'
+import { TouchTarget } from '~/components'
+import { cn } from '~/lib/cn'
 import {
 	Books,
 	Certificate,
@@ -22,7 +22,7 @@ const links = [
 	{
 		text: 'Visa & Asylum',
 		Icon: Certificate,
-		href: '/',
+		href: '/explorer',
 	},
 	{
 		text: 'Guides & Resources',

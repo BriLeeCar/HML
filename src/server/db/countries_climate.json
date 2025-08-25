@@ -1,0 +1,1012 @@
+[
+	{
+		"abbr": "AF",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "AL",
+		"pollution": 77.3,
+		"climate": 86.3
+	},
+	{
+		"abbr": "DZ",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "AD",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "AO",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "AG",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "AR",
+		"pollution": 50.8,
+		"climate": 94.9
+	},
+	{
+		"abbr": "AM",
+		"pollution": 61.8,
+		"climate": 63.4
+	},
+	{
+		"abbr": "AU",
+		"pollution": 26.9,
+		"climate": 94.2
+	},
+	{
+		"abbr": "AT",
+		"pollution": 20.6,
+		"climate": 76.6
+	},
+	{
+		"abbr": "AZ",
+		"pollution": 72,
+		"climate": 91.4
+	},
+	{
+		"abbr": "BS",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "BH",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "BD",
+		"pollution": 85.6,
+		"climate": 72.9
+	},
+	{
+		"abbr": "BB",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "BY",
+		"pollution": 44.5,
+		"climate": 69.3
+	},
+	{
+		"abbr": "BE",
+		"pollution": 49.2,
+		"climate": 86.4
+	},
+	{
+		"abbr": "BZ",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "BJ",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "BT",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "BO",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "BA",
+		"pollution": 59.7,
+		"climate": 82.9
+	},
+	{
+		"abbr": "BW",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "BR",
+		"pollution": 52.8,
+		"climate": 91.8
+	},
+	{
+		"abbr": "BN",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "BG",
+		"pollution": 62.8,
+		"climate": 81.5
+	},
+	{
+		"abbr": "BF",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "BI",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "KH",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "CM",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "CA",
+		"pollution": 29.8,
+		"climate": 55.9
+	},
+	{
+		"abbr": "CV",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "KY",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "CF",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "TD",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "CL",
+		"pollution": 77.4,
+		"climate": 95.6
+	},
+	{
+		"abbr": "CN",
+		"pollution": 76.7,
+		"climate": 73.6
+	},
+	{
+		"abbr": "CO",
+		"pollution": 62.2,
+		"climate": 82.3
+	},
+	{
+		"abbr": "KM",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "CG",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "CK",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "CR",
+		"pollution": 41.6,
+		"climate": 93.1
+	},
+	{
+		"abbr": "CI",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "HR",
+		"pollution": 31.6,
+		"climate": 89.9
+	},
+	{
+		"abbr": "CU",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "CY",
+		"pollution": 55.4,
+		"climate": 93.3
+	},
+	{
+		"abbr": "CZ",
+		"pollution": 34.6,
+		"climate": 78.7
+	},
+	{
+		"abbr": "CD",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "DK",
+		"pollution": 20.9,
+		"climate": 81.2
+	},
+	{
+		"abbr": "DJ",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "DM",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "DO",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "EC",
+		"pollution": 59.1,
+		"climate": 94.5
+	},
+	{
+		"abbr": "EG",
+		"pollution": 82.7,
+		"climate": 90.8
+	},
+	{
+		"abbr": "SV",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "GQ",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "ER",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "EE",
+		"pollution": 16.9,
+		"climate": 71.2
+	},
+	{
+		"abbr": "SZ",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "ET",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "FK",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "FJ",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "FI",
+		"pollution": 11.7,
+		"climate": 54.4
+	},
+	{
+		"abbr": "FR",
+		"pollution": 43.7,
+		"climate": 89.9
+	},
+	{
+		"abbr": "GF",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "GA",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "GM",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "GE",
+		"pollution": 67.6,
+		"climate": 88.5
+	},
+	{
+		"abbr": "DE",
+		"pollution": 28.8,
+		"climate": 82.8
+	},
+	{
+		"abbr": "GH",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "GR",
+		"pollution": 49.4,
+		"climate": 93.1
+	},
+	{
+		"abbr": "GL",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "GD",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "GT",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "GN",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "GW",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "GY",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "HT",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "HN",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "HU",
+		"pollution": 46.7,
+		"climate": 79.3
+	},
+	{
+		"abbr": "IS",
+		"pollution": 16.7,
+		"climate": 68.8
+	},
+	{
+		"abbr": "IN",
+		"pollution": 72.8,
+		"climate": 64.5
+	},
+	{
+		"abbr": "ID",
+		"pollution": 68.1,
+		"climate": 66.7
+	},
+	{
+		"abbr": "IR",
+		"pollution": 75.3,
+		"climate": 66.9
+	},
+	{
+		"abbr": "IQ",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "IE",
+		"pollution": 34.9,
+		"climate": 89.8
+	},
+	{
+		"abbr": "IL",
+		"pollution": 56.7,
+		"climate": 93.8
+	},
+	{
+		"abbr": "IT",
+		"pollution": 53.4,
+		"climate": 90.1
+	},
+	{
+		"abbr": "JM",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "JP",
+		"pollution": 38.2,
+		"climate": 84.1
+	},
+	{
+		"abbr": "JO",
+		"pollution": 77.1,
+		"climate": 91.2
+	},
+	{
+		"abbr": "KZ",
+		"pollution": 72.9,
+		"climate": 38.8
+	},
+	{
+		"abbr": "KE",
+		"pollution": 69,
+		"climate": 87.1
+	},
+	{
+		"abbr": "KI",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "KW",
+		"pollution": 69.4,
+		"climate": 20.2
+	},
+	{
+		"abbr": "KG",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "LA",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "LV",
+		"pollution": 30.1,
+		"climate": 76.8
+	},
+	{
+		"abbr": "LB",
+		"pollution": 89.6,
+		"climate": 94.7
+	},
+	{
+		"abbr": "LS",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "LR",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "LY",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "LI",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "LT",
+		"pollution": 25.9,
+		"climate": 69.9
+	},
+	{
+		"abbr": "LU",
+		"pollution": 22.9,
+		"climate": 82.6
+	},
+	{
+		"abbr": "MG",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "MW",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "MY",
+		"pollution": 60.9,
+		"climate": 58.3
+	},
+	{
+		"abbr": "MV",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "ML",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "MT",
+		"pollution": 75.7,
+		"climate": 97.8
+	},
+	{
+		"abbr": "MH",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "MR",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "MU",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "MX",
+		"pollution": 58.3,
+		"climate": 83.3
+	},
+	{
+		"abbr": "FM",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "MD",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "MC",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "MN",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "ME",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "MA",
+		"pollution": 68.4,
+		"climate": 91.7
+	},
+	{
+		"abbr": "MZ",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "MM",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "NA",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "NP",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "NL",
+		"pollution": 20.9,
+		"climate": 86.8
+	},
+	{
+		"abbr": "NC",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "NZ",
+		"pollution": 26,
+		"climate": 97.3
+	},
+	{
+		"abbr": "NI",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "NE",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "NG",
+		"pollution": 87.9,
+		"climate": 66.3
+	},
+	{
+		"abbr": "KP",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "MK",
+		"pollution": 79.2,
+		"climate": 79.2
+	},
+	{
+		"abbr": "NO",
+		"pollution": 18.3,
+		"climate": 70.9
+	},
+	{
+		"abbr": "OM",
+		"pollution": 36.4,
+		"climate": 71.3
+	},
+	{
+		"abbr": "PK",
+		"pollution": 73.2,
+		"climate": 70.8
+	},
+	{
+		"abbr": "PW",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "PS",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "PA",
+		"pollution": 55.6,
+		"climate": 68.2
+	},
+	{
+		"abbr": "PG",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "PY",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "PE",
+		"pollution": 81.9,
+		"climate": 93.3
+	},
+	{
+		"abbr": "PH",
+		"pollution": 72.5,
+		"climate": 69
+	},
+	{
+		"abbr": "PL",
+		"pollution": 55.3,
+		"climate": 75.6
+	},
+	{
+		"abbr": "PT",
+		"pollution": 29.5,
+		"climate": 97.7
+	},
+	{
+		"abbr": "PR",
+		"pollution": 47.9,
+		"climate": 71.2
+	},
+	{
+		"abbr": "QA",
+		"pollution": 60,
+		"climate": 36
+	},
+	{
+		"abbr": "RO",
+		"pollution": 58.2,
+		"climate": 76.3
+	},
+	{
+		"abbr": "RU",
+		"pollution": 58.5,
+		"climate": 36.3
+	},
+	{
+		"abbr": "RW",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "KN",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "LC",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "VC",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "WS",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "SM",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "ST",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "SA",
+		"pollution": 62.4,
+		"climate": 39.3
+	},
+	{
+		"abbr": "SN",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "RS",
+		"pollution": 65.9,
+		"climate": 83.2
+	},
+	{
+		"abbr": "SC",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "SL",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "SG",
+		"pollution": 32.3,
+		"climate": 57.5
+	},
+	{
+		"abbr": "SK",
+		"pollution": 37.1,
+		"climate": 73.9
+	},
+	{
+		"abbr": "SI",
+		"pollution": 22.2,
+		"climate": 80.6
+	},
+	{
+		"abbr": "SB",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "SO",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "ZA",
+		"pollution": 56.7,
+		"climate": 95.4
+	},
+	{
+		"abbr": "KR",
+		"pollution": 57.5,
+		"climate": 68.5
+	},
+	{
+		"abbr": "SS",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "ES",
+		"pollution": 35.3,
+		"climate": 92.7
+	},
+	{
+		"abbr": "LK",
+		"pollution": 58,
+		"climate": 64.1
+	},
+	{
+		"abbr": "SD",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "SR",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "SE",
+		"pollution": 17.6,
+		"climate": 64.7
+	},
+	{
+		"abbr": "CH",
+		"pollution": 24,
+		"climate": 80.6
+	},
+	{
+		"abbr": "SY",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "TR",
+		"pollution": 64.1,
+		"climate": 90.2
+	},
+	{
+		"abbr": "TW",
+		"pollution": 64.1,
+		"climate": 83.9
+	},
+	{
+		"abbr": "TJ",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "TZ",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "TH",
+		"pollution": 75.6,
+		"climate": 69.3
+	},
+	{
+		"abbr": "TL",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "TG",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "TO",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "TT",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "TN",
+		"pollution": 69.7,
+		"climate": 94.1
+	},
+	{
+		"abbr": "TM",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "TV",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "UG",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "UA",
+		"pollution": 62.2,
+		"climate": 71.9
+	},
+	{
+		"abbr": "AE",
+		"pollution": 48.2,
+		"climate": 43.4
+	},
+	{
+		"abbr": "GB",
+		"pollution": 40.7,
+		"climate": 88.1
+	},
+	{
+		"abbr": "US",
+		"pollution": 36.9,
+		"climate": 76.1
+	},
+	{
+		"abbr": "UY",
+		"pollution": 43.3,
+		"climate": 98.5
+	},
+	{
+		"abbr": "UZ",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "VU",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "VE",
+		"pollution": 73.7,
+		"climate": 77.1
+	},
+	{
+		"abbr": "VN",
+		"pollution": 83.8,
+		"climate": 71.1
+	},
+	{
+		"abbr": "EH",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "YE",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "ZM",
+		"pollution": "",
+		"climate": ""
+	},
+	{
+		"abbr": "ZW",
+		"pollution": "",
+		"climate": ""
+	}
+]

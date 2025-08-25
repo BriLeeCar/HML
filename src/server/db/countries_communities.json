@@ -1,0 +1,1214 @@
+[
+	{
+		"abbr": "AF",
+		"prideScore": -21,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "AL",
+		"prideScore": -2,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "DZ",
+		"prideScore": -12,
+		"transSafety": false,
+		"racismRank": 41
+	},
+	{
+		"abbr": "AD",
+		"prideScore": 8,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "AO",
+		"prideScore": -3,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "AG",
+		"prideScore": -3,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "AR",
+		"prideScore": 8,
+		"transSafety": false,
+		"racismRank": 22
+	},
+	{
+		"abbr": "AM",
+		"prideScore": -6,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "AU",
+		"prideScore": 9,
+		"transSafety": false,
+		"racismRank": 12
+	},
+	{
+		"abbr": "AT",
+		"prideScore": 9,
+		"transSafety": false,
+		"racismRank": 13
+	},
+	{
+		"abbr": "AZ",
+		"prideScore": -10,
+		"transSafety": false,
+		"racismRank": 81
+	},
+	{
+		"abbr": "BS",
+		"prideScore": -10,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "BH",
+		"prideScore": -9,
+		"transSafety": false,
+		"racismRank": 87
+	},
+	{
+		"abbr": "BD",
+		"prideScore": -9,
+		"transSafety": false,
+		"racismRank": 79
+	},
+	{
+		"abbr": "BB",
+		"prideScore": -4,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "BY",
+		"prideScore": -11,
+		"transSafety": false,
+		"racismRank": 88
+	},
+	{
+		"abbr": "BE",
+		"prideScore": 8,
+		"transSafety": true,
+		"racismRank": 9
+	},
+	{
+		"abbr": "BZ",
+		"prideScore": -3,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "BJ",
+		"prideScore": -6,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "BT",
+		"prideScore": -2,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "BO",
+		"prideScore": 0,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "BA",
+		"prideScore": -1,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "BW",
+		"prideScore": -4,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "BR",
+		"prideScore": 6,
+		"transSafety": false,
+		"racismRank": 14
+	},
+	{
+		"abbr": "BN",
+		"prideScore": -14,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "BG",
+		"prideScore": -5,
+		"transSafety": false,
+		"racismRank": 43
+	},
+	{
+		"abbr": "BF",
+		"prideScore": -8,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "BI",
+		"prideScore": -10,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "KH",
+		"prideScore": -4,
+		"transSafety": false,
+		"racismRank": 83
+	},
+	{
+		"abbr": "CM",
+		"prideScore": -13,
+		"transSafety": false,
+		"racismRank": 44
+	},
+	{
+		"abbr": "CA",
+		"prideScore": 12,
+		"transSafety": false,
+		"racismRank": 5
+	},
+	{
+		"abbr": "CV",
+		"prideScore": -4,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "KY",
+		"prideScore": 0,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "CF",
+		"prideScore": -10,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "TD",
+		"prideScore": -11,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "CL",
+		"prideScore": 9,
+		"transSafety": false,
+		"racismRank": 24
+	},
+	{
+		"abbr": "CN",
+		"prideScore": -5,
+		"transSafety": false,
+		"racismRank": 75
+	},
+	{
+		"abbr": "CO",
+		"prideScore": 9,
+		"transSafety": false,
+		"racismRank": 27
+	},
+	{
+		"abbr": "KM",
+		"prideScore": -10,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "CG",
+		"prideScore": -5,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "CK",
+		"prideScore": -6,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "CR",
+		"prideScore": 7,
+		"transSafety": false,
+		"racismRank": 52
+	},
+	{
+		"abbr": "CI",
+		"prideScore": -12,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "HR",
+		"prideScore": 2,
+		"transSafety": false,
+		"racismRank": 42
+	},
+	{
+		"abbr": "CU",
+		"prideScore": 6,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "CY",
+		"prideScore": -1,
+		"transSafety": false,
+		"racismRank": 74
+	},
+	{
+		"abbr": "CZ",
+		"prideScore": 1,
+		"transSafety": false,
+		"racismRank": 59
+	},
+	{
+		"abbr": "CD",
+		"prideScore": -10,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "DK",
+		"prideScore": 10,
+		"transSafety": true,
+		"racismRank": 1
+	},
+	{
+		"abbr": "DJ",
+		"prideScore": -11,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "DM",
+		"prideScore": -11,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "DO",
+		"prideScore": -11,
+		"transSafety": false,
+		"racismRank": 63
+	},
+	{
+		"abbr": "EC",
+		"prideScore": 3,
+		"transSafety": false,
+		"racismRank": 49
+	},
+	{
+		"abbr": "EG",
+		"prideScore": -14,
+		"transSafety": false,
+		"racismRank": 30
+	},
+	{
+		"abbr": "SV",
+		"prideScore": -5,
+		"transSafety": false,
+		"racismRank": 84
+	},
+	{
+		"abbr": "GQ",
+		"prideScore": -10,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "ER",
+		"prideScore": -13,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "EE",
+		"prideScore": 6,
+		"transSafety": false,
+		"racismRank": 50
+	},
+	{
+		"abbr": "SZ",
+		"prideScore": -12,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "ET",
+		"prideScore": -14,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "FK",
+		"prideScore": null,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "FJ",
+		"prideScore": -3,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "FI",
+		"prideScore": 9,
+		"transSafety": true,
+		"racismRank": 4
+	},
+	{
+		"abbr": "FR",
+		"prideScore": 8,
+		"transSafety": true,
+		"racismRank": 20
+	},
+	{
+		"abbr": "GF",
+		"prideScore": null,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "GA",
+		"prideScore": -8,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "GM",
+		"prideScore": -11,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "GE",
+		"prideScore": -6,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "DE",
+		"prideScore": 10,
+		"transSafety": true,
+		"racismRank": 21
+	},
+	{
+		"abbr": "GH",
+		"prideScore": -12,
+		"transSafety": false,
+		"racismRank": 40
+	},
+	{
+		"abbr": "GR",
+		"prideScore": 5,
+		"transSafety": true,
+		"racismRank": 37
+	},
+	{
+		"abbr": "GL",
+		"prideScore": 8,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "GD",
+		"prideScore": -8,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "GT",
+		"prideScore": -9,
+		"transSafety": false,
+		"racismRank": 60
+	},
+	{
+		"abbr": "GN",
+		"prideScore": -9,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "GW",
+		"prideScore": null,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "GY",
+		"prideScore": -10,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "HT",
+		"prideScore": -10,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "HN",
+		"prideScore": -7,
+		"transSafety": false,
+		"racismRank": 66
+	},
+	{
+		"abbr": "HU",
+		"prideScore": -5,
+		"transSafety": false,
+		"racismRank": 69
+	},
+	{
+		"abbr": "IS",
+		"prideScore": 10,
+		"transSafety": true,
+		"racismRank": 7
+	},
+	{
+		"abbr": "IN",
+		"prideScore": 3,
+		"transSafety": false,
+		"racismRank": 68
+	},
+	{
+		"abbr": "ID",
+		"prideScore": -13,
+		"transSafety": false,
+		"racismRank": 46
+	},
+	{
+		"abbr": "IR",
+		"prideScore": -21,
+		"transSafety": false,
+		"racismRank": 89
+	},
+	{
+		"abbr": "IQ",
+		"prideScore": -14,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "IE",
+		"prideScore": 9,
+		"transSafety": true,
+		"racismRank": 10
+	},
+	{
+		"abbr": "IL",
+		"prideScore": 5,
+		"transSafety": false,
+		"racismRank": 80
+	},
+	{
+		"abbr": "IT",
+		"prideScore": -1,
+		"transSafety": false,
+		"racismRank": 23
+	},
+	{
+		"abbr": "JM",
+		"prideScore": -12,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "JP",
+		"prideScore": -3,
+		"transSafety": false,
+		"racismRank": 62
+	},
+	{
+		"abbr": "JO",
+		"prideScore": -10,
+		"transSafety": false,
+		"racismRank": 67
+	},
+	{
+		"abbr": "KZ",
+		"prideScore": -5,
+		"transSafety": false,
+		"racismRank": 51
+	},
+	{
+		"abbr": "KE",
+		"prideScore": -10,
+		"transSafety": false,
+		"racismRank": 29
+	},
+	{
+		"abbr": "KI",
+		"prideScore": -7,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "KW",
+		"prideScore": -16,
+		"transSafety": false,
+		"racismRank": 70
+	},
+	{
+		"abbr": "KG",
+		"prideScore": -7,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "LA",
+		"prideScore": -3,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "LV",
+		"prideScore": -1,
+		"transSafety": false,
+		"racismRank": 34
+	},
+	{
+		"abbr": "LB",
+		"prideScore": -8,
+		"transSafety": false,
+		"racismRank": 73
+	},
+	{
+		"abbr": "LS",
+		"prideScore": -5,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "LR",
+		"prideScore": -11,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "LY",
+		"prideScore": -16,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "LI",
+		"prideScore": 1,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "LT",
+		"prideScore": -4,
+		"transSafety": false,
+		"racismRank": 57
+	},
+	{
+		"abbr": "LU",
+		"prideScore": 9,
+		"transSafety": true,
+		"racismRank": 18
+	},
+	{
+		"abbr": "MG",
+		"prideScore": -11,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "MW",
+		"prideScore": -14,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "MY",
+		"prideScore": -15,
+		"transSafety": false,
+		"racismRank": 33
+	},
+	{
+		"abbr": "MV",
+		"prideScore": -11,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "ML",
+		"prideScore": -6,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "MT",
+		"prideScore": 12,
+		"transSafety": true,
+		"racismRank": null
+	},
+	{
+		"abbr": "MH",
+		"prideScore": -3,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "MR",
+		"prideScore": -12,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "MU",
+		"prideScore": -5,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "MX",
+		"prideScore": 4,
+		"transSafety": false,
+		"racismRank": 36
+	},
+	{
+		"abbr": "FM",
+		"prideScore": -4,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "MD",
+		"prideScore": -5,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "MC",
+		"prideScore": -3,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "MN",
+		"prideScore": -3,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "ME",
+		"prideScore": -1,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "MA",
+		"prideScore": -14,
+		"transSafety": false,
+		"racismRank": 47
+	},
+	{
+		"abbr": "MZ",
+		"prideScore": -5,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "MM",
+		"prideScore": -10,
+		"transSafety": false,
+		"racismRank": 86
+	},
+	{
+		"abbr": "NA",
+		"prideScore": -8,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "NP",
+		"prideScore": 1,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "NL",
+		"prideScore": 8,
+		"transSafety": true,
+		"racismRank": 3
+	},
+	{
+		"abbr": "NC",
+		"prideScore": 7,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "NZ",
+		"prideScore": 12,
+		"transSafety": false,
+		"racismRank": 2
+	},
+	{
+		"abbr": "NI",
+		"prideScore": -8,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "NE",
+		"prideScore": -5,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "NG",
+		"prideScore": -17,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "KP",
+		"prideScore": -11,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "MK",
+		"prideScore": -3,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "NO",
+		"prideScore": 10,
+		"transSafety": true,
+		"racismRank": 6
+	},
+	{
+		"abbr": "OM",
+		"prideScore": -12,
+		"transSafety": false,
+		"racismRank": 56
+	},
+	{
+		"abbr": "PK",
+		"prideScore": -7,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "PW",
+		"prideScore": -7,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "PS",
+		"prideScore": null,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "PA",
+		"prideScore": -5,
+		"transSafety": false,
+		"racismRank": 53
+	},
+	{
+		"abbr": "PG",
+		"prideScore": -10,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "PY",
+		"prideScore": -8,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "PE",
+		"prideScore": -5,
+		"transSafety": false,
+		"racismRank": 32
+	},
+	{
+		"abbr": "PH",
+		"prideScore": -7,
+		"transSafety": false,
+		"racismRank": 25
+	},
+	{
+		"abbr": "PL",
+		"prideScore": -7,
+		"transSafety": false,
+		"racismRank": 38
+	},
+	{
+		"abbr": "PT",
+		"prideScore": 12,
+		"transSafety": true,
+		"racismRank": 17
+	},
+	{
+		"abbr": "PR",
+		"prideScore": 4,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "QA",
+		"prideScore": -16,
+		"transSafety": false,
+		"racismRank": 76
+	},
+	{
+		"abbr": "RO",
+		"prideScore": -3,
+		"transSafety": false,
+		"racismRank": 82
+	},
+	{
+		"abbr": "RU",
+		"prideScore": -17,
+		"transSafety": false,
+		"racismRank": 72
+	},
+	{
+		"abbr": "RW",
+		"prideScore": -10,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "KN",
+		"prideScore": -7,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "LC",
+		"prideScore": -4,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "VC",
+		"prideScore": -10,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "WS",
+		"prideScore": -5,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "SM",
+		"prideScore": 1,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "ST",
+		"prideScore": -6,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "SA",
+		"prideScore": -21,
+		"transSafety": false,
+		"racismRank": 61
+	},
+	{
+		"abbr": "SN",
+		"prideScore": -13,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "RS",
+		"prideScore": -3,
+		"transSafety": false,
+		"racismRank": 65
+	},
+	{
+		"abbr": "SC",
+		"prideScore": -5,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "SL",
+		"prideScore": -10,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "SG",
+		"prideScore": -2,
+		"transSafety": false,
+		"racismRank": 26
+	},
+	{
+		"abbr": "SK",
+		"prideScore": -2,
+		"transSafety": false,
+		"racismRank": 58
+	},
+	{
+		"abbr": "SI",
+		"prideScore": 6,
+		"transSafety": false,
+		"racismRank": 39
+	},
+	{
+		"abbr": "SB",
+		"prideScore": -11,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "SO",
+		"prideScore": -18,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "ZA",
+		"prideScore": 5,
+		"transSafety": false,
+		"racismRank": 11
+	},
+	{
+		"abbr": "KR",
+		"prideScore": -2,
+		"transSafety": false,
+		"racismRank": 85
+	},
+	{
+		"abbr": "SS",
+		"prideScore": -14,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "ES",
+		"prideScore": 12,
+		"transSafety": true,
+		"racismRank": 19
+	},
+	{
+		"abbr": "LK",
+		"prideScore": -6,
+		"transSafety": false,
+		"racismRank": 71
+	},
+	{
+		"abbr": "SD",
+		"prideScore": -12,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "SR",
+		"prideScore": -5,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "SE",
+		"prideScore": 9,
+		"transSafety": false,
+		"racismRank": 8
+	},
+	{
+		"abbr": "CH",
+		"prideScore": 11,
+		"transSafety": true,
+		"racismRank": 15
+	},
+	{
+		"abbr": "SY",
+		"prideScore": -13,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "TR",
+		"prideScore": -10,
+		"transSafety": false,
+		"racismRank": 64
+	},
+	{
+		"abbr": "TW",
+		"prideScore": 9,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "TJ",
+		"prideScore": -9,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "TZ",
+		"prideScore": -15,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "TH",
+		"prideScore": 0,
+		"transSafety": false,
+		"racismRank": 45
+	},
+	{
+		"abbr": "TL",
+		"prideScore": 0,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "TG",
+		"prideScore": -10,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "TO",
+		"prideScore": -9,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "TT",
+		"prideScore": -7,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "TN",
+		"prideScore": -14,
+		"transSafety": false,
+		"racismRank": 77
+	},
+	{
+		"abbr": "TM",
+		"prideScore": -14,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "TV",
+		"prideScore": -8,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "UG",
+		"prideScore": -18,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "UA",
+		"prideScore": -2,
+		"transSafety": false,
+		"racismRank": 48
+	},
+	{
+		"abbr": "AE",
+		"prideScore": -16,
+		"transSafety": false,
+		"racismRank": 28
+	},
+	{
+		"abbr": "GB",
+		"prideScore": 8,
+		"transSafety": false,
+		"racismRank": 16
+	},
+	{
+		"abbr": "US",
+		"prideScore": 4,
+		"transSafety": false,
+		"racismRank": 55
+	},
+	{
+		"abbr": "UY",
+		"prideScore": 10,
+		"transSafety": false,
+		"racismRank": 31
+	},
+	{
+		"abbr": "UZ",
+		"prideScore": -11,
+		"transSafety": false,
+		"racismRank": 78
+	},
+	{
+		"abbr": "VU",
+		"prideScore": -6,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "VE",
+		"prideScore": -8,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "VN",
+		"prideScore": -1,
+		"transSafety": false,
+		"racismRank": 54
+	},
+	{
+		"abbr": "EH",
+		"prideScore": null,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "YE",
+		"prideScore": -19,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "ZM",
+		"prideScore": -12,
+		"transSafety": false,
+		"racismRank": null
+	},
+	{
+		"abbr": "ZW",
+		"prideScore": -12,
+		"transSafety": false,
+		"racismRank": 35
+	}
+]

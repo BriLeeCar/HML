@@ -1,0 +1,1250 @@
+[
+	{
+		"abbr": "AF",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "AL",
+		"handle": "adventurealbania",
+		"havePhoto": true,
+		"height": 563,
+		"name": "Adventure Albania",
+		"width": 750
+	},
+	{
+		"abbr": "DZ",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "AD",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "AO",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "AG",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "AR",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "AM",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "AU",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "AT",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "AZ",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "BS",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "BH",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "BD",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "BB",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "BY",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "BE",
+		"handle": "jorgefdezsalas",
+		"havePhoto": true,
+		"height": 480,
+		"name": "Jorge Fernández Salas",
+		"width": 640
+	},
+	{
+		"abbr": "BZ",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "BJ",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "BT",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "BO",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "BA",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "BW",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "BR",
+		"handle": "smiley_shotz",
+		"havePhoto": true,
+		"height": 960,
+		"name": "Marianna Smiley",
+		"width": 640
+	},
+	{
+		"abbr": "BN",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "BG",
+		"handle": "dannyspasov",
+		"havePhoto": true,
+		"height": 800,
+		"name": "Dannyel Spasov",
+		"width": 640
+	},
+	{
+		"abbr": "BF",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "BI",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "KH",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "CM",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "CA",
+		"handle": "thirdworldhippy",
+		"havePhoto": true,
+		"height": 937,
+		"name": "Mwangi Gatheca",
+		"width": 750
+	},
+	{
+		"abbr": "CV",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "KY",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "CF",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "TD",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "CL",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "CN",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "CO",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "KM",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "CG",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "CK",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "CR",
+		"handle": "fabian_marin1",
+		"havePhoto": true,
+		"name": "Fabian Marin Zuñiga",
+		"width": 750,
+		"height": 1125
+	},
+	{
+		"abbr": "CI",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "HR",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "CU",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "CY",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "CZ",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "CD",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "DK",
+		"handle": "potapenko",
+		"havePhoto": true,
+		"name": "Maksym Potapenko",
+		"width": 640,
+		"height": 640
+	},
+	{
+		"abbr": "DJ",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "DM",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "DO",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "EC",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "EG",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "SV",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "GQ",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "ER",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "EE",
+		"handle": "juliusjansson",
+		"havePhoto": true,
+		"name": "Julius Jansson",
+		"width": 750,
+		"height": 1125
+	},
+	{
+		"abbr": "SZ",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "ET",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "FK",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "FJ",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "FI",
+		"handle": "hendrikmorkel",
+		"havePhoto": true,
+		"name": "Hendrik Morkel",
+		"width": 640,
+		"height": 427
+	},
+	{
+		"abbr": "FR",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "GF",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "GA",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "GM",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "GE",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "DE",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "GH",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "GR",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "GL",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "GD",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "GT",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "GN",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "GW",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "GY",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "HT",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "HN",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "HU",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "IS",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "IN",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "ID",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "IR",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "IQ",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "IE",
+		"handle": "wiseguyinthesky",
+		"havePhoto": true,
+		"name": "Paul Costello",
+		"width": 750,
+		"height": 938
+	},
+	{
+		"abbr": "IL",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "IT",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "JM",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "JP",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "JO",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "KZ",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "KE",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "KI",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "KW",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "KG",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "LA",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "LV",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "LB",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "LS",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "LR",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "LY",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "LI",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "LT",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "LU",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "MG",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "MW",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "MY",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "MV",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "ML",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "MT",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "MH",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "MR",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "MU",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "MX",
+		"handle": "jezar",
+		"havePhoto": true,
+		"name": "Jezael Melgoza",
+		"width": 750,
+		"height": 500
+	},
+	{
+		"abbr": "FM",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "MD",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "MC",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "MN",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "ME",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "MA",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "MZ",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "MM",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "NA",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "NP",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "NL",
+		"handle": "muzykalnepodroze",
+		"havePhoto": true,
+		"name": "Muzykalne Podróże",
+		"width": 750,
+		"height": 1008
+	},
+	{
+		"abbr": "NC",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "NZ",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "NI",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "NE",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "NG",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "KP",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "MK",
+		"handle": "adventurealbania",
+		"havePhoto": true,
+		"name": "Adventure Albania",
+		"width": 640,
+		"height": 480
+	},
+	{
+		"abbr": "NO",
+		"handle": "jelle_van_leest",
+		"havePhoto": true,
+		"name": "Jelle Van Leest",
+		"width": 750,
+		"height": 1333
+	},
+	{
+		"abbr": "OM",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "PK",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "PW",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "PS",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "PA",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "PG",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "PY",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "PE",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "PH",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "PL",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "PT",
+		"handle": "alexrvasey",
+		"havePhoto": true,
+		"name": "Alex Vasey",
+		"width": 750,
+		"height": 1000
+	},
+	{
+		"abbr": "PR",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "QA",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "RO",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "RU",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "RW",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "KN",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "LC",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "VC",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "WS",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "SM",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "ST",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "SA",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "SN",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "RS",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "SC",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "SL",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "SG",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "SK",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "SI",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "SB",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "SO",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "ZA",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "KR",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "SS",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "ES",
+		"handle": "whatyouhide",
+		"havePhoto": true,
+		"name": "Andrea Leopardi",
+		"width": 750,
+		"height": 1125
+	},
+	{
+		"abbr": "LK",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "SD",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "SR",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "SE",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "CH",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "SY",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "TR",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "TW",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "TJ",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "TZ",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "TH",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "TL",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "TG",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "TO",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "TT",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "TN",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "TM",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "TV",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "UG",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "UA",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "AE",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "GB",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "US",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "UY",
+		"handle": "pedroslinger",
+		"havePhoto": true,
+		"name": "Pedro Slinger",
+		"width": 750,
+		"height": 1125
+	},
+	{
+		"abbr": "UZ",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "VU",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "VE",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "VN",
+		"handle": "ammiengo",
+		"havePhoto": true,
+		"name": "Ammie Ngo",
+		"width": 750,
+		"height": 500
+	},
+	{
+		"abbr": "EH",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "YE",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "ZM",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	},
+	{
+		"abbr": "ZW",
+		"handle": null,
+		"havePhoto": false,
+		"name": null
+	}
+]

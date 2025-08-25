@@ -1,7 +1,7 @@
 import fs from 'fs'
-import { Heading } from '~/components/Heading'
-import { MDXProcessor } from '~/MDX/ProcessMDX'
-import { toTitleCase } from '~/util/text'
+import { Heading } from '~/components'
+import { MDXProcessor } from '~/lib/mdx/ProcessMDX'
+import { toTitleCase } from '~/lib/text'
 
 export const generateStaticParams = () => {
 	const pages = fs.readdirSync('src/data/pages')

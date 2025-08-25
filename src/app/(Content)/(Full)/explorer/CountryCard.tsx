@@ -1,22 +1,22 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Heading } from '~/components/Heading'
-import { tPhotoCountry } from './page'
+import { Heading } from '~/components'
+import { tDB } from '~/server/db/db'
 
 export const CountryCard = ({
 	country,
 }: {
-	country: tPhotoCountry
+	country: tDB['countries'][number]
 }) => {
 	return (
-		country.unsplash && (
+		country.images.havePhoto && (
 			<div className='bg-background outline-card-foreground/5 h-fill w-full basis-full rounded-lg outline-1'>
 				<figure
-					key={country.unsplash.id}
+					key={country.abbr}
 					className='relative block h-auto w-[33vw] grow overflow-hidden rounded-t-lg px-0 pt-0'>
 					<Image
-						src={country.unsplash.urls.regular + '&dpr=2&auto=format'}
-						alt={country.unsplash.alt_description ?? ''}
+						src={'/countries/' + country.name.toLowerCase()}
+						alt={`Photograph showing life in ${country.name}`}
 						fill
 						style={{
 							objectFit: 'cover',
@@ -26,10 +26,10 @@ export const CountryCard = ({
 					/>
 					<figcaption className='absolute right-0 bottom-0 z-20 w-full bg-black/35 px-2 py-1 text-end font-mono text-[.5rem] text-white uppercase underline decoration-current/30 underline-offset-2 text-shadow-2xs text-shadow-black/20 hover:decoration-current'>
 						<Link
-							href={country.unsplash.user.links.html}
+							href={'https://unsplash.com/@' + country.images.handle}
 							target='_blank'
 							rel='noopener noreferrer'>
-							Photo By {country.unsplash.user.name} on Unsplash
+							Photo By {country.images.name} on Unsplash
 						</Link>
 					</figcaption>
 				</figure>

@@ -1,33 +1,28 @@
 'use client'
 
 import { AnimatePresence, motion } from 'motion/react'
-import { useRef, useState } from 'react'
-import { Heading } from '~/components/Heading'
-import { Icon } from '~/components/Icon'
-import { Checkbox, Label } from '~/components/ui'
+import { useContext, useRef, useState } from 'react'
+import { Checkbox, Heading, Icon, Label } from '~/components'
+import { tExplorerFilters } from '~/server/db/db'
+import { DBContext } from '~/server/db/provider'
 import { Filter } from './Filter'
 import { Masonry } from './Masonary'
-import { tPhotoCountry } from './page'
 
-export const Base = ({
-	fetchedCountries,
-}: {
-	fetchedCountries: tPhotoCountry[]
-}) => {
+export const Base = () => {
+	const db = useContext(DBContext)
 	const [drawerOpen, openDrawer] = useState(false)
-	const [filters, setFilters] = useState<Array<keyof tPhotoCountry>>(
-		[]
-	)
+	const [filters, setFilters] = useState<
+		Array<keyof tExplorerFilters>
+	>([])
 
 	const handleFilterChange = (
-		filterKey: keyof tPhotoCountry,
+		filterKey: keyof tExplorerFilters,
 		value: boolean
 	) => {
 		const newFilters = [...filters.filter((f) => f != filterKey)]
 		if (value) {
 			newFilters.push(filterKey)
 		}
-		console.log(newFilters)
 		setFilters(newFilters)
 	}
 
@@ -47,7 +42,9 @@ export const Base = ({
 				/>
 			</div>
 			<Masonry
-				countries={handleCountryFilter(fetchedCountries, filters)}
+				countries={db
+					.filterByCommunities(filters)
+					.filter((c) => c.images.havePhoto == true)}
 			/>
 			<AnimatePresence>
 				{drawerOpen && (
@@ -76,9 +73,9 @@ export const Base = ({
 								<Label>
 									<Checkbox
 										id='un'
-										defaultChecked={filters.includes('un')}
+										defaultChecked={filters.includes('unMember')}
 										onCheckedChange={(checked) =>
-											handleFilterChange('un', checked === true)
+											handleFilterChange('unMember', checked === true)
 										}
 									/>
 									UN Member
@@ -108,22 +105,4 @@ export const Base = ({
 			</AnimatePresence>
 		</div>
 	)
-}
-
-const handleCountryFilter = (
-	countries: tPhotoCountry[],
-	filters: Array<keyof tPhotoCountry>
-) => {
-	const newCountries = countries.filter((c) => {
-		const tests = filters.map((key) => {
-			if (key == 'homophobia' && c[key] < 0) return false
-			if (key == 'un' && !c[key]) return false
-			if (key == 'trans' && c[key] != true) return false
-		})
-		if (tests.includes(false)) return false
-		return true
-	})
-
-	console.log(newCountries, filters)
-	return newCountries
 }

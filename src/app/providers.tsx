@@ -2,8 +2,7 @@
 
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { ReactNode } from 'react'
-import { CountriesProvider } from '~/data/stores/countryStore'
-import QueryProviders from '~/data/stores/store'
+import { DBProvider } from '~/server/db/provider'
 
 const ThemeProvider = ({
 	children,
@@ -21,9 +20,7 @@ export const Providers = ({ children }: { children: ReactNode }) => {
 			defaultTheme='system'
 			enableSystem
 			disableTransitionOnChange>
-			<CountriesProvider>
-				<QueryProviders>{children}</QueryProviders>
-			</CountriesProvider>
+			<DBProvider>{children}</DBProvider>
 		</ThemeProvider>
 	)
 }

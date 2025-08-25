@@ -3,18 +3,20 @@
 import { AnimatePresence, motion } from 'motion/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { Heading } from '~/components'
 import { IconAttributes } from '~/components/Country/IconAttributes'
-import { Heading } from '~/components/Heading'
-import { tPhotoCountry } from './page'
+import { tDB } from '~/server/db/db'
+import { DBContext } from '~/server/db/provider'
 
 export const Masonry = ({
 	countries,
 }: {
-	countries: Array<tPhotoCountry>
+	countries: ReturnType<tDB['filterByCommunities']>
 }) => {
+	const db = useContext(DBContext)
 	const [columns, setColumns] = useState([[]] as Array<
-		tPhotoCountry[]
+		tDB['countries']
 	>)
 
 	useEffect(() => {
@@ -57,14 +59,14 @@ export const Masonry = ({
 				const newColsArray = Array.from(
 					{ length: newColumns },
 					() => []
-				) as Array<tPhotoCountry[]>
+				) as tDB['countries'][]
 
 				for (let i = 0, j = 0; i <= countries.length; i++, j++) {
 					j = j >= newColumns ? 0 : j
 					countries[i] && newColsArray[j].push(countries[i])
 				}
 
-				setColumns([...newColsArray.filter((c) => c !== undefined)])
+				setColumns([...newColsArray.filter((c) => c != undefined)])
 			}
 		}
 		globalThis.window.addEventListener('resize', updateSize)
@@ -83,8 +85,8 @@ export const Masonry = ({
 						<div
 							key={`columns${i}`}
 							className='flex max-w-1/2 grow basis-0 flex-col sm:max-w-[31vw] lg:max-w-[23vw]'>
-							{col.map((c, i) => {
-								const priority = i < 4 && c.unsplash ? true : false
+							{col.map((c: tDB['countries'][number], i) => {
+								const priority = i < 4 ? true : false
 								return (
 									<motion.div
 										layoutDependency={col.length}
@@ -104,6 +106,7 @@ export const Masonry = ({
 											country={c}
 											key={c.abbr}
 											priority={priority}
+											db={db}
 										/>
 									</motion.div>
 								)
@@ -119,20 +122,28 @@ export const Masonry = ({
 const Item = ({
 	country,
 	priority,
+	db,
 }: {
-	country: tPhotoCountry
+	country: tDB['countries'][number]
 	priority: boolean
+	db: tDB
 }) => {
 	return (
 		<>
 			<figure
 				style={{
-					aspectRatio: `${country.unsplash.width} / ${country.unsplash.height}`,
+					aspectRatio: `${country.images.width} / ${country.images.height}`,
 				}}
 				className='relative flex w-auto shrink overflow-hidden rounded-t-lg px-0 pt-0'>
 				<Image
-					src={country.unsplash.urls.regular + '&dpr=3&auto=format'}
-					alt={country.unsplash.alt_description ?? ''}
+					src={
+						'/countries/'
+						+ (country.images.havePhoto == true ?
+							country.name.toLowerCase()
+						:	'placeholder')
+						+ '.jpeg'
+					}
+					alt={`Photograph showing life in ${country.name}`}
 					fill
 					style={{
 						objectFit: 'cover',
@@ -144,10 +155,10 @@ const Item = ({
 				/>
 				<figcaption className='absolute right-0 bottom-0 z-20 w-full bg-black/35 px-2 py-1 text-end font-mono text-[.5rem] text-white uppercase underline decoration-current/30 underline-offset-2 text-shadow-2xs text-shadow-black/20 hover:decoration-current'>
 					<Link
-						href={country.unsplash.user.links.html}
+						href={'https://unsplash.com/@' + country.images.handle}
 						target='_blank'
 						rel='noopener noreferrer'>
-						Photo By {country.unsplash.user.name} on Unsplash
+						Photo By {country.images.name} on Unsplash
 					</Link>
 				</figcaption>
 			</figure>
@@ -160,7 +171,7 @@ const Item = ({
 					</Heading>
 					<span className='shrink'>
 						<IconAttributes
-							country={country}
+							attr={db.getCommunityAttributes(country)}
 							className='justify-start'
 						/>
 					</span>

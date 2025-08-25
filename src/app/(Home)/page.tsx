@@ -1,6 +1,3 @@
-import { tCountryKeys } from '@/(Content)/(Full)/map/util'
-import countryPaths from '~/data/countryDataWithPaths.json'
-import { MapPathEl, MapSvg } from '../(Content)/(Full)/map/Map'
 import { MapBtn, NowBtn, SmallBtns } from './Buttons'
 import { HeadingText } from './HeadingText'
 import { Img } from './SidebarImg'
@@ -18,23 +15,23 @@ const Home = async () => {
 				<MapBtn />
 			</div>
 			<div className='absolute -top-10 -right-40 -z-1 hidden h-1/2 w-[50vw] -rotate-5 overflow-clip min-[600px]:h-screen min-[1200px]:translate-y-0 min-[1200px]:rotate-0 md:block'>
-				<MapSvg className='lg:max-h-fill xl: text-primary-foreground h-auto w-screen shadow-none lg:relative lg:w-screen'>
-					{countryPaths
-						.filter((ea) => ea.path)
+				{/* <MapSvg className='lg:max-h-fill xl: text-primary-foreground h-auto w-screen shadow-none lg:relative lg:w-screen'>
+					{db
+						.countriesWithPaths.filter((ea) => ea.svgPath)
 						.map((country) => {
-							const { path, tier, abbr, name } = country
+							const { svgPath, tier, abbr, name } = country
 
 							return (
 								<MapPathEl
 									key={name}
 									name={name as tCountryKeys}
 									abbr={abbr}
-									tier={tier as unknown as string}
-									path={path || ''}
+									tier={tier}
+									path={svgPath || ''}
 								/>
 							)
 						})}
-				</MapSvg>
+				</MapSvg> */}
 			</div>
 		</>
 	)

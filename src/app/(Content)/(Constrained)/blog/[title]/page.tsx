@@ -1,13 +1,23 @@
-import { readFileSync } from 'fs'
+import { readdirSync, readFileSync } from 'fs'
 import { getFrontmatter } from 'next-mdx-remote-client/utils'
 import Image from 'next/image'
 import path from 'path'
-import { Heading, HGroup } from '~/components/Heading'
+import { Heading, HGroup, Section, Tag } from '~/components'
 import { mdxComponents } from '~/components/MDX'
-import { Section } from '~/components/Section'
-import { Tag } from '~/components/Tag'
-import { MDXProvider } from '~/MDX/MDXProvider'
-import { toTitleCase } from '~/util/text'
+import { MDXProvider } from '~/lib/mdx/MDXProvider'
+import { toTitleCase } from '~/lib/text'
+
+export const generateStaticParams = async () => {
+	const blogDir = path.join(process.cwd(), 'src', 'data', 'blog')
+	const files = readdirSync(blogDir, 'utf-8')
+	const fileNames = files
+		.toString()
+		.split('\n')
+		.filter((file) => file.endsWith('.mdx'))
+		.map((file) => file.replace('.mdx', ''))
+
+	return fileNames.map((title) => ({ title }))
+}
 
 const BlogEntry = async ({
 	params,

@@ -1,0 +1,1214 @@
+[
+	{
+		"abbr": "AF",
+		"propertyToIncome": null,
+		"col": 19.1,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "AL",
+		"propertyToIncome": 16.3,
+		"col": 43.7,
+		"purchasingPower": 46.3
+	},
+	{
+		"abbr": "DZ",
+		"propertyToIncome": null,
+		"col": 26.8,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "AD",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "AO",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "AG",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "AR",
+		"propertyToIncome": 15.2,
+		"col": 38.3,
+		"purchasingPower": 49.3
+	},
+	{
+		"abbr": "AM",
+		"propertyToIncome": 20.9,
+		"col": 40.5,
+		"purchasingPower": 42.7
+	},
+	{
+		"abbr": "AU",
+		"propertyToIncome": 8.4,
+		"col": 63,
+		"purchasingPower": 148.7
+	},
+	{
+		"abbr": "AT",
+		"propertyToIncome": 11.8,
+		"col": 67.6,
+		"purchasingPower": 122
+	},
+	{
+		"abbr": "AZ",
+		"propertyToIncome": 16.8,
+		"col": 29.3,
+		"purchasingPower": 45.1
+	},
+	{
+		"abbr": "BS",
+		"propertyToIncome": null,
+		"col": 85.4,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "BH",
+		"propertyToIncome": null,
+		"col": 46.1,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "BD",
+		"propertyToIncome": 11.5,
+		"col": 21.2,
+		"purchasingPower": 39.3
+	},
+	{
+		"abbr": "BB",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "BY",
+		"propertyToIncome": 12.6,
+		"col": 25.3,
+		"purchasingPower": 67.4
+	},
+	{
+		"abbr": "BE",
+		"propertyToIncome": 6.6,
+		"col": 63.6,
+		"purchasingPower": 131
+	},
+	{
+		"abbr": "BZ",
+		"propertyToIncome": null,
+		"col": 42.3,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "BJ",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "BT",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "BO",
+		"propertyToIncome": null,
+		"col": 25.5,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "BA",
+		"propertyToIncome": 13.2,
+		"col": 35.7,
+		"purchasingPower": 68.4
+	},
+	{
+		"abbr": "BW",
+		"propertyToIncome": null,
+		"col": 41.7,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "BR",
+		"propertyToIncome": 15.1,
+		"col": 28.6,
+		"purchasingPower": 47.6
+	},
+	{
+		"abbr": "BN",
+		"propertyToIncome": null,
+		"col": 46.1,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "BG",
+		"propertyToIncome": 9.1,
+		"col": 39.3,
+		"purchasingPower": 88.2
+	},
+	{
+		"abbr": "BF",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "BI",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "KH",
+		"propertyToIncome": null,
+		"col": 33,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "CM",
+		"propertyToIncome": null,
+		"col": 39.6,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "CA",
+		"propertyToIncome": 9.4,
+		"col": 60.7,
+		"purchasingPower": 123.6
+	},
+	{
+		"abbr": "CV",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "KY",
+		"propertyToIncome": null,
+		"col": 108.2,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "CF",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "TD",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "CL",
+		"propertyToIncome": 15,
+		"col": 35.8,
+		"purchasingPower": 58.1
+	},
+	{
+		"abbr": "CN",
+		"propertyToIncome": 25.2,
+		"col": 29.4,
+		"purchasingPower": 90.4
+	},
+	{
+		"abbr": "CO",
+		"propertyToIncome": 17.4,
+		"col": 28,
+		"purchasingPower": 42
+	},
+	{
+		"abbr": "KM",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "CG",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "CK",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "CR",
+		"propertyToIncome": 9.9,
+		"col": 50.3,
+		"purchasingPower": 56.6
+	},
+	{
+		"abbr": "CI",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "HR",
+		"propertyToIncome": 12.1,
+		"col": 48.6,
+		"purchasingPower": 98.1
+	},
+	{
+		"abbr": "CU",
+		"propertyToIncome": null,
+		"col": 40.1,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "CY",
+		"propertyToIncome": 8.2,
+		"col": 55.2,
+		"purchasingPower": 90.6
+	},
+	{
+		"abbr": "CZ",
+		"propertyToIncome": 13.6,
+		"col": 48.2,
+		"purchasingPower": 97.6
+	},
+	{
+		"abbr": "CD",
+		"propertyToIncome": null,
+		"col": 46.5,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "DK",
+		"propertyToIncome": 6.1,
+		"col": 74.1,
+		"purchasingPower": 152.7
+	},
+	{
+		"abbr": "DJ",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "DM",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "DO",
+		"propertyToIncome": null,
+		"col": 34.7,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "EC",
+		"propertyToIncome": 11,
+		"col": 29.3,
+		"purchasingPower": 53.1
+	},
+	{
+		"abbr": "EG",
+		"propertyToIncome": 20.9,
+		"col": 19.6,
+		"purchasingPower": 23.1
+	},
+	{
+		"abbr": "SV",
+		"propertyToIncome": null,
+		"col": 37.6,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "GQ",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "ER",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "EE",
+		"propertyToIncome": 11.1,
+		"col": 55.9,
+		"purchasingPower": 91.5
+	},
+	{
+		"abbr": "SZ",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "ET",
+		"propertyToIncome": null,
+		"col": 41.6,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "FK",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "FJ",
+		"propertyToIncome": null,
+		"col": 33.3,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "FI",
+		"propertyToIncome": 7.8,
+		"col": 64.5,
+		"purchasingPower": 142.9
+	},
+	{
+		"abbr": "FR",
+		"propertyToIncome": 9.9,
+		"col": 64.4,
+		"purchasingPower": 122.8
+	},
+	{
+		"abbr": "GF",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "GA",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "GM",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "GE",
+		"propertyToIncome": 12,
+		"col": 31.2,
+		"purchasingPower": 46.7
+	},
+	{
+		"abbr": "DE",
+		"propertyToIncome": 8.5,
+		"col": 64.7,
+		"purchasingPower": 144.3
+	},
+	{
+		"abbr": "GH",
+		"propertyToIncome": null,
+		"col": 31.1,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "GR",
+		"propertyToIncome": 13.1,
+		"col": 51,
+		"purchasingPower": 66.6
+	},
+	{
+		"abbr": "GL",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "GD",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "GT",
+		"propertyToIncome": null,
+		"col": 37.9,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "GN",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "GW",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "GY",
+		"propertyToIncome": null,
+		"col": 46.9,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "HT",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "HN",
+		"propertyToIncome": null,
+		"col": 34.1,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "HU",
+		"propertyToIncome": 13.6,
+		"col": 42.3,
+		"purchasingPower": 81.4
+	},
+	{
+		"abbr": "IS",
+		"propertyToIncome": 7.7,
+		"col": 94.5,
+		"purchasingPower": 124.3
+	},
+	{
+		"abbr": "IN",
+		"propertyToIncome": 11.7,
+		"col": 19,
+		"purchasingPower": 85.5
+	},
+	{
+		"abbr": "ID",
+		"propertyToIncome": 16.3,
+		"col": 24.6,
+		"purchasingPower": 34.1
+	},
+	{
+		"abbr": "IR",
+		"propertyToIncome": 18.7,
+		"col": 22.7,
+		"purchasingPower": 32.8
+	},
+	{
+		"abbr": "IQ",
+		"propertyToIncome": null,
+		"col": 27.1,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "IE",
+		"propertyToIncome": 6.8,
+		"col": 66.6,
+		"purchasingPower": 122.2
+	},
+	{
+		"abbr": "IL",
+		"propertyToIncome": 13.2,
+		"col": 69.6,
+		"purchasingPower": 127.8
+	},
+	{
+		"abbr": "IT",
+		"propertyToIncome": 9,
+		"col": 57.2,
+		"purchasingPower": 96
+	},
+	{
+		"abbr": "JM",
+		"propertyToIncome": null,
+		"col": 50.1,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "JP",
+		"propertyToIncome": 11.3,
+		"col": 48.9,
+		"purchasingPower": 129.4
+	},
+	{
+		"abbr": "JO",
+		"propertyToIncome": 7.5,
+		"col": 36.7,
+		"purchasingPower": 57.4
+	},
+	{
+		"abbr": "KZ",
+		"propertyToIncome": 9.7,
+		"col": 26.6,
+		"purchasingPower": 56.5
+	},
+	{
+		"abbr": "KE",
+		"propertyToIncome": 20.7,
+		"col": 28.5,
+		"purchasingPower": 36.9
+	},
+	{
+		"abbr": "KI",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "KW",
+		"propertyToIncome": 7.1,
+		"col": 40.4,
+		"purchasingPower": 197.2
+	},
+	{
+		"abbr": "KG",
+		"propertyToIncome": null,
+		"col": 25.6,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "LA",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "LV",
+		"propertyToIncome": 8.6,
+		"col": 49,
+		"purchasingPower": 83.6
+	},
+	{
+		"abbr": "LB",
+		"propertyToIncome": 13.8,
+		"col": 40.5,
+		"purchasingPower": 40.3
+	},
+	{
+		"abbr": "LS",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "LR",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "LY",
+		"propertyToIncome": null,
+		"col": 17.2,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "LI",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "LT",
+		"propertyToIncome": 11.1,
+		"col": 48.3,
+		"purchasingPower": 92.9
+	},
+	{
+		"abbr": "LU",
+		"propertyToIncome": 9.6,
+		"col": 73.5,
+		"purchasingPower": 183.1
+	},
+	{
+		"abbr": "MG",
+		"propertyToIncome": null,
+		"col": 22.2,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "MW",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "MY",
+		"propertyToIncome": 8.9,
+		"col": 31.1,
+		"purchasingPower": 85.9
+	},
+	{
+		"abbr": "MV",
+		"propertyToIncome": null,
+		"col": 46,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "ML",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "MT",
+		"propertyToIncome": 10.8,
+		"col": 53.1,
+		"purchasingPower": 86.4
+	},
+	{
+		"abbr": "MH",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "MR",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "MU",
+		"propertyToIncome": null,
+		"col": 37,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "MX",
+		"propertyToIncome": 11.6,
+		"col": 37.6,
+		"purchasingPower": 52.6
+	},
+	{
+		"abbr": "FM",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "MD",
+		"propertyToIncome": null,
+		"col": 33.5,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "MC",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "MN",
+		"propertyToIncome": null,
+		"col": 30.1,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "ME",
+		"propertyToIncome": null,
+		"col": 40,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "MA",
+		"propertyToIncome": 13.5,
+		"col": 30,
+		"purchasingPower": 45.5
+	},
+	{
+		"abbr": "MZ",
+		"propertyToIncome": null,
+		"col": 35.7,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "MM",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "NA",
+		"propertyToIncome": null,
+		"col": 31.3,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "NP",
+		"propertyToIncome": null,
+		"col": 22.7,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "NL",
+		"propertyToIncome": 7.4,
+		"col": 68.1,
+		"purchasingPower": 144.5
+	},
+	{
+		"abbr": "NC",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "NZ",
+		"propertyToIncome": 7.6,
+		"col": 59.3,
+		"purchasingPower": 140.5
+	},
+	{
+		"abbr": "NI",
+		"propertyToIncome": null,
+		"col": 32.5,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "NE",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "NG",
+		"propertyToIncome": 53.4,
+		"col": 25.7,
+		"purchasingPower": 10.6
+	},
+	{
+		"abbr": "KP",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "MK",
+		"propertyToIncome": 12.5,
+		"col": 33.6,
+		"purchasingPower": 66.5
+	},
+	{
+		"abbr": "NO",
+		"propertyToIncome": 8.5,
+		"col": 78.9,
+		"purchasingPower": 133.3
+	},
+	{
+		"abbr": "OM",
+		"propertyToIncome": 2.8,
+		"col": 39.3,
+		"purchasingPower": 170.9
+	},
+	{
+		"abbr": "PK",
+		"propertyToIncome": 14.3,
+		"col": 17.7,
+		"purchasingPower": 34
+	},
+	{
+		"abbr": "PW",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "PS",
+		"propertyToIncome": null,
+		"col": 43,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "PA",
+		"propertyToIncome": 11,
+		"col": 43.3,
+		"purchasingPower": 49.3
+	},
+	{
+		"abbr": "PG",
+		"propertyToIncome": null,
+		"col": 65.6,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "PY",
+		"propertyToIncome": null,
+		"col": 22.8,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "PE",
+		"propertyToIncome": 16.9,
+		"col": 30,
+		"purchasingPower": 49.1
+	},
+	{
+		"abbr": "PH",
+		"propertyToIncome": 24.3,
+		"col": 29.5,
+		"purchasingPower": 41.3
+	},
+	{
+		"abbr": "PL",
+		"propertyToIncome": 10.9,
+		"col": 43.7,
+		"purchasingPower": 103.3
+	},
+	{
+		"abbr": "PT",
+		"propertyToIncome": 14.6,
+		"col": 45.8,
+		"purchasingPower": 67.7
+	},
+	{
+		"abbr": "PR",
+		"propertyToIncome": 5,
+		"col": 59.8,
+		"purchasingPower": 122.6
+	},
+	{
+		"abbr": "QA",
+		"propertyToIncome": 6.2,
+		"col": 46.9,
+		"purchasingPower": 177.6
+	},
+	{
+		"abbr": "RO",
+		"propertyToIncome": 10.4,
+		"col": 38.3,
+		"purchasingPower": 81.7
+	},
+	{
+		"abbr": "RU",
+		"propertyToIncome": 15.5,
+		"col": 36.1,
+		"purchasingPower": 64.3
+	},
+	{
+		"abbr": "RW",
+		"propertyToIncome": null,
+		"col": 29.7,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "KN",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "LC",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "VC",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "WS",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "SM",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "ST",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "SA",
+		"propertyToIncome": 3.5,
+		"col": 41.5,
+		"purchasingPower": 155
+	},
+	{
+		"abbr": "SN",
+		"propertyToIncome": null,
+		"col": 45,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "RS",
+		"propertyToIncome": 15.8,
+		"col": 40.9,
+		"purchasingPower": 65.4
+	},
+	{
+		"abbr": "SC",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "SL",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "SG",
+		"propertyToIncome": 22.4,
+		"col": 85.3,
+		"purchasingPower": 108
+	},
+	{
+		"abbr": "SK",
+		"propertyToIncome": 13.2,
+		"col": 46.7,
+		"purchasingPower": 83.3
+	},
+	{
+		"abbr": "SI",
+		"propertyToIncome": 13.4,
+		"col": 50.6,
+		"purchasingPower": 92.6
+	},
+	{
+		"abbr": "SB",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "SO",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "ZA",
+		"propertyToIncome": 3.3,
+		"col": 32,
+		"purchasingPower": 118.3
+	},
+	{
+		"abbr": "KR",
+		"propertyToIncome": 23.4,
+		"col": 62.4,
+		"purchasingPower": 122.2
+	},
+	{
+		"abbr": "SS",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "ES",
+		"propertyToIncome": 8.6,
+		"col": 48.6,
+		"purchasingPower": 110.7
+	},
+	{
+		"abbr": "LK",
+		"propertyToIncome": 35.3,
+		"col": 32.5,
+		"purchasingPower": 20.9
+	},
+	{
+		"abbr": "SD",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "SR",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "SE",
+		"propertyToIncome": 8.2,
+		"col": 62.8,
+		"purchasingPower": 144.7
+	},
+	{
+		"abbr": "CH",
+		"propertyToIncome": 10.7,
+		"col": 106.8,
+		"purchasingPower": 183.5
+	},
+	{
+		"abbr": "SY",
+		"propertyToIncome": null,
+		"col": 23.8,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "TR",
+		"propertyToIncome": 9.7,
+		"col": 38.2,
+		"purchasingPower": 60.4
+	},
+	{
+		"abbr": "TW",
+		"propertyToIncome": 23.5,
+		"col": 49.4,
+		"purchasingPower": 108.2
+	},
+	{
+		"abbr": "TJ",
+		"propertyToIncome": null,
+		"col": 26.2,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "TZ",
+		"propertyToIncome": null,
+		"col": 24.1,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "TH",
+		"propertyToIncome": 23.8,
+		"col": 35.3,
+		"purchasingPower": 53.3
+	},
+	{
+		"abbr": "TL",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "TG",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "TO",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "TT",
+		"propertyToIncome": null,
+		"col": 49.4,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "TN",
+		"propertyToIncome": 12,
+		"col": 27.5,
+		"purchasingPower": 38.2
+	},
+	{
+		"abbr": "TM",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "TV",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "UG",
+		"propertyToIncome": null,
+		"col": 25.4,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "UA",
+		"propertyToIncome": 12.9,
+		"col": 26.1,
+		"purchasingPower": 52.3
+	},
+	{
+		"abbr": "AE",
+		"propertyToIncome": 8.3,
+		"col": 53.4,
+		"purchasingPower": 131.6
+	},
+	{
+		"abbr": "GB",
+		"propertyToIncome": 8.7,
+		"col": 64.2,
+		"purchasingPower": 131.7
+	},
+	{
+		"abbr": "US",
+		"propertyToIncome": 3.4,
+		"col": 64.8,
+		"purchasingPower": 163.4
+	},
+	{
+		"abbr": "UY",
+		"propertyToIncome": 15.2,
+		"col": 51.3,
+		"purchasingPower": 55.9
+	},
+	{
+		"abbr": "UZ",
+		"propertyToIncome": null,
+		"col": 24.9,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "VU",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "VE",
+		"propertyToIncome": 16.1,
+		"col": 35.6,
+		"purchasingPower": 18.9
+	},
+	{
+		"abbr": "VN",
+		"propertyToIncome": 27.3,
+		"col": 25.9,
+		"purchasingPower": 47.2
+	},
+	{
+		"abbr": "EH",
+		"propertyToIncome": null,
+		"col": null,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "YE",
+		"propertyToIncome": null,
+		"col": 50.1,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "ZM",
+		"propertyToIncome": null,
+		"col": 33.5,
+		"purchasingPower": null
+	},
+	{
+		"abbr": "ZW",
+		"propertyToIncome": null,
+		"col": 33.4,
+		"purchasingPower": null
+	}
+]
