@@ -1,13 +1,11 @@
 import fs from 'fs'
-import { notFound } from 'next/navigation'
 import path from 'path'
-import { countryBasics } from '~/data/baseCountryApi'
-import countryPaths from '~/data/countryDataWithPaths.json'
-import { MDXProcessor } from '~/MDX/ProcessMDX'
+import { MDXProcessor } from '~/lib/mdx'
+import countries from '~/server/db/countries.json'
 import { Base } from './Base'
 
 export const generateStaticParams = () => {
-	return countryPaths
+	return countries
 		.filter((ea) => ea.abbr)
 		.map((ea) => {
 			return {
@@ -59,12 +57,6 @@ const CountryPage = async ({
 	const { country } = await params
 	const { section } = await searchParams
 
-	const data = await countryBasics({ abbr: country })
-
-	if (!data || data == null) {
-		notFound()
-	}
-
 	const content =
 		section ?
 			CheckForSectionMDX(country, section)
@@ -72,9 +64,8 @@ const CountryPage = async ({
 
 	return (
 		<Base
-			countryData={data}
 			section={section}
-			country={country}>
+			countryName={country}>
 			{content ?
 				<div className='flex items-start justify-center gap-4 sm:flex-row sm:gap-8'>
 					<section>

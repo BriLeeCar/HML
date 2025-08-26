@@ -1,9 +1,8 @@
 'use client'
 
 import { redirect, RedirectType } from 'next/navigation'
-import { cn } from '~/cn'
-import { Icon } from '~/components'
-import { Button } from '~/components/ui'
+import { Button, Icon } from '~/components'
+import { cn } from '~/lib/cn'
 
 export const NowBtn = ({
 	...props

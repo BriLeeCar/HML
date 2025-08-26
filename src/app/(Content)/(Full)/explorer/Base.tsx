@@ -1,35 +1,214 @@
 'use client'
 
 import { AnimatePresence, motion } from 'motion/react'
-import { useRef, useState } from 'react'
-import { Heading } from '~/components/Heading'
-import { Icon } from '~/components/Icon'
-import { Checkbox, Label } from '~/components/ui'
+import { useContext, useEffect, useReducer, useRef } from 'react'
+import { Checkbox, Heading, Icon, Label } from '~/components'
+import { tDB, tExplorerFilters } from '~/server/db/db'
+import { DBContext } from '~/server/db/provider'
 import { Filter } from './Filter'
 import { Masonry } from './Masonary'
-import { tPhotoCountry } from './page'
 
-export const Base = ({
-	fetchedCountries,
-}: {
-	fetchedCountries: tPhotoCountry[]
-}) => {
-	const [drawerOpen, openDrawer] = useState(false)
-	const [filters, setFilters] = useState<Array<keyof tPhotoCountry>>(
-		[]
-	)
+type tMasonryState = {
+	countries: tDB['countries']
+	drawerOpen: boolean
+	filters: Array<keyof tExplorerFilters>
+	columns: Array<tDB['countries']>
+	db: tDB
+}
 
-	const handleFilterChange = (
-		filterKey: keyof tPhotoCountry,
-		value: boolean
-	) => {
-		const newFilters = [...filters.filter((f) => f != filterKey)]
-		if (value) {
-			newFilters.push(filterKey)
+type tDrawerAction = {
+	type: 'SET_DRAWER'
+	payload?: null
+}
+
+type tFilterAction = {
+	type: 'SET_FILTERS'
+	payload: { key: keyof tExplorerFilters; value: boolean }
+}
+
+type tSetCountriesAction = {
+	type: 'SET_COUNTRIES'
+	payload: null
+}
+
+type tSetColumnsAction = {
+	type: 'SET_COLUMNS'
+	payload: Array<tDB['countries']>
+}
+
+export const breakpoints = [
+	{ min: '320px', columns: 2 },
+	{ min: '640px', columns: 3 },
+	{ min: '1024px', columns: 4 },
+] as {
+	min?: string
+	max?: string
+	columns: number
+}[]
+
+const handleResize = (
+	columns: Array<tDB['countries']>,
+	countries: tDB['countries']
+) => {
+	let newColumns = columns?.length ?? 1
+	if (breakpoints) {
+		for (let i = 0; i < breakpoints.length; i++) {
+			const bp = breakpoints[i]
+
+			const min =
+				bp.min ? parseInt(bp.min)
+				: i == 0 ? 0
+				: parseInt(breakpoints[i - 1].max || '0')
+
+			const max =
+				bp.max ? parseInt(bp.max)
+				: i == breakpoints.length - 1 ? Infinity
+				: parseInt(breakpoints[i + 1].min || 'Infinity')
+
+			if (
+				globalThis.window.innerWidth >= min
+				&& globalThis.window.innerWidth <= max
+			) {
+				newColumns = bp.columns
+			}
 		}
-		console.log(newFilters)
-		setFilters(newFilters)
 	}
+
+	if (newColumns != columns.length) {
+		const newColsArray = Array.from(
+			{ length: newColumns },
+			() => []
+		) as tDB['countries'][]
+
+		for (let i = 0, j = 0; i <= countries.length; i++, j++) {
+			j = j >= newColumns ? 0 : j
+			countries[i] && newColsArray[j].push(countries[i])
+		}
+
+		return [...newColsArray.filter((c) => c != undefined)]
+	}
+	return columns
+}
+
+const handleCountryFilter = (
+	countries: tDB['countries'],
+	filters: Array<keyof tExplorerFilters>,
+	cb: (
+		filters: Array<keyof tExplorerFilters>,
+		country: tDB['countries'][number]
+	) => boolean
+) => {
+	return countries.filter(
+		(c) => c.images.havePhoto == true && cb(filters, c)
+	)
+}
+
+const masonryReducer = (
+	state: tMasonryState,
+	action:
+		| tDrawerAction
+		| tFilterAction
+		| tSetCountriesAction
+		| tSetColumnsAction
+) => {
+	const newState = { ...state }
+	const handleResize = () => {
+		let newColumns = newState.columns?.length ?? 1
+		if (breakpoints) {
+			for (let i = 0; i < breakpoints.length; i++) {
+				const bp = breakpoints[i]
+
+				const min =
+					bp.min ? parseInt(bp.min)
+					: i == 0 ? 0
+					: parseInt(breakpoints[i - 1].max || '0')
+
+				const max =
+					bp.max ? parseInt(bp.max)
+					: i == breakpoints.length - 1 ? Infinity
+					: parseInt(breakpoints[i + 1].min || 'Infinity')
+
+				if (
+					globalThis.window.innerWidth >= min
+					&& globalThis.window.innerWidth <= max
+				) {
+					newColumns = bp.columns
+				}
+			}
+		}
+
+		if (newColumns != newState.columns.length) {
+			const newColsArray = Array.from(
+				{ length: newColumns },
+				() => []
+			) as tDB['countries'][]
+
+			for (
+				let i = 0, j = 0;
+				i <= newState.countries.length;
+				i++, j++
+			) {
+				j = j >= newColumns ? 0 : j
+				newState.countries[i]
+					&& newColsArray[j].push(newState.countries[i])
+			}
+
+			return [...newColsArray.filter((c) => c != undefined)]
+		}
+		return newState.columns
+	}
+
+	if (action.type == 'SET_DRAWER') {
+		Object.assign(newState, { drawerOpen: !state.drawerOpen })
+	} else if (action.type == 'SET_FILTERS') {
+		newState.filters.filter((f) => {
+			if (Array.isArray(action.payload.key)) {
+				return !action.payload.key.includes(f)
+			}
+			return f != action.payload.key
+		})
+
+		if (action.payload.value == true) {
+			newState.filters.push(action.payload.key)
+		}
+		Object.assign(newState, {
+			countries: handleCountryFilter(
+				state.db.countries,
+				newState.filters,
+				state.db.filterByCommunities
+			),
+		})
+		Object.assign(newState, {
+			columns: handleResize(),
+		})
+	} else if (action.type == 'SET_COLUMNS') {
+		Object.assign(newState, { columns: handleResize() })
+	}
+
+	return newState
+}
+
+export const Base = () => {
+	const db = useContext(DBContext)
+	const [reducer, dispatchReducer] = useReducer(masonryReducer, {
+		countries: db.countries.filter((c) => c.images.havePhoto == true),
+		drawerOpen: false,
+		filters: [],
+		columns: [] as Array<tDB['countries']>,
+		db: db,
+	})
+
+	useEffect(() => {
+		const updateSize = () =>
+			dispatchReducer({
+				type: 'SET_COLUMNS',
+				payload: handleResize(reducer.columns, reducer.countries),
+			})
+		globalThis.window.addEventListener('resize', updateSize)
+		updateSize()
+		return () =>
+			globalThis.window.removeEventListener('resize', updateSize)
+	}, [reducer.columns, reducer.countries])
 
 	const overlayRef = useRef<HTMLDivElement>(null)
 
@@ -42,56 +221,68 @@ export const Base = ({
 					Explorer
 				</Heading>
 				<Filter
-					count={Object.keys(filters).length}
-					onClick={() => openDrawer(!drawerOpen)}
+					count={Object.keys(reducer.filters).length}
+					onClick={() => dispatchReducer({ type: 'SET_DRAWER' })}
 				/>
 			</div>
-			<Masonry
-				countries={handleCountryFilter(fetchedCountries, filters)}
-			/>
+			<Masonry columns={reducer.columns} />
 			<AnimatePresence>
-				{drawerOpen && (
+				{reducer.drawerOpen && (
 					<motion.div
 						ref={overlayRef}
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
 						onClick={(e) =>
-							e.target == overlayRef.current && openDrawer(false)
+							e.target == overlayRef.current
+							&& dispatchReducer({ type: 'SET_DRAWER' })
 						}
-						className='fixed inset-0 z-40 bg-black/30 backdrop-blur-sm'>
+						className='fixed inset-0 z-40 h-screen w-screen bg-black/30 backdrop-blur-sm'>
 						<motion.div
 							initial={{ height: 0, opacity: 0 }}
 							animate={{
-								height: drawerOpen ? '300px' : '0px',
+								height: reducer.drawerOpen ? '300px' : '0px',
 								opacity: 1,
 							}}
 							exit={{ height: 0, opacity: 0 }}
 							transition={{
 								type: 'spring',
 							}}
-							className='bg-card border-muted fixed right-0 bottom-0 left-0 z-50 w-screen rounded-t-2xl border-1 border-b-0 p-8 shadow-[0_-4px_8px_rgba(0,0,0,0.4)] backdrop-blur-md md:top-20 md:right-20 md:bottom-auto md:w-96'>
+							className='bg-card border-muted fixed right-0 bottom-0 left-0 z-50 w-screen rounded-t-2xl border-1 border-b-0 p-8 shadow-[0_-4px_8px_rgba(0,0,0,0.4)] backdrop-blur-md md:right-20 md:w-96'>
 							<Heading size='lg'>Filter</Heading>
 							<form>
 								<Label>
 									<Checkbox
 										id='un'
-										defaultChecked={filters.includes('un')}
-										onCheckedChange={(checked) =>
-											handleFilterChange('un', checked === true)
-										}
+										defaultChecked={reducer.filters.includes(
+											'unMember'
+										)}
+										onCheckedChange={(checked) => {
+											dispatchReducer({
+												type: 'SET_FILTERS',
+												payload: {
+													key: 'unMember',
+													value: checked === true,
+												},
+											})
+										}}
 									/>
 									UN Member
 								</Label>
 								<Label>
 									<Checkbox
 										id='homophobia'
-										defaultChecked={filters.includes('homophobia')}
+										defaultChecked={reducer.filters.includes(
+											'prideScore'
+										)}
 										onCheckedChange={(checked) =>
-											handleFilterChange(
-												'homophobia',
-												checked === true
-											)
+											dispatchReducer({
+												type: 'SET_FILTERS',
+												payload: {
+													key: 'prideScore',
+													value: checked === true,
+												},
+											})
 										}
 									/>
 									LGBTQIA+ Friendly
@@ -100,7 +291,9 @@ export const Base = ({
 							<Icon
 								IconName='XIcon'
 								className='absolute top-4 right-4 cursor-pointer'
-								onClick={() => openDrawer(false)}
+								onClick={() =>
+									dispatchReducer({ type: 'SET_DRAWER' })
+								}
 							/>
 						</motion.div>
 					</motion.div>
@@ -108,22 +301,4 @@ export const Base = ({
 			</AnimatePresence>
 		</div>
 	)
-}
-
-const handleCountryFilter = (
-	countries: tPhotoCountry[],
-	filters: Array<keyof tPhotoCountry>
-) => {
-	const newCountries = countries.filter((c) => {
-		const tests = filters.map((key) => {
-			if (key == 'homophobia' && c[key] < 0) return false
-			if (key == 'un' && !c[key]) return false
-			if (key == 'trans' && c[key] != true) return false
-		})
-		if (tests.includes(false)) return false
-		return true
-	})
-
-	console.log(newCountries, filters)
-	return newCountries
 }

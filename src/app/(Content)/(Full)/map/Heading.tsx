@@ -1,17 +1,16 @@
 'use client'
 
 import { motion } from 'motion/react'
-import { cn } from '~/cn'
-import { Heading } from '~/components/Heading'
-import { tCountry } from '~/data/stores/countryStore'
-// import { CountryStore } from '~/data/stores/countryStore'
+import { Heading } from '~/components'
+import { cn } from '~/lib/cn'
+import { tDB } from '~/server/db/db'
 
 export const CountryHeading = ({
 	hovered,
 	hoveredData,
 }: {
 	hovered: string | null
-	hoveredData: tCountry | null
+	hoveredData: tDB['countries'][number] | null
 }) => {
 	return (
 		<span className='absolute bottom-0 left-0 z-10 flex w-full max-w-[75vw] items-center rounded-r-lg'>

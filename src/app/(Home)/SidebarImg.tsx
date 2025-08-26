@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export const Img = () => {
 	return (
-		<div className='h-full w-full p-3 max-[1200px]:min-w-[25vw]'>
+		<div className='hidden h-full w-full p-3 max-[1200px]:min-w-[25vw] md:flex'>
 			<div className='border-foreground/10 relative h-full w-full overflow-hidden'>
 				<Image
 					src='/flag.png'
@@ -15,9 +15,6 @@ export const Img = () => {
 					sizes='100vh'
 					priority
 				/>
-				<span className='text-foreground absolute bottom-0 left-0 text-xs'>
-					ATTRIBUTE
-				</span>
 			</div>
 		</div>
 	)

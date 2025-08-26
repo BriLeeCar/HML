@@ -20,13 +20,11 @@
 		],
 		"paths": {
 			"@/*": ["./src/app/*"],
-			"~/components/*": ["./src/components/*"],
-			"~/components": ["./src/components/index.ts"],
-			"~/styles/*": ["./src/styles/*"],
-			"~/cn": ["./src/util/cn.ts"],
-			"~/util/*": ["./src/util/*"],
+			"~/components/*": ["./src/app/components/*"],
+			"~/components": ["./src/app/components/index.ts"],
+			"~/server/*": ["./src/server/*"],
 			"~/data/*": ["./src/data/*"],
-			"~/MDX/*": ["./src/mdx/*"]
+			"~/lib/*": ["./src/lib/*"]
 		},
 		"typeRoots": ["./node_modules/@types", "./@types"]
 	},

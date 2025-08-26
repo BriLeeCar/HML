@@ -9,7 +9,7 @@ import {
 } from '@/(Content)/_Layout/SVG'
 import Link from 'next/link'
 import { ReactNode } from 'react'
-import { cn } from '~/cn'
+import { cn } from '~/lib/cn'
 
 export const SubMenu = ({
 	country,
@@ -88,11 +88,11 @@ const SubMenuItem = ({
 			className={cn(
 				'bg-card text-card-foreground border-border hover:bg-background hover:text-foreground flex items-center gap-1 rounded-md border-1 px-2 py-1 shadow-xs transition-all',
 				active
-					&& 'bg-red-700 hover:bg-red-700 hover:text-white dark:bg-red-900 dark:text-white hover:dark:bg-red-900'
+					&& 'text-background bg-zinc-700 italic hover:bg-zinc-700 hover:text-white dark:bg-red-900 dark:text-white hover:dark:bg-red-900'
 			)}>
 			<Icon
 				className={cn(
-					'in-[a:hover]:text-foreground text-zinc-300 dark:text-zinc-400',
+					'in-[a:hover]:text-foreground in-[a:hover]:fill-foreground text-zinc-400 transition-all dark:text-zinc-400',
 					active
 						&& 'text-white in-[a:hover]:text-white dark:text-white'
 				)}

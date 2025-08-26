@@ -4,7 +4,7 @@ import { cva } from 'class-variance-authority'
 import { motion } from 'motion/react'
 import { redirect, RedirectType } from 'next/navigation'
 import { useRef } from 'react'
-import { cn } from '~/cn'
+import { cn } from '~/lib/cn'
 import { tMapPathElProps, tMapSVGProps } from './util'
 
 const svgBase = {

@@ -1,9 +1,11 @@
 import type { Metadata } from 'next'
 import { IBM_Plex_Mono, Open_Sans } from 'next/font/google'
+import 'react'
+import { ReactNode } from 'react'
 import 'rehype-callouts/theme/vitepress'
-import { cn } from '~/cn'
-import '~/styles/globals.css'
+import { cn } from '~/lib/cn'
 import { Providers } from './providers'
+import './style.css'
 
 export const metadata: Metadata = {
 	title: {
@@ -28,10 +30,10 @@ const ibmPlexMono = IBM_Plex_Mono({
 	adjustFontFallback: true,
 })
 
-const RootLayout = ({
+const RootLayout = async ({
 	children,
 }: Readonly<{
-	children: React.ReactNode
+	children: ReactNode
 }>) => {
 	return (
 		<html
@@ -46,7 +48,8 @@ const RootLayout = ({
 			</head>
 			<body
 				className={cn(
-					'text-foreground relative font-sans antialiased'
+					'text-foreground relative font-sans antialiased',
+					'pb-4'
 				)}>
 				<Providers>{children}</Providers>
 			</body>

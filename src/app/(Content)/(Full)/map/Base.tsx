@@ -6,28 +6,21 @@ import {
 	useDragControls,
 } from 'motion/react'
 import { redirect, type RedirectType } from 'next/navigation'
-import { useEffect, useReducer } from 'react'
-import { cn } from '~/cn'
-import { Icon } from '~/components/Icon'
-import { type zodCountryRest } from '~/data/baseCountryApi'
-import {
-	type tCountry,
-	useCountries,
-} from '~/data/stores/countryStore'
+import { useContext, useEffect, useReducer } from 'react'
+import { Icon } from '~/components'
+import { cn } from '~/lib/cn'
+import { tDB } from '~/server/db/db'
+import { DBContext } from '~/server/db/provider'
 import { CountryHeading } from './Heading'
 import { MapPathEl, MapSvg } from './Map'
 import { mapReducer } from './Reducer'
 import { Search } from './SearchBtn'
-import type { tCountryKeys, tCountryPathData } from './util'
 
-const redirectLink = (country: tCountry) => {
+const redirectLink = (country: tDB['countries'][number]) => {
 	return `/countries/${country.abbr.toLowerCase()}`
 }
-export const WorldMap = ({
-	countriesWithData,
-}: {
-	countriesWithData: { [key: string]: zodCountryRest }
-}) => {
+export const WorldMap = () => {
+	const db = useContext(DBContext)
 	const [mapState, mapDispatch] = useReducer(mapReducer, {
 		hovered: null,
 		selected: null,
@@ -40,8 +33,6 @@ export const WorldMap = ({
 		},
 		hasVisited: true,
 	})
-
-	const countries = useCountries()
 
 	useEffect(() => {
 		if (!localStorage.getItem('hasVisitedMap')) {
@@ -68,11 +59,11 @@ export const WorldMap = ({
 	// const store = useCountryStore()
 	const dragControl = useDragControls()
 
-	const handleSelected = (country: tCountry) => {
+	const handleSelected = (country: tDB['countries'][number]) => {
 		redirect(redirectLink(country), 'push' as RedirectType)
 	}
 
-	if (!countriesWithData) return null
+	if (!db.countries) return null
 
 	return (
 		<div
@@ -128,7 +119,11 @@ export const WorldMap = ({
 					hovered={mapState.hovered}
 					hoveredData={
 						mapState.hovered ?
-							countries.eq('abbr', mapState.hovered) || null
+							db.countries.find(
+								(country) =>
+									country.abbr.toLowerCase()
+									== mapState.hovered?.toLowerCase()
+							) || null
 						:	null
 					}
 				/>
@@ -158,14 +153,14 @@ export const WorldMap = ({
 					})
 				}
 				dragConstraints={mapState.boundaries}>
-				{countries.getMapPaths().map((country) => {
+				{db.getMapPaths().map((country) => {
 					const { svgPath, tier, abbr, name } = country
 					return (
 						<MapPathEl
 							key={name}
-							name={name as tCountryKeys}
+							name={name}
 							abbr={abbr}
-							tier={(tier as tCountryPathData['tier']) ?? 0}
+							tier={tier}
 							svgPath={svgPath || ''}
 							onMouseEnter={() =>
 								mapDispatch({
@@ -184,7 +179,7 @@ export const WorldMap = ({
 				})}
 			</MapSvg>
 			<Search
-				countries={countries.getMapPaths()}
+				countries={db.getMapPaths()}
 				actionSelected={handleSelected}
 			/>
 		</div>

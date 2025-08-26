@@ -1,7 +1,6 @@
 // import type { zodCountryRest } from "~/data/baseCountryApi"
 import { type MotionProps } from 'motion/react'
-import mapData from '~/data/countryDataWithPaths.json'
-import { tCountry } from '~/data/stores/countryStore'
+import { tDB } from '~/server/db/db'
 
 // #region ! ---------- MAP REDUCER ----------
 type tMapState = {
@@ -38,14 +37,6 @@ export type tMapReducer = {
 }
 // #endregion ! --------------------
 
-// #region ! ---------- PATH JSON ----------
-export type tCountryPathData = {
-	abbr: string
-	path: string
-	tier: 'now' | 'soon' | 'None'
-}
-
-export type tCountryKeys = (typeof mapData)[number]['name'] & string
 // #endregion ! --------------------
 
 // #region ! ---------- COMPONENTS ----------
@@ -54,9 +45,8 @@ export type tMapSVGProps = {
 } & MotionProps
 
 export type tMapPathElProps = Omit<Props<'path'>, 'name'>
-	& Partial<tCountry> & {
+	& Partial<tDB['countries'][number]> & {
 		canClick?: boolean
-		handleInView?: (country: string, inView: boolean) => void
 	}
 
 // #endregion ! --------------------
