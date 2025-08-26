@@ -32,7 +32,7 @@ const links = [
 	{
 		text: 'Support Team',
 		Icon: Support,
-		href: '/',
+		href: '/support',
 	},
 	{
 		text: 'Our Mission',

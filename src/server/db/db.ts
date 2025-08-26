@@ -98,10 +98,12 @@ class DB {
 	}
 
 	getMapPaths() {
-		return this.countries.map((country) => ({
-			...country,
-			svgPath: country.svgPath || '',
-		}))
+		return this.countries
+			.filter((c) => c.svgPath)
+			.map((country) => ({
+				...country,
+				svgPath: country.svgPath || '',
+			}))
 	}
 
 	getCountriesForFilter(filterBy?: Array<keyof tExplorerFilters>) {

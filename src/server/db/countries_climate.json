@@ -1,8 +1,8 @@
 [
 	{
 		"abbr": "AF",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "AL",
@@ -11,23 +11,23 @@
 	},
 	{
 		"abbr": "DZ",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "AD",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "AO",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "AG",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "AR",
@@ -56,13 +56,13 @@
 	},
 	{
 		"abbr": "BS",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "BH",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "BD",
@@ -71,8 +71,8 @@
 	},
 	{
 		"abbr": "BB",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "BY",
@@ -86,23 +86,23 @@
 	},
 	{
 		"abbr": "BZ",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "BJ",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "BT",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "BO",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "BA",
@@ -111,8 +111,8 @@
 	},
 	{
 		"abbr": "BW",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "BR",
@@ -121,8 +121,8 @@
 	},
 	{
 		"abbr": "BN",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "BG",
@@ -131,23 +131,23 @@
 	},
 	{
 		"abbr": "BF",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "BI",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "KH",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "CM",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "CA",
@@ -156,23 +156,23 @@
 	},
 	{
 		"abbr": "CV",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "KY",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "CF",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "TD",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "CL",
@@ -191,18 +191,18 @@
 	},
 	{
 		"abbr": "KM",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "CG",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "CK",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "CR",
@@ -211,8 +211,8 @@
 	},
 	{
 		"abbr": "CI",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "HR",
@@ -221,8 +221,8 @@
 	},
 	{
 		"abbr": "CU",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "CY",
@@ -236,8 +236,8 @@
 	},
 	{
 		"abbr": "CD",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "DK",
@@ -246,18 +246,18 @@
 	},
 	{
 		"abbr": "DJ",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "DM",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "DO",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "EC",
@@ -271,18 +271,18 @@
 	},
 	{
 		"abbr": "SV",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "GQ",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "ER",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "EE",
@@ -291,23 +291,23 @@
 	},
 	{
 		"abbr": "SZ",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "ET",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "FK",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "FJ",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "FI",
@@ -321,18 +321,18 @@
 	},
 	{
 		"abbr": "GF",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "GA",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "GM",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "GE",
@@ -346,8 +346,8 @@
 	},
 	{
 		"abbr": "GH",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "GR",
@@ -356,43 +356,43 @@
 	},
 	{
 		"abbr": "GL",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "GD",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "GT",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "GN",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "GW",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "GY",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "HT",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "HN",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "HU",
@@ -421,8 +421,8 @@
 	},
 	{
 		"abbr": "IQ",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "IE",
@@ -441,8 +441,8 @@
 	},
 	{
 		"abbr": "JM",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "JP",
@@ -466,8 +466,8 @@
 	},
 	{
 		"abbr": "KI",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "KW",
@@ -476,13 +476,13 @@
 	},
 	{
 		"abbr": "KG",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "LA",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "LV",
@@ -496,23 +496,23 @@
 	},
 	{
 		"abbr": "LS",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "LR",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "LY",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "LI",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "LT",
@@ -526,13 +526,13 @@
 	},
 	{
 		"abbr": "MG",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "MW",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "MY",
@@ -541,13 +541,13 @@
 	},
 	{
 		"abbr": "MV",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "ML",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "MT",
@@ -556,18 +556,18 @@
 	},
 	{
 		"abbr": "MH",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "MR",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "MU",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "MX",
@@ -576,28 +576,28 @@
 	},
 	{
 		"abbr": "FM",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "MD",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "MC",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "MN",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "ME",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "MA",
@@ -606,23 +606,23 @@
 	},
 	{
 		"abbr": "MZ",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "MM",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "NA",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "NP",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "NL",
@@ -631,8 +631,8 @@
 	},
 	{
 		"abbr": "NC",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "NZ",
@@ -641,13 +641,13 @@
 	},
 	{
 		"abbr": "NI",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "NE",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "NG",
@@ -656,8 +656,8 @@
 	},
 	{
 		"abbr": "KP",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "MK",
@@ -681,13 +681,13 @@
 	},
 	{
 		"abbr": "PW",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "PS",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "PA",
@@ -696,13 +696,13 @@
 	},
 	{
 		"abbr": "PG",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "PY",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "PE",
@@ -746,38 +746,38 @@
 	},
 	{
 		"abbr": "RW",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "KN",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "LC",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "VC",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "WS",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "SM",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "ST",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "SA",
@@ -786,8 +786,8 @@
 	},
 	{
 		"abbr": "SN",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "RS",
@@ -796,13 +796,13 @@
 	},
 	{
 		"abbr": "SC",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "SL",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "SG",
@@ -821,13 +821,13 @@
 	},
 	{
 		"abbr": "SB",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "SO",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "ZA",
@@ -841,8 +841,8 @@
 	},
 	{
 		"abbr": "SS",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "ES",
@@ -856,13 +856,13 @@
 	},
 	{
 		"abbr": "SD",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "SR",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "SE",
@@ -876,8 +876,8 @@
 	},
 	{
 		"abbr": "SY",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "TR",
@@ -891,13 +891,13 @@
 	},
 	{
 		"abbr": "TJ",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "TZ",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "TH",
@@ -906,23 +906,23 @@
 	},
 	{
 		"abbr": "TL",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "TG",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "TO",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "TT",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "TN",
@@ -931,18 +931,18 @@
 	},
 	{
 		"abbr": "TM",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "TV",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "UG",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "UA",
@@ -971,13 +971,13 @@
 	},
 	{
 		"abbr": "UZ",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "VU",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "VE",
@@ -991,22 +991,22 @@
 	},
 	{
 		"abbr": "EH",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "YE",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "ZM",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	},
 	{
 		"abbr": "ZW",
-		"pollution": "",
-		"climate": ""
+		"pollution": null,
+		"climate": null
 	}
 ]
