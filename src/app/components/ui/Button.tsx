@@ -6,7 +6,7 @@ import { cn } from '~/lib/cn'
 
 const buttonVariants = cva(
 	[
-		'click',
+		'click relative',
 		// !! FOCUS VISUALS
 		'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
 

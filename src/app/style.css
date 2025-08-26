@@ -162,14 +162,6 @@
 		-webkit-text-size-adjust: 100%;
 		text-size-adjust: 100%;
 	}
-	/* h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		font-family: serif !important;
-	} */
 }
 
 @layer base {
@@ -286,32 +278,6 @@
 			overflow: hidden;
 			footer {
 				display: none;
-			}
-			header {
-				background-color: --alpha(var(--color-background) / 100%);
-			}
-			header nav menu {
-				display: flex;
-				justify-content: space-around;
-			}
-			header nav menu a {
-				max-width: fit-content;
-				text-decoration: underline;
-				text-underline-offset: 0.2rem;
-				padding-right: 1rem;
-				height: max-content;
-				padding-block: 0.5rem;
-				background-color: transparent;
-				color: var(--text-foreground);
-				&[data-active] {
-					font-style: normal;
-				}
-
-				&:hover {
-					background-color: --alpha(
-						var(--color-background) / 90%
-					) !important;
-				}
 			}
 		}
 	}
