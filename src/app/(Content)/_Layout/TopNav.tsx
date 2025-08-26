@@ -72,7 +72,7 @@ const NavMenuItem = ({
 
 export const NavMenu = () => {
 	const active = usePathname()
-	const [menuOpen, setMenuOpen] = useState(true)
+	const [menuOpen, setMenuOpen] = useState(false)
 
 	return (
 		<>
