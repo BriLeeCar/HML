@@ -221,17 +221,35 @@
 		}
 	}
 	.callout-title {
-		align-items: center;
-		font-size: 1rem;
 		gap: 2rem;
+		@apply mb-0 flex text-xl font-semibold text-[var(--rc-color-light)] dark:text-[var(--rc-color-dark)];
 		svg {
-			width: 24px !important;
-			height: 24px !important;
-			stroke-width: 1.5px;
+			width: 28px !important;
+			height: 28px !important;
+			stroke-width: 1.25px;
+		}
+	}
+	.callout-content {
+		:is(ul, ol) {
+			@apply ml-16;
+			li {
+				@apply my-1 pl-2;
+			}
+			&:first-child {
+				margin-top: 0 !important;
+			}
 		}
 	}
 	&:is([data-callout='important']) {
 		--rc-color-light: var(--color-yellow-800) !important;
+		--rc-color-dark: var(--color-yellow-500) !important;
+	}
+	&:is([data-callout='todo']) {
+		--rc-color-light: var(--color-purple-800) !important;
+		--rc-color-dark: var(--color-purple-500) !important;
+	}
+	a {
+		@apply text-sm font-semibold italic underline decoration-2 hover:decoration-[var(--rc-color-light)];
 	}
 	@apply mx-auto max-w-2xl;
 }
