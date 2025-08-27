@@ -1,6 +1,6 @@
 import fs from 'fs'
 import { Heading, Section } from '~/components'
-import { MDXProcessor } from '~/lib/mdx/ProcessMDX'
+import { MDXProcessor } from '~/lib/mdx'
 import { toTitleCase } from '~/lib/text'
 
 export const generateStaticParams = () => {

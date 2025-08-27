@@ -23,7 +23,7 @@ export const NowBtn = ({
 				<span className='sm:hidden'>Help Me Leave </span>NOW
 			</span>
 			<span className='text-sm uppercase md:w-1/2 md:text-end md:text-base/4 lg:text-start lg:text-lg'>
-				I Desperate Need to Seek Safety
+				I Desperately Need to Seek Safety
 			</span>
 		</Button>
 	)

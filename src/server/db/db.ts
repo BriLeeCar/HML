@@ -18,7 +18,7 @@ const countriesWithCrime = crime as Array<tCrime>
 const countriesWithAPI = api as Array<tPreCountryApi>
 
 const mergeByAbbr = (params: {
-	baseArr: tCountry[]
+	baseArr: tCountryBase[]
 	arrays: Array<{
 		groupKey: string
 		data: Array<{ abbr: string; [key: string]: unknown }>
@@ -27,7 +27,7 @@ const mergeByAbbr = (params: {
 	const { baseArr, arrays } = params
 
 	return baseArr.map((baseItem) => {
-		const thisItem = { ...baseItem } as tCountry & tCountryETCData
+		const thisItem = { ...baseItem } as tCountryBase & tCountryETCData
 
 		arrays.forEach((ea) => {
 			const key: tCountryKeys = ea.groupKey as keyof tCountryETCData
@@ -46,7 +46,7 @@ const mergeByAbbr = (params: {
 }
 
 class DB {
-	countries: Array<tCountry & tCountryETCData>
+	countries: Array<tCountryBase & tCountryETCData>
 	constructor() {
 		this.countries = mergeByAbbr({
 			baseArr: countries,
@@ -112,7 +112,7 @@ class DB {
 				return {
 					abbr: country.abbr,
 					name: country.name,
-					unMember: country.unMember,
+					unMember: country.api.unMember,
 					prideScore:
 						country.communities?.prideScore
 						&& country.communities?.prideScore > 0,
@@ -126,27 +126,23 @@ class DB {
 
 	filterByCommunities(
 		communities: Array<keyof tExplorerFilters>,
-		country: tCountry & tCountryETCData
+		country: tCountryBase & tCountryETCData
 	) {
 		const { prideScore, transSafety } = country.communities || {}
 		const results = communities.map((key) => {
 			if (key === 'prideScore' && prideScore && prideScore > 0) {
-				// console.log(country.name, key, country)
 				return true
 			} else if (key === 'transSafety' && transSafety === true) {
-				// console.log(country.name, key, country)
 				return true
-			} else if (key === 'unMember' && country.unMember === true) {
-				// console.log(country.name, key, country)
+			} else if (key == 'unMember' && country.api.unMember == true) {
 				return true
 			} else return false
 		})
-		console.log('results', results)
 		if (results.some((r) => r === false)) return false
 		return true
 	}
 
-	getCountryStats(country: tCountry & tCountryETCData) {
+	getCountryStats(country: tCountryBase & tCountryETCData) {
 		const stats = [
 			{
 				title: 'Safety Index',
@@ -172,9 +168,9 @@ class DB {
 		return stats
 	}
 
-	getCommunityAttributes(country: tCountry & tCountryETCData) {
+	getCommunityAttributes(country: tCountryBase & tCountryETCData) {
 		return {
-			isUn: country.communities?.isUn,
+			isUn: country.api.unMember,
 			prideScore: country.communities?.prideScore,
 			racismRank: country.communities?.racismRank,
 			transSafety: country.communities?.transSafety,
@@ -196,7 +192,7 @@ type tCountryETCData = {
 	economy: tEconomy
 	quality: tQuality
 	crime: tCrime
-} & tCountryApi
+} & { api: tCountryApi }
 
 type tCountryKeys = keyof tCountryETCData
 
@@ -248,7 +244,7 @@ type tCrime = {
 	safety: number | null
 }
 
-type tCountry = {
+type tCountryBase = {
 	abbr: string
 	name: string
 	svgPath: string | null
@@ -289,4 +285,5 @@ export type tExplorerFilters = {
 	prideScore: boolean | 0 | null
 	transSafety: boolean
 }
+export type tCountry = tDB['countries'][number]
 // #endregion ?

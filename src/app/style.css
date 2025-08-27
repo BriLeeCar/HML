@@ -32,7 +32,7 @@
 	--accent-foreground: oklch(0.205 0 0);
 
 	--border: oklch(0.922 0 0);
-	--input: oklch(0.922 0 0);
+	--input: hsl(0, 0%, 75%);
 	--ring: oklch(0.708 0 0);
 
 	--sidebar: oklch(0.94 0 27.11);

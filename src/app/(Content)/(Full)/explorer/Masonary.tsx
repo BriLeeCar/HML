@@ -1,73 +1,85 @@
 'use client'
 
-import { AnimatePresence, motion } from 'motion/react'
+import { motion } from 'motion/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useContext } from 'react'
+import { RefObject, useContext } from 'react'
 import { Heading, TouchTarget } from '~/components'
 import { IconAttributes } from '~/components/Country/IconAttributes'
 import { cn } from '~/lib/cn'
-import { tDB } from '~/server/db/db'
+import { tCountry, tDB } from '~/server/db/db'
 import { DBContext } from '~/server/db/provider'
 
 export const Masonry = ({
 	columns,
+	ref,
+	colWidth,
 }: {
-	columns: Array<tDB['countries']>
+	columns: tCountry[][]
+	ref: RefObject<HTMLDivElement | null>
+	colWidth?: number
 }) => {
 	const db = useContext(DBContext)
+	const cols =
+		(colWidth || 300) / columns.length
+		- Math.ceil(columns.length / 2) * 4
 
 	return (
 		<motion.div
+			id='masonaryWrapper'
 			layoutRoot
-			className='flex w-full shrink justify-between gap-4 md:gap-0'>
-			<AnimatePresence>
-				{columns.map((col, i) => {
-					return (
-						<div
-							key={`columns${i}`}
-							className='flex max-w-1/2 grow basis-0 flex-col sm:max-w-[31vw] lg:max-w-[23vw]'>
-							{col.map((c: tDB['countries'][number], i) => {
-								const priority = i < 4 ? true : false
-								return (
-									<motion.div
-										layoutDependency={col.length}
-										layout
-										initial={{ height: 0, marginBottom: 0 }}
-										animate={{ height: 'auto', marginBottom: '1rem' }}
-										exit={{ height: 0, marginBottom: 0 }}
-										style={{
-											breakInside: 'avoid',
-										}}
-										transition={{
-											type: 'spring',
-											stiffness: 40,
-										}}
+			key={`masonry-${columns.length}`}
+			ref={ref}
+			className='flex w-full shrink basis-full gap-4 md:max-w-[calc(100vw-2rem)] md:justify-between md:gap-0'>
+			{columns.map((col, i) => {
+				return (
+					<div
+						style={{
+							flexBasis: `${cols}px`,
+							maxWidth: `${cols}px`,
+						}}
+						key={`columns${i}`}
+						className='flex shrink basis-auto flex-col'>
+						{col.map((c: tCountry, i) => {
+							const priority = i < 4 ? true : false
+							return (
+								<motion.div
+									layoutDependency={col.length}
+									layout='preserve-aspect'
+									initial={{ height: 0, marginBottom: 0 }}
+									animate={{ height: 'auto', marginBottom: '1rem' }}
+									exit={{ height: 0, marginBottom: 0 }}
+									style={{
+										breakInside: 'avoid',
+									}}
+									transition={{
+										type: 'spring',
+										damping: 10,
+									}}
+									key={c.abbr}
+									className='bg-background outline-card-foreground/5 inline-flex h-auto w-full max-w-full shrink basis-full flex-col rounded-lg outline-1'>
+									<MasonryCountry
+										country={c}
 										key={c.abbr}
-										className='bg-background outline-card-foreground/5 flex h-auto w-full max-w-full basis-full flex-col rounded-lg outline-1'>
-										<Item
-											country={c}
-											key={c.abbr}
-											priority={priority}
-											db={db}
-										/>
-									</motion.div>
-								)
-							})}
-						</div>
-					)
-				})}
-			</AnimatePresence>
+										priority={priority}
+										db={db}
+									/>
+								</motion.div>
+							)
+						})}
+					</div>
+				)
+			})}
 		</motion.div>
 	)
 }
 
-const Item = ({
+const MasonryCountry = ({
 	country,
 	priority,
 	db,
 }: {
-	country: tDB['countries'][number]
+	country: tCountry
 	priority: boolean
 	db: tDB
 }) => {
@@ -77,7 +89,7 @@ const Item = ({
 				style={{
 					aspectRatio: `${country.images.width} / ${country.images.height}`,
 				}}
-				className='pt-0. relative flex w-auto shrink overflow-hidden rounded-t-lg px-0 has-[+section_a:hover]:*:[img]:contrast-110 has-[+section_a:hover]:*:[img]:grayscale-100'>
+				className='relative inline-flex w-full shrink overflow-hidden rounded-t-lg px-0 pt-0 has-[+section_a:hover]:*:[img]:contrast-110 has-[+section_a:hover]:*:[img]:grayscale-100'>
 				<Image
 					src={
 						'/countries/'
@@ -106,7 +118,7 @@ const Item = ({
 				</figcaption>
 			</figure>
 			<section className='relative px-4 pt-2 pb-4'>
-				<span className='flex flex-col justify-between gap-1 md:flex-row md:items-center-safe'>
+				<span className='relative flex flex-col justify-between gap-1 md:flex-row md:items-center-safe'>
 					<Link
 						href={`/countries/${country.abbr.toLowerCase()}`}
 						title={country.name}
