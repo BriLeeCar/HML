@@ -1,24 +1,18 @@
-import {
-	allFilters,
-	tCookieAction,
-	tDrawerAction,
-	tFilterAction,
-	tMasonryState,
-	tSetCountriesAction,
-} from '.'
+import { allFilters, tMasonryActions, tMasonryState } from '.'
 
 export const masonryReducer = (
 	state: tMasonryState,
-	action:
-		| tDrawerAction
-		| tFilterAction
-		| tSetCountriesAction
-		| tCookieAction
+	action: tMasonryActions
 ) => {
 	const newState = { ...state }
 
 	if (action.type == 'SET_DRAWER') {
-		Object.assign(newState, { drawerOpen: !state.drawerOpen })
+		Object.assign(newState, {
+			drawer: {
+				status: !state.drawer.status,
+				size: action.payload.size,
+			},
+		})
 		return newState
 	}
 
@@ -33,6 +27,18 @@ export const masonryReducer = (
 			}
 		})
 	}
+	if (action.type == 'CLEAR_FILTERS') {
+		newState.filters = []
+		parseFilters(newState)
+	}
+
+	if (action.type == 'SET_COUNTRIES') {
+		Object.assign(newState, {
+			countries: newState.db.countries.sort((a, b) =>
+				a.name.localeCompare(b.name)
+			),
+		})
+	}
 	newState.filters = Array.from(new Set(newState.filters))
 	window.localStorage.setItem(
 		'explorer-filters',
@@ -43,8 +49,17 @@ export const masonryReducer = (
 
 const parseFilters = (
 	newState: tMasonryState,
-	payloadFilters: tFilterAction['payload']
+	payloadFilters?: tMasonryState['filters'][0]
 ) => {
+	console.log(newState)
+	if (!payloadFilters) {
+		Object.assign(newState, {
+			countries: newState.db.countries.sort((a, b) =>
+				a.name.localeCompare(b.name)
+			),
+		})
+		return newState
+	}
 	newState.filters = [
 		...new Set(
 			newState.filters.filter((f) => {

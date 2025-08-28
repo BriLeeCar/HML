@@ -1,17 +1,16 @@
 'use client'
 
+import { SectionHeading, SubSection } from '@/(Content)/Components'
 import { motion, MotionProps } from 'motion/react'
-import { ActionDispatch, RefObject, useEffect, useState } from 'react'
-import { Button, Heading, Icon, Label, P } from '~/components'
+import { RefObject, type MouseEvent } from 'react'
+import { Button, Icon, Label } from '~/components'
 import { Checkbox } from '~/components/ui/Checkbox'
 import { cn } from '~/lib/cn'
 import {
 	filterCbs,
 	masonryReducer,
-	tDrawerAction,
 	tDrawerFilter,
-	tFilterAction,
-	tSetCountriesAction,
+	tReducerDispatch,
 } from '.'
 
 export const Drawer = ({
@@ -22,40 +21,20 @@ export const Drawer = ({
 }: Props
 	& MotionProps & {
 		overlayRef: RefObject<HTMLDivElement | null>
-		dispatchReducer: ActionDispatch<
-			[action: tDrawerAction | tFilterAction | tSetCountriesAction]
-		>
+		dispatchReducer: tReducerDispatch
 		reducer: ReturnType<typeof masonryReducer>
 	}) => {
-	const [screenSize, setScreenSize] = useState(0)
-
-	useEffect(() => {
-		const updateSize = () =>
-			setScreenSize(globalThis.window.innerWidth)
-		globalThis.window.addEventListener('resize', updateSize)
-		updateSize()
-		return () =>
-			globalThis.window.removeEventListener('resize', updateSize)
-	})
-
-	const motionProps = () => {
-		if (screenSize >= 768) {
-			return {
-				animate: {
-					width: reducer.drawerOpen ? '350px' : '0px',
-					height: '100vh',
-				},
-				exit: { width: 0 },
-			}
-		} else {
-			return {
-				animate: {
-					width: '100%',
-					height: reducer.drawerOpen ? '50vh' : '0%',
-				},
-				exit: { height: 0 },
-			}
-		}
+	const motionVariants = {
+		hidden: {
+			opacity: 0,
+			width: reducer.drawer.size == 'md' ? 0 : '100%',
+			height: reducer.drawer.size == 'md' ? '100vh' : 0,
+		},
+		visible: {
+			opacity: 1,
+			width: reducer.drawer.size == 'md' ? '350px' : '100%',
+			height: reducer.drawer.size == 'md' ? '100vh' : '50vh',
+		},
 	}
 
 	return (
@@ -63,80 +42,90 @@ export const Drawer = ({
 			{...props}
 			ref={overlayRef}
 			key='overlay'
-			initial={{ opacity: 0 }}
+			initial={{
+				opacity: 0,
+			}}
 			animate={{ opacity: 1 }}
 			exit={{ opacity: 0 }}
 			onClick={(e) =>
-				e.target == overlayRef.current
-				&& dispatchReducer({ type: 'SET_DRAWER' })
+				e.target == e.currentTarget
+				&& dispatchReducer({
+					type: 'SET_DRAWER',
+					payload: { size: '' },
+				})
 			}
-			className='fixed inset-0 z-[999] h-screen w-screen overflow-hidden bg-black/30 backdrop-blur-sm md:backdrop-blur-xs'>
+			className='fixed inset-0 z-[999] h-screen w-screen overflow-hidden backdrop-blur-sm md:backdrop-blur-xs'>
 			<div
 				key='drawer-container'
 				className={cn(
 					'fixed right-0 bottom-0 left-0',
-					'z-[999] h-full w-screen',
+					'z-[999] h-max w-full',
 					'md:top-0 md:right-20 md:h-screen md:w-max',
 					'flex items-end'
 				)}>
 				<motion.div
 					key='drawer'
-					initial={{ ...motionProps().exit, opacity: 0 }}
-					animate={{
-						...motionProps().animate,
-						opacity: 1,
-					}}
-					exit={{
-						...motionProps().exit,
-						opacity: 0,
-					}}
-					transition={{
-						type: 'spring',
-					}}
+					initial={motionVariants.hidden}
+					animate={motionVariants.visible}
+					exit={motionVariants.hidden}
 					className={cn(
-						'bg-card border-muted w-full overflow-scroll rounded-t-2xl border-1 border-b-0 md:rounded-none',
+						'bg-background border-muted overflow-x-hidden overflow-y-scroll rounded-t-2xl border-1 border-b-0 md:rounded-none',
 						'p-8 shadow-[0_-4px_8px_rgba(0,0,0,0.4)] backdrop-blur-md md:backdrop-blur-xs'
 					)}>
-					<Heading size='lg'>Filter</Heading>
-					<P>
-						We can help narrow down the selection if you tell us a
-						little bit about yourself - don’t worry, we don’t keep a
-						record of any of this and none of it can be traced back to
-						you! If you don’t select anything, you will just be shown
-						the full list of pathways
-					</P>
+					<FilterHeading />
+
 					<form className='mt-4 flex flex-col gap-2 overflow-scroll'>
 						{filterCbs.map((grp) => (
-							<section key={grp.group}>
-								<h3 className='text-muted-foreground mt-4 mb-2 text-lg font-bold'>
-									{grp.group}
-								</h3>
-								<section className='ml-4 flex flex-col gap-0.5 py-3 pl-2'>
-									{grp.items.map((cb) => (
-										<FilterCB
-											key={cb.dataKey}
-											dataKey={cb.dataKey}
-											label={cb.label}
-											reducer={reducer}
-											matches={cb.matches}
-											dispatchReducer={dispatchReducer}
-										/>
-									))}
-								</section>
-							</section>
+							<SubSection
+								title={grp.group}
+								key={grp.group}>
+								{grp.items.map((cb) => (
+									<FilterCB
+										key={cb.dataKey}
+										dataKey={cb.dataKey}
+										label={cb.label}
+										reducer={reducer}
+										matches={cb.matches}
+										dispatchReducer={dispatchReducer}
+									/>
+								))}
+							</SubSection>
 						))}
+						<ClearButton dispatchReducer={dispatchReducer} />
 					</form>
 				</motion.div>
-				<Button
-					onClick={() => dispatchReducer({ type: 'SET_DRAWER' })}
-					variant={'link'}
-					className='text-background click absolute top-4 -right-8 hover:-right-12 hover:scale-155'>
-					<Icon IconName='XIcon' />
-				</Button>
+				<CloseButton dispatchReducer={dispatchReducer} />
 			</div>
 		</motion.div>
 	)
 }
+
+const CloseButton = ({
+	dispatchReducer,
+}: {
+	dispatchReducer: tReducerDispatch
+}) => (
+	<Button
+		onClick={() =>
+			dispatchReducer({ type: 'SET_DRAWER', payload: { size: '' } })
+		}
+		variant={'link'}
+		className='text-background click absolute top-4 -right-8 hover:-right-12 hover:scale-155'>
+		<Icon IconName='XIcon' />
+	</Button>
+)
+
+const FilterHeading = () => (
+	<SectionHeading
+		eyebrow='Filter'
+		subtitle='We can help narrow down the selection if you tell us a
+						little bit about yourself - don’t worry, we don’t keep a
+						record of any of this and none of it can be traced back to
+						you! If you don’t select anything, you will just be shown
+						the full list of pathways'>
+		Let's get you matched!
+	</SectionHeading>
+)
 
 const FilterCB = ({
 	label,
@@ -148,9 +137,7 @@ const FilterCB = ({
 }: Props<typeof Checkbox>
 	& tDrawerFilter & {
 		reducer: ReturnType<typeof masonryReducer>
-		dispatchReducer: ActionDispatch<
-			[action: tDrawerAction | tFilterAction | tSetCountriesAction]
-		>
+		dispatchReducer: tReducerDispatch
 	}) => {
 	return (
 		<Label className='flex items-center gap-2 text-sm font-semibold'>
@@ -175,4 +162,33 @@ const FilterCB = ({
 			{label}
 		</Label>
 	)
+}
+const ClearButton = ({
+	dispatchReducer,
+}: {
+	dispatchReducer: tReducerDispatch
+}) => (
+	<Button
+		type='button'
+		className='mt-4'
+		onClick={(e) => {
+			handleClear(e, dispatchReducer)
+		}}>
+		Clear all filters
+	</Button>
+)
+const handleClear = (
+	e: MouseEvent<HTMLButtonElement>,
+	dispatchReducer: tReducerDispatch
+) => {
+	if (e.currentTarget.form) {
+		const checkBoxes = e.currentTarget.form.querySelectorAll(
+			'input[type="checkbox"]'
+		)
+		checkBoxes.forEach((checkbox) => {
+			;(checkbox as HTMLInputElement).checked = false
+		})
+	}
+	dispatchReducer({ type: 'CLEAR_FILTERS' })
+	dispatchReducer({ type: 'SET_DRAWER', payload: { size: '' } })
 }

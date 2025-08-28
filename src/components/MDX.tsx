@@ -1,26 +1,25 @@
-import { Children, ReactNode } from 'react'
+import { Children } from 'react'
 import { cn } from '~/lib/cn'
 import { Heading } from './Heading'
 import { Link } from './Link'
 
+import {
+	CTA,
+	InlineLink,
+	Page,
+	PageHeading,
+	Section,
+	SectionHeading,
+	SubSection,
+} from '@/(Content)/Components'
 import { Large, List, P } from './Text'
 import { Button } from './ui'
 
 export const mdxComponents = {
-	h1: ({ ...props }: Props<'h1'>) => (
-		<Heading
-			{...props}
-			level={1}
-			size='title'
-		/>
+	h1: ({ children, ...props }: Props<'h1'>) => (
+		<PageHeading {...props}>{children}</PageHeading>
 	),
-	h2: ({ ...props }: Props<'h1'>) => (
-		<Heading
-			{...props}
-			level={2}
-			size='lg'
-		/>
-	),
+	h2: ({ ...props }: Props<'h1'>) => <SectionHeading {...props} />,
 	h3: ({ ...props }: Props<'h1'>) => (
 		<Heading
 			{...props}
@@ -177,44 +176,11 @@ export const mdxComponents = {
 			)}
 		/>
 	),
-	CTALink: ({ ...props }: Props<typeof Link>) => {
-		return (
-			<Link
-				{...props}
-				className={cn(
-					'mx-auto my-2 block w-full text-center text-xl font-bold decoration-double',
-					props.className
-				)}>
-				{props.children}
-			</Link>
-		)
-	},
-	CTA: ({
-		heading,
-		href,
-		call,
-		...props
-	}: Props & {
-		heading: ReactNode
-		href: string
-		call: ReactNode
-	}) => {
-		return (
-			<div className='px-6 py-24 sm:py-32 lg:px-8'>
-				<div className='mx-auto max-w-2xl'>
-					<Heading className='text-foreground text-4xl font-semibold tracking-tight text-balance sm:text-5xl'>
-						{heading}
-					</Heading>
-					<P className='mx-auto mt-6 max-w-xl text-lg/8 text-pretty text-gray-600 dark:text-gray-300'>
-						{props.children}
-					</P>
-					<div className='mt-10 flex items-center justify-center gap-x-6'>
-						{href && (
-							<Button href={href}>{call || 'Get started'}</Button>
-						)}
-					</div>
-				</div>
-			</div>
-		)
-	},
+	Section,
+	SectionHeading,
+	SubSection,
+	Page,
+	PageHeading,
+	InlineLink,
+	CTA,
 }

@@ -146,7 +146,7 @@ export const IconAttributes = ({
 				props.className
 			)}>
 			{attr.isUn && (
-				<InnerTag className='text-xs font-bold text-[#498DD5] uppercase'>
+				<InnerTag className='text-xs font-bold text-[#498DD5] uppercase no-underline! decoration-transparent decoration-0!'>
 					UN
 				</InnerTag>
 			)}

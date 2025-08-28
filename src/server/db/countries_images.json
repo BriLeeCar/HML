@@ -259,9 +259,9 @@
 		"abbr": "CR",
 		"handle": "fabian_marin1",
 		"havePhoto": true,
+		"height": 1125,
 		"name": "Fabian Marin Zuñiga",
-		"width": 750,
-		"height": 1125
+		"width": 750
 	},
 	{
 		"abbr": "CI",
@@ -303,9 +303,9 @@
 		"abbr": "DK",
 		"handle": "potapenko",
 		"havePhoto": true,
+		"height": 640,
 		"name": "Maksym Potapenko",
-		"width": 640,
-		"height": 640
+		"width": 640
 	},
 	{
 		"abbr": "DJ",
@@ -359,9 +359,9 @@
 		"abbr": "EE",
 		"handle": "juliusjansson",
 		"havePhoto": true,
+		"height": 1125,
 		"name": "Julius Jansson",
-		"width": 750,
-		"height": 1125
+		"width": 750
 	},
 	{
 		"abbr": "SZ",
@@ -391,15 +391,17 @@
 		"abbr": "FI",
 		"handle": "hendrikmorkel",
 		"havePhoto": true,
+		"height": 427,
 		"name": "Hendrik Morkel",
-		"width": 640,
-		"height": 427
+		"width": 640
 	},
 	{
 		"abbr": "FR",
-		"handle": null,
-		"havePhoto": false,
-		"name": null
+		"handle": "kalimullin",
+		"havePhoto": true,
+		"name": "Ilnur Kalimullin",
+		"height": 960,
+		"width": 640
 	},
 	{
 		"abbr": "GF",
@@ -427,9 +429,11 @@
 	},
 	{
 		"abbr": "DE",
-		"handle": null,
-		"havePhoto": false,
-		"name": null
+		"handle": "electerious",
+		"havePhoto": true,
+		"height": 960,
+		"name": "Tobias Reich",
+		"width": 640
 	},
 	{
 		"abbr": "GH",
@@ -439,9 +443,11 @@
 	},
 	{
 		"abbr": "GR",
-		"handle": null,
-		"havePhoto": false,
-		"name": null
+		"handle": "despinagalani",
+		"havePhoto": true,
+		"height": 853,
+		"name": "Despina Galani",
+		"width": 640
 	},
 	{
 		"abbr": "GL",
@@ -499,9 +505,11 @@
 	},
 	{
 		"abbr": "IS",
-		"handle": null,
-		"havePhoto": false,
-		"name": null
+		"handle": "tompodmore86",
+		"havePhoto": true,
+		"height": 427,
+		"name": "Tom Podmore",
+		"width": 640
 	},
 	{
 		"abbr": "IN",
@@ -531,9 +539,9 @@
 		"abbr": "IE",
 		"handle": "wiseguyinthesky",
 		"havePhoto": true,
+		"height": 938,
 		"name": "Paul Costello",
-		"width": 750,
-		"height": 938
+		"width": 750
 	},
 	{
 		"abbr": "IL",
@@ -645,9 +653,11 @@
 	},
 	{
 		"abbr": "LU",
-		"handle": null,
-		"havePhoto": false,
-		"name": null
+		"handle": "cedricletsch",
+		"havePhoto": true,
+		"height": 427,
+		"name": "Cedric Letsch",
+		"width": 640
 	},
 	{
 		"abbr": "MG",
@@ -681,9 +691,11 @@
 	},
 	{
 		"abbr": "MT",
-		"handle": null,
-		"havePhoto": false,
-		"name": null
+		"handle": "mtsap",
+		"havePhoto": true,
+		"height": 427,
+		"name": "Michail Tsapas",
+		"width": 640
 	},
 	{
 		"abbr": "MH",
@@ -707,9 +719,9 @@
 		"abbr": "MX",
 		"handle": "jezar",
 		"havePhoto": true,
+		"height": 500,
 		"name": "Jezael Melgoza",
-		"width": 750,
-		"height": 500
+		"width": 750
 	},
 	{
 		"abbr": "FM",
@@ -775,9 +787,9 @@
 		"abbr": "NL",
 		"handle": "muzykalnepodroze",
 		"havePhoto": true,
+		"height": 1008,
 		"name": "Muzykalne Podróże",
-		"width": 750,
-		"height": 1008
+		"width": 750
 	},
 	{
 		"abbr": "NC",
@@ -819,17 +831,17 @@
 		"abbr": "MK",
 		"handle": "adventurealbania",
 		"havePhoto": true,
+		"height": 480,
 		"name": "Adventure Albania",
-		"width": 640,
-		"height": 480
+		"width": 640
 	},
 	{
 		"abbr": "NO",
 		"handle": "jelle_van_leest",
 		"havePhoto": true,
+		"height": 1333,
 		"name": "Jelle Van Leest",
-		"width": 750,
-		"height": 1333
+		"width": 750
 	},
 	{
 		"abbr": "OM",
@@ -895,9 +907,9 @@
 		"abbr": "PT",
 		"handle": "alexrvasey",
 		"havePhoto": true,
+		"height": 1000,
 		"name": "Alex Vasey",
-		"width": 750,
-		"height": 1000
+		"width": 750
 	},
 	{
 		"abbr": "PR",
@@ -1047,9 +1059,9 @@
 		"abbr": "ES",
 		"handle": "whatyouhide",
 		"havePhoto": true,
+		"height": 1125,
 		"name": "Andrea Leopardi",
-		"width": 750,
-		"height": 1125
+		"width": 750
 	},
 	{
 		"abbr": "LK",
@@ -1077,9 +1089,11 @@
 	},
 	{
 		"abbr": "CH",
-		"handle": null,
-		"havePhoto": false,
-		"name": null
+		"handle": "rickpsd",
+		"havePhoto": true,
+		"name": "Henrique Ferreira",
+		"height": 426,
+		"width": 640
 	},
 	{
 		"abbr": "SY",
@@ -1193,9 +1207,9 @@
 		"abbr": "UY",
 		"handle": "pedroslinger",
 		"havePhoto": true,
+		"height": 1125,
 		"name": "Pedro Slinger",
-		"width": 750,
-		"height": 1125
+		"width": 750
 	},
 	{
 		"abbr": "UZ",
@@ -1219,9 +1233,9 @@
 		"abbr": "VN",
 		"handle": "ammiengo",
 		"havePhoto": true,
+		"height": 500,
 		"name": "Ammie Ngo",
-		"width": 750,
-		"height": 500
+		"width": 750
 	},
 	{
 		"abbr": "EH",

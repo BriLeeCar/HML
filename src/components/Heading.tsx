@@ -1,26 +1,6 @@
 import { ElementType } from 'react'
 import { cn } from '~/lib/cn'
 
-export const PageHeading = ({ ...props }) => {
-	return (
-		<Heading
-			level={1}
-			size='2xl'
-			{...props}
-		/>
-	)
-}
-export const SectionHeading = ({ ...props }) => {
-	return (
-		<Heading
-			level={2}
-			size='xl'
-			className='mt-8'
-			{...props}
-		/>
-	)
-}
-
 /**
  *
  * @param props - General props for the heading element.

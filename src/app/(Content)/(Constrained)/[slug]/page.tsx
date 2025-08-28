@@ -1,9 +1,13 @@
 import { Main } from '@/(Content)/_Layout/Wrapper'
 import fs from 'fs'
 import { Suspense } from 'react'
-import { PageHeading, Section, SectionHeading } from '~/components'
 import { MDXProcessor } from '~/lib/mdx'
 import { toTitleCase } from '~/lib/text'
+import {
+	PageHeading,
+	Section,
+	SectionHeading,
+} from '../../Components'
 
 export const generateStaticParams = () => {
 	const pages = fs.readdirSync('src/data/pages')

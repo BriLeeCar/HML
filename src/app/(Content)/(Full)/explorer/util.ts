@@ -1,9 +1,6 @@
 // #region ? Types
-type tFilter = {
-	key: keyof ApiData.tExplorerFilters
-	value: boolean
-	matches: (country: ApiData.Country) => boolean
-}
+
+export type tReducerDispatch = (action: tMasonryActions) => void
 
 type tMasonaryAction<T, P> = {
 	type: T
@@ -11,31 +8,32 @@ type tMasonaryAction<T, P> = {
 
 export type tMasonryState = {
 	countries: ApiData.Country[]
-	drawerOpen: boolean
-	filters: Array<tFilter>
+	drawer: {
+		status: boolean
+		size: '' | 'sm' | 'md' | 'lg'
+	}
+	filters: Array<{
+		key: keyof ApiData.tExplorerFilters
+		value: boolean
+		matches: (country: ApiData.Country) => boolean
+	}>
 	db: ApiData.DB
 }
 
-export type tDrawerAction = tMasonaryAction<'SET_DRAWER', null>
-export type tFilterAction = tMasonaryAction<'SET_FILTERS', tFilter>
-export type tSetCountriesAction = tMasonaryAction<
-	'SET_COUNTRIES',
-	null
->
-export type tCookieAction = tMasonaryAction<
-	'SET_COOKIES',
-	tFilter['key'][]
->
-
-export type tDocSizes = {
-	screenWidth: number
-	containerWidth: number
-}
+export type tMasonryActions =
+	| tMasonaryAction<'SET_DRAWER', { size: '' | 'sm' | 'md' | 'lg' }>
+	| tMasonaryAction<'SET_FILTERS', tMasonryState['filters'][0]>
+	| tMasonaryAction<'SET_COUNTRIES', null>
+	| tMasonaryAction<'CLEAR_FILTERS', null>
+	| tMasonaryAction<
+			'SET_COOKIES',
+			tMasonryState['filters'][0]['key'][]
+	  >
 
 export type tDrawerFilter = {
 	label: string
-	dataKey: tFilter['key']
-} & Pick<tFilter, 'matches'>
+	dataKey: tMasonryState['filters'][0]['key']
+} & Pick<tMasonryState['filters'][0], 'matches'>
 
 export type tDrawerFilterGroup = {
 	group: string
@@ -43,52 +41,26 @@ export type tDrawerFilterGroup = {
 }
 // #endregion ?
 
-export const breakpoints = [
-	{ min: '320px', columns: 2 },
-	{ min: '640px', columns: 3 },
-	{ min: '1024px', columns: 4 },
-] as {
-	min?: string
-	max?: string
-	columns: number
-}[]
-
-export const handleColumns = (
-	docSizes: tDocSizes,
-	reducer: tMasonryState
-) => {
-	const width = docSizes.containerWidth
-	let newColumns = 1
-	if (breakpoints) {
-		for (let i = 0; i < breakpoints.length; i++) {
-			const bp = breakpoints[i]
-
-			const min =
-				bp.min ? parseInt(bp.min)
-				: i == 0 ? 0
-				: parseInt(breakpoints[i - 1].max || '0')
-
-			const max =
-				bp.max ? parseInt(bp.max)
-				: i == breakpoints.length - 1 ? Infinity
-				: parseInt(breakpoints[i + 1].min || 'Infinity')
-
-			if (width >= min && width <= max) {
-				newColumns = bp.columns
-			}
+export const handleColumns = (reducer: tMasonryState) => {
+	const countries = reducer.countries
+		.sort((a, b) => a.name.localeCompare(b.name))
+		.map((c) => c)
+	const columnArrays = [
+		{ min: '320px', columns: 2 },
+		{ min: '640px', columns: 3 },
+		{ min: '1024px', columns: 4 },
+	].map((bp) => {
+		const imageArrays = Array.from(
+			{ length: bp.columns },
+			() => [] as ApiData.Country[]
+		)
+		for (let c = 0, i = 0; c < countries.length; c++, i++) {
+			i = i > bp.columns - 1 ? 0 : i
+			imageArrays[i].push(countries[c])
 		}
-	}
-	const newColsArray = Array.from(
-		{ length: newColumns },
-		() => []
-	) as ApiData.Country[][]
-
-	for (let i = 0, j = 0; i <= reducer.countries.length; i++, j++) {
-		j = j >= newColumns ? 0 : j
-		reducer.countries[i] && newColsArray[j].push(reducer.countries[i])
-	}
-
-	return [...newColsArray.filter((c) => c != undefined)]
+		return { ...bp, images: imageArrays }
+	})
+	return columnArrays
 }
 
 export const filterCbs: tDrawerFilterGroup[] = [
@@ -184,10 +156,12 @@ export const filterCbs: tDrawerFilterGroup[] = [
 	},
 ]
 
-export const allFilters: Pick<tFilter, 'key' | 'matches'>[] =
-	filterCbs.flatMap((group) =>
-		group.items.map((item) => ({
-			key: item.dataKey,
-			matches: item.matches,
-		}))
-	)
+export const allFilters: Pick<
+	tMasonryState['filters'][0],
+	'key' | 'matches'
+>[] = filterCbs.flatMap((group) =>
+	group.items.map((item) => ({
+		key: item.dataKey,
+		matches: item.matches,
+	}))
+)

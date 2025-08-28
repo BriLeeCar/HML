@@ -17,6 +17,7 @@ export const BlogContent = ({
 	return (
 		<Section>
 			<SectionHeading
+				id='member-blogs'
 				eyebrow='Team Member Blogs'
 				subtitle='We are people going through this process too. Here are some of our stories and reflections.'>
 				What We Think

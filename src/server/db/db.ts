@@ -196,7 +196,9 @@ class DB {
 }
 
 export type tDB = ReturnType<typeof db>
+
 const db = () => new DB()
+
 export default db
 
 // #region ? TYPES

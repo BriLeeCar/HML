@@ -1,4 +1,5 @@
 import { Button, Icon } from '~/components'
+import { cn } from '~/lib/cn'
 
 export const FilterBtn = ({
 	count,
@@ -9,7 +10,10 @@ export const FilterBtn = ({
 			{...props}
 			variant={'default'}
 			size={'sm'}
-			className='bg-muted text-muted-foreground text-sm font-semibold uppercase'>
+			className={cn(
+				'bg-muted text-muted-foreground text-sm font-semibold uppercase',
+				props.className
+			)}>
 			<Icon IconName='FilterIcon' />
 			Filters ({count})
 		</Button>

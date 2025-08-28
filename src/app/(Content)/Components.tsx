@@ -38,14 +38,15 @@ export const PageHeading = ({
 	eyebrow,
 	subtitle,
 	children,
+	...props
 }: {
 	eyebrow?: string | ReactNode
-	subtitle?: string
+	subtitle?: ReactNode
 	children: ReactNode
-}) => (
+} & Props<'div'>) => (
 	<div className='max-w-4xl'>
 		{eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-		<PageTitle>{children}</PageTitle>
+		<PageTitle {...props}>{children}</PageTitle>
 		{subtitle && <Subtitle>{subtitle}</Subtitle>}
 	</div>
 )
@@ -59,7 +60,12 @@ export const SectionHeading = ({
 	subtitle?: ReactNode
 }) => {
 	const Inner = () => (
-		<h2 className='text-2xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white'>
+		<h2
+			{...props}
+			className={cn(
+				'text-2xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white',
+				props.className
+			)}>
 			{props.children}
 		</h2>
 	)
@@ -142,7 +148,7 @@ export const CTA = ({
 	const Actions = () => (
 		<div
 			className={cn(
-				'mt-10 flex items-center gap-x-6 md:mt-0 md:shrink-0',
+				'col-span-full row-start-3 mt-10 flex w-full items-center gap-x-6 pt-10 sm:col-span-1 sm:col-start-2 sm:row-start-1 sm:w-auto sm:pt-0 md:mt-0 md:shrink-0',
 				subtitle && 'mt-0 items-end justify-self-end'
 			)}>
 			{primaryAction && <PrimaryAction />}
@@ -152,7 +158,7 @@ export const CTA = ({
 
 	if (subtitle && (primaryAction || secondaryAction)) {
 		return (
-			<div className='relative mx-auto grid w-full grid-cols-[auto_1fr] py-16 sm:py-8'>
+			<div className='relative mx-auto grid w-full grid-cols-1 py-16 sm:grid-cols-[auto_1fr] sm:py-8'>
 				<Head />
 				<Actions />
 				<Subtitle className='col-span-2'>{subtitle}</Subtitle>
