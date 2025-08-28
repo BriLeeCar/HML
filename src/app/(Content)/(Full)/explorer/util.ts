@@ -1,39 +1,31 @@
-import type { tCountry, tDB, tExplorerFilters } from '~/server/db/db'
-
 // #region ? Types
+type tFilter = {
+	key: keyof ApiData.tExplorerFilters
+	value: boolean
+	matches: (country: ApiData.Country) => boolean
+}
+
+type tMasonaryAction<T, P> = {
+	type: T
+} & (P extends null ? { payload?: P } : { payload: P })
+
 export type tMasonryState = {
-	countries: tCountry[]
+	countries: ApiData.Country[]
 	drawerOpen: boolean
-	filters: Array<keyof tExplorerFilters>
-	// columns: tCountry[][]
-	db: tDB
+	filters: Array<tFilter>
+	db: ApiData.DB
 }
 
-export type tDrawerAction = {
-	type: 'SET_DRAWER'
-	payload?: null
-}
-
-export type tFilterAction = {
-	type: 'SET_FILTERS'
-	payload: {
-		key: keyof tExplorerFilters
-		value: boolean
-		matches: (country: tCountry) => boolean
-	}
-}
-
-export type tSetCountriesAction = {
-	type: 'SET_COUNTRIES'
-	payload: null
-}
-
-export type tMasonryReducer = {
-	countries: tCountry[]
-	drawerOpen: boolean
-	filters: Array<keyof tExplorerFilters>
-	db: tDB
-}
+export type tDrawerAction = tMasonaryAction<'SET_DRAWER', null>
+export type tFilterAction = tMasonaryAction<'SET_FILTERS', tFilter>
+export type tSetCountriesAction = tMasonaryAction<
+	'SET_COUNTRIES',
+	null
+>
+export type tCookieAction = tMasonaryAction<
+	'SET_COOKIES',
+	tFilter['key'][]
+>
 
 export type tDocSizes = {
 	screenWidth: number
@@ -42,9 +34,8 @@ export type tDocSizes = {
 
 export type tDrawerFilter = {
 	label: string
-	dataKey: keyof tExplorerFilters
-	matches: (country: tCountry) => boolean
-}
+	dataKey: tFilter['key']
+} & Pick<tFilter, 'matches'>
 
 export type tDrawerFilterGroup = {
 	group: string
@@ -64,7 +55,7 @@ export const breakpoints = [
 
 export const handleColumns = (
 	docSizes: tDocSizes,
-	reducer: tMasonryReducer
+	reducer: tMasonryState
 ) => {
 	const width = docSizes.containerWidth
 	let newColumns = 1
@@ -90,7 +81,7 @@ export const handleColumns = (
 	const newColsArray = Array.from(
 		{ length: newColumns },
 		() => []
-	) as tCountry[][]
+	) as ApiData.Country[][]
 
 	for (let i = 0, j = 0; i <= reducer.countries.length; i++, j++) {
 		j = j >= newColumns ? 0 : j
@@ -106,19 +97,30 @@ export const filterCbs: tDrawerFilterGroup[] = [
 		items: [
 			{
 				label: 'Have a monthly income',
-				dataKey: 'income' as unknown as keyof tExplorerFilters,
-				matches: (country: tCountry) => country && true,
+				dataKey:
+					'income' as unknown as keyof ApiData.tExplorerFilters,
+				matches: (country: ApiData.Country) =>
+					country
+					&& country.pathways?.some((p) => p.monthly_income == true)
+						=== true,
 			},
 			{
 				label: 'Will need help to find a job',
-				dataKey: 'jobMarket' as unknown as keyof tExplorerFilters,
-				matches: (country: tCountry) => country && true,
+				dataKey:
+					'jobMarket' as unknown as keyof ApiData.tExplorerFilters,
+				matches: (country: ApiData.Country) =>
+					country
+					&& country.pathways?.some((p) => p.job_required == false)
+						=== true,
 			},
 			{
 				label: 'Can work digitally from anywhere',
 				dataKey:
-					'digitalNomadVisa' as unknown as keyof tExplorerFilters,
-				matches: (country: tCountry) => country && true,
+					'digitalNomadVisa' as unknown as keyof ApiData.tExplorerFilters,
+				matches: (country: ApiData.Country) =>
+					country
+					&& country.pathways?.some((p) => p.digital_worker == true)
+						=== true,
 			},
 		],
 	},
@@ -127,42 +129,45 @@ export const filterCbs: tDrawerFilterGroup[] = [
 		items: [
 			{
 				label: 'Black',
-				dataKey: 'black' as unknown as keyof tExplorerFilters,
-				matches: (country: tCountry) =>
+				dataKey: 'black' as unknown as keyof ApiData.tExplorerFilters,
+				matches: (country: ApiData.Country) =>
 					(country.communities.racismRank ?? 0) > 0,
-			},
-			{
-				label: 'Spanish, Hispanic, or Latinx',
-				dataKey: 'latinx' as unknown as keyof tExplorerFilters,
-				matches: (country: tCountry) => country && true,
 			},
 			{
 				label: 'LGBTQIA+',
 				dataKey: 'prideScore',
-				matches: (country: tCountry) =>
+				matches: (country: ApiData.Country) =>
 					(country.communities.prideScore ?? -1) >= 0,
 			},
 			{
 				label: 'Trans, Intersex or Non-binary',
 				dataKey: 'transSafety',
-				matches: (country: tCountry) =>
+				matches: (country: ApiData.Country) =>
 					country.communities.transSafety == true,
 			},
 			{
 				label: 'Disabled',
 				dataKey:
-					'disabilityAccess' as unknown as keyof tExplorerFilters,
-				matches: (country: tCountry) => country && true,
+					'disabilityAccess' as unknown as keyof ApiData.tExplorerFilters,
+				matches: (country: ApiData.Country) => country && true,
 			},
 			{
 				label: '18-30 years old',
-				dataKey: 'age18-30' as unknown as keyof tExplorerFilters,
-				matches: (country: tCountry) => country && true,
+				dataKey:
+					'age18-30' as unknown as keyof ApiData.tExplorerFilters,
+				matches: (country: ApiData.Country) =>
+					country
+					&& country.pathways?.some((p) => p.age_18_30 == true)
+						=== true,
 			},
 			{
 				label: '60+ years old',
-				dataKey: 'age60+' as unknown as keyof tExplorerFilters,
-				matches: (country: tCountry) => country && true,
+				dataKey:
+					'age60+' as unknown as keyof ApiData.tExplorerFilters,
+				matches: (country: ApiData.Country) =>
+					country
+					&& country.pathways?.some((p) => p.age_60_plus == true)
+						=== true,
 			},
 		],
 	},
@@ -172,30 +177,17 @@ export const filterCbs: tDrawerFilterGroup[] = [
 			{
 				label: 'Includes Kid(s)',
 				dataKey:
-					'familyFriendly' as unknown as keyof tExplorerFilters,
-				matches: (country: tCountry) => country && true,
-			},
-			{
-				label: 'Includes Pet(s)',
-				dataKey: 'petFriendly' as unknown as keyof tExplorerFilters,
-				matches: (country: tCountry) => country && true,
-			},
-		],
-	},
-	{
-		group: "I'm of...",
-		items: [
-			{
-				label: 'African descent',
-				dataKey:
-					'africanDescent' as unknown as keyof tExplorerFilters,
-				matches: (country: tCountry) => country && true,
-			},
-			{
-				label: 'Spanish or Latin American descent',
-				dataKey: 'latinDescent' as unknown as keyof tExplorerFilters,
-				matches: (country: tCountry) => country && true,
+					'familyFriendly' as unknown as keyof ApiData.tExplorerFilters,
+				matches: (country: ApiData.Country) => country && true,
 			},
 		],
 	},
 ]
+
+export const allFilters: Pick<tFilter, 'key' | 'matches'>[] =
+	filterCbs.flatMap((group) =>
+		group.items.map((item) => ({
+			key: item.dataKey,
+			matches: item.matches,
+		}))
+	)

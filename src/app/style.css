@@ -6,15 +6,10 @@
 
 /* #region THEME */
 :root {
+	color-scheme: light dark;
 	--radius: 0.625rem;
 	--theme-black: oklch(0.145 0 0);
 	--theme-white: oklch(0.985 0 0);
-
-	--background: white;
-	--foreground: oklch(0.145 0 0);
-
-	--card: white;
-	--card-foreground: var(--theme-black);
 
 	--popover: white;
 	--popover-foreground: var(--theme-black);
@@ -25,15 +20,8 @@
 	--secondary: var(--color-red-900);
 	--secondary-foreground: white;
 
-	--muted: var(--theme-white);
-	--muted-foreground: oklch(0.556 0 0);
-
 	--accent: var(--theme-white);
 	--accent-foreground: oklch(0.205 0 0);
-
-	--border: oklch(0.922 0 0);
-	--input: hsl(0, 0%, 75%);
-	--ring: oklch(0.708 0 0);
 
 	--sidebar: oklch(0.94 0 27.11);
 	--sidebar-foreground: oklch(0.205 0 0);
@@ -53,6 +41,30 @@
 	--btn-text: var(--color-white);
 
 	--shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+:root {
+	--background: white;
+	--foreground: oklch(0.145 0 0);
+
+	--copy-foreground: oklch(39.793% 0.00005 271.152);
+
+	--muted: oklch(0.922 0 0);
+	--muted-foreground: oklch(0.556 0 0);
+
+	--border: oklch(0.145 0 0);
+	--input: oklch(0.145 0 0);
+	--ring: oklch(0.145 0 0);
+
+	--error: var(--color-red-600);
+	--warning: var(--color-yellow-600);
+	--success: var(--color-green-600);
+
+	--card-foreground: #000;
+	--card: #fff;
+
+	--section-foreground: #000;
+	--section-background: #fff;
 }
 
 .dark {
@@ -98,6 +110,8 @@
 	--font-serif: questa, serif;
 	--font-mono: var(--font-ibm-plex-mono, IBM Plex Mono), monospace;
 	--breakpoint-xs: 400px;
+
+	--color-copy: var(--copy-foreground);
 
 	--color-sidebar-ring: var(--sidebar-ring);
 	--color-sidebar-border: var(--sidebar-border);
@@ -154,13 +168,29 @@
 		--font-sans: var(--font-serif, questa-grande), serif;
 		--font-serif: JetBrains Mono, monospace !important;
 	}
+	menu,
+	footer {
+		display: none !important;
+	}
 	* {
+		background-color: transparent !important;
 		-webkit-print-color-adjust: exact;
 		print-color-adjust: exact;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 		-webkit-text-size-adjust: 100%;
 		text-size-adjust: 100%;
+	}
+	main a {
+		@apply not-italic! no-underline! decoration-0!;
+		&::after {
+			content: ' (https://helpmeleave.us' attr(href) ')';
+			color: black;
+			font-weight: normal;
+		}
+	}
+	.callout .callout-title svg {
+		display: none;
 	}
 }
 
@@ -273,7 +303,7 @@
 		min-height: 100vh;
 		margin: 0;
 		padding: 0;
-		background-color: var(--color-zinc-200);
+		background-color: var(--background);
 		@media (prefers-color-scheme: dark) {
 			background-color: var(--color-zinc-900);
 		}
@@ -298,5 +328,14 @@
 				display: none;
 			}
 		}
+	}
+}
+
+@custom-variant list-label {
+	&:is(li:has(> ol, ul)):not(li ul li, li ol li) {
+		@slot;
+	}
+	&:is(ul):has(> li > ol, > li > ul) {
+		@slot;
 	}
 }

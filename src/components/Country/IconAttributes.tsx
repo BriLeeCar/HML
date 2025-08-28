@@ -1,3 +1,4 @@
+import { JSX } from 'react'
 import { cn } from '~/lib/cn'
 import { tDB } from '~/server/db/db'
 
@@ -127,12 +128,16 @@ export const JuneteenthFlag = () => {
 
 export const IconAttributes = ({
 	attr,
+	as,
 	...props
 }: Props & {
+	as?: keyof JSX.IntrinsicElements
 	attr: ReturnType<tDB['getCommunityAttributes']>
 }) => {
+	const Tag = as ?? 'ul'
+	const InnerTag = Tag == 'ul' ? 'li' : 'span'
 	return (
-		<ul
+		<Tag
 			className={cn(
 				'*:border-foreground/20',
 				'flex',
@@ -141,20 +146,20 @@ export const IconAttributes = ({
 				props.className
 			)}>
 			{attr.isUn && (
-				<li className='text-xs font-bold text-[#498DD5] uppercase'>
+				<InnerTag className='text-xs font-bold text-[#498DD5] uppercase'>
 					UN
-				</li>
+				</InnerTag>
 			)}
 			{attr.prideScore && attr.prideScore >= 0 && (
-				<li className='text-current/50 *:size-6'>
+				<InnerTag className='text-current/50 *:size-6'>
 					<PrideFlag />
-				</li>
+				</InnerTag>
 			)}
 			{attr.transSafety && (
-				<li className='text-current/50 *:size-6'>
+				<InnerTag className='text-current/50 *:size-6'>
 					<TransFlag />
-				</li>
+				</InnerTag>
 			)}
-		</ul>
+		</Tag>
 	)
 }

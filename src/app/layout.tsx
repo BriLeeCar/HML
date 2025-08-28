@@ -48,7 +48,7 @@ const RootLayout = async ({
 			</head>
 			<body
 				className={cn(
-					'text-foreground relative font-sans antialiased',
+					'text-foreground bg-background relative font-sans antialiased',
 					'pb-4'
 				)}>
 				<Providers>{children}</Providers>

@@ -7,7 +7,6 @@ import { RefObject, useContext } from 'react'
 import { Heading, TouchTarget } from '~/components'
 import { IconAttributes } from '~/components/Country/IconAttributes'
 import { cn } from '~/lib/cn'
-import { tCountry, tDB } from '~/server/db/db'
 import { DBContext } from '~/server/db/provider'
 
 export const Masonry = ({
@@ -15,7 +14,7 @@ export const Masonry = ({
 	ref,
 	colWidth,
 }: {
-	columns: tCountry[][]
+	columns: ApiData.Country[][]
 	ref: RefObject<HTMLDivElement | null>
 	colWidth?: number
 }) => {
@@ -30,7 +29,7 @@ export const Masonry = ({
 			layoutRoot
 			key={`masonry-${columns.length}`}
 			ref={ref}
-			className='flex w-full shrink basis-full gap-4 md:max-w-[calc(100vw-2rem)] md:justify-between md:gap-0'>
+			className='mx-auto flex w-full shrink basis-full gap-4 md:max-w-[calc(100vw-2rem)] md:justify-between md:gap-0'>
 			{columns.map((col, i) => {
 				return (
 					<div
@@ -40,7 +39,7 @@ export const Masonry = ({
 						}}
 						key={`columns${i}`}
 						className='flex shrink basis-auto flex-col'>
-						{col.map((c: tCountry, i) => {
+						{col.map((c: ApiData.Country, i) => {
 							const priority = i < 4 ? true : false
 							return (
 								<motion.div
@@ -79,9 +78,9 @@ const MasonryCountry = ({
 	priority,
 	db,
 }: {
-	country: tCountry
+	country: ApiData.Country
 	priority: boolean
-	db: tDB
+	db: ApiData.DB
 }) => {
 	return (
 		<>
@@ -104,7 +103,7 @@ const MasonryCountry = ({
 						objectFit: 'cover',
 						objectPosition: 'center center',
 					}}
-					sizes={`20vw`}
+					sizes={`500px`}
 					className={cn('h-full w-auto transition-all')}
 					priority={priority}
 				/>

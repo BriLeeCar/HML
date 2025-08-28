@@ -20,8 +20,8 @@
 		],
 		"paths": {
 			"@/*": ["./src/app/*"],
-			"~/components/*": ["./src/app/_Components/*"],
-			"~/components": ["./src/app/_Components/index.ts"],
+			"~/components/*": ["./src/components/*"],
+			"~/components": ["./src/components/index.ts"],
 			"~/server/*": ["./src/server/*"],
 			"~/data/*": ["./src/data/*"],
 			"~/lib/*": ["./src/lib/*"],

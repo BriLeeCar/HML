@@ -1,18 +1,18 @@
 'use client'
 
-import { Button, Heading, Icon, Label, P } from '@/_Components'
 import { motion, MotionProps } from 'motion/react'
 import { ActionDispatch, RefObject, useEffect, useState } from 'react'
+import { Button, Heading, Icon, Label, P } from '~/components'
 import { Checkbox } from '~/components/ui/Checkbox'
 import { cn } from '~/lib/cn'
-import { masonryReducer } from './reducer'
 import {
 	filterCbs,
+	masonryReducer,
 	tDrawerAction,
 	tDrawerFilter,
 	tFilterAction,
 	tSetCountriesAction,
-} from './util'
+} from '.'
 
 export const Drawer = ({
 	overlayRef,
@@ -158,7 +158,9 @@ const FilterCB = ({
 				{...props}
 				id={dataKey}
 				name={dataKey}
-				defaultChecked={reducer.filters.includes(dataKey)}
+				defaultChecked={reducer.filters
+					.map((f) => f.key)
+					.includes(dataKey)}
 				onCheckedChange={(checked) =>
 					dispatchReducer({
 						type: 'SET_FILTERS',

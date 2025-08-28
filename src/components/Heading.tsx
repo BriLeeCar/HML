@@ -1,6 +1,26 @@
 import { ElementType } from 'react'
 import { cn } from '~/lib/cn'
 
+export const PageHeading = ({ ...props }) => {
+	return (
+		<Heading
+			level={1}
+			size='2xl'
+			{...props}
+		/>
+	)
+}
+export const SectionHeading = ({ ...props }) => {
+	return (
+		<Heading
+			level={2}
+			size='xl'
+			className='mt-8'
+			{...props}
+		/>
+	)
+}
+
 /**
  *
  * @param props - General props for the heading element.
@@ -21,16 +41,22 @@ export const Heading = ({
 		<Tag
 			{...props}
 			className={cn(
-				`text-foreground dark:text-accent-foreground mt-6 mb-2 font-serif font-bold [:is(h1,h2,h3,h4,h5,h6)>*:first-child>*:is(h1,h2,h3,h4,h5,h6)]:text-red-500`,
-				level == 2
-					&& 'scroll-m-20 border-b-1 pb-2 font-semibold tracking-tight first:mt-0',
-				size == 'title' ? 'font-heading text-7xl'
-				: size == '2xl' ? 'text-5xl'
-				: size == 'xl' ? 'text-4xl'
-				: size == 'lg' ? 'text-3xl'
-				: size == 'md' ? 'text-2xl'
-				: size == 'sm' ? 'text-xl'
-				: 'text-sm',
+				`text-foreground dark:text-accent-foreground mt-6 mb-2 font-sans font-bold tracking-tighter`,
+				size == 'title' && 'text-4xl font-black',
+				size == '2xl' && 'text-5xl',
+				size == 'xl' && 'text-3xl',
+				size == 'lg' && 'text-muted-foreground text-xl brightness-75',
+				// size == 'lg' && 'text-2xl',
+				// size == 'md' && 'text-xl',
+				// level == 2
+				// 	&& 'scroll-m-20 font-semibold tracking-tight first:mt-0',
+				// size == 'title' ? 'font-heading text-7xl'
+				// : size == '2xl' ? 'text-5xl'
+				// : size == 'xl' ? 'text-4xl'
+				// : size == 'lg' ? 'text-3xl'
+				// : size == 'md' ? 'text-2xl'
+				// : size == 'sm' ? 'text-xl'
+				// : 'text-sm',
 				props.className
 			)}
 		/>

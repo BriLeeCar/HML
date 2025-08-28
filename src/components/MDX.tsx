@@ -1,7 +1,8 @@
-import { Children } from 'react'
+import { Children, ReactNode } from 'react'
 import { cn } from '~/lib/cn'
 import { Heading } from './Heading'
 import { Link } from './Link'
+
 import { Large, List, P } from './Text'
 import { Button } from './ui'
 
@@ -24,12 +25,14 @@ export const mdxComponents = {
 		<Heading
 			{...props}
 			level={3}
-			size='md'
+			size='lg'
+			className='border-border/20 mt-8 border-b-1'
 		/>
 	),
 	h4: ({ ...props }: Props<'h1'>) => (
 		<Heading
 			{...props}
+			className='mt-6'
 			level={4}
 		/>
 	),
@@ -126,6 +129,16 @@ export const mdxComponents = {
 			/>
 		)
 	},
+	li: ({ ...props }: Props<'li'>) => (
+		<li
+			{...props}
+			className={cn(
+				'list-label:list-none list-label:ml-0',
+				// '[:is(li_li)]:text-foreground pl-0 not-[li_li]:first:has-[ul]:list-none',
+				props.className
+			)}
+		/>
+	),
 	Large,
 	table: ({ ...props }: Props<'table'>) => (
 		<table
@@ -148,15 +161,9 @@ export const mdxComponents = {
 	Button: ({ ...props }: Props<typeof Button> & { href: string }) => {
 		return (
 			<Button
-				variant='primary'
-				size='sm'
 				as='link'
 				{...props}
-				className={cn(
-					'text-xl font-black text-white uppercase',
-					'click my-4 h-auto w-full gap-0 py-2 whitespace-normal',
-					props.className || ''
-				)}>
+				className={cn(props.className || '')}>
 				{props.children}
 			</Button>
 		)
@@ -170,4 +177,44 @@ export const mdxComponents = {
 			)}
 		/>
 	),
+	CTALink: ({ ...props }: Props<typeof Link>) => {
+		return (
+			<Link
+				{...props}
+				className={cn(
+					'mx-auto my-2 block w-full text-center text-xl font-bold decoration-double',
+					props.className
+				)}>
+				{props.children}
+			</Link>
+		)
+	},
+	CTA: ({
+		heading,
+		href,
+		call,
+		...props
+	}: Props & {
+		heading: ReactNode
+		href: string
+		call: ReactNode
+	}) => {
+		return (
+			<div className='px-6 py-24 sm:py-32 lg:px-8'>
+				<div className='mx-auto max-w-2xl'>
+					<Heading className='text-foreground text-4xl font-semibold tracking-tight text-balance sm:text-5xl'>
+						{heading}
+					</Heading>
+					<P className='mx-auto mt-6 max-w-xl text-lg/8 text-pretty text-gray-600 dark:text-gray-300'>
+						{props.children}
+					</P>
+					<div className='mt-10 flex items-center justify-center gap-x-6'>
+						{href && (
+							<Button href={href}>{call || 'Get started'}</Button>
+						)}
+					</div>
+				</div>
+			</div>
+		)
+	},
 }

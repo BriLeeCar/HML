@@ -1,13 +1,19 @@
 import {
+	allFilters,
+	tCookieAction,
 	tDrawerAction,
 	tFilterAction,
 	tMasonryState,
 	tSetCountriesAction,
-} from './util'
+} from '.'
 
 export const masonryReducer = (
 	state: tMasonryState,
-	action: tDrawerAction | tFilterAction | tSetCountriesAction
+	action:
+		| tDrawerAction
+		| tFilterAction
+		| tSetCountriesAction
+		| tCookieAction
 ) => {
 	const newState = { ...state }
 
@@ -16,39 +22,60 @@ export const masonryReducer = (
 		return newState
 	}
 
-	console.log({ action })
-
 	if (action.type == 'SET_FILTERS') {
-		newState.filters = [
-			...new Set(
-				newState.filters.filter((f) => {
-					if (
-						action.payload.value == false
-						&& f == action.payload.key
-					) {
-						return false
-					}
-					return f != action.payload.key
-				})
-			),
-		]
-
-		if (
-			action.payload.value == true
-			&& !newState.filters.includes(action.payload.key)
-		) {
-			newState.filters.push(action.payload.key)
-		}
-		Object.assign(newState, {
-			countries: state.db.countries
-				.filter(
-					(c) =>
-						c.images.havePhoto == true && action.payload.matches(c)
-				)
-				.sort((a, b) => a.name.localeCompare(b.name)),
+		parseFilters(newState, action.payload)
+	}
+	if (action.type == 'SET_COOKIES') {
+		action.payload.forEach((key) => {
+			const filter = allFilters.find((f) => f.key == key)
+			if (filter) {
+				parseFilters(newState, { ...filter, value: true })
+			}
 		})
 	}
-
 	newState.filters = Array.from(new Set(newState.filters))
+	window.localStorage.setItem(
+		'explorer-filters',
+		JSON.stringify(newState.filters.map((f) => f.key))
+	)
+	return newState
+}
+
+const parseFilters = (
+	newState: tMasonryState,
+	payloadFilters: tFilterAction['payload']
+) => {
+	newState.filters = [
+		...new Set(
+			newState.filters.filter((f) => {
+				if (
+					payloadFilters.value == false
+					&& f.key == payloadFilters.key
+				) {
+					return false
+				}
+				return f.key != payloadFilters.key
+			})
+		),
+	]
+
+	if (
+		payloadFilters.value == true
+		&& !newState.filters
+			.map((n) => n.key)
+			.includes(payloadFilters.key)
+	) {
+		newState.filters.push(payloadFilters)
+	}
+
+	Object.assign(newState, {
+		countries: newState.db.countries
+			.filter((c) => {
+				return newState.filters.every((f) => {
+					return f.matches(c)
+				})
+			})
+			.sort((a, b) => a.name.localeCompare(b.name)),
+	})
 	return newState
 }

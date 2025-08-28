@@ -29,7 +29,7 @@ const links = [
 	{
 		text: 'Guides & Resources',
 		Icon: Books,
-		href: '/',
+		href: '/guides-resources',
 	},
 	{
 		text: 'Support Team',

@@ -6,6 +6,7 @@ import crime from './countries_crime.json'
 import economy from './countries_economy.json'
 import health from './countries_health.json'
 import images from './countries_images.json'
+import pathways from './countries_pathways.json'
 import quality from './countries_quality.json'
 
 const countriesWithClimate = climate as Array<tClimate>
@@ -16,6 +17,7 @@ const countriesWithEconomy = economy as Array<tEconomy>
 const countriesWithQuality = quality as Array<tQuality>
 const countriesWithCrime = crime as Array<tCrime>
 const countriesWithAPI = api as Array<tPreCountryApi>
+const countriesWithPathways = pathways as Array<tPathway>
 
 const mergeByAbbr = (params: {
 	baseArr: tCountryBase[]
@@ -84,6 +86,21 @@ class DB {
 					data: countriesWithCrime,
 				},
 			],
+		})
+
+		countriesWithPathways.forEach((p) => {
+			const country = this.countries.find(
+				(c) => c.abbr.toLowerCase() == p.abbr.toLowerCase()
+			)
+
+			if (country) {
+				if (!country['pathways']) {
+					Object.assign(country, {
+						pathways: [] as tPathway[],
+					})
+				}
+				country['pathways']?.push(p)
+			}
 		})
 	}
 
@@ -192,7 +209,9 @@ type tCountryETCData = {
 	economy: tEconomy
 	quality: tQuality
 	crime: tCrime
-} & { api: tCountryApi }
+	pathways?: tPathway[]
+	api: tCountryApi
+}
 
 type tCountryKeys = keyof tCountryETCData
 
@@ -286,4 +305,29 @@ export type tExplorerFilters = {
 	transSafety: boolean
 }
 export type tCountry = tDB['countries'][number]
+export type tPathway = {
+	id: number
+	abbr: string
+	name: string
+	category: string
+	sub: string
+	duration: number
+	renewable: boolean
+	renewal_duration: number
+	pathway_residency: boolean
+	pathway_notes: string
+	description: string
+	eligibility: string
+	limits: string
+	docs: string
+	link: string
+	digital_worker: boolean
+	monthly_income: boolean
+	job_required: boolean
+	age_18_30: boolean
+	age_60_plus: boolean
+	travelling_with_kids: boolean
+	entrepreneur: boolean
+	study: boolean
+}
 // #endregion ?

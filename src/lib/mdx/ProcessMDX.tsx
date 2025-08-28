@@ -35,7 +35,10 @@ export class MDXProcessor {
 		type?: 'path' | 'raw'
 	) {
 		this.sourceType = type ?? setType(source)
-		this.raw = setRaw(this, source as string)
+		this.raw = setRaw(this, source as string).replace(
+			/\n\n\n/g,
+			'\n\n'
+		)
 	}
 
 	removeTitle = (): this => {

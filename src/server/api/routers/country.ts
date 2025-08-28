@@ -12,7 +12,7 @@ export const countriesRouter = createTRPCRouter({
 			.map((country) => country)
 	}),
 	getByAbbr: publicProcedure
-		.input(z.string().length(3).toLowerCase())
+		.input(z.string().length(2).toLowerCase())
 		.query(({ ctx, input }) => {
 			return (
 				ctx
@@ -68,5 +68,16 @@ export const countriesRouter = createTRPCRouter({
 				}
 				return true
 			})
+		}),
+	getPathwaysByAbbr: publicProcedure
+		.input(z.string().length(2).toLowerCase())
+		.query(({ ctx, input }) => {
+			return (
+				ctx
+					.db()
+					.countries.find(
+						(country) => country.abbr.toLowerCase() === input
+					)?.pathways || []
+			)
 		}),
 })
