@@ -1,3 +1,4 @@
+export * from './AlertTriangle'
 export * from './AlignCenter'
 export * from './AlignJustify'
 export * from './AlignLeft'

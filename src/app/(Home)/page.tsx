@@ -32,7 +32,7 @@ const MenuWrapper = ({ ...props }) => {
 const MenuSub = ({ ...props }) => (
 	<div
 		{...props}
-		className='flex flex-col items-end justify-center gap-2.5 self-stretch text-end leading-tight font-semibold text-zinc-600'
+		className='flex flex-col items-end justify-center gap-2.5 self-stretch text-end leading-tight tracking-wide text-zinc-600 dark:text-zinc-400'
 	/>
 )
 
@@ -84,11 +84,11 @@ const Page2 = () => {
 	return (
 		<>
 			<h2 className='flex grow flex-col'>
-				<span className='flex h-10 max-h-[20vh] grow items-end bg-red-600 pl-8 text-3xl font-bold tracking-tight text-white'>
+				<span className='flex h-10 max-h-[20vh] grow items-end bg-red-600 pl-8 text-3xl font-bold tracking-tight text-white dark:bg-red-700'>
 					HELP ME LEAVE
 				</span>
 				<Link
-					href='/soon'
+					href='/leave-now'
 					className='pl-8 text-8xl/18 font-extrabold tracking-tight text-red-600 underline decoration-red-800 decoration-4 underline-offset-4'>
 					NOW
 				</Link>
@@ -131,12 +131,8 @@ const Page2 = () => {
 							team has volunteers ready to help guide you through this
 							process.
 						</p>
-						<small className='text-xs italic'>
-							<strong className='font-bold'>
-								Services limited to the most at risk groups.
-							</strong>{' '}
-							If you think this may be you, please reach out after
-							reading our onboarding guide
+						<small className='text-sm italic'>
+							Services limited to the most at risk groups.
 						</small>
 					</MenuSub>
 				</MenuWrapper>
@@ -176,7 +172,7 @@ const MobileHome = () => {
 					'inline-flex flex-col self-stretch'
 				)}>
 				<hgroup className='pl-4'>
-					<TopText className='text-red-500 dark:text-red-800' />
+					<TopText className='text-red-500 dark:text-red-600' />
 					<h1 className='sr-only'>Help Me Leave</h1>
 
 					<span className='-mt-6 block px-4 text-xl leading-[1.25lh] font-medium text-black italic dark:text-white dark:text-shadow-xs'>
@@ -184,7 +180,7 @@ const MobileHome = () => {
 					</span>
 				</hgroup>
 				<span className='to-background/50 h-fill w-full bg-gradient-to-b from-transparent from-50% to-50%'>
-					<BottomPlane className='text-red-500 dark:text-red-900' />
+					<BottomPlane className='text-red-500 dark:text-red-700' />
 				</span>
 			</div>
 			<div

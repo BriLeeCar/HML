@@ -2,7 +2,9 @@ import fs from 'fs'
 import path from 'path'
 import { MDXProcessor } from '~/lib/mdx'
 import countries from '~/server/db/countries.json'
+import db from '~/server/db/db'
 import { Base } from './Base'
+import { Pathways } from './Pathways'
 
 export const generateStaticParams = () => {
 	return countries
@@ -39,7 +41,6 @@ const CheckForSectionMDX = (country: string, section: string) => {
 		if (fs.existsSync(path.join(process.cwd(), file))) {
 			return new MDXProcessor(file, 'path')
 		} else {
-			console.log(`No section file found for ${country} - ${section}`)
 			return null
 		}
 	} catch (e) {
@@ -57,21 +58,37 @@ const CountryPage = async ({
 	const { country } = await params
 	const { section } = await searchParams
 
-	const content =
-		section ?
-			CheckForSectionMDX(country, section)
-		:	CheckForMDX(country)
+	let content = null
+
+	const pathway = db().getCountryByAbbr(country)
+
+	if (section) {
+		if (section == 'pathways')
+			content = {
+				Provider: () => (
+					<Pathways
+						pathways={pathway?.pathways || []}
+						name={pathway?.name || ''}
+					/>
+				),
+			}
+		else content = CheckForSectionMDX(country, section)
+	} else {
+		content = CheckForMDX(country)
+	}
+
+	if (content == null) {
+		content = {
+			Provider: () => 'Content coming soon...',
+		}
+	}
 
 	return (
 		<Base
 			section={section}
 			countryName={country}>
 			{content ?
-				<div className='flex items-start justify-center gap-4 sm:flex-row sm:gap-8'>
-					<section>
-						<content.Provider />
-					</section>
-				</div>
+				<content.Provider />
 			:	<div className='w-full text-center font-black capitalize italic not-dark:opacity-60 dark:font-semibold'>
 					Content coming soon....
 				</div>

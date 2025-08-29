@@ -14,16 +14,18 @@ export const NowBtn = ({
 		<Button
 			variant={'primary'}
 			size={'sm'}
+			as='link'
+			href='/leave-now'
 			{...props}
 			className={cn(
-				'click mb-4 h-auto w-full flex-col items-center justify-center gap-0 py-2 whitespace-normal sm:flex-row sm:gap-1.25 md:justify-around md:gap-2 lg:justify-center',
+				'click mb-4 h-auto w-full flex-col items-center justify-center gap-0 bg-red-600 py-2 whitespace-normal text-white sm:flex-row sm:gap-1.25 md:justify-around md:gap-2 lg:justify-center',
 				props.className || ''
 			)}>
 			<span className='text-xl font-black uppercase sm:text-5xl lg:text-end'>
 				<span className='sm:hidden'>Help Me Leave </span>NOW
 			</span>
 			<span className='text-sm uppercase md:w-1/2 md:text-end md:text-base/4 lg:text-start lg:text-lg'>
-				I Desperate Need to Seek Safety
+				I Desperately Need to Seek Safety
 			</span>
 		</Button>
 	)
@@ -44,15 +46,14 @@ export const SmallBtns = () => {
 	]
 
 	return (
-		<span className='grid w-full grid-cols-1 gap-4 lg:grid-cols-2'>
+		<span className='*:[button]:bg-foreground/10 text-muted-foreground *:hover:[button]:bg-foreground/10 grid w-full grid-cols-1 gap-4 lg:grid-cols-2 *:[button]:cursor-not-allowed'>
 			{btns.map((btn, i) => {
 				return (
 					<Button
 						size={'lg'}
 						variant={'secondary'}
 						key={i}
-						className='w-full grow flex-col gap-0 px-4 py-2 tracking-tighter'
-						onClick={btn.onClick}>
+						className='w-full grow flex-col gap-0 px-4 py-2 tracking-tighter'>
 						<span className='text-lg sm:text-2xl'>
 							Help Me {btn.main == 'SOON' && 'LEAVE '}
 							<b className='font-extrabold'>{btn.main}</b>

@@ -174,6 +174,7 @@ export const WorldMap = () => {
 								})
 							}
 							canClick={tier !== 'None' && !mapState.dragging.current}
+							className='dark:stroke-background fill-red-500/20 transition-all hover:fill-red-600'
 						/>
 					)
 				})}

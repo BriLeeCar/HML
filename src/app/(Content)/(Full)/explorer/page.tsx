@@ -1,6 +1,6 @@
 import { Base } from './Base'
 
-const ExplorerPage = async () => {
+const ExplorerPage = () => {
 	return <Base />
 }
 

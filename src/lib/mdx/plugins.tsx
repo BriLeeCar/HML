@@ -2,7 +2,7 @@ import { mdxAnnotations } from 'mdx-annotations'
 import callouts from 'rehype-callouts'
 import flexibleMarkers from 'remark-flexible-markers'
 import gfm from 'remark-gfm'
-import { customCallouts } from '~/lib/mdx'
+import { calloutProps, customCallouts } from '~/lib/mdx'
 
 export const remarkPlugins = [
 	mdxAnnotations.remark,
@@ -22,6 +22,7 @@ export const remarkPlugins = [
 			},
 		},
 	],
+	// [sectionize],
 ]
 
 export const rehypePlugins = [
@@ -31,6 +32,7 @@ export const rehypePlugins = [
 		{
 			theme: 'obsidian',
 			callouts: customCallouts,
+			...calloutProps,
 		},
 	],
 ]

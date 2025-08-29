@@ -1,7 +1,13 @@
+import { Main } from '@/(Content)/_Layout/Wrapper'
 import fs from 'fs'
-import { Heading, Section } from '~/components'
-import { MDXProcessor } from '~/lib/mdx/ProcessMDX'
+import { Suspense } from 'react'
+import { MDXProcessor } from '~/lib/mdx'
 import { toTitleCase } from '~/lib/text'
+import {
+	PageHeading,
+	Section,
+	SectionHeading,
+} from '../../Components'
 
 export const generateStaticParams = () => {
 	const pages = fs.readdirSync('src/data/pages')
@@ -11,29 +17,25 @@ export const generateStaticParams = () => {
 	})
 }
 
-const Page = async ({
-	params,
-}: {
-	params: Promise<{ slug: string }>
-}) => {
-	const { slug } = await params
-	const data = new MDXProcessor(
-		`src/data/pages/${slug}.mdx`,
-		'path'
-	).removeTitle()
+const Page = async (props: PageProps<'/[slug]'>) => {
+	const { slug } = await props.params
+	const data = new MDXProcessor(`src/data/pages/${slug}.mdx`, 'path')
+		.removeTitle()
+		.setComponents({
+			h2: (props) => <SectionHeading {...props} />,
+		})
 
 	return (
-		<main className='mx-auto max-w-2xl px-4 py-8'>
-			<Section>
-				<Heading
-					level={1}
-					size={'2xl'}
-					className='mt-2 mb-8'>
+		<Main>
+			<Suspense fallback={<div>Loading...</div>}>
+				<PageHeading>
 					{data.title || toTitleCase(slug.replace(/-/g, ' '))}
-				</Heading>
-				<data.Provider />
-			</Section>
-		</main>
+				</PageHeading>
+				<Section>
+					<data.Provider />
+				</Section>
+			</Suspense>
+		</Main>
 	)
 }
 

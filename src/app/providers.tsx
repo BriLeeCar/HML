@@ -3,6 +3,7 @@
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { ReactNode } from 'react'
 import { DBProvider } from '~/server/db/provider'
+import { TRPCReactProvider } from '../trpc/react'
 
 const ThemeProvider = ({
 	children,
@@ -20,7 +21,9 @@ export const Providers = ({ children }: { children: ReactNode }) => {
 			defaultTheme='system'
 			enableSystem
 			disableTransitionOnChange>
-			<DBProvider>{children}</DBProvider>
+			<DBProvider>
+				<TRPCReactProvider>{children}</TRPCReactProvider>
+			</DBProvider>
 		</ThemeProvider>
 	)
 }

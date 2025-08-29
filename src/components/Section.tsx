@@ -5,7 +5,7 @@ export const Section = ({ ...props }: Props<'section'>) => {
 		<section
 			{...props}
 			className={cn(
-				'border-border dark:bg-card/50 rounded-lg border-1 bg-zinc-100 p-6 shadow-sm',
+				'border-border/20 dark:bg-card/50 md:bg-card rounded-lg px-6 shadow-sm md:border-1',
 				props.className
 			)}
 		/>

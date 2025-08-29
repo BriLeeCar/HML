@@ -1,8 +1,8 @@
 declare module 'mdx-annotations' {
 	declare const mdxAnnotations: {
-		remark(): (tree: any) => void
-		rehype(): (tree: any) => void
-		recma(): (tree: any) => void
+		remark(): (tree: unknown) => void
+		rehype(): (tree: unknown) => void
+		recma(): (tree: unknown) => void
 	}
 
 	export { mdxAnnotations }

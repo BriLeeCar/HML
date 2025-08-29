@@ -37,7 +37,7 @@ const buttonVariants = cva(
 				secondary:
 					'bg-btn-secondary text-btn hover:bg-secondary/80 focus-visible:ring-destructive ring-offset-2',
 				primary:
-					'bg-btn-primary text-btn hover:bg-btn-primary/90 focus-visible:ring-foreground/50 shadow-black ring-offset-2',
+					'text-foreground focus-visible:ring-foreground/50 shadow-black ring-offset-2',
 				ghost:
 					'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
 				link: 'text-primary underline-offset-4 hover:underline',
@@ -100,13 +100,17 @@ export const Button = ({
 
 export function TouchTarget({
 	children,
+	...props
 }: {
 	children: React.ReactNode
-}) {
+} & Props) {
 	return (
 		<>
 			<span
-				className='absolute top-1/2 left-1/2 size-[max(100%,2.75rem)] -translate-x-1/2 -translate-y-1/2 pointer-fine:hidden'
+				className={cn(
+					'absolute top-1/2 left-1/2 size-[max(100%,2.75rem)] -translate-x-1/2 -translate-y-1/2 pointer-fine:hidden',
+					props.className
+				)}
 				aria-hidden='true'
 			/>
 			{children}

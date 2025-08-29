@@ -2,34 +2,36 @@ import { Children } from 'react'
 import { cn } from '~/lib/cn'
 import { Heading } from './Heading'
 import { Link } from './Link'
+
+import {
+	CTA,
+	InlineLink,
+	Page,
+	PageHeading,
+	Section,
+	SectionHeading,
+	SubSection,
+} from '@/(Content)/Components'
 import { Large, List, P } from './Text'
 import { Button } from './ui'
 
 export const mdxComponents = {
-	h1: ({ ...props }: Props<'h1'>) => (
-		<Heading
-			{...props}
-			level={1}
-			size='title'
-		/>
+	h1: ({ children, ...props }: Props<'h1'>) => (
+		<PageHeading {...props}>{children}</PageHeading>
 	),
-	h2: ({ ...props }: Props<'h1'>) => (
-		<Heading
-			{...props}
-			level={2}
-			size='lg'
-		/>
-	),
+	h2: ({ ...props }: Props<'h1'>) => <SectionHeading {...props} />,
 	h3: ({ ...props }: Props<'h1'>) => (
 		<Heading
 			{...props}
 			level={3}
-			size='md'
+			size='lg'
+			className='border-border/20 mt-8 border-b-1'
 		/>
 	),
 	h4: ({ ...props }: Props<'h1'>) => (
 		<Heading
 			{...props}
+			className='mt-6'
 			level={4}
 		/>
 	),
@@ -126,6 +128,16 @@ export const mdxComponents = {
 			/>
 		)
 	},
+	li: ({ ...props }: Props<'li'>) => (
+		<li
+			{...props}
+			className={cn(
+				'list-label:list-none list-label:ml-0',
+				// '[:is(li_li)]:text-foreground pl-0 not-[li_li]:first:has-[ul]:list-none',
+				props.className
+			)}
+		/>
+	),
 	Large,
 	table: ({ ...props }: Props<'table'>) => (
 		<table
@@ -148,15 +160,9 @@ export const mdxComponents = {
 	Button: ({ ...props }: Props<typeof Button> & { href: string }) => {
 		return (
 			<Button
-				variant='primary'
-				size='sm'
 				as='link'
 				{...props}
-				className={cn(
-					'text-xl font-black text-white uppercase',
-					'click my-4 h-auto w-full gap-0 py-2 whitespace-normal',
-					props.className || ''
-				)}>
+				className={cn(props.className || '')}>
 				{props.children}
 			</Button>
 		)
@@ -170,4 +176,11 @@ export const mdxComponents = {
 			)}
 		/>
 	),
+	Section,
+	SectionHeading,
+	SubSection,
+	Page,
+	PageHeading,
+	InlineLink,
+	CTA,
 }

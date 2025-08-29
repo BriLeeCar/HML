@@ -1,18 +1,11 @@
+import { Page, PageHeading, Section } from '@/(Content)/Components'
 import { readdirSync, readFileSync } from 'fs'
 import { getFrontmatter } from 'next-mdx-remote-client/utils'
 import Image from 'next/image'
 import path from 'path'
-import {
-	Heading,
-	HGroup,
-	Icon,
-	Link,
-	Section,
-	Tag,
-} from '~/components'
-import { mdxComponents } from '~/components/MDX'
+import { Icon, Link, mdxComponents, Tag } from '~/components'
 import { cn } from '~/lib/cn'
-import { MDXProvider } from '~/lib/mdx/MDXProvider'
+import { MDXProvider } from '~/lib/mdx'
 import { toTitleCase } from '~/lib/text'
 
 export const generateStaticParams = async () => {
@@ -66,7 +59,8 @@ const SocialIcon = ({
 			href={url}
 			className={cn(
 				'hover:opacity-50',
-				name == 'BlueSky' && 'text-[#0385ff]'
+				name == 'BlueSky' && 'text-[#0385ff]',
+				name == 'TikTok' && 'text-foreground'
 			)}
 			aria-label={name}
 			title={name}
@@ -79,6 +73,33 @@ const SocialIcon = ({
 		</Link>
 	)
 }
+
+const Brow = ({ frontmatter }: { frontmatter: tFrontMatter }) => (
+	<span className='flex items-center gap-8 text-sm'>
+		<span>
+			Written By <strong>{frontmatter.author?.name}</strong>, on
+			{' '
+				+ new Date(frontmatter.date).toLocaleDateString('en-US', {
+					year: 'numeric',
+					month: 'long',
+					day: 'numeric',
+				})}
+		</span>
+		{Object.keys(frontmatter.author ?? []).length > 1 && (
+			<span className='flex gap-4'>
+				{Object.keys(frontmatter.author ?? [])
+					.filter((key) => key !== 'name')
+					.map((key) => (
+						<SocialIcon
+							key={key}
+							name={key as keyof tFrontMatter['author']}
+							author={frontmatter.author}
+						/>
+					))}
+			</span>
+		)}
+	</span>
+)
 
 const BlogEntry = async ({
 	params,
@@ -97,63 +118,33 @@ const BlogEntry = async ({
 	}
 
 	return (
-		<div className='relative mx-auto max-w-3xl pt-4'>
-			<span className='mb-2 flex items-center justify-end px-10'>
-				{frontmatter.tags && frontmatter.tags.length > 0 && (
-					<div className='flex flex-wrap justify-end gap-2'>
-						{frontmatter.tags.map((tag) => (
-							<Tag
-								key={tag}
-								tag={tag}
-							/>
-						))}
-					</div>
-				)}
-			</span>
-			<Section>
-				{frontmatter.subtitle ?
-					<HGroup className='mb-2'>
-						<HGroup.Head level={1}>
-							{toTitleCase(title.replace(/-/g, ' '))}
-						</HGroup.Head>
-						<HGroup.Sub>{frontmatter.subtitle}</HGroup.Sub>
-					</HGroup>
-				:	<Heading
-						level={2}
-						size='title'>
-						{toTitleCase(title.replace(/-/g, ' '))}
-					</Heading>
+		<Page>
+			<PageHeading
+				eyebrow={
+					frontmatter.author ?
+						<Brow frontmatter={frontmatter} />
+					:	<></>
 				}
-				{frontmatter.author ?
-					<p className='mt-0 mb-4 flex items-center gap-8 px-8 text-sm text-zinc-600 italic dark:text-zinc-400'>
-						<span>
-							Written By <strong>{frontmatter.author.name}</strong>,
-							on
-							{' '
-								+ new Date(frontmatter.date).toLocaleDateString(
-									'en-US',
-									{
-										year: 'numeric',
-										month: 'long',
-										day: 'numeric',
-									}
-								)}
-						</span>
-						{Object.keys(frontmatter.author).length > 1 && (
-							<span className='flex gap-4'>
-								{Object.keys(frontmatter.author)
-									.filter((key) => key !== 'name')
-									.map((key) => (
-										<SocialIcon
-											key={key}
-											name={key as keyof tFrontMatter['author']}
-											author={frontmatter.author}
+				subtitle={
+					<>
+						{frontmatter.subtitle}
+						<span className='flex items-center justify-start px-10 py-2'>
+							{frontmatter.tags && frontmatter.tags.length > 0 && (
+								<span className='flex flex-wrap justify-end gap-2'>
+									{frontmatter.tags.map((tag) => (
+										<Tag
+											key={tag}
+											tag={tag}
 										/>
 									))}
-							</span>
-						)}
-					</p>
-				:	<></>}
+								</span>
+							)}
+						</span>
+					</>
+				}>
+				{toTitleCase(title.replace(/-/g, ' '))}
+			</PageHeading>
+			<Section>
 				{frontmatter.image && (
 					<figure className='relative mx-auto mb-6 block aspect-video w-[90%]'>
 						<Image
@@ -181,7 +172,7 @@ const BlogEntry = async ({
 					source={data}
 				/>
 			</Section>
-		</div>
+		</Page>
 	)
 }
 

@@ -1,19 +1,20 @@
 import { Button, Icon } from '~/components'
+import { cn } from '~/lib/cn'
 
-export const Filter = ({
+export const FilterBtn = ({
 	count,
 	...props
 }: Props<typeof Button> & { count: number }) => {
 	return (
-		<span className='*:click absolute right-20 flex gap-2'>
-			<Button
-				{...props}
-				variant={'default'}
-				size={'sm'}
-				className='bg-muted text-muted-foreground text-sm font-semibold uppercase'>
-				<Icon IconName='FilterIcon' />
-				Filters ({count})
-			</Button>
-		</span>
+		<Button
+			{...props}
+			size={'sm'}
+			className={cn(
+				'bg-muted text-muted-foreground hover:text-background text-sm font-semibold uppercase',
+				props.className
+			)}>
+			<Icon IconName='FilterIcon' />
+			Filters ({count})
+		</Button>
 	)
 }
