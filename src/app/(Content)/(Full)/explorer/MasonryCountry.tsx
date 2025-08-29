@@ -23,19 +23,19 @@ export const Country = ({
 			<Link
 				href={`/countries/${country.abbr.toLowerCase()}`}
 				title={country.name}
-				className='block underline decoration-red-500/50 hover:decoration-white/50'>
-				<TouchTarget className='top-0 right-0 bottom-0 left-0 h-full w-full translate-0 pointer-fine:block'>
-					<section className='absolute top-1/2 right-0 left-0 -translate-y-1/2'>
+				className='underline decoration-red-500/50 hover:decoration-white/50'>
+				<section className='absolute top-0 right-0 left-0 flex h-[calc(100%-0.5rem)] items-center justify-center overflow-hidden rounded-t-lg'>
+					<TouchTarget className='top-0 bottom-0 h-full w-full p-0 pointer-fine:block'>
 						<Heading
 							size='title'
-							className='font-heading mt-0 mb-0 pb-2 text-center text-5xl font-medium tracking-normal text-white decoration-red-500 text-shadow-md'>
+							className='font-heading mt-0 mb-0 pb-2 text-center text-3xl font-medium tracking-normal text-white decoration-red-500 text-shadow-md md:text-5xl'>
 							{country.name}
 						</Heading>
-					</section>
-				</TouchTarget>
+					</TouchTarget>
+				</section>
 				<IconAttributes
 					attr={db.getCommunityAttributes(country)}
-					className='absolute bottom-0 flex w-full justify-start bg-black/50 overflow-ellipsis *:text-lg **:[svg]:size-8 **:[svg]:text-zinc-500'
+					className='absolute bottom-1.5 flex w-full justify-start rounded-b-lg bg-black/50 overflow-ellipsis *:text-lg **:[svg]:size-8 **:[svg]:text-zinc-500'
 				/>
 			</Link>
 		</>
@@ -71,7 +71,7 @@ const Figure = ({
 			style={{
 				aspectRatio: `${details.width} / ${details.height}`,
 			}}
-			className='relative inline-flex w-full shrink px-0 pt-0'>
+			className='relative inline-flex w-full shrink overflow-hidden rounded-lg px-0 pt-0'>
 			<Image
 				src={details.url}
 				alt={details.alt}
@@ -87,7 +87,7 @@ const Figure = ({
 				)}
 				priority={priority}
 			/>
-			<span className='absolute top-0 right-0 left-0 h-full rounded-lg bg-black/20' />
+			<span className='absolute top-0 right-0 left-0 h-full bg-black/30' />
 			<FigCaption country={country} />
 		</figure>
 	)

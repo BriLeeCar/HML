@@ -62,7 +62,9 @@ const ClaimingAsylumPage = () => {
 }
 
 const Bold = ({ children }: { children: React.ReactNode }) => (
-	<strong className='font-semibold text-red-600'>{children}</strong>
+	<strong className='font-semibold text-red-600 dark:text-red-400'>
+		{children}
+	</strong>
 )
 
 const WhatItMeans = () => (

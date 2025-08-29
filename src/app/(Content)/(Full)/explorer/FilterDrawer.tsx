@@ -33,7 +33,7 @@ export const Drawer = ({
 		visible: {
 			opacity: 1,
 			width: reducer.drawer.size == 'md' ? '350px' : '100%',
-			height: reducer.drawer.size == 'md' ? '100vh' : '50vh',
+			height: reducer.drawer.size == 'md' ? '100vh' : '80vh',
 		},
 	}
 
@@ -74,7 +74,7 @@ export const Drawer = ({
 					)}>
 					<FilterHeading />
 
-					<form className='mt-4 flex flex-col gap-2 overflow-scroll'>
+					<form className='mt-4 flex flex-col gap-2 pointer-coarse:mb-12'>
 						{filterCbs.map((grp) => (
 							<SubSection
 								title={grp.group}
@@ -118,11 +118,15 @@ const CloseButton = ({
 const FilterHeading = () => (
 	<SectionHeading
 		eyebrow='Filter'
-		subtitle='We can help narrow down the selection if you tell us a
-						little bit about yourself - don’t worry, we don’t keep a
-						record of any of this and none of it can be traced back to
-						you! If you don’t select anything, you will just be shown
-						the full list of pathways'>
+		subtitle={
+			<span className='pointer-coarse:hidden'>
+				We can help narrow down the selection if you tell us a little
+				bit about yourself - don’t worry, we don’t keep a record of
+				any of this and none of it can be traced back to you! If you
+				don’t select anything, you will just be shown the full list of
+				pathways
+			</span>
+		}>
 		Let's get you matched!
 	</SectionHeading>
 )
@@ -140,7 +144,7 @@ const FilterCB = ({
 		dispatchReducer: tReducerDispatch
 	}) => {
 	return (
-		<Label className='flex items-center gap-2 text-sm font-semibold'>
+		<Label className='flex items-center gap-2 text-sm font-semibold sm:text-base pointer-coarse:my-2'>
 			<Checkbox
 				{...props}
 				id={dataKey}

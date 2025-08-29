@@ -8,10 +8,9 @@ export const FilterBtn = ({
 	return (
 		<Button
 			{...props}
-			variant={'default'}
 			size={'sm'}
 			className={cn(
-				'bg-muted text-muted-foreground text-sm font-semibold uppercase',
+				'bg-muted text-muted-foreground hover:text-background text-sm font-semibold uppercase',
 				props.className
 			)}>
 			<Icon IconName='FilterIcon' />
