@@ -1,4 +1,4 @@
-import { tDB } from '~/server/db/db'
+import { DB } from '~/server/db/db'
 
 const Stat = ({
 	title,
@@ -24,7 +24,7 @@ const Stat = ({
 export const Stats = ({
 	countryStats,
 }: {
-	countryStats: ReturnType<tDB['getCountryStats']>
+	countryStats: ReturnType<DB['getCountryStats']>
 }) => {
 	return (
 		countryStats && (

@@ -1,107 +1,9 @@
-import countries from './countries.json'
-import api from './countries_api.json'
-import climate from './countries_climate.json'
-import communities from './countries_communities.json'
-import crime from './countries_crime.json'
-import economy from './countries_economy.json'
-import health from './countries_health.json'
-import images from './countries_images.json'
-import pathways from './countries_pathways.json'
-import quality from './countries_quality.json'
+import { getDBCountries } from './_jsonFiles'
 
-const countriesWithClimate = climate as Array<tClimate>
-const countriesWithHealth = health as Array<tHealth>
-const countriesWithSafety = communities as Array<tCommunities>
-const countriesWithImages = images as Array<tImages>
-const countriesWithEconomy = economy as Array<tEconomy>
-const countriesWithQuality = quality as Array<tQuality>
-const countriesWithCrime = crime as Array<tCrime>
-const countriesWithAPI = api as Array<tPreCountryApi>
-const countriesWithPathways = pathways as Array<tPathway>
-
-const mergeByAbbr = (params: {
-	baseArr: tCountryBase[]
-	arrays: Array<{
-		groupKey: string
-		data: Array<{ abbr: string; [key: string]: unknown }>
-	}>
-}) => {
-	const { baseArr, arrays } = params
-
-	return baseArr.map((baseItem) => {
-		const thisItem = { ...baseItem } as tCountryBase & tCountryETCData
-
-		arrays.forEach((ea) => {
-			const key: tCountryKeys = ea.groupKey as keyof tCountryETCData
-
-			const newData = ea.data.find(
-				(dataItem) =>
-					dataItem.abbr.toLowerCase() == baseItem.abbr.toLowerCase()
-			)
-
-			if (newData) {
-				Object.assign(thisItem, { [key]: newData })
-			}
-		})
-		return thisItem
-	})
-}
-
-class DB {
-	countries: Array<tCountryBase & tCountryETCData>
+export class DB {
+	countries: Array<ApiData.CountryBase & ApiData.CountryETCData>
 	constructor() {
-		this.countries = mergeByAbbr({
-			baseArr: countries,
-			arrays: [
-				{
-					groupKey: 'climate',
-					data: countriesWithClimate,
-				},
-				{
-					groupKey: 'health',
-					data: countriesWithHealth,
-				},
-				{
-					groupKey: 'communities',
-					data: countriesWithSafety,
-				},
-				{
-					groupKey: 'images',
-					data: countriesWithImages,
-				},
-				{
-					groupKey: 'economy',
-					data: countriesWithEconomy,
-				},
-				{
-					groupKey: 'quality',
-					data: countriesWithQuality,
-				},
-				{
-					groupKey: 'api',
-					data: countriesWithAPI,
-				},
-				{
-					groupKey: 'crime',
-					data: countriesWithCrime,
-				},
-			],
-		})
-
-		countriesWithPathways.forEach((p) => {
-			const country = this.countries.find(
-				(c) => c.abbr.toLowerCase() == p.abbr.toLowerCase()
-			)
-
-			if (country) {
-				if (!country['pathways']) {
-					Object.assign(country, {
-						pathways: [] as tPathway[],
-					})
-				}
-				country['pathways']?.push(p)
-			}
-		})
+		this.countries = getDBCountries()
 	}
 
 	getCountries() {
@@ -123,7 +25,9 @@ class DB {
 			}))
 	}
 
-	getCountriesForFilter(filterBy?: Array<keyof tExplorerFilters>) {
+	getCountriesForFilter(
+		filterBy?: Array<keyof ApiData.ExplorerFilters>
+	) {
 		return this.countries
 			.map((country) => {
 				return {
@@ -136,14 +40,14 @@ class DB {
 					transSafety: country.communities?.transSafety,
 				}
 			})
-			.filter((ea: tExplorerFilters) =>
+			.filter((ea: ApiData.ExplorerFilters) =>
 				filterBy ? filterBy.every((key) => ea[key]) : true
 			)
 	}
 
 	filterByCommunities(
-		communities: Array<keyof tExplorerFilters>,
-		country: tCountryBase & tCountryETCData
+		communities: Array<keyof ApiData.ExplorerFilters>,
+		country: ApiData.CountryBase & ApiData.CountryETCData
 	) {
 		const { prideScore, transSafety } = country.communities || {}
 		const results = communities.map((key) => {
@@ -159,7 +63,9 @@ class DB {
 		return true
 	}
 
-	getCountryStats(country: tCountryBase & tCountryETCData) {
+	getCountryStats(
+		country: ApiData.CountryBase & ApiData.CountryETCData
+	) {
 		const stats = [
 			{
 				title: 'Safety Index',
@@ -185,7 +91,9 @@ class DB {
 		return stats
 	}
 
-	getCommunityAttributes(country: tCountryBase & tCountryETCData) {
+	getCommunityAttributes(
+		country: ApiData.CountryBase & ApiData.CountryETCData
+	) {
 		return {
 			isUn: country.api.unMember,
 			prideScore: country.communities?.prideScore,
@@ -196,140 +104,6 @@ class DB {
 }
 
 export type tDB = ReturnType<typeof db>
-
 const db = () => new DB()
 
 export default db
-
-// #region ? TYPES
-
-type tCountryETCData = {
-	climate: tClimate
-	health: tHealth
-	communities: tCommunities & { isUn: boolean }
-	images: tImages
-	economy: tEconomy
-	quality: tQuality
-	crime: tCrime
-	pathways?: tPathway[]
-	api: tCountryApi
-}
-
-type tCountryKeys = keyof tCountryETCData
-
-type tClimate = {
-	abbr: string
-	pollution: number
-	climate: number
-}
-
-type tHealth = {
-	abbr: string
-	rank: number | null
-	cost: number | null
-	index: number | null
-}
-
-type tCommunities = {
-	abbr: string
-	prideScore: number | null
-	racismRank: number | null
-	transSafety: boolean
-}
-
-type tImages = {
-	abbr: string
-	name: string | null
-	handle: string | null
-	havePhoto: boolean
-	width: number | null
-	height: number | null
-}
-
-type tEconomy = {
-	abbr: string
-	col: number | null
-	purchasingPower: number | null
-	propertyToIncome: number | null
-}
-
-type tQuality = {
-	abbr: string
-	index: number | null
-	rank: number | null
-}
-
-type tCrime = {
-	abbr: string
-	index: number | null
-	safety: number | null
-}
-
-type tCountryBase = {
-	abbr: string
-	name: string
-	svgPath: string | null
-	tier: string | null
-}
-
-type tPreCountryApi = {
-	unMember: boolean
-	abbr: string
-	name: string
-	flag: string
-	population: number
-	region: string
-	subregion: string
-	languages: Record<string, string>
-	currencies: Record<string, { name: string; symbol: string }>
-}
-
-type tCountryApi = Omit<
-	tPreCountryApi,
-	'languages' | 'currencies' | 'abbr' | 'isUn'
-> & {
-	languages: Array<{
-		abbr: string
-		name: string
-	}>
-	currencies: Array<{
-		abbr: string
-		name: string
-		symbol: string
-	}>
-}
-
-export type tExplorerFilters = {
-	abbr: string
-	name: string
-	unMember: boolean
-	prideScore: boolean | 0 | null
-	transSafety: boolean
-}
-export type tCountry = tDB['countries'][number]
-export type tPathway = {
-	id: number
-	abbr: string
-	name: string
-	category: string
-	sub: string
-	duration: number
-	renewable: boolean
-	renewal_duration: number
-	pathway_residency: boolean
-	pathway_notes: string
-	description: string
-	eligibility: string
-	limits: string
-	docs: string
-	link: string
-	digital_worker: boolean
-	monthly_income: boolean
-	job_required: boolean
-	age_18_30: boolean
-	age_60_plus: boolean
-	travelling_with_kids: boolean
-	entrepreneur: boolean
-	study: boolean
-}
-// #endregion ?

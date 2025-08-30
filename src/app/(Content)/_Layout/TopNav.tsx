@@ -22,7 +22,7 @@ const links = [
 		href: '/map',
 	},
 	{
-		text: 'Visa & Asylum',
+		text: 'Visa Explorer',
 		Icon: Certificate,
 		href: '/explorer',
 	},
@@ -39,7 +39,7 @@ const links = [
 	{
 		text: 'Our Mission',
 		Icon: Mission,
-		href: '/',
+		href: '/our-mission',
 	},
 ]
 

@@ -5,13 +5,12 @@ import {
 	SubSection,
 } from '@/(Content)/Components'
 import { List } from '~/components/Text'
-import { tPathway } from '~/server/db/db'
 
 export const Pathways = ({
 	pathways,
 	name,
 }: {
-	pathways: tPathway[]
+	pathways: ApiData.Pathway[]
 	name: string
 }) => {
 	const categories = Array.from(

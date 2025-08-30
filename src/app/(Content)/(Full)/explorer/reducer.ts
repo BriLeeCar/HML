@@ -33,13 +33,41 @@ export const masonryReducer = (
 	}
 
 	if (action.type == 'SET_COUNTRIES') {
+		const countries = newState.db.countries.sort(
+			() => Math.random() - 0.5
+		)
+
 		Object.assign(newState, {
-			countries: newState.db.countries.sort((a, b) =>
-				a.name.localeCompare(b.name)
-			),
+			countries: countries,
 		})
 	}
 	newState.filters = Array.from(new Set(newState.filters))
+
+	if (action.type == 'SET_SEARCH') {
+		Object.assign(newState, {
+			search: {
+				...newState.search,
+				query: action.payload.query,
+			},
+		})
+		if (action.payload.query == '') {
+			parseFilters(newState, newState.filters[0] || undefined)
+		} else {
+			Object.assign(newState, {
+				countries: newState.db.countries.filter((country) =>
+					country.name
+						.toLowerCase()
+						.includes(action.payload.query.toLowerCase())
+				),
+			})
+
+			parseFilters(
+				newState,
+				newState.filters[0] || undefined,
+				newState.countries
+			)
+		}
+	}
 	window.localStorage.setItem(
 		'explorer-filters',
 		JSON.stringify(newState.filters.map((f) => f.key))
@@ -49,14 +77,15 @@ export const masonryReducer = (
 
 const parseFilters = (
 	newState: tMasonryState,
-	payloadFilters?: tMasonryState['filters'][0]
+	payloadFilters?: tMasonryState['filters'][0],
+	countries?: ApiData.Country[]
 ) => {
-	console.log(newState)
+	const useCountries = countries || newState.db.countries
 	if (!payloadFilters) {
 		Object.assign(newState, {
-			countries: newState.db.countries.sort((a, b) =>
-				a.name.localeCompare(b.name)
-			),
+			countries: useCountries
+				.sort((a, b) => a.name.localeCompare(b.name))
+				.sort(() => Math.random() - 0.5),
 		})
 		return newState
 	}
@@ -84,13 +113,14 @@ const parseFilters = (
 	}
 
 	Object.assign(newState, {
-		countries: newState.db.countries
+		countries: useCountries
 			.filter((c) => {
 				return newState.filters.every((f) => {
 					return f.matches(c)
 				})
 			})
-			.sort((a, b) => a.name.localeCompare(b.name)),
+			.sort((a, b) => a.name.localeCompare(b.name))
+			.sort(() => Math.random() - 0.5),
 	})
 	return newState
 }

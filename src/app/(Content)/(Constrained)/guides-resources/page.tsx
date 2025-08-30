@@ -67,8 +67,6 @@ const GuidesResourcesPage = async () => {
 		type: 'pdf'
 	}[]
 
-	console.log(pdfGuides)
-
 	return (
 		<Page>
 			<PageHeading

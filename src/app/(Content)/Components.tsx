@@ -6,7 +6,7 @@ import { ReactNode, useState } from 'react'
 import { Icon } from '~/components/Icon'
 import { cn } from '~/lib/cn'
 
-export const Subtitle = ({ ...props }: Props<'p'>) => (
+const Subtitle = ({ ...props }: Props<'p'>) => (
 	<p
 		className={cn(
 			'mt-6 text-xl/8 text-balance text-gray-700 dark:text-gray-300',
@@ -16,7 +16,7 @@ export const Subtitle = ({ ...props }: Props<'p'>) => (
 	</p>
 )
 
-export const Eyebrow = ({ ...props }: Props<'p'>) => {
+const Eyebrow = ({ ...props }: Props<'p'>) => {
 	return (
 		<p
 			className={cn(
@@ -28,7 +28,7 @@ export const Eyebrow = ({ ...props }: Props<'p'>) => {
 	)
 }
 
-export const PageTitle = ({ ...props }) => (
+const PageTitle = ({ ...props }) => (
 	<h1 className='mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 capitalize sm:text-5xl dark:text-white'>
 		{props.children}
 	</h1>

@@ -24,7 +24,7 @@ export const Country = ({
 				href={`/countries/${country.abbr.toLowerCase()}`}
 				title={country.name}
 				className='underline decoration-red-500/50 hover:decoration-white/50'>
-				<section className='absolute top-0 right-0 left-0 flex h-[calc(100%-0.5rem)] items-center justify-center overflow-hidden rounded-t-lg'>
+				<section className='absolute top-0 right-0 left-0 flex h-[calc(100%-0.5rem)] items-center justify-center overflow-hidden rounded-t-lg hover:saturate-0'>
 					<TouchTarget className='top-0 bottom-0 h-full w-full p-0 pointer-fine:block'>
 						<Heading
 							size='title'
@@ -49,8 +49,13 @@ const Figure = ({
 	country: ApiData.Country
 	priority: boolean
 }) => {
+	if (!country.images) {
+		console.log(country)
+		return <></>
+	}
+
 	const details =
-		country.images.havePhoto ?
+		country.images?.havePhoto ?
 			{
 				...country.images,
 				url: '/countries/' + country.name.toLowerCase() + '.jpeg',
@@ -83,11 +88,12 @@ const Figure = ({
 				sizes={`500px`}
 				className={cn(
 					'h-auto w-full transition-all',
-					!country.images.havePhoto && 'opacity-50 grayscale'
+					!country.images?.havePhoto && 'opacity-50 grayscale',
+					country.images?.havePhoto && 'contrast-110 saturate-90'
 				)}
 				priority={priority}
 			/>
-			<span className='absolute top-0 right-0 left-0 h-full bg-black/30' />
+			<span className='absolute top-0 right-0 left-0 h-full bg-black/40' />
 			<FigCaption country={country} />
 		</figure>
 	)
