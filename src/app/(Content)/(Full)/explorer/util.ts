@@ -48,7 +48,6 @@ type tDrawerFilterGroup = {
 export const handleColumns = (reducer: tMasonryState) => {
 	const countries = reducer.countries
 		.sort((a, b) => a.name.localeCompare(b.name))
-		.sort(() => Math.random() - 0.5)
 		.map((c) => c)
 	const columnArrays = [
 		{ min: '320px', columns: 2 },
@@ -77,8 +76,9 @@ export const filterCbs: tDrawerFilterGroup[] = [
 				dataKey: 'income' as unknown as keyof ApiData.ExplorerFilters,
 				matches: (country: ApiData.Country) =>
 					country
-					&& country.pathways?.some((p) => p.monthly_income == true)
-						=== true,
+					&& country.pathways?.some(
+						(p: ApiData.Pathway) => p.monthly_income == true
+					) === true,
 			},
 			{
 				label: 'Will need help to find a job',

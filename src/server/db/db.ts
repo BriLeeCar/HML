@@ -101,6 +101,12 @@ export class DB {
 			transSafety: country.communities?.transSafety,
 		}
 	}
+
+	getCountriesWithPathways() {
+		return this.countries.filter(
+			(country) => country.pathways && country.pathways.length > 0
+		)
+	}
 }
 
 export type tDB = ReturnType<typeof db>

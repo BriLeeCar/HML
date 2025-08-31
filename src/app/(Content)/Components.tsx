@@ -208,11 +208,18 @@ export const Divider = ({ children }: { children?: ReactNode }) => {
 export const SubSection = ({
 	defaultOpen = true,
 	title,
+	wrapperProps,
 	...props
-}: Props<'h3'> & { title: string; defaultOpen?: boolean }) => {
+}: Props<'h3'> & {
+	title: string
+	defaultOpen?: boolean
+	wrapperProps?: Props<'article'>
+}) => {
 	const [open, setOpen] = useState(defaultOpen)
 	return (
-		<article className='my-8'>
+		<article
+			{...wrapperProps}
+			className={cn('my-8', wrapperProps?.className)}>
 			<h3
 				{...props}
 				className={cn(
@@ -240,6 +247,6 @@ export const SubSection = ({
 export const InlineLink = ({ ...props }: Props<typeof Link>) => (
 	<Link
 		{...props}
-		className='font-bold underline underline-offset-2'
+		className='font-semibold text-red-900 underline underline-offset-2 dark:text-red-400'
 	/>
 )

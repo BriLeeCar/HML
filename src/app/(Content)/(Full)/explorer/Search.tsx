@@ -126,17 +126,37 @@ export const Search = ({
 
 const Btn = ({ ...props }) => {
 	return (
-		<Button
-			{...props}
-			variant={'ghost'}
-			type='button'
-			size='icon'>
-			<Icon
-				IconName='SearchIcon'
-				className='h-5 w-5'
-			/>
-			<span className='sr-only'>Toggle Search Drawer</span>
-		</Button>
+		<>
+			<Button
+				{...props}
+				variant={'ghost'}
+				type='button'
+				size='icon'
+				className={cn(
+					'lg:hidden',
+					'rounded-md bg-red-800 px-3.5 py-2.5 text-xs font-semibold whitespace-nowrap text-white shadow-xs hover:bg-red-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-600 dark:bg-red-500 dark:shadow-none dark:hover:bg-red-400 dark:focus-visible:outline-zinc-500'
+				)}>
+				<Icon
+					IconName='SearchIcon'
+					className='h-5 w-5'
+				/>{' '}
+				<span className='sr-only'>Toggle Search Drawer</span>
+			</Button>
+			<Button
+				{...props}
+				type='button'
+				className={cn(
+					'hidden lg:flex',
+					'rounded-md bg-red-800 px-3.5 py-2.5 text-xs font-semibold whitespace-nowrap text-white shadow-xs hover:bg-red-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-600 dark:bg-red-500 dark:shadow-none dark:hover:bg-red-400 dark:focus-visible:outline-zinc-500'
+				)}>
+				<Icon
+					IconName='SearchIcon'
+					className='h-5 w-5'
+				/>{' '}
+				SEARCH
+				<span className='sr-only'>Toggle Search Drawer</span>
+			</Button>
+		</>
 	)
 }
 

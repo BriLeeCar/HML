@@ -33,9 +33,7 @@ export const masonryReducer = (
 	}
 
 	if (action.type == 'SET_COUNTRIES') {
-		const countries = newState.db.countries.sort(
-			() => Math.random() - 0.5
-		)
+		const countries = newState.db.getCountriesWithPathways()
 
 		Object.assign(newState, {
 			countries: countries,
@@ -54,11 +52,13 @@ export const masonryReducer = (
 			parseFilters(newState, newState.filters[0] || undefined)
 		} else {
 			Object.assign(newState, {
-				countries: newState.db.countries.filter((country) =>
-					country.name
-						.toLowerCase()
-						.includes(action.payload.query.toLowerCase())
-				),
+				countries: newState.db
+					.getCountriesWithPathways()
+					.filter((country) =>
+						country.name
+							.toLowerCase()
+							.includes(action.payload.query.toLowerCase())
+					),
 			})
 
 			parseFilters(
@@ -80,12 +80,13 @@ const parseFilters = (
 	payloadFilters?: tMasonryState['filters'][0],
 	countries?: ApiData.Country[]
 ) => {
-	const useCountries = countries || newState.db.countries
+	const useCountries =
+		countries || newState.db.getCountriesWithPathways()
 	if (!payloadFilters) {
 		Object.assign(newState, {
-			countries: useCountries
-				.sort((a, b) => a.name.localeCompare(b.name))
-				.sort(() => Math.random() - 0.5),
+			countries: useCountries.sort((a, b) =>
+				a.name.localeCompare(b.name)
+			),
 		})
 		return newState
 	}
@@ -119,8 +120,7 @@ const parseFilters = (
 					return f.matches(c)
 				})
 			})
-			.sort((a, b) => a.name.localeCompare(b.name))
-			.sort(() => Math.random() - 0.5),
+			.sort((a, b) => a.name.localeCompare(b.name)),
 	})
 	return newState
 }

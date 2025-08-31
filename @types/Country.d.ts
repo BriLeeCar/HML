@@ -89,19 +89,9 @@ declare global {
 		type Pathway = {
 			id: number
 			abbr: string
-			name: string
-			category: string
-			sub: string
-			duration: number
-			renewable: boolean
-			renewal_duration: number
-			pathway_residency: boolean
-			pathway_notes: string
-			description: string
-			eligibility: string
-			limits: string
-			docs: string
-			link: string
+			name?: string
+			description?: string
+			official_link?: string
 			digital_worker: boolean
 			monthly_income: boolean
 			job_required: boolean

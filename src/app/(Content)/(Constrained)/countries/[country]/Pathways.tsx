@@ -14,6 +14,7 @@ export const Pathways = ({
 	name: string
 }) => {
 	const categories = Array.from(
+		// @ts-expect-error TS2345
 		new Set(pathways.map((p) => p.category))
 	)
 	const subs =
@@ -22,8 +23,8 @@ export const Pathways = ({
 				category: cat,
 				subs: Array.from(
 					new Set(
-						pathways
-							.filter((p) => p.category === cat)
+						pathways // @ts-expect-error TS2345
+							.filter((p) => p.category === cat) // @ts-expect-error TS2345
 							.map((p) => p.sub)
 					)
 				),
@@ -38,9 +39,9 @@ export const Pathways = ({
 				Pathways to {name}
 			</SectionHeading>
 			<div className='lg:pr-8'>
-				{categories.map((cat) => (
+				{categories.map((cat, i) => (
 					<SubSection
-						key={cat}
+						key={i}
 						title={cat}>
 						<List>
 							{subs
@@ -48,13 +49,17 @@ export const Pathways = ({
 								?.subs.map((sub) =>
 									pathways
 										.filter(
+											// @ts-expect-error TS2345
 											(p) => p.category === cat && p.sub === sub
 										)
 										.map((p) => (
 											<li key={p.id}>
-												{p.link && typeof p.link == 'string' ?
+												{(
+													p.official_link
+													&& typeof p.official_link == 'string'
+												) ?
 													<InlineLink
-														href={p.link}
+														href={p.official_link}
 														target='_blank'
 														rel='noopener noreferrer'>
 														{p.name}

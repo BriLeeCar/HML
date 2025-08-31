@@ -6,8 +6,8 @@ import crime from './countries_crime.json'
 import economy from './countries_economy.json'
 import health from './countries_health.json'
 import images from './countries_images.json'
-import pathways from './countries_pathways.json'
 import quality from './countries_quality.json'
+import pathways from './pathways.json'
 
 const countriesWithClimate = climate as Array<ApiData.Climate>
 const countriesWithHealth = health as Array<ApiData.Health>

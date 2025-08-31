@@ -64,8 +64,12 @@ export const Base = () => {
 	return (
 		<>
 			<div className='relative mx-auto my-4 flex w-[95%] items-center justify-between rounded-2xl px-4 py-2'>
-				<PageHeading>Explorer</PageHeading>
-				<span className='flex items-center gap-2'>
+				<PageHeading
+					subtitle='Use a combination of the filters and some of the visual clues on the country cards to help narrow down your search!'
+					eyebrow='Visa Explorer'>
+					Explorer
+				</PageHeading>
+				<span className='flex items-center gap-4'>
 					<Search
 						withDropdown={false}
 						countries={reducer.countries}

@@ -77,6 +77,10 @@ export const Drawer = ({
 					<form className='mt-4 flex flex-col gap-2 pointer-coarse:mb-12'>
 						{filterCbs.map((grp) => (
 							<SubSection
+								wrapperProps={{
+									className:
+										'flex flex-col gap-1 *:[div]:flex *:[div]:flex-col *:[div]:gap-2',
+								}}
 								title={grp.group}
 								key={grp.group}>
 								{grp.items.map((cb) => (
@@ -92,15 +96,16 @@ export const Drawer = ({
 							</SubSection>
 						))}
 						<ClearButton dispatchReducer={dispatchReducer} />
+						<CloseButton dispatchReducer={dispatchReducer} />
 					</form>
 				</motion.div>
-				<CloseButton dispatchReducer={dispatchReducer} />
+				<XCloseButton dispatchReducer={dispatchReducer} />
 			</div>
 		</motion.div>
 	)
 }
 
-const CloseButton = ({
+const XCloseButton = ({
 	dispatchReducer,
 }: {
 	dispatchReducer: tReducerDispatch
@@ -110,8 +115,12 @@ const CloseButton = ({
 			dispatchReducer({ type: 'SET_DRAWER', payload: { size: '' } })
 		}
 		variant={'link'}
-		className='text-background click absolute top-4 -right-8 hover:-right-12 hover:scale-155'>
-		<Icon IconName='XIcon' />
+		className='click hover:bg-foreground absolute top-4 -right-12 text-red-500'>
+		<Icon
+			IconName='XIcon'
+			strokeWidth={1}
+			className='size-6 fill-current stroke-current'
+		/>
 	</Button>
 )
 
@@ -144,7 +153,7 @@ const FilterCB = ({
 		dispatchReducer: tReducerDispatch
 	}) => {
 	return (
-		<Label className='flex items-center gap-2 text-sm font-semibold sm:text-base pointer-coarse:my-2'>
+		<Label className='flex items-start gap-3 text-sm font-semibold sm:text-base'>
 			<Checkbox
 				{...props}
 				id={dataKey}
@@ -162,11 +171,26 @@ const FilterCB = ({
 						},
 					})
 				}
+				className='mt-0.5 pointer-coarse:mt-1'
 			/>
 			{label}
 		</Label>
 	)
 }
+const CloseButton = ({
+	dispatchReducer,
+}: {
+	dispatchReducer: tReducerDispatch
+}) => (
+	<Button
+		type='button'
+		className='dark:bg-muted/20 border-border/20 mt-4 border-1'
+		onClick={() => {
+			dispatchReducer({ type: 'SET_DRAWER', payload: { size: '' } })
+		}}>
+		Close Filters
+	</Button>
+)
 const ClearButton = ({
 	dispatchReducer,
 }: {
@@ -174,7 +198,7 @@ const ClearButton = ({
 }) => (
 	<Button
 		type='button'
-		className='mt-4'
+		className='dark:bg-muted/20 border-border/20 mt-4 border-1'
 		onClick={(e) => {
 			handleClear(e, dispatchReducer)
 		}}>
