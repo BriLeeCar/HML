@@ -1,3 +1,5 @@
+import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
 import { IBM_Plex_Mono, Open_Sans } from 'next/font/google'
 import 'react'
@@ -52,6 +54,8 @@ const RootLayout = async ({
 					'pb-4'
 				)}>
 				<Providers>{children}</Providers>
+				<SpeedInsights /> {/* Vercel Speed Insights */}
+				<Analytics /> {/* Vercel Analytics */}
 			</body>
 		</html>
 	)

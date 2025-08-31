@@ -9,14 +9,13 @@ import { redirect, type RedirectType } from 'next/navigation'
 import { useContext, useEffect, useReducer } from 'react'
 import { Icon } from '~/components'
 import { cn } from '~/lib/cn'
-import { tDB } from '~/server/db/db'
 import { DBContext } from '~/server/db/provider'
 import { CountryHeading } from './Heading'
 import { MapPathEl, MapSvg } from './Map'
 import { mapReducer } from './Reducer'
 import { Search } from './SearchBtn'
 
-const redirectLink = (country: tDB['countries'][number]) => {
+const redirectLink = (country: ApiData.Country) => {
 	return `/countries/${country.abbr.toLowerCase()}`
 }
 export const WorldMap = () => {
@@ -56,10 +55,9 @@ export const WorldMap = () => {
 		}
 	}, [])
 
-	// const store = useCountryStore()
 	const dragControl = useDragControls()
 
-	const handleSelected = (country: tDB['countries'][number]) => {
+	const handleSelected = (country: ApiData.Country) => {
 		redirect(redirectLink(country), 'push' as RedirectType)
 	}
 
@@ -174,7 +172,12 @@ export const WorldMap = () => {
 								})
 							}
 							canClick={tier !== 'None' && !mapState.dragging.current}
-							className='dark:stroke-background hover:fill-brand-bright fill-red-500/20 transition-all'
+							className={cn(
+								'',
+								'dark:stroke-background',
+								'hover:fill-brand-bright',
+								'fill-red-500/20 transition-all'
+							)}
 						/>
 					)
 				})}

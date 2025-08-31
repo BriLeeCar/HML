@@ -1,6 +1,5 @@
 // import type { zodCountryRest } from "~/data/baseCountryApi"
 import { type MotionProps } from 'motion/react'
-import { type DB } from '~/server/db/db'
 
 // #region ! ---------- MAP REDUCER ----------
 type tMapState = {
@@ -45,7 +44,7 @@ export type tMapSVGProps = {
 } & MotionProps
 
 export type tMapPathElProps = Omit<Props<'path'>, 'name'>
-	& Partial<DB['countries'][number]> & {
+	& Partial<ApiData.Country> & {
 		canClick?: boolean
 	}
 

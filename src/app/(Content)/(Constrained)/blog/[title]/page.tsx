@@ -20,7 +20,7 @@ export const generateStaticParams = async () => {
 	const files = readdirSync(blogDir, 'utf-8')
 	const fileNames = files
 		.toString()
-		.split('\n')
+		.split(',')
 		.filter((file) => file.endsWith('.mdx'))
 		.map((file) => file.replace('.mdx', ''))
 
