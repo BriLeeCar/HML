@@ -1,7 +1,6 @@
 'use client'
 
-import { Section, SectionHeading } from '@/(Content)/Components'
-import { Icon } from '~/components/Icon'
+import { Icon, Section, SectionHeading } from '~/components'
 export const GuidesContent = ({
 	pdfGuides,
 }: {
@@ -54,7 +53,7 @@ export const GuidesContent = ({
 							: post.subtitle === 'Guide' ?
 								<Icon
 									IconName='BookLibraryIcon'
-									className='h-6 w-6 text-red-600'
+									className='text-brand-bright h-6 w-6'
 								/>
 							:	<Icon
 									IconName='InfoCircleIcon'

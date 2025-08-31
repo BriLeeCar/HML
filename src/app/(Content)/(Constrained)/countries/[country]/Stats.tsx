@@ -6,7 +6,7 @@ const Stat = ({
 	color,
 }: Record<string, string | number>) => {
 	return (
-		<aside className='bg-foreground h-[100px] w-[150px] flex-col items-center justify-center overflow-hidden rounded-lg text-black shadow-sm'>
+		<aside className='bg-foreground h-[100px] w-[150px] items-center justify-center overflow-hidden rounded-lg text-black'>
 			<span
 				className='flex h-full w-full flex-col items-center justify-center gap-1 p-4 *:w-full *:leading-none'
 				style={{
@@ -28,7 +28,7 @@ export const Stats = ({
 }) => {
 	return (
 		countryStats && (
-			<section className='flex w-full items-end justify-around py-6'>
+			<section className='flex w-full flex-wrap items-end justify-around gap-2 py-6'>
 				{countryStats.map((stat) => {
 					let color = 0
 					switch (stat.title) {

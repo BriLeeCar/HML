@@ -1,10 +1,15 @@
 'use client'
 
-import { SectionHeading, SubSection } from '@/(Content)/Components'
 import { motion, MotionProps } from 'motion/react'
-import { RefObject, type MouseEvent } from 'react'
-import { Button, Icon, Label } from '~/components'
-import { Checkbox } from '~/components/ui/Checkbox'
+import { MouseEvent, RefObject } from 'react'
+import {
+	Button,
+	Checkbox,
+	Icon,
+	Label,
+	SectionHeading,
+	SubSection,
+} from '~/components'
 import { cn } from '~/lib/cn'
 import {
 	filterCbs,
@@ -91,6 +96,7 @@ export const Drawer = ({
 										reducer={reducer}
 										matches={cb.matches}
 										dispatchReducer={dispatchReducer}
+										autoFocus={cb.label == 'Have a monthly income'}
 									/>
 								))}
 							</SubSection>
@@ -99,30 +105,10 @@ export const Drawer = ({
 						<CloseButton dispatchReducer={dispatchReducer} />
 					</form>
 				</motion.div>
-				<XCloseButton dispatchReducer={dispatchReducer} />
 			</div>
 		</motion.div>
 	)
 }
-
-const XCloseButton = ({
-	dispatchReducer,
-}: {
-	dispatchReducer: tReducerDispatch
-}) => (
-	<Button
-		onClick={() =>
-			dispatchReducer({ type: 'SET_DRAWER', payload: { size: '' } })
-		}
-		variant={'link'}
-		className='click hover:bg-foreground absolute top-4 -right-12 text-red-500'>
-		<Icon
-			IconName='XIcon'
-			strokeWidth={1}
-			className='size-6 fill-current stroke-current'
-		/>
-	</Button>
-)
 
 const FilterHeading = () => (
 	<SectionHeading
@@ -183,11 +169,15 @@ const CloseButton = ({
 	dispatchReducer: tReducerDispatch
 }) => (
 	<Button
-		type='button'
-		className='dark:bg-muted/20 border-border/20 mt-4 border-1'
+		variant='muted'
+		className='mt-4 flex items-center justify-center gap-2'
 		onClick={() => {
 			dispatchReducer({ type: 'SET_DRAWER', payload: { size: '' } })
 		}}>
+		<Icon
+			IconName='XIcon'
+			className='size-4'
+		/>
 		Close Filters
 	</Button>
 )
@@ -197,11 +187,16 @@ const ClearButton = ({
 	dispatchReducer: tReducerDispatch
 }) => (
 	<Button
-		type='button'
-		className='dark:bg-muted/20 border-border/20 mt-4 border-1'
-		onClick={(e) => {
+		variant='default'
+		className='mt-4 flex items-center justify-center gap-2'
+		onClick={(e: MouseEvent<HTMLButtonElement>) => {
 			handleClear(e, dispatchReducer)
 		}}>
+		<Icon
+			solid
+			IconName='TrashXIcon'
+			className='size-4'
+		/>
 		Clear all filters
 	</Button>
 )

@@ -8,6 +8,7 @@
 :root {
 	color-scheme: light dark;
 	--radius: 0.625rem;
+
 	--theme-black: oklch(0.145 0 0);
 	--theme-white: oklch(0.985 0 0);
 
@@ -36,16 +37,11 @@
 	--sidebar-border: oklch(0.922 0 0);
 	--sidebar-ring: oklch(0.708 0 0);
 
-	--btn-primary: var(--color-red-600);
+	--btn-primary: var(--color-brand-bright);
 	--btn-secondary: #7e0a08;
 	--btn-text: var(--color-white);
 
 	--shadow-color: rgba(0, 0, 0, 0.1);
-}
-
-:root {
-	--background: white;
-	--foreground: oklch(0.145 0 0);
 
 	--copy-foreground: oklch(39.793% 0.00005 271.152);
 
@@ -56,7 +52,7 @@
 	--input: oklch(0.145 0 0);
 	--ring: oklch(0.145 0 0);
 
-	--error: var(--color-red-600);
+	--error: var(--color-brand-bright);
 	--warning: var(--color-yellow-600);
 	--success: var(--color-green-600);
 
@@ -65,6 +61,16 @@
 
 	--section-foreground: #000;
 	--section-background: #fff;
+}
+
+:root {
+	--background: white;
+	--foreground: oklch(0.145 0 0);
+
+	--brand: var(--color-red-800);
+	--brand-bright: var(--color-red-600);
+
+	--muted: oklch(91.717% 0.04244 17.819);
 }
 
 .dark {
@@ -83,7 +89,7 @@
 	--accent-foreground: var(--theme-white);
 	--border: oklch(1 0 0 / 10%);
 	--input: oklch(1 0 0 / 15%);
-	--ring: oklch(0.556 0 0);
+	--ring: oklch(100% 0.00011 271.152);
 
 	--sidebar: oklch(0.205 0 0);
 	--sidebar-foreground: var(--theme-white);
@@ -98,11 +104,17 @@
 	--btn-secondary: var(--color-red-900);
 	--btn-text: var(--color-white);
 
-	--background: hsl(359 10% 8%);
+	/* --background: hsl(359 10% 8%); */
 	--shadow-color: rgba(255, 255, 255, 0);
-	--color-red-400: #d2635b;
+	/* --color-red-400: #d2635b;
 	--color-red-500: oklch(0.48 0.15 23.1);
-	--color-red-600: oklch(0.36 0.22 27.11);
+	--color-brand-bright: oklch(0.36 0.22 27.11); */
+
+	--brand: #942220;
+	--brand-bright: #c3281c;
+
+	--background: #181818;
+	--card: #2a2a2a;
 }
 
 @custom-variant dark (&:is(.dark *));
@@ -156,13 +168,17 @@
 	--radius-lg: var(--radius);
 	--radius-xl: calc(var(--radius) + 4px);
 
-	--color-accent-primary: var(--color-red-600);
+	--color-accent-primary: var(--color-brand-bright);
 
 	--color-btn-primary: var(--btn-primary);
 	--color-btn-secondary: var(--btn-secondary);
 	--color-btn-text: var(--btn-text);
 
 	--color-shadow: var(--shadow-color);
+
+	/* --- IMPLEMENTED --- */
+	--color-brand: var(--brand);
+	--color-brand-bright: var(--brand-bright);
 }
 /* #endregion */
 

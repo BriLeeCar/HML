@@ -1,8 +1,8 @@
-import { Divider, Page, PageHeading } from '@/(Content)/Components'
 import { readdirSync, readFileSync } from 'fs'
 import { getFrontmatter } from 'next-mdx-remote-client/utils'
 import path from 'path'
 import { Suspense } from 'react'
+import { Divider, Page, PageHeading } from '~/components'
 import { toTitleCase } from '~/lib/text'
 import { BlogContent } from './BlogContent'
 import { GuidesContent } from './Guides'
@@ -71,7 +71,7 @@ const GuidesResourcesPage = async () => {
 		<Page>
 			<PageHeading
 				eyebrow='Guides & Resources'
-				subtitle='Welcome to our library of heavily researched, and thoughtfully curated, resources. These guides are designed to help you navigate the complexities of planning your evacuation, offering practical advice and insights to empower your journey.'>
+				subtitle='Welcome to our library of heavily researched and thoughtfully curated resources. These guides are designed to help you navigate the complexities of planning your evacuation, offering practical advice and insights to empower your journey.'>
 				The Library
 			</PageHeading>
 			{/* <Tabs /> */}

@@ -1,15 +1,15 @@
 import fs from 'fs'
 import { Suspense } from 'react'
-import { AlertCallout } from '~/components/AlertCallout'
-import { Icon } from '~/components/Icon'
-import { MDXProcessor, MDXProvider } from '~/lib/mdx'
-import { toTitleCase } from '~/lib/text'
 import {
+	AlertCallout,
+	Icon,
 	InlineLink,
 	Page as PageEl,
 	PageHeading,
 	SectionHeading,
-} from '../../Components'
+} from '~/components'
+import { MDXProcessor, MDXProvider } from '~/lib/mdx'
+import { toTitleCase } from '~/lib/text'
 
 export const generateStaticParams = () => {
 	const pages = fs.readdirSync('src/data/pages')
@@ -58,8 +58,6 @@ const Page = async (props: PageProps<'/[slug]'>) => {
 		}
 		return null
 	}
-
-	console.log(data.raw)
 
 	return (
 		<PageEl>

@@ -306,7 +306,6 @@ const MDXSectionHeading = ({ source }: { source: string }) => {
 			if (splitLines[0].startsWith('## ')) {
 				ifHeading(splitLines[0])
 				ifSubtitle(splitLines[1])
-				console.log(finalLines)
 			} else if (splitLines[1].startsWith('## ')) {
 				ifEyebrow(splitLines[0])
 				ifHeading(splitLines[1])

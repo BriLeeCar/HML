@@ -117,9 +117,7 @@ const Btn = ({ ...props }) => {
 	return (
 		<Button
 			{...props}
-			variant={'ghost'}
-			type='button'
-			size='icon'>
+			variant={'default'}>
 			<Icon
 				IconName='SearchIcon'
 				className='h-5 w-5'

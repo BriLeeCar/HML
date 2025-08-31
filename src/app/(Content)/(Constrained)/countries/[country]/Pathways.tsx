@@ -1,10 +1,10 @@
 import {
 	InlineLink,
+	List,
 	Section,
 	SectionHeading,
 	SubSection,
-} from '@/(Content)/Components'
-import { List } from '~/components/Text'
+} from '~/components'
 
 export const Pathways = ({
 	pathways,

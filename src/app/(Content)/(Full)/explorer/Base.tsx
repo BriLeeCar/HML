@@ -1,8 +1,6 @@
 'use client'
 
-import { PageHeading } from '@/(Content)/Components'
 import { AnimatePresence } from 'motion/react'
-import { redirect, RedirectType } from 'next/navigation'
 import {
 	Suspense,
 	useContext,
@@ -10,6 +8,7 @@ import {
 	useReducer,
 	useRef,
 } from 'react'
+import { PageHeading } from '~/components'
 import { DBContext } from '~/server/db/provider'
 import {
 	Drawer,
@@ -18,7 +17,6 @@ import {
 	Masonry,
 	masonryReducer,
 } from '.'
-import { Search } from './Search'
 
 export const Base = () => {
 	const db = useContext(DBContext)
@@ -53,7 +51,6 @@ export const Base = () => {
 				)
 			}
 		} else {
-			console.log('useeffect')
 			window.localStorage.setItem('explorer-filters', '[]')
 			dispatchReducer({ type: 'SET_COUNTRIES' })
 		}
@@ -63,30 +60,19 @@ export const Base = () => {
 	const masonryRef = useRef<HTMLDivElement>(null)
 	return (
 		<>
-			<div className='relative mx-auto my-4 flex w-[95%] items-center justify-between rounded-2xl px-4 py-2'>
+			<div className='relative mx-auto my-4 flex w-[95%] flex-col items-center justify-between rounded-2xl px-4 py-2 sm:flex-row'>
 				<PageHeading
-					subtitle='Use a combination of the filters and some of the visual clues on the country cards to help narrow down your search!'
+					subtitle={
+						<>
+							Use a combination of the filters and some of the visual
+							clues on the country cards to help narrow down your
+							search!
+						</>
+					}
 					eyebrow='Visa Explorer'>
 					Explorer
 				</PageHeading>
-				<span className='flex items-center gap-4'>
-					<Search
-						withDropdown={false}
-						countries={reducer.countries}
-						onSelected={(country: ApiData.Country) =>
-							redirect(
-								`/countries/${country.abbr.toLowerCase()}`,
-								'push' as RedirectType
-							)
-						}
-						onQueryChange={(e) =>
-							dispatchReducer({
-								type: 'SET_SEARCH',
-								payload: { query: e.target.value },
-							})
-						}
-						currentQuery={reducer.search.query}
-					/>
+				<span className='flex items-center justify-start gap-4'>
 					<FilterBtn
 						className='hidden md:inline-flex'
 						count={Object.keys(reducer.filters).length}

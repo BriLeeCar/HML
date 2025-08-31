@@ -1,4 +1,4 @@
-import { Badge, tBadgeColors } from './Badge'
+import { Badge, tBadgeColors } from '.'
 
 const tagGroups = {
 	politics: ['politics', 'political', 'government', 'policy', 'law'],

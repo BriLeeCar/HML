@@ -12,13 +12,11 @@ export const NowBtn = ({
 }) => {
 	return (
 		<Button
-			variant={'primary'}
-			size={'sm'}
-			as='link'
+			variant={'default'}
 			href='/leave-now'
 			{...props}
 			className={cn(
-				'click mb-4 h-auto w-full flex-col items-center justify-center gap-0 bg-red-600 py-2 whitespace-normal text-white sm:flex-row sm:gap-1.25 md:justify-around md:gap-2 lg:justify-center',
+				'click bg-brand-bright mb-4 h-auto w-full flex-col items-center justify-center gap-0 py-2 whitespace-normal text-white sm:flex-row sm:gap-1.25 md:justify-around md:gap-2 lg:justify-center',
 				props.className || ''
 			)}>
 			<span className='text-xl font-black uppercase sm:text-5xl lg:text-end'>
@@ -50,8 +48,7 @@ export const SmallBtns = () => {
 			{btns.map((btn, i) => {
 				return (
 					<Button
-						size={'lg'}
-						variant={'secondary'}
+						variant={'muted'}
 						key={i}
 						className='w-full grow flex-col gap-0 px-4 py-2 tracking-tighter'>
 						<span className='text-lg sm:text-2xl'>
@@ -76,7 +73,7 @@ export const MapBtn = () => {
 		<>
 			<Button
 				onClick={handleClick}
-				variant={'outline'}
+				variant={'muted'}
 				size={'lg'}
 				className='text-foreground fixed right-10 hidden items-center rounded-lg text-2xl font-extrabold min-[1200px]:flex'>
 				Explore the Map{' '}
@@ -88,7 +85,7 @@ export const MapBtn = () => {
 			<span className='w-full p-6 pr-0 text-end transition-all min-[1200px]:hidden'>
 				<Button
 					onClick={handleClick}
-					variant={'outline'}
+					variant={'muted'}
 					className='bg-ring/20 hover:bg-ring/30 w-auto min-w-max rounded-r-none py-0 pr-0 text-base font-bold tracking-wide italic shadow-sm'>
 					<Icon
 						IconName='GlobeIcon'

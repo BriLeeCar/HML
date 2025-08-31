@@ -1,9 +1,16 @@
-import { Page, PageHeading, Section } from '@/(Content)/Components'
 import { readdirSync, readFileSync } from 'fs'
 import { getFrontmatter } from 'next-mdx-remote-client/utils'
 import Image from 'next/image'
 import path from 'path'
-import { Icon, Link, mdxComponents, Tag } from '~/components'
+import {
+	Icon,
+	Link,
+	mdxComponents,
+	Page,
+	PageHeading,
+	Section,
+	Tag,
+} from '~/components'
 import { cn } from '~/lib/cn'
 import { MDXProvider } from '~/lib/mdx'
 import { toTitleCase } from '~/lib/text'

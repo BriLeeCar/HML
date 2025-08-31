@@ -13,7 +13,7 @@ export const CountryHeading = ({
 	hoveredData: tDB['countries'][number] | null
 }) => {
 	return (
-		<span className='absolute bottom-0 left-0 z-10 flex w-full max-w-[75vw] items-center rounded-r-lg'>
+		<span className='absolute bottom-0 left-0 z-10 flex w-full max-w-[75vw] items-center rounded-r-lg pointer-coarse:hidden'>
 			<aside className='block max-w-[570px] select-none'>
 				<motion.hgroup
 					className='backdrop-blur-[1px]'

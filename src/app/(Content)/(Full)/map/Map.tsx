@@ -1,6 +1,5 @@
 'use client'
 
-import { cva } from 'class-variance-authority'
 import { motion } from 'motion/react'
 import { redirect, RedirectType } from 'next/navigation'
 import { useRef } from 'react'
@@ -39,22 +38,6 @@ export const MapSvg = ({ ...props }: tMapSVGProps) => {
 	)
 }
 
-const mapCVA = cva(
-	[
-		'click fill-zinc-300 transition-all hover:opacity-50 dark:fill-neutral-900',
-	],
-	{
-		variants: {
-			tier: {
-				now: ['fill-red-500 dark:fill-red-700'],
-				soon: [],
-				None: 'cursor-not-allowed fill-[#FEC4C4] hover:opacity-100 dark:fill-[#48484822]',
-				null: [],
-			},
-		},
-	}
-)
-
 export const MapPathEl = ({
 	canClick = true,
 	...props
@@ -70,7 +53,6 @@ export const MapPathEl = ({
 
 	const classes = cn(
 		'stroke-background stroke-0.5 focus:outline-none dark:stroke-neutral-800',
-		tier && mapCVA({ tier }),
 		className
 	)
 

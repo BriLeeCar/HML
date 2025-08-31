@@ -1,23 +1,24 @@
+import Link from 'next/link'
+import { ReactNode } from 'react'
 import {
 	CTA,
 	Divider,
 	InlineLink,
+	List,
+	P,
 	Page,
 	PageHeading,
 	Section,
 	SectionHeading,
 	SubSection,
-} from '@/(Content)/Components'
-import Link from 'next/link'
-import { ReactNode } from 'react'
-import { List, P } from '~/components/Text'
+} from '~/components'
 
 const LeaveNow = async (props: PageProps<'/leave-now'>) => {
 	const searchParams = await props.searchParams
 	if (Object.keys(searchParams).length == 0) {
 		return (
 			<MainPage>
-				<div className='text-foreground *:hover:text-muted-foreground my-10 flex flex-col justify-around *:px-8 *:py-6 *:text-3xl *:font-semibold *:underline *:decoration-red-600 *:decoration-2 *:underline-offset-4 md:flex-row'>
+				<div className='text-foreground *:hover:text-muted-foreground *:decoration-brand-bright my-10 flex flex-col justify-around *:px-8 *:py-6 *:text-3xl *:font-semibold *:underline *:decoration-2 *:underline-offset-4 md:flex-row'>
 					<Link href='?start'>How to Start</Link>
 					<Link href='?leave'>How to Leave</Link>
 				</div>

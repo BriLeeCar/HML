@@ -1,9 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { IconAttributes } from '~/components/Country/IconAttributes'
-import { Heading } from '~/components/Heading'
-import { TouchTarget } from '~/components/ui'
 import { cn } from '~/lib/cn'
+
+import { Heading, IconAttributes, TouchTarget } from '~/components'
 
 export const Country = ({
 	country,
@@ -23,19 +22,19 @@ export const Country = ({
 			<Link
 				href={`/countries/${country.abbr.toLowerCase()}`}
 				title={country.name}
-				className='underline decoration-red-500/50 hover:decoration-white/50'>
+				className='decoration-brand-bright/50 underline hover:decoration-white/50'>
 				<section className='absolute top-0 right-0 left-0 flex h-[calc(100%-0.5rem)] items-center justify-center overflow-hidden rounded-t-lg hover:saturate-0'>
 					<TouchTarget className='top-0 bottom-0 h-full w-full p-0 pointer-fine:block'>
 						<Heading
 							size='title'
-							className='font-heading mt-0 mb-0 pb-2 text-center text-3xl font-medium tracking-normal text-white decoration-red-500 text-shadow-md md:text-5xl'>
+							className='font-heading decoration-brand mt-0 mb-0 pb-2 text-center text-3xl font-medium tracking-normal text-white text-shadow-md md:text-5xl'>
 							{country.name}
 						</Heading>
 					</TouchTarget>
 				</section>
 				<IconAttributes
 					attr={db.getCommunityAttributes(country)}
-					className='absolute bottom-1.5 flex w-full justify-start rounded-b-lg bg-black/50 overflow-ellipsis *:text-lg **:[svg]:size-8 **:[svg]:text-zinc-500'
+					className='absolute bottom-1.5 flex w-full justify-start rounded-b-lg bg-black/50 overflow-ellipsis *:text-lg **:[svg]:size-6 **:[svg]:text-white/50 md:**:[svg]:size-8'
 				/>
 			</Link>
 		</>
@@ -50,7 +49,6 @@ const Figure = ({
 	priority: boolean
 }) => {
 	if (!country.images) {
-		console.log(country)
 		return <></>
 	}
 

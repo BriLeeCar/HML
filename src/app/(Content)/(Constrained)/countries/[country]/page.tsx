@@ -1,9 +1,12 @@
 import fs from 'fs'
 import path from 'path'
+import { CTA } from '~/components/CTA'
+import { P } from '~/components/Text'
 import { MDXProcessor } from '~/lib/mdx'
 import countries from '~/server/db/countries.json'
 import db from '~/server/db/db'
 import { Base } from './Base'
+import { MatchingPathways } from './MatchingPathways'
 import { Pathways } from './Pathways'
 
 export const generateStaticParams = () => {
@@ -77,9 +80,9 @@ const CountryPage = async ({
 		content = CheckForMDX(country)
 	}
 
-	if (content == null) {
+	if (!section && !content) {
 		content = {
-			Provider: () => 'Content coming soon...',
+			Provider: () => <MatchingPathways country={country} />,
 		}
 	}
 
@@ -89,9 +92,25 @@ const CountryPage = async ({
 			countryName={country}>
 			{content ?
 				<content.Provider />
-			:	<div className='w-full text-center font-black capitalize italic not-dark:opacity-60 dark:font-semibold'>
-					Content coming soon....
-				</div>
+			:	<>
+					<P>
+						Well gosh. This country doesn't have any content yet. I'm
+						sure someone will add some soon!
+					</P>
+
+					<CTA
+						subtitle='If you are at-risk and need help finding a safe pathway, please reach out to our support team.'
+						primaryAction={{
+							href: '/support',
+							label: 'Get in touch',
+						}}
+						secondaryAction={{
+							href: '/guides-resources',
+							label: 'Read our guides',
+						}}>
+						Need help now?
+					</CTA>
+				</>
 			}
 		</Base>
 	)
