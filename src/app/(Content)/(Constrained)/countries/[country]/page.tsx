@@ -1,7 +1,13 @@
 import fs from 'fs'
 import path from 'path'
-import { CTA } from '~/components/CTA'
-import { P } from '~/components/Text'
+import {
+	CTA,
+	Divider,
+	InlineLink,
+	P,
+	Section,
+	SectionHeading,
+} from '~/components'
 import { MDXProcessor } from '~/lib/mdx'
 import countries from '~/server/db/countries.json'
 import db from '~/server/db/db'
@@ -93,11 +99,25 @@ const CountryPage = async ({
 			{content ?
 				<content.Provider />
 			:	<>
-					<P>
-						Well gosh. This country doesn't have any content yet. I'm
-						sure someone will add some soon!
-					</P>
+					<Section>
+						<SectionHeading
+							eyebrow='No content found'
+							subtitle={
+								<>
+									I'm sure someone will add some soon! Please keep
+									checking back, or{' '}
+									<InlineLink href='/guides-resources'>
+										read our guides
+									</InlineLink>{' '}
+									in the meantime.
+								</>
+							}>
+							This country doesn't have any content yet.
+						</SectionHeading>
+						<P></P>
+					</Section>
 
+					<Divider />
 					<CTA
 						subtitle='If you are at-risk and need help finding a safe pathway, please reach out to our support team.'
 						primaryAction={{

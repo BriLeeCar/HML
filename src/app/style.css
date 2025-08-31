@@ -37,10 +37,6 @@
 	--sidebar-border: oklch(0.922 0 0);
 	--sidebar-ring: oklch(0.708 0 0);
 
-	--btn-primary: var(--color-brand-bright);
-	--btn-secondary: #7e0a08;
-	--btn-text: var(--color-white);
-
 	--shadow-color: rgba(0, 0, 0, 0.1);
 
 	--copy-foreground: oklch(39.793% 0.00005 271.152);
@@ -69,6 +65,7 @@
 
 	--brand: var(--color-red-800);
 	--brand-bright: var(--color-red-600);
+	--brand-muted: var(--color-red-400);
 
 	--muted: oklch(91.717% 0.04244 17.819);
 }
@@ -100,18 +97,9 @@
 	--sidebar-border: oklch(1 0 0 / 10%);
 	--sidebar-ring: oklch(0.556 0 0);
 
-	--btn-primary: var(--color-red-500);
-	--btn-secondary: var(--color-red-900);
-	--btn-text: var(--color-white);
-
-	/* --background: hsl(359 10% 8%); */
-	--shadow-color: rgba(255, 255, 255, 0);
-	/* --color-red-400: #d2635b;
-	--color-red-500: oklch(0.48 0.15 23.1);
-	--color-brand-bright: oklch(0.36 0.22 27.11); */
-
 	--brand: #942220;
 	--brand-bright: #c3281c;
+	--brand-muted: #e85e52;
 
 	--background: #181818;
 	--card: #2a2a2a;
@@ -179,6 +167,7 @@
 	/* --- IMPLEMENTED --- */
 	--color-brand: var(--brand);
 	--color-brand-bright: var(--brand-bright);
+	--color-brand-muted: var(--brand-muted);
 }
 /* #endregion */
 
