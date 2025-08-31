@@ -51,7 +51,7 @@ export const Masonry = ({
 					return (
 						<motion.div
 							key={c.abbr}
-							className='bg-background outline-card-foreground/5 relative h-auto w-full max-w-full shrink basis-full flex-col overflow-hidden'>
+							className='bg-background outline-card-foreground/5 relative h-auto w-full max-w-full shrink basis-full flex-col overflow-hidden transition-all has-[*]:hover:grayscale-100'>
 							<Country
 								country={c}
 								key={c.abbr}

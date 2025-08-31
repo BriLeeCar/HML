@@ -5,39 +5,41 @@ declare global {
 
 		// #region ? TYPES
 
-		type tCountryETCData = {
-			climate: tClimate
-			health: tHealth
-			communities: tCommunities & { isUn: boolean }
-			images: tImages
-			economy: tEconomy
-			quality: tQuality
-			crime: tCrime
-		} & { api: tCountryApi }
+		type CountryETCData = {
+			climate: Climate
+			health: Health
+			communities: Communities & { isUn: boolean }
+			images: Images
+			economy: Economy
+			quality: Quality
+			crime: Crime
+			api: CountryApi
+			pathways?: Pathway[]
+		}
 
-		type tCountryKeys = keyof tCountryETCData
+		type CountryKeys = keyof tCountryETCData
 
-		type tClimate = {
+		type Climate = {
 			abbr: string
 			pollution: number
 			climate: number
 		}
 
-		type tHealth = {
+		type Health = {
 			abbr: string
 			rank: number | null
 			cost: number | null
 			index: number | null
 		}
 
-		type tCommunities = {
+		type Communities = {
 			abbr: string
 			prideScore: number | null
 			racismRank: number | null
 			transSafety: boolean
 		}
 
-		type tImages = {
+		type Images = {
 			abbr: string
 			name: string | null
 			handle: string | null
@@ -46,33 +48,33 @@ declare global {
 			height: number | null
 		}
 
-		type tEconomy = {
+		type Economy = {
 			abbr: string
 			col: number | null
 			purchasingPower: number | null
 			propertyToIncome: number | null
 		}
 
-		type tQuality = {
+		type Quality = {
 			abbr: string
 			index: number | null
 			rank: number | null
 		}
 
-		type tCrime = {
+		type Crime = {
 			abbr: string
 			index: number | null
 			safety: number | null
 		}
 
-		type tCountryBase = {
+		type CountryBase = {
 			abbr: string
 			name: string
 			svgPath: string | null
 			tier: string | null
 		}
 
-		type tPreCountryApi = {
+		type PreCountryApi = {
 			unMember: boolean
 			abbr: string
 			name: string
@@ -84,7 +86,23 @@ declare global {
 			currencies: Record<string, { name: string; symbol: string }>
 		}
 
-		type tCountryApi = Omit<
+		type Pathway = {
+			id: number
+			abbr: string
+			name?: string
+			description?: string
+			official_link?: string
+			digital_worker: boolean
+			monthly_income: boolean
+			job_required: boolean
+			age_18_30: boolean
+			age_60_plus: boolean
+			travelling_with_kids: boolean
+			entrepreneur: boolean
+			study: boolean
+		}
+
+		type CountryApi = Omit<
 			tPreCountryApi,
 			'languages' | 'currencies' | 'abbr' | 'isUn'
 		> & {
@@ -99,7 +117,7 @@ declare global {
 			}>
 		}
 
-		export type tExplorerFilters = {
+		export type ExplorerFilters = {
 			abbr: string
 			name: string
 			unMember: boolean

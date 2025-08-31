@@ -164,7 +164,7 @@ const BlogEntry = async ({
 				)}
 
 				<MDXProvider
-					components={mdxComponents}
+					components={mdxComponents()}
 					options={{
 						parseFrontmatter: true,
 						removeTitle: true,

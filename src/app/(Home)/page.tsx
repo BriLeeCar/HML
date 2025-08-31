@@ -95,14 +95,16 @@ const Page2 = () => {
 			</h2>
 			<div className='flex flex-col items-center justify-between gap-4 self-stretch px-4 py-3'>
 				<MenuWrapper>
-					<MenuLink href='/explorer'>Asylum & Visa Explorer</MenuLink>
+					<MenuLink href='/explorer'>Visa Explorer</MenuLink>
 					<MenuSub>
 						Hand picked and heavily researched options to get you to
 						safety the fastest
 					</MenuSub>
 				</MenuWrapper>
 				<MenuWrapper>
-					<MenuLink href='/'>Guides & Resources</MenuLink>
+					<MenuLink href='/guides-resources'>
+						Guides & Resources
+					</MenuLink>
 					<MenuSub>
 						<span>
 							Whether you’re getting your passport or wanting to

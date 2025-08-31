@@ -2,6 +2,7 @@
 
 import { PageHeading } from '@/(Content)/Components'
 import { AnimatePresence } from 'motion/react'
+import { redirect, RedirectType } from 'next/navigation'
 import {
 	Suspense,
 	useContext,
@@ -17,6 +18,7 @@ import {
 	Masonry,
 	masonryReducer,
 } from '.'
+import { Search } from './Search'
 
 export const Base = () => {
 	const db = useContext(DBContext)
@@ -26,6 +28,9 @@ export const Base = () => {
 		drawer: { status: false, size: '' },
 		filters: [],
 		db: db,
+		search: {
+			query: '',
+		},
 	})
 
 	useEffect(() => {
@@ -34,7 +39,6 @@ export const Base = () => {
 			try {
 				const parsed = JSON.parse(cookies)
 				if (Array.isArray(parsed) && parsed.length > 0) {
-					console.log('useeffect')
 					dispatchReducer({
 						type: 'SET_COOKIES',
 						payload: parsed,
@@ -60,31 +64,54 @@ export const Base = () => {
 	return (
 		<>
 			<div className='relative mx-auto my-4 flex w-[95%] items-center justify-between rounded-2xl px-4 py-2'>
-				<PageHeading>Explorer</PageHeading>
-				<FilterBtn
-					className='hidden md:inline-flex'
-					count={Object.keys(reducer.filters).length}
-					onClick={() =>
-						dispatchReducer({
-							type: 'SET_DRAWER',
-							payload: {
-								size: 'md',
-							},
-						})
-					}
-				/>{' '}
-				<FilterBtn
-					className='md:hidden'
-					count={Object.keys(reducer.filters).length}
-					onClick={() =>
-						dispatchReducer({
-							type: 'SET_DRAWER',
-							payload: {
-								size: 'sm',
-							},
-						})
-					}
-				/>
+				<PageHeading
+					subtitle='Use a combination of the filters and some of the visual clues on the country cards to help narrow down your search!'
+					eyebrow='Visa Explorer'>
+					Explorer
+				</PageHeading>
+				<span className='flex items-center gap-4'>
+					<Search
+						withDropdown={false}
+						countries={reducer.countries}
+						onSelected={(country: ApiData.Country) =>
+							redirect(
+								`/countries/${country.abbr.toLowerCase()}`,
+								'push' as RedirectType
+							)
+						}
+						onQueryChange={(e) =>
+							dispatchReducer({
+								type: 'SET_SEARCH',
+								payload: { query: e.target.value },
+							})
+						}
+						currentQuery={reducer.search.query}
+					/>
+					<FilterBtn
+						className='hidden md:inline-flex'
+						count={Object.keys(reducer.filters).length}
+						onClick={() =>
+							dispatchReducer({
+								type: 'SET_DRAWER',
+								payload: {
+									size: 'md',
+								},
+							})
+						}
+					/>{' '}
+					<FilterBtn
+						className='md:hidden'
+						count={Object.keys(reducer.filters).length}
+						onClick={() =>
+							dispatchReducer({
+								type: 'SET_DRAWER',
+								payload: {
+									size: 'sm',
+								},
+							})
+						}
+					/>
+				</span>
 			</div>
 			<Suspense
 				fallback={<div className='text-center'>Loading...</div>}>

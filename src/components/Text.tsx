@@ -11,14 +11,6 @@ export const P = ({ ...props }: Props<'p'>) => {
 		/>
 	)
 }
-export const Blockquote = ({ ...props }: Props<'blockquote'>) => {
-	return (
-		<blockquote
-			{...props}
-			className={cn('mt-6 border-l-2 pl-6 italic', props.className)}
-		/>
-	)
-}
 
 export const List = ({
 	type,

@@ -68,7 +68,6 @@
 }
 
 .dark {
-	--background: var(--theme-black);
 	--foreground: oklch(0.985 0 0);
 	--card: oklch(0.205 0 0);
 	--card-foreground: var(--theme-white);
@@ -99,7 +98,11 @@
 	--btn-secondary: var(--color-red-900);
 	--btn-text: var(--color-white);
 
+	--background: hsl(359 10% 8%);
 	--shadow-color: rgba(255, 255, 255, 0);
+	--color-red-400: #d2635b;
+	--color-red-500: oklch(0.48 0.15 23.1);
+	--color-red-600: oklch(0.36 0.22 27.11);
 }
 
 @custom-variant dark (&:is(.dark *));

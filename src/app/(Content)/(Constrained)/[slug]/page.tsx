@@ -1,11 +1,13 @@
-import { Main } from '@/(Content)/_Layout/Wrapper'
 import fs from 'fs'
 import { Suspense } from 'react'
-import { MDXProcessor } from '~/lib/mdx'
+import { AlertCallout } from '~/components/AlertCallout'
+import { Icon } from '~/components/Icon'
+import { MDXProcessor, MDXProvider } from '~/lib/mdx'
 import { toTitleCase } from '~/lib/text'
 import {
+	InlineLink,
+	Page as PageEl,
 	PageHeading,
-	Section,
 	SectionHeading,
 } from '../../Components'
 
@@ -21,21 +23,60 @@ const Page = async (props: PageProps<'/[slug]'>) => {
 	const { slug } = await props.params
 	const data = new MDXProcessor(`src/data/pages/${slug}.mdx`, 'path')
 		.removeTitle()
+		.replaceCTA()
+		.replaceSubheadings()
+		.replaceSubSections()
+		.replaceCustomMDX()
 		.setComponents({
 			h2: (props) => <SectionHeading {...props} />,
 		})
 
+	const { subtitle, type, title, description, warnings } =
+		data.frontmatter as {
+			subtitle?: string
+			type?: string
+			title?: string
+			description?: string
+			warnings?: string[]
+		}
+
+	const parsedSlug = toTitleCase(slug.replace(/-/g, ' '))
+	const ProcessSubtitle = () => {
+		if (warnings && warnings.length > 0) {
+			return (
+				<MDXProvider
+					source={warnings.join('\n\n')}
+					components={{
+						...data.components,
+						p: AlertCallout,
+						a: InlineLink,
+					}}
+				/>
+			)
+		} else if (subtitle) {
+			return <span>{subtitle}</span>
+		}
+		return null
+	}
+
+	console.log(data.raw)
+
 	return (
-		<Main>
+		<PageEl>
 			<Suspense fallback={<div>Loading...</div>}>
-				<PageHeading>
-					{data.title || toTitleCase(slug.replace(/-/g, ' '))}
+				<PageHeading
+					subtitle={ProcessSubtitle()}
+					eyebrow={
+						<span className='flex items-center gap-1'>
+							{toTitleCase(type as string)}s{' '}
+							<Icon IconName='ArrowRightIcon' /> {description}
+						</span>
+					}>
+					{title || parsedSlug}
 				</PageHeading>
-				<Section>
-					<data.Provider />
-				</Section>
+				<data.Provider />
 			</Suspense>
-		</Main>
+		</PageEl>
 	)
 }
 

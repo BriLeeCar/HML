@@ -13,11 +13,14 @@ export type tMasonryState = {
 		size: '' | 'sm' | 'md' | 'lg'
 	}
 	filters: Array<{
-		key: keyof ApiData.tExplorerFilters
+		key: keyof ApiData.ExplorerFilters
 		value: boolean
 		matches: (country: ApiData.Country) => boolean
 	}>
 	db: ApiData.DB
+	search: {
+		query: string
+	}
 }
 
 export type tMasonryActions =
@@ -29,13 +32,14 @@ export type tMasonryActions =
 			'SET_COOKIES',
 			tMasonryState['filters'][0]['key'][]
 	  >
+	| tMasonaryAction<'SET_SEARCH', { query: string }>
 
 export type tDrawerFilter = {
 	label: string
 	dataKey: tMasonryState['filters'][0]['key']
 } & Pick<tMasonryState['filters'][0], 'matches'>
 
-export type tDrawerFilterGroup = {
+type tDrawerFilterGroup = {
 	group: string
 	items: tDrawerFilter[]
 }
@@ -69,17 +73,17 @@ export const filterCbs: tDrawerFilterGroup[] = [
 		items: [
 			{
 				label: 'Have a monthly income',
-				dataKey:
-					'income' as unknown as keyof ApiData.tExplorerFilters,
+				dataKey: 'income' as unknown as keyof ApiData.ExplorerFilters,
 				matches: (country: ApiData.Country) =>
 					country
-					&& country.pathways?.some((p) => p.monthly_income == true)
-						=== true,
+					&& country.pathways?.some(
+						(p: ApiData.Pathway) => p.monthly_income == true
+					) === true,
 			},
 			{
 				label: 'Will need help to find a job',
 				dataKey:
-					'jobMarket' as unknown as keyof ApiData.tExplorerFilters,
+					'jobMarket' as unknown as keyof ApiData.ExplorerFilters,
 				matches: (country: ApiData.Country) =>
 					country
 					&& country.pathways?.some((p) => p.job_required == false)
@@ -88,7 +92,7 @@ export const filterCbs: tDrawerFilterGroup[] = [
 			{
 				label: 'Can work digitally from anywhere',
 				dataKey:
-					'digitalNomadVisa' as unknown as keyof ApiData.tExplorerFilters,
+					'digitalNomadVisa' as unknown as keyof ApiData.ExplorerFilters,
 				matches: (country: ApiData.Country) =>
 					country
 					&& country.pathways?.some((p) => p.digital_worker == true)
@@ -101,7 +105,7 @@ export const filterCbs: tDrawerFilterGroup[] = [
 		items: [
 			{
 				label: 'Black',
-				dataKey: 'black' as unknown as keyof ApiData.tExplorerFilters,
+				dataKey: 'black' as unknown as keyof ApiData.ExplorerFilters,
 				matches: (country: ApiData.Country) =>
 					(country.communities.racismRank ?? 0) > 0,
 			},
@@ -120,13 +124,13 @@ export const filterCbs: tDrawerFilterGroup[] = [
 			{
 				label: 'Disabled',
 				dataKey:
-					'disabilityAccess' as unknown as keyof ApiData.tExplorerFilters,
+					'disabilityAccess' as unknown as keyof ApiData.ExplorerFilters,
 				matches: (country: ApiData.Country) => country && true,
 			},
 			{
 				label: '18-30 years old',
 				dataKey:
-					'age18-30' as unknown as keyof ApiData.tExplorerFilters,
+					'age18-30' as unknown as keyof ApiData.ExplorerFilters,
 				matches: (country: ApiData.Country) =>
 					country
 					&& country.pathways?.some((p) => p.age_18_30 == true)
@@ -134,8 +138,7 @@ export const filterCbs: tDrawerFilterGroup[] = [
 			},
 			{
 				label: '60+ years old',
-				dataKey:
-					'age60+' as unknown as keyof ApiData.tExplorerFilters,
+				dataKey: 'age60+' as unknown as keyof ApiData.ExplorerFilters,
 				matches: (country: ApiData.Country) =>
 					country
 					&& country.pathways?.some((p) => p.age_60_plus == true)
@@ -149,7 +152,7 @@ export const filterCbs: tDrawerFilterGroup[] = [
 			{
 				label: 'Includes Kid(s)',
 				dataKey:
-					'familyFriendly' as unknown as keyof ApiData.tExplorerFilters,
+					'familyFriendly' as unknown as keyof ApiData.ExplorerFilters,
 				matches: (country: ApiData.Country) => country && true,
 			},
 		],

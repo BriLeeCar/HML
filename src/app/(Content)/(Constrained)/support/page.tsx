@@ -78,7 +78,7 @@ export default function SupportTeam() {
 			<Divider />
 			<CTA
 				primaryAction={{
-					href: 'https://form.jotform.com/252152630094046',
+					href: 'https://form.jotform.com/252073139145352',
 					label: 'Reach Out',
 				}}
 				secondaryAction={{
