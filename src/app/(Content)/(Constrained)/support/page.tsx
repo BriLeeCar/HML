@@ -1,13 +1,14 @@
+import Link from 'next/link'
 import {
 	CTA,
 	Divider,
+	List,
+	P,
 	Page,
 	PageHeading,
 	Section,
 	SectionHeading,
-} from '@/(Content)/Components'
-import Link from 'next/link'
-import { List, P } from '~/components/Text'
+} from '~/components'
 
 export default function SupportTeam() {
 	return (

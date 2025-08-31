@@ -1,7 +1,7 @@
 'use client'
 
-import { Section, SectionHeading } from '@/(Content)/Components'
 import Image from 'next/image'
+import { Section, SectionHeading } from '~/components/index'
 export const BlogContent = ({
 	blogPosts,
 	...props

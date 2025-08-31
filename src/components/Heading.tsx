@@ -1,4 +1,4 @@
-import { ElementType } from 'react'
+import { ElementType, ReactNode } from 'react'
 import { cn } from '~/lib/cn'
 
 /**
@@ -43,41 +43,84 @@ export const Heading = ({
 	)
 }
 
-const HGroup = ({ ...props }: Props<typeof Heading>) => {
-	return (
-		<hgroup
-			{...props}
-			className={cn('mb-6 has-[+figure>img]:mb-2', props.className)}>
-			{props.children}
-		</hgroup>
-	)
-}
+export const PageHeading = ({
+	eyebrow,
+	subtitle,
+	children,
+	...props
+}: {
+	eyebrow?: string | ReactNode
+	subtitle?: ReactNode
+	children: ReactNode
+} & Props<'div'>) => (
+	<div className='max-w-4xl'>
+		{eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+		<PageTitle {...props}>{children}</PageTitle>
+		{subtitle && <Subtitle>{subtitle}</Subtitle>}
+	</div>
+)
 
-const HGroupHead = ({ ...props }: Props<typeof Heading>) => {
-	const Tag = `h${props.level ?? 2}` as ElementType
-	return (
-		<Tag
-			{...props}
-			className={cn(
-				'font-serif text-3xl/7 font-bold text-gray-900 sm:truncate sm:text-5xl sm:tracking-tight dark:text-white',
-				props.className
-			)}
-		/>
-	)
-}
+const PageTitle = ({ ...props }) => (
+	<h1 className='mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 capitalize sm:text-5xl dark:text-white'>
+		{props.children}
+	</h1>
+)
 
-const HGroupSub = ({ ...props }: Props<'p'>) => {
+export const Subtitle = ({ ...props }: Props<'p'>) => (
+	<p
+		className={cn(
+			'mt-6 text-xl/8 text-balance text-gray-700 dark:text-gray-300',
+			props.className
+		)}>
+		{props.children}
+	</p>
+)
+
+const Eyebrow = ({ ...props }: Props<'p'>) => {
 	return (
 		<p
-			{...props}
 			className={cn(
-				'text-muted-foreground text-sm font-medium',
+				'text-brand-bright text-base/7 font-semibold',
 				props.className
-			)}
-		/>
+			)}>
+			{props.children}
+		</p>
 	)
 }
 
-HGroup.Head = HGroupHead
-HGroup.Sub = HGroupSub
-export { HGroup }
+export const SectionHeading = ({
+	eyebrow,
+	subtitle,
+	...props
+}: Props<'h2'> & {
+	eyebrow?: ReactNode
+	subtitle?: ReactNode
+}) => {
+	const Inner = () => (
+		<h2
+			{...props}
+			className={cn(
+				'text-2xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white',
+				props.className
+			)}>
+			{props.children}
+		</h2>
+	)
+
+	if (eyebrow || subtitle) {
+		return (
+			<hgroup className='mb-0'>
+				{eyebrow && (
+					<Eyebrow className='text-sm/8 saturate-85'>
+						{eyebrow}
+					</Eyebrow>
+				)}
+				<Inner />
+				{subtitle && (
+					<Subtitle className='text-lg md:mt-4'>{subtitle}</Subtitle>
+				)}
+			</hgroup>
+		)
+	}
+	return <Inner />
+}

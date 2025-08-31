@@ -1,5 +1,5 @@
 import { cn } from '~/lib/cn'
-import { Icon } from './Icon'
+import { Icon } from '.'
 
 export const AlertCallout = ({ ...props }: Props) => {
 	return (

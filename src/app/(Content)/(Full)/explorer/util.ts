@@ -73,17 +73,21 @@ export const filterCbs: tDrawerFilterGroup[] = [
 		items: [
 			{
 				label: 'Have a monthly income',
-				dataKey: 'income' as unknown as keyof ApiData.ExplorerFilters,
-				matches: (country: ApiData.Country) =>
-					country
-					&& country.pathways?.some(
-						(p: ApiData.Pathway) => p.monthly_income == true
-					) === true,
+				dataKey:
+					'monthly_income' as unknown as keyof ApiData.ExplorerFilters,
+				matches: (country: ApiData.Country) => {
+					return (
+						country
+						&& country.pathways?.some(
+							(p: ApiData.Pathway) => p.monthly_income == true
+						) == true
+					)
+				},
 			},
 			{
 				label: 'Will need help to find a job',
 				dataKey:
-					'jobMarket' as unknown as keyof ApiData.ExplorerFilters,
+					'job_required' as unknown as keyof ApiData.ExplorerFilters,
 				matches: (country: ApiData.Country) =>
 					country
 					&& country.pathways?.some((p) => p.job_required == false)
@@ -92,7 +96,7 @@ export const filterCbs: tDrawerFilterGroup[] = [
 			{
 				label: 'Can work digitally from anywhere',
 				dataKey:
-					'digitalNomadVisa' as unknown as keyof ApiData.ExplorerFilters,
+					'digital_worker' as unknown as keyof ApiData.ExplorerFilters,
 				matches: (country: ApiData.Country) =>
 					country
 					&& country.pathways?.some((p) => p.digital_worker == true)
@@ -130,7 +134,7 @@ export const filterCbs: tDrawerFilterGroup[] = [
 			{
 				label: '18-30 years old',
 				dataKey:
-					'age18-30' as unknown as keyof ApiData.ExplorerFilters,
+					'age_18_30-30' as unknown as keyof ApiData.ExplorerFilters,
 				matches: (country: ApiData.Country) =>
 					country
 					&& country.pathways?.some((p) => p.age_18_30 == true)
@@ -138,7 +142,8 @@ export const filterCbs: tDrawerFilterGroup[] = [
 			},
 			{
 				label: '60+ years old',
-				dataKey: 'age60+' as unknown as keyof ApiData.ExplorerFilters,
+				dataKey:
+					'age_60_plus' as unknown as keyof ApiData.ExplorerFilters,
 				matches: (country: ApiData.Country) =>
 					country
 					&& country.pathways?.some((p) => p.age_60_plus == true)
@@ -152,8 +157,12 @@ export const filterCbs: tDrawerFilterGroup[] = [
 			{
 				label: 'Includes Kid(s)',
 				dataKey:
-					'familyFriendly' as unknown as keyof ApiData.ExplorerFilters,
-				matches: (country: ApiData.Country) => country && true,
+					'travelling_with_kids' as unknown as keyof ApiData.ExplorerFilters,
+				matches: (country: ApiData.Country) =>
+					country
+					&& country.pathways?.some(
+						(p) => p.travelling_with_kids == true
+					) === true,
 			},
 		],
 	},

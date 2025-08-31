@@ -1,5 +1,3 @@
-import z from 'zod/v4'
-
 export const exhcangeRate = async (currency: string) => {
 	const data = async () => {
 		const apiCDN = await fetch(
@@ -21,7 +19,6 @@ export const exhcangeRate = async (currency: string) => {
 				return await apiFallback.json()
 			}
 		} else {
-			console.log('Fetching exchange rate from CDN')
 			return await apiCDN.json()
 		}
 	}
@@ -47,7 +44,5 @@ export const getExchangeRate = async () => {
 		(await fetchData(`${cdnString}usd.json`))
 		|| (await fetchData(`${fallbackString}usd.json`))
 
-	return z
-		.record(z.string().toUpperCase(), z.number())
-		.parse(rates['usd'])
+	return rates['usd']
 }

@@ -56,17 +56,6 @@ export const SubMenu = ({
 
 	return (
 		<>
-			{/* <div className='hidden w-full flex-wrap items-center justify-evenly md:inline-flex'>
-				{links.map((item) => (
-					<SubMenuItem
-						key={item.text}
-						text={item.text}
-						link={item.link}
-						Icon={item.icon}
-						active={active == item.link.split('=')[1]}
-					/>
-				))}
-			</div> */}
 			<select
 				className='bg-card mt-8 w-full rounded-md border-1 px-4 py-2 text-sm font-semibold shadow-sm lg:w-1/2'
 				onChange={(e) => {

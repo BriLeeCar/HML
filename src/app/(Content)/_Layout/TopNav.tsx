@@ -55,14 +55,14 @@ const NavMenuItem = ({
 		<Link
 			{...props}
 			className={cn(
-				'hover:bg-background/50 relative flex h-full gap-3 rounded-lg px-3 transition-all',
+				'hover:text-brand-bright relative flex h-full gap-3 rounded-lg px-3 transition-all',
 				active
-					&& 'md:text-background md:bg-foreground/80 hover:bg-foreground/80',
+					&& 'dark:md:text-foreground dark:md:bg-brand/20 md:text-brand',
 				props.className
 			)}
 			{...(active && { 'data-active': '' })}
 			title={props.children as string}>
-			<Icon className={cn('h-4 w-4 stroke-[1.25px]')} />
+			<Icon className={cn('text-muted-foreground size-6')} />
 			<TouchTarget>
 				<span>{props.children}</span>
 			</TouchTarget>
@@ -85,7 +85,7 @@ export const NavMenu = () => {
 				<Link
 					href='/'
 					className='relative'>
-					<HML className='text-foreground flex h-full w-auto items-center gap-0 px-4 py-1 text-3xl font-bold -tracking-widest' />
+					<HML className='text-brand flex h-full w-auto items-center gap-0 px-4 py-1 text-3xl font-bold -tracking-widest' />
 				</Link>
 				<menu className='hidden w-full items-center justify-around md:flex'>
 					{links.map((link, index) => (
@@ -103,7 +103,6 @@ export const NavMenu = () => {
 				<menu className='flex w-full items-center justify-end gap-4 pr-4 md:hidden'>
 					<Button
 						variant='ghost'
-						size='icon'
 						onClick={() => setMenuOpen(true)}
 						title='Resource Map'>
 						<Icon
@@ -148,10 +147,9 @@ const MobileNavMenu = ({
 							'bg-background fixed inset-0 z-50 flex h-full min-h-screen w-full flex-col backdrop-blur-sm'
 						)}>
 						<header className='mb-4 flex w-full items-center justify-between p-4'>
-							<HML className='text-foreground flex h-full w-auto items-center gap-0 px-4 py-1 text-3xl font-bold -tracking-widest' />
+							<HML className='text-brand flex h-full w-auto items-center gap-0 px-4 py-1 text-3xl font-bold -tracking-widest' />
 							<Button
 								variant='ghost'
-								size='icon'
 								onClick={() => setMenuOpen(false)}
 								title='Close Menu'>
 								<Icon
@@ -166,7 +164,7 @@ const MobileNavMenu = ({
 									key={index}
 									href={link.href}
 									active={active === link.href}
-									className='bg-background flex items-center gap-4 rounded-none border px-4 py-3 text-xl font-semibold shadow-sm *:[svg]:size-6'
+									className='bg-background flex items-center gap-4 rounded-none px-4 py-3 text-xl font-semibold shadow-sm dark:border *:[svg]:size-6'
 									Icon={link.Icon}
 									title={link.text}
 									onClick={() => setMenuOpen(false)}>

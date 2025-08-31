@@ -1,11 +1,11 @@
-'use client';
+'use client'
 
-import { motion } from 'motion/react';
-import { Icon } from './Icon';
+import { motion } from 'motion/react'
+import { Icon } from '.'
 
 export const Loading = () => {
 	return (
-		<motion.div className='relative flex items-center justify-center w-full h-full'>
+		<motion.div className='relative flex h-full w-full items-center justify-center'>
 			<motion.span
 				initial={{
 					top: '50%',
@@ -22,17 +22,16 @@ export const Loading = () => {
 					ease: 'easeInOut',
 					times: [0, 0.5, 0.56, 0.57, 1],
 					repeat: Infinity,
-				}}
-			>
+				}}>
 				<Icon
 					IconName='PlaneIcon'
-					className='text-accent-300 rotate-z-45 rotate-x-30 drop-shadow-white drop-shadow-md h-10 w-10'
+					className='text-accent-300 h-10 w-10 rotate-x-30 rotate-z-45 drop-shadow-md drop-shadow-white'
 					solid
 				/>
 			</motion.span>
-			<span className='ml-2 text-accent-900 text-4xl font-serif tracking-wider block relative z-2 text-shadow-xs text-shadow-accent-100'>
+			<span className='text-accent-900 text-shadow-accent-100 relative z-2 ml-2 block font-serif text-4xl tracking-wider text-shadow-xs'>
 				Loading
 			</span>
 		</motion.div>
-	);
-};
+	)
+}

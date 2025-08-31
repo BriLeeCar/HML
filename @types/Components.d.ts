@@ -31,7 +31,7 @@ declare global {
 		type WithRef<T> = React.ComponentPropsWithRef<T>
 	}
 
-	type IconKey = keyof typeof import('~/components/Icons')
+	type IconKey = keyof typeof import('../src/components/Icons')
 }
 
 export {}

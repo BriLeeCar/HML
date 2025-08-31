@@ -118,7 +118,6 @@ export const Search = ({
 				onClick={() => {
 					searchDispatch({ type: 'toggle' })
 				}}
-				className='border-1 border-current/10'
 			/>
 		</span>
 	)
@@ -129,13 +128,9 @@ const Btn = ({ ...props }) => {
 		<>
 			<Button
 				{...props}
-				variant={'ghost'}
+				variant={'default'}
 				type='button'
-				size='icon'
-				className={cn(
-					'lg:hidden',
-					'rounded-md bg-red-800 px-3.5 py-2.5 text-xs font-semibold whitespace-nowrap text-white shadow-xs hover:bg-red-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-600 dark:bg-red-500 dark:shadow-none dark:hover:bg-red-400 dark:focus-visible:outline-zinc-500'
-				)}>
+				className={cn('lg:hidden')}>
 				<Icon
 					IconName='SearchIcon'
 					className='h-5 w-5'
@@ -144,11 +139,8 @@ const Btn = ({ ...props }) => {
 			</Button>
 			<Button
 				{...props}
-				type='button'
-				className={cn(
-					'hidden lg:flex',
-					'rounded-md bg-red-800 px-3.5 py-2.5 text-xs font-semibold whitespace-nowrap text-white shadow-xs hover:bg-red-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-600 dark:bg-red-500 dark:shadow-none dark:hover:bg-red-400 dark:focus-visible:outline-zinc-500'
-				)}>
+				variant={'default'}
+				className={cn('hidden lg:flex')}>
 				<Icon
 					IconName='SearchIcon'
 					className='h-5 w-5'
@@ -162,11 +154,13 @@ const Btn = ({ ...props }) => {
 
 const SearchInput = ({
 	children,
-}: {
+	...props
+}: MotionProps & {
 	children: ReactNode | ReactNode[]
 }) => {
 	return (
 		<motion.span
+			{...props}
 			key='search-input'
 			initial={{
 				width: 0,

@@ -1,18 +1,19 @@
 import { Children } from 'react'
 import { cn } from '~/lib/cn'
-import { Heading } from './Heading'
-
 import {
+	Button,
 	CTA,
+	Heading,
 	InlineLink,
+	Large,
+	List,
+	P,
 	Page,
 	PageHeading,
 	Section,
 	SectionHeading,
 	SubSection,
-} from '@/(Content)/Components'
-import { Large, List, P } from './Text'
-import { Button } from './ui'
+} from '.'
 
 export function mdxComponents() {
 	return {
@@ -172,7 +173,7 @@ export function mdxComponents() {
 			<sup
 				{...props}
 				className={cn(
-					'text-accent-primary *:text-xs *:no-underline *:[a]:decoration-0',
+					'text-brand-brightd *:text-xs *:no-underline *:[a]:decoration-0',
 					props.className
 				)}
 			/>
@@ -186,7 +187,7 @@ export function mdxComponents() {
 		a: InlineLink,
 		CTA,
 		strong: ({ children }: { children: React.ReactNode }) => (
-			<strong className='font-semibold text-red-600 dark:text-red-400'>
+			<strong className='text-brand-bright font-medium'>
 				{children}
 			</strong>
 		),

@@ -84,12 +84,12 @@ const Page2 = () => {
 	return (
 		<>
 			<h2 className='flex grow flex-col'>
-				<span className='flex h-10 max-h-[20vh] grow items-end bg-red-600 pl-8 text-3xl font-bold tracking-tight text-white dark:bg-red-700'>
+				<span className='bg-brand-bright flex h-10 max-h-[20vh] grow items-end pl-8 text-3xl font-bold tracking-tight text-white dark:bg-red-700'>
 					HELP ME LEAVE
 				</span>
 				<Link
 					href='/leave-now'
-					className='pl-8 text-8xl/18 font-extrabold tracking-tight text-red-600 underline decoration-red-800 decoration-4 underline-offset-4'>
+					className='text-brand-bright decoration-brand pl-8 text-8xl/18 font-extrabold tracking-tight underline decoration-4 underline-offset-4'>
 					NOW
 				</Link>
 			</h2>
@@ -174,7 +174,7 @@ const MobileHome = () => {
 					'inline-flex flex-col self-stretch'
 				)}>
 				<hgroup className='pl-4'>
-					<TopText className='text-red-500 dark:text-red-600' />
+					<TopText className='dark:text-brand-bright text-red-500' />
 					<h1 className='sr-only'>Help Me Leave</h1>
 
 					<span className='-mt-6 block px-4 text-xl leading-[1.25lh] font-medium text-black italic dark:text-white dark:text-shadow-xs'>

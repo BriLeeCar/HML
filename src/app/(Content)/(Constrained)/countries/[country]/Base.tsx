@@ -1,11 +1,11 @@
 'use client'
 
-import { Page, PageHeading } from '@/(Content)/Components'
 import { notFound } from 'next/navigation'
 import { useContext } from 'react'
-import { IconAttributes } from '~/components/Country/IconAttributes'
 import { toTitleCase } from '~/lib/text'
 import { DBContext } from '~/server/db/provider'
+
+import { IconAttributes, Page, PageHeading } from '~/components'
 import { Stats } from './Stats'
 import { SubMenu } from './SubMenu'
 

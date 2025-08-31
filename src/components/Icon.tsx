@@ -1,5 +1,5 @@
-import * as AllIcons from '~/components/Icons'
 import { cn } from '~/lib/cn'
+import * as AllIcons from './Icons'
 
 export { AllIcons }
 
