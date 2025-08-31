@@ -198,7 +198,7 @@
 		"abbr": "CA",
 		"name": "Quebec-selected skilled workers (QSW)",
 		"description": "For workers selected by Quebec; two-step process (CSQ then PR).",
-		"official_link": "https://www.quebec.ca/en/immigration/immigrate/quebec-selected-skilled-workers"
+		"official_link": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/quebec-skilled-workers.html"
 	},
 	{
 		"id": 76,
@@ -286,7 +286,7 @@
 		"abbr": "UY",
 		"name": "Work Visa",
 		"description": "Applicants may apply for a study visa if they intend to study, scholarships or participate in internships in official, governmental or exchange programs in institutions accredited or authorized by the corresponding official bodies.",
-		"official_link": "https://embassyofuruguay.us/study-in-uruguay/",
+		"official_link": "https://embassyofuruguay.us/work-in-uruguay/",
 		"digital_worker": false,
 		"monthly_income": true,
 		"job_required": false,
@@ -316,7 +316,7 @@
 		"abbr": "BR",
 		"name": "Student Visa",
 		"description": "Study Visa",
-		"official_link": "https://www.gov.br/mre/pt-br/consulado-miami/information-about-visas-in-english/temporary-residence-visas-1/vitem-4-visa-temporary-visa-for-study AND https://www.gov.br/mre/pt-br/embaixada-liubliana/servicos-consulares-1/vistos-vizumi-visas-1/study-vitem-iv",
+		"official_link": "https://www.gov.br/mre/pt-br/embaixada-helsinque/consular-services/student-visa-vitem-iv",
 		"digital_worker": false,
 		"monthly_income": true,
 		"job_required": false,
@@ -331,7 +331,7 @@
 		"abbr": "BR",
 		"name": "Research, Teaching or Academic Extension Visa",
 		"description": "Academic research, Teaching or Extension (VITEM I)",
-		"official_link": "https://www.gov.br/mre/pt-br/consulado-miami/information-about-visas-in-english/temporary-residence-visas-1/temporary-visa-vitem-i-research-teaching-or-academic-extension AND https://www.gov.br/mre/pt-br/embaixada-liubliana/servicos-consulares-1/vistos-vizumi-visas-1/academic-research-teaching-or-extension-vitem-i",
+		"official_link": "https://www.gov.br/mre/pt-br/embaixada-liubliana/servicos-consulares-1/vistos-vizumi-visas-1/academic-research-teaching-or-extension-vitem-i",
 		"digital_worker": false,
 		"monthly_income": true,
 		"job_required": false,
@@ -383,7 +383,7 @@
 		"abbr": "CA",
 		"name": "Super Visa (Parents and Grandparents)",
 		"description": "Allows parents/grandparents of Canadian citizens or permanent residents to visit for extended periods.",
-		"official_link": "https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/super-visa.html",
+		"official_link": "https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/parent-grandparent-super-visa.html",
 		"digital_worker": false,
 		"monthly_income": false,
 		"job_required": false,
@@ -501,8 +501,8 @@
 		"id": 99,
 		"abbr": "IE",
 		"name": "Travel & Holiday",
-		"description": "These countries do NOT require visa to Ireland for visits up to 90 days\nAndorra \nAntigua and Barbuda \nArgentina\nAustralia\nAustria\nBahamas\nBarbados\nBelgium\nBelize\nBrazil\nBrunei\nBulgaria\nCanada\nChile\nCosta Rica\nCroatia\nCzech Republic\nDenmark\nEl Salvador\nEstonia\nFaroe Islands\nFiji\nFinland\nFrance\nGermany\nGreece\nGrenada\nGautemala\nGuyana\nHong Kong (Special Administrative Region)\nHungary\nIceland\nIsrael\nItaly\nJapan\nKiribati\nKorea (South) \nLatvia\nLiechtenstein\nLithuania\nLuxembourg\nMacau (SAR)\nMalaysia\nMaldives\nMalta\nMexico\nMonaco\nNetherlands\nNew Zealand\nNicaragua\nNorway\nPanama\nParaguay\nPoland\nPortugal\nRomania\nSaint Kitts and Nevis\nSaint Lucia\nSaint Vincent and the Grenadines\nSamoa\nSan Marino\nSeychelles\nSingapore\nSlovakia\nSlovenia\nSolomon Islands\nSpain\nSweden\nSwitzerland\nTaiwan Province of China\nTonga\nTuvalu\nUkraine\nUnited Arab Emirates\nUnited Kingdom of Great Britain and Northern Ireland (exception is UK Protected person, they require a visa)\nUnited States of America\nUruguay\nVatican (Holy See)",
-		"official_link": " Basic information -  https://www.irishimmigration.ie/registering-your-immigration-permission/ \nAll queries MUST be processed through https://portal.irishimmigration.ie/en/  It's important to book your registration appointment as soon as possible after you arrive. As soon as you arrive in Ireland, you should create an account on the Customer Service Portal and book an appointment.\n\nAppointment slots are released on a rolling 90 day basis. Please be aware that given the current high demand, appointment slots do fill up quickly. When possible, additional appointments are released. You can amend the date of your appointment to any other available date at any time via the reschedule option.\n\nIf an appointment is not available within 90 days of your arrival, please do not worry. Once you have successfully booked an appointment within the 90 days of arrival, this will be sufficient to remain in the state until the date of your appointment. You should however book your appointment as soon as you arrive in the State.\n\nNote: If you are a visa-required national and you leave the state prior to your registration appointment, you will not be able to re-enter the state without a new entry visa."
+		"description": "These countries do NOT require visa to Ireland for visits up to 90 days\nAndorra \nAntigua and Barbuda \nArgentina\nAustralia\nAustria\nBahamas\nBarbados\nBelgium\nBelize\nBrazil\nBrunei\nBulgaria\nCanada\nChile\nCosta Rica\nCroatia\nCzech Republic\nDenmark\nEl Salvador\nEstonia\nFaroe Islands\nFiji\nFinland\nFrance\nGermany\nGreece\nGrenada\nGautemala\nGuyana\nHong Kong (Special Administrative Region)\nHungary\nIceland\nIsrael\nItaly\nJapan\nKiribati\nKorea (South) \nLatvia\nLiechtenstein\nLithuania\nLuxembourg\nMacau (SAR)\nMalaysia\nMaldives\nMalta\nMexico\nMonaco\nNetherlands\nNew Zealand\nNicaragua\nNorway\nPanama\nParaguay\nPoland\nPortugal\nRomania\nSaint Kitts and Nevis\nSaint Lucia\nSaint Vincent and the Grenadines\nSamoa\nSan Marino\nSeychelles\nSingapore\nSlovakia\nSlovenia\nSolomon Islands\nSpain\nSweden\nSwitzerland\nTaiwan Province of China\nTonga\nTuvalu\nUkraine\nUnited Arab Emirates\nUnited Kingdom of Great Britain and Northern Ireland (exception is UK Protected person, they require a visa)\nUnited States of America\nUruguay\nVatican (Holy See)\n\nBasic information -  https://www.irishimmigration.ie/registering-your-immigration-permission/ \nAll queries MUST be processed through https://portal.irishimmigration.ie/en/  It's important to book your registration appointment as soon as possible after you arrive. As soon as you arrive in Ireland, you should create an account on the Customer Service Portal and book an appointment.\n\nAppointment slots are released on a rolling 90 day basis. Please be aware that given the current high demand, appointment slots do fill up quickly. When possible, additional appointments are released. You can amend the date of your appointment to any other available date at any time via the reschedule option.\n\nIf an appointment is not available within 90 days of your arrival, please do not worry. Once you have successfully booked an appointment within the 90 days of arrival, this will be sufficient to remain in the state until the date of your appointment. You should however book your appointment as soon as you arrive in the State.\n\nNote: If you are a visa-required national and you leave the state prior to your registration appointment, you will not be able to re-enter the state without a new entry visa.",
+		"official_link": "https://www.irishimmigration.ie/coming-to-work-in-ireland/what-are-my-options-for-working-in-ireland/coming-to-work-for-more-than-90-days/working-holidays-in-ireland/"
 	},
 	{
 		"id": 100,
@@ -552,7 +552,7 @@
 		"abbr": "CA",
 		"name": "Spousal Open Work Permit (SOWP)",
 		"description": "255",
-		"official_link": "No",
+		"official_link": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/family-sponsorship/spouse-partner-children/spouse-common-law-partner-canada-open-work-permit.html",
 		"digital_worker": false,
 		"monthly_income": false,
 		"job_required": false,
@@ -574,7 +574,7 @@
 		"abbr": "CA",
 		"name": "Significant Benefit to Canada (R205a)",
 		"description": "LMIA-exempt for applicants whose work would bring significant social/cultural/economic benefit to Canada.",
-		"official_link": "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/publications-manuals/operational-bulletins-manuals/temporary-residents/foreign-workers/exemptions-lmia/assessment-significant-benefit.html",
+		"official_link": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/job-offer.html",
 		"digital_worker": false,
 		"monthly_income": true,
 		"job_required": false,
@@ -589,7 +589,7 @@
 		"abbr": "CA",
 		"name": "Temporary Resident Permit (TRP)",
 		"description": "Allows inadmissible persons to enter/stay temporarily when justified by compelling reasons.",
-		"official_link": "https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/temporary-resident-permit.html"
+		"official_link": "https://ircc.canada.ca/english/information/applications/visa.asp"
 	},
 	{
 		"id": 109,
@@ -671,14 +671,14 @@
 		"abbr": "CA",
 		"name": "Open Work Permit (various)",
 		"description": "Open work permits allow work for any employer (with some exceptions).",
-		"official_link": "https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada/permit/open-work-permit.html"
+		"official_link": "https://ircc.canada.ca/english/helpcentre/answer.asp?qnum=176&top=17"
 	},
 	{
 		"id": 115,
 		"abbr": "CA",
 		"name": "Intra-Company Transferee (ICT)",
 		"description": "LMIA-exempt employer-specific permit for multinational transfers (executives, managers, specialized knowledge).",
-		"official_link": "https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada/permit/temporary/work-permit/foreign-worker/need-lmia/work-without-lmia/international-mobility-program/eligibility/intra-company-transferee.html",
+		"official_link": "https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada/work-permit/eligibility.html",
 		"digital_worker": false,
 		"monthly_income": false,
 		"job_required": true,
@@ -693,7 +693,7 @@
 		"abbr": "CA",
 		"name": "CUSMA Professionals (formerly NAFTA)",
 		"description": "LMIA-exempt permits for eligible U.S. and Mexican professionals under CUSMA.",
-		"official_link": "https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada/permit/temporary/work-permit/foreign-worker/need-lmia/work-without-lmia/international-mobility-program/agreements/cusma/permit.html",
+		"official_link": "https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada/special-instructions/business-people.html",
 		"digital_worker": false,
 		"monthly_income": false,
 		"job_required": true,
@@ -723,7 +723,7 @@
 		"abbr": "CA",
 		"name": "Family Sponsorship - Dependent Child",
 		"description": "Child meets dependency definition; sponsor eligibility.",
-		"official_link": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/family-sponsorship/children.html",
+		"official_link": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/family-sponsorship/spouse-partner-children.html",
 		"digital_worker": false,
 		"monthly_income": false,
 		"job_required": true,
@@ -753,14 +753,14 @@
 		"abbr": "CA",
 		"name": "Humanitarian and Compassionate (H&C) PR",
 		"description": "Strong H&C grounds; inadmissibility or ineligibility under other streams.",
-		"official_link": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/humanitarian-compassionate-considerations.html"
+		"official_link": "https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/guide-5291-humanitarian-compassionate-considerations.html"
 	},
 	{
 		"id": 121,
 		"abbr": "CA",
 		"name": "Family Sponsorship - Parents and Grandparents (PGP)",
 		"description": "Sponsor meets income requirements; invited to apply.",
-		"official_link": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/family-sponsorship/parent-grandparent.html",
+		"official_link": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/family-sponsorship/sponsor-parents-grandparents.html",
 		"digital_worker": false,
 		"monthly_income": false,
 		"job_required": true,
@@ -790,7 +790,7 @@
 		"abbr": "CA",
 		"name": "Family Sponsorship - Spouse/Common-law/Conjugal Partner",
 		"description": "Sponsor eligibility; genuine relationship; admissibility.",
-		"official_link": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/family-sponsorship/spouse-partner.html",
+		"official_link": "https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/guide-5289-sponsor-your-spouse-common-law-partner-conjugal-partner-dependent-child-complete-guide.html",
 		"digital_worker": false,
 		"monthly_income": false,
 		"job_required": true,
@@ -805,7 +805,7 @@
 		"abbr": "CA",
 		"name": "Quebec Experience Program (PEQ)",
 		"description": "Meet PEQ criteria (work experience or Quebec study).",
-		"official_link": "https://www.quebec.ca/en/immigration/immigrate/quebec-experience-program",
+		"official_link": "https://www.quebec.ca/immigration/permanente/travailleurs-qualifies/programme-experience-quebecoise/conditions-selection",
 		"digital_worker": false,
 		"monthly_income": true,
 		"job_required": false,
@@ -968,7 +968,7 @@
 		"abbr": "BR",
 		"name": "Family Reunification Visa",
 		"description": "Children of a Brazilian Citizen or Permanent Resident in Brazil",
-		"official_link": "https://www.gov.br/mre/pt-br/embaixada-liubliana/servicos-consulares-1/vistos-vizumi-visas-1/family-reunion-vitem-xi AND https://www.gov.br/mre/pt-br/embaixada-liubliana/servicos-consulares-1/vistos-vizumi-visas-1/general-information-1",
+		"official_link": "https://www.gov.br/mre/pt-br/embaixada-liubliana/servicos-consulares-1/vistos-vizumi-visas-1/family-reunion-vitem-xi",
 		"digital_worker": false,
 		"monthly_income": false,
 		"job_required": false,
@@ -983,7 +983,7 @@
 		"abbr": "CA",
 		"name": "Bridging Open Work Permit (BOWP)",
 		"description": "Open work permit for eligible applicants who have applied for PR and await a decision.",
-		"official_link": "https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada/permit/temporary/extend/bridging-open-work-permits.html"
+		"official_link": "https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada/pr-work-permits/bridging.html"
 	},
 	{
 		"id": 139,
@@ -1098,41 +1098,11 @@
 		"study": false
 	},
 	{
-		"id": 147,
-		"abbr": "NO",
-		"name": "Family Immigration",
-		"description": null,
-		"official_link": "https://www.gov.ie/en/department-of-justice-home-affairs-and-migration/publications/immigration/",
-		"digital_worker": false,
-		"monthly_income": false,
-		"job_required": false,
-		"age_18_30": false,
-		"age_60_plus": false,
-		"travelling_with_kids": true,
-		"entrepreneur": false,
-		"study": false
-	},
-	{
-		"id": 148,
-		"abbr": "NO",
-		"name": "Family Immigration",
-		"description": null,
-		"official_link": "https://www.gov.ie/en/department-of-justice-home-affairs-and-migration/publications/immigration/",
-		"digital_worker": false,
-		"monthly_income": false,
-		"job_required": false,
-		"age_18_30": false,
-		"age_60_plus": false,
-		"travelling_with_kids": true,
-		"entrepreneur": false,
-		"study": false
-	},
-	{
 		"id": 149,
 		"abbr": "NO",
 		"name": "Family Immigration",
 		"description": null,
-		"official_link": "https://www.gov.ie/en/department-of-justice-home-affairs-and-migration/publications/immigration/",
+		"official_link": "https://www.udi.no/en/want-to-apply/family-immigration/",
 		"digital_worker": false,
 		"monthly_income": false,
 		"job_required": false,
@@ -1147,7 +1117,7 @@
 		"abbr": "NO",
 		"name": "Residency",
 		"description": null,
-		"official_link": "https://www.gov.ie/en/department-of-justice-home-affairs-and-migration/publications/immigration/",
+		"official_link": "https://www.udi.no/en/want-to-apply/permanent-residence/",
 		"digital_worker": false,
 		"monthly_income": true,
 		"job_required": false,
@@ -1156,13 +1126,6 @@
 		"travelling_with_kids": true,
 		"entrepreneur": false,
 		"study": true
-	},
-	{
-		"id": 151,
-		"abbr": "NO",
-		"name": "Residency",
-		"description": null,
-		"official_link": "https://www.gov.ie/en/department-of-justice-home-affairs-and-migration/publications/immigration/"
 	},
 	{
 		"id": 152,
@@ -1377,14 +1340,14 @@
 		"abbr": "NO",
 		"name": "Protection (Asylum)",
 		"description": null,
-		"official_link": "https://www.gov.ie/en/department-of-justice-home-affairs-and-migration/publications/immigration/"
+		"official_link": "https://www.udi.no/en/want-to-apply/protection-asylum/#:~:text=You%20can%20apply%20for%20protection%20(asylum)%20if%20you%20are%20persecuted,you%20to%20travel%20to%20Norway"
 	},
 	{
 		"id": 172,
 		"abbr": "NO",
 		"name": "Work Immigration",
 		"description": null,
-		"official_link": "https://www.gov.ie/en/department-of-justice-home-affairs-and-migration/publications/immigration/",
+		"official_link": "https://www.udi.no/en/want-to-apply/work-immigration/",
 		"digital_worker": false,
 		"monthly_income": false,
 		"job_required": true,
@@ -1423,13 +1386,6 @@
 		"travelling_with_kids": false,
 		"entrepreneur": false,
 		"study": false
-	},
-	{
-		"id": 175,
-		"abbr": "NO",
-		"name": "Residency",
-		"description": null,
-		"official_link": "https://www.gov.ie/en/department-of-justice-home-affairs-and-migration/publications/immigration/"
 	},
 	{
 		"id": 176,
@@ -1514,7 +1470,7 @@
 		"abbr": "NO",
 		"name": "Citizenship",
 		"description": null,
-		"official_link": "https://www.gov.ie/en/department-of-justice-home-affairs-and-migration/publications/immigration/"
+		"official_link": "https://www.udi.no/en/want-to-apply/citizenship/"
 	},
 	{
 		"id": 187,
@@ -1795,7 +1751,7 @@
 		"abbr": "BR",
 		"name": "Digital Nomad Visa",
 		"description": "\"Introduced in 2022, the Digital Nomad Visa allows foreign nationals to live in Brazil while working remotely for companies based abroad. This visa caters to individuals who can demonstrate employment or income independent of Brazilian employers.  Brazil’s Federal Government enacted this visa under Normative Resolution No. 45 of the National Immigration Council, offering remote workers the chance to stay legally for an extended period.\"\r",
-		"official_link": "https://www.gov.br/mre/pt-br/consulado-miami/information-about-visas-in-english/temporary-residence-visas-1/temporary-visa-vitem-xiv-2013-digital-nomad-retirement/temporary-visa-vitem-xiv-2013-digital-nomad AND https://www.gov.br/mre/pt-br/embaixada-liubliana/servicos-consulares-1/vistos-vizumi-visas-1/general-information-1",
+		"official_link": "https://www.gov.br/mre/pt-br/embaixada-helsinque/consular-services/digital-nomad-visa-vitem-xiv",
 		"digital_worker": true,
 		"monthly_income": false,
 		"job_required": true,
@@ -1810,14 +1766,14 @@
 		"abbr": "BR",
 		"name": "Visitor Visa (e-visa)",
 		"description": "Visitor Visa",
-		"official_link": "https://www.gov.br/mre/pt-br/consulado-miami/information-about-visas-in-english/electronic-visitor-visa-e-visa AND https://www.gov.br/mre/pt-br/embaixada-liubliana/servicos-consulares-1/vistos-vizumi-visas-1/general-information-1"
+		"official_link": "https://www.gov.br/mre/pt-br/consulado-miami/information-about-visas-in-english/electronic-visitor-visa-e-visa"
 	},
 	{
 		"id": 211,
 		"abbr": "BR",
 		"name": "Retirement Visa",
 		"description": "A Permanent  Visa may be granted to the retired foreign citizens wishing to live in Brazil, provided that they are already in use of their pension, and legally allowed to transfer to Brazil a regular monthly income in a foreign currency, pension included, equivalent to a minimum of R$ 6.000,00 (six thousand reais). This minimum required income will allow for the applicant to take two legal dependents to Brazil. For every additional dependent, an additional amount of R$ 2.000,00 (two thousand reais) per month will be required. Applicants must lodge their application in person (not required for the dependents).   The procedure of applying for this visa requires an approval from our Ministry of External Relations, which takes approximately 8 weeks.  Only after the receipt of this approval can the visa be issued. Once approved, visa must be issued within 6 months. Within 30 days of arrival in Brazil, bearers of these types of visas must register with the Brazilian Immigration authorities (The Federal Police Department-DPMAF) and submit a copy of the visa application form, provided to them by this Embassy upon collection of the visa.",
-		"official_link": "https://www.gov.br/mre/pt-br/consulado-miami/information-about-visas-in-english/temporary-residence-visas-1/temporary-visa-vitem-xiv-2013-digital-nomad-retirement/temporary-visa-vitem-xiv-2013-retirement AND https://www.gov.br/mre/pt-br/embaixada-liubliana/servicos-consulares-1/vistos-vizumi-visas-1/general-information-1",
+		"official_link": "https://www.gov.br/mre/pt-br/embaixada-abu-dhabi/abu-dhabi-arquivos/english/consular-services/visa/types-of-visa/visa-for-living-in-brazil-after-retirement",
 		"digital_worker": false,
 		"monthly_income": true,
 		"job_required": false,
@@ -1832,7 +1788,7 @@
 		"abbr": "BR",
 		"name": "Investment Visa",
 		"description": "Foreign citizens that wish to establish temporary residence in Brazil as follows:  Intra-company transferee to represent commercial or civil corporation, group or economic conglomerate as administrator, manager, director or executive with management powers;  Foreigners investing in a Brazilian company. Eligible dependents of a VITEM IX holder or applicant may apply for a Temporary Visa XI - Family Reunion.",
-		"official_link": "https://www.gov.br/mre/pt-br/consulado-miami/information-about-visas-in-english/temporary-residence-visas-1/temporary-visa-vitem-ix-2013-investor AND https://www.gov.br/mre/pt-br/embaixada-liubliana/servicos-consulares-1/vistos-vizumi-visas-1/general-information-1",
+		"official_link": "https://www.gov.br/mre/pt-br/embaixada-tel-aviv/setor-consular-tlv/vistos-visas-1/vitem-ix-investment-visa",
 		"digital_worker": false,
 		"monthly_income": false,
 		"job_required": false,
@@ -1944,21 +1900,6 @@
 		"name": "Temporary Resident Visa",
 		"description": "You want to live in Mexico for more than 180 days and less than 4 years, AND you are not planning to be employed in Mexico.",
 		"official_link": "https://consulmex.sre.gob.mx/nuevayork/index.php/en/visas-foreigners"
-	},
-	{
-		"id": 222,
-		"abbr": "NO",
-		"name": "Work Immigration",
-		"description": null,
-		"official_link": "https://www.gov.ie/en/department-of-justice-home-affairs-and-migration/publications/immigration/",
-		"digital_worker": false,
-		"monthly_income": false,
-		"job_required": true,
-		"age_18_30": false,
-		"age_60_plus": false,
-		"travelling_with_kids": false,
-		"entrepreneur": false,
-		"study": false
 	},
 	{
 		"id": 223,
@@ -2336,7 +2277,7 @@
 		"abbr": "NO",
 		"name": "Visit & Holiday",
 		"description": null,
-		"official_link": "https://www.gov.ie/en/department-of-justice-home-affairs-and-migration/publications/immigration/",
+		"official_link": "https://www.udi.no/en/want-to-apply/visit-and-holiday/",
 		"digital_worker": false,
 		"monthly_income": false,
 		"job_required": false,
@@ -2347,26 +2288,11 @@
 		"study": false
 	},
 	{
-		"id": 253,
-		"abbr": "NO",
-		"name": "Work Immigration",
-		"description": null,
-		"official_link": "https://www.gov.ie/en/department-of-justice-home-affairs-and-migration/publications/immigration/",
-		"digital_worker": false,
-		"monthly_income": false,
-		"job_required": true,
-		"age_18_30": false,
-		"age_60_plus": false,
-		"travelling_with_kids": false,
-		"entrepreneur": false,
-		"study": false
-	},
-	{
 		"id": 254,
 		"abbr": "NO",
 		"name": "Repatriation",
 		"description": null,
-		"official_link": "https://www.gov.ie/en/department-of-justice-home-affairs-and-migration/publications/immigration/"
+		"official_link": "https://www.udi.no/en/return/apply-for-repatriation/"
 	},
 	{
 		"id": 255,
