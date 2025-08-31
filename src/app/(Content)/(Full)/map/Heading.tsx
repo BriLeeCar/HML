@@ -3,14 +3,13 @@
 import { motion } from 'motion/react'
 import { Heading } from '~/components'
 import { cn } from '~/lib/cn'
-import { tDB } from '~/server/db/db'
 
 export const CountryHeading = ({
 	hovered,
 	hoveredData,
 }: {
 	hovered: string | null
-	hoveredData: tDB['countries'][number] | null
+	hoveredData: ApiData.Country | null
 }) => {
 	return (
 		<span className='absolute bottom-0 left-0 z-10 flex w-full max-w-[75vw] items-center rounded-r-lg pointer-coarse:hidden'>
@@ -28,7 +27,7 @@ export const CountryHeading = ({
 							!hovered
 								&& 'font-normal text-zinc-700 italic opacity-50 dark:text-zinc-400'
 						)}
-						size='xl'>
+						size='2xl'>
 						{hovered ? hovered : 'Hover over a country'}
 						{hoveredData && hoveredData.tier != 'None' && (
 							<span

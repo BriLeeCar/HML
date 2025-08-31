@@ -57,8 +57,13 @@ const Home = () => {
 			</div>
 			<MobileHome />
 
-			<div className='absolute -top-10 -right-40 hidden h-1/2 w-[50vw] -rotate-5 overflow-clip min-[600px]:h-screen min-[1200px]:translate-y-0 min-[1200px]:rotate-0 md:block'>
-				<MapSvg className='lg:max-h-fill xl: h-auto w-screen fill-neutral-900/10 stroke-zinc-500 shadow-none lg:relative lg:w-screen'>
+			<div
+				className={cn(
+					'absolute -top-10 -right-40 -rotate-5 min-[1200px]:rotate-y-180',
+					'min-[1200px]:translate-x-3/4 min-[1200px]:translate-y-0 min-[1200px]:rotate-0 min-[1200px]:overflow-visible',
+					'hidden h-1/2 w-[50vw] overflow-clip min-[600px]:h-screen md:block'
+				)}>
+				<MapSvg className='lg:max-h-fill xl: stroke-background fill-muted h-auto w-screen stroke-1 shadow-none select-none lg:relative lg:w-screen'>
 					{db.getMapPaths().map((country) => {
 						const { svgPath, tier, abbr, name } = country
 
@@ -69,6 +74,7 @@ const Home = () => {
 								abbr={abbr}
 								tier={tier}
 								svgPath={svgPath || ''}
+								canClick={false}
 							/>
 						)
 					})}

@@ -2,14 +2,13 @@ import { AnimatePresence, motion, MotionProps } from 'motion/react'
 import { ReactNode, useReducer } from 'react'
 import { Button, Icon, Input } from '~/components'
 import { cn } from '~/lib/cn'
-import { type tDB } from '~/server/db/db'
 
 // #region ? TYPES
 
 type tSearchState = {
 	searchQuery: string
 	isOpen: boolean
-	countries: tDB['countries']
+	countries: ApiData.DB['countries']
 }
 type tSearchAction =
 	| { type: 'toggle' }
@@ -41,8 +40,8 @@ export const Search = ({
 	countries,
 	actionSelected,
 }: {
-	countries: tDB['countries']
-	actionSelected: (country: tDB['countries'][number]) => void
+	countries: ApiData.DB['countries']
+	actionSelected: (country: ApiData.Country) => void
 }) => {
 	const [searchState, searchDispatch] = useReducer(searchReducer, {
 		countries: countries.map((country) => {
@@ -153,8 +152,7 @@ const SearchInput = ({
 const SearchItem = ({
 	item,
 	...props
-}: Props<'button'>
-	& MotionProps & { item: tDB['countries'][number] }) => {
+}: Props<'button'> & MotionProps & { item: ApiData.Country }) => {
 	return (
 		<motion.button
 			{...props}

@@ -28,15 +28,17 @@ export const BlogContent = ({
 				{blogPosts.map((post) => (
 					<article
 						key={post.file}
-						className='relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pt-80 pb-8 sm:pt-48 lg:pt-80 dark:bg-gray-800'>
-						<Image
-							alt=''
-							src={post.image.url}
-							fill
-							sizes='225px'
-							className='absolute inset-0 -z-10 size-full object-cover object-center'
-						/>
-						<div className='absolute inset-0 -z-10 bg-linear-to-t from-gray-900 via-gray-900/40 dark:from-black/80 dark:via-black/40' />
+						className='relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pt-80 pb-8 sm:pt-48 lg:pt-80 dark:bg-neutral-800'>
+						{post.image?.url && (
+							<Image
+								alt=''
+								src={post.image?.url}
+								fill
+								sizes='225px'
+								className='absolute inset-0 -z-10 size-full object-cover object-center'
+							/>
+						)}
+						<div className='absolute inset-0 -z-10 bg-linear-to-t from-neutral-900 via-gray-900/40 dark:from-black/80 dark:via-black/40' />
 						<div className='absolute inset-0 -z-10 rounded-2xl inset-ring inset-ring-gray-900/10 dark:inset-ring-white/10' />
 
 						<div className='flex flex-wrap items-center gap-y-0 overflow-hidden text-sm/6 text-gray-300'>

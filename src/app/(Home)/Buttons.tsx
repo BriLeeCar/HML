@@ -12,17 +12,17 @@ export const NowBtn = ({
 }) => {
 	return (
 		<Button
-			variant={'default'}
+			variant={'bright'}
 			href='/leave-now'
 			{...props}
 			className={cn(
-				'click bg-brand-bright mb-4 h-auto w-full flex-col items-center justify-center gap-0 py-2 whitespace-normal text-white sm:flex-row sm:gap-1.25 md:justify-around md:gap-2 lg:justify-center',
+				'click z-10 mb-4 grid w-full grid-cols-2 items-center justify-center lg:grid-cols-[max-content_auto]',
 				props.className || ''
 			)}>
-			<span className='text-xl font-black uppercase sm:text-5xl lg:text-end'>
+			<span className='mr-4 text-end text-xl font-black uppercase sm:text-5xl lg:text-end'>
 				<span className='sm:hidden'>Help Me Leave </span>NOW
 			</span>
-			<span className='text-sm uppercase md:w-1/2 md:text-end md:text-base/4 lg:text-start lg:text-lg'>
+			<span className='inline-flex w-auto text-start text-sm font-bold text-balance uppercase md:text-base/4'>
 				I Desperately Need to Seek Safety
 			</span>
 		</Button>
@@ -44,18 +44,18 @@ export const SmallBtns = () => {
 	]
 
 	return (
-		<span className='*:[button]:bg-foreground/10 text-muted-foreground *:hover:[button]:bg-foreground/10 grid w-full grid-cols-1 gap-4 lg:grid-cols-2 *:[button]:cursor-not-allowed'>
+		<span className='*:[button]:bg-muted text-muted-foreground *:hover:[button]:bg-foreground/10 z-10 grid w-full grid-cols-1 gap-4 grayscale-100 *:[button]:cursor-not-allowed'>
 			{btns.map((btn, i) => {
 				return (
 					<Button
-						variant={'muted'}
+						variant={'ghost'}
 						key={i}
-						className='w-full grow flex-col gap-0 px-4 py-2 tracking-tighter'>
-						<span className='text-lg sm:text-2xl'>
+						className='flex w-full grow flex-col gap-0 px-4 py-2 tracking-tighter'>
+						<span className='text-lg sm:text-xl'>
 							Help Me {btn.main == 'SOON' && 'LEAVE '}
 							<b className='font-extrabold'>{btn.main}</b>
 						</span>
-						<span className='text-xs tracking-tight whitespace-normal uppercase sm:text-sm'>
+						<span className='text-xs tracking-tight text-balance whitespace-normal uppercase sm:text-sm'>
 							{btn.sub}
 						</span>
 					</Button>
@@ -73,8 +73,7 @@ export const MapBtn = () => {
 		<>
 			<Button
 				onClick={handleClick}
-				variant={'muted'}
-				size={'lg'}
+				variant={'ghost'}
 				className='text-foreground fixed right-10 hidden items-center rounded-lg text-2xl font-extrabold min-[1200px]:flex'>
 				Explore the Map{' '}
 				<Icon
@@ -85,8 +84,8 @@ export const MapBtn = () => {
 			<span className='w-full p-6 pr-0 text-end transition-all min-[1200px]:hidden'>
 				<Button
 					onClick={handleClick}
-					variant={'muted'}
-					className='bg-ring/20 hover:bg-ring/30 w-auto min-w-max rounded-r-none py-0 pr-0 text-base font-bold tracking-wide italic shadow-sm'>
+					variant={'ghost'}
+					className='bg-ring/20 hover:bg-ring/30 inline-flex w-auto min-w-max items-center justify-evenly gap-2 rounded-r-none py-0 pr-2 text-base font-bold tracking-wide italic shadow-sm'>
 					<Icon
 						IconName='GlobeIcon'
 						className={cn(
