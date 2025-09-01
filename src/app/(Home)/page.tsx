@@ -1,6 +1,7 @@
 'use client'
 
 import { MapPathEl, MapSvg } from '@/(Content)/(Full)/map/Map'
+import Link from 'next/link'
 import { useContext } from 'react'
 import { Button } from '~/components/Button'
 import { cn } from '~/lib/cn'
@@ -78,9 +79,11 @@ const MobileHome = () => {
 						A resource hub for at-risk Americans seeking safety abroad
 					</span>
 				</hgroup>
-				<span className='flex w-full grow items-end justify-end text-end'>
+				<Link
+					href='/leave-now'
+					className='flex w-full grow items-end justify-end text-end'>
 					<BottomPlane className='w-1/2' />
-				</span>
+				</Link>
 				<h2 className='flex grow flex-col'>
 					<Button
 						variant='ghost'
