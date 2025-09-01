@@ -95,18 +95,7 @@ const MobileHome = () => {
 				</hgroup>
 				<BottomPlane className='grow' />
 				<Page2 />
-				{/* <span className='to-background/50 h-fill w-full bg-gradient-to-b from-transparent from-50% to-50%'>
-					{/* 
-				</span> */}
 			</div>
-			{/* <div
-				ref={bottomRef}
-				className={cn(
-					'relative z-10',
-					'items-around flex flex-col pl-0',
-					'bg-background inline-flex flex-col justify-between self-stretch',
-					'md:hidden'
-				)}></div> */}
 		</>
 	)
 }
