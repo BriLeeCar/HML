@@ -3,6 +3,6 @@ import Link from 'next/link'
 export const InlineLink = ({ ...props }: Props<typeof Link>) => (
 	<Link
 		{...props}
-		className='text-muted-foreground hover:text-foreground font-medium underline decoration-current/50 decoration-1 underline-offset-2'
+		className='text-foreground decoration-brand-bright/50 hover:text-brand-bright font-semibold underline decoration-2 underline-offset-2 transition-all dark:font-medium'
 	/>
 )

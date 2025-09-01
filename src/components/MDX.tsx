@@ -187,7 +187,7 @@ export function mdxComponents() {
 		a: InlineLink,
 		CTA,
 		strong: ({ children }: { children: React.ReactNode }) => (
-			<strong className='text-brand-bright font-medium'>
+			<strong className='text-brand-bright dark:text-brand-muted font-medium dark:font-normal'>
 				{children}
 			</strong>
 		),
