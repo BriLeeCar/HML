@@ -7,7 +7,7 @@ export const BottomPlane = ({ ...props }: Props<'svg'>) => {
 		<svg
 			{...props}
 			xmlns='http://www.w3.org/2000/svg'
-			viewBox='0 0 375 221.96'>
+			viewBox='0 0 259.96 167.89'>
 			<path
 				fill='none'
 				strokeDasharray='3.9 3.9'
@@ -15,15 +15,18 @@ export const BottomPlane = ({ ...props }: Props<'svg'>) => {
 				strokeWidth='1.65px'
 				stroke='currentColor'
 				className='text-brand'
-				d='M187.21,135.16c-17.45-195.94,142.8-54.36,187.79-94.14'
+				d='M49.31,97.59C136.59-73.46,214.43,42.93,259.42,3.15'
 			/>
 			<motion.path
-				initial={{ translateY: -60 }}
-				animate={{ translateY: [-60, 0] }}
-				transition={{ duration: 2, ease: 'anticipate' }}
+				initial={{ translateY: -60, translateX: 20 }}
+				animate={{
+					translateY: [-60, 0],
+					translateX: [20, 0],
+				}}
+				transition={{ duration: 1 }}
 				fill='currentColor'
-				d='M142.8,152.74l.12,8.46,36.12,27.7.25,17.87c.04,2.37,1.01,4.63,2.71,6.27,1.7,1.64,3.98,2.56,6.35,2.52,2.37-.04,4.63-1.01,6.27-2.71s2.56-3.98,2.52-6.35l-.25-18.33,35.33-28.71-.11-8-35.55,13.05-.29-20.55,13.27-9.13-.12-8.93-22.2,9.25-22.45-8.62.12,8.93,13.52,8.74.29,20.92-35.91-12.43v.04Z'
-				className={'text-brand-bright/70'}
+				d='M3.63,90.56l-3.63,7.64,20.18,40.8-7.66,16.14c-1.01,2.14-1.14,4.6-.34,6.82.8,2.22,2.44,4.05,4.59,5.06,2.14,1.01,4.6,1.14,6.82.34s4.05-2.44,5.06-4.59l7.87-16.56,44.38-10.16,3.43-7.23-37.66-3.98,8.81-18.57,15.94-2.33,3.83-8.07-24-1.5-16.34-17.65-3.83,8.07,8.27,13.81-8.97,18.9L3.64,90.51l-.02.04h0Z'
+				className={'text-brand-bright rotate-5'}
 			/>
 		</svg>
 	)

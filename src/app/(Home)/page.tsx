@@ -60,41 +60,35 @@ const Home = () => {
 
 export default Home
 
-const Page2 = () => {
-	return (
-		<>
-			<h2 className='flex flex-col px-2 pb-6'>
-				<Button
-					variant='ghost'
-					href='/leave-now'
-					className='text-brand-bright flex grow justify-center font-serif text-8xl tracking-tight italic'>
-					NOW
-				</Button>
-			</h2>
-		</>
-	)
-}
-
 const MobileHome = () => {
 	return (
 		<>
 			<div
 				id='mobile-hero'
 				className={cn(
-					'relative z-10 h-screen max-h-screen overflow-hidden md:hidden',
-					'items-around flex flex-col justify-between pt-16 pl-0',
+					'relative z-10 h-screen max-h-screen md:hidden',
+					'items-around flex flex-col justify-between pl-0',
 					'inline-flex flex-col self-stretch'
 				)}>
 				<hgroup className='pl-4'>
-					<TopText className='text-brand-bright' />
+					<TopText className='text-brand-bright pt-8' />
 					<h1 className='sr-only'>Help Me Leave</h1>
 
 					<span className='-mt-6 block px-4 text-xl leading-[1.25lh] font-medium text-black italic dark:text-white dark:text-shadow-xs'>
 						A resource hub for at-risk Americans seeking safety abroad
 					</span>
 				</hgroup>
-				<BottomPlane className='grow' />
-				<Page2 />
+				<span className='flex w-full grow items-end justify-end text-end'>
+					<BottomPlane className='w-1/2' />
+				</span>
+				<h2 className='flex grow flex-col'>
+					<Button
+						variant='ghost'
+						href='/leave-now'
+						className='decoration-brand-bright font-heading hover:text-brand-bright to-background text-foreground/85 flex h-min grow items-start justify-center bg-linear-to-b from-transparent to-25% pb-8 text-8xl tracking-tight italic underline underline-offset-12'>
+						NOW
+					</Button>
+				</h2>
 			</div>
 		</>
 	)
