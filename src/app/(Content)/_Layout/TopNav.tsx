@@ -78,9 +78,8 @@ export const NavMenu = () => {
 		<>
 			<nav
 				className={cn(
-					// 'xs:bg-purple-200 sm:bg-red-200 md:bg-blue-200 lg:bg-amber-200 xl:bg-green-200',
 					'flex w-full overflow-hidden',
-					'text-sidebar-foreground z-99 bg-zinc-200/70 py-2 text-xs font-semibold tracking-tight uppercase italic dark:bg-zinc-900'
+					'text-sidebar-foreground z-99 bg-zinc-200/70 py-2 text-xs font-semibold tracking-tight uppercase italic dark:bg-neutral-900'
 				)}>
 				<Link
 					href='/'
@@ -147,7 +146,9 @@ const MobileNavMenu = ({
 							'bg-background fixed inset-0 z-50 flex h-full min-h-screen w-full flex-col backdrop-blur-sm'
 						)}>
 						<header className='mb-4 flex w-full items-center justify-between p-4'>
-							<HML className='text-brand flex h-full w-auto items-center gap-0 px-4 py-1 text-3xl font-bold -tracking-widest' />
+							<Link href='/'>
+								<HML className='text-brand flex h-full w-auto items-center gap-0 px-4 py-1 text-3xl font-bold -tracking-widest' />
+							</Link>
 							<Button
 								variant='ghost'
 								onClick={() => setMenuOpen(false)}
