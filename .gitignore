@@ -45,3 +45,4 @@ yarn-error.log*
 *.tsbuildinfo
 .vscode/settings.json
 node_modules
+/www

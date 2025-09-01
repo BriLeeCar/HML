@@ -71,7 +71,7 @@ const GuidesResourcesPage = async () => {
 		<Page>
 			<PageHeading
 				eyebrow='Guides & Resources'
-				subtitle='Welcome to our library of heavily researched and thoughtfully curated resources. These guides are designed to help you navigate the complexities of planning your evacuation, offering practical advice and insights to empower your journey.'>
+				subtitle='Welcome to our library of heavily researched and thoughtfully curated resources. We will be adding to this collection over time, so please check back often for new insights and information to support your journey.'>
 				The Library
 			</PageHeading>
 			{/* <Tabs /> */}

@@ -1,7 +1,7 @@
-import Link from 'next/link'
 import {
 	CTA,
 	Divider,
+	InlineLink,
 	List,
 	P,
 	Page,
@@ -54,21 +54,17 @@ export default function SupportTeam() {
 				</SectionHeading>
 				<List type={'numbered'}>
 					<li>
-						<Link
-							href='/get-ready-to-leave'
-							className='font-bold underline underline-offset-2'>
+						<InlineLink href='/get-ready-to-leave'>
 							Get Ready to Leave
-						</Link>{' '}
+						</InlineLink>{' '}
 						provides important information about documentation and the
 						general overview of the process. It also provides
 						additional readings and resources.
 					</li>
 					<li>
-						<Link
-							href='/pdf/Traditional-Paths-v-Asylum.pdf'
-							className='font-bold underline underline-offset-2'>
+						<InlineLink href='/pdf/Traditional-Paths-v-Asylum.pdf'>
 							Traditional Visa Routes vs. Asylum Path
-						</Link>{' '}
+						</InlineLink>{' '}
 						explains the differences between traditional visa routes
 						and the asylum path. Each has its own criteria and
 						expectations, and it’s important to understand these in

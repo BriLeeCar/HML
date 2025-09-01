@@ -77,13 +77,19 @@ declare global {
 		type PreCountryApi = {
 			unMember: boolean
 			abbr: string
-			name: string
 			flag: string
 			population: number
 			region: string
 			subregion: string
-			languages: Record<string, string>
-			currencies: Record<string, { name: string; symbol: string }>
+			languages: Record<string, string | undefined>
+			currencies: {
+				[key: string]:
+					| {
+							name: string
+							symbol: string
+					  }
+					| undefined
+			}
 		}
 
 		type Pathway = {

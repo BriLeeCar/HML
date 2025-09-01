@@ -1,1012 +1,1012 @@
 [
-	{
-		"abbr": "AF",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "AL",
-		"pollution": 77.3,
-		"climate": 86.3
-	},
-	{
-		"abbr": "DZ",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "AD",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "AO",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "AG",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "AR",
-		"pollution": 50.8,
-		"climate": 94.9
-	},
-	{
-		"abbr": "AM",
-		"pollution": 61.8,
-		"climate": 63.4
-	},
-	{
-		"abbr": "AU",
-		"pollution": 26.9,
-		"climate": 94.2
-	},
-	{
-		"abbr": "AT",
-		"pollution": 20.6,
-		"climate": 76.6
-	},
-	{
-		"abbr": "AZ",
-		"pollution": 72,
-		"climate": 91.4
-	},
-	{
-		"abbr": "BS",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "BH",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "BD",
-		"pollution": 85.6,
-		"climate": 72.9
-	},
-	{
-		"abbr": "BB",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "BY",
-		"pollution": 44.5,
-		"climate": 69.3
-	},
-	{
-		"abbr": "BE",
-		"pollution": 49.2,
-		"climate": 86.4
-	},
-	{
-		"abbr": "BZ",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "BJ",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "BT",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "BO",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "BA",
-		"pollution": 59.7,
-		"climate": 82.9
-	},
-	{
-		"abbr": "BW",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "BR",
-		"pollution": 52.8,
-		"climate": 91.8
-	},
-	{
-		"abbr": "BN",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "BG",
-		"pollution": 62.8,
-		"climate": 81.5
-	},
-	{
-		"abbr": "BF",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "BI",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "KH",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "CM",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "CA",
-		"pollution": 29.8,
-		"climate": 55.9
-	},
-	{
-		"abbr": "CV",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "KY",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "CF",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "TD",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "CL",
-		"pollution": 77.4,
-		"climate": 95.6
-	},
-	{
-		"abbr": "CN",
-		"pollution": 76.7,
-		"climate": 73.6
-	},
-	{
-		"abbr": "CO",
-		"pollution": 62.2,
-		"climate": 82.3
-	},
-	{
-		"abbr": "KM",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "CG",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "CK",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "CR",
-		"pollution": 41.6,
-		"climate": 93.1
-	},
-	{
-		"abbr": "CI",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "HR",
-		"pollution": 31.6,
-		"climate": 89.9
-	},
-	{
-		"abbr": "CU",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "CY",
-		"pollution": 55.4,
-		"climate": 93.3
-	},
-	{
-		"abbr": "CZ",
-		"pollution": 34.6,
-		"climate": 78.7
-	},
-	{
-		"abbr": "CD",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "DK",
-		"pollution": 20.9,
-		"climate": 81.2
-	},
-	{
-		"abbr": "DJ",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "DM",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "DO",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "EC",
-		"pollution": 59.1,
-		"climate": 94.5
-	},
-	{
-		"abbr": "EG",
-		"pollution": 82.7,
-		"climate": 90.8
-	},
-	{
-		"abbr": "SV",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "GQ",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "ER",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "EE",
-		"pollution": 16.9,
-		"climate": 71.2
-	},
-	{
-		"abbr": "SZ",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "ET",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "FK",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "FJ",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "FI",
-		"pollution": 11.7,
-		"climate": 54.4
-	},
-	{
-		"abbr": "FR",
-		"pollution": 43.7,
-		"climate": 89.9
-	},
-	{
-		"abbr": "GF",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "GA",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "GM",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "GE",
-		"pollution": 67.6,
-		"climate": 88.5
-	},
-	{
-		"abbr": "DE",
-		"pollution": 28.8,
-		"climate": 82.8
-	},
-	{
-		"abbr": "GH",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "GR",
-		"pollution": 49.4,
-		"climate": 93.1
-	},
-	{
-		"abbr": "GL",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "GD",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "GT",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "GN",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "GW",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "GY",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "HT",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "HN",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "HU",
-		"pollution": 46.7,
-		"climate": 79.3
-	},
-	{
-		"abbr": "IS",
-		"pollution": 16.7,
-		"climate": 68.8
-	},
-	{
-		"abbr": "IN",
-		"pollution": 72.8,
-		"climate": 64.5
-	},
-	{
-		"abbr": "ID",
-		"pollution": 68.1,
-		"climate": 66.7
-	},
-	{
-		"abbr": "IR",
-		"pollution": 75.3,
-		"climate": 66.9
-	},
-	{
-		"abbr": "IQ",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "IE",
-		"pollution": 34.9,
-		"climate": 89.8
-	},
-	{
-		"abbr": "IL",
-		"pollution": 56.7,
-		"climate": 93.8
-	},
-	{
-		"abbr": "IT",
-		"pollution": 53.4,
-		"climate": 90.1
-	},
-	{
-		"abbr": "JM",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "JP",
-		"pollution": 38.2,
-		"climate": 84.1
-	},
-	{
-		"abbr": "JO",
-		"pollution": 77.1,
-		"climate": 91.2
-	},
-	{
-		"abbr": "KZ",
-		"pollution": 72.9,
-		"climate": 38.8
-	},
-	{
-		"abbr": "KE",
-		"pollution": 69,
-		"climate": 87.1
-	},
-	{
-		"abbr": "KI",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "KW",
-		"pollution": 69.4,
-		"climate": 20.2
-	},
-	{
-		"abbr": "KG",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "LA",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "LV",
-		"pollution": 30.1,
-		"climate": 76.8
-	},
-	{
-		"abbr": "LB",
-		"pollution": 89.6,
-		"climate": 94.7
-	},
-	{
-		"abbr": "LS",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "LR",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "LY",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "LI",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "LT",
-		"pollution": 25.9,
-		"climate": 69.9
-	},
-	{
-		"abbr": "LU",
-		"pollution": 22.9,
-		"climate": 82.6
-	},
-	{
-		"abbr": "MG",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "MW",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "MY",
-		"pollution": 60.9,
-		"climate": 58.3
-	},
-	{
-		"abbr": "MV",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "ML",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "MT",
-		"pollution": 75.7,
-		"climate": 97.8
-	},
-	{
-		"abbr": "MH",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "MR",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "MU",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "MX",
-		"pollution": 58.3,
-		"climate": 83.3
-	},
-	{
-		"abbr": "FM",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "MD",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "MC",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "MN",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "ME",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "MA",
-		"pollution": 68.4,
-		"climate": 91.7
-	},
-	{
-		"abbr": "MZ",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "MM",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "NA",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "NP",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "NL",
-		"pollution": 20.9,
-		"climate": 86.8
-	},
-	{
-		"abbr": "NC",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "NZ",
-		"pollution": 26,
-		"climate": 97.3
-	},
-	{
-		"abbr": "NI",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "NE",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "NG",
-		"pollution": 87.9,
-		"climate": 66.3
-	},
-	{
-		"abbr": "KP",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "MK",
-		"pollution": 79.2,
-		"climate": 79.2
-	},
-	{
-		"abbr": "NO",
-		"pollution": 18.3,
-		"climate": 70.9
-	},
-	{
-		"abbr": "OM",
-		"pollution": 36.4,
-		"climate": 71.3
-	},
-	{
-		"abbr": "PK",
-		"pollution": 73.2,
-		"climate": 70.8
-	},
-	{
-		"abbr": "PW",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "PS",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "PA",
-		"pollution": 55.6,
-		"climate": 68.2
-	},
-	{
-		"abbr": "PG",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "PY",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "PE",
-		"pollution": 81.9,
-		"climate": 93.3
-	},
-	{
-		"abbr": "PH",
-		"pollution": 72.5,
-		"climate": 69
-	},
-	{
-		"abbr": "PL",
-		"pollution": 55.3,
-		"climate": 75.6
-	},
-	{
-		"abbr": "PT",
-		"pollution": 29.5,
-		"climate": 97.7
-	},
-	{
-		"abbr": "PR",
-		"pollution": 47.9,
-		"climate": 71.2
-	},
-	{
-		"abbr": "QA",
-		"pollution": 60,
-		"climate": 36
-	},
-	{
-		"abbr": "RO",
-		"pollution": 58.2,
-		"climate": 76.3
-	},
-	{
-		"abbr": "RU",
-		"pollution": 58.5,
-		"climate": 36.3
-	},
-	{
-		"abbr": "RW",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "KN",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "LC",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "VC",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "WS",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "SM",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "ST",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "SA",
-		"pollution": 62.4,
-		"climate": 39.3
-	},
-	{
-		"abbr": "SN",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "RS",
-		"pollution": 65.9,
-		"climate": 83.2
-	},
-	{
-		"abbr": "SC",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "SL",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "SG",
-		"pollution": 32.3,
-		"climate": 57.5
-	},
-	{
-		"abbr": "SK",
-		"pollution": 37.1,
-		"climate": 73.9
-	},
-	{
-		"abbr": "SI",
-		"pollution": 22.2,
-		"climate": 80.6
-	},
-	{
-		"abbr": "SB",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "SO",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "ZA",
-		"pollution": 56.7,
-		"climate": 95.4
-	},
-	{
-		"abbr": "KR",
-		"pollution": 57.5,
-		"climate": 68.5
-	},
-	{
-		"abbr": "SS",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "ES",
-		"pollution": 35.3,
-		"climate": 92.7
-	},
-	{
-		"abbr": "LK",
-		"pollution": 58,
-		"climate": 64.1
-	},
-	{
-		"abbr": "SD",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "SR",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "SE",
-		"pollution": 17.6,
-		"climate": 64.7
-	},
-	{
-		"abbr": "CH",
-		"pollution": 24,
-		"climate": 80.6
-	},
-	{
-		"abbr": "SY",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "TR",
-		"pollution": 64.1,
-		"climate": 90.2
-	},
-	{
-		"abbr": "TW",
-		"pollution": 64.1,
-		"climate": 83.9
-	},
-	{
-		"abbr": "TJ",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "TZ",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "TH",
-		"pollution": 75.6,
-		"climate": 69.3
-	},
-	{
-		"abbr": "TL",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "TG",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "TO",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "TT",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "TN",
-		"pollution": 69.7,
-		"climate": 94.1
-	},
-	{
-		"abbr": "TM",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "TV",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "UG",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "UA",
-		"pollution": 62.2,
-		"climate": 71.9
-	},
-	{
-		"abbr": "AE",
-		"pollution": 48.2,
-		"climate": 43.4
-	},
-	{
-		"abbr": "GB",
-		"pollution": 40.7,
-		"climate": 88.1
-	},
-	{
-		"abbr": "US",
-		"pollution": 36.9,
-		"climate": 76.1
-	},
-	{
-		"abbr": "UY",
-		"pollution": 43.3,
-		"climate": 98.5
-	},
-	{
-		"abbr": "UZ",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "VU",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "VE",
-		"pollution": 73.7,
-		"climate": 77.1
-	},
-	{
-		"abbr": "VN",
-		"pollution": 83.8,
-		"climate": 71.1
-	},
-	{
-		"abbr": "EH",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "YE",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "ZM",
-		"pollution": null,
-		"climate": null
-	},
-	{
-		"abbr": "ZW",
-		"pollution": null,
-		"climate": null
-	}
+    {
+        "abbr": "AFG",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "ALB",
+        "pollution": 77.3,
+        "climate": 86.3
+    },
+    {
+        "abbr": "DZA",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "AND",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "AGO",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "ATG",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "ARG",
+        "pollution": 50.8,
+        "climate": 94.9
+    },
+    {
+        "abbr": "ARM",
+        "pollution": 61.8,
+        "climate": 63.4
+    },
+    {
+        "abbr": "AUS",
+        "pollution": 26.9,
+        "climate": 94.2
+    },
+    {
+        "abbr": "AUT",
+        "pollution": 20.6,
+        "climate": 76.6
+    },
+    {
+        "abbr": "AZE",
+        "pollution": 72,
+        "climate": 91.4
+    },
+    {
+        "abbr": "BHS",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "BHR",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "BGD",
+        "pollution": 85.6,
+        "climate": 72.9
+    },
+    {
+        "abbr": "BRB",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "BLR",
+        "pollution": 44.5,
+        "climate": 69.3
+    },
+    {
+        "abbr": "BEL",
+        "pollution": 49.2,
+        "climate": 86.4
+    },
+    {
+        "abbr": "BLZ",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "BEN",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "BTN",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "BOL",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "BIH",
+        "pollution": 59.7,
+        "climate": 82.9
+    },
+    {
+        "abbr": "BWA",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "BRA",
+        "pollution": 52.8,
+        "climate": 91.8
+    },
+    {
+        "abbr": "BRN",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "BGR",
+        "pollution": 62.8,
+        "climate": 81.5
+    },
+    {
+        "abbr": "BFA",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "BDI",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "KHM",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "CMR",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "CAN",
+        "pollution": 29.8,
+        "climate": 55.9
+    },
+    {
+        "abbr": "CPV",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "CYM",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "CAF",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "TCD",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "CHL",
+        "pollution": 77.4,
+        "climate": 95.6
+    },
+    {
+        "abbr": "CHN",
+        "pollution": 76.7,
+        "climate": 73.6
+    },
+    {
+        "abbr": "COL",
+        "pollution": 62.2,
+        "climate": 82.3
+    },
+    {
+        "abbr": "COM",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "COG",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "COK",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "CRI",
+        "pollution": 41.6,
+        "climate": 93.1
+    },
+    {
+        "abbr": "CIV",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "HRV",
+        "pollution": 31.6,
+        "climate": 89.9
+    },
+    {
+        "abbr": "CUB",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "CYP",
+        "pollution": 55.4,
+        "climate": 93.3
+    },
+    {
+        "abbr": "CZE",
+        "pollution": 34.6,
+        "climate": 78.7
+    },
+    {
+        "abbr": "COD",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "DNK",
+        "pollution": 20.9,
+        "climate": 81.2
+    },
+    {
+        "abbr": "DJI",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "DMA",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "DOM",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "ECU",
+        "pollution": 59.1,
+        "climate": 94.5
+    },
+    {
+        "abbr": "EGY",
+        "pollution": 82.7,
+        "climate": 90.8
+    },
+    {
+        "abbr": "SLV",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "GNQ",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "ERI",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "EST",
+        "pollution": 16.9,
+        "climate": 71.2
+    },
+    {
+        "abbr": "SWZ",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "ETH",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "FLK",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "FJI",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "FIN",
+        "pollution": 11.7,
+        "climate": 54.4
+    },
+    {
+        "abbr": "FRA",
+        "pollution": 43.7,
+        "climate": 89.9
+    },
+    {
+        "abbr": "GUF",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "GAB",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "GMB",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "GEO",
+        "pollution": 67.6,
+        "climate": 88.5
+    },
+    {
+        "abbr": "DEU",
+        "pollution": 28.8,
+        "climate": 82.8
+    },
+    {
+        "abbr": "GHA",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "GRC",
+        "pollution": 49.4,
+        "climate": 93.1
+    },
+    {
+        "abbr": "GRL",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "GRD",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "GTM",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "GIN",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "GNB",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "GUY",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "HTI",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "HND",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "HUN",
+        "pollution": 46.7,
+        "climate": 79.3
+    },
+    {
+        "abbr": "ISL",
+        "pollution": 16.7,
+        "climate": 68.8
+    },
+    {
+        "abbr": "IND",
+        "pollution": 72.8,
+        "climate": 64.5
+    },
+    {
+        "abbr": "IDN",
+        "pollution": 68.1,
+        "climate": 66.7
+    },
+    {
+        "abbr": "IRN",
+        "pollution": 75.3,
+        "climate": 66.9
+    },
+    {
+        "abbr": "IRQ",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "IRL",
+        "pollution": 34.9,
+        "climate": 89.8
+    },
+    {
+        "abbr": "ISR",
+        "pollution": 56.7,
+        "climate": 93.8
+    },
+    {
+        "abbr": "ITA",
+        "pollution": 53.4,
+        "climate": 90.1
+    },
+    {
+        "abbr": "JAM",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "JPN",
+        "pollution": 38.2,
+        "climate": 84.1
+    },
+    {
+        "abbr": "JOR",
+        "pollution": 77.1,
+        "climate": 91.2
+    },
+    {
+        "abbr": "KAZ",
+        "pollution": 72.9,
+        "climate": 38.8
+    },
+    {
+        "abbr": "KEN",
+        "pollution": 69,
+        "climate": 87.1
+    },
+    {
+        "abbr": "KIR",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "KWT",
+        "pollution": 69.4,
+        "climate": 20.2
+    },
+    {
+        "abbr": "KGZ",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "LAO",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "LVA",
+        "pollution": 30.1,
+        "climate": 76.8
+    },
+    {
+        "abbr": "LBN",
+        "pollution": 89.6,
+        "climate": 94.7
+    },
+    {
+        "abbr": "LSO",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "LBR",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "LBY",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "LIE",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "LTU",
+        "pollution": 25.9,
+        "climate": 69.9
+    },
+    {
+        "abbr": "LUX",
+        "pollution": 22.9,
+        "climate": 82.6
+    },
+    {
+        "abbr": "MDG",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "MWI",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "MYS",
+        "pollution": 60.9,
+        "climate": 58.3
+    },
+    {
+        "abbr": "MDV",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "MLI",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "MLT",
+        "pollution": 75.7,
+        "climate": 97.8
+    },
+    {
+        "abbr": "MHL",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "MRT",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "MUS",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "MEX",
+        "pollution": 58.3,
+        "climate": 83.3
+    },
+    {
+        "abbr": "FSM",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "MDA",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "MCO",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "MNG",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "MNE",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "MAR",
+        "pollution": 68.4,
+        "climate": 91.7
+    },
+    {
+        "abbr": "MOZ",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "MMR",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "NAM",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "NPL",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "NLD",
+        "pollution": 20.9,
+        "climate": 86.8
+    },
+    {
+        "abbr": "NCL",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "NZL",
+        "pollution": 26,
+        "climate": 97.3
+    },
+    {
+        "abbr": "NIC",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "NER",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "NGA",
+        "pollution": 87.9,
+        "climate": 66.3
+    },
+    {
+        "abbr": "PRK",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "MKD",
+        "pollution": 79.2,
+        "climate": 79.2
+    },
+    {
+        "abbr": "NOR",
+        "pollution": 18.3,
+        "climate": 70.9
+    },
+    {
+        "abbr": "OMN",
+        "pollution": 36.4,
+        "climate": 71.3
+    },
+    {
+        "abbr": "PAK",
+        "pollution": 73.2,
+        "climate": 70.8
+    },
+    {
+        "abbr": "PLW",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "PSE",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "PAN",
+        "pollution": 55.6,
+        "climate": 68.2
+    },
+    {
+        "abbr": "PNG",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "PRY",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "PER",
+        "pollution": 81.9,
+        "climate": 93.3
+    },
+    {
+        "abbr": "PHL",
+        "pollution": 72.5,
+        "climate": 69
+    },
+    {
+        "abbr": "POL",
+        "pollution": 55.3,
+        "climate": 75.6
+    },
+    {
+        "abbr": "PRT",
+        "pollution": 29.5,
+        "climate": 97.7
+    },
+    {
+        "abbr": "PRI",
+        "pollution": 47.9,
+        "climate": 71.2
+    },
+    {
+        "abbr": "QAT",
+        "pollution": 60,
+        "climate": 36
+    },
+    {
+        "abbr": "ROU",
+        "pollution": 58.2,
+        "climate": 76.3
+    },
+    {
+        "abbr": "RUS",
+        "pollution": 58.5,
+        "climate": 36.3
+    },
+    {
+        "abbr": "RWA",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "KNA",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "LCA",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "VCT",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "WSM",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "SMR",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "STP",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "SAU",
+        "pollution": 62.4,
+        "climate": 39.3
+    },
+    {
+        "abbr": "SEN",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "SRB",
+        "pollution": 65.9,
+        "climate": 83.2
+    },
+    {
+        "abbr": "SYC",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "SLE",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "SGP",
+        "pollution": 32.3,
+        "climate": 57.5
+    },
+    {
+        "abbr": "SVK",
+        "pollution": 37.1,
+        "climate": 73.9
+    },
+    {
+        "abbr": "SVN",
+        "pollution": 22.2,
+        "climate": 80.6
+    },
+    {
+        "abbr": "SLB",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "SOM",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "ZAF",
+        "pollution": 56.7,
+        "climate": 95.4
+    },
+    {
+        "abbr": "KOR",
+        "pollution": 57.5,
+        "climate": 68.5
+    },
+    {
+        "abbr": "SSD",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "ESP",
+        "pollution": 35.3,
+        "climate": 92.7
+    },
+    {
+        "abbr": "LKA",
+        "pollution": 58,
+        "climate": 64.1
+    },
+    {
+        "abbr": "SDN",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "SUR",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "SWE",
+        "pollution": 17.6,
+        "climate": 64.7
+    },
+    {
+        "abbr": "CHE",
+        "pollution": 24,
+        "climate": 80.6
+    },
+    {
+        "abbr": "SYR",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "TUR",
+        "pollution": 64.1,
+        "climate": 90.2
+    },
+    {
+        "abbr": "TWN",
+        "pollution": 64.1,
+        "climate": 83.9
+    },
+    {
+        "abbr": "TJK",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "TZA",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "THA",
+        "pollution": 75.6,
+        "climate": 69.3
+    },
+    {
+        "abbr": "TLS",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "TGO",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "TON",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "TTO",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "TUN",
+        "pollution": 69.7,
+        "climate": 94.1
+    },
+    {
+        "abbr": "TKM",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "TUV",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "UGA",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "UKR",
+        "pollution": 62.2,
+        "climate": 71.9
+    },
+    {
+        "abbr": "ARE",
+        "pollution": 48.2,
+        "climate": 43.4
+    },
+    {
+        "abbr": "GBR",
+        "pollution": 40.7,
+        "climate": 88.1
+    },
+    {
+        "abbr": "USA",
+        "pollution": 36.9,
+        "climate": 76.1
+    },
+    {
+        "abbr": "URY",
+        "pollution": 43.3,
+        "climate": 98.5
+    },
+    {
+        "abbr": "UZB",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "VUT",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "VEN",
+        "pollution": 73.7,
+        "climate": 77.1
+    },
+    {
+        "abbr": "VNM",
+        "pollution": 83.8,
+        "climate": 71.1
+    },
+    {
+        "abbr": "ESH",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "YEM",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "ZMB",
+        "pollution": null,
+        "climate": null
+    },
+    {
+        "abbr": "ZWE",
+        "pollution": null,
+        "climate": null
+    }
 ]
