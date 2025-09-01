@@ -318,6 +318,9 @@
 	}
 
 	:is(body, html) {
+		&:has(#mobile-hero) {
+			height: 100vh;
+		}
 		&:has(#homePage, #map) {
 			background-color: var(--color-background);
 		}

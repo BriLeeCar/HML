@@ -72,7 +72,7 @@ const CountryPage = async ({
 	const pathway = db().getCountryByAbbr(country)
 
 	if (section) {
-		if (section == 'pathways')
+		if (section == 'pathways' && pathway?.pathways?.length)
 			content = {
 				Provider: () => (
 					<Pathways

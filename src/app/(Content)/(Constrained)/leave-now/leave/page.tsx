@@ -51,18 +51,12 @@ const LeavePage = () => {
 				<SubSection title='Choosing your destination'>
 					<List>
 						<li>
-							<InlineLink
-								href='/top-visa-options'
-								target='_blank'>
-								Top Visa routes
+							<InlineLink href='/claiming-asylum'>
+								Claiming Asylum: What it Means and Where to Start
 							</InlineLink>
 						</li>
 						<li>
-							<InlineLink
-								href='/top-asylum-options'
-								target='_blank'>
-								Top Asylum routes
-							</InlineLink>
+							<InlineLink href='/explorer'>Visa Explorer</InlineLink>
 						</li>
 					</List>
 				</SubSection>

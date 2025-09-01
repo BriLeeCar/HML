@@ -7,7 +7,7 @@ export const Button = ({
 }: tBtnProps<'link' | 'button'>) => {
 	// const Tag = 'href' in props ? Link : 'button'
 	const classes = cn(
-		'click rounded-md px-3.5 py-2.5 text-xs font-semibold tracking-wide whitespace-nowrap uppercase transition-all focus-visible:outline-2 focus-visible:outline-offset-2 has-[svg]:py-2',
+		'click relative rounded-md px-3.5 py-2.5 text-xs font-semibold tracking-wide whitespace-nowrap uppercase transition-all focus-visible:outline-2 focus-visible:outline-offset-2 has-[svg]:py-2',
 		variant == 'default'
 			&& 'bg-brand hover:bg-brand-bright text-white focus-visible:outline-zinc-600',
 		variant == 'bright'

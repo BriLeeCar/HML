@@ -62,13 +62,11 @@ export default function SupportTeam() {
 						additional readings and resources.
 					</li>
 					<li>
-						<InlineLink href='/pdf/Traditional-Paths-v-Asylum.pdf'>
-							Traditional Visa Routes vs. Asylum Path
+						<InlineLink href='/claiming-asylum'>
+							Claiming Asylum: What it Means and Where to Start
 						</InlineLink>{' '}
-						explains the differences between traditional visa routes
-						and the asylum path. Each has its own criteria and
-						expectations, and it’s important to understand these in
-						advance.
+						provides important information about what asylum actually
+						means, and if it is the right pathway for you.
 					</li>
 				</List>
 			</Section>

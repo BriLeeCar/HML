@@ -1,40 +1,14 @@
 'use client'
 
 import { MapPathEl, MapSvg } from '@/(Content)/(Full)/map/Map'
-import { useMotionValueEvent, useScroll } from 'motion/react'
-import Link from 'next/link'
-import { useContext, useRef } from 'react'
+import { useContext } from 'react'
+import { Button } from '~/components/Button'
 import { cn } from '~/lib/cn'
 import { DBContext } from '~/server/db/provider'
 import { MapBtn, NowBtn, SmallBtns } from './Buttons'
 import { HeadingText, TopText } from './HeadingText'
 import { BottomPlane } from './MobileText'
 import { Img } from './SidebarImg'
-
-const MenuLink = ({ ...props }: Props<typeof Link>) => {
-	return (
-		<Link
-			{...props}
-			className='text-foreground w-full text-end text-[1.75rem] font-extrabold underline decoration-red-700 decoration-2'
-		/>
-	)
-}
-
-const MenuWrapper = ({ ...props }) => {
-	return (
-		<div
-			{...props}
-			className='flex flex-col items-center justify-center self-stretch border-black/20 pb-6 tracking-tight not-last:border-b-2'
-		/>
-	)
-}
-
-const MenuSub = ({ ...props }) => (
-	<div
-		{...props}
-		className='flex flex-col items-end justify-center gap-2.5 self-stretch text-end leading-tight tracking-wide text-zinc-600 dark:text-zinc-400'
-	/>
-)
 
 const Home = () => {
 	const db = useContext(DBContext)
@@ -89,118 +63,50 @@ export default Home
 const Page2 = () => {
 	return (
 		<>
-			<h2 className='flex grow flex-col'>
-				<span className='bg-brand-bright flex h-10 max-h-[20vh] grow items-end pl-8 text-3xl font-bold tracking-tight text-white dark:bg-red-700'>
-					HELP ME LEAVE
-				</span>
-				<Link
+			<h2 className='flex flex-col px-2 pb-6'>
+				<Button
+					variant='ghost'
 					href='/leave-now'
-					className='text-brand-bright decoration-brand pl-8 text-8xl/18 font-extrabold tracking-tight underline decoration-4 underline-offset-4'>
+					className='text-brand-bright flex grow justify-center font-serif text-8xl tracking-tight italic'>
 					NOW
-				</Link>
+				</Button>
 			</h2>
-			<div className='flex flex-col items-center justify-between gap-4 self-stretch px-4 py-3'>
-				<MenuWrapper>
-					<MenuLink href='/explorer'>Visa Explorer</MenuLink>
-					<MenuSub>
-						Hand picked and heavily researched options to get you to
-						safety the fastest
-					</MenuSub>
-				</MenuWrapper>
-				<MenuWrapper>
-					<MenuLink href='/guides-resources'>
-						Guides & Resources
-					</MenuLink>
-					<MenuSub>
-						<span>
-							Whether you’re getting your passport or wanting to
-							prepare for your first month in your new home,{' '}
-							<em className='inline'>
-								we want to make sure you’re prepared.
-							</em>
-						</span>
-					</MenuSub>
-				</MenuWrapper>
-				<MenuWrapper>
-					<MenuLink href='/map'>Interactive Map</MenuLink>
-					<MenuSub>
-						Hand picked and heavily researched options to get you to
-						safety the fastest
-					</MenuSub>
-				</MenuWrapper>
-				<MenuWrapper>
-					<MenuLink href='/support'>Find Support</MenuLink>
-					<MenuSub>
-						<p>
-							The{' '}
-							<strong className='font-extrabold'>
-								Help Me Leave
-							</strong>{' '}
-							team has volunteers ready to help guide you through this
-							process.
-						</p>
-						<small className='text-sm italic'>
-							Services limited to the most at risk groups.
-						</small>
-					</MenuSub>
-				</MenuWrapper>
-			</div>
 		</>
 	)
 }
 
 const MobileHome = () => {
-	const scrollProgress = useScroll()
-	const bottomRef = useRef<HTMLDivElement>(null)
-
-	useMotionValueEvent(scrollProgress.scrollY, 'change', (latest) => {
-		const previous = scrollProgress.scrollY.getPrevious()
-		if (window.innerWidth > 600 || window.innerHeight < 500) return
-		if (previous != undefined) {
-			const direction = latest > previous ? 'down' : 'up'
-
-			if (
-				direction == 'down'
-				&& latest > window.innerHeight / 4
-				&& latest < window.innerHeight
-			) {
-				scrollTo({
-					top: bottomRef.current?.offsetTop,
-					behavior: 'smooth',
-				})
-			}
-		}
-	})
 	return (
 		<>
 			<div
+				id='mobile-hero'
 				className={cn(
-					'relative z-10 h-screen md:hidden',
-					'items-around flex flex-col justify-between pt-28 pl-0',
+					'relative z-10 h-screen max-h-screen overflow-hidden md:hidden',
+					'items-around flex flex-col justify-between pt-16 pl-0',
 					'inline-flex flex-col self-stretch'
 				)}>
 				<hgroup className='pl-4'>
-					<TopText className='dark:text-brand-bright text-red-500' />
+					<TopText className='text-brand-bright' />
 					<h1 className='sr-only'>Help Me Leave</h1>
 
 					<span className='-mt-6 block px-4 text-xl leading-[1.25lh] font-medium text-black italic dark:text-white dark:text-shadow-xs'>
 						A resource hub for at-risk Americans seeking safety abroad
 					</span>
 				</hgroup>
-				<span className='to-background/50 h-fill w-full bg-gradient-to-b from-transparent from-50% to-50%'>
-					<BottomPlane className='text-red-500 dark:text-red-700' />
-				</span>
+				<BottomPlane className='grow' />
+				<Page2 />
+				{/* <span className='to-background/50 h-fill w-full bg-gradient-to-b from-transparent from-50% to-50%'>
+					{/* 
+				</span> */}
 			</div>
-			<div
+			{/* <div
 				ref={bottomRef}
 				className={cn(
-					'relative z-10 h-screen',
+					'relative z-10',
 					'items-around flex flex-col pl-0',
 					'bg-background inline-flex flex-col justify-between self-stretch',
 					'md:hidden'
-				)}>
-				<Page2 />
-			</div>
+				)}></div> */}
 		</>
 	)
 }

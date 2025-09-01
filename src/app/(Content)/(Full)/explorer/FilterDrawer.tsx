@@ -52,13 +52,13 @@ export const Drawer = ({
 			}}
 			animate={{ opacity: 1 }}
 			exit={{ opacity: 0 }}
-			onClick={(e) =>
+			onClick={(e) => {
 				e.target == e.currentTarget
-				&& dispatchReducer({
-					type: 'SET_DRAWER',
-					payload: { size: '' },
-				})
-			}
+					&& dispatchReducer({
+						type: 'SET_DRAWER',
+						payload: { size: '' },
+					})
+			}}
 			className='fixed inset-0 z-[999] h-screen w-screen overflow-hidden backdrop-blur-sm md:backdrop-blur-xs'>
 			<div
 				key='drawer-container'
@@ -96,7 +96,6 @@ export const Drawer = ({
 										reducer={reducer}
 										matches={cb.matches}
 										dispatchReducer={dispatchReducer}
-										autoFocus={cb.label == 'Have a monthly income'}
 									/>
 								))}
 							</SubSection>
