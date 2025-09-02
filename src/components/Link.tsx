@@ -11,6 +11,7 @@ export const Link = ({ size = 'md', ...props }: Props.Link) => {
 	return (
 		<NextLink
 			{...props}
+			prefetch={false}
 			className={cn(
 				size == 'sm' ? 'text-sm'
 				: size == 'md' ? 'text-base'

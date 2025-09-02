@@ -3,6 +3,7 @@ import type { NextConfig } from 'next'
 const nextConfig: NextConfig = {
 	pageExtensions: ['tsx', 'ts', 'jsx', 'js', 'mdx'],
 	images: {
+		unoptimized: true,
 		remotePatterns: [
 			{
 				protocol: 'https',

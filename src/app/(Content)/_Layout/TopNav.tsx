@@ -53,6 +53,7 @@ const NavMenuItem = ({
 }) => {
 	return (
 		<Link
+			prefetch={false}
 			{...props}
 			className={cn(
 				'hover:text-brand-bright relative flex h-full gap-3 rounded-lg px-3 transition-all',
@@ -82,6 +83,7 @@ export const NavMenu = () => {
 					'text-sidebar-foreground z-99 bg-zinc-200/70 py-2 text-xs font-semibold tracking-tight uppercase italic dark:bg-neutral-900'
 				)}>
 				<Link
+					prefetch={false}
 					href='/'
 					className='relative'>
 					<HML className='text-brand flex h-full w-auto items-center gap-0 px-4 py-1 text-3xl font-bold -tracking-widest' />

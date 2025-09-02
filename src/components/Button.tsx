@@ -21,6 +21,7 @@ export const Button = ({
 		const linkProps = props as Props.Link
 		return (
 			<Link
+				prefetch={false}
 				{...linkProps}
 				href={linkProps.href}
 				className={classes}>

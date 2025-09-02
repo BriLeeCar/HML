@@ -80,6 +80,7 @@ const MobileHome = () => {
 					</span>
 				</hgroup>
 				<Link
+					prefetch={false}
 					href='/leave-now'
 					className='flex w-full grow items-end justify-end text-end'>
 					<BottomPlane className='w-1/2' />

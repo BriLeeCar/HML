@@ -22,6 +22,7 @@ export const Country = ({
 			<Link
 				href={`/countries/${country.abbr.toLowerCase()}`}
 				title={country.name}
+				prefetch={false}
 				className='decoration-brand-bright/50 underline hover:decoration-white/50'>
 				<section className='absolute top-0 right-0 left-0 flex h-[calc(100%-0.5rem)] items-center justify-center overflow-hidden rounded-t-lg hover:saturate-0'>
 					<TouchTarget className='top-0 bottom-0 h-full w-full p-0 pointer-fine:block'>

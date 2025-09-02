@@ -7,11 +7,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 				<NavMenu />
 			</header>
 			{children}
-			<footer className='absolute bottom-2 w-full p-2 text-center'>
-				<small className='text-xs italic'>
-					&copy; HelpMeLeave {new Date().getFullYear()}
-				</small>
-			</footer>
 		</>
 	)
 }

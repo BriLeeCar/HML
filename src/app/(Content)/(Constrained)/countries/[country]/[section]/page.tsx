@@ -8,10 +8,16 @@ import {
 	SectionHeading,
 } from '~/components'
 import { MDXProcessor } from '~/lib/mdx'
-import countries from '~/server/db/countries.json'
 import db from '~/server/db/db'
+import countries from '~/server/db/pathways.json'
 import { Base } from '../Base'
 import { Pathways } from '../Pathways'
+
+export const runtime = 'nodejs'
+export const dynamic = 'force-static'
+export const dynamicParams = true
+export const revalidate = 86400
+export const fetchCache = 'force-cache'
 
 const sectionArr = [
 	'basics',
@@ -24,15 +30,24 @@ const sectionArr = [
 ]
 
 export const generateStaticParams = async () => {
-	const countrySections = countries
-		.map((ea) => ea.abbr)
-		.filter((ea) => ea)
-		.flatMap((country) => {
-			return sectionArr.map((section) => ({
-				country: country?.toUpperCase() || '',
-				section,
-			}))
-		})
+	const pathwayCountries = [
+		...new Set(
+			countries
+				.filter((ea) => ea.abbr)
+				.map((ea) => {
+					return {
+						country: ea.abbr.toUpperCase(),
+					}
+				})
+		),
+	]
+
+	const countrySections = pathwayCountries.flatMap((country) => {
+		return sectionArr.map((section) => ({
+			country: country.country,
+			section,
+		}))
+	})
 	return countrySections
 }
 
