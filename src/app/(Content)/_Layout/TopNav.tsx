@@ -91,6 +91,7 @@ export const NavMenu = () => {
 						<NavMenuItem
 							key={index}
 							href={link.href}
+							prefetch={false}
 							active={active === link.href}
 							className='flex items-center justify-between gap-2'
 							Icon={link.Icon}
@@ -146,7 +147,9 @@ const MobileNavMenu = ({
 							'bg-background fixed inset-0 z-50 flex h-full min-h-screen w-full flex-col backdrop-blur-sm'
 						)}>
 						<header className='mb-4 flex w-full items-center justify-between p-4'>
-							<Link href='/'>
+							<Link
+								prefetch={false}
+								href='/'>
 								<HML className='text-brand flex h-full w-auto items-center gap-0 px-4 py-1 text-3xl font-bold -tracking-widest' />
 							</Link>
 							<Button
@@ -162,6 +165,7 @@ const MobileNavMenu = ({
 						<menu className='flex basis-full flex-col justify-around gap-0'>
 							{links.map((link, index) => (
 								<NavMenuItem
+									prefetch={false}
 									key={index}
 									href={link.href}
 									active={active === link.href}

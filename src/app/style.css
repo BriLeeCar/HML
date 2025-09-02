@@ -111,7 +111,6 @@
 	--font-sans: var(--font-open-sans, Open Sans), sans-serif;
 	--font-heading: questa-grande, serif;
 	--font-serif: questa, serif;
-	--font-mono: var(--font-ibm-plex-mono, IBM Plex Mono), monospace;
 	--breakpoint-xs: 400px;
 
 	--color-copy: var(--copy-foreground);

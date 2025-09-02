@@ -1,7 +1,6 @@
 import { Analytics } from '@vercel/analytics/next'
-import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
-import { IBM_Plex_Mono, Open_Sans } from 'next/font/google'
+import { Open_Sans } from 'next/font/google'
 import 'react'
 import { ReactNode } from 'react'
 import 'rehype-callouts/theme/vitepress'
@@ -24,14 +23,6 @@ const openSans = Open_Sans({
 	adjustFontFallback: true,
 })
 
-const ibmPlexMono = IBM_Plex_Mono({
-	variable: '--font-ibm-plex-mono',
-	weight: ['100', '200', '300', '400', '500', '600', '700'],
-	subsets: ['latin', 'latin-ext'],
-	style: ['normal', 'italic'],
-	adjustFontFallback: true,
-})
-
 const RootLayout = async ({
 	children,
 }: Readonly<{
@@ -40,7 +31,7 @@ const RootLayout = async ({
 	return (
 		<html
 			lang='en'
-			className={cn(openSans.variable, ibmPlexMono.variable)}
+			className={cn(openSans.variable)}
 			suppressHydrationWarning>
 			<head>
 				<link
@@ -54,7 +45,6 @@ const RootLayout = async ({
 					'pb-4'
 				)}>
 				<Providers>{children}</Providers>
-				<SpeedInsights /> {/* Vercel Speed Insights */}
 				<Analytics /> {/* Vercel Analytics */}
 			</body>
 		</html>

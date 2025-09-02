@@ -5,7 +5,7 @@ export const Img = () => {
 		<div className='hidden h-full w-full p-3 max-[1200px]:min-w-[25vw] md:flex'>
 			<div className='border-foreground/10 relative h-full w-full overflow-hidden'>
 				<Image
-					src='/flag.png'
+					src='https://brileec.com/hml/flag.png'
 					fill
 					style={{
 						objectFit: 'cover',

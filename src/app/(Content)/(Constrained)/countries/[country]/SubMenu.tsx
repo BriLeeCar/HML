@@ -19,37 +19,37 @@ export const SubMenu = ({
 	const links = [
 		{
 			text: 'Basics',
-			link: `${country}`,
+			link: `/countries/${country}`,
 			icon: Basics,
 		},
 		{
 			text: 'Pathways',
-			link: `${country}?section=pathways`,
+			link: `/countries/${country}/pathways`,
 			icon: Pathways,
 		},
 		{
 			text: 'Economy',
-			link: `${country}?section=economy`,
+			link: `/countries/${country}/economy`,
 			icon: PiggyBank,
 		},
 		{
 			text: 'Social',
-			link: `${country}?section=social`,
+			link: `/countries/${country}/social`,
 			icon: Confetti,
 		},
 		{
 			text: 'Employment',
-			link: `${country}?section=employment`,
+			link: `/countries/${country}/employment`,
 			icon: Briefcase,
 		},
 		{
 			text: 'Housing',
-			link: `${country}?section=housing`,
+			link: `/countries/${country}/housing`,
 			icon: Home,
 		},
 		{
 			text: 'Medical',
-			link: `${country}?section=medical`,
+			link: `/countries/${country}/medical`,
 			icon: Medical,
 		},
 	]
@@ -65,7 +65,7 @@ export const SubMenu = ({
 					}
 				}}
 				defaultValue={
-					active ? `${country}?section=${active}` : country
+					active ? `/countries/${country}/${active}` : country
 				}>
 				{links.map((item) => (
 					<option
@@ -78,36 +78,3 @@ export const SubMenu = ({
 		</>
 	)
 }
-
-// const SubMenuItem = ({
-// 	text,
-// 	link,
-// 	Icon,
-// 	active = false,
-// }: {
-// 	text: string
-// 	link: string
-// 	Icon: ({ ...props }) => ReactNode
-// 	active?: boolean
-// }) => {
-// 	return (
-// 		<Link
-// 			href={link}
-// 			className={cn(
-// 				'bg-card text-card-foreground border-border hover:bg-background hover:text-foreground flex items-center gap-1 rounded-md border-1 px-2 py-1 shadow-xs transition-all',
-// 				active
-// 					&& 'text-background bg-zinc-700 italic hover:bg-zinc-700 hover:text-white dark:bg-red-900 dark:text-white hover:dark:bg-red-900'
-// 			)}>
-// 			<Icon
-// 				className={cn(
-// 					'in-[a:hover]:text-foreground in-[a:hover]:fill-foreground text-zinc-400 transition-all dark:text-zinc-400',
-// 					active
-// 						&& 'text-white in-[a:hover]:text-white dark:text-white'
-// 				)}
-// 			/>
-// 			<div className='justify-center text-xs font-semibold uppercase'>
-// 				{text}
-// 			</div>
-// 		</Link>
-// 	)
-// }
