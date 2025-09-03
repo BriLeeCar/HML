@@ -37,7 +37,7 @@ export const Icon = ({
 					strokeLinecap='round'
 					strokeLinejoin='round'
 					className={cn('click', props.className)}>
-					<SelectedIcon solid={solid} />
+					<SelectedIcon solid={solid ?? false} />
 				</svg>
 			</button>
 		)
@@ -53,7 +53,7 @@ export const Icon = ({
 			strokeLinecap='round'
 			strokeLinejoin='round'
 			{...props}>
-			<SelectedIcon solid={solid} />
+			<SelectedIcon solid={solid ?? false} />
 		</svg>
 	)
 }

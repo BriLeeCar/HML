@@ -13,7 +13,7 @@ const Layout = ({ children }: { children?: ReactNode }) => (
 
 		<Divider />
 		<CTA
-			subtitle='We appreciate the information overwhelm is very easy – the stakes are high and the are a lot of things to consider. The Help Me Leave Support team provides 1-1 support to help you understand your options and make the choices that are best for you.'
+			subtitle='We appreciate that information overwhelm can come on very easily – the stakes are high and  there are a lot of things to consider. The Help Me Leave Support team provides 1-1 support to help you understand your options and make the choices that are best for you.'
 			primaryAction={{
 				href: '/support',
 				label: 'Get In Touch',

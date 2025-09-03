@@ -2,8 +2,7 @@ import { readdirSync, readFileSync } from 'fs'
 import { getFrontmatter } from 'next-mdx-remote-client/utils'
 import path from 'path'
 import { Suspense } from 'react'
-import { Divider, Page, PageHeading } from '~/components'
-import { toTitleCase } from '~/lib/text'
+import { Page, PageHeading } from '~/components'
 import { BlogContent } from './BlogContent'
 import { GuidesContent } from './Guides'
 
@@ -11,8 +10,6 @@ const GuidesResourcesPage = async () => {
 	const getBlogPosts = readdirSync(
 		path.join(process.cwd(), 'src/data/blog')
 	)
-
-	const getPDFS = readdirSync(path.join(process.cwd(), 'public/pdf'))
 
 	const blogPosts = (await Promise.all(
 		getBlogPosts.map(async (file) => {
@@ -31,53 +28,24 @@ const GuidesResourcesPage = async () => {
 		author?: { name: string }
 		file: string
 	}[]
-	const pdfGuides = (
-		await Promise.all(
-			getPDFS.map(async (file) => {
-				let parsedFile = file.replace('.pdf', '').replaceAll('-', ' ')
-
-				let subtitle = ''
-
-				if (parsedFile.includes('Checklist')) {
-					subtitle = 'Checklist'
-				}
-				if (
-					parsedFile.includes('How')
-					|| parsedFile.includes('General')
-				) {
-					subtitle = 'Guide'
-				}
-				parsedFile = parsedFile
-					.replace('Checklist', '')
-					.replace('How To', '')
-					.replace('Guide', '')
-					.replace('General', '')
-
-				return {
-					title: toTitleCase(parsedFile.trim()),
-					link: `/pdf/${file}`,
-					type: 'pdf',
-					subtitle: subtitle ? subtitle : undefined,
-				}
-			})
-		)
-	).filter((ea) => ea) as {
-		title: string
-		link: string
-		type: 'pdf'
-	}[]
 
 	return (
 		<Page>
 			<PageHeading
 				eyebrow='Guides & Resources'
-				subtitle='Welcome to our library of heavily researched and thoughtfully curated resources. We will be adding to this collection over time, so please check back often for new insights and information to support your journey.'>
+				subtitle={
+					<>
+						Welcome to our library of heavily researched and
+						thoughtfully curated resources. We will be adding to this
+						collection over time, so please check back often for new
+						insights and information to support your journey.
+					</>
+				}>
 				The Library
 			</PageHeading>
-			{/* <Tabs /> */}
+
 			<Suspense fallback={<div>Loading...</div>}>
-				<GuidesContent pdfGuides={pdfGuides} />
-				<Divider />
+				<GuidesContent />
 				<BlogContent blogPosts={blogPosts} />
 			</Suspense>
 		</Page>

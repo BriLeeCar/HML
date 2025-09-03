@@ -10,7 +10,7 @@ export const CTA = ({
 	primaryAction?: {
 		href: string
 		label: string
-	}
+	} & Props<typeof Button>
 	secondaryAction?: {
 		href: string
 		label: string
@@ -23,21 +23,17 @@ export const CTA = ({
 		</h2>
 	)
 
-	const PrimaryAction = () => (
-		<Button
-			href={primaryAction?.href || '#'}
-			variant='default'>
-			{primaryAction?.label}
-		</Button>
-
-		// <a
-		// 	href={primaryAction?.href}
-		// 	className={cn(
-		// 		'rounded-md bg-brand px-3.5 py-2.5 text-xs font-semibold whitespace-nowrap text-white shadow-xs hover:bg-brand-bright focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-600 dark:bg-red-500 dark:shadow-none dark:hover:bg-red-400 dark:focus-visible:outline-zinc-500'
-		// 	)}>
-		// 	{primaryAction?.label}
-		// </a>
-	)
+	const PrimaryAction = () => {
+		const { label, ...actions } = primaryAction!
+		return (
+			<Button
+				{...actions}
+				href={actions?.href || '#'}
+				variant='default'>
+				{label}
+			</Button>
+		)
+	}
 
 	const SecondaryAction = () => (
 		<a
@@ -73,7 +69,8 @@ export const CTA = ({
 		<div
 			className={cn(
 				'mx-auto flex flex-col items-center justify-between py-16 sm:py-8',
-				subtitle ? 'flex-col items-start' : 'md:flex-row'
+				subtitle ? 'flex-col items-start' : 'md:flex-row lg:mx-8',
+				props.className
 			)}>
 			{subtitle ?
 				<hgroup className='mb-6 max-w-2xl'>

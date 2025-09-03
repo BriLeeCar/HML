@@ -1,10 +1,14 @@
 import Link from 'next/link'
 import { cn } from '~/lib/cn'
+import { Icon } from './Icon'
 
 export const Button = ({
 	variant = 'default',
+	preIcon,
 	...props
-}: tBtnProps<'link' | 'button'>) => {
+}: tBtnProps<'link' | 'button'> & {
+	preIcon?: Props.Icon['IconName']
+}) => {
 	// const Tag = 'href' in props ? Link : 'button'
 	const classes = cn(
 		'click relative rounded-md px-3.5 py-2.5 text-xs font-semibold tracking-wide whitespace-nowrap uppercase transition-all focus-visible:outline-2 focus-visible:outline-offset-2 has-[svg]:py-2',
@@ -17,6 +21,21 @@ export const Button = ({
 		variant == 'ghost' && 'border-0 bg-transparent text-current',
 		props.className
 	)
+
+	const Inner = () => {
+		return (
+			<>
+				{preIcon && (
+					<Icon
+						IconName={preIcon}
+						className='mr-4 -ml-1 inline h-4 w-4'
+					/>
+				)}
+				{props.children}
+			</>
+		)
+	}
+
 	if ('href' in props) {
 		const linkProps = props as Props.Link
 		return (
@@ -25,7 +44,7 @@ export const Button = ({
 				{...linkProps}
 				href={linkProps.href}
 				className={classes}>
-				{props.children}
+				<Inner />
 			</Link>
 		)
 	}
@@ -34,7 +53,9 @@ export const Button = ({
 		<button
 			{...buttonProps}
 			className={classes}>
-			<TouchTarget>{props.children}</TouchTarget>
+			<TouchTarget>
+				<Inner />
+			</TouchTarget>
 		</button>
 	)
 }
