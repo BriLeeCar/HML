@@ -29,13 +29,13 @@ type tMapAction =
 			type: 'selected'
 			details?: string | null
 	  }
+	| { type: 'dragStart' }
+	| { type: 'dragEnd' }
 
 export type tMapReducer = {
 	state: tMapState
 	action: tMapAction
 }
-// #endregion ! --------------------
-
 // #endregion ! --------------------
 
 // #region ! ---------- COMPONENTS ----------
@@ -44,8 +44,6 @@ export type tMapSVGProps = {
 } & MotionProps
 
 export type tMapPathElProps = Omit<Props<'path'>, 'name'>
-	& Partial<ApiData.Country> & {
-		canClick?: boolean
-	}
+	& Partial<ApiData.Country>
 
 // #endregion ! --------------------

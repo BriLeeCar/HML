@@ -1,3 +1,4 @@
+import { Section } from '~/components'
 import { DB } from '~/server/db/db'
 
 const Stat = ({
@@ -6,17 +7,15 @@ const Stat = ({
 	color,
 }: Record<string, string | number>) => {
 	return (
-		<aside className='bg-foreground h-[100px] w-[150px] items-center justify-center overflow-hidden rounded-lg text-black'>
-			<span
-				className='flex h-full w-full flex-col items-center justify-center gap-1 p-4 *:w-full *:leading-none'
-				style={{
-					background: color ? `hsl(${color}, 100%, 50%)` : undefined,
-				}}>
-				<h3 className='text-center text-sm font-medium uppercase'>
-					{title}
-				</h3>
-				<p className='text-center text-4xl font-extrabold'>{stat}</p>
-			</span>
+		<aside
+			className='flex h-[100px] grow basis-[150px] flex-col items-center justify-center gap-1 overflow-hidden rounded-lg p-4 text-black *:w-full *:leading-none'
+			style={{
+				background: color ? `hsl(${color}, 100%, 50%)` : undefined,
+			}}>
+			<h3 className='text-center text-sm font-medium uppercase'>
+				{title}
+			</h3>
+			<p className='text-center text-4xl font-extrabold'>{stat}</p>
 		</aside>
 	)
 }
@@ -28,7 +27,7 @@ export const Stats = ({
 }) => {
 	return (
 		countryStats && (
-			<section className='flex w-full flex-wrap items-end justify-around gap-2 py-6'>
+			<Section className='mx-auto max-w-[calc(300px_+_1rem)] flex-row flex-wrap justify-center gap-2 md:max-w-[calc(450px+1.5rem)] lg:max-w-[calc(600px_+_2rem)]'>
 				{countryStats.map((stat) => {
 					let color = 0
 					switch (stat.title) {
@@ -59,7 +58,7 @@ export const Stats = ({
 						)
 					)
 				})}
-			</section>
+			</Section>
 		)
 	)
 }

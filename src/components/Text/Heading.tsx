@@ -26,17 +26,6 @@ export const Heading = ({
 				size == '2xl' && 'text-5xl',
 				size == 'xl' && 'text-3xl',
 				size == 'lg' && 'text-muted-foreground text-xl brightness-75',
-				// size == 'lg' && 'text-2xl',
-				// size == 'md' && 'text-xl',
-				// level == 2
-				// 	&& 'scroll-m-20 font-semibold tracking-tight first:mt-0',
-				// size == 'title' ? 'font-heading text-7xl'
-				// : size == '2xl' ? 'text-5xl'
-				// : size == 'xl' ? 'text-4xl'
-				// : size == 'lg' ? 'text-3xl'
-				// : size == 'md' ? 'text-2xl'
-				// : size == 'sm' ? 'text-xl'
-				// : 'text-sm',
 				props.className
 			)}
 		/>
@@ -80,7 +69,7 @@ const Eyebrow = ({ ...props }: Props<'p'>) => {
 	return (
 		<p
 			className={cn(
-				'text-brand-bright text-base/7 font-semibold',
+				'text-brand-bright text-base/7 font-semibold dark:text-[#f3736c]',
 				props.className
 			)}>
 			{props.children}
@@ -111,9 +100,7 @@ export const SectionHeading = ({
 		return (
 			<hgroup className='mb-0'>
 				{eyebrow && (
-					<Eyebrow className='text-sm/8 saturate-85'>
-						{eyebrow}
-					</Eyebrow>
+					<Eyebrow className='text-sm/8'>{eyebrow}</Eyebrow>
 				)}
 				<Inner />
 				{subtitle && (

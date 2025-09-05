@@ -1,9 +1,10 @@
 import {
-	List,
+	Li,
 	P,
 	Section,
 	SectionHeading,
 	SubSection,
+	UL,
 } from '~/components/index'
 
 const StartPage = () => {
@@ -26,61 +27,61 @@ const StartPage = () => {
 				</P>
 			</div>
 			<SubSection title='Work or Study Visa'>
-				<List>
-					<li>
+				<UL>
+					<Li>
 						Often requires a sponsor (employer, university, or family)
 						or significant funds.
-					</li>
-					<li>
+					</Li>
+					<Li>
 						Strict eligibility: financial proof, documents, background
 						checks.
-					</li>
-					<li>Processing can take weeks or months.</li>
-					<li>
+					</Li>
+					<Li>Processing can take weeks or months.</Li>
+					<Li>
 						If approved, a residence permit is issued for a set period
 						of time.
-					</li>
-					<li>
+					</Li>
+					<Li>
 						If denied, you are still free to explore other visa
 						options.
-					</li>
-				</List>
+					</Li>
+				</UL>
 			</SubSection>
 			<SubSection title='Tourist Visa'>
-				<List>
-					<li>
+				<UL>
+					<Li>
 						There are lots of places where American citizens can get
 						lengthy tourist visas either immediately or very quickly.
-					</li>
-					<li>
+					</Li>
+					<Li>
 						Many work or study visas have to be applied for FROM your
 						home country.
-					</li>
-					<li>
+					</Li>
+					<Li>
 						May also affect your ability to apply for asylum in your
 						target country.
-					</li>
-				</List>
+					</Li>
+				</UL>
 			</SubSection>
 			<SubSection title='Asylum'>
-				<List>
-					<li>
+				<UL>
+					<Li>
 						Only for people with a well-founded fear of persecution
 						(e.g. political opinion, religion, race, sexuality, social
 						group).
-					</li>
-					<li>
+					</Li>
+					<Li>
 						Must usually apply on arrival in the country of refuge.
-					</li>
-					<li>
+					</Li>
+					<Li>
 						Free to apply; temporary housing, food, and medical
 						support are often provided during the process.
-					</li>
-					<li>
+					</Li>
+					<Li>
 						If denied, <strong>possible entry bans</strong> or forced
 						return will be implemented by the local goverment.
-					</li>
-				</List>
+					</Li>
+				</UL>
 			</SubSection>
 		</Section>
 	)

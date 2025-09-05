@@ -1,9 +1,9 @@
 import {
 	InlineLink,
-	List,
+	Li,
 	Section,
 	SectionHeading,
-	SubSection,
+	UL,
 } from '~/components'
 
 export const Pathways = ({
@@ -13,24 +13,6 @@ export const Pathways = ({
 	pathways: ApiData.Pathway[]
 	name: string
 }) => {
-	const categories = Array.from(
-		// @ts-expect-error TS2345
-		new Set(pathways.map((p) => p.category))
-	)
-	const subs =
-		categories.map((cat) => {
-			return {
-				category: cat,
-				subs: Array.from(
-					new Set(
-						pathways // @ts-expect-error TS2345
-							.filter((p) => p.category === cat) // @ts-expect-error TS2345
-							.map((p) => p.sub)
-					)
-				),
-			}
-		}) || []
-
 	return (
 		<Section className='md:mt-12'>
 			<SectionHeading
@@ -39,49 +21,29 @@ export const Pathways = ({
 				Pathways to {name}
 			</SectionHeading>
 			<div className='lg:pr-8'>
-				{categories.map((cat, i) => (
-					<SubSection
-						key={i}
-						title={cat}>
-						<List>
-							{subs
-								.find((s) => s.category === cat)
-								?.subs.map((sub) =>
-									pathways
-										.filter(
-											// @ts-expect-error TS2345
-											(p) => p.category === cat && p.sub === sub
-										)
-										.map((p) => (
-											<li key={p.id}>
-												{(
-													p.official_link
-													&& typeof p.official_link == 'string'
-												) ?
-													<InlineLink
-														href={p.official_link}
-														target='_blank'
-														rel='noopener noreferrer'>
-														{p.name}
-													</InlineLink>
-												:	<span className='font-semibold text-red-500'>
-														{p.name}
-													</span>
-												}
-												{p.description && (
-													<>
-														<br />
-														<span className='block pl-6'>
-															{p.description}
-														</span>
-													</>
-												)}
-											</li>
-										))
-								)}
-						</List>
-					</SubSection>
-				))}
+				<UL>
+					{pathways.map((p) => (
+						<Li key={p.id}>
+							{p.official_link && typeof p.official_link == 'string' ?
+								<InlineLink
+									href={p.official_link}
+									target='_blank'
+									rel='noopener noreferrer'>
+									{p.name}
+								</InlineLink>
+							:	<span className='font-semibold text-red-500'>
+									{p.name}
+								</span>
+							}
+							{p.description && (
+								<>
+									<br />
+									<span className='block pl-6'>{p.description}</span>
+								</>
+							)}
+						</Li>
+					))}
+				</UL>
 			</div>
 		</Section>
 	)

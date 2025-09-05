@@ -1,10 +1,11 @@
 import {
 	InlineLink,
-	List,
+	Li,
 	Section,
 	SectionHeading,
 	SubSection,
-} from '~/components/index'
+	UL,
+} from '~/components'
 
 const LeavePage = () => {
 	return (
@@ -17,73 +18,73 @@ const LeavePage = () => {
 					preparing to leave.
 				</SectionHeading>
 				<SubSection title='Documents'>
-					<List>
-						<li>
+					<UL>
+						<Li>
 							<InlineLink
 								href='/pdf/Get-Your-Documents-Ready.pdf'
 								target='_blank'>
 								Get Your Documents Ready
 							</InlineLink>
-						</li>
-						<li>
+						</Li>
+						<Li>
 							<InlineLink
 								href='/pdf/Passport-Checklist.pdf'
 								target='_blank'>
 								Apply for a passport
 							</InlineLink>
-						</li>
-						<li>
+						</Li>
+						<Li>
 							<InlineLink
 								href='/pdf/REAL-ID-Checklist.pdf'
 								target='_blank'>
 								REAL ID
 							</InlineLink>
-						</li>
-						<li>
+						</Li>
+						<Li>
 							<InlineLink
 								href='/pdf/Replace-Birth-Certificate-Checklist.pdf'
 								target='_blank'>
 								Birth certificate
 							</InlineLink>
-						</li>
-					</List>
+						</Li>
+					</UL>
 				</SubSection>
 				<SubSection title='Choosing your destination'>
-					<List>
-						<li>
+					<UL>
+						<Li>
 							<InlineLink href='/claiming-asylum'>
 								Claiming Asylum: What it Means and Where to Start
 							</InlineLink>
-						</li>
-						<li>
+						</Li>
+						<Li>
 							<InlineLink href='/explorer'>Visa Explorer</InlineLink>
-						</li>
-					</List>
+						</Li>
+					</UL>
 				</SubSection>
 				<SubSection title='Preparing to leave'>
-					<List>
-						<li>
+					<UL>
+						<Li>
 							<InlineLink
 								href='/pdf/How-To-Book-a-Flight.pdf'
 								target='_blank'>
 								Booking a flight
 							</InlineLink>
-						</li>
-						<li>
+						</Li>
+						<Li>
 							<InlineLink
 								href='/pdf/Moving-Checklist.pdf'
 								target='_blank'>
 								Moving checklist
 							</InlineLink>
-						</li>
-						<li>
+						</Li>
+						<Li>
 							<InlineLink
 								href='/pdf/First-Month-Checklist.pdf'
 								target='_blank'>
 								Your first month
 							</InlineLink>
-						</li>
-					</List>
+						</Li>
+					</UL>
 				</SubSection>
 			</div>
 		</Section>

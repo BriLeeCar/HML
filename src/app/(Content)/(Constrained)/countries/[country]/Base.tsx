@@ -44,7 +44,7 @@ export const Base = ({
 				/>
 
 				{children}
-				{!section && (
+				{section == 'Basics' && (
 					<Stats countryStats={db.getCountryStats(country)} />
 				)}
 			</Page>

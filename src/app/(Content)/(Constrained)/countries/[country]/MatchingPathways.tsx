@@ -1,12 +1,7 @@
 'use client'
 
-import { useContext, useEffect, useState } from 'react'
-import {
-	InlineLink,
-	List,
-	Section,
-	SectionHeading,
-} from '~/components'
+import { Fragment, useContext, useEffect, useState } from 'react'
+import { DL, Section, SectionHeading } from '~/components'
 import { DBContext } from '~/server/db/provider'
 
 export const MatchingPathways = ({
@@ -28,8 +23,11 @@ export const MatchingPathways = ({
 				data?.pathways?.filter((p) => {
 					if (
 						storedFilters.every((f) => {
+							if (['prideScore', 'transSafety'].includes(f)) {
+								return true
+							}
 							if (f == 'job_required') {
-								return !p[f]
+								return p[f] == false
 							}
 							return p[f]
 						})
@@ -51,26 +49,16 @@ export const MatchingPathways = ({
 					Matching Pathways
 				</SectionHeading>
 
-				<List>
+				<DL>
 					{pathways.map((pathway) => (
-						<li key={pathway.id}>
-							{pathway.official_link ?
-								<InlineLink
-									href={pathway.official_link}
-									target='_blank'>
-									{pathway.name}
-								</InlineLink>
-							:	<span className='text-lg font-semibold'>
-									{pathway.name}
-								</span>
-							}
-							<br />
-							<span className='block pl-8'>
-								{pathway.description}
-							</span>
-						</li>
+						<Fragment key={pathway.id}>
+							<DL.Title href={pathway.official_link ?? undefined}>
+								{pathway.name}
+							</DL.Title>
+							<DL.Item>{pathway.description}</DL.Item>
+						</Fragment>
 					))}
-				</List>
+				</DL>
 			</Section>
 		)
 	)

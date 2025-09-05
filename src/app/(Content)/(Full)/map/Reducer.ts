@@ -45,6 +45,22 @@ export const mapReducer = (
 					...state,
 					hovered: null,
 				}
+			case 'dragStart':
+				return {
+					...state,
+					dragging: {
+						first: true,
+						current: true,
+					},
+				}
+			case 'dragEnd':
+				return {
+					...state,
+					dragging: {
+						first: true,
+						current: false,
+					},
+				}
 			case 'setDragging':
 				return {
 					...state,

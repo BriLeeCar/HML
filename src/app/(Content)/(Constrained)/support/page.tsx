@@ -2,7 +2,8 @@ import {
 	CTA,
 	Divider,
 	InlineLink,
-	List,
+	Li,
+	OL,
 	P,
 	Page,
 	PageHeading,
@@ -52,23 +53,23 @@ export default function SupportTeam() {
 					Reaching out can be scary, but asking for help is always the
 					right choice—the best choice for you.
 				</SectionHeading>
-				<List type={'numbered'}>
-					<li>
+				<OL>
+					<Li>
 						<InlineLink href='/get-ready-to-leave'>
 							Get Ready to Leave
 						</InlineLink>{' '}
 						provides important information about documentation and the
 						general overview of the process. It also provides
 						additional readings and resources.
-					</li>
-					<li>
+					</Li>
+					<Li>
 						<InlineLink href='/claiming-asylum'>
 							Claiming Asylum: What it Means and Where to Start
 						</InlineLink>{' '}
 						provides important information about what asylum actually
 						means, and if it is the right pathway for you.
-					</li>
-				</List>
+					</Li>
+				</OL>
 			</Section>
 			<Divider />
 			<CTA

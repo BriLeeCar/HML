@@ -1,8 +1,6 @@
 'use client'
 
 import { motion } from 'motion/react'
-import { redirect, RedirectType } from 'next/navigation'
-import { useRef } from 'react'
 import { cn } from '~/lib/cn'
 import { tMapPathElProps, tMapSVGProps } from './util'
 
@@ -38,16 +36,11 @@ export const MapSvg = ({ ...props }: tMapSVGProps) => {
 	)
 }
 
-export const MapPathEl = ({
-	canClick = true,
-	...props
-}: tMapPathElProps) => {
-	const pathRef = useRef(null)
-	const { svgPath, tier, name, abbr, className, ...rest } = props as {
+export const MapPathEl = ({ ...props }: tMapPathElProps) => {
+	const { svgPath, name, abbr, className, ...rest } = props as {
 		svgPath: string | null
 		name: string
 		abbr: string
-		tier: 'now' | 'soon' | 'None' | null
 		className?: string
 	}
 
@@ -60,21 +53,12 @@ export const MapPathEl = ({
 		<>
 			<path
 				{...rest}
-				ref={pathRef}
 				d={svgPath!}
 				aria-label={name}
 				className={cn(classes)}
 				id={abbr}
 				data-country={name}
 				data-abb={abbr}
-				data-tier={tier}
-				onClick={() => {
-					if (canClick)
-						redirect(
-							`/countries/${abbr?.toLowerCase()}`,
-							'push' as RedirectType
-						)
-				}}
 			/>
 		</>
 	)

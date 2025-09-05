@@ -1,18 +1,24 @@
 import { Children } from 'react'
 import { cn } from '~/lib/cn'
 import {
+	Blockquote,
+	Bold,
 	Button,
 	CTA,
 	Heading,
 	InlineLink,
 	Large,
-	List,
+	Li,
+	OL,
 	P,
 	Page,
 	PageHeading,
 	Section,
 	SectionHeading,
 	SubSection,
+	Sup,
+	U,
+	UL,
 } from '.'
 
 export function mdxComponents() {
@@ -37,22 +43,9 @@ export function mdxComponents() {
 			/>
 		),
 		p: P,
-		P: P,
-		blockquote: ({ ...props }: Props<'blockquote'>) => (
-			<blockquote
-				className='border-accent-500 mx-8 my-4 border-l-4 pl-4 text-gray-500 italic'
-				{...props}
-			/>
-		),
-		U: ({ ...props }: Props<'u'>) => (
-			<span
-				{...props}
-				className={cn(
-					'underline decoration-current/30 underline-offset-2',
-					props.className
-				)}
-			/>
-		),
+		P,
+		blockquote: Blockquote,
+		U,
 		Card: ({
 			heading,
 			subheading,
@@ -119,25 +112,9 @@ export function mdxComponents() {
 				/>
 			)
 		},
-		ul: List,
-		ol: ({ ...props }) => {
-			return (
-				<List
-					type='numbered'
-					{...props}
-				/>
-			)
-		},
-		li: ({ ...props }: Props<'li'>) => (
-			<li
-				{...props}
-				className={cn(
-					'list-label:list-none list-label:ml-0',
-					// '[:is(li_li)]:text-foreground pl-0 not-[li_li]:first:has-[ul]:list-none',
-					props.className
-				)}
-			/>
-		),
+		ul: UL,
+		ol: OL,
+		li: Li,
 		Large,
 		table: ({ ...props }: Props<'table'>) => (
 			<table
@@ -163,21 +140,14 @@ export function mdxComponents() {
 			return (
 				<Button
 					as='link'
+					prefetch={false}
 					{...props}
 					className={cn(props.className || '')}>
 					{props.children}
 				</Button>
 			)
 		},
-		sup: ({ ...props }: Props<'sup'>) => (
-			<sup
-				{...props}
-				className={cn(
-					'text-brand-brightd *:text-xs *:no-underline *:[a]:decoration-0',
-					props.className
-				)}
-			/>
-		),
+		sup: Sup,
 		Section: Section,
 		SectionHeading,
 		SubSection,
@@ -186,10 +156,6 @@ export function mdxComponents() {
 		InlineLink,
 		a: InlineLink,
 		CTA,
-		strong: ({ children }: { children: React.ReactNode }) => (
-			<strong className='text-brand-bright dark:text-brand-muted font-medium dark:font-normal'>
-				{children}
-			</strong>
-		),
+		strong: Bold,
 	}
 }

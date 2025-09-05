@@ -1,25 +1,37 @@
 'use client'
 
-import {
-	AnimatePresence,
-	motion,
-	useDragControls,
-} from 'motion/react'
-import { redirect, type RedirectType } from 'next/navigation'
-import { useContext, useEffect, useReducer } from 'react'
-import { Icon } from '~/components'
+import { AnimatePresence, useDragControls } from 'motion/react'
+import { useRouter } from 'next/navigation'
+import { MouseEvent, useContext, useEffect, useReducer } from 'react'
 import { cn } from '~/lib/cn'
 import { DBContext } from '~/server/db/provider'
+import { FirstVisitOverlay } from './FirstVisitOverlay'
 import { CountryHeading } from './Heading'
 import { MapPathEl, MapSvg } from './Map'
 import { mapReducer } from './Reducer'
 import { Search } from './SearchBtn'
+import { tMapReducer } from './util'
 
-const redirectLink = (country: ApiData.Country) => {
-	return `/countries/${country.abbr.toLowerCase()}`
+const actionEnterExit = (
+	e: MouseEvent<SVGPathElement>,
+	mapDispatch: React.Dispatch<tMapReducer['action']>
+) => {
+	const target = e.currentTarget as SVGPathElement
+	if (target.getAttribute('data-abb') != 'USA') {
+		e.type == 'mouseenter' ?
+			mapDispatch({
+				type: 'countryHover',
+				details: target.getAttribute('data-country')!,
+			})
+		:	mapDispatch({
+				type: 'clearHover',
+			})
+	}
 }
+
 export const WorldMap = () => {
 	const db = useContext(DBContext)
+	const router = useRouter()
 	const [mapState, mapDispatch] = useReducer(mapReducer, {
 		hovered: null,
 		selected: null,
@@ -32,6 +44,12 @@ export const WorldMap = () => {
 		},
 		hasVisited: true,
 	})
+
+	const hoveredCountry = db.countries?.find(
+		(country) =>
+			country.name.toLowerCase() == mapState.hovered?.toLowerCase()
+	)
+	const dragControl = useDragControls()
 
 	useEffect(() => {
 		if (!localStorage.getItem('hasVisitedMap')) {
@@ -55,12 +73,6 @@ export const WorldMap = () => {
 		}
 	}, [])
 
-	const dragControl = useDragControls()
-
-	const handleSelected = (country: ApiData.Country) => {
-		redirect(redirectLink(country), 'push' as RedirectType)
-	}
-
 	if (!db.countries) return null
 
 	return (
@@ -71,59 +83,12 @@ export const WorldMap = () => {
 				mapState.dragging.current ? 'cursor-grabbing' : 'cursor-grab'
 			)}>
 			{!mapState.hasVisited && (
-				<motion.div
-					initial={{ opacity: 1, display: 'flex' }}
-					animate={{
-						opacity: 0,
-						display: 'none',
-						transition: { delay: 3 },
-					}}
-					className={cn(
-						mapState.dragging.first ?
-							'cursor-grabbing'
-						:	'cursor-grab',
-						'bg-background/45 absolute top-0 right-0 bottom-0 left-0 z-100 flex items-center justify-center text-4xl font-bold uppercase'
-					)}>
-					<motion.span
-						className='flex max-w-screen items-center justify-around gap-2'
-						initial={{
-							translateX: 0,
-						}}
-						animate={{
-							translateX: [0, -100, 0, 100, 0, 0],
-							opacity: [1, 0.5, 1, 0.5, 1, 0],
-							transition: {
-								delay: 0.5,
-								duration: 2,
-							},
-						}}>
-						<Icon
-							IconName='ArrowRightIcon'
-							className='h-full w-auto origin-left scale-300 rotate-180'
-						/>
-						<span className='block w-2/3 text-center'>
-							Drag to move the map
-						</span>
-						<Icon
-							IconName='ArrowRightIcon'
-							className='origin-left scale-300'
-						/>
-					</motion.span>
-				</motion.div>
+				<FirstVisitOverlay draggingFirst={mapState.dragging.first} />
 			)}
 			<AnimatePresence>
 				<CountryHeading
 					key={mapState.hovered || 'no-hover'}
-					hovered={mapState.hovered}
-					hoveredData={
-						mapState.hovered ?
-							db.countries.find(
-								(country) =>
-									country.abbr.toLowerCase()
-									== mapState.hovered?.toLowerCase()
-							) || null
-						:	null
-					}
+					hoveredData={hoveredCountry}
 				/>
 			</AnimatePresence>
 			<MapSvg
@@ -134,57 +99,44 @@ export const WorldMap = () => {
 				whileDrag={{ opacity: 0.5 }}
 				onDragStart={() =>
 					mapDispatch({
-						type: 'setDragging',
-						details: {
-							first: true,
-							current: true,
-						},
+						type: 'dragStart',
 					})
 				}
 				onDragEnd={() =>
 					mapDispatch({
-						type: 'setDragging',
-						details: {
-							first: true,
-							current: false,
-						},
+						type: 'dragEnd',
 					})
 				}
 				dragConstraints={mapState.boundaries}>
 				{db.getMapPaths().map((country) => {
-					const { svgPath, tier, abbr, name } = country
+					const { svgPath, abbr, name } = country
 					return (
 						<MapPathEl
 							key={name}
 							name={name}
 							abbr={abbr}
-							tier={tier}
 							svgPath={svgPath || ''}
-							onMouseEnter={() =>
-								mapDispatch({
-									type: 'countryHover',
-									details: name!,
-								})
-							}
-							onMouseLeave={() =>
-								mapDispatch({
-									type: 'clearHover',
-								})
-							}
-							canClick={tier !== 'None' && !mapState.dragging.current}
+							onMouseEnter={(e) => actionEnterExit(e, mapDispatch)}
+							onMouseLeave={(e) => actionEnterExit(e, mapDispatch)}
 							className={cn(
-								'',
 								'dark:stroke-background',
-								'hover:fill-brand-bright',
+								abbr != 'USA' && 'hover:fill-brand-bright',
 								'fill-red-500/20 transition-all'
 							)}
+							onClick={() =>
+								router.push(
+									`/countries/${country.abbr.toLowerCase()}`
+								)
+							}
 						/>
 					)
 				})}
 			</MapSvg>
 			<Search
 				countries={db.getMapPaths()}
-				actionSelected={handleSelected}
+				actionSelected={(country) =>
+					router.push(`/countries/${country.abbr.toLowerCase()}`)
+				}
 			/>
 		</div>
 	)

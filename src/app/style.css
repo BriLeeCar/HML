@@ -65,6 +65,7 @@
 
 	--brand: var(--color-red-800);
 	--brand-bright: var(--color-red-600);
+	--brand-bright-link: var(--color-red-600);
 	--brand-muted: var(--color-red-400);
 
 	--muted: oklch(91.717% 0.04244 17.819);
@@ -99,6 +100,8 @@
 
 	--brand: #942220;
 	--brand-bright: #c3281c;
+	--brand-bright-link: #ff867d;
+
 	--brand-muted: #e85e52;
 
 	--background: #181818;
@@ -166,6 +169,7 @@
 	/* --- IMPLEMENTED --- */
 	--color-brand: var(--brand);
 	--color-brand-bright: var(--brand-bright);
+	--color-brand-bright-link: var(--brand-bright-link);
 	--color-brand-muted: var(--brand-muted);
 }
 /* #endregion */
@@ -342,7 +346,7 @@
 }
 
 @custom-variant list-label {
-	&:is(li:has(> ol, ul)):not(li ul li, li ol li) {
+	&:is(li:has(> ol, ul)):not(li ul li, li ol li, li + li) {
 		@slot;
 	}
 	&:is(ul):has(> li > ol, > li > ul) {

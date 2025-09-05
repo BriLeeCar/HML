@@ -40,16 +40,14 @@ const Home = () => {
 				)}>
 				<MapSvg className='lg:max-h-fill xl: stroke-background fill-muted h-auto w-screen stroke-1 shadow-none select-none lg:relative lg:w-screen'>
 					{db.getMapPaths().map((country) => {
-						const { svgPath, tier, abbr, name } = country
+						const { svgPath, abbr, name } = country
 
 						return (
 							<MapPathEl
 								key={name}
 								name={name as string}
 								abbr={abbr}
-								tier={tier}
 								svgPath={svgPath || ''}
-								canClick={false}
 							/>
 						)
 					})}

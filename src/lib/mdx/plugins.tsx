@@ -1,11 +1,9 @@
-import { mdxAnnotations } from 'mdx-annotations'
 import callouts from 'rehype-callouts'
 import flexibleMarkers from 'remark-flexible-markers'
 import gfm from 'remark-gfm'
 import { calloutProps, customCallouts } from '~/lib/mdx'
 
 export const remarkPlugins = [
-	mdxAnnotations.remark,
 	[
 		gfm,
 		{
@@ -22,11 +20,9 @@ export const remarkPlugins = [
 			},
 		},
 	],
-	// [sectionize],
 ]
 
 export const rehypePlugins = [
-	mdxAnnotations.rehype,
 	[
 		callouts,
 		{
@@ -37,4 +33,4 @@ export const rehypePlugins = [
 	],
 ]
 
-export const recmaPlugins = [mdxAnnotations.recma]
+export const recmaPlugins = []

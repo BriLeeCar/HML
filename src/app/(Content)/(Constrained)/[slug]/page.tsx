@@ -23,7 +23,6 @@ const Page = async (props: PageProps<'/[slug]'>) => {
 	const { slug } = await props.params
 	const data = new MDXProcessor(`src/data/pages/${slug}.mdx`, 'path')
 		.removeTitle()
-		.replaceCTA()
 		.replaceSubheadings()
 		.replaceSubSections()
 		.replaceCustomMDX()

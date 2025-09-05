@@ -56,7 +56,7 @@ const NavMenuItem = ({
 			prefetch={false}
 			{...props}
 			className={cn(
-				'hover:text-brand-bright relative flex h-full gap-3 rounded-lg px-3 transition-all',
+				'hover:text-brand-bright-link relative flex h-full gap-3 rounded-lg px-3 transition-all',
 				active
 					&& 'dark:md:text-foreground dark:md:bg-brand/20 md:text-brand',
 				props.className
@@ -86,7 +86,7 @@ export const NavMenu = () => {
 					prefetch={false}
 					href='/'
 					className='relative'>
-					<HML className='text-brand flex h-full w-auto items-center gap-0 px-4 py-1 text-3xl font-bold -tracking-widest' />
+					<HML className='text-brand dark:text-brand-bright-link flex h-full w-auto items-center gap-0 px-4 py-1 text-3xl font-bold -tracking-widest' />
 				</Link>
 				<menu className='hidden w-full items-center justify-around md:flex'>
 					{links.map((link, index) => (
@@ -152,7 +152,7 @@ const MobileNavMenu = ({
 							<Link
 								prefetch={false}
 								href='/'>
-								<HML className='text-brand flex h-full w-auto items-center gap-0 px-4 py-1 text-3xl font-bold -tracking-widest' />
+								<HML className='text-brand dark:text-brand-bright-link flex h-full w-auto items-center gap-0 px-4 py-1 text-3xl font-bold -tracking-widest' />
 							</Link>
 							<Button
 								variant='ghost'
