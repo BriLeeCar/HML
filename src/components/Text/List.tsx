@@ -58,7 +58,7 @@ const DT = ({ href, ...props }: Props<'dt'> & { href?: string }) => {
 		<dt
 			{...props}
 			className={cn(
-				'border-muted/75 border-b-8 pl-2 text-lg leading-0.5',
+				'pl-2 text-lg leading-0.5',
 				!href && 'font-semibold',
 				props.className
 			)}>
