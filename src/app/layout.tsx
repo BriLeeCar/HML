@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
 import { Open_Sans } from 'next/font/google'
 import 'react'
@@ -44,6 +45,7 @@ const RootLayout = async ({
 					'pb-4'
 				)}>
 				<Providers>{children}</Providers>
+				<Analytics />
 			</body>
 		</html>
 	)
