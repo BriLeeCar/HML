@@ -1,10 +1,16 @@
 import { readdirSync, readFileSync } from 'fs'
+import type { Metadata } from 'next'
 import { getFrontmatter } from 'next-mdx-remote-client/utils'
 import path from 'path'
 import { Suspense } from 'react'
 import { Page, PageHeading } from '~/components'
 import { BlogContent } from './BlogContent'
 import { GuidesContent } from './Guides'
+
+export const metadata: Metadata = {
+	title: 'Guides & Resources',
+	description: `Explore step-by-step guides and resources for asylum, tracel, documents, and safety — get started with Help Me Leave now.`,
+}
 
 const GuidesResourcesPage = async () => {
 	const getBlogPosts = readdirSync(

@@ -1,4 +1,5 @@
 import { readdirSync, readFileSync } from 'fs'
+import type { Metadata } from 'next'
 import { getFrontmatter } from 'next-mdx-remote-client/utils'
 import Image from 'next/image'
 import path from 'path'
@@ -25,6 +26,37 @@ export const generateStaticParams = async () => {
 		.map((file) => file.replace('.mdx', ''))
 
 	return fileNames.map((title) => ({ title }))
+}
+
+export const generateMetadata = async ({
+	params,
+}: PageProps<'/blog/[title]'>): Promise<Metadata> => {
+	const data = (await params).title as string
+
+	const blogDir = path.join(
+		process.cwd(),
+		'src',
+		'data',
+		'blog',
+		data + '.mdx'
+	)
+	const files = readFileSync(blogDir, 'utf-8')
+	const { frontmatter } = getFrontmatter(files)
+
+	const { title, subtitle, author } = frontmatter as {
+		title?: string
+		subtitle: string
+		author?: {
+			name: string
+		}
+	}
+	return {
+		title: title ?? (toTitleCase(data.replace(/-/g, ' ')) as string),
+		description:
+			subtitle ?
+				`${subtitle} by ${author?.name}`
+			:	`A blog post by ${author}`,
+	}
 }
 
 type tFrontMatter = {

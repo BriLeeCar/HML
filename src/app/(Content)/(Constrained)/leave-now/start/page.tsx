@@ -1,3 +1,4 @@
+import { type Metadata } from 'next'
 import {
 	Li,
 	P,
@@ -6,6 +7,12 @@ import {
 	SubSection,
 	UL,
 } from '~/components/index'
+
+export const metadata: Metadata = {
+	title: 'How to Start',
+	description:
+		'Getting started is a whirlwind, but we can help you understand your options and make a plan. We have guides and support staff ready to assist you.',
+}
 
 const StartPage = () => {
 	return (

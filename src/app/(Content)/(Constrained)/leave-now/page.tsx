@@ -1,4 +1,11 @@
+import { Metadata } from 'next'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+	title: 'Leave Now',
+	description:
+		'Get immediate help and resources to leave as soon as possible. We have guides and support staff ready to assist you.',
+}
 
 const LeaveNow = () => {
 	return (

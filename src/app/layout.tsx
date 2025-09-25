@@ -10,7 +10,7 @@ import './style.css'
 
 export const metadata: Metadata = {
 	title: {
-		template: 'Help Me Leave | %s',
+		template: '%s | Help Me Leave',
 		default: 'Help Me Leave',
 	},
 }
@@ -33,12 +33,6 @@ const RootLayout = async ({
 			lang='en'
 			className={cn(openSans.variable)}
 			suppressHydrationWarning>
-			<head>
-				<link
-					rel='stylesheet'
-					href='https://use.typekit.net/alq7mbw.css'
-				/>
-			</head>
 			<body
 				className={cn(
 					'text-foreground bg-background relative font-sans antialiased',

@@ -1,4 +1,6 @@
 import fs from 'fs'
+import { type Metadata } from 'next'
+import { getFrontmatter } from 'next-mdx-remote-client/utils'
 import { Suspense } from 'react'
 import {
 	AlertCallout,
@@ -17,6 +19,37 @@ export const generateStaticParams = () => {
 		const slug = page.replace('.mdx', '')
 		return { slug }
 	})
+}
+
+export const generateMetadata = async ({
+	params,
+}: PageProps<'/[slug]'>): Promise<Metadata> => {
+	const { slug } = await params
+	try {
+		const file = fs.readFileSync(
+			`src/data/pages/${slug}.mdx`,
+			'utf-8'
+		)
+		if (file) {
+			const data = getFrontmatter(file)
+			const { metadata } = data.frontmatter as {
+				metadata: {
+					title?: string
+					description?: string
+				}
+			}
+			return {
+				title:
+					metadata.title
+					?? (toTitleCase(slug.replace(/-/g, ' ')) as string),
+				description: metadata.description ?? undefined,
+			}
+		}
+	} catch (e: AnySafe) {
+		// File not found or other error
+		console.error(e)
+	}
+	return { title: toTitleCase(slug.replace(/-/g, ' ')) as string }
 }
 
 const Page = async (props: PageProps<'/[slug]'>) => {

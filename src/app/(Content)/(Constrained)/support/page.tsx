@@ -1,3 +1,4 @@
+import { type Metadata } from 'next'
 import {
 	CTA,
 	Divider,
@@ -10,6 +11,12 @@ import {
 	Section,
 	SectionHeading,
 } from '~/components'
+
+export const metadata: Metadata = {
+	title: 'Support Team',
+	description:
+		'Our Support Team is here to help you create an evacuation plan that works best for you.',
+}
 
 export default function SupportTeam() {
 	return (

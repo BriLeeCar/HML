@@ -7,6 +7,14 @@ import {
 	UL,
 } from '~/components'
 
+import { type Metadata } from 'next'
+
+export const metadata: Metadata = {
+	title: 'How to Leave',
+	description:
+		'The Help Me Leave team has compiled lists and resources to help you with each step of the process.',
+}
+
 const LeavePage = () => {
 	return (
 		<Section>

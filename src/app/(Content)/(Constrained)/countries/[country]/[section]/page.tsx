@@ -1,4 +1,5 @@
 import fs from 'fs'
+import { Metadata } from 'next'
 import path from 'path'
 import {
 	CTA,
@@ -8,6 +9,8 @@ import {
 	SectionHeading,
 } from '~/components'
 import { MDXProcessor } from '~/lib/mdx'
+import { toTitleCase } from '~/lib/text'
+import countriesMeta from '~/server/db/countries.json'
 import db from '~/server/db/db'
 import countries from '~/server/db/pathways.json'
 import { Base } from '../Base'
@@ -28,6 +31,26 @@ const sectionArr = [
 	'housing',
 	'medical',
 ]
+
+export const generateMetadata = async ({
+	params,
+}: PageProps<'/countries/[country]/[section]'>): Promise<Metadata> => {
+	const data = await params
+	const country = toTitleCase(
+		countriesMeta
+			.find(
+				(c) => c.abbr.toLowerCase() === data.country.toLowerCase()
+			)
+			?.name?.replace('-', '')
+	)
+
+	const section = toTitleCase(data.section.replace('-', ' '))
+
+	return {
+		title: `${country}'s ${section}`,
+		description: `Narrowed overview of ${country}'s ${section} information to ensure you're making an informed decision about your new home.`,
+	}
+}
 
 export const generateStaticParams = async () => {
 	const pathwayCountries = [
