@@ -4,7 +4,7 @@ export const resources: tResource = {
 		links: [
 			{
 				title: 'Join Our Discord',
-				href: 'https://discord.gg/3UHPXjKs',
+				href: 'https://discord.gg/TcHKRgED6y',
 				subtitle: 'Connect with others going through this process',
 				type: 'link',
 				Icon: { name: 'DiscordIcon', color: 'text-indigo-500' },
