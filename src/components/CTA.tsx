@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import { cn } from '~/lib/cn'
 import { Button, Subtitle } from '.'
 
@@ -15,7 +16,7 @@ export const CTA = ({
 		href: string
 		label: string
 	}
-	subtitle?: string
+	subtitle?: ReactNode
 }) => {
 	const Head = () => (
 		<h2 className='max-w-2xl text-4xl font-semibold tracking-tight text-gray-900 sm:text-4xl dark:text-white'>

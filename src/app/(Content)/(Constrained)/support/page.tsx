@@ -11,6 +11,7 @@ import {
 	Section,
 	SectionHeading,
 } from '~/components'
+import { FAQ } from './faq'
 
 export const metadata: Metadata = {
 	title: 'Support Team',
@@ -79,7 +80,42 @@ export default function SupportTeam() {
 				</OL>
 			</Section>
 			<Divider />
+			<FAQ />
+			<Divider />
+
 			<CTA
+				subtitle={
+					<>
+						We are so grateful for the outpouring of support and
+						interest we have received. At this time, our Support Team
+						is at capacity and we are not accepting new requests for
+						assistance.
+						<br />
+						<br />
+						We are working hard to expand our team and resources to
+						better serve you. Please check back in the coming days for
+						updates on when we will be able to accept new requests.
+						<br />
+						<br />
+						In the meantime, please join our{' '}
+						<InlineLink href='https://discord.gg/TcHKRgED6y'>
+							Discord community
+						</InlineLink>{' '}
+						to connect with others and explore our Guides & Resources
+						.
+					</>
+				}
+				primaryAction={{
+					href: 'https://discord.gg/TcHKRgED6y',
+					label: 'Join Our Discord',
+				}}
+				secondaryAction={{
+					href: '/guides-resources',
+					label: 'Explore Resources',
+				}}>
+				<em>Support Requests On Hold</em>
+			</CTA>
+			{/* <CTA
 				primaryAction={{
 					href: 'https://form.jotform.com/252073139145352',
 					label: 'Reach Out',
@@ -91,7 +127,7 @@ export default function SupportTeam() {
 				If you're ready,
 				<br />
 				we're ready.
-			</CTA>
+			</CTA> */}
 		</Page>
 	)
 }
