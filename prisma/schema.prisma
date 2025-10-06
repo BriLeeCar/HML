@@ -8,20 +8,21 @@ datasource db {
 }
 
 model Post {
-  id                 Int                  @id @default(autoincrement())
-  name               String
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
-  authorId           String               @map("createdById")
-  contentHTML        String
-  contentText        String
-  status             String               @default("DRAFT")
-  subtitle           String?
-  slug               String               @unique
-  image              Boolean              @default(false)
-  author             User                 @relation(fields: [authorId], references: [id])
-  Tag                PostTag[]
-  PostVersionHistory PostVersionHistory[]
+  id          Int      @id @default(autoincrement())
+  name        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  authorId    String   @map("createdById")
+  contentHTML String
+  contentText String
+  status      String   @default("DRAFT")
+  subtitle    String?
+  slug        String   @unique
+  image       Boolean  @default(false)
+  author      User     @relation(fields: [authorId], references: [id])
+
+  tags                 PostTag[]
+  postVersionHistories PostVersionHistory[]
 
   @@index([name])
 }
@@ -36,11 +37,12 @@ model PostTag {
 }
 
 model Tag {
-  id       Int       @id @default(autoincrement())
+  id       Int     @id @default(autoincrement())
   name     String
   parentId Int?
   color    String?
-  PostTag  PostTag[]
+
+  posts    PostTag[]
   parent   Tag?      @relation("TagToTag", fields: [parentId], references: [id])
   children Tag[]     @relation("TagToTag")
 
@@ -85,7 +87,7 @@ model User {
   lastName           String?
   accounts           Account[]
   posts              Post[]
-  PostVersionHistory PostVersionHistory[]
+  postVersionHistory PostVersionHistory[]
   sessions           Session[]
   key                UserKey?
   socials            UserSocial[]
@@ -122,7 +124,7 @@ model Social {
   url        String
   icon       String
   color      String?
-  UserSocial UserSocial[]
+  userSocial UserSocial[]
 }
 
 model PostVersionHistory {

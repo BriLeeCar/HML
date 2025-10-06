@@ -20,6 +20,7 @@
 		],
 		"paths": {
 			"@/*": ["./src/app/*"],
+			"@admin/*": ["./src/app/admin/*"],
 			"~/components/*": ["./src/components/*"],
 			"~/components": ["./src/components/index.ts"],
 			"~/server/*": ["./src/server/*"],

@@ -1,9 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-import { QuillWrapper } from '~/app/admin/_components/editorWrapper'
-import { api } from '~/trpc/react'
+import { QuillWrapper } from '@admin/_components/editorWrapper'
 import {
 	AuthorField,
 	BlogBtns,
@@ -15,55 +12,38 @@ import {
 	TagFormEl,
 	TitleField,
 	WrittenOnField,
-} from '.'
+} from '@admin/blog/_fields'
+import { BlogData, dataReducer } from '@admin/blog/lib'
+import { useRouter } from 'next/navigation'
+import { useReducer } from 'react'
+import { api } from '~/trpc/react'
 
-export const BlogForm = ({
-	data,
-}: {
-	data: {
-		id?: number | string
-		title: string
-		subtitle: string
-		slug: string
-		author: {
-			id: number | string
-			firstName: string
-			lastName: string
-			fullName: string
-		}
-		image?: File | boolean
-		text: string | null
-		content: string | null
-		tags?: { id: number; name: string }[]
-		type: 'edit' | 'create' | string
-	}
-}) => {
-	const [title, setTitle] = useState(data?.title ?? '')
-	const [subtitle, setSubtitle] = useState(data?.subtitle ?? '')
-	const [author, setAuthor] = useState({
-		id: data?.author.id,
-		firstName: data?.author.firstName,
-		lastName: data?.author.lastName,
-		fullName: data?.author.fullName,
-	})
-	const [image, setImage] = useState(data?.image)
-	const [slug, setSlug] = useState(data?.slug)
-	const [content, setContent] = useState({
-		text: data?.text ?? '',
-		content: data?.content ?? '',
-	})
+export const BlogForm = ({ data }: { data: BlogData }) => {
+	const [postData, dispatch] = useReducer(dataReducer, data, () => ({
+		...data,
+		tags: 'tags' in data ? data.tags?.map((t) => t) : [],
+		author: data?.author ?? {
+			id: '',
+			fullName: '',
+			name: null,
+			firstName: '',
+			lastName: '',
+		},
+	}))
+
+	console.log('postData', postData.tags)
 
 	const router = useRouter()
 
 	const createPost = api.blogPost.create.useMutation({
 		onSuccess: () => {
-			router.push('/admin')
+			router.push('/admin/blog')
 		},
 	})
 
 	const editPost = api.blogPost.edit.useMutation({
 		onSuccess: () => {
-			router.push('/admin')
+			router.push(`/admin/blog/edit?id=${postData.id}`)
 		},
 	})
 
@@ -72,21 +52,23 @@ export const BlogForm = ({
 			onSubmit={(e) => {
 				e.preventDefault()
 				const formData = {
-					title,
-					subtitle,
-					slug,
+					name: postData.name,
+					subtitle: postData.subtitle,
+					slug: postData.slug,
 					author:
-						typeof author === 'string' ? author : (
-							author.id.toString()
-						),
-					content: content.content,
-					text: content.text,
+						typeof postData.author === 'string' ?
+							postData.author
+						:	(postData.author?.id?.toString() ?? ''),
+					contentHTML: postData.contentHTML,
+					contentText: postData.contentText,
 					image: true, // @todo handle image upload
 					tags: Array.from(
 						e.currentTarget.querySelector('#selected-tags')?.children
 							?? []
 					).map((tagEl) => Number(tagEl.id)),
 				}
+
+				console.log('formData', formData)
 
 				if (data?.type == 'edit') {
 					editPost.mutate(formData)
@@ -101,15 +83,17 @@ export const BlogForm = ({
 					sectionDescription='This is where you will write the content of your post.'
 					className='mr-4 w-full grow'>
 					<TitleField
-						title={title}
-						setTitle={setTitle}
-						setSlug={setSlug}
+						title={postData.name}
+						dispatchDataAction={dispatch}
 					/>
 					<QuillWrapper
 						wrapperProps={{ className: 'h-[70vh]' }}
 						contentProps={{
-							setValue: setContent,
-							value: { text: content.text, content: content.content },
+							dispatchDataAction: dispatch,
+							value: {
+								contentText: postData.contentText,
+								contentHTML: postData.contentHTML,
+							},
 						}}
 					/>
 				</Section>
@@ -123,30 +107,29 @@ export const BlogForm = ({
 						<div className='space-y-8 p-2'>
 							<SubSectionWrapper>
 								<SubtitleField
-									subtitle={subtitle}
-									setSubtitle={setSubtitle}
+									subtitle={postData.subtitle}
+									dispatchDataAction={dispatch}
 								/>
 
 								<ImageField
-									image={image}
-									setImage={setImage}
+									image={postData.image}
+									dispatchDataAction={dispatch}
 								/>
 
 								<SlugField
-									slug={slug}
-									setSlug={setSlug}
+									slug={postData.slug}
+									dispatchDataAction={dispatch}
 								/>
 							</SubSectionWrapper>
 							<SubSectionWrapper>
 								<AuthorField
-									author={author.fullName ?? ''}
-									// @ts-expect-error mismatched types
-									setAuthor={setAuthor}
+									author={postData.author}
+									dispatchDataAction={dispatch}
 								/>
 								<WrittenOnField />
 							</SubSectionWrapper>
 							<SubSectionWrapper className='space-y-0'>
-								<TagFormEl tags={data?.tags} />
+								<TagFormEl tags={postData?.tags} />
 							</SubSectionWrapper>
 						</div>
 					</Section>

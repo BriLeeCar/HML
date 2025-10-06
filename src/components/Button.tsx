@@ -12,6 +12,8 @@ export const Button = ({
 	// const Tag = 'href' in props ? Link : 'button'
 	const classes = cn(
 		'click relative rounded-md px-3.5 py-2.5 text-xs font-semibold tracking-wide whitespace-nowrap uppercase transition-all focus-visible:outline-2 focus-visible:outline-offset-2 has-[svg]:py-2',
+		// ! ICONS
+		'[:has([data-slot="icon"])]:flex [:has([data-slot="icon"])]:items-center [:has([data-slot="icon"])]:gap-2',
 		variant == 'default'
 			&& 'bg-brand hover:bg-brand-bright text-white focus-visible:outline-zinc-600',
 		variant == 'bright'

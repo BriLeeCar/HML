@@ -1,14 +1,17 @@
 'use client'
-import type { Dispatch, SetStateAction } from 'react'
+import type { ActionDispatch } from 'react'
 import { Field, Label } from '../../_components/fieldset'
 import { Input } from '../../_components/input'
+import { ReducerSetField } from '../lib'
 
 export const ImageField = ({
 	image,
-	setImage,
+	dispatchDataAction,
 }: {
 	image?: File | boolean | null
-	setImage?: Dispatch<SetStateAction<File | boolean | undefined>>
+	dispatchDataAction: ActionDispatch<
+		[action: ReducerSetField<'image'>]
+	>
 }) => {
 	if (image || !image) {
 	}
@@ -21,7 +24,16 @@ export const ImageField = ({
 				defaultValue={''}
 				onChange={(e) =>
 					// @ts-expect-error FileList is not null here
-					setImage && setImage(e.currentTarget.files?.[0] ?? null)
+					setImage
+					&& dispatchDataAction({
+						type: 'SET_FIELD',
+						payload: [
+							{
+								fieldKey: 'image',
+								fieldValue: e.currentTarget.files?.[0] ? true : false,
+							},
+						],
+					})
 				}
 			/>
 		</Field>

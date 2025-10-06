@@ -1,8 +1,8 @@
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import { type DefaultSession, type NextAuthConfig } from "next-auth";
+import { PrismaAdapter } from '@auth/prisma-adapter'
+import { type DefaultSession, type NextAuthConfig } from 'next-auth'
 
-import { db } from "~/server/db";
-import { CredentialsConfig } from "./lib/credentials";
+import { db } from '~/server/db'
+import { CredentialsConfig } from './lib/credentials'
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -10,13 +10,13 @@ import { CredentialsConfig } from "./lib/credentials";
  *
  * @see https://next-auth.js.org/getting-started/typescript#module-augmentation
  */
-declare module "next-auth" {
+declare module 'next-auth' {
 	interface Session extends DefaultSession {
 		user: {
-			id: string;
+			id: string
 			// ...other properties
 			// role: UserRole;
-		} & DefaultSession["user"];
+		} & DefaultSession['user']
 	}
 
 	// interface User {
@@ -34,7 +34,7 @@ export const authConfig = {
 	providers: [CredentialsConfig],
 	adapter: PrismaAdapter(db),
 	session: {
-		strategy: "jwt",
+		strategy: 'jwt',
 	},
 	callbacks: {
 		session: (data) => {
@@ -44,13 +44,13 @@ export const authConfig = {
 					...data.session.user,
 					id: data.token.sub,
 				},
-			};
+			}
 		},
 		jwt: (data) => {
-			return data.token;
+			return data.token
+		},
+		redirect: async (data) => {
+			return data.baseUrl + '/admin'
 		},
 	},
-	// pages: {
-	// 	signIn: "/admin/auth/signIn",
-	// },
-} satisfies NextAuthConfig;
+} satisfies NextAuthConfig

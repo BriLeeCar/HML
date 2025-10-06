@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { z } from 'zod'
+import { createTRPCRouter, publicProcedure } from '~/server/api/trpc'
 
 export const userRouter = createTRPCRouter({
 	checkForUserKey: publicProcedure
@@ -8,13 +8,16 @@ export const userRouter = createTRPCRouter({
 			const key = await ctx.db.userKey.findUnique({
 				where: { key: input.userKey },
 				include: { user: true },
-			});
+			})
 
 			if (key) {
 				return {
 					valid: true,
-					user: key.user ? { id: key.user.id, name: key.user.name } : null,
-				};
+					user:
+						key.user ?
+							{ id: key.user.id, name: key.user.name }
+						:	null,
+				}
 			}
 		}),
 	createNewFromKey: publicProcedure
@@ -23,7 +26,7 @@ export const userRouter = createTRPCRouter({
 				key: z.string(),
 				name: z.string().min(2).max(32),
 				secret: z.string().min(8).max(64),
-			}),
+			})
 		)
 		.mutation(async ({ input, ctx }) => {
 			return await ctx.db.user.create({
@@ -36,6 +39,9 @@ export const userRouter = createTRPCRouter({
 						},
 					},
 				},
-			});
+			})
 		}),
-});
+	getAll: publicProcedure.query(async ({ ctx }) => {
+		return await ctx.db.user.findMany()
+	}),
+})
