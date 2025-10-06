@@ -5,6 +5,7 @@ import 'react'
 import { ReactNode } from 'react'
 import 'rehype-callouts/theme/vitepress'
 import { cn } from '~/lib/cn'
+import { TRPCReactProvider } from '~/trpc/react'
 import { Providers } from './providers'
 import './style.css'
 
@@ -38,7 +39,9 @@ const RootLayout = async ({
 					'text-foreground bg-background relative font-sans antialiased',
 					'pb-4'
 				)}>
-				<Providers>{children}</Providers>
+				<TRPCReactProvider>
+					<Providers>{children}</Providers>
+				</TRPCReactProvider>
 				<Analytics />
 			</body>
 		</html>

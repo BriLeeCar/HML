@@ -24,7 +24,8 @@
 			"~/components": ["./src/components/index.ts"],
 			"~/server/*": ["./src/server/*"],
 			"~/data/*": ["./src/data/*"],
-			"~/lib/*": ["./src/lib/*"]
+			"~/lib/*": ["./src/lib/*"],
+			"~/*": ["./src/*"]
 		},
 		"typeRoots": ["./node_modules/@types", "./@types"]
 	},

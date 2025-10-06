@@ -1,0 +1,136 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("PRISMA_DATABASE_URL")
+}
+
+model Post {
+  id                 Int                  @id @default(autoincrement())
+  name               String
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  authorId           String               @map("createdById")
+  contentHTML        String
+  contentText        String
+  status             String               @default("DRAFT")
+  subtitle           String?
+  slug               String               @unique
+  image              Boolean              @default(false)
+  author             User                 @relation(fields: [authorId], references: [id])
+  Tag                PostTag[]
+  PostVersionHistory PostVersionHistory[]
+
+  @@index([name])
+}
+
+model PostTag {
+  postId Int
+  tagId  Int
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  tag    Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([postId, tagId])
+}
+
+model Tag {
+  id       Int       @id @default(autoincrement())
+  name     String
+  parentId Int?
+  color    String?
+  PostTag  PostTag[]
+  parent   Tag?      @relation("TagToTag", fields: [parentId], references: [id])
+  children Tag[]     @relation("TagToTag")
+
+  @@index([name, parentId])
+}
+
+model Account {
+  id                       String  @id @default(cuid())
+  userId                   String
+  type                     String
+  provider                 String
+  providerAccountId        String
+  refresh_token            String?
+  access_token             String?
+  expires_at               Int?
+  token_type               String?
+  scope                    String?
+  id_token                 String?
+  session_state            String?
+  refresh_token_expires_in Int?
+  user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id                 String               @id @default(cuid())
+  name               String?
+  email              String?              @unique
+  emailVerified      DateTime?
+  image              String?
+  secret             String
+  firstName          String?
+  lastName           String?
+  accounts           Account[]
+  posts              Post[]
+  PostVersionHistory PostVersionHistory[]
+  sessions           Session[]
+  key                UserKey?
+  socials            UserSocial[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model UserKey {
+  key    String  @id @default(cuid())
+  name   String
+  userId String? @unique
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model UserSocial {
+  userId   String
+  socialId Int
+  handle   String
+  social   Social @relation(fields: [socialId], references: [id], onDelete: Cascade)
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, socialId])
+}
+
+model Social {
+  id         Int          @id @default(autoincrement())
+  name       String       @unique
+  url        String
+  icon       String
+  color      String?
+  UserSocial UserSocial[]
+}
+
+model PostVersionHistory {
+  id         Int      @id @default(autoincrement())
+  postId     Int
+  userId     String
+  action     String
+  instanceAt DateTime @default(now())
+  post       Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
