@@ -24,14 +24,11 @@ export const BlogForm = ({ data }: { data: BlogData }) => {
 		tags: 'tags' in data ? data.tags?.map((t) => t) : [],
 		author: data?.author ?? {
 			id: '',
-			fullName: '',
 			name: null,
 			firstName: '',
 			lastName: '',
 		},
 	}))
-
-	console.log('postData', postData.tags)
 
 	const router = useRouter()
 

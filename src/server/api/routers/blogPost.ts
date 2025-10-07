@@ -49,14 +49,7 @@ export const blogPostRouter = createTRPCRouter({
 						},
 					},
 				},
-				author: {
-					select: {
-						id: true,
-						name: true,
-						firstName: true,
-						lastName: true,
-					},
-				},
+				author: true,
 			},
 		})
 	}),
@@ -146,7 +139,6 @@ export const blogPostRouter = createTRPCRouter({
 							name: true,
 							firstName: true,
 							lastName: true,
-							fullName: true,
 						},
 					},
 					tags: {

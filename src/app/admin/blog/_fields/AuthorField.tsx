@@ -45,7 +45,11 @@ export const AuthorField = ({
 		<Field>
 			<Label>Author</Label>
 			<Input
-				defaultValue={author.fullName || author.name || ''}
+				defaultValue={
+					[author.firstName, author.lastName].join(' ')
+					|| author.name
+					|| ''
+				}
 				onChange={handleAuthorChange}
 				disabled
 			/>

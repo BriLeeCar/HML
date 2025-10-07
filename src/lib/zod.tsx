@@ -49,7 +49,6 @@ export type tTagWithRelations = tTagWithParent & { children: tTag[] }
 
 export const zUserDBSchema = z.object({
 	id: z.string(),
-	fullName: z.string().optional().default(''),
 	name: z.string().nullable().default(null),
 	email: z.email().or(z.string()).nullable().default(null),
 	emailVerified: z.date().nullable().default(null),
