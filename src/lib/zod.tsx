@@ -80,7 +80,6 @@ export const zBlogPostEditSchema = zBlogPostDBSchema
 	.extend({
 		author: zUserDBSchema.pick({
 			id: true,
-			fullName: true,
 			firstName: true,
 			lastName: true,
 			name: true,
