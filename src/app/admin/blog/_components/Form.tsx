@@ -15,7 +15,7 @@ import {
 } from '@admin/blog/_fields'
 import { BlogData, dataReducer } from '@admin/blog/lib'
 import { useRouter } from 'next/navigation'
-import { useReducer } from 'react'
+import { MouseEvent, useReducer } from 'react'
 import { api } from '~/trpc/react'
 
 export const BlogForm = ({ data }: { data: BlogData }) => {
@@ -28,6 +28,7 @@ export const BlogForm = ({ data }: { data: BlogData }) => {
 			firstName: '',
 			lastName: '',
 		},
+		status: data?.status ?? 'DRAFT',
 	}))
 
 	const router = useRouter()
@@ -44,36 +45,56 @@ export const BlogForm = ({ data }: { data: BlogData }) => {
 		},
 	})
 
+	const deletePost = api.blogPost.delete.useMutation({
+		onSuccess: () => {
+			router.push('/admin/blog')
+		},
+	})
+
+	const handleSubmit = (e: MouseEvent) => {
+		const target = e.target as HTMLButtonElement
+		const actionType = target.dataset.type
+
+		const formData = {
+			name: postData.name,
+			subtitle: postData.subtitle,
+			slug: postData.slug,
+			author:
+				typeof postData.author === 'string' ?
+					postData.author
+				:	(postData.author?.id?.toString() ?? ''),
+			contentHTML: postData.contentHTML,
+			contentText: postData.contentText,
+			image: true, // @todo handle image upload
+			tags: Array.from(
+				document.querySelector('#selected-tags')?.children ?? []
+			).map((tagEl) => Number(tagEl.id)),
+			status: postData.status ?? 'DRAFT',
+		}
+		if (actionType === 'delete') {
+			deletePost.mutate(postData.id as number)
+			return
+		}
+
+		switch (actionType) {
+			case 'publish':
+				Object.assign(formData, { status: 'PUBLISHED' })
+				break
+			case 'save':
+				postData.type == 'add'
+					&& Object.assign(formData, { status: 'DRAFT' })
+				break
+		}
+
+		if (data?.type == 'edit') {
+			editPost.mutate(formData)
+		} else {
+			createPost.mutate(formData)
+		}
+	}
+
 	return (
-		<form
-			onSubmit={(e) => {
-				e.preventDefault()
-				const formData = {
-					name: postData.name,
-					subtitle: postData.subtitle,
-					slug: postData.slug,
-					author:
-						typeof postData.author === 'string' ?
-							postData.author
-						:	(postData.author?.id?.toString() ?? ''),
-					contentHTML: postData.contentHTML,
-					contentText: postData.contentText,
-					image: true, // @todo handle image upload
-					tags: Array.from(
-						e.currentTarget.querySelector('#selected-tags')?.children
-							?? []
-					).map((tagEl) => Number(tagEl.id)),
-				}
-
-				console.log('formData', formData)
-
-				if (data?.type == 'edit') {
-					editPost.mutate(formData)
-				} else {
-					createPost.mutate(formData)
-				}
-			}}
-			className='mx-auto my-6 flex max-w-6xl flex-col gap-4 p-4'>
+		<form className='mx-auto my-6 flex max-w-6xl flex-col gap-4 p-4'>
 			<div className='flex flex-col-reverse gap-12 lg:flex-row'>
 				<Section
 					sectionTitle='Post Content'
@@ -95,7 +116,7 @@ export const BlogForm = ({ data }: { data: BlogData }) => {
 					/>
 				</Section>
 				<div className='mr-4 sm:w-full lg:max-w-sm'>
-					<BlogBtns />
+					<BlogBtns handle={handleSubmit} />
 
 					<Section
 						sectionTitle='Post Basics'

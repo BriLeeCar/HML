@@ -1,36 +1,5 @@
+import { MouseEventHandler } from 'react'
 import { Button, Icon } from '~/components'
-
-const PublishBtn = () => (
-	<BlogBtn
-		icon='ArrowInUpRightStrokeSquareIcon'
-		text='Publish'
-		type='submit'
-	/>
-)
-
-const DeleteBtn = () => (
-	<BlogBtn
-		icon='TrashXIcon'
-		text='Delete'
-		variant='bright'
-		iconSolid
-	/>
-)
-
-const SaveBtn = () => (
-	<BlogBtn
-		icon='SaveIcon'
-		text='Save Draft'
-		iconSolid
-	/>
-)
-
-const PreviewBtn = () => (
-	<BlogBtn
-		icon='EyeIcon'
-		text='Preview'
-	/>
-)
 
 const BlogBtn = ({
 	icon,
@@ -38,15 +7,17 @@ const BlogBtn = ({
 	iconSolid,
 	type = 'button',
 	variant,
+	...props
 }: {
 	icon: IconKey
 	iconSolid?: boolean
 	text: string
 	type?: 'button' | 'submit' | 'reset'
 	variant?: 'default' | 'bright' | 'muted' | 'ghost'
-}) => {
+} & Props<typeof Button>) => {
 	return (
 		<Button
+			{...props}
 			className='mb-2'
 			type={type}
 			variant={variant}>
@@ -61,17 +32,44 @@ const BlogBtn = ({
 	)
 }
 
-export const BlogBtns = () => {
+export const BlogBtns = ({
+	handle,
+}: {
+	handle: MouseEventHandler<HTMLButtonElement>
+}) => {
 	return (
 		<>
 			<div className='bg-background fixed right-0 bottom-0 left-0 z-10 flex flex-wrap items-stretch p-2 shadow-[-0px_-2px_8px_rgba(0,0,0,0.1),-0px_0px_6px_rgba(0,0,0,0.05)] md:justify-center md:gap-12 md:py-4'>
 				<span className='flex grow justify-center gap-4 md:justify-end'>
-					<PublishBtn />
-					<SaveBtn />
-					<PreviewBtn />
+					<BlogBtn
+						onClick={handle}
+						icon='ArrowInUpRightStrokeSquareIcon'
+						text='Publish'
+						data-type='publish'
+					/>
+					<BlogBtn
+						onClick={handle}
+						icon='SaveIcon'
+						text='Save Draft'
+						data-type='save'
+						iconSolid
+					/>
+					<BlogBtn
+						href='/blog'
+						target='_blank'
+						icon='EyeIcon'
+						text='Preview'
+					/>
 				</span>
 				<span className='flex grow justify-center md:grow-0 md:pr-4'>
-					<DeleteBtn />
+					<BlogBtn
+						icon='TrashXIcon'
+						text='Delete'
+						variant='bright'
+						iconSolid
+						data-type='delete'
+						onClick={handle}
+					/>
 				</span>
 			</div>
 		</>

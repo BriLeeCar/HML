@@ -1,5 +1,6 @@
 import {
 	blogPostRouter,
+	socialMediaRouter,
 	tagRouter,
 	userRouter,
 } from '~/server/api/routers'
@@ -17,6 +18,7 @@ export const appRouter = createTRPCRouter({
 	blogPost: blogPostRouter,
 	user: userRouter,
 	tag: tagRouter,
+	socialMedia: socialMediaRouter,
 })
 
 // export type definition of API

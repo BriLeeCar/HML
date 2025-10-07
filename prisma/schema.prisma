@@ -109,22 +109,26 @@ model UserKey {
 }
 
 model UserSocial {
-  userId   String
-  socialId Int
-  handle   String
-  social   Social @relation(fields: [socialId], references: [id], onDelete: Cascade)
-  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+  socialCode String
+  handle     String
+  social     Social @relation(fields: [socialCode], references: [codeName], onDelete: Cascade)
+  user       User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@id([userId, socialId])
+  @@id([userId, socialCode])
 }
 
 model Social {
-  id         Int          @id @default(autoincrement())
-  name       String       @unique
-  url        String
-  icon       String
-  color      String?
-  userSocial UserSocial[]
+  codeName           String       @id
+  name               String       @unique
+  url                String
+  icon               String
+  lightModeColor     String?
+  darkModeColor      String?
+  color              String?
+  profileLinkFormat  String?
+  profileEntryFormat String?
+  users              UserSocial[]
 }
 
 model PostVersionHistory {

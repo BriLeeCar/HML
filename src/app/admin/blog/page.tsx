@@ -75,6 +75,7 @@ const BlogPage = async () => {
 						<TableHeader className='w-full'>author</TableHeader>
 						<TableHeader>created</TableHeader>
 						<TableHeader>tags</TableHeader>
+						<TableHeader>status</TableHeader>
 					</TableRow>
 				</TableHead>
 				<TableBody>
@@ -118,6 +119,7 @@ const BlogPage = async () => {
 									))}
 								</div>
 							</TableCell>
+							<TableCell>{post.status}</TableCell>
 						</TableRow>
 					))}
 				</TableBody>

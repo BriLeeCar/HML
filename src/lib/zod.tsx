@@ -1,5 +1,21 @@
 import { z } from 'zod'
 
+// #region ? PRIMITIVES
+export const zSocialPlatformSchema = z.object({
+	codeName: z.string(),
+	name: z.string(),
+	url: z.string(),
+	icon: z.string().nullable(),
+	darkModeColor: z.string(),
+	lightModeColor: z.string(),
+	profileEntryFormat: z.string().includes('[HANDLE]'),
+	profileLinkFormat: z.string().includes('[HANDLE]'),
+})
+
+export type tSocialPlatform = z.infer<typeof zSocialPlatformSchema>
+
+// #endregion ?
+
 // #region ? USER AUTH SCHEMAS
 const zPassword = z
 	.string()
@@ -47,6 +63,7 @@ export type tTagWithRelations = tTagWithParent & { children: tTag[] }
 
 // #endregion ?
 
+// #region ? USER SCHEMAS
 export const zUserDBSchema = z.object({
 	id: z.string(),
 	name: z.string().nullable().default(null),
@@ -58,8 +75,26 @@ export const zUserDBSchema = z.object({
 	lastName: z.string(),
 })
 
-const zId = z.coerce.number()
+export const zUserSocialSchema = z.object({
+	handle: z.string(),
+	social: zSocialPlatformSchema,
+})
 
+export const zProfileSchema = zUserDBSchema.extend({
+	socials: z.array(
+		zUserSocialSchema.transform((social) => {
+			return {
+				handle: social.handle,
+				...social.social,
+			}
+		})
+	),
+})
+
+// #endregion ?
+
+// #region ? BLOG POST SCHEMAS
+const zId = z.coerce.number()
 export const zBlogPostDBSchema = z.object({
 	id: zId.default(0),
 	name: z.string().default(''),
@@ -67,7 +102,7 @@ export const zBlogPostDBSchema = z.object({
 	updatedAt: z.coerce.date().default(new Date()),
 	contentHTML: z.string().default(''),
 	contentText: z.string().default(''),
-	status: z.enum(['DRAFT', 'PUBLISHED', 'ARCHIVED']).default('DRAFT'),
+	status: z.enum(['DRAFT', 'PUBLISHED']).default('DRAFT'),
 	subtitle: z.string().default(''),
 	slug: z
 		.string()
@@ -115,3 +150,5 @@ export const zBlogPostAddSchema = zBlogPostDBSchema
 			tags: [] as tTag[],
 		}))
 	)
+
+// #endregion ?

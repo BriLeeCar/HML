@@ -31,11 +31,11 @@ export const QuillWrapper = ({
 }) => {
 	const { quill, quillRef } = useQuill({
 		theme: 'snow',
-		modules: {
-			toolbar: {
-				container: '#toolbar',
-			},
-		},
+		// modules: {
+		// 	toolbar: {
+		// 		container: '#toolbar',
+		// 	},
+		// },
 		...quillOptions,
 	})
 
@@ -92,7 +92,7 @@ export const QuillWrapper = ({
 			<div
 				{...wrapperProps}
 				className={cn('h-96', wrapperProps?.className)}>
-				<QuillToolbar />
+				{/* <QuillToolbar /> */}
 				<div ref={quillRef} />
 				<div id='editor' />
 			</div>
@@ -113,6 +113,8 @@ const QuillCounter = ({ ...props }: ComponentPropsWithRef<'div'>) => {
 	)
 }
 
+// TODO: CREATE CUSTOM TOOLBAR TO USE WITH OUR BRANDING AND FORMAT IN MIND
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const QuillToolbar = () => {
 	return (
 		<div id='toolbar'>
@@ -124,12 +126,12 @@ const QuillToolbar = () => {
 				<option value='large'></option>
 				<option value='huge'></option>
 			</select>
-			<select
+			{/* <select
 				className='ql-header'
 				defaultValue='section'>
 				<option value='section'>Section</option>
 				<option value='subsection'>Subsection</option>
-			</select>
+			</select> */}
 
 			<button className='ql-italic'></button>
 			<button className='ql-bold'></button>

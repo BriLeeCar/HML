@@ -14,6 +14,7 @@ const zPost = z.object({
 	author: z.string(),
 	contentHTML: z.string().optional(),
 	contentText: z.string().optional(),
+	status: z.enum(['DRAFT', 'PUBLISHED']).optional(),
 })
 
 const handleCreateOrUpdate = (input: z.infer<typeof zPost>) => ({
@@ -24,6 +25,7 @@ const handleCreateOrUpdate = (input: z.infer<typeof zPost>) => ({
 	contentHTML: input.contentHTML ?? '',
 	contentText: input.contentText ?? '',
 	image: input.image ? true : false,
+	status: input.status ?? 'DRAFT',
 })
 
 export const blogPostRouter = createTRPCRouter({
@@ -40,6 +42,7 @@ export const blogPostRouter = createTRPCRouter({
 				subtitle: true,
 				createdAt: true,
 				updatedAt: true,
+				status: true,
 				tags: {
 					select: {
 						tag: {
@@ -126,6 +129,13 @@ export const blogPostRouter = createTRPCRouter({
 				},
 			})
 			return updated
+		}),
+	delete: protectedProcedure
+		.input(z.coerce.number())
+		.mutation(async ({ ctx, input }) => {
+			return await ctx.db.post.delete({
+				where: { id: input },
+			})
 		}),
 	getById: publicProcedure
 		.input(z.coerce.number())

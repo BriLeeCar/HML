@@ -18,8 +18,6 @@ const AddBlogPage = async () => {
 		author: author.data,
 	})
 
-	console.log(baseData)
-
 	if (baseData.data) {
 		return (
 			author && (

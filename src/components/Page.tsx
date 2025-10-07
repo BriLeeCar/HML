@@ -6,7 +6,7 @@ import { Icon, Main } from '.'
 
 export const Page = ({ ...props }) => (
 	<Main>
-		<section className='mx-auto w-full max-w-2xl px-6 lg:max-w-7xl lg:px-8'>
+		<section className='relative mx-auto w-full max-w-2xl px-6 lg:max-w-7xl lg:px-8'>
 			{props.children}
 		</section>
 	</Main>
