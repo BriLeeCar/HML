@@ -109,8 +109,8 @@ const BlogPage = async () => {
 							<TableCell>{toShortDate(post.createdAt)}</TableCell>
 							<TableCell>
 								<div className='flex flex-wrap gap-1'>
-									{post.tags
-										&& post.tags?.map(({ tag }, index) => (
+									{Array.isArray(post.tags)
+										&& post.tags.map(({ tag }, index) => (
 											<span
 												key={index}
 												className='rounded-full bg-zinc-200 px-2 py-1 text-xs text-zinc-800 dark:bg-zinc-700 dark:text-zinc-200'>
