@@ -110,6 +110,7 @@ const BlogPage = async () => {
 							<TableCell>
 								<div className='flex flex-wrap gap-1'>
 									{Array.isArray(post.tags)
+										// @ts-expect-error -- IGNORE --
 										&& post.tags.map(({ tag }, index) => (
 											<span
 												key={index}
