@@ -10,7 +10,7 @@ export const TitleField = ({
 }: {
 	title?: string
 	dispatchDataAction: ActionDispatch<
-		[action: ReducerSetField<'title' | 'slug'>]
+		[action: ReducerSetField<'name' | 'slug'>]
 	>
 }) => {
 	const handleTitleChange = (
@@ -19,7 +19,7 @@ export const TitleField = ({
 		dispatchDataAction({
 			type: 'SET_FIELD',
 			payload: [
-				{ fieldKey: 'title', fieldValue: e.target.value },
+				{ fieldKey: 'name', fieldValue: e.target.value },
 				{
 					fieldKey: 'slug',
 					fieldValue: e.target.value
