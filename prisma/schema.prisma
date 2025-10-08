@@ -8,40 +8,44 @@ datasource db {
 }
 
 model Post {
-  id          Int      @id @default(autoincrement())
-  name        String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  authorId    String   @map("createdById")
-  contentHTML String
-  contentText String
-  status      String   @default("DRAFT")
-  subtitle    String?
-  slug        String   @unique
-  image       Boolean  @default(false)
-  author      User     @relation(fields: [authorId], references: [id])
+  id              Int      @id @default(autoincrement())
+  name            String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  authorId        String   @map("createdById")
+  contentHTML     String
+  contentText     String
+  status          String   @default("DRAFT")
+  subtitle        String?
+  slug            String   @unique
+  image           Boolean  @default(false)
+  author          User     @relation(fields: [authorId], references: [id])
+  metaDescription String?
+  metaKeywords    String[] @default([])
 
+  // ! Relations
   tags                 PostTag[]
   postVersionHistories PostVersionHistory[]
 
-  @@index([name])
+  @@index([name, slug])
 }
 
 model PostTag {
   postId Int
   tagId  Int
-  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
-  tag    Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  // ! Relations
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  tag  Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
 
   @@id([postId, tagId])
 }
 
 model Tag {
-  id       Int     @id @default(autoincrement())
+  id       Int       @id @default(autoincrement())
   name     String
   parentId Int?
   color    String?
-
   posts    PostTag[]
   parent   Tag?      @relation("TagToTag", fields: [parentId], references: [id])
   children Tag[]     @relation("TagToTag")
@@ -77,14 +81,16 @@ model Session {
 }
 
 model User {
-  id                 String               @id @default(cuid())
-  name               String
-  email              String?              @unique
-  emailVerified      DateTime?
-  image              String?
-  secret             String
-  firstName          String?
-  lastName           String?
+  id            String    @id @default(cuid())
+  name          String    @unique
+  email         String?
+  emailVerified DateTime?
+  image         String?
+  secret        String
+  firstName     String?
+  lastName      String?
+
+  // ! Relations
   accounts           Account[]
   posts              Post[]
   postVersionHistory PostVersionHistory[]
@@ -105,30 +111,35 @@ model UserKey {
   key    String  @id @default(cuid())
   name   String
   userId String? @unique
-  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // ! Relations
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model UserSocial {
   userId     String
   socialCode String
   handle     String
-  social     Social @relation(fields: [socialCode], references: [codeName], onDelete: Cascade)
-  user       User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // ! Relations
+  social Social @relation(fields: [socialCode], references: [codeName], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([userId, socialCode])
 }
 
 model Social {
-  codeName           String       @id
-  name               String       @unique
+  codeName           String  @id
+  name               String  @unique
   url                String
   icon               String
   lightModeColor     String?
   darkModeColor      String?
-  color              String?
   profileLinkFormat  String?
   profileEntryFormat String?
-  users              UserSocial[]
+
+  // ! Relations
+  users UserSocial[]
 }
 
 model PostVersionHistory {
