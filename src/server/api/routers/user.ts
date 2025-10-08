@@ -147,38 +147,6 @@ export const userRouter = createTRPCRouter({
 								},
 							}
 						}),
-						// upsert: socials.map((s) => {
-						// 	return {
-						// 		where: {
-						// 			userId_socialId: {
-						// 				userId: id,
-						// 				socialId:
-						// 					socialPlatforms.find((sp) => sp.name == s.name)
-						// 						?.id ?? 0,
-						// 			},
-						// 		},
-						// 		create: {
-						// 			handle: s.handle,
-						// 			socialId:
-						// 				socialPlatforms.find((x) => x.name == s.name)?.id
-						// 				?? 0,
-						// 			userId: id,
-						// 		},
-						// 		update: {},
-						// 	}
-						// }),
-						// createMany: {
-						// 	skipDuplicates: true,
-						// 	data:socialPlatforms.map((platform) => {
-						// 		const match = newSocials.find(
-						// 			(s) => s.name == platform.name
-						// 		)
-						// 		return {
-						// 			socialId: platform.id,
-						// 			handle: match ? match.handle : '',
-						// 		}
-						// 	}),
-						// },
 					},
 				},
 			})

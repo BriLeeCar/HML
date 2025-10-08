@@ -72,14 +72,20 @@ const LegendAndDesc = ({
 	return <></>
 }
 
-export const FormField = ({ ...props }) => {
+export const FormField = ({
+	asCol = false,
+	...props
+}: Props<'span'> & { asCol?: boolean }) => {
 	return (
 		<span
 			{...props}
 			data-slot='field'
 			className={cn(
 				'grid grid-cols-[100px_auto] items-baseline',
-				'gap-4 *:data-[slot="label"]:w-[100px] *:data-[slot="label"]:justify-end *:data-[slot="label"]:font-semibold'
+				'gap-4 *:data-[slot="label"]:justify-end *:data-[slot="label"]:font-semibold',
+				asCol && 'mt-4 flex w-full flex-col gap-2',
+				!asCol && '*:data-[slot="label"]:w-[100px]',
+				props.className
 			)}
 		/>
 	)

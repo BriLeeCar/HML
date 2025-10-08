@@ -1,7 +1,6 @@
 'use client'
 import type { ActionDispatch } from 'react'
-import { Field, Label } from '../../_components/fieldset'
-import { Input } from '../../_components/input'
+import { FormField, Input, Label } from '~/components/Form'
 import { ReducerSetField } from '../lib'
 
 export const SubtitleField = ({
@@ -14,7 +13,7 @@ export const SubtitleField = ({
 	>
 }) => {
 	return (
-		<Field className='flex items-baseline gap-4 lg:block'>
+		<FormField asCol>
 			<Label>Subtitle</Label>
 			<Input
 				defaultValue={subtitle}
@@ -30,6 +29,6 @@ export const SubtitleField = ({
 					})
 				}
 			/>
-		</Field>
+		</FormField>
 	)
 }

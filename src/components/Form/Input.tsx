@@ -6,9 +6,12 @@ import { Icon } from '../Icon'
 const css = {
 	withWrapper: {
 		wrapper: cn(
-			'border-input/20 focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-[3px]'
+			'border-input/20 focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-[3px]',
+			'[*:has(input:disabled)]:bg-current/25 [*:has(input:disabled)]:opacity-50'
 		),
-		base: cn('border-0 px-0 outline-none focus:ring-0'),
+		base: cn(
+			'border-0 px-0 outline-none focus:ring-0 disabled:bg-transparent'
+		),
 	},
 	wrapper: cn('border-input/20'),
 	base: cn(
@@ -38,7 +41,7 @@ export const Input = ({
 	icon?: {
 		before?: IconKey
 		after?: IconKey
-	}
+	} & Props<'svg'>
 }) => {
 	if (text) {
 		return (
@@ -115,32 +118,38 @@ const WithIcon = ({
 	icon,
 	...props
 }: Props<'input'> & {
-	icon: { before?: IconKey; after?: IconKey }
-}) => (
-	<InputWithBeforeWrapper className='gap-2'>
-		{icon.before && (
-			<BeforeAfterWrapper className='pr-1'>
-				<Icon
-					IconName={icon.before}
-					className='h-4 w-4'
-				/>
-			</BeforeAfterWrapper>
-		)}
-		<BaseInput
-			{...props}
-			type={props.type}
-			className={cn(css.withWrapper.base, props.className)}
-		/>
-		{icon.after && (
-			<BeforeAfterWrapper>
-				<Icon
-					IconName={icon.after}
-					className='h-4 w-4'
-				/>
-			</BeforeAfterWrapper>
-		)}
-	</InputWithBeforeWrapper>
-)
+	icon: { before?: IconKey; after?: IconKey } & Props<'svg'>
+}) => {
+	const { before, after, ...rest } = icon
+
+	return (
+		<InputWithBeforeWrapper className='gap-2'>
+			{before && (
+				<BeforeAfterWrapper className='pr-1'>
+					<Icon
+						{...rest}
+						IconName={before}
+						className='h-4 w-4'
+					/>
+				</BeforeAfterWrapper>
+			)}
+			<BaseInput
+				{...props}
+				type={props.type}
+				className={cn(css.withWrapper.base, props.className)}
+			/>
+			{after && (
+				<BeforeAfterWrapper>
+					<Icon
+						{...rest}
+						IconName={after}
+						className='h-4 w-4'
+					/>
+				</BeforeAfterWrapper>
+			)}
+		</InputWithBeforeWrapper>
+	)
+}
 
 const BeforeAfterWrapper = ({ ...props }: Props<'span'>) => (
 	<span

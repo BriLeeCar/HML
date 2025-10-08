@@ -66,13 +66,13 @@ export type tTagWithRelations = tTagWithParent & { children: tTag[] }
 // #region ? USER SCHEMAS
 export const zUserDBSchema = z.object({
 	id: z.string(),
-	name: z.string().nullable().default(null),
+	name: z.string(),
 	email: z.email().or(z.string()).nullable().default(null),
 	emailVerified: z.date().nullable().default(null),
 	image: z.string().nullable(),
 	secret: z.string(),
-	firstName: z.string(),
-	lastName: z.string(),
+	firstName: z.string().nullable().default(null),
+	lastName: z.string().nullable().default(null),
 })
 
 export const zUserSocialSchema = z.object({

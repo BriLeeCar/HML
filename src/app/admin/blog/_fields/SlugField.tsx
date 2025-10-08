@@ -1,8 +1,6 @@
 'use client'
-import type { ActionDispatch } from 'react'
-import { Checkbox, CheckboxField } from '../../_components/checkbox'
-import { Field, FieldGroup, Label } from '../../_components/fieldset'
-import { Input } from '../../_components/input'
+import { useState, type ActionDispatch } from 'react'
+import { FormField, Input, Label } from '~/components'
 import { ReducerSetField } from '../lib'
 
 export const SlugField = ({
@@ -14,11 +12,20 @@ export const SlugField = ({
 		[action: ReducerSetField<'slug'>]
 	>
 }) => {
+	const [isLocked, setIsLocked] = useState(true)
+
 	return (
-		<FieldGroup>
-			<Field className='mb-2 flex items-baseline gap-4 lg:block'>
+		<>
+			<FormField asCol>
 				<Label>Slug</Label>
 				<Input
+					icon={{
+						before:
+							isLocked ? 'LockKeyholeIcon' : 'LockKeyholeOpenAltIcon',
+						onClick: () => {
+							setIsLocked((prev) => !prev)
+						},
+					}}
 					defaultValue={slug}
 					onChange={(e) =>
 						dispatchDataAction({
@@ -28,13 +35,9 @@ export const SlugField = ({
 							],
 						})
 					}
-					disabled
+					disabled={isLocked}
 				/>
-			</Field>
-			<CheckboxField className='ml-12 lg:ml-0'>
-				<Label>Unlock?</Label>
-				<Checkbox />
-			</CheckboxField>
-		</FieldGroup>
+			</FormField>
+		</>
 	)
 }

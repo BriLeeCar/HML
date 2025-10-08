@@ -7,7 +7,6 @@ import {
 	ImageField,
 	Section,
 	SlugField,
-	SubSectionWrapper,
 	SubtitleField,
 	TagFormEl,
 	TitleField,
@@ -16,6 +15,7 @@ import {
 import { BlogData, dataReducer } from '@admin/blog/lib'
 import { useRouter } from 'next/navigation'
 import { MouseEvent, useReducer } from 'react'
+import { Fieldset } from '~/components/index'
 import { api } from '~/trpc/react'
 
 export const BlogForm = ({ data }: { data: BlogData }) => {
@@ -123,14 +123,9 @@ export const BlogForm = ({ data }: { data: BlogData }) => {
 						sectionDescription='These are the basic settings for your post. You can always change them later.'
 						className='w-full'>
 						<div className='space-y-8 p-2'>
-							<SubSectionWrapper>
+							<Fieldset legend='Meta'>
 								<SubtitleField
 									subtitle={postData.subtitle}
-									dispatchDataAction={dispatch}
-								/>
-
-								<ImageField
-									image={postData.image}
 									dispatchDataAction={dispatch}
 								/>
 
@@ -138,17 +133,19 @@ export const BlogForm = ({ data }: { data: BlogData }) => {
 									slug={postData.slug}
 									dispatchDataAction={dispatch}
 								/>
-							</SubSectionWrapper>
-							<SubSectionWrapper>
+							</Fieldset>
+							<Fieldset legend='Details'>
 								<AuthorField
 									author={postData.author}
 									dispatchDataAction={dispatch}
 								/>
 								<WrittenOnField />
-							</SubSectionWrapper>
-							<SubSectionWrapper className='space-y-0'>
-								<TagFormEl tags={postData?.tags} />
-							</SubSectionWrapper>
+								<ImageField
+									image={postData.image}
+									dispatchDataAction={dispatch}
+								/>
+							</Fieldset>
+							<TagFormEl tags={postData?.tags} />
 						</div>
 					</Section>
 				</div>

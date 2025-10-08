@@ -1,7 +1,6 @@
 'use client'
 import type { ActionDispatch } from 'react'
-import { Field, Label } from '../../_components/fieldset'
-import { Input } from '../../_components/input'
+import { FormField, Input, Label } from '~/components'
 import { ReducerSetField } from '../lib'
 
 export const ImageField = ({
@@ -16,7 +15,7 @@ export const ImageField = ({
 	if (image || !image) {
 	}
 	return (
-		<Field className='flex items-baseline gap-4 lg:block'>
+		<FormField asCol>
 			<Label>Image</Label>
 			<Input
 				accept='image/*'
@@ -36,6 +35,6 @@ export const ImageField = ({
 					})
 				}
 			/>
-		</Field>
+		</FormField>
 	)
 }
