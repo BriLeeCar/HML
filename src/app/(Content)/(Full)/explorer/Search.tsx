@@ -1,5 +1,9 @@
-import { AnimatePresence, motion, MotionProps } from 'motion/react'
-import { ReactNode, useReducer } from 'react'
+import {
+	AnimatePresence,
+	motion,
+	type MotionProps,
+} from 'motion/react'
+import { type ReactNode, useReducer } from 'react'
 import { Button, Icon, Input } from '~/components'
 import { cn } from '~/lib/cn'
 import { DB, type tDB } from '~/server/db/db'

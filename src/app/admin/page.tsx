@@ -1,5 +1,5 @@
-const AdminPage = () => {
-  return <>ADMIN</>;
-};
+const AdminPage = async () => {
+	;<></>
+}
 
-export default AdminPage;
+export default AdminPage

@@ -1,4 +1,4 @@
-import { tMapReducer } from './util'
+import { type tMapReducer } from './util'
 
 export const mapReducer = (
 	state: tMapReducer['state'],

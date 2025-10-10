@@ -9,50 +9,13 @@ import {
 import { Button, Icon } from '~/components/index'
 import { toShortDate } from '~/lib/date'
 import { api } from '~/trpc/server'
-
-const ActionLink = ({ id, slug }: { id: string; slug: string }) => {
-	const actions: Array<{
-		name: string
-		href: string
-		external?: boolean
-		icon: IconKey
-	}> = [
-		{
-			name: 'Edit',
-			href: `/admin/blog/edit?id=${id}`,
-			icon: 'EditIcon',
-		},
-		{ name: 'Delete', href: '#', icon: 'TrashXIcon' },
-		{
-			name: 'View',
-			href: `/blog/${slug}`,
-			external: true,
-			icon: 'EyeIcon',
-		},
-	]
-	return actions.map((action) => {
-		return (
-			<Button
-				title={action.name + ' Post'}
-				variant='ghost'
-				className='text-brand hover:text-brand-bright px-2'
-				key={action.name}
-				href={action.href}
-				target={action.external ? '_blank' : undefined}>
-				<Icon
-					IconName={action.icon}
-					className='inline h-4 w-4'
-				/>
-			</Button>
-		)
-	})
-}
+import { ActionLink } from './DashButtons'
 
 const BlogPage = async () => {
 	const blogPages = await api.blogPost.getAll()
 
 	return (
-		<div className='mx-auto mt-8 max-w-4xl'>
+		<div className='mx-auto my-8 max-w-4xl'>
 			<div className='flex items-center justify-between px-4'>
 				<Button
 					href='blog/add'

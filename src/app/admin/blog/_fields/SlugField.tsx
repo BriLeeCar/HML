@@ -1,7 +1,7 @@
 'use client'
 import { useState, type ActionDispatch } from 'react'
 import { FormField, Input, Label } from '~/components'
-import { ReducerSetField } from '../lib'
+import type { ReducerSetField } from '../lib'
 
 export const SlugField = ({
 	slug,

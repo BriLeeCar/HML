@@ -1,6 +1,6 @@
 import { Icon as IconEl, SubSection } from '~/components'
 import { cn } from '~/lib/cn'
-import { tResource } from './Resources'
+import type { tResource } from './Resources'
 
 export const ResourceLink = ({
 	href,

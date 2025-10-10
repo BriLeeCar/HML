@@ -1,5 +1,5 @@
 import { Select } from '@/admin/_components/select'
-import {
+import type {
 	ChangeEvent,
 	Dispatch,
 	FocusEvent,
@@ -15,8 +15,8 @@ import {
 	Label,
 } from '~/components/index'
 import { cn } from '~/lib/cn'
-import { tSocialPlatform } from '~/lib/zod'
-import { User } from './page'
+import type { zSocial } from '~/server/api/zod'
+import type { User } from './page'
 
 export const ProfileForm = ({
 	user,
@@ -29,7 +29,7 @@ export const ProfileForm = ({
 	setUserAction: Dispatch<SetStateAction<User>>
 	showNewSocials: boolean
 	setShowNewSocials: Dispatch<SetStateAction<boolean>>
-	missingSocials: Array<tSocialPlatform>
+	missingSocials: Array<zSocial>
 }) => {
 	const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
 		const target = e.target as HTMLInputElement

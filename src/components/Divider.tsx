@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 export const Divider = ({ children }: { children?: ReactNode }) => {
 	return (

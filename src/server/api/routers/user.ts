@@ -1,14 +1,11 @@
 import { z } from 'zod'
-import {
-	zProfileSchema,
-	zSocialPlatformSchema,
-	zUserDBSchema,
-} from '~/lib/zod'
+import { zProfileSchema, zUserDBSchema } from '~/lib/zod'
 import {
 	createTRPCRouter,
 	protectedProcedure,
 	publicProcedure,
 } from '~/server/api/trpc'
+import { Social, User, UserKey } from '~/zod'
 
 export const userRouter = createTRPCRouter({
 	getById: publicProcedure
@@ -20,7 +17,7 @@ export const userRouter = createTRPCRouter({
 		}),
 
 	getByIdForProfile: publicProcedure
-		.input(z.string())
+		.input(User.shape.id)
 		.query(async ({ ctx, input }) => {
 			const user = await ctx.db.user.findUnique({
 				where: { id: input },
@@ -40,7 +37,7 @@ export const userRouter = createTRPCRouter({
 						z
 							.object({
 								handle: z.string(),
-								social: zSocialPlatformSchema,
+								social: Social,
 							})
 							.transform((social) => {
 								return {
@@ -73,10 +70,8 @@ export const userRouter = createTRPCRouter({
 		}),
 	createNewFromKey: publicProcedure
 		.input(
-			z.object({
-				key: z.string(),
-				name: z.string().min(2).max(32),
-				secret: z.string().min(8).max(64),
+			UserKey.extend({
+				secret: User.shape.secret,
 			})
 		)
 		.mutation(async ({ input, ctx }) => {
@@ -102,7 +97,7 @@ export const userRouter = createTRPCRouter({
 				socials: z.array(
 					z.object({
 						handle: z.string(),
-						...zSocialPlatformSchema.shape,
+						...Social.shape,
 					})
 				),
 			})

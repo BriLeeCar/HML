@@ -1,24 +1,26 @@
 'use client'
 import type { ActionDispatch } from 'react'
 import { FormField, Input, Label } from '~/components/Form'
-import { ReducerSetField } from '../lib'
+import type { ReducerSetField } from '../lib'
 
 export const SubtitleField = ({
 	subtitle,
 	dispatchDataAction,
 }: {
-	subtitle: string
+	subtitle: string | null
 	dispatchDataAction: ActionDispatch<
 		[action: ReducerSetField<'subtitle'>]
 	>
 }) => {
 	return (
 		<FormField asCol>
-			<Label>Subtitle</Label>
+			<Label htmlFor='subtitle'>Subtitle</Label>
 			<Input
-				defaultValue={subtitle}
+				id='subtitle'
+				defaultValue={subtitle ?? undefined}
 				onChange={(e) =>
-					dispatchDataAction({
+					e.currentTarget.value
+					&& dispatchDataAction({
 						type: 'SET_FIELD',
 						payload: [
 							{

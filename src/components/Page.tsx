@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode, useState } from 'react'
+import { type ReactNode, useState } from 'react'
 import { cn } from '~/lib/cn'
 import { Icon, Main } from '.'
 

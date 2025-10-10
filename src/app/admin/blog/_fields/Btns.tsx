@@ -1,4 +1,4 @@
-import { MouseEventHandler } from 'react'
+import { type MouseEventHandler } from 'react'
 import { Button, Icon } from '~/components'
 
 const BlogBtn = ({
@@ -33,8 +33,10 @@ const BlogBtn = ({
 }
 
 export const BlogBtns = ({
+	formStatus,
 	handle,
 }: {
+	formStatus: boolean[]
 	handle: MouseEventHandler<HTMLButtonElement>
 }) => {
 	return (
@@ -45,20 +47,23 @@ export const BlogBtns = ({
 						onClick={handle}
 						icon='ArrowInUpRightStrokeSquareIcon'
 						text='Publish'
-						data-type='publish'
+						name='PUBLISHED'
+						disabled={formStatus.some((status) => status)}
 					/>
 					<BlogBtn
 						onClick={handle}
 						icon='SaveIcon'
 						text='Save Draft'
-						data-type='save'
 						iconSolid
+						name='DRAFT'
+						disabled={formStatus.some((status) => status)}
 					/>
 					<BlogBtn
 						href='/blog'
 						target='_blank'
 						icon='EyeIcon'
 						text='Preview'
+						disabled={formStatus.some((status) => status)}
 					/>
 				</span>
 				<span className='flex grow justify-center md:grow-0 md:pr-4'>
@@ -67,8 +72,9 @@ export const BlogBtns = ({
 						text='Delete'
 						variant='bright'
 						iconSolid
-						data-type='delete'
 						onClick={handle}
+						name='DELETE'
+						disabled={formStatus.some((status) => status)}
 					/>
 				</span>
 			</div>

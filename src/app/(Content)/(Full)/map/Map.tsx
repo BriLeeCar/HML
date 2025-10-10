@@ -2,7 +2,7 @@
 
 import { motion } from 'motion/react'
 import { cn } from '~/lib/cn'
-import { tMapPathElProps, tMapSVGProps } from './util'
+import type { tMapPathElProps, tMapSVGProps } from './util'
 
 const svgBase = {
 	width: 700,

@@ -2,7 +2,12 @@
 
 import { AnimatePresence, useDragControls } from 'motion/react'
 import { useRouter } from 'next/navigation'
-import { MouseEvent, useContext, useEffect, useReducer } from 'react'
+import {
+	type MouseEvent,
+	useContext,
+	useEffect,
+	useReducer,
+} from 'react'
 import { cn } from '~/lib/cn'
 import { DBContext } from '~/server/db/provider'
 import { FirstVisitOverlay } from './FirstVisitOverlay'
@@ -10,7 +15,7 @@ import { CountryHeading } from './Heading'
 import { MapPathEl, MapSvg } from './Map'
 import { mapReducer } from './Reducer'
 import { Search } from './SearchBtn'
-import { tMapReducer } from './util'
+import type { tMapReducer } from './util'
 
 const actionEnterExit = (
 	e: MouseEvent<SVGPathElement>,

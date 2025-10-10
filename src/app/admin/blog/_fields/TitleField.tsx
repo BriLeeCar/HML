@@ -1,8 +1,8 @@
 'use client'
+
 import type { ActionDispatch } from 'react'
-import { Field, Label } from '../../_components/fieldset'
-import { Input } from '../../_components/input'
-import { ReducerSetField } from '../lib'
+import { FormField, Input, Label } from '~/components/index'
+import type { ReducerSetField } from '../lib'
 
 export const TitleField = ({
 	title,
@@ -32,12 +32,15 @@ export const TitleField = ({
 		})
 	}
 	return (
-		<Field className='flex items-baseline gap-4 lg:block'>
-			<Label>Title</Label>
+		<FormField
+			asCol
+			className='mb-4'>
+			<Label htmlFor='name'>Title</Label>
 			<Input
+				id='name'
 				defaultValue={title}
 				onChange={handleTitleChange}
 			/>
-		</Field>
+		</FormField>
 	)
 }

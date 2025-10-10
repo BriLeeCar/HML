@@ -35,10 +35,10 @@ export default defineConfig([
         },
     },
     {
-        ignores: ['.next/*'],
+        ignores: ['.next/*', "next-env.d.ts"],
     },
     {
-        files: ['**/*.ts', '**/*.tsx'],
+        files: ['src/**/*.ts', 'src/**/*.tsx'],
         languageOptions: {
             parser: tsParser,
             parserOptions: {

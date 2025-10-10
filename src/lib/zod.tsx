@@ -66,17 +66,23 @@ export type tTagWithRelations = tTagWithParent & { children: tTag[] }
 // #region ? USER SCHEMAS
 export const zUserDBSchema = z.object({
 	id: z.string(),
-	name: z.string(),
+	name: z.string({
+		error: 'Name is required',
+	}),
 	email: z.email().or(z.string()).nullable().default(null),
 	emailVerified: z.date().nullable().default(null),
 	image: z.string().nullable(),
-	secret: z.string(),
+	secret: z.string({
+		error: 'A secret is required',
+	}),
 	firstName: z.string().nullable().default(null),
 	lastName: z.string().nullable().default(null),
 })
 
 export const zUserSocialSchema = z.object({
-	handle: z.string(),
+	handle: z.string({
+		error: 'A handle is required to add a social link',
+	}),
 	social: zSocialPlatformSchema,
 })
 
@@ -97,7 +103,9 @@ export const zProfileSchema = zUserDBSchema.extend({
 const zId = z.coerce.number()
 export const zBlogPostDBSchema = z.object({
 	id: zId.default(0),
-	name: z.string().default(''),
+	name: z
+		.string({ error: 'Every post must have a title' })
+		.default(''),
 	createdAt: z.coerce.date().default(new Date()),
 	updatedAt: z.coerce.date().default(new Date()),
 	contentHTML: z.string().default(''),
@@ -105,7 +113,9 @@ export const zBlogPostDBSchema = z.object({
 	status: z.enum(['DRAFT', 'PUBLISHED']).default('DRAFT'),
 	subtitle: z.string().default(''),
 	slug: z
-		.string()
+		.string({
+			error: 'Every post needs a slug',
+		})
 		.transform((v) => v.toLowerCase().replace(/\s+/g, '-'))
 		.default(''),
 	image: z.boolean().default(false),

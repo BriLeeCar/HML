@@ -1,5 +1,5 @@
 'use client'
-import { ComponentPropsWithRef } from 'react'
+import type { ComponentPropsWithRef } from 'react'
 import { cn } from '~/lib/cn'
 import { Icon } from '../Icon'
 
@@ -73,6 +73,19 @@ export const Input = ({
 const BaseInput = ({ ...props }) => (
 	<input
 		{...props}
+		id={
+			props.id ? props.id
+			: props.name ?
+				props.name
+			:	undefined
+		}
+		name={
+			props.name ? props.name
+			: props.id ?
+				props.id
+			:	undefined
+		}
+		autoComplete={props.autoComplete ?? 'off'}
 		data-slot='input'
 		className={cn(css.base, props.className)}
 	/>

@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
-import { tSocialPlatform } from '~/lib/zod'
 import type { userRouter } from '~/server/api/routers'
+import type { zSocial } from '~/server/api/zod'
 import { auth } from '~/server/auth'
 import { api } from '~/trpc/server'
 import { ProfileBase } from './Base'
@@ -13,7 +13,7 @@ const SettingsProfilePage = async () => {
 
 	const socialOptions = (await api.socialMedia.getMissing(
 		id
-	)) as tSocialPlatform[]
+	)) as zSocial[]
 
 	return (
 		<ProfileBase

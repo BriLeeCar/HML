@@ -140,11 +140,7 @@ const Brow = ({ frontmatter }: { frontmatter: tFrontMatter }) => (
 	</span>
 )
 
-const BlogEntry = async ({
-	params,
-}: {
-	params: Promise<{ title: string }>
-}) => {
+const BlogEntry = async ({ params }: PageProps<'/blog/[title]'>) => {
 	const { title } = await params
 
 	const data = readFileSync(

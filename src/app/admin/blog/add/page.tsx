@@ -1,32 +1,52 @@
-import { zBlogPostAddSchema, zUserDBSchema } from '~/lib/zod'
+import { User } from '~/server/api/zod'
 import { auth } from '~/server/auth'
 import { db } from '~/server/db'
 import { HydrateClient } from '~/trpc/server'
-import { BlogForm } from '../_components/Form'
+import { BlogForm } from '../Form'
 
 const AddBlogPage = async () => {
 	const authorId = (await auth())?.user?.id
-	const author = zUserDBSchema.safeParse(
-		await db.user.findUnique({
+
+	let [authorData, allTags] = await db.$transaction([
+		db.user.findUnique({
 			where: { id: authorId },
-		})
-	)
+		}),
+		db.tag.findMany(),
+	])
 
-	if (!author.success) return <div>Login unable to be verified</div>
-	const baseData = zBlogPostAddSchema.safeParse({
-		type: 'add',
-		author: author.data,
-	})
+	authorData = authorData ? User.parse(authorData) : null
 
-	if (baseData.data) {
-		return (
-			author && (
-				<HydrateClient>
-					<BlogForm data={baseData.data} />
-				</HydrateClient>
-			)
+	if (!authorData) return <div>Login unable to be verified</div>
+
+	return (
+		authorData && (
+			<HydrateClient>
+				<BlogForm
+					data={{
+						author: authorData,
+						id: 0,
+						type: 'add',
+						contentHTML: '\n',
+						contentText: '',
+						authorId: authorData.id,
+						metaDescription: '',
+						image: false,
+						imageKey: null,
+						imageExt: null,
+						contentDelta: null as unknown as string,
+						name: '',
+						slug: '',
+						status: 'DRAFT',
+						subtitle: '',
+						tags: [],
+						createdAt: new Date(),
+						updatedAt: new Date(),
+					}}
+					allTags={allTags}
+				/>
+			</HydrateClient>
 		)
-	}
+	)
 }
 
 export default AddBlogPage

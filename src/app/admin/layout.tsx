@@ -23,12 +23,13 @@ const AdminLayout = ({ children }: { children: ReactNode }) => {
 					))}
 				</ul>
 				<Button
+					prefetch={false}
 					href='/api/auth/signout'
 					className='inline-flex'>
 					Sign out
 				</Button>
 			</nav>
-			<main className='m-6 min-h-screen dark:bg-neutral-800 dark:text-white'>
+			<main className='m-6 mb-12 min-h-screen pb-12 dark:bg-neutral-800 dark:text-white'>
 				{children}
 			</main>
 		</>

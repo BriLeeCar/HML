@@ -1,4 +1,8 @@
-import { allFilters, tMasonryActions, tMasonryState } from '.'
+import {
+	allFilters,
+	type tMasonryActions,
+	type tMasonryState,
+} from '.'
 
 export const masonryReducer = (
 	state: tMasonryState,

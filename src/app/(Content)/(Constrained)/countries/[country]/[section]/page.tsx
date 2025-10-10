@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import path from 'path'
 import {
 	CTA,
@@ -96,12 +96,7 @@ const CheckForSectionMDX = (country: string, section: string) => {
 
 const SectionPage = async ({
 	params,
-}: {
-	params: Promise<{
-		country: string
-		section: string
-	}>
-}) => {
+}: PageProps<'/countries/[country]/[section]'>) => {
 	const { country, section } = await params
 
 	const pathway = db().getCountryByAbbr(country)

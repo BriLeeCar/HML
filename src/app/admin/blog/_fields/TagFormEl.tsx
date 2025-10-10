@@ -1,16 +1,17 @@
 'use client'
 
-import { Dispatch, useReducer, useRef } from 'react'
+import { type Dispatch, useReducer, useRef } from 'react'
 import { Fieldset, Input } from '~/components'
 import { cn } from '~/lib/cn'
-import type { tTag } from '~/lib/zod'
-import { api } from '~/trpc/react'
+import type { zTag } from '~/zod'
+
+type Tag = NonNullable<zTag>
 
 type TagsObj = {
-	allTags: tTag[]
-	current: tTag[]
+	allTags: Tag[]
+	current: Tag[]
 	search: string
-	filtered: tTag[]
+	filtered: Tag[]
 }
 
 type ReducerActionTypes =
@@ -23,20 +24,15 @@ type ReducerActionTypes =
 type ReducerAction<T = ReducerActionTypes> = {
 	type: T
 	payload: T extends 'SET_SEARCH' ? string
-	: T extends 'ADD_TAG' ? tTag
-	: T extends 'REMOVE_TAG' ? tTag
-	: T extends 'SET_FILTERED' ? tTag[]
+	: T extends 'ADD_TAG' ? Tag
+	: T extends 'REMOVE_TAG' ? Tag
+	: T extends 'SET_FILTERED' ? Tag[]
 	: T extends 'CLEAR_SEARCH' ? null
 	: never
 }
 
 const tagReducer = (
-	state: {
-		allTags: tTag[]
-		current: tTag[]
-		search: string
-		filtered: tTag[]
-	},
+	state: TagsObj,
 	action: ReducerAction<ReducerActionTypes>,
 	inputRef: React.RefObject<HTMLInputElement | null>
 ) => {
@@ -50,7 +46,7 @@ const tagReducer = (
 		)
 	}
 
-	const removeCurrentTags = (tags: tTag[]) => {
+	const removeCurrentTags = (tags: Tag[]) => {
 		return tags.filter((tag) => !newState.current.includes(tag))
 	}
 
@@ -96,16 +92,15 @@ const tagReducer = (
 }
 
 export const TagFormEl = ({ ...data }) => {
-	const [result] = api.tag.getAll.useSuspenseQuery()
 	const inputRef = useRef<HTMLInputElement | null>(null)
 
 	const [tags, dispatch] = useReducer(
 		(state, action) => tagReducer(state, action, inputRef),
 		{
-			allTags: result as tTag[],
-			current: data.tags ?? ([] as tTag[]),
+			allTags: data.allTags as Tag[],
+			current: data.tags ?? ([] as Tag[]),
 			search: '',
-			filtered: [] as tTag[],
+			filtered: [] as Tag[],
 		}
 	)
 

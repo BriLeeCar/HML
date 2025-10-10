@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { toTitleCase } from '~/lib/text'
 import countries from '~/server/db/countries.json'
 import { Base } from './Base'
@@ -42,7 +42,7 @@ export const generateStaticParams = async () => {
 
 const CountryPage = async ({
 	params,
-}: Slug<{ country: string }> & {}) => {
+}: PageProps<'/countries/[country]'>) => {
 	const { country } = await params
 
 	return (

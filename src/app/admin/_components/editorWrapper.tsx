@@ -5,13 +5,13 @@ import type { QuillOptions } from 'quill'
 import 'quill/dist/quill.bubble.css'
 import 'quill/dist/quill.snow.css'
 import {
-	ActionDispatch,
 	useEffect,
+	type ActionDispatch,
 	type ComponentPropsWithoutRef,
 	type ComponentPropsWithRef,
 } from 'react'
 import { cn } from '~/lib/cn'
-import { ReducerSetField } from '../blog/lib'
+import type { ReducerSetField } from '../blog/lib'
 
 export const QuillWrapper = ({
 	wrapperProps,
@@ -68,8 +68,13 @@ export const QuillWrapper = ({
 					contentProps.value.contentHTML
 				)
 			}
-			// eslint-disable-next-line @typescript-eslint/no-unused-vars
-			quill.on('text-change', (delta, oldDelta, source) => {
+			quill.on('text-change', (delta) => {
+				delta.ops?.forEach((op) => {
+					if (op.attributes?.background) {
+						quill.format('background', false)
+					}
+				})
+
 				contentProps?.dispatchDataAction({
 					type: 'SET_FIELD',
 					payload: [
@@ -92,10 +97,10 @@ export const QuillWrapper = ({
 			<div
 				{...wrapperProps}
 				className={cn('h-96', wrapperProps?.className)}>
-				{/* <QuillToolbar /> */}
 				<div ref={quillRef} />
 				<div id='editor' />
 			</div>
+			<br />
 			<span className='flex w-full items-center justify-end gap-2 p-4'>
 				<QuillCounter>{words()} words</QuillCounter> /{' '}
 				<QuillCounter>{letters()} characters</QuillCounter>

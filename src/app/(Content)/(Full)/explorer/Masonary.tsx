@@ -1,7 +1,12 @@
 'use client'
 
 import { motion } from 'motion/react'
-import { RefObject, useContext, useEffect, useState } from 'react'
+import {
+	type RefObject,
+	useContext,
+	useEffect,
+	useState,
+} from 'react'
 import { DBContext } from '~/server/db/provider'
 import { Country } from './MasonryCountry'
 

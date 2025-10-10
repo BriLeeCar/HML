@@ -14,6 +14,11 @@ export const env = createEnv({
     AUTH_DISCORD_ID: z.string(),
     AUTH_DISCORD_SECRET: z.string(),
     PRISMA_DATABASE_URL: z.string(),
+    R2_ACCT: z.string(),
+    R2_TOKEN: z.string(),
+    R2_ACCESS_KEY_ID: z.string(),
+    R2_SECRET_KEY: z.string(),
+    R2_BUCKET: z.string(),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -38,6 +43,11 @@ export const env = createEnv({
     AUTH_DISCORD_SECRET: process.env.AUTH_DISCORD_SECRET,
     PRISMA_DATABASE_URL: process.env.PRISMA_DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
+    R2_ACCT: process.env.R2_ACCT,
+    R2_TOKEN: process.env.R2_TOKEN,
+    R2_ACCESS_KEY_ID: process.env.R2_ACCESS_KEY_ID,
+    R2_SECRET_KEY: process.env.R2_SECRET_KEY,
+    R2_BUCKET: process.env.R2_BUCKET,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

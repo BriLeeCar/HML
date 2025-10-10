@@ -1,4 +1,6 @@
 import z from 'zod'
+import { deleteFile } from '~/server/s3'
+import { Post, prismaSchema, Tag, User } from '~/zod'
 import {
 	createTRPCRouter,
 	protectedProcedure,
@@ -6,26 +8,9 @@ import {
 } from '../trpc'
 
 const zPost = z.object({
-	name: z.string(),
-	subtitle: z.string(),
-	image: z.file().or(z.boolean()).optional(),
-	slug: z.string(),
-	tags: z.array(z.number()).optional(),
-	author: z.string(),
-	contentHTML: z.string().optional(),
-	contentText: z.string().optional(),
-	status: z.enum(['DRAFT', 'PUBLISHED']).optional(),
-})
-
-const handleCreateOrUpdate = (input: z.infer<typeof zPost>) => ({
-	name: input.name,
-	subtitle: input.subtitle,
-	slug: input.slug,
-	authorId: input.author,
-	contentHTML: input.contentHTML ?? '',
-	contentText: input.contentText ?? '',
-	image: input.image ? true : false,
-	status: input.status ?? 'DRAFT',
+	...Post.shape,
+	tags: Tag.shape.id.array(),
+	author: User.shape.id,
 })
 
 export const blogPostRouter = createTRPCRouter({
@@ -57,85 +42,157 @@ export const blogPostRouter = createTRPCRouter({
 		})
 	}),
 	create: protectedProcedure
-		.input(zPost)
+		.input(
+			z.object({
+				author: z.string(),
+				name: z.string().min(3).max(100),
+				subtitle: z.string().min(3).max(200).nullish(),
+				slug: z.string().min(3).max(100),
+				contentHTML: z.string().default('\n'),
+				contentText: z.string().default(''),
+				image: z.boolean().default(false),
+				imageExt: z.string().nullish(),
+				imageKey: z.string().nullish(),
+				status: z
+					.enum(['DRAFT', 'PUBLISHED', 'ARCHIVED'])
+					.default('DRAFT'),
+				tags: z.array(z.number()),
+			})
+		)
 		.mutation(async ({ ctx, input }) => {
-			return await ctx.db.post.create({
+			const { tags, author, ...rest } = input
+			const post = await ctx.db.post.create({
 				data: {
-					...handleCreateOrUpdate(input),
+					authorId: author,
+					...rest,
 					tags: {
 						createMany: {
-							data:
-								input.tags?.map((tag) => ({
-									tagId: Number(tag),
-								})) ?? [],
+							data: tags.map((tag) => ({
+								tagId: Number(tag),
+							})),
 							skipDuplicates: true,
-						},
-					},
-					postVersionHistories: {
-						create: {
-							action: 'created',
-							userId: input.author,
 						},
 					},
 				},
 			})
+			if (!post) throw new Error('Post not created')
+			else
+				return {
+					data: post,
+					image: {
+						action: input.image == true ? 'upload' : null,
+						key: input.imageKey,
+						ext: input.imageExt,
+					},
+				}
 		}),
 	edit: protectedProcedure
-		.input(zPost)
-		.mutation(async ({ ctx, input }) => {
-			const previousData = await ctx.db.post.findUnique({
-				where: { slug: input.slug },
-				include: { tags: true },
+		.input(
+			z.object({
+				previousData: z.object({
+					...zPost.shape,
+					tags: z.array(Tag),
+					author: z.object({
+						id: User.shape.id,
+						name: User.shape.name,
+						firstName: User.shape.firstName,
+						lastName: User.shape.lastName,
+					}),
+				}),
+				newData: z.object({
+					...Post.omit({ id: true }).partial().shape,
+					id: z.coerce.number<string | number>(),
+					image: z.boolean(),
+					imageExt: z.string().nullish(),
+					imageKey: z.string().nullish(),
+					tags: z.object({
+						newTags: z.array(z.number()),
+						removedTags: z.array(z.number()),
+					}),
+					author: z
+						.object({
+							id: User.shape.id,
+							name: User.shape.name,
+							firstName: User.shape.firstName,
+							lastName: User.shape.lastName,
+						})
+						.or(z.string())
+						.optional(),
+				}),
 			})
+		)
+		.mutation(async ({ ctx, input }) => {
+			const { previousData, newData } = input
+			newData.updatedAt = new Date()
 
-			const data = handleCreateOrUpdate(input)
+			const { tags, author, ...updateData } = newData
 
-			const changes = Object.entries(data)
-				.map(([key, value]) => {
-					if (
-						previousData
-						&& previousData[key as keyof typeof data] !== value
-					) {
-						return `${key}`
-					}
-					return null
-				})
-				.filter(Boolean)
+			if (author) {
+				if (typeof author === 'string') {
+					updateData.authorId = author
+				} else {
+					updateData.authorId = author.id
+				}
+			}
 
-			const updated = await ctx.db.post.update({
-				where: { slug: input.slug },
+			const update = await ctx.db.post.update({
+				where: {
+					id: newData.id,
+				},
 				data: {
-					...handleCreateOrUpdate(input),
+					...updateData,
 					tags: {
 						createMany: {
 							data:
-								input.tags?.map((tag) => ({
+								tags?.newTags?.map((tag) => ({
 									tagId: Number(tag),
 								})) ?? [],
 							skipDuplicates: true,
 						},
 						deleteMany: {
-							NOT: {
-								tagId: { in: input.tags?.map((tag) => Number(tag)) },
+							tagId: {
+								in: tags?.removedTags?.map((tag) => Number(tag)),
 							},
-						},
-					},
-					postVersionHistories: {
-						create: {
-							action: 'updated - ' + changes.join(', '),
-							userId: input.author,
 						},
 					},
 				},
 			})
-			return updated
+
+			return {
+				id: newData.id,
+				previousData,
+				newData: update,
+				image: {
+					action:
+						typeof newData.image == 'boolean' ?
+							newData.image == true ?
+								'upload'
+							:	'delete'
+						:	null,
+				},
+			}
 		}),
 	delete: protectedProcedure
 		.input(z.coerce.number())
 		.mutation(async ({ ctx, input }) => {
-			return await ctx.db.post.delete({
+			const deletePost = await ctx.db.post.delete({
 				where: { id: input },
 			})
+
+			if (!deletePost) throw new Error('Post not deleted')
+			else {
+				if (deletePost.image) {
+					const deleteImage = await deleteFile(
+						`${deletePost.imageKey}.${deletePost.imageExt}`
+					)
+
+					if (deleteImage.$metadata.httpStatusCode != 204) {
+						console.error('Image not deleted from S3/R2')
+					}
+				}
+
+				return deletePost
+			}
 		}),
 	getById: publicProcedure
 		.input(z.coerce.number())
@@ -158,6 +215,65 @@ export const blogPostRouter = createTRPCRouter({
 					},
 				},
 			})
+			if (!post) return null
+
+			const parsed = z
+				.object({
+					...Post.shape,
+					author: User.pick({
+						id: true,
+						name: true,
+						firstName: true,
+						lastName: true,
+					}),
+					tags: z
+						.object({
+							tag: z.object({
+								...prismaSchema.PostTag.relations.shape.tag.shape,
+							}),
+						})
+						.array()
+						.transform((tags) => {
+							return tags.map(({ tag }) => tag)
+						}),
+				})
+				.safeParse(post)
+			if (parsed.success) {
+				return parsed.data
+			}
+		}),
+	page: publicProcedure
+		.input(
+			z
+				.object({
+					slug: z.string(),
+				})
+				.or(z.object({ id: z.coerce.number() }))
+		)
+		.query(async ({ ctx, input }) => {
+			const post = await ctx.db.post.findFirst({
+				where:
+					'id' in input ? { id: input.id } : { slug: input.slug },
+				include: {
+					author: {
+						include: {
+							socials: {
+								select: {
+									handle: true,
+									social: true,
+								},
+							},
+						},
+					},
+					tags: {
+						select: {
+							tag: true,
+						},
+					},
+				},
+			})
+			if (!post) return null
+
 			return post
 		}),
 })

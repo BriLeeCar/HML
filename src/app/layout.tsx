@@ -2,7 +2,6 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
 import { Open_Sans } from 'next/font/google'
 import 'react'
-import { ReactNode } from 'react'
 import 'rehype-callouts/theme/vitepress'
 import { cn } from '~/lib/cn'
 import { TRPCReactProvider } from '~/trpc/react'
@@ -24,11 +23,7 @@ const openSans = Open_Sans({
 	adjustFontFallback: true,
 })
 
-const RootLayout = async ({
-	children,
-}: Readonly<{
-	children: ReactNode
-}>) => {
+const RootLayout = async ({ children }: LayoutProps<'/'>) => {
 	return (
 		<html
 			lang='en'

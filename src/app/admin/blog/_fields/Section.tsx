@@ -1,13 +1,7 @@
 'use client'
 import { type ComponentPropsWithoutRef, useState } from 'react'
-import { Icon } from '~/components/Icon'
+import { Icon, P } from '~/components'
 import { cn } from '~/lib/cn'
-import {
-	FieldGroup,
-	Fieldset,
-	Legend,
-} from '../../_components/fieldset'
-import { Text } from '../../_components/text'
 
 export const Section = ({
 	sectionTitle,
@@ -16,7 +10,7 @@ export const Section = ({
 }: {
 	sectionTitle: string
 	sectionDescription: string
-} & ComponentPropsWithoutRef<'fieldset'>) => {
+} & ComponentPropsWithoutRef<'div'>) => {
 	const [open, setOpen] = useState(true)
 
 	const toggleOpen = () => {
@@ -24,8 +18,8 @@ export const Section = ({
 	}
 
 	return (
-		<Fieldset {...props}>
-			<Legend
+		<div {...props}>
+			<span
 				onClick={toggleOpen}
 				className='cursor-pointer'>
 				<Icon
@@ -36,11 +30,11 @@ export const Section = ({
 					)}
 				/>
 				{sectionTitle}
-			</Legend>
-			<Text>{sectionDescription}</Text>
-			<FieldGroup className={open ? 'block' : 'hidden'}>
+			</span>
+			<P>{sectionDescription}</P>
+			<section className={open ? 'block' : 'hidden'}>
 				{props.children}
-			</FieldGroup>
-		</Fieldset>
+			</section>
+		</div>
 	)
 }

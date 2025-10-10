@@ -1,7 +1,7 @@
 'use client'
 
-import { motion, MotionProps } from 'motion/react'
-import { MouseEvent, RefObject } from 'react'
+import { motion, type MotionProps } from 'motion/react'
+import type { MouseEvent, RefObject } from 'react'
 import {
 	Button,
 	Checkbox,
@@ -14,8 +14,8 @@ import { cn } from '~/lib/cn'
 import {
 	filterCbs,
 	masonryReducer,
-	tDrawerFilter,
-	tReducerDispatch,
+	type tDrawerFilter,
+	type tReducerDispatch,
 } from '.'
 
 export const Drawer = ({

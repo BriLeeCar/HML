@@ -1,19 +1,16 @@
 'use client'
 
 import type { ChangeEvent } from 'react'
-import type { z } from 'zod'
 import { FormField, Input, Label } from '~/components'
-import { zBlogPostAddSchema, zBlogPostEditSchema } from '~/lib/zod'
+import type { RouterOutput } from '~/server/api/zod'
 import { api } from '~/trpc/react'
-import { DispatchAction } from '../lib'
+import type { DispatchAction } from '../lib'
 
 export const AuthorField = ({
 	author,
 	dispatchDataAction,
 }: {
-	author:
-		| z.infer<typeof zBlogPostAddSchema>['author']
-		| z.infer<typeof zBlogPostEditSchema>['author']
+	author: RouterOutput<'blogPost', 'getById'>['author']
 	dispatchDataAction: DispatchAction<'author'>
 }) => {
 	const authorList = api.user.getAll.useQuery()
