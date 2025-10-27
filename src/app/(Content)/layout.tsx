@@ -1,3 +1,4 @@
+import { AnnouncementBanner } from './_Layout/TopBanner'
 import { NavMenu } from './_Layout/TopNav'
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
@@ -5,7 +6,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 		<>
 			<header className='sticky top-0 z-99 w-full backdrop-blur-sm'>
 				<NavMenu />
-				{/* <PopoverMenu /> */}
+				<AnnouncementBanner />
 			</header>
 			{children}
 		</>
