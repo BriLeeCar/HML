@@ -91,7 +91,7 @@ export const PrideFlag = ({ ...props }: Props.IconPath) => {
 	)
 }
 
-export const TransFlag = ({ ...props }: Props.IconPath) => {
+const TransFlag = ({ ...props }: Props.IconPath) => {
 	return (
 		<svg
 			{...props}

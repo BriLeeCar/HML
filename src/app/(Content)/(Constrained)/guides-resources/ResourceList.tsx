@@ -6,19 +6,33 @@ export const ResourceLink = ({
 	href,
 	title,
 	subtitle,
+	author,
+	date,
+	target,
 }: {
 	href: string
 	title: string
 	subtitle: string
+	author?: string
+	date?: string
+	target?: string
 }) => (
 	<div>
 		<a
 			href={href}
-			className='text-lg/1 font-semibold text-zinc-900 hover:underline dark:text-zinc-100'>
+			className='text-lg/1 font-semibold text-zinc-900 hover:underline dark:text-zinc-100'
+			target={target}>
 			{title}
 		</a>
 		{subtitle && (
 			<p className='mt-0 text-sm text-zinc-600 dark:text-zinc-400'>
+				{author || date ?
+					<span className='block font-semibold'>
+						{author && author}
+						{date && author && ' • '}
+						{date && date}
+					</span>
+				:	<></>}
 				{subtitle}
 			</p>
 		)}
@@ -51,12 +65,18 @@ export const Resource = ({
 	subtitle,
 	type,
 	Icon,
+	author,
+	date,
+	target,
 }: {
 	href: string
 	title: string
 	subtitle?: string
 	type?: string
+	date?: string
+	author?: string
 	Icon?: tResource[string]['links'][number]['Icon']
+	target: string
 }) => {
 	return (
 		<div
@@ -72,6 +92,9 @@ export const Resource = ({
 				href={href}
 				title={title}
 				subtitle={subtitle || ''}
+				author={author}
+				date={date}
+				target={target}
 			/>
 		</div>
 	)
@@ -97,6 +120,9 @@ export const ResourceSection = ({
 						subtitle={post.subtitle}
 						type={post.type}
 						Icon={post.Icon}
+						author={post.author}
+						date={post.date}
+						target={post.target || '_self'}
 					/>
 				))}
 			</div>
