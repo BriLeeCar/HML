@@ -16,5 +16,13 @@
 		"prettier-plugin-tailwindcss"
 	],
 	"tailwindStyleSheet": "./src/styles/global.css",
-	"tailwindFunctions": ["cn", "cva"]
+	"tailwindFunctions": ["cn", "cva"],
+	"overrides": [
+		{
+			"files": "*.css",
+			"options": {
+				"singleQuote": false
+			}
+		}
+	]
 }
