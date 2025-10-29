@@ -1,8 +1,5 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
-
-@source inline("bg-yellow-{400,500,600,700}");
-@source inline("decoration-{yellow,red,purple}-{400,500,600,700}/{25,50,75}");
+@import "tailwindcss";
+@import "tw-animate-css";
 
 /* #region THEME */
 :root {
@@ -195,7 +192,7 @@
 	main a {
 		@apply not-italic! no-underline! decoration-0!;
 		&::after {
-			content: ' (https://helpmeleave.us' attr(href) ')';
+			content: " (https://helpmeleave.us" attr(href) ")";
 			color: black;
 			font-weight: normal;
 		}
@@ -250,7 +247,7 @@
 .callout {
 	padding: 0.75rem 1.5rem;
 
-	&:is([data-collapsible='true']) {
+	&:is([data-collapsible="true"]) {
 		&:has(.callout-title:hover) {
 			@apply brightness-50 transition-all;
 		}
@@ -281,11 +278,11 @@
 			}
 		}
 	}
-	&:is([data-callout='important']) {
+	&:is([data-callout="important"]) {
 		--rc-color-light: var(--color-yellow-800) !important;
 		--rc-color-dark: var(--color-yellow-500) !important;
 	}
-	&:is([data-callout='todo']) {
+	&:is([data-callout="todo"]) {
 		--rc-color-light: var(--color-purple-800) !important;
 		--rc-color-dark: var(--color-purple-500) !important;
 	}
@@ -346,10 +343,15 @@
 }
 
 @custom-variant list-label {
-	&:is(li:has(> ol, ul)):not(li ul li, li ol li, li + li) {
+	&:is(li:has(> ol, ul)):not(
+			li ul li,
+			li ol li,
+			li + li,
+			.not-list-label
+		) {
 		@slot;
 	}
-	&:is(ul):has(> li > ol, > li > ul) {
+	&:is(ul):has(> li > ol, > li > ul):not(.not-list-label) {
 		@slot;
 	}
 }

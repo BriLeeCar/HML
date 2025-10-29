@@ -1,7 +1,7 @@
 import { type Metadata } from 'next'
 import {
+	Bold,
 	CTA,
-	Divider,
 	InlineLink,
 	Li,
 	OL,
@@ -24,33 +24,33 @@ export default function SupportTeam() {
 		<Page>
 			<PageHeading
 				eyebrow='Support Team'
-				subtitle='Our goal is to make sure you feel supported in creating the evacuation plan that works best for you.'>
+				subtitle={
+					<>
+						Our goal is to make sure you feel supported in creating
+						the evacuation plan that works best for you.
+						<Bold className='block'>You are not alone</Bold>
+					</>
+				}>
 				We're here to help
 			</PageHeading>
+			<P>
+				We’ll help you identify your most important support needs,
+				explore which pathways may suit you best, and then walk with
+				you through the steps of organizing, arranging, and planning
+				along that pathway.
+			</P>
+			<P>
+				Many members of the Support Team have also had to leave their
+				home country. Whenever possible, you’ll speak with someone who
+				has chosen and experienced a pathway similar to your own. We
+				know that leaving behind a life—people, places, and things—is
+				never easy. If you are truly ready to leave, or if you feel
+				you cannot stay, we are here to make the logistics and
+				mechanics as clear and manageable as possible.
+			</P>
 
-			<Section>
-				<div className='lg:pr-8'>
-					<SectionHeading>You are not alone</SectionHeading>
+			<FAQ />
 
-					<P>
-						We’ll help you identify your most important support needs,
-						explore which pathways may suit you best, and then walk
-						with you through the steps of organizing, arranging, and
-						planning along that pathway.
-					</P>
-					<P>
-						Many members of the Support Team have also had to leave
-						their home country. Whenever possible, you’ll speak with
-						someone who has chosen and experienced a pathway similar
-						to your own. We know that leaving behind a life—people,
-						places, and things—is never easy. If you are truly ready
-						to leave, or if you feel you cannot stay, we are here to
-						make the logistics and mechanics as clear and manageable
-						as possible.
-					</P>
-				</div>
-			</Section>
-			<Divider />
 			<Section>
 				<SectionHeading
 					eyebrow='Before Reaching Out'
@@ -61,61 +61,49 @@ export default function SupportTeam() {
 					Reaching out can be scary, but asking for help is always the
 					right choice—the best choice for you.
 				</SectionHeading>
-				<OL>
-					<Li>
+				<OL className='text-balance *:mt-4'>
+					<Li className='not-list-label'>
 						<InlineLink href='/get-ready-to-leave'>
 							Get Ready to Leave
-						</InlineLink>{' '}
-						provides important information about documentation and the
-						general overview of the process. It also provides
-						additional readings and resources.
+						</InlineLink>
+						<ul>
+							<li>
+								This document is where we recommend you start. It
+								outlines essential steps from planning to packing,
+								helping you create a personalized evacuation plan.
+							</li>
+						</ul>
 					</Li>
 					<Li>
 						<InlineLink href='/claiming-asylum'>
 							Claiming Asylum: What it Means and Where to Start
-						</InlineLink>{' '}
-						provides important information about what asylum actually
-						means, and if it is the right pathway for you.
+						</InlineLink>
+						<ul>
+							<li>
+								Important for those considering asylum as a pathway,
+								this guide provides important information about what
+								asylum actually means, and if it is the right pathway
+								for you.
+							</li>
+						</ul>
+					</Li>
+					<Li>
+						<InlineLink href='#faq'>
+							Frequently Asked Questions
+						</InlineLink>
+						<ul>
+							<li>
+								To keep our support team free to process users that
+								are in dire need of relocation, we have compiled a
+								list of frequently asked questions to help you find
+								the information you need quickly.
+							</li>
+						</ul>
 					</Li>
 				</OL>
 			</Section>
-			<Divider />
-			<FAQ />
-			<Divider />
 
 			<CTA
-				subtitle={
-					<>
-						We are so grateful for the outpouring of support and
-						interest we have received. At this time, our Support Team
-						is at capacity and we are not accepting new requests for
-						assistance.
-						<br />
-						<br />
-						We are working hard to expand our team and resources to
-						better serve you. Please check back in the coming days for
-						updates on when we will be able to accept new requests.
-						<br />
-						<br />
-						In the meantime, please join our{' '}
-						<InlineLink href='https://discord.gg/TcHKRgED6y'>
-							Discord community
-						</InlineLink>{' '}
-						to connect with others and explore our Guides & Resources
-						.
-					</>
-				}
-				primaryAction={{
-					href: 'https://discord.gg/TcHKRgED6y',
-					label: 'Join Our Discord',
-				}}
-				secondaryAction={{
-					href: '/guides-resources',
-					label: 'Explore Resources',
-				}}>
-				<em>Support Requests On Hold</em>
-			</CTA>
-			{/* <CTA
 				primaryAction={{
 					href: 'https://form.jotform.com/252073139145352',
 					label: 'Reach Out',
@@ -127,7 +115,13 @@ export default function SupportTeam() {
 				If you're ready,
 				<br />
 				we're ready.
-			</CTA> */}
+			</CTA>
+
+			{/* <OnHold
+				reason='We are working hard to expand our team and resources to
+                            better serve you. Please check back in the coming days for
+                            updates on when we will be able to accept new requests.'
+			/> */}
 		</Page>
 	)
 }

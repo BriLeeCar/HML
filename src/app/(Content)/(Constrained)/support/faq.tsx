@@ -34,6 +34,7 @@ export const FAQ = () => {
 	return (
 		<Section>
 			<SectionHeading
+				id='FAQ'
 				eyebrow='FAQ'
 				subtitle='To keep our support team free to process users that are in dire need of relocation, we have compiled a list of frequently asked questions to help you find the information you need quickly.'>
 				Only Have a Quick Question?
