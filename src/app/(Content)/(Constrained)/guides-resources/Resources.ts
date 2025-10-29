@@ -14,12 +14,23 @@ export const resources: tResource = {
 				Icon: { name: 'GlobeIcon', color: 'text-current' },
 			},
 			{
+				title: '#NoLongerSafe September 22nd - October 24th, 2025',
+				href: '/pdf/NoLongerSafe - Sept22-Oct24.pdf',
+				subtitle:
+					'An Update of Events that Exemplify that the United States No Longer Meets the Criteria to Be Considered a "Safe Country of Origin"',
+				type: 'link',
+				author: 'D. Jey Poston, Fleurian Ray Filkins, & Qira',
+				date: 'October 27th, 2025',
+				Icon: { name: 'TransFlag', color: 'text-current' },
+				target: '_blank',
+			},
+			{
 				title: '#NoLongerSafe',
 				href: '/pdf/NoLongerSafe.pdf',
 				subtitle:
-					'Why The United States no longer qualifies as a "Safe Country of Origin"',
+					'Why the United States No Longer Qualifies as a "Safe Country of Origin"',
 				type: 'link',
-				author: 'Jey Poston',
+				author: 'D. Jey Poston',
 				date: 'September 19, 2025',
 				Icon: { name: 'TransFlag', color: 'text-current' },
 				target: '_blank',

@@ -27,7 +27,7 @@ export const ResourceLink = ({
 		{subtitle && (
 			<p className='mt-0 text-sm text-zinc-600 dark:text-zinc-400'>
 				{author || date ?
-					<span className='block font-semibold'>
+					<span className='block font-semibold text-balance italic dark:text-zinc-200'>
 						{author && author}
 						{date && author && ' • '}
 						{date && date}
