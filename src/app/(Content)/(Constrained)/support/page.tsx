@@ -105,8 +105,9 @@ export default function SupportTeam() {
 
 			<CTA
 				primaryAction={{
-					href: 'https://form.jotform.com/252073139145352',
+					href: 'https://forms.clickup.com/90151711045/f/2kyqbwa5-195/251K9UAW6C3E3HIJIG',
 					label: 'Reach Out',
+					target: '_blank',
 				}}
 				secondaryAction={{
 					href: '/get-ready-to-leave',

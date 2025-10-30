@@ -11,6 +11,7 @@ export const CTA = ({
 	primaryAction?: {
 		href: string
 		label: string
+		target?: string
 	} & Props<typeof Button>
 	secondaryAction?: {
 		href: string
@@ -30,6 +31,7 @@ export const CTA = ({
 			<Button
 				{...actions}
 				href={actions?.href || '#'}
+				target={actions?.target || '_self'}
 				variant='default'>
 				{label}
 			</Button>
