@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Bold, Icon, InlineLink } from '~/components'
+import { topBarAnnouncement } from '~/data/announcement'
 
 export const AnnouncementBanner = () => {
 	const [isVisible, setIsVisible] = useState(true)
@@ -10,14 +11,15 @@ export const AnnouncementBanner = () => {
 		isVisible && (
 			<div className='bg-brand/10 flex w-full items-center gap-6 px-6 py-2.5 sm:px-3.5 sm:before:flex-1'>
 				<p className='text-brand-bright flex items-center gap-x-3 text-base/4'>
-					<Bold className='font-bold uppercase'>URGENT:</Bold>
+					<Bold className='font-bold uppercase'>
+						{topBarAnnouncement.type}:
+					</Bold>
 					<InlineLink
 						className='font-medium'
-						href='/pdf/Netherlands Safe Country Press Release 10-27-25.pdf'
-						target='_blank'
+						href={`/${topBarAnnouncement.link.folder}/${topBarAnnouncement.link.fileName}.${topBarAnnouncement.link.ext}`}
+						target={topBarAnnouncement.link.target}
 						rel='noopener noreferrer'>
-						Netherlands Suspends "Safe Country" List Ahead of EU
-						Reform
+						{topBarAnnouncement.message}
 					</InlineLink>
 				</p>
 				<div className='flex flex-1 justify-end'>
