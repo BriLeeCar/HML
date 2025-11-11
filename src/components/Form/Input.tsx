@@ -5,7 +5,9 @@ export const Input = ({
 	className,
 	type,
 	...props
-}: Props<'input'> & { type?: string }) => {
+}: (Props.WithRef<'input'> | Props<'input'>) & {
+	type?: Props<'input'>['type']
+}) => {
 	return (
 		<input
 			{...props}
