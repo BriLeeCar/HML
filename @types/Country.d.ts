@@ -116,11 +116,13 @@ declare global {
 				abbr: string
 				name: string
 			}>
-			currencies: Array<{
-				abbr: string
-				name: string
-				symbol: string
-			}>
+			currencies: {
+				[key: string]: {
+					abbr: string
+					name: string
+					symbol: string
+				}
+			}
 		}
 
 		export type ExplorerFilters = {

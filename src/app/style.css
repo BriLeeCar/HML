@@ -66,6 +66,8 @@
 	--brand-muted: var(--color-red-400);
 
 	--muted: oklch(91.717% 0.04244 17.819);
+
+	--mulberry: #7a2235;
 }
 
 .dark {
@@ -168,6 +170,8 @@
 	--color-brand-bright: var(--brand-bright);
 	--color-brand-bright-link: var(--brand-bright-link);
 	--color-brand-muted: var(--brand-muted);
+
+	--color-mulberry: var(--mulberry);
 }
 /* #endregion */
 
@@ -240,6 +244,14 @@
 @utility print-only {
 	@media not print {
 		display: none !important;
+	}
+}
+
+@utility search-no-picker {
+	&::-webkit-calendar-picker-indicator {
+		display: none !important;
+		appearance: none;
+		-webkit-appearance: none;
 	}
 }
 /* #endregion */
@@ -360,4 +372,18 @@ input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
+}
+
+body:has(.admin) {
+	main {
+		@apply max-md:px-0;
+	}
+	div:has(> p + h1 + p),
+	hgroup {
+		@apply max-md:px-6;
+	}
+}
+
+@utility admin-mobile-padding {
+	@apply px-6 md:px-0;
 }

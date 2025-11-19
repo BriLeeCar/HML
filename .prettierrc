@@ -8,7 +8,7 @@
 	"trailingComma": "es5",
 	"bracketSameLine": true,
 	"singleAttributePerLine": true,
-	"printWidth": 70,
+	"printWidth": 100,
 	"semi": false,
 	"quoteProps": "as-needed",
 	"plugins": [

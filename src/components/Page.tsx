@@ -6,7 +6,11 @@ import { Icon, Main } from '.'
 
 export const Page = ({ ...props }) => (
 	<Main>
-		<section className='mx-auto w-full max-w-2xl px-6 lg:max-w-7xl lg:px-8'>
+		<section
+			className={cn(
+				'mx-auto w-full max-w-2xl px-6 lg:max-w-7xl lg:px-8',
+				props.className
+			)}>
 			{props.children}
 		</section>
 	</Main>
@@ -24,21 +28,28 @@ export const SubSection = ({
 	defaultOpen = true,
 	title,
 	wrapperProps,
+	innerProps,
 	type = 'default',
+	role,
+	'aria-label': ariaLabel,
 	...props
 }: Omit<Props<'button'>, 'type' | 'title'> & {
 	title: ReactNode
 	defaultOpen?: boolean
 	wrapperProps?: Props<'article'>
+	innerProps?: Props<'article'>
 	type?: 'default' | 'grey'
 }) => {
 	const [open, setOpen] = useState(defaultOpen)
 	return (
 		<article
 			{...wrapperProps}
-			className={cn(open ? 'my-8' : 'my-6', wrapperProps?.className)}>
+			role={role}
+			aria-label={ariaLabel}
+			className={cn(wrapperProps?.className)}>
 			<button
 				role='heading'
+				type='button'
 				{...props}
 				className={cn(
 					'click',
@@ -57,12 +68,11 @@ export const SubSection = ({
 				/>{' '}
 				{title}
 			</button>
-			<div className='pl-6'>{open && props.children}</div>
-			{!open && type != 'grey' && (
-				<div className='indent-4 text-lg text-gray-500 italic'>
-					...
-				</div>
-			)}
+			<div
+				{...innerProps}
+				className={cn('pl-6', innerProps?.className)}>
+				{open && props.children}
+			</div>
 		</article>
 	)
 }
