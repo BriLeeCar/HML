@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import { Icon } from '~/components/Icon'
 import {
+	Button,
 	Checkbox,
 	CheckboxField,
 	CheckboxGroup,
@@ -8,9 +9,9 @@ import {
 	Field,
 	FieldGroup,
 	Label,
+	Select,
 	Textarea,
 } from '.'
-import { Button, Select } from '../../_components/Form'
 import { FormSection, FormSubSection } from './Base'
 
 export const RestrictionsOpportunities = ({ pathwayData, dispatchAction }: ElProps) => {

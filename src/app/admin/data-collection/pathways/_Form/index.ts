@@ -1,16 +1,6 @@
-export {
-	Button,
-	Error,
-	ProgressBar,
-} from '@/admin/data-collection/_components/Form'
+export { Button, Error } from '@/admin/data-collection/_components/Form'
 
-export {
-	Page,
-	PageHeading,
-	Section,
-	SectionHeading,
-	SubSection,
-} from '~/components'
+export { Page, PageHeading, Section, SectionHeading, SubSection } from '~/components'
 
 export {
 	Combobox,
@@ -36,10 +26,7 @@ export {
 
 export { Input } from '@/admin/data-collection/_components/input'
 export { Select } from '@/admin/data-collection/_components/select'
-export {
-	Strong,
-	Text,
-} from '@/admin/data-collection/_components/text'
+export { Strong, Text } from '@/admin/data-collection/_components/text'
 export { Textarea } from '@/admin/data-collection/_components/textarea'
 
 export { Form } from '../Form'

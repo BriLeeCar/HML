@@ -1,4 +1,4 @@
-export { Button, Error, ProgressBar } from '@/admin/data-collection/_components/Form'
+export { Button, Error } from '@/admin/data-collection/_components/Form'
 export { Page, PageHeading, Section, SectionHeading, SubSection } from '~/components'
 
 export {
