@@ -2,7 +2,7 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
 import { Open_Sans } from 'next/font/google'
 import 'react'
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import 'rehype-callouts/theme/vitepress'
 import { cn } from '~/lib/cn'
 import { Providers } from './providers'
@@ -33,11 +33,7 @@ const RootLayout = async ({
 			lang='en'
 			className={cn(openSans.variable)}
 			suppressHydrationWarning>
-			<body
-				className={cn(
-					'text-foreground bg-background relative font-sans antialiased',
-					'pb-4'
-				)}>
+			<body className={cn('text-foreground bg-background relative font-sans antialiased', 'pb-4')}>
 				<Providers>{children}</Providers>
 				<Analytics />
 			</body>

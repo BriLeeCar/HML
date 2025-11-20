@@ -17,10 +17,7 @@ export function Listbox<T>({
 	autoFocus?: boolean
 	'aria-label'?: string
 	children?: React.ReactNode
-} & Omit<
-	Headless.ListboxProps<typeof Fragment, T>,
-	'as' | 'multiple'
->) {
+} & Omit<Headless.ListboxProps<typeof Fragment, T>, 'as' | 'multiple'>) {
 	return (
 		<Headless.Listbox
 			{...props}
@@ -40,7 +37,7 @@ export function Listbox<T>({
 					// Hide default focus styles
 					'focus:outline-hidden',
 					// Focus ring
-					'after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-transparent after:ring-inset data-focus:after:ring-2 data-focus:after:ring-blue-500',
+					'after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-transparent after:ring-inset data-focus:after:ring-2 data-focus:after:ring-[#AC162B]',
 					// Disabled state
 					'data-disabled:opacity-50 data-disabled:before:bg-zinc-950/5 data-disabled:before:shadow-none',
 				])}>
@@ -48,11 +45,7 @@ export function Listbox<T>({
 					as='span'
 					options={options}
 					placeholder={
-						placeholder && (
-							<span className='block truncate text-zinc-500'>
-								{placeholder}
-							</span>
-						)
+						placeholder && <span className='block truncate text-zinc-500'>{placeholder}</span>
 					}
 					className={cn([
 						// Basic layout
@@ -144,11 +137,7 @@ export function ListboxOption<T>({
 			{...props}>
 			{({ selectedOption }) => {
 				if (selectedOption) {
-					return (
-						<div className={cn(className, sharedClasses)}>
-							{children}
-						</div>
-					)
+					return <div className={cn(className, sharedClasses)}>{children}</div>
 				}
 
 				return (
@@ -159,7 +148,7 @@ export function ListboxOption<T>({
 							// Typography
 							'text-base/6 text-zinc-950 sm:text-sm/6 dark:text-white forced-colors:text-[CanvasText]',
 							// Focus
-							'outline-hidden data-focus:bg-blue-500 data-focus:text-white',
+							'outline-hidden data-focus:bg-[#AC162B] data-focus:text-white',
 							// Forced colors mode
 							'forced-color-adjust-none forced-colors:data-focus:bg-[Highlight] forced-colors:data-focus:text-[HighlightText]',
 							// Disabled
@@ -177,10 +166,7 @@ export function ListboxOption<T>({
 								strokeLinejoin='round'
 							/>
 						</svg>
-						<span
-							className={cn(className, sharedClasses, 'col-start-2')}>
-							{children}
-						</span>
+						<span className={cn(className, sharedClasses, 'col-start-2')}>{children}</span>
 					</div>
 				)
 			}}
@@ -188,17 +174,11 @@ export function ListboxOption<T>({
 	)
 }
 
-export function ListboxLabel({
-	className,
-	...props
-}: React.ComponentPropsWithoutRef<'span'>) {
+export function ListboxLabel({ className, ...props }: React.ComponentPropsWithoutRef<'span'>) {
 	return (
 		<span
 			{...props}
-			className={cn(
-				className,
-				'ml-2.5 truncate first:ml-0 sm:ml-2 sm:first:ml-0'
-			)}
+			className={cn(className, 'ml-2.5 truncate first:ml-0 sm:ml-2 sm:first:ml-0')}
 		/>
 	)
 }

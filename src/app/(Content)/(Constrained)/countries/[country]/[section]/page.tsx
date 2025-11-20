@@ -1,13 +1,7 @@
 import fs from 'fs'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import path from 'path'
-import {
-	CTA,
-	Divider,
-	InlineLink,
-	Section,
-	SectionHeading,
-} from '~/components'
+import { CTA, Divider, InlineLink, Section, SectionHeading } from '~/components'
 import { MDXProcessor } from '~/lib/mdx'
 import { toTitleCase } from '~/lib/text'
 import countriesMeta from '~/server/db/countries.json'
@@ -22,15 +16,7 @@ export const dynamicParams = true
 export const revalidate = 86400
 export const fetchCache = 'force-cache'
 
-const sectionArr = [
-	'basics',
-	'pathways',
-	'economy',
-	'social',
-	'employment',
-	'housing',
-	'medical',
-]
+const sectionArr = ['basics', 'pathways', 'economy', 'social', 'employment', 'housing', 'medical']
 
 export const generateMetadata = async ({
 	params,
@@ -38,9 +24,7 @@ export const generateMetadata = async ({
 	const data = await params
 	const country = toTitleCase(
 		countriesMeta
-			.find(
-				(c) => c.abbr.toLowerCase() === data.country.toLowerCase()
-			)
+			.find(c => c.abbr.toLowerCase() === data.country.toLowerCase())
 			?.name?.replace('-', '')
 	)
 
@@ -56,8 +40,8 @@ export const generateStaticParams = async () => {
 	const pathwayCountries = [
 		...new Set(
 			countries
-				.filter((ea) => ea.abbr)
-				.map((ea) => {
+				.filter(ea => ea.abbr)
+				.map(ea => {
 					return {
 						country: ea.abbr.toUpperCase(),
 					}
@@ -65,8 +49,8 @@ export const generateStaticParams = async () => {
 		),
 	]
 
-	const countrySections = pathwayCountries.flatMap((country) => {
-		return sectionArr.map((section) => ({
+	const countrySections = pathwayCountries.flatMap(country => {
+		return sectionArr.map(section => ({
 			country: country.country,
 			section,
 		}))
@@ -75,13 +59,7 @@ export const generateStaticParams = async () => {
 }
 
 const CheckForSectionMDX = (country: string, section: string) => {
-	const file = path.join(
-		'src',
-		'data',
-		'country',
-		country,
-		`${section}.mdx`
-	)
+	const file = path.join('src', 'data', 'country', country, `${section}.mdx`)
 	try {
 		if (fs.existsSync(path.join(process.cwd(), file))) {
 			return new MDXProcessor(file, 'path')
@@ -130,12 +108,8 @@ const SectionPage = async ({
 							eyebrow='No content found'
 							subtitle={
 								<>
-									I'm sure someone will add some soon! Please keep
-									checking back, or{' '}
-									<InlineLink href='/guides-resources'>
-										read our guides
-									</InlineLink>{' '}
-									in the meantime.
+									I'm sure someone will add some soon! Please keep checking back, or{' '}
+									<InlineLink href='/guides-resources'>read our guides</InlineLink> in the meantime.
 								</>
 							}>
 							This country doesn't have any content yet.

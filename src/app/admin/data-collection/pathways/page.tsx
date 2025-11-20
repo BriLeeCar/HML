@@ -1,5 +1,5 @@
 import { Base } from './_Form/Base'
-import { approvedHandles } from './approvedHandles'
+import { APPROVED_HANDLES } from './constants'
 
 import { GetHandle } from './HandleInput'
 
@@ -7,6 +7,8 @@ const VisaPathwayCollectionPage = async ({
 	searchParams,
 }: PageProps<'/admin/data-collection/pathways'>) => {
 	const { handle } = await searchParams
+
+	console.log(handle)
 
 	if (!handle) {
 		return (
@@ -16,7 +18,7 @@ const VisaPathwayCollectionPage = async ({
 		)
 	}
 
-	if (!approvedHandles.includes(handle as string)) {
+	if (!Object.keys(APPROVED_HANDLES).includes(handle as string)) {
 		return (
 			<Wrapper>
 				<GetHandle />
@@ -32,9 +34,7 @@ const VisaPathwayCollectionPage = async ({
 }
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
-	<div className='dark:bg-background min-h-screen max-w-screen'>
-		{children}
-	</div>
+	<div className='dark:bg-background min-h-screen max-w-screen'>{children}</div>
 )
 
 export default VisaPathwayCollectionPage

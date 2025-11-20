@@ -1,13 +1,11 @@
 'use client'
 
-import { ReactNode, useContext, useReducer } from 'react'
-import { cn } from '~/lib/cn'
-import { DBContext } from '~/server/db/provider'
 import {
 	Button,
 	FieldGroup,
 	Fieldset,
 	Form,
+	initState,
 	Legend,
 	Page,
 	PageHeading,
@@ -16,24 +14,30 @@ import {
 	SectionHeading,
 	SubSection,
 	Text,
-} from '..'
+} from '@/data-collection/pathways'
+import { MOCK_DATA } from '@/data-collection/pathways/constants'
 
+import {
+	ApplicationCost,
+	Documentation,
+	Duration,
+	Notes,
+	Overview,
+	ProcessingTime,
+	Renewable,
+	RestrictionsOpportunities,
+} from '@/data-collection/pathways/_Form'
 import { motion, useScroll } from 'motion/react'
-import { initState } from '../reducer'
-import { ApplicationCost } from './ApplicationCost'
-import { Documentation } from './Documentation'
-import { Duration } from './Duration'
-import { Notes } from './Notes'
-import { Overview } from './Overview'
-import { ProcessingTime } from './ProcessingTime'
-import { Renewable } from './Renewable'
-import { RestrictionsOpportunities } from './RestrictionsOpportunities'
+import { type ReactNode, useContext, useReducer } from 'react'
+import { cn } from '~/lib/cn'
+import { DBContext } from '~/server/db/provider'
 
 export const Base = ({ handle }: { handle: string }) => {
 	const db = useContext(DBContext)
 
 	const [pathwayData, dispatchPathway] = useReducer(pathwayReducer, {
 		...initState(),
+		...MOCK_DATA,
 		db: db,
 		countriesWithPathways: db.getCountriesWithPathways(),
 		discordHandle: {
@@ -56,17 +60,22 @@ export const Base = ({ handle }: { handle: string }) => {
 					originY: 0,
 					left: 0,
 					right: 0,
-					backgroundColor: '#74447E',
+					backgroundColor: 'light-dark(#7A2235, #47274E)',
 				}}
 			/>
 			<PageHeading
-				eyebrow='Beta'
-				subtitle='Please let us know of any issues when filling out the form!'>
+				eyebrow={<span className='text-[#AC162B] dark:text-[#DAE638]'>Beta</span>}
+				subtitle={<span>Please let us know of any issues when filling out the form!</span>}>
 				Add Pathway Form
 			</PageHeading>
 			{/* ? DISCORD */}
 			<Section>
-				<SectionHeading eyebrow='For Verification Purposes'>Discord Handle</SectionHeading>
+				<SectionHeading
+					eyebrow={
+						<span className='text-[#AC162B] dark:text-[#DAE638]'>For Verification Purposes'</span>
+					}>
+					Discord Handle
+				</SectionHeading>
 				<form className='admin-mobile-padding my-2'>
 					<label
 						className='sr-only'
@@ -86,10 +95,10 @@ export const Base = ({ handle }: { handle: string }) => {
 							'flex h-9 w-full min-w-0 text-base',
 							'disabled:bg-foreground/3 disabled:pointer-events-none disabled:cursor-not-allowed disabled:text-current/60 disabled:italic md:text-sm',
 							'in-[fieldset]:bg-foreground/2',
-							'dark:outline-offset-2 dark:outline-[#7A2235] dark:focus-visible:ring-0 dark:focus-visible:ring-offset-0 dark:focus-visible:outline-2',
+							'dark:outline-offset-2 dark:focus-visible:ring-0 dark:focus-visible:ring-offset-0 dark:focus-visible:outline-2',
 							'bg-foreground/5 max-w-sm rounded-lg'
 						)}
-						onBlur={(e) =>
+						onBlur={e =>
 							dispatchPathway({
 								type: 'setDiscordHandle',
 								field: 'discordHandle',
@@ -198,7 +207,12 @@ export const Base = ({ handle }: { handle: string }) => {
 						type='button'
 						variant='ghost'
 						onClick={() => {
-							console.log(pathwayData)
+							const consoledData = { ...pathwayData } as AnySafe
+
+							delete consoledData.db
+							delete consoledData.countriesWithPathways
+
+							console.log(consoledData)
 						}}>
 						Submit Pathway
 					</Button>
@@ -223,7 +237,7 @@ export const FormSection = ({
 			role='group'
 			title={props.title}
 			className={cn(
-				'from-background/100 sticky top-0 z-10 bg-linear-to-b from-50% to-transparent to-100% max-md:pt-4 max-md:pb-8 md:static',
+				'from-background/100 dark:text-foreground sticky top-0 z-10 bg-linear-to-b from-50% to-transparent to-100% text-[#AC162B] max-md:pt-4 max-md:pb-8 md:static',
 				props.className
 			)}
 			innerProps={{
@@ -235,10 +249,7 @@ export const FormSection = ({
 				className='mb-10 text-balance'>
 				{description}
 			</Text>
-			<FieldGroup className='dark:*:[fieldset]:*:first:text-brand-bright-link'>
-				{/* '*:[fieldset]:*:first:mb-1 *:[fieldset]:*:first:border-b-1 *:[fieldset]:*:first:pb-1 dark:*:[fieldset]:*:first:text-red-200' */}
-				{props.children}
-			</FieldGroup>
+			<FieldGroup>{props.children}</FieldGroup>
 		</SubSection>
 	)
 }

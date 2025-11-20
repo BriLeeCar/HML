@@ -1,23 +1,12 @@
 'use client'
 
+import { Error, errors, Field, FieldGroup, Input, Label, Select } from '@/data-collection/pathways'
 import z from 'zod/v4'
-import { Error, Field, FieldGroup, Input, Label, Select } from '.'
 
-import { errors } from '.'
-
-export const MinMaxCostFieldGroup = ({
-	pathwayData,
-	dispatchAction,
-}: ElProps) => {
+export const MinMaxCostFieldGroup = ({ pathwayData, dispatchAction }: ElProps) => {
 	const baseData = pathwayData['cost']
 
-	const handleData = ({
-		key,
-		value,
-	}: {
-		key: 'min' | 'max'
-		value: number | string
-	}) => {
+	const handleData = ({ key, value }: { key: 'min' | 'max'; value: number | string }) => {
 		const newData = { ...baseData }
 		newData.value[key].value = Number(value)
 		newData.value[key].error = []
@@ -25,24 +14,17 @@ export const MinMaxCostFieldGroup = ({
 
 		const parsed = z
 			.preprocess((val) => {
-				return parseFloat(
-					typeof val === 'string' ? val : String(val)
-				).toFixed(2)
+				return parseFloat(typeof val === 'string' ? val : String(val)).toFixed(2)
 			}, z.coerce.number().nonnegative(errors.negative))
 			.safeParse(newData.value[key].value)
 
 		if (parsed.success) {
 			newData.value[key].value = parsed.data
 		} else {
-			newData.value[key].error = parsed.error.issues.map(
-				(i) => i.message
-			)
+			newData.value[key].error = parsed.error.issues.map((i) => i.message)
 		}
 
-		if (
-			newData.value.max.value > 0
-			&& newData.value.min.value > newData.value.max.value
-		) {
+		if (newData.value.max.value > 0 && newData.value.min.value > newData.value.max.value) {
 			newData.error.push(errors.minGtMax)
 		} else {
 			newData.error = []
@@ -57,18 +39,16 @@ export const MinMaxCostFieldGroup = ({
 
 	const currencyOptions = (pathwayData.countryId.value != null
 		&& pathwayData.countryId.value != ''
-		&& pathwayData.countriesWithPathways.find(
-			(c) => c.abbr === pathwayData.countryId.value
-		)?.api.currencies) || {
+		&& pathwayData.countriesWithPathways.find((c) => c.abbr === pathwayData.countryId.value)?.api
+			.currencies) || {
 		'': { symbol: '', name: 'Select Currency', abbr: '' },
 	}
 
 	const currencyOptionEls = () => {
 		const currencies = []
 		for (const [key, cur] of Object.entries(
-			pathwayData.countriesWithPathways.find(
-				(c) => c.abbr === pathwayData.countryId.value
-			)?.api.currencies || {}
+			pathwayData.countriesWithPathways.find((c) => c.abbr === pathwayData.countryId.value)?.api
+				.currencies || {}
 		)) {
 			currencies.push({
 				value: key,
@@ -89,6 +69,7 @@ export const MinMaxCostFieldGroup = ({
 					data-slot='control'>
 					<Label>Min</Label>
 					<Input
+						defaultValue={baseData.value.min.value}
 						name={`costMin`}
 						aria-label={`Cost Min`}
 						type='number'
@@ -110,6 +91,7 @@ export const MinMaxCostFieldGroup = ({
 					data-slot='control'>
 					<Label>Max</Label>
 					<Input
+						defaultValue={baseData.value.max.value}
 						name={`costMax`}
 						aria-label={`Cost Max`}
 						type='number'
@@ -134,12 +116,12 @@ export const MinMaxCostFieldGroup = ({
 					data-slot='control'>
 					<Label>Currency</Label>
 					<Select
+						defaultValue={pathwayData.costUom.value?.abbr || ''}
 						disabled={currencies.length === 0}
 						name={`costUOM`}
 						aria-label={`Cost UOM`}
 						onChange={(e) => {
-							const selectedCurrency =
-								currencyOptions[e.target.selectedIndex]
+							const selectedCurrency = currencyOptions[e.target.selectedIndex]
 
 							dispatchAction({
 								field: 'costUom',

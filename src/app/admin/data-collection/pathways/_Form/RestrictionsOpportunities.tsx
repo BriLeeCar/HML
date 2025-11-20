@@ -1,5 +1,3 @@
-import { ReactNode } from 'react'
-import { Icon } from '~/components/Icon'
 import {
 	Button,
 	Checkbox,
@@ -11,8 +9,10 @@ import {
 	Label,
 	Select,
 	Textarea,
-} from '.'
-import { FormSection, FormSubSection } from './Base'
+} from '@/data-collection/pathways'
+import { FormSection, FormSubSection } from '@/data-collection/pathways/_Form'
+import { type ReactNode } from 'react'
+import { Icon } from '~/components/Icon'
 
 export const RestrictionsOpportunities = ({ pathwayData, dispatchAction }: ElProps) => {
 	return (
@@ -105,10 +105,11 @@ const RestrctionOpportunitiesCB = <
 			</CheckboxField>
 			{data.value.possible && (
 				<Textarea
+					defaultValue={data.value.note ?? undefined}
 					name={`${field}Notes`}
 					{...props}
-					className='-mt-4 mb-8 pl-8'
-					onBlur={(e) => {
+					className='-mt-4 mb-8'
+					onBlur={e => {
 						dispatchAction({
 							type: dispatchValues.type,
 							field: dispatchValues.field,
@@ -160,15 +161,15 @@ const NationalityRestrictionsCB = ({ pathwayData, dispatchAction }: ElProps) => 
 					legend='Countries with Restrictions'
 					aria-label='Countries with Restrictions'
 					description='Please include each country as a separate entry'>
-					{baseData.value.nationalities.map((n) => (
+					{baseData.value.nationalities.map(n => (
 						<FieldGroup
 							key={n.counter}
-							className='ml-6 grid grid-cols-[auto_max-content] border-b-2 border-[#F0EBF1] pt-4 pb-8 pl-6 *:grid *:grid-cols-[.15fr_auto] *:items-baseline *:gap-x-8 last:border-0 last:pb-0 *:last:grid-cols-1'>
+							className='ml-6 grid grid-cols-[auto_max-content] border-b-2 border-[#F0EBF1] pt-4 pb-8 pl-6 *:grid *:grid-cols-[.15fr_auto] *:items-baseline *:gap-x-8 last:border-0 last:pb-0 *:last:grid-cols-1 dark:border-b-1 dark:border-current/10'>
 							<Field className='col-start-1 mb-1'>
 								<Label>Country</Label>
 								<Select
 									defaultValue={n.country}
-									onChange={(e) => {
+									onChange={e => {
 										const payload = { ...baseData }
 										payload.value.nationalities[n.counter].country = e.currentTarget.value
 
@@ -181,12 +182,12 @@ const NationalityRestrictionsCB = ({ pathwayData, dispatchAction }: ElProps) => 
 									<option>Select a country</option>
 									{pathwayData.db.countries
 										.sort((a, b) => a.name.localeCompare(b.name))
-										.filter((country) =>
+										.filter(country =>
 											pathwayData.nationalities.value.nationalities.every(
-												(n2) => n2.country !== country.abbr || n2.counter === n.counter
+												n2 => n2.country !== country.abbr || n2.counter === n.counter
 											)
 										)
-										.map((country) => (
+										.map(country => (
 											<option
 												key={country.abbr}
 												value={country.abbr}>
@@ -198,9 +199,10 @@ const NationalityRestrictionsCB = ({ pathwayData, dispatchAction }: ElProps) => 
 							<Field className='col-start-1 mb-1'>
 								<Label>Details</Label>
 								<Textarea
+									defaultValue={n.note}
 									name='nationalityRestrictionDetails'
 									className='mt-1'
-									onBlur={(e) => {
+									onBlur={e => {
 										const payload = { ...baseData }
 										payload.value.nationalities[n.counter].note = e.currentTarget.value
 										dispatchAction({
@@ -239,7 +241,7 @@ const NationalityRestrictionsCB = ({ pathwayData, dispatchAction }: ElProps) => 
 				<Button
 					type='button'
 					size='sm'
-					className='my-8 flex w-full items-center justify-center gap-x-2 bg-[#F0EBF1] text-center text-[#74447E] hover:bg-[#74447E] hover:text-[#F0EBF1] focus-visible:outline-offset-1 focus-visible:outline-[#47274E] dark:bg-[#47274E] dark:text-[#F0EBF1] dark:hover:bg-[#74447E] dark:hover:text-[#F0EBF1]'
+					innerButton
 					onClick={() => {
 						baseData.counter += 1
 						baseData.value.nationalities.push({
@@ -301,16 +303,22 @@ const OtherRestrictions = ({ pathwayData, dispatchAction }: ElProps) => {
 					legend='Restrictions'
 					aria-label='Restrictions'
 					description='Please include each restriction as a separate entry'>
-					{baseData.value.restrictions.map((n) => (
+					{baseData.value.restrictions.map(n => (
 						<FieldGroup
 							key={n.counter}
-							className='ml-6 grid grid-cols-[auto_max-content] border-b-2 border-[#F0EBF1] pt-4 pb-8 pl-6 *:grid *:grid-cols-[.15fr_auto] *:items-baseline *:gap-x-8 last:border-0 last:pb-0 *:last:grid-cols-1'>
+							className='ml-6 grid grid-cols-[auto_max-content] border-b-2 border-[#F0EBF1] pt-4 pb-8 pl-6 *:grid *:grid-cols-[.15fr_auto] *:items-baseline *:gap-x-8 last:border-0 last:pb-0 *:last:grid-cols-1 dark:border-b-1 dark:border-current/10'>
 							<Field className='col-start-1 mb-1'>
 								<Label>Details</Label>
 								<Textarea
+									defaultValue={n.value}
 									name='restrictionDetails'
 									className='mt-1'
-									onBlur={(e) => {
+									onBlur={e => {
+										console.log(
+											n.counter,
+											e.currentTarget.value,
+											baseData.value.restrictions.filter(r => r.counter === n.counter)
+										)
 										baseData.value.restrictions[n.counter].value = e.currentTarget.value
 										dispatchAction({
 											type: 'setRestrictions',
@@ -327,7 +335,7 @@ const OtherRestrictions = ({ pathwayData, dispatchAction }: ElProps) => {
 									className='mx-auto rounded-full px-1.5 py-0'
 									onClick={() =>
 										dispatchAction({
-											type: 'deleteRestriction',
+											type: 'deleteRestrictions',
 											field: 'restrictions',
 											payload: n.counter,
 										})
@@ -348,13 +356,14 @@ const OtherRestrictions = ({ pathwayData, dispatchAction }: ElProps) => {
 				<Button
 					type='button'
 					size='sm'
-					className='my-8 flex w-full items-center justify-center gap-x-2 bg-[#F0EBF1] text-center text-[#74447E] hover:bg-[#74447E] hover:text-[#F0EBF1] focus-visible:outline-offset-1 focus-visible:outline-[#47274E] dark:bg-[#47274E] dark:text-[#F0EBF1] dark:hover:bg-[#74447E] dark:hover:text-[#F0EBF1]'
+					innerButton
 					onClick={() => {
 						baseData.counter += 1
 						baseData.value.restrictions.push({
 							counter: baseData.counter,
 							value: '',
 						})
+						console.log('adding restriction', baseData.value.restrictions)
 						dispatchAction({
 							type: 'setRestrictions',
 							field: 'restrictions',

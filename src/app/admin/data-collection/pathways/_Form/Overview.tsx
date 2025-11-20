@@ -1,4 +1,3 @@
-import z from 'zod/v4'
 import {
 	Combobox,
 	ComboboxDescription,
@@ -10,12 +9,10 @@ import {
 	Input,
 	Label,
 	Textarea,
-} from '.'
+} from '@/data-collection/pathways'
+import z from 'zod/v4'
 
-export const Overview = ({
-	pathwayData,
-	dispatchAction,
-}: ElProps) => {
+export const Overview = ({ pathwayData, dispatchAction }: ElProps) => {
 	const dispatchStringField = <F extends keyof Dispatch.StringFields>(
 		value: string | null,
 		field: F
@@ -37,21 +34,14 @@ export const Overview = ({
 				<Label>Country ID</Label>
 				<Combobox
 					name='countryId'
-					options={pathwayData.countriesWithPathways.map(
-						(c) => c.abbr
-					)}
+					options={pathwayData.countriesWithPathways.map((c) => c.abbr)}
 					value={pathwayData.countryId.value ?? ''}
 					defaultValue={
-						pathwayData.countriesWithPathways.find(
-							(c) => c.abbr === pathwayData.countryId.value
-						)?.abbr ?? undefined
+						pathwayData.countriesWithPathways.find((c) => c.abbr === pathwayData.countryId.value)
+							?.abbr ?? undefined
 					}
 					onChange={(val) => {
-						const parsed = z
-							.string()
-							.toUpperCase()
-							.length(3, 'Invalid Country ID')
-							.safeParse(val)
+						const parsed = z.string().toUpperCase().length(3, 'Invalid Country ID').safeParse(val)
 						if (parsed.success)
 							dispatchAction({
 								type: 'setCountryId',
@@ -69,9 +59,7 @@ export const Overview = ({
 							key={country}>
 							<ComboboxLabel>{country}</ComboboxLabel>
 							<ComboboxDescription>
-								{pathwayData.countriesWithPathways.find(
-									(c) => c.abbr == country
-								)?.name ?? country}
+								{pathwayData.countriesWithPathways.find((c) => c.abbr == country)?.name ?? country}
 							</ComboboxDescription>
 						</ComboboxOption>
 					)}
@@ -99,6 +87,7 @@ export const Overview = ({
 			<Field>
 				<Label>Official Link</Label>
 				<Input
+					defaultValue={pathwayData.officialLink.value ?? undefined}
 					name='pathwayLink'
 					type='url'
 					onBlur={(e) => {
@@ -116,6 +105,7 @@ export const Overview = ({
 			<Field>
 				<Label>Category</Label>
 				<Input
+					defaultValue={pathwayData.category.value ?? undefined}
 					name='pathwayCategory'
 					onBlur={(e) =>
 						dispatchAction({
@@ -134,6 +124,7 @@ export const Overview = ({
 			<Field className='col-span-full'>
 				<Label>Description</Label>
 				<Textarea
+					defaultValue={pathwayData.description.value ?? undefined}
 					name='pathwayDescription'
 					onBlur={(e) =>
 						dispatchAction({
@@ -179,10 +170,7 @@ const onBlurDispatchStringField = (
 	value: string | null,
 	pathwayData: ElProps['pathwayData'],
 	field: Dispatch.StringKeys,
-	dispatchFn: (
-		value: string | null,
-		field: Dispatch.StringKeys
-	) => void
+	dispatchFn: (value: string | null, field: Dispatch.StringKeys) => void
 ) => {
 	const val = emptyToNull(value)
 

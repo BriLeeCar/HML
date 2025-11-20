@@ -2,7 +2,7 @@
 
 import { AnimatePresence, useDragControls } from 'motion/react'
 import { useRouter } from 'next/navigation'
-import { MouseEvent, useContext, useEffect, useReducer } from 'react'
+import { type MouseEvent, useContext, useEffect, useReducer } from 'react'
 import { cn } from '~/lib/cn'
 import { DBContext } from '~/server/db/provider'
 import { FirstVisitOverlay } from './FirstVisitOverlay'
@@ -10,7 +10,7 @@ import { CountryHeading } from './Heading'
 import { MapPathEl, MapSvg } from './Map'
 import { mapReducer } from './Reducer'
 import { Search } from './SearchBtn'
-import { tMapReducer } from './util'
+import type { tMapReducer } from './util'
 
 const actionEnterExit = (
 	e: MouseEvent<SVGPathElement>,
@@ -46,8 +46,7 @@ export const WorldMap = () => {
 	})
 
 	const hoveredCountry = db.countries?.find(
-		(country) =>
-			country.name.toLowerCase() == mapState.hovered?.toLowerCase()
+		country => country.name.toLowerCase() == mapState.hovered?.toLowerCase()
 	)
 	const dragControl = useDragControls()
 
@@ -82,9 +81,7 @@ export const WorldMap = () => {
 				'fixed top-0 left-0 flex h-full max-h-screen w-full max-w-screen items-center justify-center overflow-hidden',
 				mapState.dragging.current ? 'cursor-grabbing' : 'cursor-grab'
 			)}>
-			{!mapState.hasVisited && (
-				<FirstVisitOverlay draggingFirst={mapState.dragging.first} />
-			)}
+			{!mapState.hasVisited && <FirstVisitOverlay draggingFirst={mapState.dragging.first} />}
 			<AnimatePresence>
 				<CountryHeading
 					key={mapState.hovered || 'no-hover'}
@@ -108,7 +105,7 @@ export const WorldMap = () => {
 					})
 				}
 				dragConstraints={mapState.boundaries}>
-				{db.getMapPaths().map((country) => {
+				{db.getMapPaths().map(country => {
 					const { svgPath, abbr, name } = country
 					return (
 						<MapPathEl
@@ -116,27 +113,21 @@ export const WorldMap = () => {
 							name={name}
 							abbr={abbr}
 							svgPath={svgPath || ''}
-							onMouseEnter={(e) => actionEnterExit(e, mapDispatch)}
-							onMouseLeave={(e) => actionEnterExit(e, mapDispatch)}
+							onMouseEnter={e => actionEnterExit(e, mapDispatch)}
+							onMouseLeave={e => actionEnterExit(e, mapDispatch)}
 							className={cn(
 								'dark:stroke-background',
 								abbr != 'USA' && 'hover:fill-brand-bright',
 								'fill-red-500/20 transition-all'
 							)}
-							onClick={() =>
-								router.push(
-									`/countries/${country.abbr.toLowerCase()}`
-								)
-							}
+							onClick={() => router.push(`/countries/${country.abbr.toLowerCase()}`)}
 						/>
 					)
 				})}
 			</MapSvg>
 			<Search
 				countries={db.getMapPaths()}
-				actionSelected={(country) =>
-					router.push(`/countries/${country.abbr.toLowerCase()}`)
-				}
+				actionSelected={country => router.push(`/countries/${country.abbr.toLowerCase()}`)}
 			/>
 		</div>
 	)

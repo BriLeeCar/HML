@@ -2,10 +2,7 @@ import * as Headless from '@headlessui/react'
 import type React from 'react'
 import { cn } from '~/lib/cn'
 
-export function CheckboxGroup({
-	className,
-	...props
-}: React.ComponentPropsWithoutRef<'div'>) {
+export function CheckboxGroup({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
 	return (
 		<div
 			data-slot='control'
@@ -24,10 +21,7 @@ export function CheckboxGroup({
 export function CheckboxField({
 	className,
 	...props
-}: { className?: string } & Omit<
-	Headless.FieldProps,
-	'as' | 'className'
->) {
+}: { className?: string } & Omit<Headless.FieldProps, 'as' | 'className'>) {
 	return (
 		<Headless.Field
 			data-slot='field'
@@ -67,7 +61,7 @@ const base = [
 	'after:absolute after:inset-0 after:rounded-[calc(0.3125rem-1px)] after:shadow-[inset_0_1px_--theme(--color-white/15%)]',
 	'dark:after:-inset-px dark:after:hidden dark:after:rounded-[0.3125rem] dark:group-data-checked:after:block',
 	// Focus ring
-	'group-data-focus:outline-2 group-data-focus:outline-offset-2 group-data-focus:outline-blue-500',
+	'group-data-focus:outline-2 group-data-focus:outline-offset-2 group-data-focus:outline-[#AC162B]',
 	// Disabled state
 	'group-data-disabled:opacity-50',
 	'group-data-disabled:border-zinc-950/25 group-data-disabled:bg-zinc-950/5 group-data-disabled:[--checkbox-check:var(--color-zinc-950)]/50 group-data-disabled:before:bg-transparent',
@@ -132,10 +126,7 @@ export function Checkbox({
 		<Headless.Checkbox
 			data-slot='control'
 			{...props}
-			className={cn(
-				className,
-				'group inline-flex focus:outline-hidden'
-			)}>
+			className={cn(className, 'group inline-flex focus:outline-hidden')}>
 			<span className={cn([base, colors[color]])}>
 				<svg
 					className='size-4 stroke-(--checkbox-check) opacity-0 group-data-checked:opacity-100 sm:h-3.5 sm:w-3.5'

@@ -1,9 +1,6 @@
-import { allFilters, tMasonryActions, tMasonryState } from '.'
+import { allFilters, type tMasonryActions, type tMasonryState } from '.'
 
-export const masonryReducer = (
-	state: tMasonryState,
-	action: tMasonryActions
-) => {
+export const masonryReducer = (state: tMasonryState, action: tMasonryActions) => {
 	const newState = { ...state }
 
 	if (action.type == 'SET_DRAWER') {
@@ -20,8 +17,8 @@ export const masonryReducer = (
 		parseFilters(newState, action.payload)
 	}
 	if (action.type == 'SET_COOKIES') {
-		action.payload.forEach((key) => {
-			const filter = allFilters.find((f) => f.key == key)
+		action.payload.forEach(key => {
+			const filter = allFilters.find(f => f.key == key)
 			if (filter) {
 				parseFilters(newState, { ...filter, value: true })
 			}
@@ -54,24 +51,15 @@ export const masonryReducer = (
 			Object.assign(newState, {
 				countries: newState.db
 					.getCountriesWithPathways()
-					.filter((country) =>
-						country.name
-							.toLowerCase()
-							.includes(action.payload.query.toLowerCase())
+					.filter(country =>
+						country.name.toLowerCase().includes(action.payload.query.toLowerCase())
 					),
 			})
 
-			parseFilters(
-				newState,
-				newState.filters[0] || undefined,
-				newState.countries
-			)
+			parseFilters(newState, newState.filters[0] || undefined, newState.countries)
 		}
 	}
-	window.localStorage.setItem(
-		'explorer-filters',
-		JSON.stringify(newState.filters.map((f) => f.key))
-	)
+	window.localStorage.setItem('explorer-filters', JSON.stringify(newState.filters.map(f => f.key)))
 	return newState
 }
 
@@ -80,23 +68,17 @@ const parseFilters = (
 	payloadFilters?: tMasonryState['filters'][0],
 	countries?: ApiData.Country[]
 ) => {
-	const useCountries =
-		countries || newState.db.getCountriesWithPathways()
+	const useCountries = countries || newState.db.getCountriesWithPathways()
 	if (!payloadFilters) {
 		Object.assign(newState, {
-			countries: useCountries.sort((a, b) =>
-				a.name.localeCompare(b.name)
-			),
+			countries: useCountries.sort((a, b) => a.name.localeCompare(b.name)),
 		})
 		return newState
 	}
 	newState.filters = [
 		...new Set(
-			newState.filters.filter((f) => {
-				if (
-					payloadFilters.value == false
-					&& f.key == payloadFilters.key
-				) {
+			newState.filters.filter(f => {
+				if (payloadFilters.value == false && f.key == payloadFilters.key) {
 					return false
 				}
 				return f.key != payloadFilters.key
@@ -106,17 +88,15 @@ const parseFilters = (
 
 	if (
 		payloadFilters.value == true
-		&& !newState.filters
-			.map((n) => n.key)
-			.includes(payloadFilters.key)
+		&& !newState.filters.map(n => n.key).includes(payloadFilters.key)
 	) {
 		newState.filters.push(payloadFilters)
 	}
 
 	Object.assign(newState, {
 		countries: useCountries
-			.filter((c) => {
-				return newState.filters.every((f) => {
+			.filter(c => {
+				return newState.filters.every(f => {
 					return f.matches(c)
 				})
 			})

@@ -29,7 +29,7 @@ export const Select = forwardRef(function Select(
 				// Background color is moved to control and shadow is removed in dark mode so hide `before` pseudo
 				'dark:before:hidden',
 				// Focus ring
-				'after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-transparent after:ring-inset has-data-focus:after:ring-2 has-data-focus:after:ring-blue-500',
+				'after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-transparent after:ring-inset has-data-focus:after:ring-2 has-data-focus:after:ring-[#AC162B]',
 				// Disabled state
 				'has-data-disabled:opacity-50 has-data-disabled:before:bg-zinc-950/5 has-data-disabled:before:shadow-none',
 				className,
@@ -38,9 +38,7 @@ export const Select = forwardRef(function Select(
 				ref={ref}
 				multiple={multiple}
 				{...props}
-				{...(placeholder && placeholder.selected ?
-					{ 'data-placeholder': true }
-				:	{})}
+				{...(placeholder && placeholder.selected ? { 'data-placeholder': true } : {})}
 				className={cn([
 					// Basic layout
 					'relative block w-full appearance-none rounded-lg py-[calc(--spacing(2.5)-1px)] sm:py-[calc(--spacing(1.5)-1px)]',
@@ -65,11 +63,7 @@ export const Select = forwardRef(function Select(
 					'data-placeholder:text-center data-placeholder:text-xs/6 data-placeholder:tracking-wide data-placeholder:text-current/75 data-placeholder:italic',
 				])}>
 				<>
-					{placeholder && (
-						<option value={placeholder.value}>
-							{placeholder.label}
-						</option>
-					)}
+					{placeholder && <option value={placeholder.value}>{placeholder.label}</option>}
 					{props.children}
 				</>
 			</Headless.Select>

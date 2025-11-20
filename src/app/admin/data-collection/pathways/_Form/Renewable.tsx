@@ -1,6 +1,4 @@
 'use client'
-import { AnimatePresence, motion } from 'motion/react'
-import { Icon } from '~/components/Icon'
 import {
 	Button,
 	Checkbox,
@@ -12,9 +10,10 @@ import {
 	Label,
 	Strong,
 	Textarea,
-} from '.'
-import { FormSubSection } from './Base'
-import { MinMaxTimeFieldGroup } from './MinMaxTimeFieldGroup'
+} from '@/data-collection/pathways'
+import { FormSubSection, MinMaxTimeFieldGroup } from '@/data-collection/pathways/_Form'
+import { AnimatePresence, motion } from 'motion/react'
+import { Icon } from '~/components/Icon'
 
 const animateVariants = {
 	exit: {
@@ -204,7 +203,7 @@ const RenewalNotes = ({ pathwayData, dispatchAction }: ElProps) => {
 				</>
 			}>
 			<FieldGroup className='grid gap-y-4'>
-				{pathwayData.renewable.value.notes.map((note) => {
+				{pathwayData.renewable.value.notes.map(note => {
 					return (
 						<Field
 							key={note.counter}
@@ -212,9 +211,9 @@ const RenewalNotes = ({ pathwayData, dispatchAction }: ElProps) => {
 							<Textarea
 								defaultValue={note.value ?? undefined}
 								name={`renewableNote${note.counter}`}
-								onBlur={(e) => {
+								onBlur={e => {
 									const data = { ...pathwayData.renewable }
-									const thisNote = data.value.notes.find((n) => n.counter == note.counter)
+									const thisNote = data.value.notes.find(n => n.counter == note.counter)
 									thisNote && (thisNote.value = e.currentTarget.value)
 									dispatchAction({
 										field: 'renewable',
@@ -248,7 +247,7 @@ const RenewalNotes = ({ pathwayData, dispatchAction }: ElProps) => {
 			<Button
 				type='button'
 				size='sm'
-				className='my-8 flex w-full items-center justify-center gap-x-2 bg-[#F0EBF1] text-center text-[#74447E] hover:bg-[#74447E] hover:text-[#F0EBF1] focus-visible:outline-offset-1 focus-visible:outline-[#47274E] dark:bg-[#47274E] dark:text-[#F0EBF1] dark:hover:bg-[#74447E] dark:hover:text-[#F0EBF1]'
+				innerButton
 				onClick={addNote}>
 				<Icon
 					IconName='PlusCircleIcon'

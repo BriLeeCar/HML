@@ -10,15 +10,10 @@ export function Dropdown(props: Headless.MenuProps) {
 	return <Headless.Menu {...props} />
 }
 
-export function DropdownButton<
-	T extends React.ElementType = typeof Button,
->({
+export function DropdownButton<T extends React.ElementType = typeof Button>({
 	as = Button,
 	...props
-}: { className?: string } & Omit<
-	Headless.MenuButtonProps<T>,
-	'className'
->) {
+}: { className?: string } & Omit<Headless.MenuButtonProps<T>, 'className'>) {
 	return (
 		<Headless.MenuButton
 			as={as}
@@ -31,10 +26,7 @@ export function DropdownMenu({
 	anchor = 'bottom',
 	className,
 	...props
-}: { className?: string } & Omit<
-	Headless.MenuItemsProps,
-	'as' | 'className'
->) {
+}: { className?: string } & Omit<Headless.MenuItemsProps, 'as' | 'className'>) {
 	return (
 		<Headless.MenuItems
 			{...props}
@@ -67,14 +59,8 @@ export function DropdownItem({
 	className,
 	...props
 }: { className?: string } & (
-	| ({ href?: never } & Omit<
-			Headless.MenuItemProps<'button'>,
-			'as' | 'className'
-	  >)
-	| ({ href: string } & Omit<
-			Headless.MenuItemProps<typeof Link>,
-			'as' | 'className'
-	  >)
+	| ({ href?: never } & Omit<Headless.MenuItemProps<'button'>, 'as' | 'className'>)
+	| ({ href: string } & Omit<Headless.MenuItemProps<typeof Link>, 'as' | 'className'>)
 )) {
 	let classes = cn(
 		className,
@@ -83,7 +69,7 @@ export function DropdownItem({
 		// Text styles
 		'text-left text-base/6 text-zinc-950 sm:text-sm/6 dark:text-white forced-colors:text-[CanvasText]',
 		// Focus
-		'data-focus:bg-blue-500 data-focus:text-white',
+		'data-focus:bg-[#AC162B] data-focus:text-white',
 		// Disabled state
 		'data-disabled:opacity-50',
 		// Forced colors mode
@@ -111,17 +97,11 @@ export function DropdownItem({
 			/>
 }
 
-export function DropdownHeader({
-	className,
-	...props
-}: React.ComponentPropsWithoutRef<'div'>) {
+export function DropdownHeader({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
 	return (
 		<div
 			{...props}
-			className={cn(
-				className,
-				'col-span-5 px-3.5 pt-2.5 pb-1 sm:px-3'
-			)}
+			className={cn(className, 'col-span-5 px-3.5 pt-2.5 pb-1 sm:px-3')}
 		/>
 	)
 }
@@ -129,10 +109,7 @@ export function DropdownHeader({
 export function DropdownSection({
 	className,
 	...props
-}: { className?: string } & Omit<
-	Headless.MenuSectionProps,
-	'as' | 'className'
->) {
+}: { className?: string } & Omit<Headless.MenuSectionProps, 'as' | 'className'>) {
 	return (
 		<Headless.MenuSection
 			{...props}
@@ -148,10 +125,7 @@ export function DropdownSection({
 export function DropdownHeading({
 	className,
 	...props
-}: { className?: string } & Omit<
-	Headless.MenuHeadingProps,
-	'as' | 'className'
->) {
+}: { className?: string } & Omit<Headless.MenuHeadingProps, 'as' | 'className'>) {
 	return (
 		<Headless.MenuHeading
 			{...props}
@@ -166,10 +140,7 @@ export function DropdownHeading({
 export function DropdownDivider({
 	className,
 	...props
-}: { className?: string } & Omit<
-	Headless.MenuSeparatorProps,
-	'as' | 'className'
->) {
+}: { className?: string } & Omit<Headless.MenuSeparatorProps, 'as' | 'className'>) {
 	return (
 		<Headless.MenuSeparator
 			{...props}
@@ -181,10 +152,7 @@ export function DropdownDivider({
 	)
 }
 
-export function DropdownLabel({
-	className,
-	...props
-}: React.ComponentPropsWithoutRef<'div'>) {
+export function DropdownLabel({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
 	return (
 		<div
 			{...props}
@@ -198,10 +166,7 @@ export function DropdownLabel({
 export function DropdownDescription({
 	className,
 	...props
-}: { className?: string } & Omit<
-	Headless.DescriptionProps,
-	'as' | 'className'
->) {
+}: { className?: string } & Omit<Headless.DescriptionProps, 'as' | 'className'>) {
 	return (
 		<Headless.Description
 			data-slot='description'
@@ -226,23 +191,18 @@ export function DropdownShortcut({
 		<Headless.Description
 			as='kbd'
 			{...props}
-			className={cn(
-				className,
-				'col-start-5 row-start-1 flex justify-self-end'
-			)}>
-			{(Array.isArray(keys) ? keys : keys.split('')).map(
-				(char, index) => (
-					<kbd
-						key={index}
-						className={cn([
-							'min-w-[2ch] text-center font-sans text-zinc-400 capitalize group-data-focus:text-white forced-colors:group-data-focus:text-[HighlightText]',
-							// Make sure key names that are longer than one character (like "Tab") have extra space
-							index > 0 && char.length > 1 && 'pl-1',
-						])}>
-						{char}
-					</kbd>
-				)
-			)}
+			className={cn(className, 'col-start-5 row-start-1 flex justify-self-end')}>
+			{(Array.isArray(keys) ? keys : keys.split('')).map((char, index) => (
+				<kbd
+					key={index}
+					className={cn([
+						'min-w-[2ch] text-center font-sans text-zinc-400 capitalize group-data-focus:text-white forced-colors:group-data-focus:text-[HighlightText]',
+						// Make sure key names that are longer than one character (like "Tab") have extra space
+						index > 0 && char.length > 1 && 'pl-1',
+					])}>
+					{char}
+				</kbd>
+			))}
 		</Headless.Description>
 	)
 }

@@ -23,23 +23,20 @@ export function Combobox<T>({
 	autoFocus?: boolean
 	'aria-label'?: string
 	children: (value: NonNullable<T>) => React.ReactElement
-} & Omit<
-	Headless.ComboboxProps<T, false>,
-	'as' | 'multiple' | 'children'
-> & { anchor?: 'top' | 'bottom' }) {
+} & Omit<Headless.ComboboxProps<T, false>, 'as' | 'multiple' | 'children'> & {
+		anchor?: 'top' | 'bottom'
+	}) {
 	const [query, setQuery] = useState('')
 
 	const handleFilter = () => {
 		if (query == '') {
 			return options
 		} else {
-			const o = options.filter((option) => {
+			const o = options.filter(option => {
 				if (filter) {
 					return filter(option, query)
 				} else {
-					return displayValue(option)
-						?.toLowerCase()
-						.includes(query.toLowerCase())
+					return displayValue(option)?.toLowerCase().includes(query.toLowerCase())
 				}
 			})
 
@@ -66,7 +63,7 @@ export function Combobox<T>({
 					// Background color is moved to control and shadow is removed in dark mode so hide `before` pseudo
 					'dark:before:hidden',
 					// Focus ring
-					'after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-transparent after:ring-inset sm:focus-within:after:ring-2 sm:focus-within:after:ring-blue-500',
+					'after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-transparent after:ring-inset sm:focus-within:after:ring-2 sm:focus-within:after:ring-[#AC162B]',
 					// Disabled state
 					'has-data-disabled:opacity-50 has-data-disabled:before:bg-zinc-950/5 has-data-disabled:before:shadow-none',
 					// Invalid state
@@ -77,7 +74,7 @@ export function Combobox<T>({
 					data-slot='control'
 					aria-label={ariaLabel}
 					displayValue={(option: T) => displayValue(option) ?? ''}
-					onChange={(event) => setQuery(event.target.value)}
+					onChange={event => setQuery(event.target.value)}
 					placeholder={placeholder}
 					className={cn([
 						className,
@@ -175,7 +172,7 @@ export function ComboboxOption<T>({
 				// Typography
 				'text-base/6 text-zinc-950 sm:text-sm/6 dark:text-white forced-colors:text-[CanvasText]',
 				// Focus
-				'outline-hidden data-focus:bg-blue-500 data-focus:text-white',
+				'outline-hidden data-focus:bg-[#222D30] data-focus:text-white',
 				// Forced colors mode
 				'forced-color-adjust-none forced-colors:data-focus:bg-[Highlight] forced-colors:data-focus:text-[HighlightText]',
 				// Disabled
@@ -198,17 +195,11 @@ export function ComboboxOption<T>({
 	)
 }
 
-export function ComboboxLabel({
-	className,
-	...props
-}: React.ComponentPropsWithoutRef<'span'>) {
+export function ComboboxLabel({ className, ...props }: React.ComponentPropsWithoutRef<'span'>) {
 	return (
 		<span
 			{...props}
-			className={cn(
-				className,
-				'ml-2.5 truncate first:ml-0 sm:ml-2 sm:first:ml-0'
-			)}
+			className={cn(className, 'ml-2.5 truncate first:ml-0 sm:ml-2 sm:first:ml-0')}
 		/>
 	)
 }

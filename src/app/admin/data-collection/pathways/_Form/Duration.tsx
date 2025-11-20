@@ -1,11 +1,7 @@
-import { FieldGroup } from '..'
-import { FormSubSection } from './Base'
-import { MinMaxTimeFieldGroup } from './MinMaxTimeFieldGroup'
+import { FieldGroup } from '@/data-collection/pathways'
+import { FormSubSection, MinMaxTimeFieldGroup } from '@/data-collection/pathways/_Form'
 
-export const Duration = ({
-	pathwayData,
-	dispatchAction,
-}: ElProps) => {
+export const Duration = ({ pathwayData, dispatchAction }: ElProps) => {
 	return (
 		<FormSubSection
 			aria-label='Visa Duration'

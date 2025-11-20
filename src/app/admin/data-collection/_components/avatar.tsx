@@ -72,21 +72,15 @@ export const AvatarButton = forwardRef(function AvatarButton(
 		...props
 	}: AvatarProps
 		& (
-			| ({ href?: never } & Omit<
-					Headless.ButtonProps,
-					'as' | 'className'
-			  >)
-			| ({ href: string } & Omit<
-					React.ComponentPropsWithoutRef<typeof Link>,
-					'className'
-			  >)
+			| ({ href?: never } & Omit<Headless.ButtonProps, 'as' | 'className'>)
+			| ({ href: string } & Omit<React.ComponentPropsWithoutRef<typeof Link>, 'className'>)
 		),
 	ref: React.ForwardedRef<HTMLButtonElement>
 ) {
 	let classes = cn(
 		className,
 		square ? 'rounded-[20%]' : 'rounded-full',
-		'relative inline-grid focus:not-data-focus:outline-hidden data-focus:outline-2 data-focus:outline-offset-2 data-focus:outline-blue-500'
+		'relative inline-grid focus:not-data-focus:outline-hidden data-focus:outline-2 data-focus:outline-offset-2 data-focus:outline-[#AC162B]'
 	)
 
 	return typeof props.href === 'string' ?

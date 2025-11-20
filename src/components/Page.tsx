@@ -1,16 +1,12 @@
 'use client'
 
-import { ReactNode, useState } from 'react'
+import { type ReactNode, useState } from 'react'
 import { cn } from '~/lib/cn'
 import { Icon, Main } from '.'
 
 export const Page = ({ ...props }) => (
 	<Main>
-		<section
-			className={cn(
-				'mx-auto w-full max-w-2xl px-6 lg:max-w-7xl lg:px-8',
-				props.className
-			)}>
+		<section className={cn('mx-auto w-full max-w-2xl px-6 lg:max-w-7xl lg:px-8', props.className)}>
 			{props.children}
 		</section>
 	</Main>

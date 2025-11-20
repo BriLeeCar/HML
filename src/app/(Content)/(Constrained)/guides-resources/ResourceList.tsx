@@ -1,6 +1,6 @@
 import { Icon as IconEl, SubSection } from '~/components'
 import { cn } from '~/lib/cn'
-import { tResource } from './Resources'
+import type { tResource } from './Resources'
 
 export const ResourceLink = ({
 	href,
@@ -112,7 +112,7 @@ export const ResourceSection = ({
 			title={sectionTitle}
 			className='mb-8'>
 			<div className='mx-auto my-10 grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 md:mx-0 md:max-w-none md:grid-cols-2'>
-				{resourceArray.map((post) => (
+				{resourceArray.map(post => (
 					<Resource
 						key={post.href}
 						href={post.href}

@@ -1,9 +1,6 @@
-import { tMapReducer } from './util'
+import type { tMapReducer } from './util'
 
-export const mapReducer = (
-	state: tMapReducer['state'],
-	action: tMapReducer['action']
-) => {
+export const mapReducer = (state: tMapReducer['state'], action: tMapReducer['action']) => {
 	if (action.type) {
 		switch (action.type) {
 			case 'selected':
@@ -11,14 +8,9 @@ export const mapReducer = (
 					...state,
 				}
 			case 'set-boundaries':
-				const rect = document
-					.querySelector('#worldMap')
-					?.getBoundingClientRect()
+				const rect = document.querySelector('#worldMap')?.getBoundingClientRect()
 				if (!rect) return state
-				if (
-					-rect.right + rect.left + window.innerWidth
-					!= state.boundaries.left
-				) {
+				if (-rect.right + rect.left + window.innerWidth != state.boundaries.left) {
 					return {
 						...state,
 						boundaries: {

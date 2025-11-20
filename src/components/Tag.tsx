@@ -1,23 +1,9 @@
-import { Badge, tBadgeColors } from '.'
+import { Badge, type tBadgeColors } from '.'
 
 const tagGroups = {
 	politics: ['politics', 'political', 'government', 'policy', 'law'],
-	social: [
-		'social',
-		'cultural',
-		'society',
-		'community',
-		'social issues',
-	],
-	economic: [
-		'economic',
-		'finance',
-		'business',
-		'trade',
-		'market',
-		'economy',
-		'financial',
-	],
+	social: ['social', 'cultural', 'society', 'community', 'social issues'],
+	economic: ['economic', 'finance', 'business', 'trade', 'market', 'economy', 'financial'],
 	environmental: [
 		'environmental',
 		'environment',
@@ -27,23 +13,8 @@ const tagGroups = {
 		'climate',
 		'climate change',
 	],
-	technological: [
-		'technological',
-		'technology',
-		'tech',
-		'ai',
-		'chat gpt',
-	],
-	health: [
-		'health',
-		'healthcare',
-		'medicine',
-		'wellness',
-		'medical',
-		'covid',
-		'pandemic',
-		'cdc',
-	],
+	technological: ['technological', 'technology', 'tech', 'ai', 'chat gpt'],
+	health: ['health', 'healthcare', 'medicine', 'wellness', 'medical', 'covid', 'pandemic', 'cdc'],
 	educational: [
 		'educational',
 		'education',
@@ -52,12 +23,7 @@ const tagGroups = {
 		'university',
 		'department of education',
 	],
-	historical: [
-		'historical',
-		'history',
-		'historical events',
-		'historical context',
-	],
+	historical: ['historical', 'history', 'historical events', 'historical context'],
 	religion: ['religion'],
 }
 

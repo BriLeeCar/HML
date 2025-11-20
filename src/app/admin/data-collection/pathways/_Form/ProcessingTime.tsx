@@ -1,12 +1,8 @@
 'use client'
-import { Error, Field } from '..'
-import { FormSubSection } from './Base'
-import { MinMaxTimeFieldGroup } from './MinMaxTimeFieldGroup'
+import { Error, Field } from '@/data-collection/pathways'
+import { FormSubSection, MinMaxTimeFieldGroup } from '@/data-collection/pathways/_Form'
 
-export const ProcessingTime = ({
-	pathwayData,
-	dispatchAction,
-}: ElProps) => {
+export const ProcessingTime = ({ pathwayData, dispatchAction }: ElProps) => {
 	return (
 		<FormSubSection
 			aria-label='Processing Time'

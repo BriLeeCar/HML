@@ -1,5 +1,5 @@
-import { AnimatePresence, motion, MotionProps } from 'motion/react'
-import { ReactNode, useReducer } from 'react'
+import { AnimatePresence, motion, type MotionProps } from 'motion/react'
+import { type ReactNode, useReducer } from 'react'
 import { Button, Icon, Input } from '~/components'
 import { cn } from '~/lib/cn'
 import { DB, type tDB } from '~/server/db/db'
@@ -11,15 +11,10 @@ type tSearchState = {
 	isOpen: boolean
 	countries: tDB['countries']
 }
-type tSearchAction =
-	| { type: 'toggle' }
-	| { type: 'search'; query: string }
+type tSearchAction = { type: 'toggle' } | { type: 'search'; query: string }
 // #endregion ?
 
-const searchReducer = (
-	state: tSearchState,
-	action: tSearchAction
-) => {
+const searchReducer = (state: tSearchState, action: tSearchAction) => {
 	switch (action.type) {
 		case 'toggle':
 			return {
@@ -52,7 +47,7 @@ export const Search = ({
 	withDropdown?: boolean
 } & Props<'input'>) => {
 	const [searchState, searchDispatch] = useReducer(searchReducer, {
-		countries: countries.map((country) => {
+		countries: countries.map(country => {
 			return {
 				...country,
 				name: country.name?.replace(/ \(.+\)/, ''),
@@ -65,10 +60,8 @@ export const Search = ({
 	const matchingCountries =
 		searchState.searchQuery == '' ?
 			[]
-		:	searchState.countries.filter((country) =>
-				country.name
-					.toLowerCase()
-					.includes(searchState.searchQuery.toLowerCase())
+		:	searchState.countries.filter(country =>
+				country.name.toLowerCase().includes(searchState.searchQuery.toLowerCase())
 			)
 
 	return (
@@ -80,7 +73,7 @@ export const Search = ({
 							<span
 								key='search-results'
 								className='mb-2 flex cursor-default flex-col gap-0.5 text-sm'>
-								{matchingCountries.map((res) => (
+								{matchingCountries.map(res => (
 									<SearchItem
 										key={res.abbr}
 										item={res}
@@ -101,7 +94,7 @@ export const Search = ({
 							onBlur={() => {
 								searchDispatch({ type: 'toggle' })
 							}}
-							onChange={(e) => {
+							onChange={e => {
 								if (withDropdown) {
 									searchDispatch({
 										type: 'search',
@@ -180,8 +173,7 @@ const SearchInput = ({
 const SearchItem = ({
 	item,
 	...props
-}: Props<'button'>
-	& MotionProps & { item: DB['countries'][number] }) => {
+}: Props<'button'> & MotionProps & { item: DB['countries'][number] }) => {
 	return (
 		<motion.button
 			{...props}

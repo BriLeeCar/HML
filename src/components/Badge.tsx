@@ -1,5 +1,5 @@
 'use client'
-import { cva, VariantProps } from 'class-variance-authority'
+import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '~/lib/cn'
 
 const BadgeVariants = cva(
@@ -70,10 +70,10 @@ export const Badge = ({
 				'group relative inline-flex rounded-md focus:not-data-focus:outline-hidden data-focus:outline-2 data-focus:outline-offset-2',
 				as == 'button' ? 'click' : 'cursor-default'
 			)}
-			onMouseEnter={(e) => {
+			onMouseEnter={e => {
 				e.currentTarget.setAttribute('data-hover', '')
 			}}
-			onMouseLeave={(e) => {
+			onMouseLeave={e => {
 				e.currentTarget.removeAttribute('data-hover')
 			}}>
 			<span className={classes}>{props.children}</span>

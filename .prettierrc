@@ -8,13 +8,14 @@
 	"trailingComma": "es5",
 	"bracketSameLine": true,
 	"singleAttributePerLine": true,
+	"arrowParens": "avoid",
+	"bracketSpacing": true,
+	"objectWrap": "preserve",
+	"proseWrap": "always",
 	"printWidth": 100,
 	"semi": false,
 	"quoteProps": "as-needed",
-	"plugins": [
-		"prettier-plugin-organize-imports",
-		"prettier-plugin-tailwindcss"
-	],
+	"plugins": ["prettier-plugin-organize-imports", "prettier-plugin-tailwindcss"],
 	"tailwindStyleSheet": "./src/styles/global.css",
 	"tailwindFunctions": ["cn", "cva"],
 	"overrides": [

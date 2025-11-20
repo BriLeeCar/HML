@@ -1,4 +1,4 @@
-import { ElementType, ReactNode } from 'react'
+import type { ElementType, ReactNode } from 'react'
 import { cn } from '~/lib/cn'
 
 /**
@@ -11,11 +11,7 @@ import { cn } from '~/lib/cn'
  * @return A heading element (`h1` to `h6`) with the specified level and size.
  */
 
-export const Heading = ({
-	level = 2,
-	size = 'md',
-	...props
-}: Props.Heading) => {
+export const Heading = ({ level = 2, size = 'md', ...props }: Props.Heading) => {
 	const Tag = `h${level}` as ElementType
 	return (
 		<Tag
@@ -50,17 +46,18 @@ export const PageHeading = ({
 )
 
 const PageTitle = ({ ...props }) => (
-	<h1 className='mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 capitalize sm:text-5xl dark:text-white'>
+	<h1
+		className={cn(
+			'mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 capitalize sm:text-5xl dark:text-white',
+			props.className
+		)}>
 		{props.children}
 	</h1>
 )
 
 export const Subtitle = ({ ...props }: Props<'p'>) => (
 	<p
-		className={cn(
-			'mt-6 text-xl/8 text-balance text-gray-700 dark:text-gray-300',
-			props.className
-		)}>
+		className={cn('mt-6 text-xl/8 text-balance text-gray-700 dark:text-gray-300', props.className)}>
 		{props.children}
 	</p>
 )
@@ -99,13 +96,9 @@ export const SectionHeading = ({
 	if (eyebrow || subtitle) {
 		return (
 			<hgroup className='mb-0'>
-				{eyebrow && (
-					<Eyebrow className='text-sm/8'>{eyebrow}</Eyebrow>
-				)}
+				{eyebrow && <Eyebrow className='text-sm/8'>{eyebrow}</Eyebrow>}
 				<Inner />
-				{subtitle && (
-					<Subtitle className='text-lg md:mt-4'>{subtitle}</Subtitle>
-				)}
+				{subtitle && <Subtitle className='text-lg md:mt-4'>{subtitle}</Subtitle>}
 			</hgroup>
 		)
 	}

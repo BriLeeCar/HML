@@ -3,17 +3,10 @@
 import { AnimatePresence, motion } from 'motion/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { type Dispatch, type SetStateAction, useState } from 'react'
 import { Button, Icon, TouchTarget } from '~/components'
 import { cn } from '~/lib/cn'
-import {
-	Books,
-	Certificate,
-	HeartMap,
-	HML,
-	Mission,
-	Support,
-} from './SVG'
+import { Books, Certificate, HeartMap, HML, Mission, Support } from './SVG'
 
 const links = [
 	{
@@ -57,8 +50,7 @@ const NavMenuItem = ({
 			{...props}
 			className={cn(
 				'hover:text-brand-bright-link relative flex h-full gap-3 rounded-lg px-3 transition-all',
-				active
-					&& 'dark:md:text-foreground dark:md:bg-brand/20 md:text-brand',
+				active && 'dark:md:text-foreground dark:md:bg-brand/20 md:text-brand',
 				props.className
 			)}
 			{...(active && { 'data-active': '' })}

@@ -1,5 +1,5 @@
-import { AnimatePresence, motion, MotionProps } from 'motion/react'
-import { ReactNode, useReducer } from 'react'
+import { AnimatePresence, motion, type MotionProps } from 'motion/react'
+import { type ReactNode, useReducer } from 'react'
 import { Button, Icon, Input } from '~/components'
 import { cn } from '~/lib/cn'
 
@@ -10,15 +10,10 @@ type tSearchState = {
 	isOpen: boolean
 	countries: ApiData.DB['countries']
 }
-type tSearchAction =
-	| { type: 'toggle' }
-	| { type: 'search'; query: string }
+type tSearchAction = { type: 'toggle' } | { type: 'search'; query: string }
 // #endregion ?
 
-const searchReducer = (
-	state: tSearchState,
-	action: tSearchAction
-) => {
+const searchReducer = (state: tSearchState, action: tSearchAction) => {
 	switch (action.type) {
 		case 'toggle':
 			return {
@@ -44,7 +39,7 @@ export const Search = ({
 	actionSelected: (country: ApiData.Country) => void
 }) => {
 	const [searchState, searchDispatch] = useReducer(searchReducer, {
-		countries: countries.map((country) => {
+		countries: countries.map(country => {
 			return {
 				...country,
 				name: country.name?.replace(/ \(.+\)/, ''),
@@ -57,17 +52,12 @@ export const Search = ({
 	const matchingCountries =
 		searchState.searchQuery == '' ?
 			[]
-		:	searchState.countries.filter((country) =>
-				country.name
-					.toLowerCase()
-					.includes(searchState.searchQuery.toLowerCase())
+		:	searchState.countries.filter(country =>
+				country.name.toLowerCase().includes(searchState.searchQuery.toLowerCase())
 			)
 
 	return (
-		<span
-			className={cn(
-				'fixed right-4 bottom-4 z-50 flex items-end gap-2'
-			)}>
+		<span className={cn('fixed right-4 bottom-4 z-50 flex items-end gap-2')}>
 			<AnimatePresence>
 				{searchState.isOpen && (
 					<SearchInput>
@@ -75,7 +65,7 @@ export const Search = ({
 							<span
 								key='search-results'
 								className='mb-2 flex cursor-default flex-col gap-0.5 text-sm'>
-								{matchingCountries.map((res) => (
+								{matchingCountries.map(res => (
 									<SearchItem
 										key={res.abbr}
 										item={res}
@@ -91,7 +81,7 @@ export const Search = ({
 							type='text'
 							className='bg-card'
 							autoFocus
-							onChange={(e) => {
+							onChange={e => {
 								searchDispatch({
 									type: 'search',
 									query: e.target.value,
@@ -126,11 +116,7 @@ const Btn = ({ ...props }) => {
 	)
 }
 
-const SearchInput = ({
-	children,
-}: {
-	children: ReactNode | ReactNode[]
-}) => {
+const SearchInput = ({ children }: { children: ReactNode | ReactNode[] }) => {
 	return (
 		<motion.span
 			key='search-input'

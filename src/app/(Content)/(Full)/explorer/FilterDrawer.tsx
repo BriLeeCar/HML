@@ -1,22 +1,10 @@
 'use client'
 
-import { motion, MotionProps } from 'motion/react'
-import { MouseEvent, RefObject } from 'react'
-import {
-	Button,
-	Checkbox,
-	Icon,
-	Label,
-	SectionHeading,
-	SubSection,
-} from '~/components'
+import { motion, type MotionProps } from 'motion/react'
+import type { MouseEvent, RefObject } from 'react'
+import { Button, Checkbox, Icon, Label, SectionHeading, SubSection } from '~/components'
 import { cn } from '~/lib/cn'
-import {
-	filterCbs,
-	masonryReducer,
-	tDrawerFilter,
-	tReducerDispatch,
-} from '.'
+import { filterCbs, masonryReducer, type tDrawerFilter, type tReducerDispatch } from '.'
 
 export const Drawer = ({
 	overlayRef,
@@ -52,7 +40,7 @@ export const Drawer = ({
 			}}
 			animate={{ opacity: 1 }}
 			exit={{ opacity: 0 }}
-			onClick={(e) => {
+			onClick={e => {
 				e.target == e.currentTarget
 					&& dispatchReducer({
 						type: 'SET_DRAWER',
@@ -80,15 +68,14 @@ export const Drawer = ({
 					<FilterHeading />
 
 					<form className='mt-4 flex flex-col gap-2 pointer-coarse:mb-12'>
-						{filterCbs.map((grp) => (
+						{filterCbs.map(grp => (
 							<SubSection
 								wrapperProps={{
-									className:
-										'flex flex-col gap-1 *:[div]:flex *:[div]:flex-col *:[div]:gap-2',
+									className: 'flex flex-col gap-1 *:[div]:flex *:[div]:flex-col *:[div]:gap-2',
 								}}
 								title={grp.group}
 								key={grp.group}>
-								{grp.items.map((cb) => (
+								{grp.items.map(cb => (
 									<FilterCB
 										key={cb.dataKey}
 										dataKey={cb.dataKey}
@@ -114,11 +101,9 @@ const FilterHeading = () => (
 		eyebrow='Filter'
 		subtitle={
 			<span className='pointer-coarse:hidden'>
-				We can help narrow down the selection if you tell us a little
-				bit about yourself - don’t worry, we don’t keep a record of
-				any of this and none of it can be traced back to you! If you
-				don’t select anything, you will just be shown the full list of
-				pathways
+				We can help narrow down the selection if you tell us a little bit about yourself - don’t
+				worry, we don’t keep a record of any of this and none of it can be traced back to you! If
+				you don’t select anything, you will just be shown the full list of pathways
 			</span>
 		}>
 		Let's get you matched!
@@ -143,10 +128,8 @@ const FilterCB = ({
 				{...props}
 				id={dataKey}
 				name={dataKey}
-				defaultChecked={reducer.filters
-					.map((f) => f.key)
-					.includes(dataKey)}
-				onCheckedChange={(checked) =>
+				defaultChecked={reducer.filters.map(f => f.key).includes(dataKey)}
+				onCheckedChange={checked =>
 					dispatchReducer({
 						type: 'SET_FILTERS',
 						payload: {
@@ -162,11 +145,7 @@ const FilterCB = ({
 		</Label>
 	)
 }
-const CloseButton = ({
-	dispatchReducer,
-}: {
-	dispatchReducer: tReducerDispatch
-}) => (
+const CloseButton = ({ dispatchReducer }: { dispatchReducer: tReducerDispatch }) => (
 	<Button
 		variant='muted'
 		className='mt-4 flex items-center justify-center gap-2'
@@ -180,11 +159,7 @@ const CloseButton = ({
 		Close Filters
 	</Button>
 )
-const ClearButton = ({
-	dispatchReducer,
-}: {
-	dispatchReducer: tReducerDispatch
-}) => (
+const ClearButton = ({ dispatchReducer }: { dispatchReducer: tReducerDispatch }) => (
 	<Button
 		variant='default'
 		className='mt-4 flex items-center justify-center gap-2'
@@ -199,15 +174,10 @@ const ClearButton = ({
 		Clear all filters
 	</Button>
 )
-const handleClear = (
-	e: MouseEvent<HTMLButtonElement>,
-	dispatchReducer: tReducerDispatch
-) => {
+const handleClear = (e: MouseEvent<HTMLButtonElement>, dispatchReducer: tReducerDispatch) => {
 	if (e.currentTarget.form) {
-		const checkBoxes = e.currentTarget.form.querySelectorAll(
-			'input[type="checkbox"]'
-		)
-		checkBoxes.forEach((checkbox) => {
+		const checkBoxes = e.currentTarget.form.querySelectorAll('input[type="checkbox"]')
+		checkBoxes.forEach(checkbox => {
 			;(checkbox as HTMLInputElement).checked = false
 		})
 	}

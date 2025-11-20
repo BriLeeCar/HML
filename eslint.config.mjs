@@ -35,7 +35,7 @@ export default defineConfig([
         },
     },
     {
-        ignores: ['.next/*'],
+        ignores: ['.next/*', 'next-env.d.ts', 'src/app/admin/data-collection/_components/**'],
     },
     {
         files: ['**/*.ts', '**/*.tsx'],

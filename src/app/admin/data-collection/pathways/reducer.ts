@@ -1,4 +1,4 @@
-import z, { ZodSafeParseResult } from 'zod/v4'
+import z, { type ZodSafeParseResult } from 'zod/v4'
 
 type StateAction<T extends boolean = true> = T extends true ? State.Base.WithUtilities : State.Base
 
@@ -210,6 +210,44 @@ export const pathwayReducer = (state: StateAction, action: Dispatch.Fn) => {
 	let newState = { ...state }
 	const { field, payload, type } = action
 
+	// @ts-expect-error Mocking data - special case
+	if (type == 'mockData' && field == 'all') {
+		newState = { ...newState, ...(payload as unknown as State.Base) }
+		return newState
+	}
+
+	if (type.startsWith('delete')) {
+		let newData: State.Base[typeof field] = { ...newState[field] }
+		switch (field) {
+			case 'nationalities':
+				{
+					newData = newData as State.Base['nationalities']
+					newData.value.nationalities = newState['nationalities'].value.nationalities.filter(
+						n => n.counter != payload
+					)
+				}
+				break
+			case 'restrictions':
+				{
+					newData = newData as State.Base['restrictions']
+					newData.value.restrictions = newState['restrictions'].value.restrictions.filter(
+						r => r.counter != payload
+					)
+				}
+				break
+			case 'notes':
+			case 'documents':
+			case 'requirements':
+				newData = newData as State.Base[typeof field]
+				newData.value = newState[field].value.filter(
+					n => n.counter != payload
+				) as typeof newData.value
+
+				break
+		}
+		newState = { ...newState, [field]: newData }
+	}
+
 	if (!type.startsWith('set')) {
 		switch (type) {
 			case 'checkRenewable':
@@ -228,33 +266,9 @@ export const pathwayReducer = (state: StateAction, action: Dispatch.Fn) => {
 			case 'deleteRenewableNote':
 				{
 					const updatedNotes = newState.renewable.value.notes.filter(
-						(note) => note.counter !== (payload as number)
+						note => note.counter !== (payload as number)
 					)
 					newState.renewable.value.notes = updatedNotes
-				}
-				break
-			case 'deleteNationality':
-				{
-					const updatedNationalities = newState.nationalities.value.nationalities.filter(
-						(nat) => nat.counter !== (payload as number)
-					)
-					newState.nationalities.value.nationalities = updatedNationalities
-				}
-				break
-			case 'deleteNote':
-				{
-					const updatedNotes = newState.notes.value.filter(
-						(not) => not.counter !== (payload as number)
-					)
-					newState.notes.value = updatedNotes
-				}
-				break
-			case 'deleteDocument':
-				{
-					const updatedDocs = newState.documents.value.filter(
-						(not) => not.counter !== (payload as number)
-					)
-					newState.documents.value = updatedDocs
 				}
 				break
 		}
@@ -272,40 +286,23 @@ export const pathwayReducer = (state: StateAction, action: Dispatch.Fn) => {
 		Object.assign(newState, {
 			[field]: payload,
 		})
+
+		console.log('SET ACTION FOR', field, payload)
 	}
 
-	// if (run) {
-	// 	if (validSetPayload(action) && payload != null) {
-	// 		const parsed = parse(state, action) as ZodSafeParseResult<
-	// 			StateAction[typeof field]
-	// 		>
+	if (field == 'countryId') {
+		const currencies = state.countriesWithPathways.find(c => c.abbr == payload.value)?.api
+			.currencies
 
-	// 		Object.assign(newState[field], payload)
-
-	// 		if (parsed && !parsed.success) {
-	// 			newState[field].error = parsed.error?.issues.map(
-	// 				(i: { message: string }) => i.message
-	// 			)
-	// 		}
-	// 	} else {
-	// 		switch (action.type) {
-	// 			case 'checkRenewable':
-	// 				{
-	// 					newState.renewable.value.renewable = payload as boolean
-	// 					if (payload == false) {
-	// 						newState.renewable.value.sameAsInitialDuration = false
-	// 					}
-	// 				}
-	// 				break
-	// 			case 'checkRenewableSameAsInitialDuration':
-	// 				{
-	// 					newState.renewable.value.sameAsInitialDuration =
-	// 						payload as boolean
-	// 				}
-	// 				break
-	// 		}
-	// 	}
-	// }
+		if (currencies && Object.keys(currencies).length == 1) {
+			newState.costUom.value = Object.keys(currencies).map(k => {
+				return {
+					abbr: k,
+					currencySymbol: currencies[k].symbol,
+				}
+			})[0]
+		}
+	}
 
 	return newState
 }
@@ -334,7 +331,7 @@ const parse = (state: StateAction, dispatch: Dispatch.Fn) => {
 
 const parseCountryId = (state: StateAction, payload: Dispatch.Fn['payload']) => {
 	return validator
-		.countryId(state.countriesWithPathways.map((c) => c.abbr))
+		.countryId(state.countriesWithPathways.map(c => c.abbr))
 		.or(z.object({ value: z.literal(''), error: zErrorObj() }))
 		.safeParse(payload)
 }
@@ -361,7 +358,7 @@ const zMinStringObj = (num: number) =>
 		.string()
 		.trim()
 		.min(num, {
-			error: (iss) => {
+			error: iss => {
 				return `${iss.path?.join('.')}: Must be at least ${num} characters`
 			},
 		})
@@ -411,7 +408,7 @@ export const validator = {
 			value: zMinStringObj(3)
 				.length(3, '3 character exact')
 				.toUpperCase()
-				.refine((val) => validAbbr.includes(val), {
+				.refine(val => validAbbr.includes(val), {
 					message: 'Not a valid country code',
 				}),
 			error: zErrorObj(),

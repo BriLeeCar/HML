@@ -4,10 +4,7 @@ import { cn } from '~/lib/cn'
 export function RadioGroup({
 	className,
 	...props
-}: { className?: string } & Omit<
-	Headless.RadioGroupProps,
-	'as' | 'className'
->) {
+}: { className?: string } & Omit<Headless.RadioGroupProps, 'as' | 'className'>) {
 	return (
 		<Headless.RadioGroup
 			data-slot='control'
@@ -26,10 +23,7 @@ export function RadioGroup({
 export function RadioField({
 	className,
 	...props
-}: { className?: string } & Omit<
-	Headless.FieldProps,
-	'as' | 'className'
->) {
+}: { className?: string } & Omit<Headless.FieldProps, 'as' | 'className'>) {
 	return (
 		<Headless.Field
 			data-slot='field'
@@ -73,7 +67,7 @@ const base = [
 	// Indicator color (dark mode)
 	'dark:group-data-hover:group-data-checked:[--radio-indicator:var(--radio-checked-indicator)] dark:group-data-hover:[--radio-indicator:var(--color-zinc-700)]',
 	// Focus ring
-	'group-data-focus:outline group-data-focus:outline-2 group-data-focus:outline-offset-2 group-data-focus:outline-blue-500',
+	'group-data-focus:outline group-data-focus:outline-2 group-data-focus:outline-offset-2 group-data-focus:outline-[#AC162B]',
 	// Disabled state
 	'group-data-disabled:opacity-50',
 	'group-data-disabled:border-zinc-950/25 group-data-disabled:bg-zinc-950/5 group-data-disabled:[--radio-checked-indicator:var(--color-zinc-950)]/50 group-data-disabled:before:bg-transparent',
@@ -135,10 +129,7 @@ export function Radio({
 		<Headless.Radio
 			data-slot='control'
 			{...props}
-			className={cn(
-				className,
-				'group inline-flex focus:outline-hidden'
-			)}>
+			className={cn(className, 'group inline-flex focus:outline-hidden')}>
 			<span className={cn([base, colors[color]])}>
 				<span
 					className={cn(

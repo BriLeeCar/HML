@@ -1,9 +1,7 @@
 'use client'
-import { toTitleCase } from '~/lib/text'
-import { Error, Field, FieldGroup, Input, Label, Select } from '.'
-
+import { Error, errors, Field, FieldGroup, Input, Label, Select } from '@/data-collection/pathways'
 import z, { type ZodSafeParseResult } from 'zod'
-import { errors } from '.'
+import { toTitleCase } from '~/lib/text'
 
 const timeOptionEls = [
 	{
@@ -38,9 +36,7 @@ export const MinMaxTimeFieldGroup = ({
 		field: Validator.Keys.UOM
 	}) => {
 	const baseData = {
-		...(field == 'renewable' ?
-			pathwayData.renewable.value.duration
-		:	pathwayData[field]),
+		...(field == 'renewable' ? pathwayData.renewable.value.duration : pathwayData[field]),
 	}
 
 	const handleData = ({
@@ -53,18 +49,10 @@ export const MinMaxTimeFieldGroup = ({
 	>) => {
 		const action = dispatchMinMaxTimeData({ key, value, thisData })
 
-		action.error = action.error.filter(
-			(i) => ![errors.minGtMax, errors.noMaxWOutMin].includes(i)
-		)
-		if (
-			thisData.value.max.value > 0
-			&& thisData.value.min.value > action.value.max.value
-		) {
+		action.error = action.error.filter((i) => ![errors.minGtMax, errors.noMaxWOutMin].includes(i))
+		if (thisData.value.max.value > 0 && thisData.value.min.value > action.value.max.value) {
 			action.error.push(errors.minGtMax)
-		} else if (
-			thisData.value.min.value == 0
-			&& action.value.max.value > 0
-		) {
+		} else if (thisData.value.min.value == 0 && action.value.max.value > 0) {
 			action.error.push(errors.noMaxWOutMin)
 		}
 
@@ -96,6 +84,7 @@ export const MinMaxTimeFieldGroup = ({
 					data-slot='control'>
 					<Label>Min</Label>
 					<Input
+						defaultValue={baseData.value.min.value}
 						name={`${field}Min`}
 						aria-label={`${toTitleCase(field)} Min`}
 						type='number'
@@ -119,6 +108,7 @@ export const MinMaxTimeFieldGroup = ({
 					data-slot='control'>
 					<Label>Max</Label>
 					<Input
+						defaultValue={baseData.value.max.value}
 						name={`${field}Max`}
 						aria-label={`${toTitleCase(field)} Max`}
 						type='number'
@@ -180,22 +170,15 @@ const dispatchMinMaxTimeData = ({
 	key,
 	value,
 	thisData,
-}: MinMaxTimeDispatchProps<
-	'max' | 'min' | 'uom',
-	Validator.Keys.UOM
->) => {
+}: MinMaxTimeDispatchProps<'max' | 'min' | 'uom', Validator.Keys.UOM>) => {
 	let newData = { ...thisData }
-	let parsed: ZodSafeParseResult<
-		(typeof newData.value)[typeof key]['value']
-	> | null = null
+	let parsed: ZodSafeParseResult<(typeof newData.value)[typeof key]['value']> | null = null
 
 	if (key == 'min' || key == 'max') {
 		newData.value[key].value = Number(value)
 	}
 
-	const minMaxParse = z.coerce
-		.number<string | number>()
-		.nonnegative(errors.negative)
+	const minMaxParse = z.coerce.number<string | number>().nonnegative(errors.negative)
 
 	const maxParse = minMaxParse.superRefine((val, ctx) => {
 		if (val % 1 !== 0) {
@@ -209,17 +192,15 @@ const dispatchMinMaxTimeData = ({
 		}
 	})
 
-	const uomParse = z.coerce
-		.number<string | number>()
-		.transform((val) => {
-			return (
-				timeOptionEls.find((o) => o.value == val) ?? {
-					label: '',
-					value: 0,
-					base: '',
-				}
-			)
-		})
+	const uomParse = z.coerce.number<string | number>().transform((val) => {
+		return (
+			timeOptionEls.find((o) => o.value == val) ?? {
+				label: '',
+				value: 0,
+				base: '',
+			}
+		)
+	})
 
 	const keys = Object.keys(newData.value) as ['min', 'max', 'uom']
 
@@ -228,10 +209,7 @@ const dispatchMinMaxTimeData = ({
 		const thisValue = key == k ? value : newData.value[k].value
 
 		if (k == 'max' || k == 'min') {
-			parsed =
-				key == 'max' ?
-					maxParse.safeParse(thisValue)
-				:	minParse.safeParse(thisValue)
+			parsed = key == 'max' ? maxParse.safeParse(thisValue) : minParse.safeParse(thisValue)
 		}
 		if (k == 'uom' && k == key) {
 			if (thisValue == null) {
@@ -244,18 +222,13 @@ const dispatchMinMaxTimeData = ({
 			if (parsed.success) {
 				newData.value[k].value = parsed.data
 			} else {
-				newData.value[k].error = parsed.error.issues.map(
-					(i) => i.message
-				)
+				newData.value[k].error = parsed.error.issues.map((i) => i.message)
 			}
 		}
 
 		parsed = null
 	})
-	if (
-		newData.value.max.value > 0
-		&& newData.value.min.value > newData.value.max.value
-	) {
+	if (newData.value.max.value > 0 && newData.value.min.value > newData.value.max.value) {
 		newData.error.push(errors.minGtMax)
 	} else {
 		newData.error = []
@@ -278,7 +251,6 @@ export type MinMaxTimeDispatchProps<
 			value: number
 			label: string
 		}
-	thisData: D extends 'renewable' ?
-		State.Base['renewable']['value']['duration']
+	thisData: D extends 'renewable' ? State.Base['renewable']['value']['duration']
 	:	State.Base['processingTime' | 'duration']
 }

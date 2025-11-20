@@ -1,6 +1,6 @@
+import { type initState } from '@/data-collection/pathways/reducer'
 import { ActionDispatch } from 'react'
 import { DB } from '~/server/db/db'
-import { type initState } from './reducer'
 
 declare global {
 	declare namespace YO {
@@ -354,7 +354,10 @@ declare global {
 	declare namespace Dispatch {
 		type Base = State.Base
 
-		type ListKeys = Extract<keyof Base, 'notes' | 'requirements' | 'limitations' | 'documents'>
+		type ListKeys = Extract<
+			keyof Base,
+			'notes' | 'requirements' | 'limitations' | 'documents' | 'restrictions'
+		>
 
 		type StringKeys = Exclude<
 			{
@@ -417,21 +420,6 @@ declare global {
 			| {
 					type: 'deleteNationality'
 					field: 'nationalities'
-					payload: number
-			  }
-			| {
-					type: 'deleteRestriction'
-					field: 'restrictions'
-					payload: number
-			  }
-			| {
-					type: 'deleteNote'
-					field: 'notes'
-					payload: number
-			  }
-			| {
-					type: 'deleteDocument'
-					field: 'documents'
 					payload: number
 			  }
 	}

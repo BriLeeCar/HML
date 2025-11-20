@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { toTitleCase } from '~/lib/text'
 import countries from '~/server/db/countries.json'
 import { Base } from './Base'
@@ -15,9 +15,7 @@ export const generateMetadata = async ({
 }: PageProps<'/countries/[country]'>): Promise<Metadata> => {
 	const abbr = (await params).country
 	const country = toTitleCase(
-		countries
-			.find((c) => c.abbr.toLowerCase() === abbr.toLowerCase())
-			?.name?.replace('-', '')
+		countries.find(c => c.abbr.toLowerCase() === abbr.toLowerCase())?.name?.replace('-', '')
 	)
 
 	return {
@@ -30,8 +28,8 @@ export const generateStaticParams = async () => {
 	return [
 		...new Set(
 			countries
-				.filter((ea) => ea.abbr)
-				.map((ea) => {
+				.filter(ea => ea.abbr)
+				.map(ea => {
 					return {
 						country: ea.abbr.toUpperCase(),
 					}
@@ -40,9 +38,7 @@ export const generateStaticParams = async () => {
 	]
 }
 
-const CountryPage = async ({
-	params,
-}: Slug<{ country: string }> & {}) => {
+const CountryPage = async ({ params }: Slug<{ country: string }> & {}) => {
 	const { country } = await params
 
 	return (

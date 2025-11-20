@@ -1,4 +1,3 @@
-// import type { zodCountryRest } from "~/data/baseCountryApi"
 import { type MotionProps } from 'motion/react'
 
 // #region ! ---------- MAP REDUCER ----------
@@ -43,7 +42,6 @@ export type tMapSVGProps = {
 	className?: string
 } & MotionProps
 
-export type tMapPathElProps = Omit<Props<'path'>, 'name'>
-	& Partial<ApiData.Country>
+export type tMapPathElProps = Omit<Props<'path'>, 'name'> & Partial<ApiData.Country>
 
 // #endregion ! --------------------

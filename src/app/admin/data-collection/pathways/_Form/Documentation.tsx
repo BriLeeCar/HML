@@ -1,21 +1,21 @@
+import { Button, Field, FieldGroup, Input, Label } from '@/data-collection/pathways'
 import { Icon } from '~/components/Icon'
-import { Button, Field, FieldGroup, Input, Label } from '.'
 
 export const Documentation = ({ pathwayData, dispatchAction }: ElProps) => {
 	const baseData = { ...pathwayData.documents }
 	return (
 		<FieldGroup>
-			{baseData.value.map((n) => (
+			{baseData.value.map(n => (
 				<FieldGroup
 					key={n.counter}
-					className='ml-6 grid grid-cols-[auto_auto_0.15fr] gap-x-4 border-b-2 border-[#F0EBF1] pt-0 pb-4 pl-6 *:flex *:items-baseline *:gap-x-4 last:border-0 last:pb-0'>
+					className='ml-6 grid grid-cols-[auto_auto_0.15fr] gap-x-4 border-b-2 border-[#F0EBF1] pt-0 pb-4 pl-6 *:flex *:items-baseline *:gap-x-4 last:border-0 last:pb-0 dark:border-b-1 dark:border-current/10'>
 					<Field>
 						<Label>Document</Label>
 						<Input
 							name={`documentDetails-${n.counter}`}
 							className='mt-1'
 							defaultValue={n.title}
-							onBlur={(e) => {
+							onBlur={e => {
 								baseData.value[n.counter].title = e.currentTarget.value
 								dispatchAction({
 									type: 'setDocuments',
@@ -39,13 +39,13 @@ export const Documentation = ({ pathwayData, dispatchAction }: ElProps) => {
 							type='button'
 							iconOnly
 							className='mx-auto rounded-full px-1.5 py-0'
-							onClick={() =>
+							onClick={() => {
 								dispatchAction({
-									type: 'deleteDocument',
+									type: 'deleteDocuments',
 									field: 'documents',
 									payload: n.counter,
 								})
-							}>
+							}}>
 							<Icon
 								IconName='XIcon'
 								className='h-fit w-fit text-red-600 hover:text-red-800'
@@ -60,7 +60,7 @@ export const Documentation = ({ pathwayData, dispatchAction }: ElProps) => {
 			<Button
 				type='button'
 				size='sm'
-				className='my-8 flex w-full items-center justify-center gap-x-2 bg-[#F0EBF1] text-center text-[#74447E] hover:bg-[#74447E] hover:text-[#F0EBF1] focus-visible:outline-offset-1 focus-visible:outline-[#47274E] dark:bg-[#47274E] dark:text-[#F0EBF1] dark:hover:bg-[#74447E] dark:hover:text-[#F0EBF1]'
+				innerButton
 				onClick={() => {
 					baseData.value.push({
 						counter: baseData.counter,

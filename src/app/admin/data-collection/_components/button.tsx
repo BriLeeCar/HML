@@ -10,7 +10,7 @@ const styles = {
 		// Sizing
 		'px-[calc(--spacing(3.5)-1px)] py-[calc(--spacing(2.5)-1px)] sm:px-[calc(--spacing(3)-1px)] sm:py-[calc(--spacing(1.5)-1px)] sm:text-sm/6',
 		// Focus
-		'focus:not-data-focus:outline-hidden data-focus:outline-2 data-focus:outline-offset-2 data-focus:outline-blue-500',
+		'focus:not-data-focus:outline-hidden data-focus:outline-2 data-focus:outline-offset-2 data-focus:outline-[#AC162B]',
 		// Disabled
 		'data-disabled:opacity-50',
 		// Icon
@@ -167,25 +167,12 @@ type ButtonProps = (
 	| { color?: never; outline: true; plain?: never }
 	| { color?: never; outline?: never; plain: true }
 ) & { className?: string; children: React.ReactNode } & (
-		| ({ href?: never } & Omit<
-				Headless.ButtonProps,
-				'as' | 'className'
-		  >)
-		| ({ href: string } & Omit<
-				React.ComponentPropsWithoutRef<typeof Link>,
-				'className'
-		  >)
+		| ({ href?: never } & Omit<Headless.ButtonProps, 'as' | 'className'>)
+		| ({ href: string } & Omit<React.ComponentPropsWithoutRef<typeof Link>, 'className'>)
 	)
 
 export const Button = forwardRef(function Button(
-	{
-		color,
-		outline,
-		plain,
-		className,
-		children,
-		...props
-	}: ButtonProps,
+	{ color, outline, plain, className, children, ...props }: ButtonProps,
 	ref: React.ForwardedRef<HTMLElement>
 ) {
 	let classes = cn(
@@ -214,11 +201,7 @@ export const Button = forwardRef(function Button(
 /**
  * Expand the hit area to at least 44×44px on touch devices
  */
-export function TouchTarget({
-	children,
-}: {
-	children: React.ReactNode
-}) {
+export function TouchTarget({ children }: { children: React.ReactNode }) {
 	return (
 		<>
 			<span

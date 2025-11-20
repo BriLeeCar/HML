@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { CTA, Divider, Page, PageHeading } from '~/components'
 
 const Layout = ({ children }: { children?: ReactNode }) => (

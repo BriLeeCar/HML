@@ -2,10 +2,7 @@ import * as Headless from '@headlessui/react'
 import type React from 'react'
 import { cn } from '~/lib/cn'
 
-export function SwitchGroup({
-	className,
-	...props
-}: React.ComponentPropsWithoutRef<'div'>) {
+export function SwitchGroup({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
 	return (
 		<div
 			data-slot='control'
@@ -24,10 +21,7 @@ export function SwitchGroup({
 export function SwitchField({
 	className,
 	...props
-}: { className?: string } & Omit<
-	Headless.FieldProps,
-	'as' | 'className'
->) {
+}: { className?: string } & Omit<Headless.FieldProps, 'as' | 'className'>) {
 	return (
 		<Headless.Field
 			data-slot='field'
@@ -167,7 +161,7 @@ export function Switch({
 				// Checked
 				'data-checked:bg-(--switch-bg) data-checked:ring-(--switch-bg-ring) dark:data-checked:bg-(--switch-bg) dark:data-checked:ring-(--switch-bg-ring)',
 				// Focus
-				'focus:not-data-focus:outline-hidden data-focus:outline-2 data-focus:outline-offset-2 data-focus:outline-blue-500',
+				'focus:not-data-focus:outline-hidden data-focus:outline-2 data-focus:outline-offset-2 data-focus:outline-[#AC162B]',
 				// Hover
 				'data-hover:ring-black/15 data-hover:data-checked:ring-(--switch-bg-ring)',
 				'dark:data-hover:ring-white/25 dark:data-hover:data-checked:ring-(--switch-bg-ring)',
