@@ -1,7 +1,7 @@
 import * as Headless from '@headlessui/react'
 import React, { forwardRef } from 'react'
+import { TouchTarget } from '~/components'
 import { cn } from '~/lib/cn'
-import { TouchTarget } from './button'
 import { Link } from './link'
 
 const colors = {

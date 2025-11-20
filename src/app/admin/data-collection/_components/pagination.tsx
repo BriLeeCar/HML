@@ -1,6 +1,6 @@
 import type React from 'react'
 import { cn } from '~/lib/cn'
-import { Button } from './button'
+import { CatalystButton } from './button'
 
 export function Pagination({
 	'aria-label': ariaLabel = 'Page navigation',
@@ -26,7 +26,7 @@ export function PaginationPrevious({
 }>) {
 	return (
 		<span className={cn(className, 'grow basis-0')}>
-			<Button
+			<CatalystButton
 				{...(href === null ? { disabled: true } : { href })}
 				plain
 				aria-label='Previous page'>
@@ -44,7 +44,7 @@ export function PaginationPrevious({
 					/>
 				</svg>
 				{children}
-			</Button>
+			</CatalystButton>
 		</span>
 	)
 }
@@ -59,7 +59,7 @@ export function PaginationNext({
 }>) {
 	return (
 		<span className={cn(className, 'flex grow basis-0 justify-end')}>
-			<Button
+			<CatalystButton
 				{...(href === null ? { disabled: true } : { href })}
 				plain
 				aria-label='Next page'>
@@ -77,22 +77,16 @@ export function PaginationNext({
 						strokeLinejoin='round'
 					/>
 				</svg>
-			</Button>
+			</CatalystButton>
 		</span>
 	)
 }
 
-export function PaginationList({
-	className,
-	...props
-}: React.ComponentPropsWithoutRef<'span'>) {
+export function PaginationList({ className, ...props }: React.ComponentPropsWithoutRef<'span'>) {
 	return (
 		<span
 			{...props}
-			className={cn(
-				className,
-				'hidden items-baseline gap-x-2 sm:flex'
-			)}
+			className={cn(className, 'hidden items-baseline gap-x-2 sm:flex')}
 		/>
 	)
 }
@@ -108,7 +102,7 @@ export function PaginationPage({
 	current?: boolean
 }>) {
 	return (
-		<Button
+		<CatalystButton
 			href={href}
 			plain
 			aria-label={`Page ${children}`}
@@ -119,7 +113,7 @@ export function PaginationPage({
 				current && 'before:bg-zinc-950/5 dark:before:bg-white/10'
 			)}>
 			<span className='-mx-0.5'>{children}</span>
-		</Button>
+		</CatalystButton>
 	)
 }
 
