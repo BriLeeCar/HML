@@ -13,7 +13,7 @@ export const MinMaxCostFieldGroup = ({ pathwayData, dispatchAction }: ElProps) =
 		newData.error = []
 
 		const parsed = z
-			.preprocess((val) => {
+			.preprocess(val => {
 				return parseFloat(typeof val === 'string' ? val : String(val)).toFixed(2)
 			}, z.coerce.number().nonnegative(errors.negative))
 			.safeParse(newData.value[key].value)
@@ -21,7 +21,7 @@ export const MinMaxCostFieldGroup = ({ pathwayData, dispatchAction }: ElProps) =
 		if (parsed.success) {
 			newData.value[key].value = parsed.data
 		} else {
-			newData.value[key].error = parsed.error.issues.map((i) => i.message)
+			newData.value[key].error = parsed.error.issues.map(i => i.message)
 		}
 
 		if (newData.value.max.value > 0 && newData.value.min.value > newData.value.max.value) {
@@ -32,14 +32,17 @@ export const MinMaxCostFieldGroup = ({ pathwayData, dispatchAction }: ElProps) =
 
 		dispatchAction({
 			field: 'cost',
-			type: 'setCost',
-			payload: newData,
-		} as Dispatch.SetterFn['cost'])
+			payload: {
+				...pathwayData.cost,
+				value: newData.value,
+				error: newData.error,
+			},
+		})
 	}
 
 	const currencyOptions = (pathwayData.countryId.value != null
 		&& pathwayData.countryId.value != ''
-		&& pathwayData.countriesWithPathways.find((c) => c.abbr === pathwayData.countryId.value)?.api
+		&& pathwayData.countriesWithPathways.find(c => c.abbr === pathwayData.countryId.value)?.api
 			.currencies) || {
 		'': { symbol: '', name: 'Select Currency', abbr: '' },
 	}
@@ -47,7 +50,7 @@ export const MinMaxCostFieldGroup = ({ pathwayData, dispatchAction }: ElProps) =
 	const currencyOptionEls = () => {
 		const currencies = []
 		for (const [key, cur] of Object.entries(
-			pathwayData.countriesWithPathways.find((c) => c.abbr === pathwayData.countryId.value)?.api
+			pathwayData.countriesWithPathways.find(c => c.abbr === pathwayData.countryId.value)?.api
 				.currencies || {}
 		)) {
 			currencies.push({
@@ -75,7 +78,7 @@ export const MinMaxCostFieldGroup = ({ pathwayData, dispatchAction }: ElProps) =
 						type='number'
 						min={0.01}
 						step={0.01}
-						onBlur={(e) => {
+						onBlur={e => {
 							handleData({
 								key: 'min',
 								value: e.target.value,
@@ -97,7 +100,7 @@ export const MinMaxCostFieldGroup = ({ pathwayData, dispatchAction }: ElProps) =
 						type='number'
 						min={0.01}
 						step={0.01}
-						onBlur={(e) => {
+						onBlur={e => {
 							handleData({
 								key: 'max',
 								value: e.target.value,
@@ -120,12 +123,11 @@ export const MinMaxCostFieldGroup = ({ pathwayData, dispatchAction }: ElProps) =
 						disabled={currencies.length === 0}
 						name={`costUOM`}
 						aria-label={`Cost UOM`}
-						onChange={(e) => {
+						onChange={e => {
 							const selectedCurrency = currencyOptions[e.target.selectedIndex]
 
 							dispatchAction({
 								field: 'costUom',
-								type: 'setCostUom',
 								payload: {
 									value: {
 										abbr: selectedCurrency.abbr,
@@ -136,7 +138,7 @@ export const MinMaxCostFieldGroup = ({ pathwayData, dispatchAction }: ElProps) =
 							})
 						}}>
 						{currencies.length > 0 ?
-							currencies.map((option) => (
+							currencies.map(option => (
 								<option
 									key={option.base}
 									value={option.value}>

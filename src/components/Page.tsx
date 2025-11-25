@@ -53,7 +53,7 @@ export const SubSection = ({
 					type == 'default'
 						&& 'text-lg font-semibold tracking-tight text-pretty text-red-500 saturate-75',
 					type == 'grey'
-						&& 'dark:text-accent-foreground text-muted-foreground border-border/20 border-b-1 font-sans text-xl font-bold tracking-tighter brightness-75',
+						&& 'dark:text-accent-foreground text-muted-foreground border-border/20 border-b font-sans text-xl font-bold tracking-tighter brightness-75',
 					open && 'mb-4',
 					props.className
 				)}

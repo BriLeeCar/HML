@@ -30,6 +30,3 @@ Dockerfile
 /.vercel
 .vercel
 
-#Temp
-src/app/admin/data-collection/pathways/Handleinput.tsx
-src/app/admin/data-collection/pathways/HandleInput.tsx

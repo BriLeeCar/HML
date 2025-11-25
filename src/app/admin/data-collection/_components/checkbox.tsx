@@ -72,6 +72,10 @@ const base = [
 ]
 
 const colors = {
+	brand: [
+		'[--checkbox-check:var(--color-white)] [--checkbox-checked-bg:#42585E] [--checkbox-checked-border:#222D30]/80',
+		'dark:[--checkbox-checked-bg:#DAE638] dark:[--checkbox-checked-border:#5A5F0C]/80 dark:[--checkbox-check:var(--color-zinc-900)]',
+	],
 	'dark/zinc': [
 		'[--checkbox-check:var(--color-white)] [--checkbox-checked-bg:var(--color-zinc-900)] [--checkbox-checked-border:var(--color-zinc-950)]/90',
 		'dark:[--checkbox-checked-bg:var(--color-zinc-600)]',

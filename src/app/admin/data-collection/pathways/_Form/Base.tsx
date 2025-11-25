@@ -5,18 +5,17 @@ import {
 	FieldGroup,
 	Fieldset,
 	Form,
-	initState,
 	Legend,
 	Page,
 	PageHeading,
+	PATHWAY_BASE,
 	pathwayReducer,
 	Section,
 	SectionHeading,
 	SubSection,
 	Text,
+	toCSV,
 } from '@/data-collection/pathways'
-import { MOCK_DATA } from '@/data-collection/pathways/constants'
-
 import {
 	ApplicationCost,
 	Documentation,
@@ -27,6 +26,7 @@ import {
 	Renewable,
 	RestrictionsOpportunities,
 } from '@/data-collection/pathways/_Form'
+
 import { motion, useScroll } from 'motion/react'
 import { type ReactNode, useContext, useReducer } from 'react'
 import { cn } from '~/lib/cn'
@@ -36,8 +36,8 @@ export const Base = ({ handle }: { handle: string }) => {
 	const db = useContext(DBContext)
 
 	const [pathwayData, dispatchPathway] = useReducer(pathwayReducer, {
-		...initState(),
-		...MOCK_DATA,
+		// ...initPathway(),
+		...PATHWAY_BASE,
 		db: db,
 		countriesWithPathways: db.getCountriesWithPathways(),
 		discordHandle: {
@@ -47,6 +47,33 @@ export const Base = ({ handle }: { handle: string }) => {
 	})
 
 	const { scrollYProgress } = useScroll()
+
+	const handleSubmit = async () => {
+		console.log(toCSV({ ...pathwayData }))
+
+		const response = await fetch(
+			`/admin/api/pathwayWrite?handle=${pathwayData.discordHandle.value}`,
+			{
+				method: 'POST',
+				mode: 'same-origin',
+
+				headers: {
+					'Content-Type': 'application/json',
+					Handle: handle,
+				},
+				body: JSON.stringify(toCSV({ ...pathwayData })),
+			}
+		)
+
+		if (response.ok) {
+			alert('Pathway submitted successfully!')
+			// window.scrollTo({
+			// 	top: 0,
+			// 	behavior: 'smooth',
+			// })
+			// window.location.reload()
+		}
+	}
 
 	return (
 		<Page className='admin md:px-0'>
@@ -69,7 +96,7 @@ export const Base = ({ handle }: { handle: string }) => {
 				Add Pathway Form
 			</PageHeading>
 			{/* ? DISCORD */}
-			<Section>
+			{/* <Section>
 				<SectionHeading
 					eyebrow={
 						<span className='text-[#AC162B] dark:text-[#DAE638]'>For Verification Purposes'</span>
@@ -88,7 +115,7 @@ export const Base = ({ handle }: { handle: string }) => {
 						className={cn(
 							'focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-3',
 							'bg-background outline-foreground/20',
-							'border-foreground/20 border-1',
+							'border-foreground/20 border',
 							// 'focus-visible:border-foreground/10',
 							'rounded-md',
 							'px-3 py-1',
@@ -100,18 +127,15 @@ export const Base = ({ handle }: { handle: string }) => {
 						)}
 						onBlur={e =>
 							dispatchPathway({
-								type: 'setDiscordHandle',
 								field: 'discordHandle',
-								payload: {
-									value: e.currentTarget.value,
-									error: [],
-								},
+								payload: e.currentTarget.value,
 							})
 						}
 					/>
 				</form>
-			</Section>
+			</Section> */}
 			{/* ? FORM */}
+
 			<Section>
 				<SectionHeading subtitle="If you have any trouble, please let the staff know so we can either alter to form, or help explain why there's an issue">
 					Pathway Details
@@ -206,13 +230,13 @@ export const Base = ({ handle }: { handle: string }) => {
 						className='mt-8 rounded-xl text-base'
 						type='button'
 						variant='ghost'
-						onClick={() => {
+						onClick={async () => {
 							const consoledData = { ...pathwayData } as AnySafe
 
 							delete consoledData.db
 							delete consoledData.countriesWithPathways
 
-							console.log(consoledData)
+							await handleSubmit()
 						}}>
 						Submit Pathway
 					</Button>
@@ -237,12 +261,12 @@ export const FormSection = ({
 			role='group'
 			title={props.title}
 			className={cn(
-				'from-background/100 dark:text-foreground sticky top-0 z-10 bg-linear-to-b from-50% to-transparent to-100% text-[#AC162B] max-md:pt-4 max-md:pb-8 md:static',
+				'from-background dark:text-foreground sticky top-0 z-10 bg-linear-to-b from-50% to-transparent to-100% text-[#AC162B] max-md:pt-4 max-md:pb-8 md:static',
 				props.className
 			)}
 			innerProps={{
 				...props.innerProps,
-				className: cn('-mt-6 md:mt-0', props.innerProps?.className),
+				className: cn('-mt-6 pl-0 md:mt-0 md:pl-6', props.innerProps?.className),
 			}}>
 			<Text
 				data-slot='description'

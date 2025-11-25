@@ -33,8 +33,6 @@ const animateVariants = {
 }
 
 export const Renewable = ({ pathwayData, dispatchAction }: ElProps) => {
-	const data = pathwayData.renewable
-
 	return (
 		<>
 			<span
@@ -43,13 +41,12 @@ export const Renewable = ({ pathwayData, dispatchAction }: ElProps) => {
 				<CheckboxGroup>
 					<CheckboxField>
 						<Checkbox
-							name='cbRenewable'
-							defaultChecked={data.value.renewable}
+							color='brand'
+							defaultChecked={pathwayData.isRenewable.value}
 							onClick={() => {
 								dispatchAction({
-									type: 'checkRenewable',
-									field: 'renewable',
-									payload: data.value.renewable ? false : true,
+									field: 'isRenewable',
+									payload: pathwayData.isRenewable.value ? false : true,
 								})
 							}}
 						/>
@@ -61,12 +58,12 @@ export const Renewable = ({ pathwayData, dispatchAction }: ElProps) => {
 					</CheckboxField>
 				</CheckboxGroup>
 				<RewnewalDurationCB
-					data={data}
+					pathwayData={pathwayData}
 					dispatchAction={dispatchAction}
 				/>
 			</span>
 			<AnimatePresence>
-				{data.value.renewable && !data.value.sameAsInitialDuration && (
+				{pathwayData.isRenewable.value && !pathwayData.renewableSameAsInitial.value && (
 					<motion.span
 						exit={{
 							marginTop: 0,
@@ -87,14 +84,14 @@ export const Renewable = ({ pathwayData, dispatchAction }: ElProps) => {
 							description='Please provide the duration details for the renewal of this pathway. If the renewal duration is the same as the initial duration, you can indicate that using the checkbox above.'>
 							<FieldGroup className='grid'>
 								<AnimatePresence>
-									{data.value.sameAsInitialDuration == false && (
+									{pathwayData.renewableSameAsInitial.value == false && (
 										<motion.span
 											{...animateVariants}
 											key='renewalDurationNumbers'>
 											<MinMaxTimeFieldGroup
 												pathwayData={pathwayData}
 												dispatchAction={dispatchAction}
-												field='renewable'
+												field='renewableDuration'
 												className='grid gap-x-4 md:grid-cols-3'
 											/>
 										</motion.span>
@@ -104,7 +101,7 @@ export const Renewable = ({ pathwayData, dispatchAction }: ElProps) => {
 						</FormSubSection>
 					</motion.span>
 				)}
-				{data.value.renewable && (
+				{pathwayData.isRenewable.value && (
 					<motion.span
 						{...animateVariants}
 						key='renewalNotes'>
@@ -119,16 +116,10 @@ export const Renewable = ({ pathwayData, dispatchAction }: ElProps) => {
 	)
 }
 
-const RewnewalDurationCB = ({
-	data,
-	dispatchAction,
-}: {
-	dispatchAction: ElProps['dispatchAction']
-	data: ElProps['pathwayData']['renewable']
-}) => {
+const RewnewalDurationCB = ({ pathwayData, dispatchAction }: ElProps) => {
 	return (
 		<AnimatePresence>
-			{data.value.renewable && (
+			{pathwayData.isRenewable.value && (
 				<motion.span
 					key='renewalDurationCB'
 					exit={{
@@ -140,7 +131,7 @@ const RewnewalDurationCB = ({
 					animate={{
 						...animateVariants.animate,
 						translateX: '0%',
-						flexBasis: '50%',
+						flexBasis: '100%',
 
 						position: 'relative',
 					}}
@@ -153,13 +144,13 @@ const RewnewalDurationCB = ({
 					<CheckboxGroup>
 						<CheckboxField>
 							<Checkbox
+								color='brand'
 								name='cbRenewableSameAsInitialDuration'
-								defaultChecked={data.value.sameAsInitialDuration}
+								defaultChecked={pathwayData.renewableSameAsInitial.value}
 								onClick={() => {
 									dispatchAction({
-										type: 'checkRenewableSameAsInitialDuration',
-										field: 'renewable',
-										payload: data.value.sameAsInitialDuration ? false : true,
+										field: 'renewableSameAsInitial',
+										payload: pathwayData.renewableSameAsInitial.value ? false : true,
 									})
 								}}
 							/>
@@ -177,18 +168,10 @@ const RewnewalDurationCB = ({
 
 const RenewalNotes = ({ pathwayData, dispatchAction }: ElProps) => {
 	const addNote = () => {
-		const newData = { ...pathwayData.renewable }
-		newData.value.notes.push({
-			value: '',
-			error: [],
-			counter: pathwayData.renewable.counter + 1,
-		})
-		newData.counter += 1
-
 		dispatchAction({
-			field: 'renewable',
-			type: 'setRenewable',
-			payload: newData,
+			type: 'add',
+			field: 'renewableNotes',
+			payload: null,
 		})
 	}
 	return (
@@ -203,22 +186,25 @@ const RenewalNotes = ({ pathwayData, dispatchAction }: ElProps) => {
 				</>
 			}>
 			<FieldGroup className='grid gap-y-4'>
-				{pathwayData.renewable.value.notes.map(note => {
+				{pathwayData.renewableNotes.value.map(note => {
 					return (
 						<Field
 							key={note.counter}
 							className='flex items-center gap-x-2'>
 							<Textarea
-								defaultValue={note.value ?? undefined}
+								defaultValue={note.note ?? undefined}
 								name={`renewableNote${note.counter}`}
 								onBlur={e => {
-									const data = { ...pathwayData.renewable }
-									const thisNote = data.value.notes.find(n => n.counter == note.counter)
-									thisNote && (thisNote.value = e.currentTarget.value)
 									dispatchAction({
-										field: 'renewable',
-										type: 'setRenewable',
-										payload: data,
+										type: 'update',
+										field: 'renewableNotes',
+										payload: {
+											counter: note.counter,
+											value: {
+												...note,
+												note: e.currentTarget.value,
+											},
+										},
 									})
 								}}
 							/>
@@ -228,8 +214,8 @@ const RenewalNotes = ({ pathwayData, dispatchAction }: ElProps) => {
 								className='rounded-full px-2 py-0'
 								onClick={() =>
 									dispatchAction({
-										type: 'deleteRenewableNote',
-										field: 'renewable',
+										type: 'delete',
+										field: 'renewableNotes',
 										payload: note.counter,
 									})
 								}>

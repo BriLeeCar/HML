@@ -1,4 +1,4 @@
-import { Button, Field, FieldGroup, Input, Label } from '@/data-collection/pathways'
+import { Button, Field, FieldGroup, Input, InputGroup, Label } from '@/data-collection/pathways'
 import { Icon } from '~/components/Icon'
 
 export const Documentation = ({ pathwayData, dispatchAction }: ElProps) => {
@@ -8,7 +8,7 @@ export const Documentation = ({ pathwayData, dispatchAction }: ElProps) => {
 			{baseData.value.map(n => (
 				<FieldGroup
 					key={n.counter}
-					className='ml-6 grid grid-cols-[auto_auto_0.15fr] gap-x-4 border-b-2 border-[#F0EBF1] pt-0 pb-4 pl-6 *:flex *:items-baseline *:gap-x-4 last:border-0 last:pb-0 dark:border-b-1 dark:border-current/10'>
+					className='ml-6 grid grid-cols-[auto_auto_0.15fr] gap-x-4 border-b-2 border-[#F0EBF1] pt-0 pb-4 *:flex *:items-baseline *:gap-x-4 last:border-0 last:pb-0 md:pl-6 dark:border-b dark:border-current/10'>
 					<Field>
 						<Label>Document</Label>
 						<Input
@@ -16,23 +16,50 @@ export const Documentation = ({ pathwayData, dispatchAction }: ElProps) => {
 							className='mt-1'
 							defaultValue={n.title}
 							onBlur={e => {
-								baseData.value[n.counter].title = e.currentTarget.value
 								dispatchAction({
-									type: 'setDocuments',
+									type: 'update',
 									field: 'documents',
-									payload: baseData,
+									payload: {
+										counter: n.counter,
+										value: {
+											...n,
+											title: e.currentTarget.value,
+										},
+									},
 								})
 							}}
 						/>
 					</Field>
 					<Field>
 						<Label>Cost</Label>
-						<Input
-							type='number'
-							min={0}
-							step={0.01}
-							defaultValue={n.cost}
-						/>
+						<InputGroup>
+							{pathwayData.costUom.value.currencySymbol && (
+								<span
+									data-slot='icon'
+									className='text-xs'>
+									{pathwayData.costUom.value.currencySymbol}
+								</span>
+							)}
+							<Input
+								type='number'
+								min={0}
+								step={0.01}
+								defaultValue={n.cost}
+								onBlur={e => {
+									dispatchAction({
+										type: 'update',
+										field: 'documents',
+										payload: {
+											counter: n.counter,
+											value: {
+												...n,
+												cost: parseFloat(e.currentTarget.value),
+											},
+										},
+									})
+								}}
+							/>
+						</InputGroup>
 					</Field>
 					<span className='mt-[0.25lh] mb-1 flex w-full justify-center pl-2 align-middle'>
 						<Button
@@ -41,7 +68,7 @@ export const Documentation = ({ pathwayData, dispatchAction }: ElProps) => {
 							className='mx-auto rounded-full px-1.5 py-0'
 							onClick={() => {
 								dispatchAction({
-									type: 'deleteDocuments',
+									type: 'delete',
 									field: 'documents',
 									payload: n.counter,
 								})
@@ -62,17 +89,10 @@ export const Documentation = ({ pathwayData, dispatchAction }: ElProps) => {
 				size='sm'
 				innerButton
 				onClick={() => {
-					baseData.value.push({
-						counter: baseData.counter,
-						title: '',
-						cost: 0,
-						error: [],
-					})
-					baseData.counter += 1
 					dispatchAction({
-						type: 'setDocuments',
+						type: 'add',
 						field: 'documents',
-						payload: baseData,
+						payload: null,
 					})
 				}}>
 				<Icon

@@ -17,7 +17,7 @@ export const ApplicationCost = ({ pathwayData, dispatchAction }: ElProps) => {
 				</>
 			}>
 			<Field>
-				<Error message={pathwayData.processingTime.error} />
+				<Error message={pathwayData.cost.error} />
 			</Field>
 
 			<MinMaxCostFieldGroup

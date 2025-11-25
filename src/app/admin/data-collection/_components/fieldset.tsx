@@ -4,17 +4,11 @@ import { cn } from '~/lib/cn'
 export function Fieldset({
 	className,
 	...props
-}: { className?: string } & Omit<
-	Headless.FieldsetProps,
-	'as' | 'className'
->) {
+}: { className?: string } & Omit<Headless.FieldsetProps, 'as' | 'className'>) {
 	return (
 		<Headless.Fieldset
 			{...props}
-			className={cn(
-				className,
-				'*:data-[slot=text]:mt-1 [&>*+[data-slot=control]]:mt-6'
-			)}
+			className={cn(className, '*:data-[slot=text]:mt-1 [&>*+[data-slot=control]]:mt-6')}
 		/>
 	)
 }
@@ -22,12 +16,10 @@ export function Fieldset({
 export function Legend({
 	className,
 	...props
-}: { className?: string } & Omit<
-	Headless.LegendProps,
-	'as' | 'className'
->) {
+}: { className?: string } & Omit<Headless.LegendProps, 'className'>) {
 	return (
 		<Headless.Legend
+			as='legend'
 			data-slot='legend'
 			{...props}
 			className={cn(
@@ -38,15 +30,12 @@ export function Legend({
 	)
 }
 
-export function FieldGroup({
-	className,
-	...props
-}: React.ComponentPropsWithoutRef<'div'>) {
+export function FieldGroup({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
 	return (
 		<div
 			data-slot='control'
 			{...props}
-			className={cn(className, 'space-y-8')}
+			className={cn('space-y-8', className)}
 		/>
 	)
 }
@@ -54,10 +43,7 @@ export function FieldGroup({
 export function Field({
 	className,
 	...props
-}: { className?: string } & Omit<
-	Headless.FieldProps,
-	'as' | 'className'
->) {
+}: { className?: string } & Omit<Headless.FieldProps, 'as' | 'className'>) {
 	return (
 		<Headless.Field
 			{...props}
@@ -77,10 +63,7 @@ export function Field({
 export function Label({
 	className,
 	...props
-}: { className?: string } & Omit<
-	Headless.LabelProps,
-	'as' | 'className'
->) {
+}: { className?: string } & Omit<Headless.LabelProps, 'as' | 'className'>) {
 	return (
 		<Headless.Label
 			data-slot='label'
@@ -96,10 +79,7 @@ export function Label({
 export function Description({
 	className,
 	...props
-}: { className?: string } & Omit<
-	Headless.DescriptionProps,
-	'as' | 'className'
->) {
+}: { className?: string } & Omit<Headless.DescriptionProps, 'as' | 'className'>) {
 	return (
 		<Headless.Description
 			data-slot='description'
@@ -115,10 +95,7 @@ export function Description({
 export function ErrorMessage({
 	className,
 	...props
-}: { className?: string } & Omit<
-	Headless.DescriptionProps,
-	'as' | 'className'
->) {
+}: { className?: string } & Omit<Headless.DescriptionProps, 'as' | 'className'>) {
 	return (
 		<Headless.Description
 			data-slot='error'

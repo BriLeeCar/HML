@@ -13,53 +13,35 @@ import {
 import z from 'zod/v4'
 
 export const Overview = ({ pathwayData, dispatchAction }: ElProps) => {
-	const dispatchStringField = <F extends keyof Dispatch.StringFields>(
-		value: string | null,
-		field: F
-	) => {
-		dispatchAction({
-			type: 'set' + field.charAt(0).toUpperCase() + field.slice(1),
-			field: field,
-			payload: {
-				value: value,
-				error: [],
-			},
-		} as unknown as Dispatch.StringFields[F])
-	}
-
 	return (
 		<FieldGroup className='grid gap-x-8 md:grid-cols-2'>
 			{/* ? COUNTRY ID */}
-			<Field>
+			<Field aria-required='true'>
 				<Label>Country ID</Label>
 				<Combobox
 					name='countryId'
-					options={pathwayData.countriesWithPathways.map((c) => c.abbr)}
+					options={pathwayData.countriesWithPathways.map(c => c.abbr)}
 					value={pathwayData.countryId.value ?? ''}
 					defaultValue={
-						pathwayData.countriesWithPathways.find((c) => c.abbr === pathwayData.countryId.value)
+						pathwayData.countriesWithPathways.find(c => c.abbr === pathwayData.countryId.value)
 							?.abbr ?? undefined
 					}
-					onChange={(val) => {
+					onChange={val => {
 						const parsed = z.string().toUpperCase().length(3, 'Invalid Country ID').safeParse(val)
 						if (parsed.success)
 							dispatchAction({
-								type: 'setCountryId',
 								field: 'countryId',
-								payload: {
-									value: val,
-									error: [],
-								},
+								payload: parsed.data,
 							})
 					}}
 					displayValue={(value: string | null) => value?.toString()}>
-					{(country) => (
+					{country => (
 						<ComboboxOption
 							value={country}
 							key={country}>
 							<ComboboxLabel>{country}</ComboboxLabel>
 							<ComboboxDescription>
-								{pathwayData.countriesWithPathways.find((c) => c.abbr == country)?.name ?? country}
+								{pathwayData.countriesWithPathways.find(c => c.abbr == country)?.name ?? country}
 							</ComboboxDescription>
 						</ComboboxOption>
 					)}
@@ -72,12 +54,12 @@ export const Overview = ({ pathwayData, dispatchAction }: ElProps) => {
 				<Input
 					defaultValue={pathwayData.officialName.value ?? undefined}
 					name='pathwayOfficialName'
-					onBlur={(e) => {
+					onBlur={e => {
 						onBlurDispatchStringField(
 							e.currentTarget.value,
 							pathwayData,
 							'officialName',
-							dispatchStringField
+							dispatchAction
 						)
 					}}
 				/>
@@ -90,12 +72,12 @@ export const Overview = ({ pathwayData, dispatchAction }: ElProps) => {
 					defaultValue={pathwayData.officialLink.value ?? undefined}
 					name='pathwayLink'
 					type='url'
-					onBlur={(e) => {
+					onBlur={e => {
 						onBlurDispatchStringField(
 							e.currentTarget.value,
 							pathwayData,
 							'officialLink',
-							dispatchStringField
+							dispatchAction
 						)
 					}}
 				/>
@@ -107,16 +89,7 @@ export const Overview = ({ pathwayData, dispatchAction }: ElProps) => {
 				<Input
 					defaultValue={pathwayData.category.value ?? undefined}
 					name='pathwayCategory'
-					onBlur={(e) =>
-						dispatchAction({
-							type: 'setCategory',
-							field: 'category',
-							payload: {
-								value: e.currentTarget.value,
-								error: [],
-							},
-						})
-					}
+					onBlur={e => console.log(e.currentTarget.value)}
 				/>
 				<Error message={pathwayData.category.error} />
 			</Field>
@@ -126,14 +99,10 @@ export const Overview = ({ pathwayData, dispatchAction }: ElProps) => {
 				<Textarea
 					defaultValue={pathwayData.description.value ?? undefined}
 					name='pathwayDescription'
-					onBlur={(e) =>
+					onBlur={e =>
 						dispatchAction({
-							type: 'setDescription',
 							field: 'description',
-							payload: {
-								value: e.currentTarget.value,
-								error: [],
-							},
+							payload: e.currentTarget.value,
 						})
 					}
 				/>
@@ -154,9 +123,9 @@ const emptyToNull = (str: string | null) => {
 }
 
 const noChange = (
-	field: State.Base.Keys,
-	value: State.Base[State.Base.Keys]['value'],
-	pathwayData: State.Base
+	field: PathwaysStringKeys,
+	value: Pathways[PathwaysStringKeys]['value'],
+	pathwayData: Pathways
 ) => {
 	const pathValue = pathwayData[field].value
 
@@ -169,12 +138,15 @@ const noChange = (
 const onBlurDispatchStringField = (
 	value: string | null,
 	pathwayData: ElProps['pathwayData'],
-	field: Dispatch.StringKeys,
-	dispatchFn: (value: string | null, field: Dispatch.StringKeys) => void
+	field: PathwaysStringKeys,
+	dispatchFn: (props: { field: PathwaysStringKeys; payload: string | null }) => void
 ) => {
 	const val = emptyToNull(value)
 
 	if (!noChange(field, val, pathwayData)) {
-		return dispatchFn(value, field)
+		return dispatchFn({
+			field: field,
+			payload: val,
+		})
 	}
 }

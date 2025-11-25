@@ -1,592 +1,685 @@
-import z, { type ZodSafeParseResult } from 'zod/v4'
+import z from 'zod/v4'
+import { errors } from './constants'
+import { validate } from './validation'
 
-type StateAction<T extends boolean = true> = T extends true ? State.Base.WithUtilities : State.Base
-
-export const initState = () => ({
-	countryId: {
-		value: null as string | null,
+const getFns = {
+	asString: () => '',
+	asBool: () => false,
+	asMinMaxVal: () => ({
+		value: 0,
 		error: [] as string[],
-	},
-	pathwayId: {
-		value: null as string | null,
-		error: [] as string[],
-	},
-	costUom: {
+	}),
+	asMinMax: () => ({
+		min: getFns.asMinMaxVal(),
+		max: getFns.asMinMaxVal(),
+	}),
+	asUomVal: () => ({
 		value: {
-			abbr: '',
-			currencySymbol: '',
+			base: null as string | null,
+			value: 0,
+			label: '',
 		},
 		error: [] as string[],
-	},
-	officialName: {
-		value: null as string | null,
-		error: [] as string[],
-	},
-	officialLink: {
-		value: null as string | null,
-		error: [] as string[],
-	},
-	category: {
-		value: null as string | null,
-		error: [] as string[],
-	},
-	description: {
-		value: null as string | null,
-		error: [] as string[],
-	},
-	duration: {
-		value: {
-			min: {
-				value: 0,
-				error: [] as string[],
-			},
-			max: {
-				value: 0,
-				error: [] as string[],
-			},
-			uom: {
-				value: {
-					base: null as string | null,
-					value: 0,
-					label: '',
-				},
-				error: [] as string[],
-			},
-		},
-		error: [] as string[],
-	},
-	renewable: {
-		value: {
-			sameAsInitialDuration: false,
-			renewable: true,
-			duration: {
-				value: {
-					min: {
-						value: 0,
-						error: [] as string[],
-					},
-					max: {
-						value: 0,
-						error: [] as string[],
-					},
-					uom: {
-						value: {
-							base: null as string | null,
-							value: 0,
-							label: '',
-						},
-						error: [] as string[],
-					},
-				},
-				error: [] as string[],
-			},
-			notes: [
-				{
-					value: '',
-					error: [] as string[],
-					counter: 0,
-				},
-			],
-		},
-		error: [] as string[],
-		counter: 0,
-	},
-	processingTime: {
-		value: {
-			min: {
-				value: 0,
-				error: [] as string[],
-			},
-			max: {
-				value: 0,
-				error: [] as string[],
-			},
-			uom: {
-				value: {
-					base: null as string | null,
-					value: 0,
-					label: '',
-				},
-				error: [] as string[],
-			},
-		},
-		error: [] as string[],
-	},
-	cost: {
-		value: {
-			min: {
-				value: 0,
-				error: [] as string[],
-			},
-			max: {
-				value: 0,
-				error: [] as string[],
-			},
-		},
-		error: [] as string[],
-	},
-	reunification: {
-		value: {
-			possible: false,
-			note: null as string | null,
-		},
-		error: [] as string[],
-	},
-	residency: {
-		value: {
-			possible: false,
-			note: null as string | null,
-		},
-		error: [] as string[],
-	},
-	citizenship: {
-		value: {
-			possible: false,
-			note: null as string | null,
-		},
-		error: [] as string[],
-	},
-	restrictions: {
-		value: {
-			hasRestrictions: false,
-			restrictions: [
-				{
-					value: '',
-					counter: 0,
-				},
-			],
-		},
-		error: [] as string[],
-		counter: 0,
-	},
-	requirements: {
-		value: [] as {
-			value: string
-			counter: number
-		}[],
-		error: [] as string[],
-		counter: 0,
-	},
-	notes: {
-		value: [] as {
-			note: string
-			counter: number
-		}[],
-		error: [] as string[],
-		counter: 0,
-	},
-	documents: {
-		error: [] as string[],
-		counter: 0,
-		value: [] as {
-			title: string
-			cost: number
-			counter: number
-			error: string[]
-		}[],
-	},
-	nationalities: {
-		value: {
-			restricted: false,
-			nationalities: [
-				{
-					country: '',
-					note: '',
-					counter: 0,
-				},
-			],
-		},
-		error: [] as string[],
-		counter: 0,
-	},
-	discordHandle: {
+	}),
+	asMinMaxUom: () => ({
+		...getFns.asMinMax(),
+		uom: getFns.asUomVal(),
+	}),
+	asArray: (counter?: number) => ({
 		value: '',
+		counter: counter ?? 0,
+	}),
+	asNote: (counter?: number) => ({
+		note: '',
+		counter: counter ?? 0,
+	}),
+}
+
+export const getEmptyEntry = {
+	countryId: getFns.asString,
+	pathwayId: getFns.asString,
+	officialName: getFns.asString,
+	officialLink: getFns.asString,
+	category: getFns.asString,
+	description: getFns.asString,
+
+	costUom: () => ({
+		abbr: '',
+		currencySymbol: '',
+	}),
+	duration: getFns.asMinMaxUom,
+	cost: getFns.asMinMax,
+	notes: getFns.asNote,
+	documents: (counter?: number) => ({
+		title: '',
+		cost: 0,
+		note: '',
+		counter: counter ?? 0,
 		error: [] as string[],
-	},
-})
+	}),
+	requirements: getFns.asArray,
 
-// #region ? ---------- Pathway Reducer ----------
-export const pathwayReducer = (state: StateAction, action: Dispatch.Fn) => {
-	let newState = { ...state }
-	const { field, payload, type } = action
+	renewableNotes: getFns.asNote,
+	isRenewable: getFns.asBool,
+	renewableDuration: getFns.asMinMaxUom,
+	renewableSameAsInitial: getFns.asBool,
+	discordHandle: getFns.asString,
 
-	// @ts-expect-error Mocking data - special case
-	if (type == 'mockData' && field == 'all') {
-		newState = { ...newState, ...(payload as unknown as State.Base) }
-		return newState
-	}
+	hasNationalityRestrictions: getFns.asBool,
+	restrictedNationalities: (counter?: number) => ({
+		country: '',
+		...getFns.asNote(counter),
+	}),
 
-	if (type.startsWith('delete')) {
-		let newData: State.Base[typeof field] = { ...newState[field] }
-		switch (field) {
-			case 'nationalities':
-				{
-					newData = newData as State.Base['nationalities']
-					newData.value.nationalities = newState['nationalities'].value.nationalities.filter(
-						n => n.counter != payload
-					)
-				}
-				break
-			case 'restrictions':
-				{
-					newData = newData as State.Base['restrictions']
-					newData.value.restrictions = newState['restrictions'].value.restrictions.filter(
-						r => r.counter != payload
-					)
-				}
-				break
-			case 'notes':
-			case 'documents':
-			case 'requirements':
-				newData = newData as State.Base[typeof field]
-				newData.value = newState[field].value.filter(
-					n => n.counter != payload
-				) as typeof newData.value
+	processingTime: getFns.asMinMaxUom,
 
-				break
-		}
-		newState = { ...newState, [field]: newData }
-	}
+	reunificationPossible: getFns.asBool,
+	reunificationNote: getFns.asString,
 
-	if (!type.startsWith('set')) {
-		switch (type) {
-			case 'checkRenewable':
-				{
-					newState.renewable.value.renewable = payload as boolean
-					if (payload == false) {
-						newState.renewable.value.sameAsInitialDuration = false
-					}
-				}
-				break
-			case 'checkRenewableSameAsInitialDuration':
-				{
-					newState.renewable.value.sameAsInitialDuration = payload as boolean
-				}
-				break
-			case 'deleteRenewableNote':
-				{
-					const updatedNotes = newState.renewable.value.notes.filter(
-						note => note.counter !== (payload as number)
-					)
-					newState.renewable.value.notes = updatedNotes
-				}
-				break
-		}
-	} else if (
-		['countryId', 'officialName', 'officialLink', 'category', 'description'].includes(field)
-	) {
-		const parsed = parse(state, action) as ZodSafeParseResult<StateAction[typeof field]>
+	residencyPossible: getFns.asBool,
+	residencyNote: getFns.asString,
 
-		Object.assign(newState[field], payload)
+	citizenshipPossible: getFns.asBool,
+	citizenshipNote: getFns.asString,
 
-		if (parsed && !parsed.success) {
-			newState[field].error = parsed.error?.issues.map((i: { message: string }) => i.message)
-		}
-	} else {
-		Object.assign(newState, {
-			[field]: payload,
+	limitations: getFns.asArray,
+	hasLimitations: getFns.asBool,
+}
+
+export const initPathway = () => {
+	const keys = Object.keys(getEmptyEntry) as Array<PathwaysKeys>
+	const Pathways: Pathways = {} as Pathways
+
+	keys.forEach(key => {
+		const returnedData = getEmptyEntry[key]()
+		Object.assign(Pathways, {
+			[key]: {
+				...(typeof returnedData == 'string' || typeof returnedData == 'boolean' ?
+					{ value: returnedData }
+				:	{ value: undefined }),
+			},
 		})
 
-		console.log('SET ACTION FOR', field, payload)
-	}
-
-	if (field == 'countryId') {
-		const currencies = state.countriesWithPathways.find(c => c.abbr == payload.value)?.api
-			.currencies
-
-		if (currencies && Object.keys(currencies).length == 1) {
-			newState.costUom.value = Object.keys(currencies).map(k => {
-				return {
-					abbr: k,
-					currencySymbol: currencies[k].symbol,
-				}
-			})[0]
+		if (getEmptyEntry[key] != getFns.asBool) {
+			Object.assign(Pathways[key], {
+				error: [] as string[],
+			})
+			if (
+				getEmptyEntry[key] == getFns.asArray
+				|| getEmptyEntry[key] == getFns.asNote
+				|| key == 'documents'
+				|| key == 'restrictedNationalities'
+			) {
+				Object.assign(Pathways[key], {
+					counter: 0,
+					value: [returnedData],
+				})
+			}
 		}
+		if (Pathways[key].value == undefined) {
+			Object.assign(Pathways[key], {
+				value: returnedData,
+			})
+		}
+	})
+
+	return Pathways
+}
+
+// #region ? ---------- Pathways Reducer ----------
+export const pathwayReducer = (
+	state: PathwaysWithDB,
+	action: PathwaysActions[keyof PathwaysActions]
+): PathwaysWithDB => {
+	const { field } = action
+
+	switch (field) {
+		case 'countryId':
+			return handleCountryId({
+				state,
+				action,
+			})
+		case 'pathwayId':
+		case 'description':
+		case 'category':
+		case 'discordHandle':
+		case 'residencyNote':
+		case 'citizenshipNote':
+		case 'reunificationNote':
+			return handleStringField({
+				state,
+				action,
+			})
+		case 'officialName':
+			const data = handleStringField({
+				state,
+				action,
+			})
+			return {
+				...state,
+				...data,
+				pathwayId: {
+					...state.pathwayId,
+					value: createPathwayID({
+						state,
+						action,
+					}),
+				},
+			}
+		case 'citizenshipPossible':
+		case 'residencyPossible':
+		case 'reunificationPossible':
+		case 'hasNationalityRestrictions':
+		case 'hasLimitations':
+		case 'isRenewable':
+		case 'renewableSameAsInitial':
+			return handleBooleanField({
+				state,
+				action,
+			})
+		case 'officialLink':
+			return handleLinkField({
+				state,
+				action,
+			})
+		case 'documents':
+			return handleDocuments({
+				state,
+				action,
+			})
+		case 'renewableNotes':
+			return handleRenewalDurationNotes({
+				state,
+				action,
+			})
+		case 'cost':
+		case 'duration':
+		case 'processingTime':
+		case 'renewableDuration':
+			return handleMinMax({
+				state,
+				action,
+			})
 	}
 
-	return newState
+	if ('type' in action && typeof action.payload != 'string') {
+		return handleNote({
+			state,
+			action,
+		})
+	}
+
+	return state
 }
 // #endregion
 
-const parse = (state: StateAction, dispatch: Dispatch.Fn) => {
-	const { field, payload } = dispatch
+const createPathwayID = ({
+	state,
+	action,
+}: {
+	state: PathwaysWithDB
+	action: PathwaysActions[PathwaysKeys]
+}) => {
+	const { field, payload } = action
+	let officialName = state.officialName.value ?? ''
+	let countryId = state.countryId.value ?? ''
 
 	switch (field) {
-		case 'countryId': {
-			return parseCountryId(state, payload)
-		}
-		case 'pathwayId':
 		case 'officialName':
-		case 'officialLink':
-		case 'description':
-		case 'category': {
-			return parseStringFields(payload, field)
-		}
+			officialName = payload as string
+			break
+		case 'countryId':
+			countryId = payload as string
+			break
+	}
 
-		default: {
-			return validator[field]().safeParse(payload)
+	return [countryId, officialName]
+		.map(p => p.trim().toLowerCase().replaceAll(/\s+/g, '-'))
+		.join('-')
+}
+
+const handleCountryId = ({
+	state,
+	action,
+}: {
+	state: PathwaysWithDB
+	action: PathwaysActions['countryId']
+}) => {
+	const { field, payload } = handleReturns<'countryId'>({
+		state,
+		action,
+	})
+
+	const currencyField = {
+		costUom: {
+			...state.costUom,
+		},
+	}
+
+	const country = state.countriesWithPathways.find(c => c.abbr === payload)
+
+	if (country) {
+		const currencies = Object.keys(country.api.currencies)
+		currencyField.costUom.value =
+			currencies.length == 1 ?
+				(currencyField.costUom.value = {
+					abbr: currencies[0],
+					currencySymbol: country.api.currencies[currencies[0]].symbol,
+				})
+			:	currencyField.costUom.value
+	}
+
+	const pathwayId = state.pathwayId
+
+	return {
+		...state,
+		[field]: {
+			...state[field],
+			value: payload,
+		},
+		...currencyField,
+		pathwayId: {
+			...pathwayId,
+			value: createPathwayID({
+				state,
+				action,
+			}),
+		},
+	}
+}
+
+const handleStringField = ({
+	state,
+	action,
+}: {
+	state: PathwaysWithDB
+	action: PathwaysActions[PathwaysStringKeys]
+}) => {
+	const { field, payload, returns } = handleReturns<PathwaysStringKeys>({
+		state,
+		action,
+	})
+
+	const newData = z
+		.string()
+		.min(10, errors.stringLength(10))
+		.trim()
+		.or(z.literal(''))
+		.safeParse(payload)
+
+	if (returns[field] && typeof returns[field] === 'object' && 'error' in returns[field]) {
+		if (!newData.success) returns[field].error = newData.error.issues.map(i => i.message)
+		else
+			returns[field] = {
+				error: [],
+				value: newData.data,
+			}
+	}
+	return returns
+}
+
+const handleLinkField = ({
+	state,
+	action,
+}: {
+	state: PathwaysWithDB
+	action: PathwaysStringPayload['officialLink']
+}) => {
+	const { field, payload, returns } = handleReturns<'officialLink'>({
+		state,
+		action,
+	})
+
+	const newData = z.url().or(z.literal('')).safeParse(payload)
+	if (!newData.success) {
+		returns[field].error = newData.error.issues.map(i => i.message)
+	} else {
+		returns[field].value = newData.data
+		returns[field].error = []
+	}
+
+	return returns
+}
+
+const handleBooleanField = ({
+	state,
+	action,
+}: {
+	state: PathwaysWithDB
+	action: PathwaysActions[PathwaysBooleanKeys]
+}) => {
+	const { field, payload, returns } = handleReturns<PathwaysBooleanKeys>({
+		state,
+		action,
+	})
+
+	returns[field] = {
+		...state[field],
+		value: payload,
+	}
+
+	if (payload == false) {
+		switch (field) {
+			case 'hasLimitations':
+				returns['limitations'] = {
+					...state['limitations'],
+					value: [],
+				}
+				break
+			case 'hasNationalityRestrictions':
+				returns['restrictedNationalities'] = {
+					...state['restrictedNationalities'],
+					value: [],
+				}
+				break
+			case 'isRenewable':
+				returns['renewableDuration'] = {
+					...state['renewableDuration'],
+					value: {
+						min: { value: 0, error: [] },
+						max: { value: 0, error: [] },
+						uom: {
+							value: {
+								base: null,
+								value: 0,
+								label: '',
+							},
+							error: [],
+						},
+					},
+				}
+				returns['renewableNotes'] = {
+					...state['renewableNotes'],
+					value: [],
+				}
+				returns['renewableSameAsInitial'] = {
+					...state['renewableSameAsInitial'],
+					value: false,
+				}
+				break
+			case 'renewableSameAsInitial':
+				returns['renewableDuration'] = {
+					...state['renewableDuration'],
+					value: state['duration'].value,
+				}
+				break
+			case 'reunificationPossible':
+				returns['reunificationNote'] = {
+					...state['reunificationNote'],
+					value: null,
+				}
+				break
+			case 'citizenshipPossible':
+				returns['citizenshipNote'] = {
+					...state['citizenshipNote'],
+					value: null,
+				}
+				break
+			case 'residencyPossible':
+				returns['residencyNote'] = {
+					...state['residencyNote'],
+					value: null,
+				}
+				break
+		}
+	}
+
+	return returns
+}
+
+const handleDocuments = ({
+	state,
+	action,
+}: {
+	state: PathwaysWithDB
+	action: PathwaysActions['documents']
+}): PathwaysWithDB => {
+	const { type, field, returns, payload } = handleReturns<'documents'>({
+		state,
+		action,
+	})
+
+	const payloadIsObject = (payload: unknown) => typeof payload == 'object' && payload != null
+
+	switch (type) {
+		case 'add':
+			{
+				console.log('Adding document')
+				const newCounter = state[field].counter + 1
+				returns[field] = {
+					...state[field],
+					counter: newCounter,
+					value: [...state[field].value, getEmptyEntry[field](newCounter)],
+				}
+			}
+			break
+		case 'delete':
+			returns[field] = {
+				...state[field],
+				value: state[field].value.filter(n => n.counter != payload),
+			}
+			break
+		case 'update': {
+			if (payloadIsObject(payload)) {
+				const { counter, value } = payload
+				returns[field] = {
+					...state[field],
+					value: state[field].value.map(n =>
+						n.counter == counter ?
+							{
+								...n,
+								...value,
+							}
+						:	n
+					),
+				}
+			}
+		}
+	}
+	return returns
+}
+
+const handleNote = <K extends PathwaysArrayKeys>({
+	state,
+	action,
+}: {
+	state: PathwaysWithDB
+	action: PathwaysActions[K]
+}) => {
+	const { type, field, returns, payload } = handleReturns<K>({
+		state,
+		action,
+	})
+
+	const payloadIsObject = (payload: unknown) => typeof payload == 'object' && payload != null
+
+	switch (type) {
+		case 'add':
+			{
+				console.log('Adding note')
+				const newCounter = state[field].counter + 1
+				returns[field] = {
+					...state[field],
+					counter: newCounter,
+					value: [...state[field].value, getEmptyEntry[field](newCounter)],
+				}
+			}
+			break
+		case 'delete':
+			returns[field] = {
+				...state[field],
+				value: state[field].value.filter(n => n.counter != payload),
+			}
+			break
+		case 'update':
+			{
+				if (payloadIsObject(payload)) {
+					const { counter, value } = payload
+					returns[field] = {
+						...state[field],
+						value: state[field].value.map(n =>
+							n.counter == counter ?
+								{
+									...n,
+									...value,
+								}
+							:	n
+						),
+					}
+				}
+			}
+			break
+	}
+
+	return returns
+}
+
+const addNote = <K extends PathwaysArrayKeys>({
+	data,
+	field,
+	counter,
+}: {
+	data: PathwaysWithDB[K]
+	field: K
+	counter: number
+}) => {
+	// ? -------------- ADD --------------
+	const newCounter = counter + 1
+
+	return {
+		...data,
+		counter: newCounter,
+		value: [...data.value, getEmptyEntry[field](newCounter)],
+	}
+}
+
+const removeNote = <K extends PathwaysArrayKeys>({
+	data,
+	counter,
+}: {
+	data: PathwaysWithDB[K]
+	counter: number
+}) => {
+	return {
+		...data,
+		value: data.value.filter(n => n.counter != counter),
+	}
+}
+
+const handleRenewalDurationNotes = ({
+	state,
+	action,
+}: {
+	state: PathwaysWithDB
+	action: PathwaysActions['renewableNotes']
+}) => {
+	const { type, field, payload } = action
+	switch (type) {
+		case 'add':
+			return {
+				...state,
+				renewableNotes: addNote<'renewableNotes'>({
+					data: state[field],
+					field,
+					counter: state[field].counter,
+				}),
+			}
+		case 'delete':
+			return {
+				...state,
+				renewableNotes: removeNote<'renewableNotes'>({
+					data: state.renewableNotes,
+					counter: payload,
+				}),
+			}
+		case 'update': {
+			const { counter, value } = payload
+
+			const updatedNote = validate.renewableNotes({
+				pathwayFieldData: state.renewableNotes,
+				value: value as Pathways['renewableNotes']['value'][number],
+				counter: counter,
+			})
+			return {
+				...state,
+				renewableNotes: {
+					...state.renewableNotes,
+					...updatedNote,
+				},
+			}
 		}
 	}
 }
 
-const parseCountryId = (state: StateAction, payload: Dispatch.Fn['payload']) => {
-	return validator
-		.countryId(state.countriesWithPathways.map(c => c.abbr))
-		.or(z.object({ value: z.literal(''), error: zErrorObj() }))
-		.safeParse(payload)
+const handleMinMax = <K extends PathwaysMinMaxKeys>({
+	state,
+	action,
+}: {
+	state: PathwaysWithDB
+	action: PathwaysActions[K]
+}) => {
+	const { field, payload, returns } = handleReturns<K>({
+		state,
+		action,
+	})
+
+	if (typeof payload == 'object' && 'error' in payload) {
+		if (payload.value.max.value != 0 && payload.value.min.value > payload.value.max.value) {
+			// hasError = true
+			payload.error = ['Ensure your minimum value is less than your maximum value']
+		} else {
+			payload.error = []
+		}
+
+		returns[field] = {
+			...state[field],
+			...payload,
+		}
+
+		return returns
+	}
+	return returns
 }
 
-const parseStringFields = <K extends State.Base.Keys>(
-	payload: State.Base[K],
-	field: K extends 'category' | 'officialLink' | 'officialName' | 'pathwayId' | 'description' ? K
-	:	never
-) => {
-	return validator[field]().or(zEmptyString()).safeParse(payload)
-}
+const handleReturns = <K extends PathwaysKeys>({
+	state,
+	action,
+}: {
+	state: PathwaysWithDB
+	action: PathwaysActions[K]
+}): {
+	field: K
+	payload: PathwaysPayload[K]['payload']
+	returns: PathwaysWithDB
+	type?: 'add' | 'delete' | 'update'
+} => {
+	const { field, payload } = action as {
+		field: K
+		payload: PathwaysPayload[K]['payload']
+	}
 
-// #endregion -------------------------------------------------------
-
-// #region ? VALIDATION
-
-const zErrorObj = () => z.string().array()
-
-const zCounterObj = () =>
-	z.coerce.number<string | number>().nonnegative('Must be 0 or greater').prefault(0)
-
-const zMinStringObj = (num: number) =>
-	z
-		.string()
-		.trim()
-		.min(num, {
-			error: iss => {
-				return `${iss.path?.join('.')}: Must be at least ${num} characters`
+	if ('type' in action) {
+		return {
+			field,
+			payload,
+			returns: {
+				...state,
+				[field]: {
+					...state[field],
+				},
 			},
-		})
+			type: action.type,
+		}
+	}
 
-const zRangeMinMaxObj = () =>
-	z.object({
-		value: z.coerce.number<string | number>().nonnegative().default(0),
-		error: zErrorObj(),
-	})
-
-const zRangeUomObj = () =>
-	z.object({
-		value: z.object({
-			base: z.string().trim().or(z.null()),
-			value: z.coerce.number<string | number>().nonnegative(),
-			label: z.string().trim(),
-		}),
-		error: zErrorObj(),
-	})
-
-const zStringArray = () =>
-	z
-		.object({
-			value: zMinStringObj(10),
-			counter: zCounterObj(),
-		})
-		.array()
-
-const zStringArrayWithError = () => {
-	return zStringArray()
-		.unwrap()
-		.extend({
-			error: zErrorObj(),
-		})
-		.array()
+	return {
+		field,
+		payload,
+		returns: {
+			...state,
+			[field]: {
+				...state[field],
+			},
+		},
+	}
 }
-
-const zEmptyString = () =>
-	z.object({
-		value: z.literal(''),
-		error: zErrorObj(),
-	})
-
-export const validator = {
-	countryId: (validAbbr: string[]) => {
-		return z.object({
-			value: zMinStringObj(3)
-				.length(3, '3 character exact')
-				.toUpperCase()
-				.refine(val => validAbbr.includes(val), {
-					message: 'Not a valid country code',
-				}),
-			error: zErrorObj(),
-		})
-	},
-	pathwayId: () => {
-		return z.object({
-			value: zMinStringObj(5).catch(''),
-			error: zErrorObj(),
-		})
-	},
-	costUom: () => {
-		return z.object({
-			value: z.object({
-				abbr: zMinStringObj(3).length(3, '3 character exact').toUpperCase(),
-				currencySymbol: z.string().trim(),
-			}),
-			error: zErrorObj(),
-		})
-	},
-	officialName: () => {
-		return z.object({
-			value: zMinStringObj(5),
-			error: zErrorObj(),
-		})
-	},
-	officialLink: () => {
-		return z.object({
-			value: z.url('Not a valid link').trim(),
-			error: zErrorObj(),
-		})
-	},
-	category: () => {
-		return z.object({
-			value: zMinStringObj(3).or(z.literal('')),
-			error: zErrorObj(),
-		})
-	},
-	description: () => {
-		return z.object({
-			value: zMinStringObj(10).or(z.literal('')),
-			error: zErrorObj(),
-		})
-	},
-	duration: () => {
-		return z.object({
-			value: z.object({
-				min: zRangeMinMaxObj(),
-				max: zRangeMinMaxObj(),
-				uom: zRangeUomObj(),
-			}),
-			error: zErrorObj(),
-		})
-	},
-	renewable: () => {
-		return z.object({
-			value: z.object({
-				renewable: z.boolean().default(false),
-				sameAsInitialDuration: z.boolean().default(false),
-				duration: z.object({
-					min: zRangeMinMaxObj(),
-					max: zRangeMinMaxObj(),
-					uom: zRangeUomObj(),
-				}),
-				notes: zStringArrayWithError(),
-			}),
-			counter: zCounterObj(),
-			error: zErrorObj(),
-		})
-	},
-	cost: () => {
-		return z.object({
-			value: z.object({
-				min: zRangeMinMaxObj(),
-				max: zRangeMinMaxObj(),
-			}),
-			error: zErrorObj(),
-		})
-	},
-	processingTime: () => {
-		return z.object({
-			value: z.object({
-				min: zRangeMinMaxObj(),
-				max: zRangeMinMaxObj(),
-				uom: zRangeUomObj(),
-			}),
-			error: zErrorObj(),
-		})
-	},
-	documents: () => {
-		return z.object({
-			value: z
-				.object({
-					cost: z.coerce.number<string | number>().nonnegative(),
-					title: zMinStringObj(5),
-					counter: zCounterObj(),
-					error: zErrorObj(),
-				})
-				.array(),
-			error: zErrorObj(),
-			counter: zCounterObj(),
-		})
-	},
-	reunification: () => {
-		return z.object({
-			value: z.object({
-				possible: z.boolean(),
-				notes: zStringArray(),
-			}),
-			counter: zCounterObj(),
-			error: zErrorObj(),
-		})
-	},
-	citizenship: () => {
-		return z.object({
-			value: z.object({
-				possible: z.boolean(),
-				notes: zStringArray(),
-			}),
-			counter: zCounterObj(),
-			error: zErrorObj(),
-		})
-	},
-	residency: () => {
-		return z.object({
-			value: z.object({
-				possible: z.boolean(),
-				notes: zStringArray(),
-			}),
-			counter: zCounterObj(),
-			error: zErrorObj(),
-		})
-	},
-	requirements: () => {
-		return z.object({
-			value: zStringArray(),
-			error: zErrorObj(),
-			counter: zCounterObj(),
-		})
-	},
-	restrictions: () => {
-		return z.object({
-			value: z.object({
-				hasRestrictions: z.boolean().default(false),
-				restrictions: zStringArray(),
-			}),
-			error: zErrorObj(),
-			counter: zCounterObj(),
-		})
-	},
-	notes: () => {
-		return z.object({
-			value: zStringArray(),
-			error: zErrorObj(),
-			counter: zCounterObj(),
-		})
-	},
-	nationalities: () => {
-		return z.object({
-			value: z.object({
-				restricted: z.boolean().prefault(false),
-				nationalities: z
-					.object({
-						counter: zCounterObj(),
-						value: zMinStringObj(3),
-					})
-					.array(),
-				notes: zStringArray(),
-			}),
-			error: zErrorObj(),
-			counter: zCounterObj(),
-		})
-	},
-	discordHandle: () => {
-		return z.object({
-			value: z.string().trim(),
-			error: zErrorObj(),
-		})
-	},
-}
-// #endregion ?
