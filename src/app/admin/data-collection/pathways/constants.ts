@@ -6,7 +6,6 @@ export const APPROVED_HANDLES = {
 	thenotorioushlb: 'admin',
 	chaoticpluto366: 'admin',
 	repairedbutton: 'admin',
-	'elizabeth.the.3rd': 'admin',
 }
 
 export const MOCK_DATA: Pathways = {

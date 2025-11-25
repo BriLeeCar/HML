@@ -23,6 +23,10 @@ const nextConfig: NextConfig = {
 				protocol: 'https',
 				hostname: 'brileec.com',
 			},
+			{
+				protocol: 'https',
+				hostname: 'pub-87438faadb01418487f9087b516e33b8.r2.dev',
+			},
 		],
 	},
 	devIndicators: false,

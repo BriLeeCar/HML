@@ -322,3 +322,372 @@ const minString = (min: number) => {
 	return z.string().trim().min(min, `Must be at least ${min} characters long`)
 }
 // #endregion
+
+export const pathwaySubmit = (pathway: PathwaysWithDB) => {
+	const pathwayId = pathway.pathwayId.value?.toLowerCase() as string
+	const parsedPathway = { ...pathway }
+
+	const parsed = z
+		.object({
+			countryId: z
+				.object({
+					value: z.string().min(3),
+					error: z.array(z.string()),
+				})
+				.transform(val => val.value),
+			pathwayId: z
+				.object({
+					value: z.string().min(3),
+					error: z.array(z.string()),
+				})
+				.transform(val => val.value.toLowerCase()),
+			discordHandle: z
+				.object({
+					value: z.string().min(3),
+					error: z.array(z.string()),
+				})
+				.transform(val => val.value),
+			officialName: z
+				.object({
+					value: z.string().min(10),
+					error: z.array(z.string()),
+				})
+				.transform(val => val.value),
+			officialLink: z
+				.object({
+					value: z.url(),
+					error: z.array(z.string()),
+				})
+				.transform(val => val.value),
+			category: z
+				.object({
+					value: z.string().min(3),
+					error: z.array(z.string()),
+				})
+				.transform(val => val.value),
+			description: z
+				.object({
+					value: z.string().min(10),
+					error: z.array(z.string()),
+				})
+				.transform(val => val.value),
+			citizenshipPossible: z
+				.object({
+					value: z.boolean(),
+				})
+				.transform(val => val.value),
+			citizenshipNote: z
+				.object({
+					value: z.string().nullable(),
+					error: z.array(z.string()),
+				})
+				.transform(val => val.value),
+			reunificationPossible: z
+				.object({
+					value: z.boolean(),
+				})
+				.transform(val => val.value),
+			reunificationNote: z
+				.object({
+					value: z.string().nullable(),
+					error: z.array(z.string()),
+				})
+				.transform(val => val.value),
+			residencyPossible: z
+				.object({
+					value: z.boolean(),
+				})
+				.transform(val => val.value),
+			residencyNote: z
+				.object({
+					value: z.string().nullable(),
+					error: z.array(z.string()),
+				})
+				.transform(val => val.value),
+			costUom: z
+				.object({
+					value: z
+						.object({
+							abbr: z.string().nullable(),
+							currencySymbol: z.string().nullable(),
+						})
+						.nullable(),
+					error: z.array(z.string()),
+				})
+				.transform(val => val.value?.abbr),
+			duration: z
+				.object({
+					value: z.object({
+						min: z.object({
+							value: z.number().min(0),
+							error: z.array(z.string()),
+						}),
+						max: z.object({
+							value: z.number().min(0),
+							error: z.array(z.string()),
+						}),
+						uom: z.object({
+							value: z.object({
+								base: z.string().nullable(),
+								value: z.number().min(1),
+								label: z.string().nullable(),
+							}),
+							error: z.array(z.string()),
+						}),
+					}),
+					error: z.array(z.string()),
+				})
+				.transform(val => {
+					return {
+						min: val.value.min.value * val.value.uom.value.value,
+						max: val.value.max.value * val.value.uom.value.value,
+					}
+				}),
+			processingTime: z
+				.object({
+					value: z.object({
+						min: z.object({
+							value: z.number().min(0),
+							error: z.array(z.string()),
+						}),
+						max: z.object({
+							value: z.number().min(0),
+							error: z.array(z.string()),
+						}),
+						uom: z.object({
+							value: z.object({
+								base: z.string().nullable(),
+								value: z.number().min(1),
+								label: z.string().nullable(),
+							}),
+							error: z.array(z.string()),
+						}),
+					}),
+					error: z.array(z.string()),
+				})
+				.transform(val => {
+					return {
+						min: val.value.min.value * val.value.uom.value.value,
+						max: val.value.max.value * val.value.uom.value.value,
+					}
+				}),
+			cost: z
+				.object({
+					value: z.object({
+						min: z.object({
+							value: z.number().min(0),
+							error: z.array(z.string()),
+						}),
+						max: z.object({
+							value: z.number().min(0),
+							error: z.array(z.string()),
+						}),
+					}),
+					error: z.array(z.string()),
+				})
+				.transform(val => ({
+					min: val.value.min.value,
+					max: val.value.max.value,
+				})),
+			isRenewable: z
+				.object({
+					value: z.boolean(),
+				})
+				.transform(val => val.value),
+			renewableDuration: z
+				.object({
+					value: z
+						.object({
+							min: z.object({
+								value: z.number().min(0),
+								error: z.array(z.string()),
+							}),
+							max: z.object({
+								value: z.number().min(0),
+								error: z.array(z.string()),
+							}),
+							uom: z.object({
+								value: z.object({
+									base: z.string().nullable(),
+									value: z.number().min(1),
+									label: z.string().nullable(),
+								}),
+								error: z.array(z.string()),
+							}),
+						})
+						.nullable(),
+					error: z.array(z.string()),
+				})
+				.transform(val => {
+					if (val.value == null) {
+						return {
+							min: null,
+							max: null,
+						}
+					}
+					return {
+						min: val.value.min.value * val.value.uom.value.value,
+						max: val.value.max.value * val.value.uom.value.value,
+					}
+				}),
+			renewableSameAsInitial: z
+				.object({
+					value: z.boolean(),
+				})
+				.transform(val => val.value),
+			hasLimitations: z
+				.object({
+					value: z.boolean(),
+				})
+				.transform(val => val.value),
+			limitations: z
+				.object({
+					value: z.array(
+						z.object({
+							note: z.string().min(10),
+							error: z.array(z.string()),
+							counter: z.number(),
+						})
+					),
+				})
+				.transform(val => val.value.map(n => n.note)),
+			hasNationalityRestrictions: z
+				.object({
+					value: z.boolean(),
+				})
+				.transform(val => val.value),
+			restrictedNationalities: z
+				.object({
+					value: z.array(
+						z.object({
+							country: z.string().min(3),
+							note: z.string().min(10),
+							error: z.array(z.string()),
+							counter: z.number(),
+						})
+					),
+				})
+				.transform(val => val.value.map(n => ({ country: n.country, note: n.note }))),
+			documents: z
+				.object({
+					value: z.array(
+						z.object({
+							title: z.string().min(5),
+							cost: z.number().min(0),
+							note: z.string().nullable(),
+							error: z.array(z.string()),
+							counter: z.number(),
+						})
+					),
+				})
+				.transform(val => val.value.map(d => ({ title: d.title, cost: d.cost, note: d.note }))),
+			notes: z
+				.object({
+					value: z.array(
+						z.object({
+							note: z.string().min(10),
+							error: z.array(z.string()),
+							counter: z.number(),
+						})
+					),
+				})
+				.transform(val => val.value.map(n => n.note)),
+			requirements: z
+				.object({
+					value: z.array(
+						z.object({
+							note: z.string().min(10),
+							error: z.array(z.string()),
+							counter: z.number(),
+						})
+					),
+				})
+				.transform(val => val.value.map(n => n.note)),
+		})
+		.transform(val => {
+			return {
+				base: {
+					['Country Id']: val.countryId,
+					['Pathway Id']: val.pathwayId,
+					['Discord Handle']: val.discordHandle,
+					['Official Name']: val.officialName,
+					['Official Link']: val.officialLink,
+					['Category']: val.category,
+					['Description']: val.description,
+
+					['Citizenship Possible']: val.citizenshipPossible,
+					['Citizenship Note']: val.citizenshipPossible ? val.citizenshipNote : null,
+
+					['Reunification Possible']: val.reunificationPossible,
+					['Reunification Note']: val.reunificationPossible ? val.reunificationNote : null,
+
+					['Residency Possible']: val.residencyPossible,
+					['Residency Note']: val.residencyPossible ? val.residencyNote : null,
+
+					['Cost UoM']: val.costUom,
+
+					['Duration Min (in days)']: val.duration.min,
+					['Duration Max (in days)']: val.duration.max,
+
+					['Processing Time Min (in days)']: val.processingTime.min,
+					['Processing Time Max (in days)']: val.processingTime.max,
+
+					['Cost Min']: val.cost.min,
+					['Cost Max']: val.cost.max,
+
+					['Is Renewable']: val.isRenewable,
+					['Renewable Duration Min (in days)']: val.isRenewable ? val.renewableDuration.min : null,
+					['Renewable Duration Max (in days)']: val.isRenewable ? val.renewableDuration.max : null,
+					['Renewable Same As Initial']: val.isRenewable ? val.renewableSameAsInitial : null,
+
+					['Has Limitations']: val.hasLimitations,
+				},
+				...(val.hasLimitations && {
+					limitations: val.limitations.map((limitation, index) => ({
+						['Country Id']: val.countryId,
+						['Pathway Id']: pathwayId,
+						['Limitation Id']: `${pathwayId}_limitation_${index + 1}`,
+						['Note']: limitation,
+					})),
+				}),
+				...(val.hasNationalityRestrictions && {
+					restrictedNationalities: val.restrictedNationalities.map((restriction, index) => ({
+						['Country Id']: val.countryId,
+						['Pathway Id']: pathwayId,
+						['Restriction Id']: `${pathwayId}_restriction_${index + 1}`,
+						['Country']: restriction.country,
+						['Note']: restriction.note,
+					})),
+				}),
+				...(val.documents.length > 0 && {
+					documents: val.documents.map((document, index) => ({
+						['Country Id']: val.countryId,
+						['Pathway Id']: pathwayId,
+						['Document Id']: `${pathwayId}_document_${index + 1}`,
+						['Title']: document.title,
+						['Cost']: document.cost,
+						['Note']: document.note,
+					})),
+				}),
+				...(val.notes.length > 0 && {
+					notes: val.notes.map((note, index) => ({
+						['Country Id']: val.countryId,
+						['Pathway Id']: pathwayId,
+						['Note Id']: `${pathwayId}_note_${index + 1}`,
+						['Note']: note,
+					})),
+				}),
+				...(val.requirements.length > 0 && {
+					requirements: val.requirements.map((requirement, index) => ({
+						['Country Id']: val.countryId,
+						['Pathway Id']: pathwayId,
+						['Requirement Id']: `${pathwayId}_requirement_${index + 1}`,
+						['Note']: requirement,
+					})),
+				}),
+			}
+		})
+		.safeParse(parsedPathway)
+
+	return parsed
+}

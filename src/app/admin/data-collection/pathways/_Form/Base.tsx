@@ -6,15 +6,16 @@ import {
 	Fieldset,
 	Form,
 	Legend,
+	MOCK_DATA,
 	Page,
 	PageHeading,
 	PATHWAY_BASE,
 	pathwayReducer,
+	pathwaySubmit,
 	Section,
 	SectionHeading,
 	SubSection,
 	Text,
-	toCSV,
 } from '@/data-collection/pathways'
 import {
 	ApplicationCost,
@@ -36,8 +37,8 @@ export const Base = ({ handle }: { handle: string }) => {
 	const db = useContext(DBContext)
 
 	const [pathwayData, dispatchPathway] = useReducer(pathwayReducer, {
-		// ...initPathway(),
 		...PATHWAY_BASE,
+		...MOCK_DATA,
 		db: db,
 		countriesWithPathways: db.getCountriesWithPathways(),
 		discordHandle: {
@@ -49,30 +50,30 @@ export const Base = ({ handle }: { handle: string }) => {
 	const { scrollYProgress } = useScroll()
 
 	const handleSubmit = async () => {
-		console.log(toCSV({ ...pathwayData }))
+		console.log(pathwaySubmit({ ...pathwayData }))
 
-		const response = await fetch(
-			`/admin/api/pathwayWrite?handle=${pathwayData.discordHandle.value}`,
-			{
-				method: 'POST',
-				mode: 'same-origin',
+		// const response = await fetch(
+		// 	`/admin/api/pathwayWrite?handle=${pathwayData.discordHandle.value}`,
+		// 	{
+		// 		method: 'POST',
+		// 		mode: 'same-origin',
 
-				headers: {
-					'Content-Type': 'application/json',
-					Handle: handle,
-				},
-				body: JSON.stringify(toCSV({ ...pathwayData })),
-			}
-		)
+		// 		headers: {
+		// 			'Content-Type': 'application/json',
+		// 			Handle: handle,
+		// 		},
+		// 		body: JSON.stringify(toCSV({ ...pathwayData })),
+		// 	}
+		// )
 
-		if (response.ok) {
-			alert('Pathway submitted successfully!')
-			// window.scrollTo({
-			// 	top: 0,
-			// 	behavior: 'smooth',
-			// })
-			// window.location.reload()
-		}
+		// if (response.ok) {
+		// 	alert('Pathway submitted successfully!')
+		// 	// window.scrollTo({
+		// 	// 	top: 0,
+		// 	// 	behavior: 'smooth',
+		// 	// })
+		// 	// window.location.reload()
+		// }
 	}
 
 	return (
