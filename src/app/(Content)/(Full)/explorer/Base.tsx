@@ -1,72 +1,59 @@
 'use client'
 
 import { AnimatePresence } from 'motion/react'
-import {
-	Suspense,
-	useContext,
-	useEffect,
-	useReducer,
-	useRef,
-} from 'react'
+import { Suspense, useContext, useReducer, useRef } from 'react'
 import { PageHeading } from '~/components'
+import { useLocalData } from '~/lib/useLocalData'
 import { DBContext } from '~/server/db/provider'
-import {
-	Drawer,
-	FilterBtn,
-	handleColumns,
-	Masonry,
-	masonryReducer,
-} from '.'
+import { allFilters, Drawer, FilterBtn, handleColumns, Masonry, masonryReducer } from '.'
 
 export const Base = () => {
 	const db = useContext(DBContext)
+	const localItems = useLocalData<Array<keyof ApiData.ExplorerFilters>>('explorer-filters') || []
 
 	const [reducer, dispatchReducer] = useReducer(masonryReducer, {
-		countries: [],
+		countries: db
+			.getCountriesWithPathways()
+			.filter(country => {
+				if (localItems.length == 0) {
+					return true
+				}
+
+				const filters = allFilters.filter(f => localItems.includes(f.key))
+				return filters.every(filter => filter.matches(country))
+			})
+			.sort((a, b) => a.name.localeCompare(b.name)),
 		drawer: { status: false, size: '' },
-		filters: [],
+		filters: allFilters
+			.filter(f => localItems.includes(f.key))
+			.map(f => ({
+				...f,
+				value: true,
+			})),
 		db: db,
 		search: {
 			query: '',
 		},
 	})
 
-	useEffect(() => {
-		const cookies = window.localStorage.getItem('explorer-filters')
-		if (cookies) {
-			try {
-				const parsed = JSON.parse(cookies)
-				if (Array.isArray(parsed) && parsed.length > 0) {
-					dispatchReducer({
-						type: 'SET_COOKIES',
-						payload: parsed,
-					})
-				} else {
-					dispatchReducer({ type: 'SET_COUNTRIES' })
-				}
-			} catch (e) {
-				console.error(
-					'Error parsing explorer-filters from localStorage',
-					e
-				)
-			}
-		} else {
-			window.localStorage.setItem('explorer-filters', '[]')
-			dispatchReducer({ type: 'SET_COUNTRIES' })
-		}
-	}, [])
-
 	const overlayRef = useRef<HTMLDivElement>(null)
 	const masonryRef = useRef<HTMLDivElement>(null)
+
+	if (reducer.filters.length === 0 && localItems.length > 0) {
+		dispatchReducer({
+			type: 'INIT_FILTERS',
+			payload: null,
+		})
+	}
+
 	return (
 		<>
 			<div className='relative mx-auto my-4 flex w-[95%] flex-col items-center justify-between rounded-2xl px-4 py-2 sm:flex-row'>
 				<PageHeading
 					subtitle={
 						<>
-							Use a combination of the filters and some of the visual
-							clues on the country cards to help narrow down your
-							search!
+							Use a combination of the filters and some of the visual clues on the country cards to
+							help narrow down your search!
 						</>
 					}
 					eyebrow='Visa Explorer'>
@@ -75,7 +62,7 @@ export const Base = () => {
 				<span className='flex items-center justify-start gap-4'>
 					<FilterBtn
 						className='hidden md:inline-flex'
-						count={Object.keys(reducer.filters).length}
+						count={Object.keys(localItems).length}
 						onClick={() =>
 							dispatchReducer({
 								type: 'SET_DRAWER',
@@ -87,7 +74,7 @@ export const Base = () => {
 					/>{' '}
 					<FilterBtn
 						className='md:hidden'
-						count={Object.keys(reducer.filters).length}
+						count={Object.keys(localItems).length}
 						onClick={() =>
 							dispatchReducer({
 								type: 'SET_DRAWER',
@@ -99,8 +86,7 @@ export const Base = () => {
 					/>
 				</span>
 			</div>
-			<Suspense
-				fallback={<div className='text-center'>Loading...</div>}>
+			<Suspense fallback={<div className='text-center'>Loading...</div>}>
 				<Masonry
 					key={reducer.countries.length}
 					columns={handleColumns(reducer)}

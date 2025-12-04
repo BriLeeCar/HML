@@ -1,0 +1,431 @@
+generator client {
+  provider        = "prisma-client"
+  output          = "../src/server/prisma/generated"
+  previewFeatures = ["views"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Country {
+  code               String                         @id @unique
+  name               String
+  countryCurrencies  CountryCurrency[]
+  countryLanguages   CountryLanguage[]
+  pathways           Pathway[]
+  restrictedPathways PathwayRestrictedNationality[]
+}
+
+model CountryLanguage {
+  countryCode  String
+  languageCode String
+  country      Country  @relation(fields: [countryCode], references: [code])
+  language     Language @relation(fields: [languageCode], references: [code])
+
+  @@id([countryCode, languageCode])
+}
+
+model CountryCurrency {
+  countryCode  String
+  currencyCode String
+  country      Country  @relation(fields: [countryCode], references: [code])
+  currency     Currency @relation(fields: [currencyCode], references: [code])
+
+  @@id([countryCode, currencyCode])
+}
+
+model Pathway {
+  id                      Int                            @id @default(autoincrement())
+  countryCode             String
+  name                    String
+  link                    String
+  description             String
+  type                    PathwayType
+  discordHandle           String
+  createdAt               DateTime                       @default(now())
+  updatedAt               DateTime                       @default(dbgenerated("date(CURRENT_TIMESTAMP)")) @updatedAt
+  currencyCode            String
+  notes                   String[]                       @default([])
+  limitations             String[]                       @default([])
+  requirements            String[]                       @default([])
+  restrictions            String[]                       @default([])
+  cost                    Json                           @db.Json
+  duration                Json                           @db.Json
+  processTime             Json                           @db.Json
+  renewal                 Json                           @db.Json
+  country                 Country                        @relation(fields: [countryCode], references: [code])
+  currency                Currency                       @relation(fields: [currencyCode], references: [code])
+  categories              PathwayCategories[]
+  documents               PathwayDocuments[]
+  pipelines               PathwayPipeline[]
+  restrictedNationalities PathwayRestrictedNationality[]
+}
+
+model PathwayCategories {
+  pathwayId     Int
+  pathwayTypeId Int
+  pathway       Pathway      @relation(fields: [pathwayId], references: [id])
+  pathwayType   PathwayTypes @relation(fields: [pathwayTypeId], references: [id])
+
+  @@id([pathwayId, pathwayTypeId])
+}
+
+model PathwayPipeline {
+  id        Int              @id @default(autoincrement())
+  pathwayId Int
+  pipeline  PathwayPipelines
+  note      String?
+  pathway   Pathway          @relation(fields: [pathwayId], references: [id])
+}
+
+model PathwayRestrictedNationality {
+  pathwayId   Int
+  countryCode String
+  note        String?
+  country     Country @relation(fields: [countryCode], references: [code])
+  pathway     Pathway @relation(fields: [pathwayId], references: [id])
+
+  @@id([pathwayId, countryCode])
+}
+
+model PathwayDocuments {
+  id          Int       @id @default(autoincrement())
+  pathwayId   Int
+  documentId  Int
+  description String?
+  cost        Decimal   @default(0.00)
+  document    Documents @relation(fields: [documentId], references: [id])
+  link        String?
+  isRequired  Boolean   @default(false)
+  title       String?
+  pathway     Pathway   @relation(fields: [pathwayId], references: [id])
+}
+
+model Currency {
+  code              String            @id @unique
+  name              String
+  symbol            String
+  countryCurrencies CountryCurrency[]
+  pathways          Pathway[]
+}
+
+model Documents {
+  id               Int                @id @default(autoincrement())
+  name             String
+  description      String?
+  type             DocumentType[]     @default([GENERAL])
+  pathwayDocuments PathwayDocuments[]
+}
+
+model Language {
+  code             String            @id @unique
+  name             String
+  countryLanguages CountryLanguage[]
+}
+
+model Post {
+  id                   Int                  @id @default(autoincrement())
+  name                 String
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+  authorId             String               @map("createdById")
+  contentHTML          String
+  contentText          String
+  subtitle             String?
+  slug                 String               @unique
+  image                Boolean              @default(false)
+  metaDescription      String?
+  metaKeywords         String[]             @default([])
+  status               ContentStatus        @default(DRAFT)
+  contentDelta         String               @default("{}")
+  imageExt             String?
+  imageKey             String?
+  postVersionHistories PostVersionHistory[]
+  author               User                 @relation(fields: [authorId], references: [id])
+  postBlock            PostBlock[]
+  tags                 PostTag[]
+
+  @@index([name, slug])
+}
+
+model PostTag {
+  postId Int
+  tagId  Int
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  tag    Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([postId, tagId])
+}
+
+model Tag {
+  id        Int            @id @default(autoincrement())
+  name      String
+  parentId  Int?
+  color     String         @default("grey")
+  posts     PostTag[]
+  parent    Tag?           @relation("TagToTag", fields: [parentId], references: [id])
+  children  Tag[]          @relation("TagToTag")
+  childTag  TagHierarchy[] @relation("TagHierarchyChild")
+  parentTag TagHierarchy[] @relation("TagHierarchyParent")
+
+  @@index([name, parentId])
+}
+
+model TagHierarchy {
+  id       Int @id @default(autoincrement())
+  parentId Int
+  childId  Int
+  parent   Tag @relation("TagHierarchyChild", fields: [childId], references: [id], onDelete: Cascade)
+  child    Tag @relation("TagHierarchyParent", fields: [parentId], references: [id], onDelete: Cascade)
+
+  @@unique([parentId, childId])
+}
+
+model Resource {
+  id          Int      @id @default(autoincrement())
+  name        String
+  type        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  authorId    String
+  content     String
+  author      User     @relation(fields: [authorId], references: [id], onDelete: NoAction)
+}
+
+model Block {
+  id         Int          @id @default(autoincrement())
+  slug       String       @unique
+  name       String
+  component  String
+  type       String       @default("text")
+  blockField BlockField[]
+  postBlock  PostBlock[]
+
+  @@index([name, slug])
+}
+
+model BlockField {
+  id           Int     @id @default(autoincrement())
+  blockId      Int
+  name         String
+  type         String
+  options      String?
+  slug         String
+  defaultValue String?
+  block        Block   @relation(fields: [blockId], references: [id], onDelete: Cascade)
+
+  @@unique([blockId, name])
+  @@index([blockId, slug])
+}
+
+model PostBlock {
+  id       Int    @id @default(autoincrement())
+  postId   Int
+  blockId  Int
+  type     String
+  content  String
+  position Int
+  block    Block  @relation(fields: [blockId], references: [id], onDelete: Cascade)
+  post     Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@index([postId, blockId])
+}
+
+model Account {
+  id                       String  @id(map: "Account_pkey") @default(cuid())
+  userId                   String
+  type                     String
+  provider                 String
+  providerAccountId        String
+  refresh_token            String?
+  access_token             String?
+  expires_at               Int?
+  token_type               String?
+  scope                    String?
+  id_token                 String?
+  session_state            String?
+  refresh_token_expires_in Int?
+  user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade, map: "Account_userId_fkey")
+
+  @@unique([provider, providerAccountId], map: "Account_provider_providerAccountId_key")
+  @@map("CMS_Account")
+}
+
+model Session {
+  id           String   @id(map: "Session_pkey") @default(cuid())
+  sessionToken String   @unique(map: "Session_sessionToken_key")
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade, map: "Session_userId_fkey")
+
+  @@map("CMS_Session")
+}
+
+model User {
+  id                 String               @id(map: "User_pkey") @default(cuid())
+  name               String               @unique(map: "User_name_key")
+  email              String?
+  emailVerified      DateTime?
+  image              String?
+  secret             String
+  firstName          String?
+  lastName           String?
+  discordHandle      String?
+  accounts           Account[]
+  postVersionHistory PostVersionHistory[]
+  sessions           Session[]
+  key                UserKey?
+  roles              UserRoles[]
+  socials            UserSocial[]
+  posts              Post[]
+  resources          Resource[]
+
+  @@map("CMS_User")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique(map: "VerificationToken_token_key")
+  expires    DateTime
+
+  @@unique([identifier, token], map: "VerificationToken_identifier_token_key")
+  @@map("CMS_VerificationToken")
+}
+
+model UserKey {
+  key    String  @id(map: "UserKey_pkey") @default(cuid())
+  name   String
+  userId String? @unique(map: "UserKey_userId_key")
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade, map: "UserKey_userId_fkey")
+
+  @@map("CMS_UserKey")
+}
+
+model UserSocial {
+  userId     String
+  handle     String
+  socialCode String
+  social     Social @relation(fields: [socialCode], references: [codeName], onDelete: Cascade, map: "UserSocial_socialCode_fkey")
+  user       User   @relation(fields: [userId], references: [id], onDelete: Cascade, map: "UserSocial_userId_fkey")
+
+  @@id([userId, socialCode], map: "UserSocial_pkey")
+  @@map("CMS_UserSocial")
+}
+
+model UserRoles {
+  userId String
+  roleId Int
+  role   Roles  @relation(fields: [roleId], references: [id], onDelete: Cascade, map: "UserRoles_roleId_fkey")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, map: "UserRoles_userId_fkey")
+
+  @@id([userId, roleId], map: "UserRoles_pkey")
+  @@map("CMS_UserRoles")
+}
+
+model Roles {
+  id        Int         @id(map: "Roles_pkey") @default(autoincrement())
+  name      String      @unique(map: "Roles_name_key")
+  UserRoles UserRoles[]
+
+  @@map("CMS_Roles")
+}
+
+model Social {
+  name               String       @unique(map: "Social_name_key")
+  url                String
+  icon               String
+  codeName           String       @id(map: "Social_pkey")
+  profileLinkFormat  String
+  profileEntryFormat String
+  darkModeColor      String
+  lightModeColor     String
+  users              UserSocial[]
+
+  @@map("CMS_Social")
+}
+
+model PostVersionHistory {
+  id         Int      @id(map: "PostVersionHistory_pkey") @default(autoincrement())
+  postId     Int
+  userId     String
+  action     String
+  instanceAt DateTime @default(now())
+  post       Post     @relation(fields: [postId], references: [id], onDelete: Cascade, map: "PostVersionHistory_postId_fkey")
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade, map: "PostVersionHistory_userId_fkey")
+
+  @@map("CMS_PostVersionHistory")
+}
+
+model PathwayTypes {
+  id          Int                 @id(map: "pathwaytypes_pkey") @default(autoincrement())
+  name        String              @db.VarChar(255)
+  parentId    Int?
+  description String?
+  pathways    PathwayCategories[]
+  parent      PathwayTypes?       @relation("PathwayTypesParentChild", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "pathwaytypes_parentid_fkey")
+  children    PathwayTypes[]      @relation("PathwayTypesParentChild")
+}
+
+view CountryDetailed {
+  code       String
+  name       String
+  currencies Json[] @db.Json
+  languages  Json[] @db.Json
+}
+
+enum PathwayType {
+  ASYLUM
+  VISA
+}
+
+enum PathwayPipelines {
+  CITIZENSHIP
+  RESIDENCY
+  REUNIFICATION
+}
+
+enum PathwayNoteType {
+  GENERAL
+  LIMITATION
+  REQUIREMENT
+}
+
+enum ContentStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum DocumentType {
+  GENERAL
+  FINANCIAL
+  IDENTIFICATION
+  EVIDENCE
+  SUPPORTING
+  SPONSORSHIP
+  INSURANCE
+  PLAN
+}
+
+enum TagColor {
+  amber
+  blue
+  cyan
+  emerald
+  fuchsia
+  green
+  indigo
+  lime
+  orange
+  pink
+  purple
+  red
+  rose
+  sky
+  teal
+  violet
+  yellow
+  zinc
+}

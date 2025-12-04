@@ -1,34 +1,29 @@
+import { api } from 'query'
 import { Base } from './_Form/Base'
-import { APPROVED_HANDLES } from './constants'
 
-import { GetHandle } from './HandleInput'
+import { verifyUser } from '~/server/auth/lib/verifyUser'
 
-const VisaPathwayCollectionPage = async ({
-	searchParams,
-}: PageProps<'/admin/data-collection/pathways'>) => {
-	const { handle } = await searchParams
+const VisaPathwayCollectionPage = async () => {
+	await verifyUser()
 
-	console.log(handle)
+	const query = await api.dataCollection.PathwayInit({
+		countries: {
+			query: [],
+			select: {
+				code: true,
+				name: true,
+				currencies: true,
+				languages: true,
+			},
+		},
+	})
 
-	if (!handle) {
-		return (
-			<Wrapper>
-				<GetHandle />
-			</Wrapper>
-		)
-	}
-
-	if (!Object.keys(APPROVED_HANDLES).includes(handle as string)) {
-		return (
-			<Wrapper>
-				<GetHandle />
-			</Wrapper>
-		)
-	}
+	// const pipelines = await api.dataCollection.Select()
+	// query['new'] = pipelines
 
 	return (
 		<Wrapper>
-			<Base handle={handle as string} />
+			<Base prisma={query} />
 		</Wrapper>
 	)
 }

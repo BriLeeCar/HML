@@ -2,6 +2,7 @@ import { allFilters, type tMasonryActions, type tMasonryState } from '.'
 
 export const masonryReducer = (state: tMasonryState, action: tMasonryActions) => {
 	const newState = { ...state }
+	console.log('Action:', action)
 
 	if (action.type == 'SET_DRAWER') {
 		Object.assign(newState, {
@@ -10,6 +11,24 @@ export const masonryReducer = (state: tMasonryState, action: tMasonryActions) =>
 				size: action.payload.size,
 			},
 		})
+		return newState
+	}
+
+	if (action.type == 'INIT_FILTERS') {
+		const localItems = JSON.parse(
+			window.localStorage.getItem('explorer-filters') || '[]'
+		) as string[]
+		const filters = allFilters
+			.filter(f => localItems.includes(f.key))
+			.map(f => ({
+				...f,
+				value: true,
+			}))
+
+		Object.assign(newState, {
+			filters: filters,
+		})
+		parseFilters(newState, filters[0] || undefined)
 		return newState
 	}
 
@@ -63,7 +82,7 @@ export const masonryReducer = (state: tMasonryState, action: tMasonryActions) =>
 	return newState
 }
 
-const parseFilters = (
+export const parseFilters = (
 	newState: tMasonryState,
 	payloadFilters?: tMasonryState['filters'][0],
 	countries?: ApiData.Country[]

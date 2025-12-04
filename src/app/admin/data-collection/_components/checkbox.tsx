@@ -27,7 +27,6 @@ export function CheckboxField({
 			data-slot='field'
 			{...props}
 			className={cn(
-				className,
 				// Base layout
 				'grid grid-cols-[1.125rem_1fr] gap-x-4 gap-y-1 sm:grid-cols-[1rem_1fr]',
 				// Control layout
@@ -37,7 +36,9 @@ export function CheckboxField({
 				// Description layout
 				'*:data-[slot=description]:col-start-2 *:data-[slot=description]:row-start-2',
 				// With description
-				'has-data-[slot=description]:**:data-[slot=label]:font-medium'
+				'has-data-[slot=description]:**:data-[slot=label]:font-medium',
+
+				className
 			)}
 		/>
 	)
@@ -61,10 +62,10 @@ const base = [
 	'after:absolute after:inset-0 after:rounded-[calc(0.3125rem-1px)] after:shadow-[inset_0_1px_--theme(--color-white/15%)]',
 	'dark:after:-inset-px dark:after:hidden dark:after:rounded-[0.3125rem] dark:group-data-checked:after:block',
 	// Focus ring
-	'group-data-focus:outline-2 group-data-focus:outline-offset-2 group-data-focus:outline-[#AC162B]',
+	'group-data-focus:outline-2 group-data-focus:outline-offset-2 group-data-focus:outline-interactive',
 	// Disabled state
 	'group-data-disabled:opacity-50',
-	'group-data-disabled:border-zinc-950/25 group-data-disabled:bg-zinc-950/5 group-data-disabled:[--checkbox-check:var(--color-zinc-950)]/50 group-data-disabled:before:bg-transparent',
+	'group-data-disabled:border-zinc-950/25 group-data-disabled:bg-zinc-950/5 group-data-disabled:[--checkbox-check:var(--color-interactive)]/50 group-data-disabled:before:bg-transparent',
 	'dark:group-data-disabled:border-white/20 dark:group-data-disabled:bg-white/2.5 dark:group-data-disabled:[--checkbox-check:var(--color-white)]/50 dark:group-data-checked:group-data-disabled:after:hidden',
 	// Forced colors mode
 	'forced-colors:[--checkbox-check:HighlightText] forced-colors:[--checkbox-checked-bg:Highlight] forced-colors:group-data-disabled:[--checkbox-check:Highlight]',
@@ -73,8 +74,8 @@ const base = [
 
 const colors = {
 	brand: [
-		'[--checkbox-check:var(--color-white)] [--checkbox-checked-bg:#42585E] [--checkbox-checked-border:#222D30]/80',
-		'dark:[--checkbox-checked-bg:#DAE638] dark:[--checkbox-checked-border:#5A5F0C]/80 dark:[--checkbox-check:var(--color-zinc-900)]',
+		'[--checkbox-check:var(--color-white)] [--checkbox-checked-bg:var(--color-interactive)] [--checkbox-checked-border:var(--color-interactive)]/80',
+		'dark:[--checkbox-checked-bg:var(--color-interactive)] dark:[--checkbox-checked-border:#5A5F0C]/80 dark:[--checkbox-check:var(--color-zinc-900)]',
 	],
 	'dark/zinc': [
 		'[--checkbox-check:var(--color-white)] [--checkbox-checked-bg:var(--color-zinc-900)] [--checkbox-checked-border:var(--color-zinc-950)]/90',
@@ -130,7 +131,7 @@ export function Checkbox({
 		<Headless.Checkbox
 			data-slot='control'
 			{...props}
-			className={cn(className, 'group inline-flex focus:outline-hidden')}>
+			className={cn('group inline-flex focus:outline-hidden', className)}>
 			<span className={cn([base, colors[color]])}>
 				<svg
 					className='size-4 stroke-(--checkbox-check) opacity-0 group-data-checked:opacity-100 sm:h-3.5 sm:w-3.5'

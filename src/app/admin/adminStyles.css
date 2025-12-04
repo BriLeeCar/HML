@@ -1,0 +1,11 @@
+@theme {
+	--color-v2-red: #ac162b;
+	--color-v2-mulberry: #7a2235;
+	--color-v2-yellow: #dae638;
+	--color-v2-purple-brand: #47274e;
+	--color-v2-slate: #222d30;
+	--color-v2-grey: #e9edf3;
+
+	--color-ring-color: light-dark(var(--color-v2-red), var(--color-v2-yellow));
+	--color-interactive: light-dark(var(--color-v2-red), var(--color-v2-yellow));
+}

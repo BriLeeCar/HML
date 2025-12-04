@@ -4,7 +4,7 @@ import { cn } from '~/lib/cn'
 
 const BadgeVariants = cva(
 	[
-		'inline-flex items-center gap-x-1.5 rounded-md border-1 border-current/20 px-2 py-0.5 font-mono text-[0.6rem]/5 font-medium uppercase shadow-2xs saturate-50 hover:saturate-100 forced-colors:outline',
+		'inline-flex items-center gap-x-1.5 rounded-md border border-current/20 px-2 py-0.5 font-mono text-[0.6rem]/5 font-medium uppercase shadow-2xs saturate-50 hover:saturate-100 forced-colors:outline',
 	],
 	{
 		variants: {
@@ -61,10 +61,8 @@ export const Badge = ({
 		})
 	)
 
-	const Tag = as
-
 	return (
-		<Tag
+		<span
 			{...props}
 			className={cn(
 				'group relative inline-flex rounded-md focus:not-data-focus:outline-hidden data-focus:outline-2 data-focus:outline-offset-2',
@@ -77,6 +75,6 @@ export const Badge = ({
 				e.currentTarget.removeAttribute('data-hover')
 			}}>
 			<span className={classes}>{props.children}</span>
-		</Tag>
+		</span>
 	)
 }

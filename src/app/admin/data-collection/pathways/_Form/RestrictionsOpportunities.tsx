@@ -15,11 +15,20 @@ import {
 	RemoveButtonWrapper,
 	Select,
 	Textarea,
+	type ElPrismaProps,
 } from '@/data-collection/pathways'
 import { type ReactNode } from 'react'
 import { Icon } from '~/components/Icon'
+import type { Country } from '~/server/prisma/generated/browser'
+import { note, refresh } from './refresh'
 
-export const RestrictionsOpportunities = ({ pathwayData, dispatchAction }: ElProps) => {
+export const RestrictionsOpportunities = ({
+	data,
+	handlePrisma,
+	countries,
+}: ElPrismaProps & {
+	countries: Array<{ code: string; name: string }>
+}) => {
 	return (
 		<FormSection
 			title='Restrictions & Opportunities'
@@ -30,89 +39,77 @@ export const RestrictionsOpportunities = ({ pathwayData, dispatchAction }: ElPro
 			}>
 			<CheckboxGroup>
 				<NationalityRestrictionsCB
-					pathwayData={pathwayData}
-					dispatchAction={dispatchAction}
+					data={data}
+					handlePrisma={handlePrisma}
+					countries={countries}
 				/>
 				<Limitations
-					pathwayData={pathwayData}
-					dispatchAction={dispatchAction}
+					data={data}
+					handlePrisma={handlePrisma}
 				/>
 				<RestrictionOpportunitiesCB
 					label='Potentially Allows for Reunification'
 					description='This pathway could be used to reunify family members under specific conditions.'
-					field='reunificationPossible'
-					noteField='reunificationNote'
-					data={pathwayData}
-					dispatchAction={dispatchAction}
+					field='reunification'
+					data={data}
+					handlePrisma={handlePrisma}
 				/>
 				<RestrictionOpportunitiesCB
 					label='Has a Route Towards Residency'
 					description='This pathway may provide a route to permanent or long-term residency in the country.'
-					field='residencyPossible'
-					noteField='residencyNote'
-					data={pathwayData}
-					dispatchAction={dispatchAction}
+					field='residency'
+					data={data}
+					handlePrisma={handlePrisma}
 				/>
 				<RestrictionOpportunitiesCB
 					label='Has a Route Towards Citizenship'
 					description='This pathway may provide a route to citizenship in the country.'
-					field='citizenshipPossible'
-					noteField='citizenshipNote'
-					data={pathwayData}
-					dispatchAction={dispatchAction}
+					field='citizenship'
+					data={data}
+					handlePrisma={handlePrisma}
 				/>
 			</CheckboxGroup>
 		</FormSection>
 	)
 }
 
-const RestrictionOpportunitiesCB = <B extends PathwaysBooleanKeys, A extends PathwaysStringKeys>({
+const RestrictionOpportunitiesCB = <B extends Exclude<keyof Query['piplines'], 'renewal'>>({
 	label,
 	description,
 	field,
-	noteField,
 	data,
-	dispatchAction,
+	handlePrisma,
 	...props
-}: Props<typeof Textarea> & {
-	dispatchAction: ElProps['dispatchAction']
-	label: string
-	description: ReactNode
-	field: B
-	noteField: A
-	data: PathwaysWithDB
-}) => {
-	const dbData = { ...data[field] }
-	const noteData = { ...data[noteField] }
-
+}: ElPrismaProps
+	& Props<typeof Textarea> & {
+		label: string
+		description: ReactNode
+		field: B
+	}) => {
 	return (
 		<FieldGroup>
 			<CheckboxField>
 				<Checkbox
 					name={field}
 					color='brand'
-					defaultChecked={dbData.value}
-					onClick={() => {
-						dispatchAction({
-							field: field,
-							payload: !dbData.value,
-						})
+					defaultChecked={data.piplines[field]}
+					onChange={e => {
+						const updated = { ...data }
+						updated.piplines[field] = e
+						handlePrisma(updated)
 					}}
 				/>
 				<Label>{label}</Label>
 				<Description>{description}</Description>
 			</CheckboxField>
-			{dbData.value && (
+			{data.piplines[field] == true && (
 				<Textarea
-					defaultValue={noteData.value ?? undefined}
+					defaultValue={data.query[field] ?? undefined}
 					name={`${field}Notes`}
 					{...props}
 					className='-mt-4 mb-8'
 					onBlur={e => {
-						dispatchAction({
-							field: noteField,
-							payload: e.currentTarget.value,
-						})
+						handlePrisma(refresh(data, field, e.target.value))
 					}}
 				/>
 			)}
@@ -120,58 +117,67 @@ const RestrictionOpportunitiesCB = <B extends PathwaysBooleanKeys, A extends Pat
 	)
 }
 
-const NationalityRestrictionsCB = ({ pathwayData, dispatchAction }: ElProps) => {
-	type RestrictedNationality = PathwaysWithDB['restrictedNationalities']['value'][number]
+const NationalityRestrictionsCB = ({
+	data,
+	handlePrisma,
+	countries,
+}: ElPrismaProps & {
+	countries: Country[]
+}) => {
+	const cbValue = data.query['restrictedNationalities']?.length > 0
 
-	const cbValue = { ...pathwayData.hasNationalityRestrictions }
-	const baseData = { ...pathwayData.restrictedNationalities }
-
-	const handleDelete = (counter: number) => {
-		dispatchAction({
-			type: 'delete',
-			field: 'restrictedNationalities',
-			payload: counter,
-		})
-	}
-
-	const handleNoteChange = (data: RestrictedNationality, note: string) => {
-		dispatchAction({
-			type: 'update',
-			field: 'restrictedNationalities',
-			payload: {
-				counter: data.counter,
-				value: {
-					...data,
-					note: note,
-				},
+	const handleDelete = (countryCode: string) => {
+		handlePrisma({
+			...data,
+			query: {
+				...data.query,
+				restrictedNationalities: data.query.restrictedNationalities.filter(
+					n => n.countryCode !== countryCode
+				),
 			},
 		})
 	}
 
-	const handleCountryChange = (data: RestrictedNationality, country: string) => {
-		dispatchAction({
-			type: 'update',
-			field: 'restrictedNationalities',
-			payload: {
-				counter: data.counter,
-				value: {
-					...data,
-					country: country,
-				},
+	const handleNoteChange = (countryCode: string, note: string) => {
+		handlePrisma({
+			...data,
+			query: {
+				...data.query,
+				restrictedNationalities: data.query.restrictedNationalities.map(n => {
+					if (n.countryCode === countryCode) {
+						return {
+							...n,
+							note: note,
+						}
+					}
+					return n
+				}),
 			},
 		})
 	}
 
-	const getCountryOptions = (data: RestrictedNationality) => {
-		return pathwayData.db.countries
-			.sort((a, b) => {
-				return a.name.localeCompare(b.name)
-			})
-			.filter(country => {
-				return baseData.value.every(n2 => {
-					return n2.country !== country.abbr || n2.counter === data.counter
-				})
-			})
+	const handleCountryChange = (countryCode: string, country: string) => {
+		handlePrisma({
+			...data,
+			query: {
+				...data.query,
+				restrictedNationalities: data.query.restrictedNationalities.map(n => {
+					if (n.countryCode === countryCode) {
+						return {
+							...n,
+							countryCode: country,
+						}
+					}
+					return n
+				}),
+			},
+		})
+	}
+
+	const getCountryOptions = () => {
+		return countries.sort((a, b) => {
+			return a.name.localeCompare(b.name)
+		})
 	}
 
 	return (
@@ -183,16 +189,28 @@ const NationalityRestrictionsCB = ({ pathwayData, dispatchAction }: ElProps) => 
 					when applying for this pathway.'
 				// name='nationalityRestrictions'
 				className='aria-checked:[&+label:is([data-slot="label"])]:font-semibold!'
-				defaultChecked={cbValue.value}
-				onClick={() => {
-					dispatchAction({
-						field: 'hasNationalityRestrictions',
-						payload: !cbValue.value,
+				defaultChecked={cbValue}
+				onChange={e => {
+					handlePrisma({
+						...data,
+						query: {
+							...data.query,
+							restrictedNationalities:
+								e ?
+									[
+										{
+											pathwayId: 0,
+											countryCode: '',
+											note: '',
+										},
+									]
+								:	[],
+						},
 					})
 				}}
 			/>
 
-			{cbValue.value && (
+			{cbValue && (
 				<>
 					<FormSubSection
 						className='*:data-[slot="legend"]:text-current/70 md:pl-8'
@@ -200,20 +218,20 @@ const NationalityRestrictionsCB = ({ pathwayData, dispatchAction }: ElProps) => 
 						aria-label='Countries with Restrictions'
 						description='Please include each country as a separate entry'>
 						<FieldGroup className='flex flex-col'>
-							{baseData.value.map(n => (
+							{data.query.restrictedNationalities.map(n => (
 								<FieldGroup
-									key={n.counter}
+									key={n.countryCode}
 									className='grid grid-cols-[auto_.15fr] *:grid *:grid-cols-[3.5rem_auto] *:items-baseline *:gap-x-8 *:last:grid-cols-1'>
 									<Field className='col-start-1 mb-1'>
 										<Label>Country</Label>
 										<Select
-											defaultValue={n.country}
-											onChange={e => handleCountryChange(n, e.currentTarget.value)}>
+											defaultValue={n.countryCode}
+											onChange={e => handleCountryChange(n.countryCode, e.currentTarget.value)}>
 											<option>Select a country</option>
-											{getCountryOptions(n).map(country => (
+											{getCountryOptions().map(country => (
 												<option
-													key={country.abbr}
-													value={country.abbr}>
+													key={country.code}
+													value={country.code}>
 													{country.name}
 												</option>
 											))}
@@ -222,14 +240,14 @@ const NationalityRestrictionsCB = ({ pathwayData, dispatchAction }: ElProps) => 
 									<Field className='col-start-1'>
 										<Label>Details</Label>
 										<Textarea
-											defaultValue={n.note}
+											defaultValue={n.note || undefined}
 											name='nationalityRestrictionDetails'
 											className='mt-1'
-											onBlur={e => handleNoteChange(n, e.currentTarget.value)}
+											onBlur={e => handleNoteChange(n.countryCode, e.currentTarget.value)}
 										/>
 									</Field>
 									<RemoveButtonWrapper className='mt-3 self-start'>
-										<RemoveButton onClick={() => handleDelete(n.counter)} />
+										<RemoveButton onClick={() => handleDelete(n.countryCode)} />
 									</RemoveButtonWrapper>
 								</FieldGroup>
 							))}
@@ -238,10 +256,19 @@ const NationalityRestrictionsCB = ({ pathwayData, dispatchAction }: ElProps) => 
 
 					<AddButton
 						onClick={() => {
-							dispatchAction({
-								type: 'add',
-								field: 'restrictedNationalities',
-								payload: null,
+							handlePrisma({
+								...data,
+								query: {
+									...data.query,
+									restrictedNationalities: [
+										...data.query.restrictedNationalities,
+										{
+											pathwayId: 0,
+											countryCode: '',
+											note: '',
+										},
+									],
+								},
 							})
 						}}>
 						Nationality
@@ -252,18 +279,13 @@ const NationalityRestrictionsCB = ({ pathwayData, dispatchAction }: ElProps) => 
 	)
 }
 
-const Limitations = ({ pathwayData, dispatchAction }: ElProps) => {
-	const baseData = { ...pathwayData }
-
+const Limitations = ({ data, handlePrisma }: ElPrismaProps) => {
 	return (
 		<FieldGroup>
 			<CheckBox
-				defaultChecked={baseData.hasLimitations.value}
+				defaultChecked={data.query.limitations?.length > 0}
 				onClick={() => {
-					dispatchAction({
-						field: 'hasLimitations',
-						payload: !baseData.hasLimitations.value,
-					})
+					handlePrisma(note(data, 'limitations', 'add'))
 				}}
 				label='Has Other Limitations'
 				description={
@@ -277,14 +299,14 @@ const Limitations = ({ pathwayData, dispatchAction }: ElProps) => {
 				}
 			/>
 
-			{baseData.hasLimitations.value && (
+			{data.query.limitations?.length > 0 && (
 				<FormSubSection
 					className='md:pl-8'
 					legend='Limitations'
 					aria-label='Limitations'
 					description='Please include each limitation as a separate entry'>
 					<FieldGroup className='flex flex-col'>
-						{baseData.limitations.value.map(n => (
+						{data.query.limitations.map(n => (
 							<div
 								key={n.counter}
 								className='grid grid-cols-[auto_.15fr] *:items-baseline *:last:grid-cols-1'>
@@ -294,29 +316,24 @@ const Limitations = ({ pathwayData, dispatchAction }: ElProps) => {
 										name={`limitationDetails${n.counter}`}
 										className='mt-1'
 										onBlur={e => {
-											dispatchAction({
-												type: 'update',
-												field: 'limitations',
-												payload: {
-													counter: n.counter,
-													value: {
+											handlePrisma(
+												note(
+													data,
+													'limitations',
+													'update',
+													{
 														...n,
-														note: e.currentTarget.value,
+														note: e.target.value,
 													},
-												},
-											})
+													n.counter
+												)
+											)
 										}}
 									/>
 								</Field>
 								<RemoveButtonWrapper>
 									<RemoveButton
-										onClick={() =>
-											dispatchAction({
-												type: 'delete',
-												field: 'limitations',
-												payload: n.counter,
-											})
-										}
+										onClick={() => handlePrisma(note(data, 'limitations', 'remove', n, n.counter))}
 									/>
 								</RemoveButtonWrapper>
 							</div>
@@ -324,17 +341,13 @@ const Limitations = ({ pathwayData, dispatchAction }: ElProps) => {
 					</FieldGroup>
 				</FormSubSection>
 			)}
-			{baseData.hasLimitations.value && (
+			{data.query.limitations?.length > 0 && (
 				<Button
 					type='button'
 					size='sm'
 					innerButton
 					onClick={() => {
-						dispatchAction({
-							type: 'add',
-							field: 'limitations',
-							payload: null,
-						})
+						handlePrisma(note(data, 'limitations', 'add'))
 					}}>
 					<Icon
 						IconName='PlusCircleIcon'

@@ -25,11 +25,11 @@ export const Select = forwardRef(function Select(
 				// Basic layout
 				'group relative block w-full',
 				// Background color + shadow applied to inset pseudo element, so shadow blends with border in light mode
-				'before:absolute before:inset-px before:rounded-[calc(var(--radius-lg)-1px)] before:bg-white before:shadow-sm',
+				'before:absolute before:inset-px before:rounded-[calc(var(--radius-lg)-1px)] before:bg-white before:shadow-sm in-data-invalid:before:shadow-red-900/15',
 				// Background color is moved to control and shadow is removed in dark mode so hide `before` pseudo
 				'dark:before:hidden',
 				// Focus ring
-				'after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-transparent after:ring-inset has-data-focus:after:ring-2 has-data-focus:after:ring-[#AC162B]',
+				'has-data-focus:after:ring-interactive after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-transparent after:ring-inset has-data-focus:after:ring-2',
 				// Disabled state
 				'has-data-disabled:opacity-50 has-data-disabled:before:bg-zinc-950/5 has-data-disabled:before:shadow-none',
 				className,
@@ -57,7 +57,9 @@ export const Select = forwardRef(function Select(
 					// Hide default focus styles
 					'focus:outline-hidden',
 					// Invalid state
-					'data-invalid:border-red-500 data-invalid:data-hover:border-red-500 dark:data-invalid:border-red-600 dark:data-invalid:data-hover:border-red-600',
+					'data-invalid:border-red-500/40 data-invalid:data-hover:border-red-500 dark:data-invalid:border-red-600/40 dark:data-invalid:data-hover:border-red-600',
+					'in-data-invalid:border-red-500/40 in-data-invalid:data-hover:border-red-500 dark:in-data-invalid:border-red-600/40 dark:in-data-invalid:data-hover:border-red-600',
+					'click',
 					// Disabled state
 					'data-disabled:cursor-not-allowed data-disabled:border-zinc-950/20 data-disabled:opacity-100 dark:data-disabled:border-white/15 dark:data-disabled:bg-white/2.5 dark:data-hover:data-disabled:border-white/15',
 					'data-placeholder:text-center data-placeholder:text-xs/6 data-placeholder:tracking-wide data-placeholder:text-current/75 data-placeholder:italic',

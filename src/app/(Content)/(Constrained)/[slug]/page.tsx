@@ -15,21 +15,18 @@ import { toTitleCase } from '~/lib/text'
 
 export const generateStaticParams = () => {
 	const pages = fs.readdirSync('src/data/pages')
-	return pages.map((page) => {
+	return pages.map(page => {
 		const slug = page.replace('.mdx', '')
 		return { slug }
 	})
 }
 
-export const generateMetadata = async ({
-	params,
-}: PageProps<'/[slug]'>): Promise<Metadata> => {
+export const dynamicParams = false
+
+export const generateMetadata = async ({ params }: PageProps<'/[slug]'>): Promise<Metadata> => {
 	const { slug } = await params
 	try {
-		const file = fs.readFileSync(
-			`src/data/pages/${slug}.mdx`,
-			'utf-8'
-		)
+		const file = fs.readFileSync(`src/data/pages/${slug}.mdx`, 'utf-8')
 		if (file) {
 			const data = getFrontmatter(file)
 			const { metadata } = data.frontmatter as {
@@ -39,9 +36,7 @@ export const generateMetadata = async ({
 				}
 			}
 			return {
-				title:
-					metadata.title
-					?? (toTitleCase(slug.replace(/-/g, ' ')) as string),
+				title: metadata.title ?? (toTitleCase(slug.replace(/-/g, ' ')) as string),
 				description: metadata.description ?? undefined,
 			}
 		}
@@ -60,17 +55,16 @@ const Page = async (props: PageProps<'/[slug]'>) => {
 		.replaceSubSections()
 		.replaceCustomMDX()
 		.setComponents({
-			h2: (props) => <SectionHeading {...props} />,
+			h2: props => <SectionHeading {...props} />,
 		})
 
-	const { subtitle, type, title, description, warnings } =
-		data.frontmatter as {
-			subtitle?: string
-			type?: string
-			title?: string
-			description?: string
-			warnings?: string[]
-		}
+	const { subtitle, type, title, description, warnings } = data.frontmatter as {
+		subtitle?: string
+		type?: string
+		title?: string
+		description?: string
+		warnings?: string[]
+	}
 
 	const parsedSlug = toTitleCase(slug.replace(/-/g, ' '))
 	const ProcessSubtitle = () => {
@@ -98,8 +92,7 @@ const Page = async (props: PageProps<'/[slug]'>) => {
 					subtitle={ProcessSubtitle()}
 					eyebrow={
 						<span className='flex items-center gap-1'>
-							{toTitleCase(type as string)}s{' '}
-							<Icon IconName='ArrowRightIcon' /> {description}
+							{toTitleCase(type as string)}s <Icon IconName='ArrowRightIcon' /> {description}
 						</span>
 					}>
 					{title || parsedSlug}

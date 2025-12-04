@@ -48,29 +48,38 @@ export function Field({
 		<Headless.Field
 			{...props}
 			className={cn(
-				className,
 				'[&>[data-slot=label]+[data-slot=control]]:mt-3',
 				'[&>[data-slot=label]+[data-slot=description]]:mt-1',
 				'[&>[data-slot=description]+[data-slot=control]]:mt-3',
 				'[&>[data-slot=control]+[data-slot=description]]:mt-3',
 				'[&>[data-slot=control]+[data-slot=error]]:mt-3',
-				'*:data-[slot=label]:font-medium'
+				'*:data-[slot=label]:font-medium',
+				'relative',
+				className
 			)}
 		/>
 	)
 }
 
 export function Label({
+	required,
 	className,
 	...props
-}: { className?: string } & Omit<Headless.LabelProps, 'as' | 'className'>) {
+}: { className?: string; required?: boolean } & Omit<Headless.LabelProps, 'as' | 'className'>) {
 	return (
 		<Headless.Label
 			data-slot='label'
+			aria-required={required ? 'true' : undefined}
 			{...props}
 			className={cn(
-				className,
-				'text-base/6 text-zinc-950 select-none data-disabled:opacity-50 sm:text-sm/6 dark:text-white'
+				'text-base/6 text-zinc-950 select-none data-disabled:opacity-50 sm:text-sm/6 dark:text-white',
+				[
+					'aria-required:after:ml-0.5',
+					'aria-required:after:font-normal',
+					'aria-required:after:text-red-500',
+					'aria-required:after:content-["*"]',
+				],
+				className
 			)}
 		/>
 	)

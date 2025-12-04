@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./admin/adminStyles.css";
 @import "tw-animate-css";
 
 /* #region THEME */
@@ -121,9 +122,7 @@
 	--color-sidebar-border: var(--sidebar-border);
 	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
 	--color-sidebar-accent: var(--sidebar-accent);
-	--color-sidebar-primary-foreground: var(
-		--sidebar-primary-foreground
-	);
+	--color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
 	--color-sidebar-muted: var(--sidebar-muted);
 	--color-sidebar-primary: var(--sidebar-primary);
 	--color-sidebar-foreground: var(--sidebar-foreground);
@@ -355,12 +354,7 @@
 }
 
 @custom-variant list-label {
-	&:is(li:has(> ol, ul)):not(
-			li ul li,
-			li ol li,
-			li + li,
-			.not-list-label
-		) {
+	&:is(li:has(> ol, ul)):not(li ul li, li ol li, li + li, .not-list-label) {
 		@slot;
 	}
 	&:is(ul):has(> li > ol, > li > ul):not(.not-list-label) {

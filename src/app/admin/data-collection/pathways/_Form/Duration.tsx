@@ -1,7 +1,11 @@
 import { FieldGroup } from '@/data-collection/pathways'
-import { FormSubSection, MinMaxTimeFieldGroup } from '@/data-collection/pathways/_Form'
+import {
+	FormSubSection,
+	MinMaxTimeFieldGroup,
+	type ElPrismaProps,
+} from '@/data-collection/pathways/_Form'
 
-export const Duration = ({ pathwayData, dispatchAction }: ElProps) => {
+export const Duration = ({ data, handlePrisma }: ElPrismaProps) => {
 	return (
 		<FormSubSection
 			aria-label='Visa Duration'
@@ -11,10 +15,11 @@ export const Duration = ({ pathwayData, dispatchAction }: ElProps) => {
 			}>
 			<FieldGroup>
 				<MinMaxTimeFieldGroup
-					pathwayData={pathwayData}
-					dispatchAction={dispatchAction}
+					data={data}
+					handlePrisma={handlePrisma}
 					field='duration'
 					className='grid gap-x-4 md:grid-cols-3'
+					error={data.errors.duration.base?.length > 0}
 				/>
 			</FieldGroup>
 		</FormSubSection>

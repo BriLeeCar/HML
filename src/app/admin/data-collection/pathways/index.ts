@@ -6,8 +6,6 @@ export * from '@/data-collection/_components'
 export * from '@/data-collection/pathways/_Form'
 export * from '@/data-collection/pathways/constants'
 export { Form } from '@/data-collection/pathways/Form'
-export * from '@/data-collection/pathways/reducer'
-export * from '@/data-collection/pathways/validation'
 
 export const errors = {
 	minGtMax: 'Max must be greater than or equal to Min',

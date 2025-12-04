@@ -7,6 +7,9 @@ import tsParser from '@typescript-eslint/parser';
 
 export default defineConfig([
     {
+        "ignores": ["node_modules/**", ".docs/**"]
+    },
+    {
         plugins: {
             react: reactPlugin,
         },
@@ -16,14 +19,17 @@ export default defineConfig([
         settings: {
             react: {
                 version: 'detect', // You can add this if you get a warning about the React version when you lint
+
             },
         },
     },
     {
         plugins: {
-            'react-hooks': hooksPlugin,
+            ['react-hooks']: hooksPlugin,
         },
-        rules: hooksPlugin.configs.recommended.rules,
+        rules: {
+            ...hooksPlugin.configs.recommended.rules,
+        }
     },
     {
         plugins: {

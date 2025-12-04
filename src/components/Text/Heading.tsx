@@ -1,4 +1,4 @@
-import type { ElementType, ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { cn } from '~/lib/cn'
 
 /**
@@ -8,22 +8,66 @@ import { cn } from '~/lib/cn'
  * @param size - The size of the heading, which affects the font size.
  *               Options are 'xs', 'sm', 'md', 'lg', and 'title'.
  *               Defaults to 'md'.
- * @return A heading element (`h1` to `h6`) with the specified level and size.
+ *
+ * @returns A heading element (`h1` to `h6`) with the specified level and size.
+ *
+ * @category Components - Text
  */
 
 export const Heading = ({ level = 2, size = 'md', ...props }: Props.Heading) => {
-	const Tag = `h${level}` as ElementType
+	const className = cn(
+		`text-foreground dark:text-accent-foreground mt-6 mb-2 font-sans font-bold tracking-tighter`,
+		size == 'title' && 'text-4xl font-black',
+		size == '2xl' && 'text-5xl',
+		size == 'xl' && 'text-3xl',
+		size == 'lg' && 'text-muted-foreground text-xl brightness-75',
+		props.className
+	)
+
+	if (level == 1) {
+		return (
+			<h1
+				{...props}
+				className={className}
+			/>
+		)
+	}
+	if (level == 2) {
+		return (
+			<h2
+				{...props}
+				className={className}
+			/>
+		)
+	}
+	if (level == 3) {
+		return (
+			<h3
+				{...props}
+				className={className}
+			/>
+		)
+	}
+	if (level == 4) {
+		return (
+			<h4
+				{...props}
+				className={className}
+			/>
+		)
+	}
+	if (level == 5) {
+		return (
+			<h5
+				{...props}
+				className={className}
+			/>
+		)
+	}
 	return (
-		<Tag
+		<h6
 			{...props}
-			className={cn(
-				`text-foreground dark:text-accent-foreground mt-6 mb-2 font-sans font-bold tracking-tighter`,
-				size == 'title' && 'text-4xl font-black',
-				size == '2xl' && 'text-5xl',
-				size == 'xl' && 'text-3xl',
-				size == 'lg' && 'text-muted-foreground text-xl brightness-75',
-				props.className
-			)}
+			className={className}
 		/>
 	)
 }
@@ -82,25 +126,24 @@ export const SectionHeading = ({
 	eyebrow?: ReactNode
 	subtitle?: ReactNode
 }) => {
-	const Inner = () => (
-		<h2
-			{...props}
-			className={cn(
-				'text-2xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white',
-				props.className
-			)}>
-			{props.children}
-		</h2>
-	)
-
 	if (eyebrow || subtitle) {
 		return (
 			<hgroup className='mb-0'>
 				{eyebrow && <Eyebrow className='text-sm/8'>{eyebrow}</Eyebrow>}
-				<Inner />
+				<SectionHeadingInner {...props} />
 				{subtitle && <Subtitle className='text-lg md:mt-4'>{subtitle}</Subtitle>}
 			</hgroup>
 		)
 	}
-	return <Inner />
+	return <SectionHeadingInner {...props} />
 }
+const SectionHeadingInner = ({ ...props }: Props<'h2'>) => (
+	<h2
+		{...props}
+		className={cn(
+			'text-2xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white',
+			props.className
+		)}>
+		{props.children}
+	</h2>
+)

@@ -1,7 +1,6 @@
 declare global {
-	declare type Props<T = 'div'> = React.ComponentPropsWithoutRef<T>
-	declare type Props<T, P> = React.ComponentPropsWithoutRef<T>
-		& React.JSX.ElementType<P>
+	type Props<T = 'div'> = React.ComponentPropsWithoutRef<T>
+	type Props<T, P> = React.ComponentPropsWithoutRef<T> & React.JSX.ElementType<P>
 
 	namespace Props {
 		type Icon = Props<'svg'> & {
@@ -10,10 +9,7 @@ declare global {
 		}
 
 		type IconPath = Omit<Icon, 'IconName'>
-		type Link = Omit<
-			Props<typeof import('next/link').default>,
-			'href'
-		> & {
+		type Link = Omit<Props<typeof import('next/link').default>, 'href'> & {
 			size?: 'sm' | 'md' | 'lg'
 			href: string
 		}

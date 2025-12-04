@@ -8,19 +8,25 @@ const listClasses = cn(
 	'[:is(h1,h2,h3,h4,h5,h6)+*:is(ul,ol,dl)]:mt-0'
 )
 
-export const List = ({
-	type,
-	...props
-}: Props<'ul'> & { type?: 'numbered' | '' }) => {
-	const Tag = type === 'numbered' ? 'ol' : 'ul'
+export const List = ({ type, ...props }: Props<'ul'> & { type?: 'numbered' | '' }) => {
+	const className = cn(
+		type === 'numbered' ? 'list-decimal' : 'list-disc',
+		listClasses,
+		props.className
+	)
+
+	if (type === 'numbered') {
+		return (
+			<ol
+				{...props}
+				className={className}
+			/>
+		)
+	}
 	return (
-		<Tag
+		<ul
 			{...props}
-			className={cn(
-				type === 'numbered' ? 'list-decimal' : 'list-disc',
-				listClasses,
-				props.className
-			)}
+			className={cn(listClasses, props.className)}
 		/>
 	)
 }
@@ -28,10 +34,7 @@ export const List = ({
 const Li = ({ ...props }: Props<'li'>) => (
 	<li
 		{...props}
-		className={cn(
-			'list-label:list-none list-label:ml-0',
-			props.className
-		)}
+		className={cn('list-label:list-none list-label:ml-0', props.className)}
 	/>
 )
 
@@ -57,19 +60,11 @@ const DT = ({ href, ...props }: Props<'dt'> & { href?: string }) => {
 	return (
 		<dt
 			{...props}
-			className={cn(
-				'pl-2 text-lg leading-0.5',
-				!href && 'font-semibold',
-				props.className
-			)}>
+			className={cn('pl-2 text-lg leading-0.5', !href && 'font-semibold', props.className)}>
 			{href ?
 				<InlineLink
 					href={href}
-					target={
-						href.endsWith('pdf') || href.startsWith('http') ?
-							'_blank'
-						:	'_self'
-					}>
+					target={href.endsWith('pdf') || href.startsWith('http') ? '_blank' : '_self'}>
 					{props.children}
 				</InlineLink>
 			:	props.children}

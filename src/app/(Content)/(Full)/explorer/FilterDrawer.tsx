@@ -47,12 +47,12 @@ export const Drawer = ({
 						payload: { size: '' },
 					})
 			}}
-			className='fixed inset-0 z-[999] h-screen w-screen overflow-hidden backdrop-blur-sm md:backdrop-blur-xs'>
+			className='fixed inset-0 z-999 h-screen w-screen overflow-hidden backdrop-blur-sm md:backdrop-blur-xs'>
 			<div
 				key='drawer-container'
 				className={cn(
 					'fixed right-0 bottom-0 left-0',
-					'z-[999] h-max w-full',
+					'z-999 h-max w-full',
 					'md:top-0 md:right-20 md:h-screen md:w-max',
 					'flex items-end'
 				)}>
@@ -62,7 +62,7 @@ export const Drawer = ({
 					animate={motionVariants.visible}
 					exit={motionVariants.hidden}
 					className={cn(
-						'bg-background border-muted overflow-x-hidden overflow-y-scroll rounded-t-2xl border-1 border-b-0 md:rounded-none',
+						'bg-background border-muted overflow-x-hidden overflow-y-scroll rounded-t-2xl border border-b-0 md:rounded-none',
 						'p-8 shadow-[0_-4px_8px_rgba(0,0,0,0.4)] backdrop-blur-md md:backdrop-blur-xs'
 					)}>
 					<FilterHeading />

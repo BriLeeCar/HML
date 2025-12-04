@@ -23,16 +23,14 @@ import {
 
 export function mdxComponents() {
 	return {
-		h1: ({ children, ...props }: Props<'h1'>) => (
-			<PageHeading {...props}>{children}</PageHeading>
-		),
+		h1: ({ children, ...props }: Props<'h1'>) => <PageHeading {...props}>{children}</PageHeading>,
 		h2: ({ ...props }: Props<'h1'>) => <SectionHeading {...props} />,
 		h3: ({ ...props }: Props<'h1'>) => (
 			<Heading
 				{...props}
 				level={3}
 				size='lg'
-				className='border-border/20 mt-8 border-b-1'
+				className='border-border/20 mt-8 border-b'
 			/>
 		),
 		h4: ({ ...props }: Props<'h1'>) => (
@@ -71,16 +69,8 @@ export function mdxComponents() {
 						className='bg-card text-card-foreground flex w-full max-w-sm flex-col gap-6 rounded-xl border py-6 shadow-sm'>
 						{(heading || subheading) && (
 							<div className='@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6'>
-								{heading && (
-									<span className='leading-none font-semibold'>
-										{heading}
-									</span>
-								)}
-								{subheading && (
-									<span className='text-muted-foreground text-sm'>
-										{subheading}
-									</span>
-								)}
+								{heading && <span className='leading-none font-semibold'>{heading}</span>}
+								{subheading && <span className='text-muted-foreground text-sm'>{subheading}</span>}
 							</div>
 						)}
 						<div
@@ -89,9 +79,7 @@ export function mdxComponents() {
 							{props.children}
 						</div>
 						{footer && (
-							<div className='flex flex-col items-center gap-2 px-6 [.border-t]:pt-6'>
-								{footer}
-							</div>
+							<div className='flex flex-col items-center gap-2 px-6 [.border-t]:pt-6'>{footer}</div>
 						)}
 					</div>
 				</article>
@@ -134,9 +122,7 @@ export function mdxComponents() {
 				{...props}
 			/>
 		),
-		Button: ({
-			...props
-		}: Props<typeof Button> & { href: string }) => {
+		Button: ({ ...props }: Props<typeof Button> & { href: string }) => {
 			return (
 				<Button
 					as='link'
@@ -148,7 +134,7 @@ export function mdxComponents() {
 			)
 		},
 		sup: Sup,
-		Section: Section,
+		Section,
 		SectionHeading,
 		SubSection,
 		Page,

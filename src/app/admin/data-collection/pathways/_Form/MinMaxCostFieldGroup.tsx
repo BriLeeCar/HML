@@ -1,159 +1,185 @@
 'use client'
 
-import { Error, errors, Field, FieldGroup, Input, Label, Select } from '@/data-collection/pathways'
-import z from 'zod/v4'
+import {
+	Error,
+	Field,
+	FieldGroup,
+	Input,
+	Label,
+	Select,
+	Strong,
+	type ElPrismaProps,
+	type FieldElProps,
+} from '@/data-collection/pathways'
+import { zMinMax } from '~/server/api/routers/clientConstants'
+import type { Country, Currency, Language } from '~/server/prisma/generated/browser'
+import { FieldCost } from './CostField'
+import { refresh } from './refresh'
 
-export const MinMaxCostFieldGroup = ({ pathwayData, dispatchAction }: ElProps) => {
-	const baseData = pathwayData['cost']
-
-	const handleData = ({ key, value }: { key: 'min' | 'max'; value: number | string }) => {
-		const newData = { ...baseData }
-		newData.value[key].value = Number(value)
-		newData.value[key].error = []
-		newData.error = []
-
-		const parsed = z
-			.preprocess(val => {
-				return parseFloat(typeof val === 'string' ? val : String(val)).toFixed(2)
-			}, z.coerce.number().nonnegative(errors.negative))
-			.safeParse(newData.value[key].value)
-
-		if (parsed.success) {
-			newData.value[key].value = parsed.data
-		} else {
-			newData.value[key].error = parsed.error.issues.map(i => i.message)
+export const MinMaxCostFieldGroup = ({
+	error,
+	data,
+	handlePrisma,
+	countries,
+}: ElPrismaProps & {
+	error?: boolean
+	countries: Array<
+		Country & {
+			currencies: Currency[]
+			languages?: Language[] | undefined
 		}
-
-		if (newData.value.max.value > 0 && newData.value.min.value > newData.value.max.value) {
-			newData.error.push(errors.minGtMax)
-		} else {
-			newData.error = []
-		}
-
-		dispatchAction({
-			field: 'cost',
-			payload: {
-				...pathwayData.cost,
-				value: newData.value,
-				error: newData.error,
-			},
-		})
-	}
-
-	const currencyOptions = (pathwayData.countryId.value != null
-		&& pathwayData.countryId.value != ''
-		&& pathwayData.countriesWithPathways.find(c => c.abbr === pathwayData.countryId.value)?.api
-			.currencies) || {
-		'': { symbol: '', name: 'Select Currency', abbr: '' },
-	}
+	>
+}) => {
+	const currencyOptions = countries
+		.filter(c => c.code === data.query.countryCode)
+		.flatMap(c => c.currencies)
 
 	const currencyOptionEls = () => {
-		const currencies = []
-		for (const [key, cur] of Object.entries(
-			pathwayData.countriesWithPathways.find(c => c.abbr === pathwayData.countryId.value)?.api
-				.currencies || {}
-		)) {
+		const currencies: {
+			value: string
+			label: string
+			base: string
+		}[] = []
+
+		for (const currency of currencyOptions) {
 			currencies.push({
-				value: key,
-				label: `${key} (${cur.symbol})`,
-				base: key,
+				value: currency.code,
+				label: `${currency.code} - ${currency.symbol}`,
+				base: currency.code,
 			})
 		}
+
 		return currencies
 	}
 
 	const currencies = currencyOptionEls()
 
 	return (
-		<FieldGroup className='grid gap-x-8 md:grid-cols-3'>
-			<Field>
-				<div
-					className='grid items-center gap-x-4 gap-y-3 *:first:font-medium md:grid-cols-[0.25fr_1.75fr] md:*:first:text-end'
-					data-slot='control'>
-					<Label>Min</Label>
-					<Input
-						defaultValue={baseData.value.min.value}
-						name={`costMin`}
-						aria-label={`Cost Min`}
-						type='number'
-						min={0.01}
-						step={0.01}
-						onBlur={e => {
-							handleData({
-								key: 'min',
-								value: e.target.value,
-							})
-						}}
-					/>
-					<Error message={baseData.value.min.error} />
-				</div>
-			</Field>
-			<Field>
-				<div
-					className='grid items-center gap-x-4 gap-y-3 *:first:font-medium md:grid-cols-[0.25fr_1.75fr] md:*:first:text-end'
-					data-slot='control'>
-					<Label>Max</Label>
-					<Input
-						defaultValue={baseData.value.max.value}
-						name={`costMax`}
-						aria-label={`Cost Max`}
-						type='number'
-						min={0.01}
-						step={0.01}
-						onBlur={e => {
-							handleData({
-								key: 'max',
-								value: e.target.value,
-							})
-						}}
-					/>
-					<Error
-						message={baseData.value.max.error}
-						className='col-span-2'
-					/>
-				</div>
-			</Field>
-			<Field>
-				<div
-					className='grid items-center gap-x-4 gap-y-3 *:first:font-medium md:grid-cols-[0.25fr_1.75fr] md:*:first:text-end'
-					data-slot='control'>
-					<Label>Currency</Label>
-					<Select
-						defaultValue={pathwayData.costUom.value?.abbr || ''}
-						disabled={currencies.length === 0}
-						name={`costUOM`}
-						aria-label={`Cost UOM`}
-						onChange={e => {
-							const selectedCurrency = currencyOptions[e.target.selectedIndex]
+		<FieldGroup
+			data-invalid={error == true ? true : undefined}
+			className='grid gap-x-8 md:grid-cols-[1fr_1fr_auto] md:*:[div]:mb-0'>
+			<MinMaxCostField
+				required
+				label='Min'
+				errorMessages={data.errors.cost.min}>
+				<MinMaxInput
+					data={data}
+					keyMinMax='min'
+					handlePrisma={handlePrisma}
+				/>
+			</MinMaxCostField>
+			<MinMaxCostField
+				label='Max'
+				errorMessages={data.errors.cost.max}>
+				<MinMaxInput
+					data={data}
+					keyMinMax='max'
+					handlePrisma={handlePrisma}
+				/>
+			</MinMaxCostField>
+			<MinMaxCostField
+				required
+				label='Currency'
+				errorMessages={[]}>
+				<Select
+					defaultValue={data.query.currencyCode || ''}
+					disabled={currencies.length === 0}
+					name={`costUOM`}
+					aria-label={`Cost UOM`}
+					className='has-data-disabled:italic *:data-disabled:text-xs/loose'
+					onChange={e => {
+						const selectedCurrency = currencyOptions[e.target.selectedIndex]
 
-							dispatchAction({
-								field: 'costUom',
-								payload: {
-									value: {
-										abbr: selectedCurrency.abbr,
-										currencySymbol: selectedCurrency.symbol,
-									},
-									error: [],
-								},
-							})
-						}}>
-						{currencies.length > 0 ?
-							currencies.map(option => (
-								<option
-									key={option.base}
-									value={option.value}>
-									{option.label}
-								</option>
-							))
-						:	<option
-								key={''}
-								value={''}>
-								{'Select a Country'}
+						handlePrisma(refresh(data, 'currencyCode', selectedCurrency.code))
+					}}>
+					{currencies.length > 0 ?
+						currencies.map(option => (
+							<option
+								key={option.base}
+								value={option.value}>
+								{option.label}
 							</option>
-						}
-					</Select>
-				</div>
-			</Field>
+						))
+					:	<option
+							key={''}
+							value={''}>
+							{'Select a Country'}
+						</option>
+					}
+				</Select>
+			</MinMaxCostField>
+			<span className='row-start-3 mb-8 text-center italic opacity-65 md:col-span-full md:row-start-auto md:mb-0 md:text-xs/10'>
+				If the <Strong>Max</Strong> cost is left blank, it will be assumed that the cost is a fixed
+				value (<Strong>Min Value</Strong>).
+			</span>
 		</FieldGroup>
+	)
+}
+
+const MinMaxCostField = ({ ...props }: FieldElProps) => {
+	return (
+		<Field data-invalid={props.errorMessages && props.errorMessages.length > 0 ? true : undefined}>
+			<div
+				className='grid items-center gap-x-4 gap-y-3 *:first:font-medium md:grid-cols-[0.25fr_1.75fr] md:*:first:text-end'
+				data-slot='control'>
+				<Label required={props.required}>{props.label}</Label>
+				{props.children}
+				<Error
+					message={props.errorMessages}
+					className='col-span-2'
+				/>
+			</div>
+		</Field>
+	)
+}
+
+const MinMaxInput = <T extends 'min' | 'max'>({
+	data,
+	keyMinMax,
+	handlePrisma,
+	...props
+}: {
+	data: Query
+	keyMinMax: T
+	handlePrisma: ElPrismaProps['handlePrisma']
+} & Props<typeof Input>) => {
+	const keyCasing = keyMinMax.charAt(0).toUpperCase() + keyMinMax.slice(1)
+
+	return (
+		<FieldCost
+			data={data}
+			cost={data.query.cost?.[keyMinMax] || 0}
+			name={`cost${keyCasing}`}
+			aria-label={`Cost ${keyCasing}`}
+			{...props}
+			onBlur={e => {
+				const newData = { ...data }
+				const parsed = zMinMax({}).safeParse({
+					...newData.query.cost,
+					[keyMinMax]: Number(e.target.value),
+				})
+				const fieldErrors = {
+					min: [] as string[],
+					max: [] as string[],
+					base: [] as string[],
+				}
+				if (!parsed.success) {
+					parsed.error.issues.forEach(issue => {
+						const pathKey = issue.path[0] as keyof typeof fieldErrors
+						if (pathKey == 'min' || pathKey == 'max') {
+							fieldErrors[pathKey].push(issue.message)
+						} else {
+							fieldErrors['base'].push(issue.message)
+						}
+					})
+				}
+				newData.query.cost = {
+					...newData.query.cost,
+					[keyMinMax]: Number(e.target.value),
+				}
+				newData.errors.cost = fieldErrors
+				handlePrisma(newData)
+			}}
+		/>
 	)
 }

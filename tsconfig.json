@@ -1,35 +1,75 @@
 {
-	"compilerOptions": {
-		"target": "ES2017",
-		"lib": ["dom", "dom.iterable", "esnext"],
-		"allowJs": true,
-		"skipLibCheck": true,
-		"strict": true,
-		"noEmit": true,
-		"esModuleInterop": true,
-		"module": "esnext",
-		"moduleResolution": "bundler",
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"verbatimModuleSyntax": true,
-		"jsx": "preserve",
-		"incremental": true,
-		"plugins": [
-			{
-				"name": "next"
-			}
-		],
-		"paths": {
-			"@/*": ["./src/app/*"],
-			"~/components/*": ["./src/components/*"],
-			"~/components": ["./src/components/index.ts"],
-			"~/server/*": ["./src/server/*"],
-			"~/data/*": ["./src/data/*"],
-			"~/lib/*": ["./src/lib/*"],
-			"@/data-collection/*": ["./src/app/admin/data-collection/*"]
-		},
-		"typeRoots": ["./node_modules/@types", "./@types"]
-	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/**/*.d.ts"],
-	"exclude": ["node_modules"]
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": [
+        "./src/app/*"
+      ],
+      "~/components/*": [
+        "./src/components/*"
+      ],
+      "~/components": [
+        "./src/components/index.ts"
+      ],
+      "~/server/*": [
+        "./src/server/*"
+      ],
+      "~/data/*": [
+        "./src/data/*"
+      ],
+      "~/lib/*": [
+        "./src/lib/*"
+      ],
+      "@/data-collection/*": [
+        "./src/app/admin/data-collection/*"
+      ],
+      "prisma": [
+        "./src/server/prisma/db.ts"
+      ],
+      "prisma/*": [
+        "./src/server/prisma/generated/*"
+      ],
+      "query": [
+        "./src/trpc/server.ts"
+      ]
+    },
+    "typeRoots": [
+      "./node_modules/@types",
+      "./@types"
+    ]
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/**/*.d.ts",
+    ".next/dev/types/**/*.ts",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next"
+  ]
 }

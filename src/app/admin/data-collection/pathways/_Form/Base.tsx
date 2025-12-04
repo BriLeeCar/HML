@@ -6,12 +6,8 @@ import {
 	Fieldset,
 	Form,
 	Legend,
-	MOCK_DATA,
 	Page,
 	PageHeading,
-	PATHWAY_BASE,
-	pathwayReducer,
-	pathwaySubmit,
 	Section,
 	SectionHeading,
 	SubSection,
@@ -20,64 +16,136 @@ import {
 import {
 	ApplicationCost,
 	Documentation,
-	Duration,
+	MinMaxTimeFieldGroup,
 	Notes,
-	Overview,
-	ProcessingTime,
 	Renewable,
 	RestrictionsOpportunities,
 } from '@/data-collection/pathways/_Form'
 
 import { motion, useScroll } from 'motion/react'
-import { type ReactNode, useContext, useReducer } from 'react'
+import { useState, type ReactNode } from 'react'
+import { api, type RouterOutputs } from '~/lib/api'
 import { cn } from '~/lib/cn'
-import { DBContext } from '~/server/db/provider'
+import { useToast, type ToastMessage } from '~/lib/useToast'
+import { zCreatePathwayInput } from '~/server/api/routers/clientConstants'
+import type { CreatePathwayInput } from '~/server/api/routers/routerDataCollection'
+import { CategorySection } from './Categories'
+import { OverviewSection } from './OverviewSection'
+import { createTracker } from './refresh'
 
-export const Base = ({ handle }: { handle: string }) => {
-	const db = useContext(DBContext)
+export type ElPrismaProps = {
+	data: Query
+	handlePrisma: (data: ElPrismaProps['data']) => void
+}
+export type PrismaQuery = ElPrismaProps['data']
 
-	const [pathwayData, dispatchPathway] = useReducer(pathwayReducer, {
-		...PATHWAY_BASE,
-		...MOCK_DATA,
-		db: db,
-		countriesWithPathways: db.getCountriesWithPathways(),
-		discordHandle: {
-			value: handle,
-			error: [],
+export const Base = ({ prisma }: { prisma: RouterOutputs['dataCollection']['PathwayInit'] }) => {
+	const { documentTypes, countries, pathwayTypes } = prisma
+	const toast = useToast()
+	const [data, setData] = useState({
+		query: {
+			createdAt: new Date(),
+			updatedAt: new Date(),
+		},
+		...createTracker(),
+	} as Query)
+
+	const { mutate } = api.dataCollection.CreatePathway.useMutation({
+		onSuccess: () => {
+			window.scrollTo(0, 0)
+			toast.fireToast({
+				title: 'Pathway created successfully!',
+				status: 'success',
+				body:
+					data.query.name ? `You have successfully created the pathway: ${data.query.name}` : '',
+			} as ToastMessage)
+		},
+		onError: () => {
+			window.scrollTo({
+				behavior: 'smooth',
+				top: 0,
+			})
+			toast.fireToast({
+				title: 'Error creating pathway',
+				status: 'error',
+				body: <>There was an error creating the pathway. Please verify the following:</>,
+			} as ToastMessage)
 		},
 	})
 
+	const handlePrisma = (newData: Query) => {
+		if (newData.utilities.countryData && !newData.query.currencyCode) {
+			if (newData.utilities.countryData.currencies.length == 1) {
+				newData.query.currencyCode = newData.utilities.countryData.currencies[0].code
+			}
+		}
+
+		setData({ ...newData })
+	}
+
 	const { scrollYProgress } = useScroll()
-
 	const handleSubmit = async () => {
-		console.log(pathwaySubmit({ ...pathwayData }))
+		const submission = { ...data }
+		Object.assign(submission, {
+			type: 'VISA',
+		})
 
-		// const response = await fetch(
-		// 	`/admin/api/pathwayWrite?handle=${pathwayData.discordHandle.value}`,
-		// 	{
-		// 		method: 'POST',
-		// 		mode: 'same-origin',
+		const validation = zCreatePathwayInput.safeParse(submission)
+		console.log('Validation Result:', validation.error?.issues)
 
-		// 		headers: {
-		// 			'Content-Type': 'application/json',
-		// 			Handle: handle,
-		// 		},
-		// 		body: JSON.stringify(toCSV({ ...pathwayData })),
-		// 	}
-		// )
+		validation.success && mutate(submission as CreatePathwayInput)
+		if (validation.error) {
+			const zodErrors = {
+				...data.errors,
+				...createTracker().errors,
+			}
 
-		// if (response.ok) {
-		// 	alert('Pathway submitted successfully!')
-		// 	// window.scrollTo({
-		// 	// 	top: 0,
-		// 	// 	behavior: 'smooth',
-		// 	// })
-		// 	// window.location.reload()
-		// }
+			validation.error.issues
+				.filter(issue => {
+					return issue.path.length > 0 && issue.path[0] == 'query'
+				})
+				.forEach(errPath => {
+					const path = errPath.path
+					const pathKey = path[1] as keyof Query['errors']
+					const dataPath = {
+						[pathKey]: data.errors[pathKey],
+					}
+					if (['cost', 'processTime', 'duration'].includes(pathKey)) {
+						const fieldKey = pathKey as 'cost' | 'processTime' | 'duration'
+						const lastKey = path[2] as keyof Query['errors'][typeof fieldKey]
+						if (lastKey == 'min' || lastKey == 'max') {
+							dataPath[fieldKey] = {
+								...data.errors[fieldKey],
+								[lastKey]: [errPath.message],
+							}
+						} else {
+							dataPath[fieldKey] = {
+								...data.errors[fieldKey],
+								base: [errPath.message],
+							}
+						}
+					} else if (Array.isArray(dataPath[pathKey])) {
+						dataPath[pathKey] = [errPath.message] as string[]
+					}
+
+					Object.assign(zodErrors, {
+						...dataPath,
+					})
+				})
+
+			setData({
+				...data,
+				errors: {
+					...createTracker().errors,
+					...zodErrors,
+				},
+			})
+		}
 	}
 
 	return (
 		<Page className='admin md:px-0'>
+			<toast.El />
 			<motion.div
 				style={{
 					position: 'fixed',
@@ -92,50 +160,10 @@ export const Base = ({ handle }: { handle: string }) => {
 				}}
 			/>
 			<PageHeading
-				eyebrow={<span className='text-[#AC162B] dark:text-[#DAE638]'>Beta</span>}
+				eyebrow={<span className='text-v2-red dark:text-v2-yellow'>Beta</span>}
 				subtitle={<span>Please let us know of any issues when filling out the form!</span>}>
 				Add Pathway Form
 			</PageHeading>
-			{/* ? DISCORD */}
-			{/* <Section>
-				<SectionHeading
-					eyebrow={
-						<span className='text-[#AC162B] dark:text-[#DAE638]'>For Verification Purposes'</span>
-					}>
-					Discord Handle
-				</SectionHeading>
-				<form className='admin-mobile-padding my-2'>
-					<label
-						className='sr-only'
-						htmlFor='discord-handle'></label>
-					<input
-						id='discord-handle'
-						defaultValue={pathwayData.discordHandle.value}
-						type='text'
-						placeholder='Your discord handle'
-						className={cn(
-							'focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-3',
-							'bg-background outline-foreground/20',
-							'border-foreground/20 border',
-							// 'focus-visible:border-foreground/10',
-							'rounded-md',
-							'px-3 py-1',
-							'flex h-9 w-full min-w-0 text-base',
-							'disabled:bg-foreground/3 disabled:pointer-events-none disabled:cursor-not-allowed disabled:text-current/60 disabled:italic md:text-sm',
-							'in-[fieldset]:bg-foreground/2',
-							'dark:outline-offset-2 dark:focus-visible:ring-0 dark:focus-visible:ring-offset-0 dark:focus-visible:outline-2',
-							'bg-foreground/5 max-w-sm rounded-lg'
-						)}
-						onBlur={e =>
-							dispatchPathway({
-								field: 'discordHandle',
-								payload: e.currentTarget.value,
-							})
-						}
-					/>
-				</form>
-			</Section> */}
-			{/* ? FORM */}
 
 			<Section>
 				<SectionHeading subtitle="If you have any trouble, please let the staff know so we can either alter to form, or help explain why there's an issue">
@@ -143,17 +171,17 @@ export const Base = ({ handle }: { handle: string }) => {
 				</SectionHeading>
 				<Form>
 					{/* ? OVERVIEW */}
-					<FormSection
-						title='Overview'
-						aria-label='Pathway Overview'
-						description={
-							'This section collects the basic information about the pathway. Please ensure that all information is accurate and corresponds to official sources where applicable.'
-						}>
-						<Overview
-							pathwayData={pathwayData}
-							dispatchAction={dispatchPathway}
-						/>
-					</FormSection>
+					<OverviewSection
+						data={data}
+						handlePrisma={handlePrisma}
+						countries={countries}
+					/>
+					{/* ? CATEGORIES */}
+					<CategorySection
+						data={data}
+						handlePrisma={handlePrisma}
+						pathwayTypes={pathwayTypes}
+					/>
 					{/* ? APPLICATION */}
 					<FormSection
 						description={
@@ -162,20 +190,43 @@ export const Base = ({ handle }: { handle: string }) => {
 						title='Application'
 						aria-label='Application Details'>
 						{/* ? PROCESSING TIME */}
-						<ProcessingTime
-							pathwayData={pathwayData}
-							dispatchAction={dispatchPathway}
-						/>
+						<FormSubSection
+							aria-label='Processing Time'
+							legend='Processing Time'
+							description={
+								'Please provide the processing time for the application of this pathway using whole numbers only. Change the unit of measurement (UOM) as needed.'
+							}>
+							<MinMaxTimeFieldGroup
+								data={data}
+								error={data.errors.processTime.base?.length > 0}
+								handlePrisma={handlePrisma}
+								field='processTime'
+								className='grid gap-x-4 md:grid-cols-3'
+							/>
+						</FormSubSection>
 						{/* ? COST */}
 						<ApplicationCost
-							pathwayData={pathwayData}
-							dispatchAction={dispatchPathway}
+							data={data}
+							handlePrisma={handlePrisma}
+							countries={countries}
 						/>
 						{/* ? DURATION */}
-						<Duration
-							pathwayData={pathwayData}
-							dispatchAction={dispatchPathway}
-						/>
+						<FormSubSection
+							aria-label='Visa Duration'
+							legend='Duration'
+							description={
+								'Please provide the duration of the visa/pathway. If the visa can be renewed, please indicate so by checking the appropriate box(es).'
+							}>
+							<FieldGroup>
+								<MinMaxTimeFieldGroup
+									error={data.errors.duration.base?.length > 0}
+									data={data}
+									handlePrisma={handlePrisma}
+									field='duration'
+									className='grid gap-x-4 md:grid-cols-3'
+								/>
+							</FieldGroup>
+						</FormSubSection>
 					</FormSection>
 					{/* ? DOCUMENTATION */}
 					<FormSection
@@ -185,8 +236,9 @@ export const Base = ({ handle }: { handle: string }) => {
 							'What documentation is needed for the visa application, as well as any other supporting paperwork required for approval?'
 						}>
 						<Documentation
-							pathwayData={pathwayData}
-							dispatchAction={dispatchPathway}
+							documentTypes={documentTypes}
+							data={data}
+							handlePrisma={handlePrisma}
 						/>
 					</FormSection>
 					{/* ? RENEWAL */}
@@ -194,9 +246,7 @@ export const Base = ({ handle }: { handle: string }) => {
 						title='Renewal'
 						description={
 							<>
-								If this pathway is renewable, please provide the renewal duration details below. If
-								the renewal duration is the same as the initial duration, please check the below to
-								indicate as such.{' '}
+								If this pathway is renewable, please provide the renewal duration details below.
 								<em>
 									Don't worry about the reasons and exceptions, we will cover those in the notes
 									section!
@@ -204,16 +254,17 @@ export const Base = ({ handle }: { handle: string }) => {
 							</>
 						}>
 						<Renewable
-							pathwayData={pathwayData}
-							dispatchAction={dispatchPathway}
+							data={data}
+							handlePrisma={handlePrisma}
 						/>
 					</FormSection>
-					{/* ? Restrictions & Opportunities */}
+					{/* ? RESTRICTIONS & OPPORTUNITIES */}
 					<RestrictionsOpportunities
-						pathwayData={pathwayData}
-						dispatchAction={dispatchPathway}
+						data={data}
+						handlePrisma={handlePrisma}
+						countries={countries}
 					/>
-
+					{/* ? ADDITIONAL NOTES */}
 					<FormSection
 						title='Additional Notes'
 						aria-label='Additional Notes'
@@ -221,8 +272,8 @@ export const Base = ({ handle }: { handle: string }) => {
 							'Please provide any additional notes or important information about the pathway that may not have been covered in the previous sections. This could include special conditions, exceptions, or other relevant details.'
 						}>
 						<Notes
-							pathwayData={pathwayData}
-							dispatchAction={dispatchPathway}
+							data={data}
+							handlePrisma={handlePrisma}
 						/>
 					</FormSection>
 
@@ -232,11 +283,6 @@ export const Base = ({ handle }: { handle: string }) => {
 						type='button'
 						variant='ghost'
 						onClick={async () => {
-							const consoledData = { ...pathwayData } as AnySafe
-
-							delete consoledData.db
-							delete consoledData.countriesWithPathways
-
 							await handleSubmit()
 						}}>
 						Submit Pathway
@@ -262,7 +308,7 @@ export const FormSection = ({
 			role='group'
 			title={props.title}
 			className={cn(
-				'from-background dark:text-foreground sticky top-0 z-10 bg-linear-to-b from-50% to-transparent to-100% text-[#AC162B] max-md:pt-4 max-md:pb-8 md:static',
+				'from-background dark:text-foreground text-v2-red sticky top-0 z-10 bg-linear-to-b from-50% to-transparent to-100% max-md:pt-4 max-md:pb-8 md:static',
 				props.className
 			)}
 			innerProps={{

@@ -1,38 +1,31 @@
 'use client'
 import {
-	Button,
 	Checkbox,
 	CheckboxField,
 	CheckboxGroup,
 	Description,
-	Field,
-	FieldGroup,
 	Label,
-	Strong,
-	Textarea,
 } from '@/data-collection/pathways'
-import { FormSubSection, MinMaxTimeFieldGroup } from '@/data-collection/pathways/_Form'
-import { AnimatePresence, motion } from 'motion/react'
-import { Icon } from '~/components/Icon'
+import { type ElPrismaProps } from '@/data-collection/pathways/_Form'
 
-const animateVariants = {
-	exit: {
-		opacity: 0,
-		height: 0,
-		overflow: 'hidden',
-	},
-	animate: {
-		opacity: 1,
-		height: '100%',
-	},
-	initial: {
-		opacity: 0,
-		height: 0,
-		overflow: 'hidden',
-	},
-}
+// const animateVariants = {
+// 	exit: {
+// 		opacity: 0,
+// 		height: 0,
+// 		overflow: 'hidden',
+// 	},
+// 	animate: {
+// 		opacity: 1,
+// 		height: '100%',
+// 	},
+// 	initial: {
+// 		opacity: 0,
+// 		height: 0,
+// 		overflow: 'hidden',
+// 	},
+// }
 
-export const Renewable = ({ pathwayData, dispatchAction }: ElProps) => {
+export const Renewable = ({ data, handlePrisma }: ElPrismaProps) => {
 	return (
 		<>
 			<span
@@ -42,11 +35,14 @@ export const Renewable = ({ pathwayData, dispatchAction }: ElProps) => {
 					<CheckboxField>
 						<Checkbox
 							color='brand'
-							defaultChecked={pathwayData.isRenewable.value}
+							defaultChecked={data.piplines.renewal}
 							onClick={() => {
-								dispatchAction({
-									field: 'isRenewable',
-									payload: pathwayData.isRenewable.value ? false : true,
+								handlePrisma({
+									...data,
+									piplines: {
+										...data.piplines,
+										renewal: !data.piplines.renewal,
+									},
 								})
 							}}
 						/>
@@ -57,12 +53,12 @@ export const Renewable = ({ pathwayData, dispatchAction }: ElProps) => {
 						</Description>
 					</CheckboxField>
 				</CheckboxGroup>
-				<RewnewalDurationCB
+				{/* <RewnewalDurationCB
 					pathwayData={pathwayData}
 					dispatchAction={dispatchAction}
-				/>
+				/> */}
 			</span>
-			<AnimatePresence>
+			{/* <AnimatePresence>
 				{pathwayData.isRenewable.value && !pathwayData.renewableSameAsInitial.value && (
 					<motion.span
 						exit={{
@@ -111,138 +107,138 @@ export const Renewable = ({ pathwayData, dispatchAction }: ElProps) => {
 						/>
 					</motion.span>
 				)}
-			</AnimatePresence>
+			</AnimatePresence> */}
 		</>
 	)
 }
 
-const RewnewalDurationCB = ({ pathwayData, dispatchAction }: ElProps) => {
-	return (
-		<AnimatePresence>
-			{pathwayData.isRenewable.value && (
-				<motion.span
-					key='renewalDurationCB'
-					exit={{
-						...animateVariants.exit,
-						translateX: '100%',
-						flexBasis: '0%',
-						position: 'absolute',
-					}}
-					animate={{
-						...animateVariants.animate,
-						translateX: '0%',
-						flexBasis: '100%',
+// const RewnewalDurationCB = ({ data, handlePrisma }: ElPrismaProps) => {
+// 	return (
+// 		<AnimatePresence>
+// 			{pathwayData.isRenewable.value && (
+// 				<motion.span
+// 					key='renewalDurationCB'
+// 					exit={{
+// 						...animateVariants.exit,
+// 						translateX: '100%',
+// 						flexBasis: '0%',
+// 						position: 'absolute',
+// 					}}
+// 					animate={{
+// 						...animateVariants.animate,
+// 						translateX: '0%',
+// 						flexBasis: '100%',
 
-						position: 'relative',
-					}}
-					initial={{
-						...animateVariants.initial,
-						translateX: '100%',
-						flexBasis: '0%',
-						position: 'absolute',
-					}}>
-					<CheckboxGroup>
-						<CheckboxField>
-							<Checkbox
-								color='brand'
-								name='cbRenewableSameAsInitialDuration'
-								defaultChecked={pathwayData.renewableSameAsInitial.value}
-								onClick={() => {
-									dispatchAction({
-										field: 'renewableSameAsInitial',
-										payload: pathwayData.renewableSameAsInitial.value ? false : true,
-									})
-								}}
-							/>
-							<Label>Renewal Duration Identical</Label>
-							<Description>
-								The initial duration of the visa matches the renewal duration.
-							</Description>
-						</CheckboxField>
-					</CheckboxGroup>
-				</motion.span>
-			)}
-		</AnimatePresence>
-	)
-}
+// 						position: 'relative',
+// 					}}
+// 					initial={{
+// 						...animateVariants.initial,
+// 						translateX: '100%',
+// 						flexBasis: '0%',
+// 						position: 'absolute',
+// 					}}>
+// 					<CheckboxGroup>
+// 						<CheckboxField>
+// 							<Checkbox
+// 								color='brand'
+// 								name='cbRenewableSameAsInitialDuration'
+// 								defaultChecked={pathwayData.renewableSameAsInitial.value}
+// 								onClick={() => {
+// 									dispatchAction({
+// 										field: 'renewableSameAsInitial',
+// 										payload: pathwayData.renewableSameAsInitial.value ? false : true,
+// 									})
+// 								}}
+// 							/>
+// 							<Label>Renewal Duration Identical</Label>
+// 							<Description>
+// 								The initial duration of the visa matches the renewal duration.
+// 							</Description>
+// 						</CheckboxField>
+// 					</CheckboxGroup>
+// 				</motion.span>
+// 			)}
+// 		</AnimatePresence>
+// 	)
+// }
 
-const RenewalNotes = ({ pathwayData, dispatchAction }: ElProps) => {
-	const addNote = () => {
-		dispatchAction({
-			type: 'add',
-			field: 'renewableNotes',
-			payload: null,
-		})
-	}
-	return (
-		<FormSubSection
-			aria-label='Renewal Notes'
-			legend='Notes'
-			description={
-				<>
-					Any additional information regarding the renewal of the pathway can be added here, and if
-					it makes more sense to you, feel free to add multiple notes using the <Strong>+</Strong>{' '}
-					button.
-				</>
-			}>
-			<FieldGroup className='grid gap-y-4'>
-				{pathwayData.renewableNotes.value.map(note => {
-					return (
-						<Field
-							key={note.counter}
-							className='flex items-center gap-x-2'>
-							<Textarea
-								defaultValue={note.note ?? undefined}
-								name={`renewableNote${note.counter}`}
-								onBlur={e => {
-									dispatchAction({
-										type: 'update',
-										field: 'renewableNotes',
-										payload: {
-											counter: note.counter,
-											value: {
-												...note,
-												note: e.currentTarget.value,
-											},
-										},
-									})
-								}}
-							/>
-							<Button
-								type='button'
-								iconOnly
-								className='rounded-full px-2 py-0'
-								onClick={() =>
-									dispatchAction({
-										type: 'delete',
-										field: 'renewableNotes',
-										payload: note.counter,
-									})
-								}>
-								<Icon
-									IconName='XIcon'
-									className='h-auto w-full text-red-600 hover:text-red-800'
-									data-slot='icon'
-									solid
-								/>
-							</Button>
-						</Field>
-					)
-				})}
-			</FieldGroup>
-			<Button
-				type='button'
-				size='sm'
-				innerButton
-				onClick={addNote}>
-				<Icon
-					IconName='PlusCircleIcon'
-					className='h-4 w-4 text-current/75'
-					data-slot='icon'
-					solid
-				/>
-				Add Note
-			</Button>
-		</FormSubSection>
-	)
-}
+// const RenewalNotes = ({ pathwayData, dispatchAction }: ElProps) => {
+// 	const addNote = () => {
+// 		dispatchAction({
+// 			type: 'add',
+// 			field: 'renewableNotes',
+// 			payload: null,
+// 		})
+// 	}
+// 	return (
+// 		<FormSubSection
+// 			aria-label='Renewal Notes'
+// 			legend='Notes'
+// 			description={
+// 				<>
+// 					Any additional information regarding the renewal of the pathway can be added here, and if
+// 					it makes more sense to you, feel free to add multiple notes using the <Strong>+</Strong>{' '}
+// 					button.
+// 				</>
+// 			}>
+// 			<FieldGroup className='grid gap-y-4'>
+// 				{pathwayData.renewableNotes.value.map(note => {
+// 					return (
+// 						<Field
+// 							key={note.counter}
+// 							className='flex items-center gap-x-2'>
+// 							<Textarea
+// 								defaultValue={note.note ?? undefined}
+// 								name={`renewableNote${note.counter}`}
+// 								onBlur={e => {
+// 									dispatchAction({
+// 										type: 'update',
+// 										field: 'renewableNotes',
+// 										payload: {
+// 											counter: note.counter,
+// 											value: {
+// 												...note,
+// 												note: e.currentTarget.value,
+// 											},
+// 										},
+// 									})
+// 								}}
+// 							/>
+// 							<Button
+// 								type='button'
+// 								iconOnly
+// 								className='rounded-full px-2 py-0'
+// 								onClick={() =>
+// 									dispatchAction({
+// 										type: 'delete',
+// 										field: 'renewableNotes',
+// 										payload: note.counter,
+// 									})
+// 								}>
+// 								<Icon
+// 									IconName='XIcon'
+// 									className='h-auto w-full text-red-600 hover:text-red-800'
+// 									data-slot='icon'
+// 									solid
+// 								/>
+// 							</Button>
+// 						</Field>
+// 					)
+// 				})}
+// 			</FieldGroup>
+// 			<Button
+// 				type='button'
+// 				size='sm'
+// 				innerButton
+// 				onClick={addNote}>
+// 				<Icon
+// 					IconName='PlusCircleIcon'
+// 					className='h-4 w-4 text-current/75'
+// 					data-slot='icon'
+// 					solid
+// 				/>
+// 				Add Note
+// 			</Button>
+// 		</FormSubSection>
+// 	)
+// }

@@ -1,8 +1,24 @@
 import { Error, Field, Strong } from '@/data-collection/pathways'
 
-import { FormSubSection, MinMaxCostFieldGroup } from '@/data-collection/pathways/_Form'
+import {
+	FormSubSection,
+	MinMaxCostFieldGroup,
+	type ElPrismaProps,
+} from '@/data-collection/pathways/_Form'
+import type { Country, Currency, Language } from '~/server/prisma/generated/browser'
 
-export const ApplicationCost = ({ pathwayData, dispatchAction }: ElProps) => {
+export const ApplicationCost = ({
+	data,
+	handlePrisma,
+	countries,
+}: ElPrismaProps & {
+	countries: Array<
+		Country & {
+			currencies: Currency[]
+			languages?: Language[] | undefined
+		}
+	>
+}) => {
 	return (
 		<FormSubSection
 			aria-label='Cost'
@@ -16,14 +32,15 @@ export const ApplicationCost = ({ pathwayData, dispatchAction }: ElProps) => {
 					</Strong>
 				</>
 			}>
-			<Field>
-				<Error message={pathwayData.cost.error} />
-			</Field>
-
 			<MinMaxCostFieldGroup
-				pathwayData={pathwayData}
-				dispatchAction={dispatchAction}
+				error={data.errors.cost.base?.length > 0}
+				data={data}
+				handlePrisma={handlePrisma}
+				countries={countries}
 			/>
+			<Field className='text-center font-medium italic *:text-sm/12'>
+				<Error message={data.errors.cost.base} />
+			</Field>
 		</FormSubSection>
 	)
 }

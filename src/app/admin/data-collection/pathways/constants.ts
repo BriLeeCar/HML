@@ -8,14 +8,18 @@ export const APPROVED_HANDLES = {
 	repairedbutton: 'admin',
 }
 
-export const MOCK_DATA: Pathways = {
-	countryId: {
+/* 
+	
+	*/
+
+export const MOCK_DATA = {
+	countryCode: {
 		value: 'CAN',
 		error: [],
+		visited: true,
 	},
-	pathwayId: {
-		value: 'CAN-CANADA-WORK-VISA',
-		error: [],
+	categories: {
+		value: [1, 8],
 	},
 	costUom: {
 		value: {
@@ -24,31 +28,37 @@ export const MOCK_DATA: Pathways = {
 		},
 		error: [],
 	},
-	officialName: {
+	name: {
 		value: 'Canada Work Visa',
 		error: [],
+		visited: true,
 	},
-	officialLink: {
+	link: {
 		value: 'https://www.canada.ca',
 		error: [],
+		visited: true,
 	},
 	category: {
 		value: 'Random Work Visa Category',
 		error: [],
+		visited: true,
 	},
 	description: {
 		value: 'This is a mock description for the Canada Work Visa pathway.',
 		error: [],
+		visited: true,
 	},
 	duration: {
 		value: {
 			min: {
 				value: 12,
 				error: [],
+				visited: true,
 			},
 			max: {
 				value: 18,
 				error: [],
+				visited: true,
 			},
 			uom: {
 				value: {
@@ -69,10 +79,12 @@ export const MOCK_DATA: Pathways = {
 			min: {
 				value: 6,
 				error: [],
+				visited: true,
 			},
 			max: {
 				value: 12,
 				error: [],
+				visited: true,
 			},
 			uom: {
 				value: {
@@ -103,10 +115,12 @@ export const MOCK_DATA: Pathways = {
 			min: {
 				value: 4,
 				error: [],
+				visited: true,
 			},
 			max: {
 				value: 6,
 				error: [],
+				visited: true,
 			},
 			uom: {
 				value: {
@@ -124,10 +138,12 @@ export const MOCK_DATA: Pathways = {
 			min: {
 				value: 100,
 				error: [],
+				visited: true,
 			},
 			max: {
 				value: 300,
 				error: [],
+				visited: true,
 			},
 		},
 		error: [],
@@ -138,7 +154,7 @@ export const MOCK_DATA: Pathways = {
 				note: 'Applicants must be under 35 years old.',
 				counter: 0,
 				error: [],
-			},
+			} as unknown as string,
 		],
 		counter: 1,
 	},
@@ -165,7 +181,7 @@ export const MOCK_DATA: Pathways = {
 				note: 'This is a mock note regarding the Canada Work Visa pathway.',
 				counter: 0,
 				error: [],
-			},
+			} as unknown as string,
 		],
 		counter: 1,
 	},
@@ -175,21 +191,19 @@ export const MOCK_DATA: Pathways = {
 			{
 				title: 'Valid passport',
 				cost: 180,
+				type: 0,
 				counter: 0,
 				note: 'A passport valid for at least six months beyond the intended stay.',
 				error: [],
 			},
 		],
 	},
-	discordHandle: {
-		value: 'brileec',
-		error: [],
-	},
 	citizenshipPossible: {
 		value: false,
 	},
 	citizenshipNote: {
 		value: null,
+		visited: false,
 		error: [],
 	},
 	residencyPossible: {
@@ -197,6 +211,7 @@ export const MOCK_DATA: Pathways = {
 	},
 	residencyNote: {
 		value: 'Residency can be obtained after 2 years of continuous stay.',
+		visited: true,
 		error: [],
 	},
 	reunificationPossible: {
@@ -204,6 +219,7 @@ export const MOCK_DATA: Pathways = {
 	},
 	reunificationNote: {
 		value: 'Family reunification is allowed under certain conditions.',
+		visited: true,
 		error: [],
 	},
 	requirements: {
@@ -212,22 +228,22 @@ export const MOCK_DATA: Pathways = {
 				note: 'Proof of employment offer in Canada.',
 				error: [],
 				counter: 0,
-			},
+			} as unknown as string,
 		],
 		counter: 1,
 	},
 }
 
-export const PATHWAY_BASE: Omit<Pathways, 'discordHandle'> & {
-	discordHandle: { value: string | null; error: string[] }
-} = {
-	countryId: {
+export const PATHWAY_BASE = {
+	countryCode: {
 		value: null,
 		error: [],
+		visited: false,
 	},
-	pathwayId: {
+	id: {
 		value: null,
 		error: [],
+		visited: false,
 	},
 	costUom: {
 		value: {
@@ -236,31 +252,40 @@ export const PATHWAY_BASE: Omit<Pathways, 'discordHandle'> & {
 		},
 		error: [],
 	},
-	officialName: {
+	name: {
 		value: null,
 		error: [],
+		visited: false,
 	},
-	officialLink: {
+	link: {
 		value: null,
 		error: [],
+		visited: false,
+	},
+	categories: {
+		value: [] as number[],
 	},
 	category: {
 		value: null,
 		error: [],
+		visited: false,
 	},
 	description: {
 		value: null,
 		error: [],
+		visited: false,
 	},
 	duration: {
 		value: {
 			min: {
 				value: 0,
 				error: [],
+				visited: false,
 			},
 			max: {
 				value: 0,
 				error: [],
+				visited: false,
 			},
 			uom: {
 				value: {
@@ -281,10 +306,12 @@ export const PATHWAY_BASE: Omit<Pathways, 'discordHandle'> & {
 			min: {
 				value: 0,
 				error: [],
+				visited: false,
 			},
 			max: {
 				value: 0,
 				error: [],
+				visited: false,
 			},
 			uom: {
 				value: {
@@ -304,39 +331,13 @@ export const PATHWAY_BASE: Omit<Pathways, 'discordHandle'> & {
 		value: [],
 		counter: 0,
 	},
-	processingTime: {
-		value: {
-			min: {
-				value: 0,
-				error: [],
-			},
-			max: {
-				value: 0,
-				error: [],
-			},
-			uom: {
-				value: {
-					base: null,
-					value: 0,
-					label: null,
-				},
-				error: [],
-			},
-		},
-		error: [],
+	processTime: {
+		min: 0,
+		max: 0,
 	},
 	cost: {
-		value: {
-			min: {
-				value: 0,
-				error: [],
-			},
-			max: {
-				value: 0,
-				error: [],
-			},
-		},
-		error: [],
+		min: 0,
+		max: 0,
 	},
 	limitations: {
 		value: [],
@@ -360,15 +361,12 @@ export const PATHWAY_BASE: Omit<Pathways, 'discordHandle'> & {
 		counter: 0,
 		value: [],
 	},
-	discordHandle: {
-		value: null,
-		error: [],
-	},
 	citizenshipPossible: {
 		value: false,
 	},
 	citizenshipNote: {
 		value: null,
+		visited: false,
 		error: [],
 	},
 	residencyPossible: {
@@ -376,6 +374,7 @@ export const PATHWAY_BASE: Omit<Pathways, 'discordHandle'> & {
 	},
 	residencyNote: {
 		value: null,
+		visited: false,
 		error: [],
 	},
 	reunificationPossible: {
@@ -383,6 +382,7 @@ export const PATHWAY_BASE: Omit<Pathways, 'discordHandle'> & {
 	},
 	reunificationNote: {
 		value: null,
+		visited: false,
 		error: [],
 	},
 	requirements: {
@@ -398,3 +398,20 @@ export const errors = {
 	wholeNumber: 'Must be a whole number',
 	stringLength: (min: number) => `Must be ${min} characters or more`,
 }
+
+export const betaCountries = [
+	{ name: 'Albania', code: 'ALB' },
+	{ name: 'Brazil', code: 'BRA' },
+	{ name: 'Canada', code: 'CAN' },
+	{ name: 'Costa Rica', code: 'CRI' },
+	{ name: 'Estonia', code: 'EST' },
+	{ name: 'Spain', code: 'ESP' },
+	{ name: 'Finland', code: 'FIN' },
+	{ name: 'France', code: 'FRA' },
+	{ name: 'Ireland', code: 'IRL' },
+	{ name: 'Italy', code: 'ITA' },
+	{ name: 'Mexico', code: 'MEX' },
+	{ name: 'Norway', code: 'NOR' },
+	{ name: 'Portugal', code: 'PRT' },
+	{ name: 'Uruguay', code: 'URY' },
+]

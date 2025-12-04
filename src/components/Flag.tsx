@@ -136,32 +136,97 @@ export const IconAttributes = ({
 	as?: keyof JSX.IntrinsicElements
 	attr: ReturnType<ApiData.DB['getCommunityAttributes']>
 }) => {
-	const Tag = as ?? 'ul'
-	const InnerTag = Tag == 'ul' ? 'li' : 'span'
+	const classNames = cn(
+		'*:border-foreground/20',
+		'flex',
+		'items-center justify-between',
+		'px-2 *:border-r *:px-2 *:last:border-0',
+		props.className
+	)
+
+	if (!as) {
+		return (
+			<ul className={classNames}>
+				<InnerAttributeLI attr={attr} />
+			</ul>
+		)
+	}
+
 	return (
-		<Tag
+		<span
 			className={cn(
 				'*:border-foreground/20',
 				'flex',
 				'items-center justify-between',
-				'px-2 *:border-r-1 *:px-2 *:last:border-0',
+				'px-2 *:border-r *:px-2 *:last:border-0',
 				props.className
 			)}>
+			<InnerAttributeSpan attr={attr} />
+		</span>
+	)
+}
+
+const InnerAttributeLI = ({
+	attr,
+}: Props & {
+	attr: ReturnType<ApiData.DB['getCommunityAttributes']>
+}) => {
+	return (
+		<>
 			{attr.isUn && (
-				<InnerTag className='font-bold text-[#498DD5] uppercase no-underline! decoration-transparent decoration-0!'>
-					UN
-				</InnerTag>
-			)}
-			{attr.prideScore && attr.prideScore >= 0 && (
-				<InnerTag className='text-current/50'>
-					<PrideFlag />
-				</InnerTag>
+				<li
+					className={
+						'font-bold text-[#498DD5] uppercase no-underline! decoration-transparent decoration-0!'
+					}>
+					{attr.prideScore && attr.prideScore >= 0 && (
+						<>
+							<PrideFlag className='mr-1 inline-block' />
+						</>
+					)}
+				</li>
 			)}
 			{attr.transSafety && (
-				<InnerTag className='text-current'>
+				<li className={'text-current'}>
 					<TransFlag />
-				</InnerTag>
+				</li>
 			)}
-		</Tag>
+			{attr.prideScore && attr.prideScore >= 0 && (
+				<li className='text-current/50'>
+					<PrideFlag className='mr-1 inline-block' />
+				</li>
+			)}
+		</>
+	)
+}
+const InnerAttributeSpan = ({
+	attr,
+}: Props & {
+	attr: ReturnType<ApiData.DB['getCommunityAttributes']>
+}) => {
+	return (
+		<>
+			{attr.isUn && (
+				<span
+					className={
+						'font-bold text-[#498DD5] uppercase no-underline! decoration-transparent decoration-0!'
+					}>
+					{attr.prideScore && attr.prideScore >= 0 && (
+						<>
+							<PrideFlag className='mr-1 inline-block' />
+						</>
+					)}
+				</span>
+			)}
+			{attr.transSafety && (
+				<span className={'text-current'}>
+					<TransFlag />
+				</span>
+			)}
+			{attr.prideScore && attr.prideScore >= 0 && (
+				<span className='text-current/50'>
+					<PrideFlag className='mr-1 inline-block' />
+				</span>
+			)}
+		</>
 	)
 }

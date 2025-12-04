@@ -9,7 +9,6 @@ export const Button = ({
 }: tBtnProps<'link' | 'button'> & {
 	preIcon?: Props.Icon['IconName']
 }) => {
-	// const Tag = 'href' in props ? Link : 'button'
 	const classes = cn(
 		'click relative rounded-md px-3.5 py-2.5 text-xs font-semibold tracking-wide whitespace-nowrap uppercase transition-all focus-visible:outline-2 focus-visible:outline-offset-2 has-[svg]:py-2',
 		variant == 'default'
@@ -22,20 +21,6 @@ export const Button = ({
 		props.className
 	)
 
-	const Inner = () => {
-		return (
-			<>
-				{preIcon && (
-					<Icon
-						IconName={preIcon}
-						className='mr-4 -ml-1 inline h-4 w-4'
-					/>
-				)}
-				{props.children}
-			</>
-		)
-	}
-
 	if ('href' in props) {
 		const linkProps = props as Props.Link
 		return (
@@ -44,7 +29,10 @@ export const Button = ({
 				{...linkProps}
 				href={linkProps.href}
 				className={classes}>
-				<Inner />
+				<Inner
+					children={props.children}
+					preIcon={preIcon}
+				/>
 			</Link>
 		)
 	}
@@ -54,7 +42,10 @@ export const Button = ({
 			{...buttonProps}
 			className={classes}>
 			<TouchTarget>
-				<Inner />
+				<Inner
+					children={props.children}
+					preIcon={preIcon}
+				/>
 			</TouchTarget>
 		</button>
 	)
@@ -82,7 +73,26 @@ export function TouchTarget({
 
 type tBtnProps<T extends 'button' | 'link'> = {
 	variant?: 'default' | 'muted' | 'ghost' | 'bright'
-} & (T extends 'link' ?
-	Omit<Props.Link, 'as'> & { as: 'link'; href: string }
+} & (T extends 'link' ? Omit<Props.Link, 'as'> & { as: 'link'; href: string }
 : T extends 'button' ? Props<'button'>
 : never)
+
+const Inner = ({
+	preIcon,
+	...props
+}: {
+	preIcon?: Props.Icon['IconName']
+	children: React.ReactNode
+}) => {
+	return (
+		<>
+			{preIcon && (
+				<Icon
+					IconName={preIcon}
+					className='mr-4 -ml-1 inline h-4 w-4'
+				/>
+			)}
+			{props.children}
+		</>
+	)
+}
