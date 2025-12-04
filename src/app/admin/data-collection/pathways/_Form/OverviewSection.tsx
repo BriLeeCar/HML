@@ -17,7 +17,6 @@ import {
 } from '@/data-collection/pathways'
 import z from 'zod/v4'
 import { Icon } from '~/components/Icon'
-import type { Country } from '~/server/prisma/generated/browser'
 import { FieldLink } from './LinkField'
 import { refresh } from './refresh'
 
@@ -40,7 +39,7 @@ export const OverviewSection = ({
 	handlePrisma,
 	countries,
 }: ElPrismaProps & {
-	countries: Country[]
+	countries: Queried.Country.WithRelations[]
 }) => {
 	return (
 		<FormSection

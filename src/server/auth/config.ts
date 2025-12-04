@@ -1,7 +1,7 @@
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import { type DefaultSession, type NextAuthConfig } from 'next-auth'
 
-import db from 'prisma'
+import db from '~/server/prisma/db'
 import { CredentialsConfig } from './lib/credentials'
 
 /**

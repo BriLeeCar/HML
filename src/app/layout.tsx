@@ -5,6 +5,7 @@ import 'react'
 import type { ReactNode } from 'react'
 import 'rehype-callouts/theme/vitepress'
 import { cn } from '~/lib/cn'
+import { TRPCReactProvider } from '../trpc/react'
 import { Providers } from './providers'
 import './style.css'
 
@@ -34,7 +35,9 @@ const RootLayout = async ({
 			className={cn(openSans.variable)}
 			suppressHydrationWarning>
 			<body className={cn('text-foreground bg-background relative font-sans antialiased', 'pb-4')}>
-				<Providers>{children}</Providers>
+				<Providers>
+					<TRPCReactProvider>{children}</TRPCReactProvider>
+				</Providers>
 				<Analytics />
 			</body>
 		</html>

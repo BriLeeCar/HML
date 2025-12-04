@@ -1,10 +1,10 @@
+import { CredentialsSignin } from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
 import z from 'zod'
 import { hash, verify } from '~/lib/hashAndSalt'
 
-import { CredentialsSignin } from 'next-auth'
-import db from 'prisma'
 import { User, UserKey, type zUser, type zUserKey } from '~/server/api/zod'
+import db from '~/server/prisma/db'
 
 type CredentialsBase = {
 	username: zUser['name']

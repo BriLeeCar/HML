@@ -12,7 +12,6 @@ import {
 	type FieldElProps,
 } from '@/data-collection/pathways'
 import { zMinMax } from '~/server/api/routers/clientConstants'
-import type { Country, Currency, Language } from '~/server/prisma/generated/browser'
 import { FieldCost } from './CostField'
 import { refresh } from './refresh'
 
@@ -23,12 +22,7 @@ export const MinMaxCostFieldGroup = ({
 	countries,
 }: ElPrismaProps & {
 	error?: boolean
-	countries: Array<
-		Country & {
-			currencies: Currency[]
-			languages?: Language[] | undefined
-		}
-	>
+	countries: Array<Queried.Country.WithRelations>
 }) => {
 	const currencyOptions = countries
 		.filter(c => c.code === data.query.countryCode)

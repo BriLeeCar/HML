@@ -19,7 +19,6 @@ import {
 } from '@/data-collection/pathways'
 import { type ReactNode } from 'react'
 import { Icon } from '~/components/Icon'
-import type { Country } from '~/server/prisma/generated/browser'
 import { note, refresh } from './refresh'
 
 export const RestrictionsOpportunities = ({
@@ -122,7 +121,7 @@ const NationalityRestrictionsCB = ({
 	handlePrisma,
 	countries,
 }: ElPrismaProps & {
-	countries: Country[]
+	countries: Queried.Country.Model[]
 }) => {
 	const cbValue = data.query['restrictedNationalities']?.length > 0
 

@@ -11,7 +11,6 @@ import {
 } from '@/data-collection/pathways'
 import z from 'zod'
 import { Icon } from '~/components/Icon'
-import type { Documents } from '~/server/prisma/generated/browser'
 import { FieldCost } from './CostField'
 import { document } from './refresh'
 
@@ -20,7 +19,7 @@ export const Documentation = ({
 	data,
 	handlePrisma,
 }: ElPrismaProps & {
-	documentTypes: Documents[]
+	documentTypes: Queried.Models.Documents[]
 }) => {
 	const baseData = { ...data }
 	return (

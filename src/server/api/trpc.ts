@@ -11,8 +11,8 @@ import { initTRPC, TRPCError } from '@trpc/server'
 import superjson from 'superjson'
 import z, { ZodError } from 'zod'
 
-import db from 'prisma'
 import { auth } from '~/server/auth'
+import db from '~/server/prisma/db'
 
 /**
  * 1. CONTEXT

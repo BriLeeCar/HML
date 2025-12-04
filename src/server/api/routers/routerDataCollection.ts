@@ -1,4 +1,4 @@
-import type { PathwayPipeline, PathwayTypes, Prisma } from 'prisma/client'
+import type * as Prisma from '@prisma/client'
 import z from 'zod/v4'
 import { createTRPCRouter, getCountriesByCode, protectedProcedure } from '.'
 
@@ -112,7 +112,7 @@ export const DataCollectionRouter = createTRPCRouter({
 				'currencies' | 'languages',
 				boolean
 			>
-				& Prisma.CountrySelect
+				& Record<keyof Prisma.Country, boolean>
 
 			const [countries, documentTypes, pathwayTypes] = await ctx.db.$transaction(async tx => {
 				const countries = (await tx.country.findMany({
@@ -137,9 +137,9 @@ export const DataCollectionRouter = createTRPCRouter({
 						:	{}),
 					},
 				})) as Array<
-					Prisma.CountryModel & {
-						countryCurrencies: Prisma.CountryCurrencyModel[]
-						countryLanguages: Prisma.CountryLanguageModel[]
+					Prisma.Country & {
+						countryCurrencies: Prisma.CountryCurrency[]
+						countryLanguages: Prisma.CountryLanguage[]
 					}
 				>
 
@@ -297,8 +297,10 @@ export const DataCollectionRouter = createTRPCRouter({
 								.map(([key, value]) =>
 									value ?
 										{
-											pipeline: key.toUpperCase() as PathwayPipeline['pipeline'],
-											note: query[key as PathwayPipeline['pipeline'] & keyof Query['query']] || '',
+											pipeline: key.toUpperCase() as Prisma.PathwayPipeline['pipeline'],
+											note:
+												query[key as Prisma.PathwayPipeline['pipeline'] & keyof Query['query']]
+												|| '',
 										}
 									:	null
 								)
@@ -366,5 +368,5 @@ export const DataCollectionRouter = createTRPCRouter({
 	}),
 })
 
-type PathwayTypeOmitted = Omit<PathwayTypes, 'parentId'>
+type PathwayTypeOmitted = Omit<Prisma.PathwayTypes, 'parentId'>
 export type PathwayTypeRecursive = PathwayTypeOmitted & { children: PathwayTypeRecursive[] }

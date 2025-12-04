@@ -1,11 +1,11 @@
 generator client {
-  provider        = "prisma-client"
-  output          = "../src/server/prisma/generated"
-  previewFeatures = ["views"]
+  provider = "prisma-client-js"
+  // output   = "../src/server/prisma/generated"
 }
 
 datasource db {
   provider = "postgresql"
+  url      = env("PRISMA_DATABASE_URL")
 }
 
 model Country {
@@ -366,13 +366,6 @@ model PathwayTypes {
   pathways    PathwayCategories[]
   parent      PathwayTypes?       @relation("PathwayTypesParentChild", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "pathwaytypes_parentid_fkey")
   children    PathwayTypes[]      @relation("PathwayTypesParentChild")
-}
-
-view CountryDetailed {
-  code       String
-  name       String
-  currencies Json[] @db.Json
-  languages  Json[] @db.Json
 }
 
 enum PathwayType {

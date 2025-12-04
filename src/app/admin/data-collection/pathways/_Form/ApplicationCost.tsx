@@ -5,19 +5,13 @@ import {
 	MinMaxCostFieldGroup,
 	type ElPrismaProps,
 } from '@/data-collection/pathways/_Form'
-import type { Country, Currency, Language } from '~/server/prisma/generated/browser'
 
 export const ApplicationCost = ({
 	data,
 	handlePrisma,
 	countries,
 }: ElPrismaProps & {
-	countries: Array<
-		Country & {
-			currencies: Currency[]
-			languages?: Language[] | undefined
-		}
-	>
+	countries: Array<Queried.Country.WithRelations>
 }) => {
 	return (
 		<FormSubSection

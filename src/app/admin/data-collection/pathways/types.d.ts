@@ -1,4 +1,4 @@
-import type * as Prisma from '~/server/prisma/generated/browser'
+import type * as Prisma from '@prisma/client'
 
 declare global {
 	// // #region OLD DATA
@@ -165,6 +165,83 @@ declare global {
 	// 	// #endregion ?
 	// }
 	// // #endregion
+
+	namespace Queried {
+		namespace Currency {
+			type Model = Prisma.Currency
+		}
+		namespace Language {
+			type Model = Prisma.Language
+		}
+		namespace Documents {
+			type Model = Prisma.Documents
+		}
+		namespace Pathway {
+			type Model = Omit<Prisma.Pathway, 'duration' | 'processTime' | 'renewal' | 'cost'> & {
+				duration: {
+					min: number
+					max: number
+					note: string
+				}
+				processTime: {
+					min: number
+					max: number
+					note: string
+				}
+				renewal: {
+					min: number
+					max: number
+					note: string
+				}
+				cost: {
+					min: number
+					max: number
+				}
+			}
+
+			type Relations = {
+				country: Country.Model
+				currencies: Currency.Model[]
+				languages: Language.Model[]
+				documents: Documents.Model[]
+			}
+
+			type WithRelations<C extends keyof Queried.Pathway.Relations> = Queried.Pathway.Model & {
+				[K in C]: Queried.Pathway.Relations[K]
+			}
+			type TypeEnum = Prisma.PathwayType
+		}
+
+		namespace Country {
+			type Model = Prisma.Country
+
+			type WithRelations = Country.Model & {
+				currencies: Prisma.Currency[]
+				languages: Prisma.Language[]
+			}
+		}
+
+		namespace Models {
+			type Country = Prisma.Country
+			type CountryWithRelations = Country & {
+				currencies: Currency[]
+				languages: Language[]
+			}
+
+			type Currency = Prisma.Currency
+			type Documents = Prisma.Documents
+			type Language = Prisma.Language
+			type Pathway = Prisma.Pathway
+		}
+
+		namespace Columns {
+			type Country = keyof Queried.Models.Country
+			type Currency = keyof Queried.Models.Currency
+			type Documents = keyof Queried.Models.Documents
+			type Language = keyof Queried.Models.Language
+			type Pathway = keyof Queried.Models.Pathway
+		}
+	}
 
 	type PrismaPathway = {
 		documents: Array<Omit<Prisma.PathwayDocuments, 'cost'> & { cost: number }>

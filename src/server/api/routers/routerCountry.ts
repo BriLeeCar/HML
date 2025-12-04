@@ -1,17 +1,18 @@
+import type { Country, CountryCurrency, CountryLanguage } from '@prisma/client'
+
 import type { User } from 'next-auth'
-import type * as Prisma from 'prisma/models'
 import z from 'zod/v4'
 import { createTRPCRouter, publicProcedure } from '.'
 import { transformCountryCurrency } from './routerCurrency'
 import { transformCountryLanguage } from './routerLanguage'
 import type { tCTX } from './types'
 
-type CountryCol = Prisma.CountryModel & {
-	countryCurrencies: Prisma.CountryCurrencyModel[]
-	countryLanguages: Prisma.CountryLanguageModel[]
+type CountryCol = Country & {
+	countryCurrencies: CountryCurrency[]
+	countryLanguages: CountryLanguage[]
 }
 
-type CountryOutput = Record<'currencies' | 'languages', boolean> & Prisma.CountrySelect
+type CountryOutput = Record<'currencies' | 'languages', boolean> & Record<keyof Country, boolean>
 
 const zSelectIncludeKeys = z.partialRecord(
 	z.enum(['code', 'name', 'currencies', 'languages']),
