@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  // output   = "../src/server/prisma/generated"
 }
 
 datasource db {
@@ -36,28 +35,27 @@ model CountryCurrency {
 }
 
 model Pathway {
-  id           Int         @id @default(autoincrement())
-  countryCode  String
-  name         String
-  link         String
-  description  String
-  type         PathwayType
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @default(dbgenerated("date(CURRENT_TIMESTAMP)")) @updatedAt
-  currencyCode String
-  notes        String[]    @default([])
-  limitations  String[]    @default([])
-  requirements String[]    @default([])
-  restrictions String[]    @default([])
-  cost         Json        @db.Json
-  duration     Json        @db.Json
-  processTime  Json        @db.Json
-  renewal      Json        @db.Json
-  createdBy    String
-
-  createdByUser           User                           @relation(fields: [createdBy], references: [id])
+  id                      Int                            @id @default(autoincrement())
+  countryCode             String
+  name                    String
+  link                    String
+  description             String
+  type                    PathwayType
+  createdAt               DateTime                       @default(now())
+  updatedAt               DateTime                       @default(dbgenerated("date(CURRENT_TIMESTAMP)")) @updatedAt
+  currencyCode            String
+  notes                   String[]                       @default([])
+  limitations             String[]                       @default([])
+  requirements            String[]                       @default([])
+  restrictions            String[]                       @default([])
+  duration                Json?                          @default("{\"max\": 0, \"min\": 0, \"note\": null}")
+  processTime             Json?                          @default("{\"max\": 0, \"min\": 0, \"note\": null}")
+  renewal                 Json?                          @default("{\"max\": 0, \"min\": 0, \"note\": null}")
+  cost                    Json?                          @default("{\"max\": 0, \"min\": 0}")
+  createdby               String
   country                 Country                        @relation(fields: [countryCode], references: [code])
   currency                Currency                       @relation(fields: [currencyCode], references: [code])
+  CMS_User                User                           @relation(fields: [createdby], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "pathway_userfkey")
   categories              PathwayCategories[]
   documents               PathwayDocuments[]
   pipelines               PathwayPipeline[]
@@ -97,10 +95,10 @@ model PathwayDocuments {
   documentId  Int
   description String?
   cost        Decimal   @default(0.00)
-  document    Documents @relation(fields: [documentId], references: [id])
+  isRequired  Boolean   @default(true)
   link        String?
-  isRequired  Boolean   @default(false)
   title       String?
+  document    Documents @relation(fields: [documentId], references: [id])
   pathway     Pathway   @relation(fields: [pathwayId], references: [id])
 }
 
@@ -281,9 +279,9 @@ model User {
   key                UserKey?
   roles              UserRoles[]
   socials            UserSocial[]
+  Pathway            Pathway[]
   posts              Post[]
   resources          Resource[]
-  pathways           Pathway[]
 
   @@map("CMS_User")
 }
@@ -302,8 +300,8 @@ model UserKey {
   name   String
   userId String? @unique(map: "UserKey_userId_key")
   roleId Int
+  role   Roles   @relation(fields: [roleId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "CMS_UserKey_Role")
   user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade, map: "UserKey_userId_fkey")
-  role   Roles   @relation(fields: [roleId], references: [id], onDelete: NoAction, map: "CMS_UserKey_Role")
 
   @@map("CMS_UserKey")
 }
@@ -332,8 +330,8 @@ model UserRoles {
 model Roles {
   id        Int         @id(map: "Roles_pkey") @default(autoincrement())
   name      String      @unique(map: "Roles_name_key")
-  UserRoles UserRoles[]
   userKeys  UserKey[]
+  UserRoles UserRoles[]
 
   @@map("CMS_Roles")
 }

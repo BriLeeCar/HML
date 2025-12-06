@@ -1,6 +1,6 @@
 import { LayoutWrapper } from '@/admin/_components/Wrapper'
 import { api } from 'query'
-import { NewUserForm } from './_components/NewUserForm'
+import { NewUserForm } from './Base'
 
 export default async function NewUserPage() {
 	const userRoles = await api.user.getUserRoles()

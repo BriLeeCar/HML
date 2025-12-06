@@ -128,7 +128,7 @@ export const DataCollectionRouter = createTRPCRouter({
 		try {
 			const newPathway = await ctx.db.pathway.create({
 				data: {
-					createdBy: user!.id,
+					createdby: user!.id,
 					countryCode: query.countryCode,
 					name: query.name,
 					createdAt: new Date(),
