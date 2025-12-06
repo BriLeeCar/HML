@@ -206,6 +206,8 @@ export const zCreatePathwayInput = z
 				)
 				.prefault([]),
 			citizenship: z.string().optional(),
+			residency: z.string().optional(),
+			reunification: z.string().optional(),
 			notes: z
 				.array(
 					z.object({
