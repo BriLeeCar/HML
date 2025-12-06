@@ -11,7 +11,7 @@ import {
 	Section,
 	SectionHeading,
 } from '~/components'
-import { FAQ } from './faq'
+import { FAQ } from './_components/faq'
 
 export const metadata: Metadata = {
 	title: 'Support Team',
@@ -26,26 +26,23 @@ export default function SupportTeam() {
 				eyebrow='Support Team'
 				subtitle={
 					<>
-						Our goal is to make sure you feel supported in creating
-						the evacuation plan that works best for you.
+						Our goal is to make sure you feel supported in creating the evacuation plan that works
+						best for you.
 						<Bold className='block'>You are not alone</Bold>
 					</>
 				}>
 				We're here to help
 			</PageHeading>
 			<P>
-				We’ll help you identify your most important support needs,
-				explore which pathways may suit you best, and then walk with
-				you through the steps of organizing, arranging, and planning
+				We’ll help you identify your most important support needs, explore which pathways may suit
+				you best, and then walk with you through the steps of organizing, arranging, and planning
 				along that pathway.
 			</P>
 			<P>
-				Many members of the Support Team have also had to leave their
-				home country. Whenever possible, you’ll speak with someone who
-				has chosen and experienced a pathway similar to your own. We
-				know that leaving behind a life—people, places, and things—is
-				never easy. If you are truly ready to leave, or if you feel
-				you cannot stay, we are here to make the logistics and
+				Many members of the Support Team have also had to leave their home country. Whenever
+				possible, you’ll speak with someone who has chosen and experienced a pathway similar to your
+				own. We know that leaving behind a life—people, places, and things—is never easy. If you are
+				truly ready to leave, or if you feel you cannot stay, we are here to make the logistics and
 				mechanics as clear and manageable as possible.
 			</P>
 
@@ -58,19 +55,16 @@ export default function SupportTeam() {
 					read the following information before contacting us. These
 					documents will help you understand the process and prepare
 					for your conversation with our Support Team.'>
-					Reaching out can be scary, but asking for help is always the
-					right choice—the best choice for you.
+					Reaching out can be scary, but asking for help is always the right choice—the best choice
+					for you.
 				</SectionHeading>
 				<OL className='text-balance *:mt-4'>
 					<Li className='not-list-label'>
-						<InlineLink href='/get-ready-to-leave'>
-							Get Ready to Leave
-						</InlineLink>
+						<InlineLink href='/get-ready-to-leave'>Get Ready to Leave</InlineLink>
 						<ul>
 							<li>
-								This document is where we recommend you start. It
-								outlines essential steps from planning to packing,
-								helping you create a personalized evacuation plan.
+								This document is where we recommend you start. It outlines essential steps from
+								planning to packing, helping you create a personalized evacuation plan.
 							</li>
 						</ul>
 					</Li>
@@ -80,23 +74,19 @@ export default function SupportTeam() {
 						</InlineLink>
 						<ul>
 							<li>
-								Important for those considering asylum as a pathway,
-								this guide provides important information about what
-								asylum actually means, and if it is the right pathway
-								for you.
+								Important for those considering asylum as a pathway, this guide provides important
+								information about what asylum actually means, and if it is the right pathway for
+								you.
 							</li>
 						</ul>
 					</Li>
 					<Li>
-						<InlineLink href='#faq'>
-							Frequently Asked Questions
-						</InlineLink>
+						<InlineLink href='#faq'>Frequently Asked Questions</InlineLink>
 						<ul>
 							<li>
-								To keep our support team free to process users that
-								are in dire need of relocation, we have compiled a
-								list of frequently asked questions to help you find
-								the information you need quickly.
+								To keep our support team free to process users that are in dire need of relocation,
+								we have compiled a list of frequently asked questions to help you find the
+								information you need quickly.
 							</li>
 						</ul>
 					</Li>

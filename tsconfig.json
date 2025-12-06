@@ -24,6 +24,7 @@
 			"~/components/*": ["./src/components/*"],
 			"~/components": ["./src/components/index.ts"],
 			"~/server/*": ["./src/server/*"],
+			"~/trpc": ["./src/server/api/*"],
 			"~/data/*": ["./src/data/*"],
 			"~/lib/*": ["./src/lib/*"],
 			"@/data-collection/*": ["./src/app/admin/data-collection/*"],

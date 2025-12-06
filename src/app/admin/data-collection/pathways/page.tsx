@@ -1,5 +1,5 @@
 import { api } from 'query'
-import { Base } from './_Form/Base'
+import { Base } from './Base'
 
 import { verifyUser } from '~/server/auth/lib/verifyUser'
 
@@ -18,9 +18,6 @@ const VisaPathwayCollectionPage = async () => {
 		},
 	})
 
-	// const pipelines = await api.dataCollection.Select()
-	// query['new'] = pipelines
-
 	return (
 		<Wrapper>
 			<Base prisma={query} />
@@ -29,7 +26,7 @@ const VisaPathwayCollectionPage = async () => {
 }
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
-	<div className='dark:bg-background min-h-screen max-w-screen'>{children}</div>
+	<div className='min-h-screen max-w-screen'>{children}</div>
 )
 
 export default VisaPathwayCollectionPage

@@ -6,8 +6,8 @@ import { toTitleCase } from '~/lib/text'
 import { DBContext } from '~/server/db/provider'
 
 import { IconAttributes, Page, PageHeading } from '~/components'
-import { Stats } from './Stats'
-import { SubMenu } from './SubMenu'
+import { Stats } from './_components/Stats'
+import { SubMenu } from './_components/SubMenu'
 
 export const Base = ({
 	countryName,
@@ -44,9 +44,7 @@ export const Base = ({
 				/>
 
 				{children}
-				{section == 'Basics' && (
-					<Stats countryStats={db.getCountryStats(country)} />
-				)}
+				{section == 'Basics' && <Stats countryStats={db.getCountryStats(country)} />}
 			</Page>
 		</>
 	)

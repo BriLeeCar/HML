@@ -34,7 +34,12 @@ const RootLayout = async ({
 			lang='en'
 			className={cn(openSans.variable)}
 			suppressHydrationWarning>
-			<body className={cn('text-foreground bg-background relative font-sans antialiased', 'pb-4')}>
+			<body
+				className={cn(
+					'text-foreground bg-background relative font-sans antialiased',
+					'pb-4',
+					'has-[.admin]:dark:bg-[#181c1d]'
+				)}>
 				<Providers>
 					<TRPCReactProvider>{children}</TRPCReactProvider>
 				</Providers>

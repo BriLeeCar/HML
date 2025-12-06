@@ -5,6 +5,10 @@ import { api } from '../../../trpc/server'
 export const verifyUser = async () => {
 	const { id } = (await auth())?.user ?? {}
 	const user = await api.user.getUserById(id)
-	if (!user) redirect('/api/auth/signin')
+	if (!user) redirect('/admin/auth/signin')
 	return user
+}
+
+export const verifyAdmin = async () => {
+	return await api.admin.verify()
 }

@@ -1,5 +1,5 @@
-import { AnnouncementBanner } from './_Layout/TopBanner'
-import { NavMenu } from './_Layout/TopNav'
+import { AnnouncementBanner } from './_components/TopBanner'
+import { NavMenu } from './_components/TopNav'
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
 	return (

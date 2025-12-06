@@ -29,7 +29,6 @@ const nextConfig: NextConfig = {
 			},
 		],
 	},
-	devIndicators: false,
 	headers: async () => {
 		return [
 			{

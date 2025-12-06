@@ -1,15 +1,15 @@
 'use client'
 
-import { MapPathEl, MapSvg } from '@/(Content)/(Full)/map/Map'
+import { MapPathEl, MapSvg } from '@/(Content)/(Full Width)/map/_components/Map'
 import Link from 'next/link'
 import { useContext } from 'react'
 import { Button } from '~/components/Button'
 import { cn } from '~/lib/cn'
 import { DBContext } from '~/server/db/provider'
-import { MapBtn, NowBtn, SmallBtns } from './Buttons'
-import { HeadingText, TopText } from './HeadingText'
-import { BottomPlane } from './MobileText'
-import { Img } from './SidebarImg'
+import { MapBtn, NowBtn, SmallBtns } from './_components/Buttons'
+import { HeadingText, TopText } from './_components/HeadingText'
+import { BottomPlane } from './_components/MobileText'
+import { Img } from './_components/SidebarImg'
 
 const Home = () => {
 	const db = useContext(DBContext)
@@ -39,7 +39,7 @@ const Home = () => {
 					'hidden h-1/2 w-[50vw] overflow-clip min-[600px]:h-screen md:block'
 				)}>
 				<MapSvg className='lg:max-h-fill xl: stroke-background fill-muted h-auto w-screen stroke-1 shadow-none select-none lg:relative lg:w-screen'>
-					{db.getMapPaths().map((country) => {
+					{db.getMapPaths().map(country => {
 						const { svgPath, abbr, name } = country
 
 						return (

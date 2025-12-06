@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { toTitleCase } from '~/lib/text'
 import countries from '~/server/db/countries.json'
 import { Base } from './Base'
-import { MatchingPathways } from './MatchingPathways'
+import { MatchingPathways } from './_components/MatchingPathways'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-static'

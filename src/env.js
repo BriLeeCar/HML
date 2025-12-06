@@ -11,6 +11,10 @@ export const env = createEnv({
             process.env.NODE_ENV === "production"
                 ? z.string()
                 : z.string().optional(),
+        NEXTAUTH_SECRET:
+            process.env.NODE_ENV === "production"
+                ? z.string()
+                : z.string().optional(),
         PRISMA_DATABASE_URL: z.string(),
         R2_ACCT: z.string(),
         R2_TOKEN: z.string(),
@@ -38,6 +42,7 @@ export const env = createEnv({
      */
     runtimeEnv: {
         AUTH_SECRET: process.env.AUTH_SECRET,
+        NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
         PRISMA_DATABASE_URL: process.env.PRISMA_DATABASE_URL,
 
         NODE_ENV: process.env.NODE_ENV,

@@ -1,0 +1,16 @@
+export const betaCountries = [
+	{ name: 'Albania', code: 'ALB' },
+	{ name: 'Brazil', code: 'BRA' },
+	{ name: 'Canada', code: 'CAN' },
+	{ name: 'Costa Rica', code: 'CRI' },
+	{ name: 'Estonia', code: 'EST' },
+	{ name: 'Spain', code: 'ESP' },
+	{ name: 'Finland', code: 'FIN' },
+	{ name: 'France', code: 'FRA' },
+	{ name: 'Ireland', code: 'IRL' },
+	{ name: 'Italy', code: 'ITA' },
+	{ name: 'Mexico', code: 'MEX' },
+	{ name: 'Norway', code: 'NOR' },
+	{ name: 'Portugal', code: 'PRT' },
+	{ name: 'Uruguay', code: 'URY' },
+]

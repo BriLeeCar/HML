@@ -1,4 +1,5 @@
 export * from '../trpc'
+export * from './routerAdmin'
 export * from './routerCountry'
 export * from './routerCurrency'
 export * from './routerDataCollection'

@@ -8,7 +8,7 @@ import countriesMeta from '~/server/db/countries.json'
 import db from '~/server/db/db'
 import countries from '~/server/db/pathways.json'
 import { Base } from '../Base'
-import { Pathways } from '../Pathways'
+import { Pathways } from '../_components/Pathways'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-static'

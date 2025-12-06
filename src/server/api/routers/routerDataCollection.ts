@@ -1,101 +1,7 @@
 import type * as Prisma from '@prisma/client'
 import z from 'zod/v4'
 import { createTRPCRouter, getCountriesByCode, protectedProcedure } from '.'
-
-const zCreatePathwayInput = z
-	.object({
-		counters: z.object({
-			notes: z.number(),
-			limitations: z.number(),
-			requirements: z.number(),
-			restrictions: z.number(),
-			documents: z.number(),
-		}),
-		date: z.date(),
-		durations: z.object({
-			duration: z.number().prefault(1),
-			processTime: z.number().prefault(1),
-			renewal: z.number().prefault(1),
-		}),
-		piplines: z.object({
-			residency: z.boolean().prefault(false),
-			citizenship: z.boolean().prefault(false),
-			reunification: z.boolean().prefault(false),
-			renewal: z.boolean().prefault(false),
-		}),
-		query: z.object({
-			countryCode: z.string('Country ID is required'),
-			name: z.string(),
-			link: z.url(),
-			description: z.string(),
-			currencyCode: z.string(),
-			processTime: z.object({
-				min: z.number(),
-				max: z.number().prefault(0),
-				note: z.string().optional(),
-			}),
-			cost: z.object({
-				min: z.number().optional(),
-				max: z.number().prefault(0),
-			}),
-			duration: z.object({
-				min: z.number(),
-				max: z.number().prefault(0),
-				note: z.string().optional(),
-			}),
-			documents: z.array(
-				z.object({
-					id: z.number(),
-					documentId: z.number(),
-					title: z
-						.string()
-						.transform(val => (val == '' ? null : null))
-						.nullable(),
-					cost: z.number().optional(),
-					description: z.string().optional(),
-					link: z.url().optional(),
-					isRequired: z.boolean().prefault(false),
-				})
-			),
-			restrictedNationalities: z.array(
-				z.object({
-					countryCode: z.string(),
-					note: z.string(),
-				})
-			),
-			citizenship: z.string().optional(),
-			notes: z.array(
-				z.object({
-					counter: z.number(),
-					note: z.string(),
-				})
-			),
-			limitations: z.array(
-				z.object({
-					counter: z.number(),
-					note: z.string(),
-				})
-			),
-			restrictions: z.array(
-				z.object({
-					counter: z.number(),
-					note: z.string(),
-				})
-			),
-			requirements: z.array(
-				z.object({
-					counter: z.number(),
-					note: z.string(),
-				})
-			),
-			renewal: z.object({
-				min: z.number().optional(),
-				max: z.number().optional(),
-				note: z.string().optional(),
-			}),
-		}),
-	})
-	.loose()
+import { zCreatePathwayInput } from '../zod'
 
 export type CreatePathwayInput = z.infer<typeof zCreatePathwayInput>
 
@@ -214,63 +120,6 @@ export const DataCollectionRouter = createTRPCRouter({
 			}
 		}),
 
-	/* {
-    "query": {
-        "documents": [
-            {
-                "id": 1,
-                "documentId": 8,
-                "title": "",
-                "cost": 20,
-                "description": "Laboris nulla Lorem fugiat. Laborum eu elit do. Qui ut irure aliqua amet tempor dolore deserunt. Proident voluptate irure velit eiusmod dolor aliqua Lorem aute dolore excepteur cupidatat sunt aliquip officia. Proident adipisicing cupidatat Lorem ut aute quis qui reprehenderit laborum labore commodo amet. Enim in et pariatur esse voluptate deserunt incididunt enim sunt deserunt id. Aliqua minim duis sint quis cupidatat elit quis.",
-                "link": "https://google.com",
-                "isRequired": false,
-                "pathwayId": 0
-            }
-        ],
-        "restrictedNationalities": [
-            {
-                "pathwayId": 0,
-                "countryCode": "ARM",
-                "note": "Laboris nulla Lorem fugiat. Laborum eu elit do. Qui ut irure aliqua amet tempor dolore deserunt. Proident voluptate irure velit eiusmod dolor aliqua Lorem aute dolore excepteur cupidatat sunt aliquip officia. Proident adipisicing cupidatat Lorem ut aute quis qui reprehenderit laborum labore commodo amet. Enim in et pariatur esse voluptate deserunt incididunt enim sunt deserunt id. Aliqua minim duis sint quis cupidatat elit quis."
-            }
-        ],
-        "citizenship": "Laboris nulla Lorem fugiat. Laborum eu elit do. Qui ut irure aliqua amet tempor dolore deserunt. Proident voluptate irure velit eiusmod dolor aliqua Lorem aute dolore excepteur cupidatat sunt aliquip officia. Proident adipisicing cupidatat Lorem ut aute quis qui reprehenderit laborum labore commodo amet. Enim in et pariatur esse voluptate deserunt incididunt enim sunt deserunt id. Aliqua minim duis sint quis cupidatat elit quis.",
-        "notes": [
-            {
-                "counter": 1,
-                "note": "Laboris nulla Lorem fugiat. Laborum eu elit do. Qui ut irure aliqua amet tempor dolore deserunt. Proident voluptate irure velit eiusmod dolor aliqua Lorem aute dolore excepteur cupidatat sunt aliquip officia. Proident adipisicing cupidatat Lorem ut aute quis qui reprehenderit laborum labore commodo amet. Enim in et pariatur esse voluptate deserunt incididunt enim sunt deserunt id. Aliqua minim duis sint quis cupidatat elit quis."
-            },
-            {
-                "counter": 2,
-                "note": "Laboris nulla Lorem fugiat. Laborum eu elit do. Qui ut irure aliqua amet tempor dolore deserunt. Proident voluptate irure velit eiusmod dolor aliqua Lorem aute dolore excepteur cupidatat sunt aliquip officia. Proident adipisicing cupidatat Lorem ut aute quis qui reprehenderit laborum labore commodo amet. Enim in et pariatur esse voluptate deserunt incididunt enim sunt deserunt id. Aliqua minim duis sint quis cupidatat elit quis. Laboris nulla Lorem fugiat. Laborum eu elit do. Qui ut irure aliqua amet tempor dolore deserunt. Proident voluptate irure velit eiusmod dolor aliqua Lorem aute dolore excepteur cupidatat sunt aliquip officia. Proident adipisicing cupidatat Lorem ut aute quis qui reprehenderit laborum labore commodo amet. Enim in et pariatur esse voluptate deserunt incididunt enim sunt deserunt id. Aliqua minim duis sint quis cupidatat elit quis."
-            }
-        ],
-        "limitations": [
-            {
-                "counter": 1,
-                "note": "Laboris nulla Lorem fugiat. Laborum eu elit do. Qui ut irure aliqua amet tempor dolore deserunt. Proident voluptate irure velit eiusmod dolor aliqua Lorem aute dolore excepteur cupidatat sunt aliquip officia. Proident adipisicing cupidatat Lorem ut aute quis qui reprehenderit laborum labore commodo amet. Enim in et pariatur esse voluptate deserunt incididunt enim sunt deserunt id. Aliqua minim duis sint quis cupidatat elit quis."
-            },
-            {
-                "counter": 2,
-                "note": "Laboris nulla Lorem fugiat. Laborum eu elit do. Qui ut irure aliqua amet tempor dolore deserunt. Proident voluptate irure velit eiusmod dolor aliqua Lorem aute dolore excepteur cupidatat sunt aliquip officia. Proident adipisicing cupidatat Lorem ut aute quis qui reprehenderit laborum labore commodo amet. Enim in et pariatur esse voluptate deserunt incididunt enim sunt deserunt id. Aliqua minim duis sint quis cupidatat elit quis."
-            }
-        ]
-    },
-    "date": "2025-12-03T14:30:43.688Z",
-    "durations": {
-        "duration": 365,
-        "processTime": 7,
-        "renewal": 1
-    },
-    "piplines": {
-        "residency": false,
-        "citizenship": true,
-        "reunification": false,
-        "renewal": true
-    }
-} */
-
 	CreatePathway: protectedProcedure.input(zCreatePathwayInput).mutation(async ({ ctx, input }) => {
 		const { piplines, query } = input
 
@@ -279,7 +128,7 @@ export const DataCollectionRouter = createTRPCRouter({
 		try {
 			const newPathway = await ctx.db.pathway.create({
 				data: {
-					discordHandle: user?.name || '',
+					createdBy: user!.id,
 					countryCode: query.countryCode,
 					name: query.name,
 					createdAt: new Date(),
@@ -332,12 +181,12 @@ export const DataCollectionRouter = createTRPCRouter({
 						note: query.duration.note || '',
 					},
 					renewal: {
-						min: piplines.renewal ? Number(query.renewal.min) : null,
-						max: piplines.renewal ? Number(query.renewal.max) : null,
-						note: query.renewal.note || '',
+						min: piplines.renewal ? Number(query.renewal?.min) : null,
+						max: piplines.renewal ? Number(query.renewal?.max) : null,
+						note: query.renewal?.note || '',
 					},
 					documents: {
-						connectOrCreate: query.documents.map(doc => ({
+						connectOrCreate: query.documents?.map(doc => ({
 							create: {
 								description: doc.description || null,
 								cost: doc.cost || 0,

@@ -19,8 +19,12 @@ export const CTA = ({ primaryAction, secondaryAction, subtitle, ...props }: CTAP
 	if (subtitle && (primaryAction || secondaryAction)) {
 		return (
 			<div className='relative mx-auto grid w-full grid-cols-1 py-16 sm:grid-cols-[auto_1fr] sm:py-8'>
-				<Head />
-				<Actions />
+				<Head>{props.children}</Head>
+				<Actions
+					primaryAction={primaryAction}
+					secondaryAction={secondaryAction}
+					subtitle={subtitle}
+				/>
 				<Subtitle className='col-span-2'>{subtitle}</Subtitle>
 			</div>
 		)

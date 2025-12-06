@@ -36,24 +36,26 @@ model CountryCurrency {
 }
 
 model Pathway {
-  id                      Int                            @id @default(autoincrement())
-  countryCode             String
-  name                    String
-  link                    String
-  description             String
-  type                    PathwayType
-  discordHandle           String
-  createdAt               DateTime                       @default(now())
-  updatedAt               DateTime                       @default(dbgenerated("date(CURRENT_TIMESTAMP)")) @updatedAt
-  currencyCode            String
-  notes                   String[]                       @default([])
-  limitations             String[]                       @default([])
-  requirements            String[]                       @default([])
-  restrictions            String[]                       @default([])
-  cost                    Json                           @db.Json
-  duration                Json                           @db.Json
-  processTime             Json                           @db.Json
-  renewal                 Json                           @db.Json
+  id           Int         @id @default(autoincrement())
+  countryCode  String
+  name         String
+  link         String
+  description  String
+  type         PathwayType
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @default(dbgenerated("date(CURRENT_TIMESTAMP)")) @updatedAt
+  currencyCode String
+  notes        String[]    @default([])
+  limitations  String[]    @default([])
+  requirements String[]    @default([])
+  restrictions String[]    @default([])
+  cost         Json        @db.Json
+  duration     Json        @db.Json
+  processTime  Json        @db.Json
+  renewal      Json        @db.Json
+  createdBy    String
+
+  createdByUser           User                           @relation(fields: [createdBy], references: [id])
   country                 Country                        @relation(fields: [countryCode], references: [code])
   currency                Currency                       @relation(fields: [currencyCode], references: [code])
   categories              PathwayCategories[]
@@ -281,6 +283,7 @@ model User {
   socials            UserSocial[]
   posts              Post[]
   resources          Resource[]
+  pathways           Pathway[]
 
   @@map("CMS_User")
 }
@@ -298,7 +301,9 @@ model UserKey {
   key    String  @id(map: "UserKey_pkey") @default(cuid())
   name   String
   userId String? @unique(map: "UserKey_userId_key")
+  roleId Int
   user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade, map: "UserKey_userId_fkey")
+  role   Roles   @relation(fields: [roleId], references: [id], onDelete: NoAction, map: "CMS_UserKey_Role")
 
   @@map("CMS_UserKey")
 }
@@ -328,6 +333,7 @@ model Roles {
   id        Int         @id(map: "Roles_pkey") @default(autoincrement())
   name      String      @unique(map: "Roles_name_key")
   UserRoles UserRoles[]
+  userKeys  UserKey[]
 
   @@map("CMS_Roles")
 }

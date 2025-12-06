@@ -1,5 +1,6 @@
 import { z } from 'zod/v4'
-import { createTRPCRouter, publicProcedure } from '.'
+import { generateKey } from '~/lib/keyGen'
+import { createTRPCRouter, protectedProcedure, publicProcedure } from '.'
 
 export const UserRouter = createTRPCRouter({
 	getUserById: publicProcedure.input(z.string().or(z.undefined())).query(async ({ ctx, input }) => {
@@ -10,5 +11,20 @@ export const UserRouter = createTRPCRouter({
 					},
 				})
 			:	false
+	}),
+	createUserKey: protectedProcedure
+		.input(z.object({ name: z.string(), roleId: z.number().gt(0, 'Invalid Role') }))
+		.mutation(async ({ input, ctx }) => {
+			const key = generateKey()
+			return await ctx.db.userKey.create({
+				data: {
+					name: input.name,
+					key: key,
+					roleId: input.roleId,
+				},
+			})
+		}),
+	getUserRoles: publicProcedure.query(async ({ ctx }) => {
+		return await ctx.db.roles.findMany()
 	}),
 })

@@ -20,10 +20,7 @@ export const appRouter = createTRPCRouter({
 	pathway: router.PathwayRouter,
 	language: router.LanguageRouter,
 	currency: router.CurrencyRouter,
-	// blogPost: blogPostRouter,
-	// user: userRouter,
-	// tag: tagRouter,
-	// socialMedia: socialMediaRouter,
+	admin: router.AdminRouter,
 })
 
 // export type definition of API

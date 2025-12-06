@@ -28,9 +28,20 @@ import db from '~/server/prisma/db'
  */
 export const createTRPCContext = async (opts: { headers: Headers }) => {
 	const session = await auth()
+	const userData = await db.user.findFirst({
+		where: { id: session?.user?.id },
+		select: {
+			roles: {
+				select: {
+					role: true,
+				},
+			},
+		},
+	})
 
 	return {
 		db,
+		userRoles: userData?.roles.map(r => r.role) ?? [],
 		session,
 		...opts,
 	}
