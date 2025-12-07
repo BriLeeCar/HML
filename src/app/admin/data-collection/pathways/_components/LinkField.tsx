@@ -29,15 +29,17 @@ export const FieldLink = ({ errors, onBlur, ...props }: FieldLinkProps) => {
 		onBlur && onBlur(newData)
 	}
 
+	const { className, ...rest } = props
+
 	return (
-		<InputGroup>
+		<InputGroup className={className}>
 			<Icon
 				IconName='GlobeAltIcon'
 				data-slot='icon'
 			/>
 			<Input
 				onBlur={handleBlur}
-				{...props}
+				{...rest}
 				placeholder='https://'
 				invalid={errors ?? undefined}
 				type='url'

@@ -1,5 +1,5 @@
 import { z } from 'zod/v4'
-import { generateKey } from '~/lib/keyGen'
+import { generateKey } from '~/lib/security/keyGen'
 import { createTRPCRouter, protectedProcedure, publicProcedure } from '.'
 
 export const UserRouter = createTRPCRouter({

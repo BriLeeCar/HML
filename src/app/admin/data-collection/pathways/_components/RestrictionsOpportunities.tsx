@@ -122,7 +122,7 @@ const NationalityRestrictionsCB = ({
 	handlePrisma,
 	countries,
 }: ElPrismaProps & {
-	countries: Prisma.Country[]
+	countries: PrismaSchema.CountryModel[]
 }) => {
 	const cbValue = data.query['restrictedNationalities']?.length > 0
 
@@ -183,6 +183,7 @@ const NationalityRestrictionsCB = ({
 	return (
 		<FieldGroup>
 			<CheckBox
+				name='nationalityCB'
 				color='brand'
 				label='Has Nationality Restrictions'
 				description='Applicants from certain nationalities may face restrictions or additional requirements

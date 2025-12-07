@@ -1,16 +1,7 @@
 import { Button } from '@/admin/_components'
-import {
-	Field,
-	FieldGroup,
-	Input,
-	InputGroup,
-	Label,
-	Select,
-	Textarea,
-} from '@/admin/_components/catalyst/'
-import z from 'zod'
+import { Field, FieldGroup, Input, Label, Select, Textarea } from '@/admin/_components/catalyst/'
 import { Icon } from '~/components'
-import { document, FieldCost, type ElPrismaProps } from '..'
+import { document, FieldCost, FieldLink, type ElPrismaProps } from '..'
 
 export const Documentation = ({
 	documentTypes,
@@ -20,14 +11,23 @@ export const Documentation = ({
 	documentTypes: Queried.Models.Documents[]
 }) => {
 	const baseData = { ...data }
+
+	// approx width in rems
+	const labelWidth =
+		Math.max(...['type', 'cost', 'title', 'link', 'notes'].map(x => x.length)) * 0.6 + 1.2
+
 	return (
 		<FieldGroup>
 			{baseData.query.documents?.map(n => (
 				<FieldGroup
 					key={n.id}
-					className='grid grid-cols-[auto_auto_auto_0.15fr] gap-x-4 border-b-2 border-[#F0EBF1] pt-0 pb-4 *:flex *:items-baseline *:gap-x-4 last:border-0 last:pb-0 dark:border-b dark:border-current/10'>
+					className='grid grid-cols-[auto_auto_0.15fr] *:items-baseline *:gap-x-4'>
 					{/* ! TYPE */}
-					<Field>
+					<Field
+						className='grid text-end'
+						style={{
+							gridTemplateColumns: `${labelWidth}rem auto`,
+						}}>
 						<Label required>Type</Label>
 						<Select
 							placeholder={{
@@ -58,8 +58,38 @@ export const Documentation = ({
 							))}
 						</Select>
 					</Field>
+					{/* ! COST */}
+					<Field
+						className='grid text-end'
+						style={{
+							gridTemplateColumns: `${labelWidth}rem auto`,
+						}}>
+						<Label>Cost</Label>
+						<FieldCost
+							className='w-full basis-full'
+							data={data}
+							cost={n.cost}
+							onBlur={e => {
+								handlePrisma(
+									document(
+										data,
+										'update',
+										{
+											...n,
+											cost: Number(e.currentTarget.value),
+										},
+										n.id
+									)
+								)
+							}}
+						/>
+					</Field>
 					{/* ! TITLE */}
-					<Field>
+					<Field
+						className='row-start-2 grid text-end'
+						style={{
+							gridTemplateColumns: `${labelWidth}rem auto`,
+						}}>
 						<Label>Title</Label>
 						<Input
 							name={`documentTitle-${n.id}`}
@@ -81,52 +111,28 @@ export const Documentation = ({
 							}}
 						/>
 					</Field>
-					{/* ! COST */}
-					<Field className='row-start-2'>
-						<Label>Cost</Label>
-						<FieldCost
-							data={data}
-							cost={n.cost}
-							onBlur={e => {
-								handlePrisma(
-									document(
-										data,
-										'update',
-										{
-											...n,
-											cost: Number(e.currentTarget.value),
-										},
-										n.id
-									)
-								)
+					{/* ! LINK */}
+					<Field
+						className='row-start-2 grid w-full text-end'
+						style={{
+							gridTemplateColumns: `${labelWidth}rem auto`,
+						}}>
+						<Label>Link</Label>
+						<FieldLink
+							className='w-full basis-full'
+							defaultValue={n.link ?? undefined}
+							onBlur={({ data: parsedData }) => {
+								const parsed = { ...data }
+								parsed.query.documents.forEach(doc => {
+									if (doc == n) {
+										doc.link = parsedData ?? null
+									}
+								})
+								handlePrisma({
+									...parsed,
+								})
 							}}
 						/>
-					</Field>
-					{/* ! LINK */}
-					<Field className='row-start-2'>
-						<Label>Link</Label>
-						<InputGroup>
-							{data.query.currencyCode && (
-								<span
-									data-slot='icon'
-									className='text-xs'>
-									{data.query.currencyCode}
-								</span>
-							)}
-							<Input
-								type='text'
-								defaultValue={n.link || undefined}
-								onBlur={e => {
-									if (z.url().safeParse(e.currentTarget.value).success) {
-										baseData.errors.link = []
-										baseData.query.link = e.currentTarget.value
-									} else {
-										baseData.errors.link = ['Invalid URL']
-									}
-									handlePrisma({ ...baseData })
-								}}
-							/>
-						</InputGroup>
 					</Field>
 					{/* ! DELETE BUTTON */}
 					<span className='mt-[0.25lh] mb-1 flex w-full justify-center pl-2 align-middle'>
@@ -146,8 +152,12 @@ export const Documentation = ({
 						</Button>
 					</span>
 					{/* ! DESCRIPTION */}
-					<Field className='col-span-3 -mt-3 flex-col pl-12 *:mt-0!'>
-						<Label className='sr-only'>Notes</Label>
+					<Field
+						className='col-span-2 row-start-3 grid text-end *:mt-0!'
+						style={{
+							gridTemplateColumns: `${labelWidth}rem auto`,
+						}}>
+						<Label>Notes</Label>
 						<Textarea
 							defaultValue={n.description || undefined}
 							placeholder='Any special notes for this document can be written here'

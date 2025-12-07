@@ -215,4 +215,5 @@ declare global {
 
 	type ToTitleCase<S extends string> =
 		S extends `${infer F}${infer L}` ? `${F}${IsCapitalized<L>}${ToTitleCase<L>}` : S
+	// #endregion
 }

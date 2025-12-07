@@ -129,6 +129,7 @@ export function Checkbox({
 } & Omit<Headless.CheckboxProps, 'as' | 'className'>) {
 	return (
 		<Headless.Checkbox
+			aria-label={props.name}
 			data-slot='control'
 			{...props}
 			className={cn('group inline-flex focus:outline-hidden', className)}>

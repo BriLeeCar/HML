@@ -1,6 +1,6 @@
 import { CredentialsSignin } from 'next-auth'
 import z from 'zod'
-import { hash } from '~/lib/hashAndSalt'
+import { hash } from '~/lib/security/hashAndSalt'
 import { User, UserKey } from '~/server/api/zod'
 import db from '~/server/prisma/db'
 import type { CredentialsBase } from './credentials'

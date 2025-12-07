@@ -9,7 +9,7 @@ import { Icon } from '~/components'
 import { api, type RouterOutputs } from '~/lib/api'
 import { cn } from '~/lib/cn'
 import { toTitleCase } from '~/lib/text'
-import { useToast } from '~/lib/useToast'
+import { useToast } from '../../../../../hooks/useToast'
 
 type NewUserData = RouterOutputs['user']['createUserKey']
 

@@ -35,24 +35,25 @@ model CountryCurrency {
 }
 
 model Pathway {
-  id                      Int                            @id @default(autoincrement())
-  countryCode             String
-  name                    String
-  link                    String
-  description             String
-  type                    PathwayType
-  createdAt               DateTime                       @default(now())
-  updatedAt               DateTime                       @default(dbgenerated("date(CURRENT_TIMESTAMP)")) @updatedAt
-  currencyCode            String
-  notes                   String[]                       @default([])
-  limitations             String[]                       @default([])
-  requirements            String[]                       @default([])
-  restrictions            String[]                       @default([])
-  duration                Json?                          @default("{\"max\": 0, \"min\": 0, \"note\": null}")
-  processTime             Json?                          @default("{\"max\": 0, \"min\": 0, \"note\": null}")
-  renewal                 Json?                          @default("{\"max\": 0, \"min\": 0, \"note\": null}")
-  cost                    Json?                          @default("{\"max\": 0, \"min\": 0}")
-  createdby               String
+  id           Int         @id @default(autoincrement())
+  countryCode  String
+  name         String
+  link         String
+  description  String
+  type         PathwayType
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @default(dbgenerated("date(CURRENT_TIMESTAMP)")) @updatedAt
+  currencyCode String
+  notes        String[]    @default([])
+  limitations  String[]    @default([])
+  requirements String[]    @default([])
+  restrictions String[]    @default([])
+  duration     Json?       @default("{\"max\": 0, \"min\": 0, \"note\": null}")
+  processTime  Json?       @default("{\"max\": 0, \"min\": 0, \"note\": null}")
+  renewal      Json?       @default("{\"max\": 0, \"min\": 0, \"note\": null}")
+  cost         Json?       @default("{\"max\": 0, \"min\": 0}")
+  createdby    String
+
   country                 Country                        @relation(fields: [countryCode], references: [code])
   currency                Currency                       @relation(fields: [currencyCode], references: [code])
   CMS_User                User                           @relation(fields: [createdby], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "pathway_userfkey")
@@ -76,7 +77,8 @@ model PathwayPipeline {
   pathwayId Int
   pipeline  PathwayPipelines
   note      String?
-  pathway   Pathway          @relation(fields: [pathwayId], references: [id])
+
+  pathway Pathway @relation(fields: [pathwayId], references: [id])
 }
 
 model PathwayRestrictedNationality {

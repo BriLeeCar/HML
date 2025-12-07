@@ -13,9 +13,11 @@ export const CheckBox = ({
 		<CheckboxField>
 			<Checkbox
 				{...props}
+				aria-label={props.name}
+				id={props.name}
 				color='brand'
 			/>
-			<Label>{label}</Label>
+			<Label htmlFor={props.name}>{label}</Label>
 			{description && <Description>{description}</Description>}
 		</CheckboxField>
 	)

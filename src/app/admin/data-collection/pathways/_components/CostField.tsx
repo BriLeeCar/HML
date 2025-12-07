@@ -9,8 +9,9 @@ export const FieldCost = ({
 	data: ElPrismaProps['data']
 	cost: number
 }) => {
+	const { className, ...rest } = props
 	return (
-		<InputGroup>
+		<InputGroup className={className}>
 			{data.query.currencyCode && (
 				<span
 					data-slot='icon'
@@ -27,7 +28,7 @@ export const FieldCost = ({
 				step={0.01}
 				placeholder='0.00'
 				defaultValue={cost > 0 ? cost.toString() : undefined}
-				{...props}
+				{...rest}
 			/>
 		</InputGroup>
 	)

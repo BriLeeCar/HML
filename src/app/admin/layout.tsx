@@ -16,7 +16,7 @@ const sideNav = [
 
 const Nav = () => {
 	return (
-		<nav className='admin bg-v2-slate text-v2-grey *:*:click sticky top-0 z-999 flex w-screen items-center justify-between p-2 dark:bg-[hsl(196,16%,12%)]'>
+		<nav className='admin bg-v2-slate text-v2-grey *:*:click sticky top-0 z-900 flex w-screen items-center justify-between p-2 dark:bg-[hsl(196,16%,12%)]'>
 			<ul className='flex items-center gap-6'>
 				{sideNav.map(item => (
 					<li key={item.href}>

@@ -145,9 +145,11 @@ export const MinMaxTimeFieldGroup = ({
 				</div>
 			</Field>
 
-			<Field className='col-span-3 mt-0 text-center font-medium italic *:text-sm/12'>
-				<FormError message={data.errors[field].base} />
-			</Field>
+			{data.errors[field].base?.length > 0 && (
+				<Field className='col-span-3 mt-0 text-center font-medium italic *:text-sm/12'>
+					<FormError message={data.errors[field].base} />
+				</Field>
+			)}
 		</FieldGroup>
 	)
 }
