@@ -3,6 +3,17 @@ import { generateKey } from '~/lib/security/keyGen'
 import { createTRPCRouter, protectedProcedure, publicProcedure } from '.'
 
 export const UserRouter = createTRPCRouter({
+	current: publicProcedure.query(async ({ ctx }) => {
+		const userId = ctx.session?.user
+		return (
+			userId
+			&& (await ctx.db.user.findUnique({
+				where: {
+					id: userId.id,
+				},
+			}))
+		)
+	}),
 	getUserById: publicProcedure.input(z.string().or(z.undefined())).query(async ({ ctx, input }) => {
 		return input ?
 				await ctx.db.user.findUnique({

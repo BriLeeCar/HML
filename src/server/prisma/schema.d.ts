@@ -17,5 +17,6 @@ declare global {
 		type CurrencyModel = P.Currency
 		type LanguageModel = P.Language
 		type DocumentModel = P.Documents
+		type UserModel = P.User
 	}
 }

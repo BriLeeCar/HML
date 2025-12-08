@@ -42,8 +42,13 @@ export const CTA = ({ primaryAction, secondaryAction, subtitle, ...props }: CTAP
 					<Head />
 					<Subtitle>{subtitle}</Subtitle>
 				</hgroup>
-			:	<Head />}
-			{(primaryAction || secondaryAction) && <Actions />}
+			:	<Head>{props.children}</Head>}
+			{(primaryAction || secondaryAction) && (
+				<Actions
+					primaryAction={primaryAction}
+					secondaryAction={secondaryAction}
+				/>
+			)}
 		</div>
 	)
 }
