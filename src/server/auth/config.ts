@@ -26,6 +26,7 @@ declare module 'next-auth' {
  */
 export const authConfig = {
 	providers: [CredentialsConfig],
+	// @ts-expect-error PrismaAdapter type issue
 	adapter: PrismaAdapter(db),
 	session: {
 		strategy: 'jwt',

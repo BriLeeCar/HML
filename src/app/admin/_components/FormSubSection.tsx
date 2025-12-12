@@ -5,10 +5,12 @@ export const FormSubSection = ({
 	description,
 	legend,
 	'aria-label': ariaLabel,
+	asDiv = false,
 	...props
 }: Props<'fieldset'> & {
 	legend: ReactNode
 	description?: ReactNode
+	asDiv?: boolean
 }) => {
 	return (
 		<Fieldset
@@ -17,6 +19,7 @@ export const FormSubSection = ({
 			<Legend className='max-sm:text-base'>{legend}</Legend>
 			{description && (
 				<Text
+					asDiv={asDiv}
 					className='text-balance'
 					data-slot='description'>
 					{description}

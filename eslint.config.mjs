@@ -7,7 +7,7 @@ import tsParser from '@typescript-eslint/parser';
 
 export default defineConfig([
     {
-        "ignores": ["node_modules/**", ".docs/**"]
+        "ignores": ["node_modules/**", ".docs/**", "src/server/prisma/generated/**"],
     },
     {
         plugins: {

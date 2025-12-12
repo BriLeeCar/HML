@@ -1,3 +1,4 @@
+import { cn } from '~/lib/cn'
 import { ErrorMessage } from './catalyst/'
 
 export const FormError = ({
@@ -23,6 +24,29 @@ export const FormError = ({
 					:	message
 				}
 			/>
+		)
+	)
+}
+
+export const FormGroupError = ({
+	message,
+	...props
+}: Props<'span'> & {
+	message?: string | string[]
+	safeNull?: boolean
+}) => {
+	return (
+		message
+		&& message.length > 0 && (
+			<span
+				data-slot='error'
+				{...props}
+				className={cn(
+					'relative -top-3 h-0 text-base/6 text-red-600 data-disabled:opacity-50 sm:text-sm/6 dark:text-red-500',
+					props.className
+				)}>
+				{message}
+			</span>
 		)
 	)
 }

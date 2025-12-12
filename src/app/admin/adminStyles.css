@@ -9,3 +9,17 @@
 	--color-ring-color: light-dark(var(--color-v2-red), var(--color-v2-yellow));
 	--color-interactive: light-dark(var(--color-v2-red), var(--color-v2-yellow));
 }
+
+section > *:is(h1, h2, h3, h4, h5, h6) + form {
+	margin-top: 0;
+}
+
+[data-layout="page"]:has([class*="page-full"]) {
+	@apply px-0;
+	[class*="page-full"] .page-auto {
+		@apply px-6 lg:px-8;
+	}
+	& > *:not([class*="page-full"]) {
+		@apply px-6 lg:px-8;
+	}
+}

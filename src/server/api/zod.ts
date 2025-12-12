@@ -127,17 +127,29 @@ export const zMinMax = ({
 						code: 'too_small',
 						path: [key],
 						origin: 'number',
-						message: 'Must be a non-negative number',
+						message: 'No negatives',
 						minimum: 0,
 					})
 			})
 			if (data.max > 0 && data.max < data.min) {
 				ctx.addIssue({
 					code: 'custom',
-					message: 'Maximum must be greater than or equal to Minimum',
+					message: 'Max must be greater than or equal to Min, or zero',
+				})
+			}
+			if (data.max > 0 && data.min <= 0) {
+				ctx.addIssue({
+					code: 'custom',
+					message: 'Min must be greater than zero if using a Max value',
 				})
 			}
 		})
+
+const zDuration = z.object({
+	min: z.number().prefault(0),
+	max: z.number().prefault(0),
+	separate: z.boolean().prefault(false),
+})
 
 export const zCreatePathwayInput = z
 	.object({
@@ -150,9 +162,9 @@ export const zCreatePathwayInput = z
 		}),
 		date: z.date(),
 		durations: z.object({
-			duration: z.number().prefault(1),
-			processTime: z.number().prefault(1),
-			renewal: z.number().prefault(1),
+			duration: zDuration,
+			processTime: zDuration,
+			renewal: zDuration,
 		}),
 		piplines: z.object({
 			residency: z.boolean().prefault(false),

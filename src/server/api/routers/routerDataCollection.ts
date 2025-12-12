@@ -125,26 +125,6 @@ export const DataCollectionRouter = createTRPCRouter({
 
 		const user = ctx.session.user
 
-		// type PipelineTypes<C extends 'upper' | 'lower'> =
-		// 	C extends 'upper' ? Prisma.PathwayPipeline['pipeline'] & Uppercase<keyof Query['query']>
-		// 	:	Lowercase<Prisma.PathwayPipeline['pipeline']> & keyof Query['query']
-
-		// const createPiplines: Prisma.Prisma.PathwayPipelineCreateOrConnectWithoutPathwayInput[] = (
-		// 	Object.entries(piplines) as [PipelineTypes<'lower'>, boolean][]
-		// )
-		// 	.map(([key, value]) => {
-		// 		const parsedKey = (key as PipelineTypes<'lower'>).toUpperCase() as PipelineTypes<'upper'>
-		// 		return value ?
-		// 				({
-		// 					create: {
-		// 						note: query[key] || '',
-		// 						pipeline: parsedKey,
-		// 					}
-		// 				} as Prisma.Prisma.PathwayPipelineCreateOrConnectWithoutPathwayInput)
-		// 			:	null
-		// 	})
-		// 	.filter(d => d != null)
-
 		try {
 			const newPathway = await ctx.db.pathway.create({
 				data: {

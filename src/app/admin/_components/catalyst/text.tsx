@@ -3,24 +3,23 @@ import { Link } from './link'
 
 export function Text({
 	className,
+	asDiv,
 	...props
-}: React.ComponentPropsWithoutRef<'p'>) {
-	return (
-		<p
-			data-slot='text'
-			{...props}
-			className={cn(
-				className,
-				'text-base/6 text-zinc-500 sm:text-sm/6 dark:text-zinc-400'
-			)}
-		/>
-	)
+}: React.ComponentPropsWithoutRef<'p'> & { asDiv?: boolean }) {
+	return asDiv ?
+			<div
+				data-slot='text'
+				{...props}
+				className={cn(className, 'text-base/6 text-zinc-500 sm:text-sm/6 dark:text-zinc-400')}
+			/>
+		:	<p
+				data-slot='text'
+				{...props}
+				className={cn(className, 'text-base/6 text-zinc-500 sm:text-sm/6 dark:text-zinc-400')}
+			/>
 }
 
-export function TextLink({
-	className,
-	...props
-}: React.ComponentPropsWithoutRef<typeof Link>) {
+export function TextLink({ className, ...props }: React.ComponentPropsWithoutRef<typeof Link>) {
 	return (
 		<Link
 			{...props}
@@ -32,25 +31,16 @@ export function TextLink({
 	)
 }
 
-export function Strong({
-	className,
-	...props
-}: React.ComponentPropsWithoutRef<'strong'>) {
+export function Strong({ className, ...props }: React.ComponentPropsWithoutRef<'strong'>) {
 	return (
 		<strong
 			{...props}
-			className={cn(
-				'font-medium text-zinc-950 dark:text-white',
-				className
-			)}
+			className={cn('font-medium text-zinc-950 dark:text-white', className)}
 		/>
 	)
 }
 
-export function Code({
-	className,
-	...props
-}: React.ComponentPropsWithoutRef<'code'>) {
+export function Code({ className, ...props }: React.ComponentPropsWithoutRef<'code'>) {
 	return (
 		<code
 			{...props}

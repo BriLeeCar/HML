@@ -6,7 +6,9 @@ import { Icon, Main } from '.'
 
 export const Page = ({ ...props }) => (
 	<Main>
-		<section className={cn('mx-auto w-full max-w-2xl px-6 lg:max-w-7xl lg:px-8', props.className)}>
+		<section
+			data-layout='page'
+			className={cn('mx-auto w-full max-w-2xl px-6 lg:max-w-7xl lg:px-8', props.className)}>
 			{props.children}
 		</section>
 	</Main>
