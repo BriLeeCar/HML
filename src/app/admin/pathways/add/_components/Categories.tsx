@@ -1,4 +1,4 @@
-import { FormSection, FormSubSection } from '@/admin/_components'
+import { FormSection } from '@/admin/_components'
 import {
 	Checkbox,
 	CheckboxField,
@@ -6,7 +6,8 @@ import {
 	Description,
 	Label,
 } from '@/admin/_components/catalyst/'
-import { useState } from 'react'
+import { useState, type MouseEvent } from 'react'
+import { Icon } from '~/components/Icon'
 import { cn } from '~/lib/cn'
 import type { PathwayTypeRecursive } from '~/server/api/routers'
 import { type ElPrismaProps } from '..'
@@ -63,19 +64,19 @@ export const CategorySection = ({
 				"To best classify this pathway, please fill out the category information below. We use this to help users filter and find relevant pathways, as well as suggest similar pathways they might be interested in but haven't discovered yet."
 			}>
 			{/* ? BASE CATEGORIES */}
-			<FormSubSection
+			<Group
+				handleCheck={handleCheck}
+				checkBoxes={pathwayTypes.sort((a, b) =>
+					a.name == 'Other' ? 1
+					: b.name == 'Other' ? -1
+					: a.name.localeCompare(b.name)
+				)}
+			/>
+			{/* <FormSubSection
 				className='*:grid-cols-1 *:pl-0'
 				legend={'Base Categories'}
 				description={'Select the base categories that best describe this pathway.'}>
-				<Group
-					handleCheck={handleCheck}
-					checkBoxes={pathwayTypes.sort((a, b) =>
-						a.name == 'Other' ? 1
-						: b.name == 'Other' ? -1
-						: a.name.localeCompare(b.name)
-					)}
-				/>
-			</FormSubSection>
+			</FormSubSection> */}
 		</FormSection>
 	)
 }
@@ -89,7 +90,7 @@ const Group = ({
 }) => {
 	return (
 		<CheckboxGroup
-			className={cn('col-span-2 row-start-3! grid w-full grid-cols-3 justify-between pt-3 pl-10')}>
+			className={cn('col-span-2 row-start-3! grid w-full grid-cols-3 justify-between pl-10')}>
 			{checkBoxes
 				.sort((a, b) => {
 					const childCompare = a.children.length - b.children.length
@@ -119,14 +120,39 @@ const CB = ({
 	handleCheck: (id: number, status: boolean) => void
 	cb: Categories
 }) => {
-	const [checked, setChecked] = useState(false)
+	const [cbStatus, setCbStatus] = useState({
+		checked: false,
+		open: true,
+	})
+
 	const handle = (status: boolean) => {
-		setChecked(status)
+		setCbStatus({
+			...cbStatus,
+			checked: !cbStatus.checked,
+		})
 		handleCheck(cb.id, status)
 	}
 
+	const handleToggle = (e: MouseEvent) => {
+		if (cb.children.length > 0 && cbStatus.checked == true) {
+			e.preventDefault()
+			cbStatus.checked == true
+				&& setCbStatus({
+					...cbStatus,
+					open: !cbStatus.open,
+				})
+		} else {
+			setCbStatus({
+				...cbStatus,
+				checked: !cbStatus.checked,
+			})
+
+			handleCheck(cb.id, cbStatus.checked)
+		}
+	}
+
 	return (
-		<CheckboxField className='gap-y-0 has-data-checked:has-[div]:col-span-full'>
+		<CheckboxField className='mb-6 gap-y-0 has-data-checked:has-[div]:col-span-full'>
 			<Checkbox
 				{...props}
 				onChange={e => {
@@ -136,14 +162,51 @@ const CB = ({
 				color={'brand'}
 				name={cb.name}
 			/>
-			<Label>{cb.name}</Label>
+			<Label
+				className={cbStatus.checked ? 'text-interactive flex basis-full font-bold!' : ''}
+				onClick={handleToggle}>
+				{cb.name.trim()}
+				{cbStatus.checked && cb.children.length > 0 && (
+					<span className='w-full'>
+						<Icon
+							IconName='ChevronDownIcon'
+							className={cn(!cbStatus.open ? '-rotate-90' : '', 'transition-all')}
+						/>
+					</span>
+				)}
+			</Label>
 			<Description className='text-sm'>{cb.description}</Description>
-			{checked && cb.children.length > 0 && (
-				<Group
+			{cbStatus.checked && cb.children.length > 0 && (
+				<CBKids
+					open={cbStatus.open}
+					checked={cbStatus.checked}
+					kids={cb.children}
 					handleCheck={handleCheck}
-					checkBoxes={cb.children}
 				/>
 			)}
 		</CheckboxField>
 	)
+}
+
+const CBKids = ({
+	handleCheck,
+	kids,
+	open,
+	checked,
+}: {
+	handleCheck: (id: number, status: boolean) => void
+	kids: PathwayTypeRecursive[]
+	open: boolean
+	checked: boolean
+}) => {
+	const hasKids = kids.length > 0
+	if (checked && hasKids) {
+		return open ?
+				<Group
+					handleCheck={handleCheck}
+					checkBoxes={kids}
+				/>
+			:	<div />
+	}
+	return <></>
 }

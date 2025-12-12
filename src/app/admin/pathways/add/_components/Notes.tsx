@@ -3,11 +3,9 @@ import { Field, FieldGroup, Label, Textarea } from '@/admin/_components/catalyst
 import { note, type ElPrismaProps } from '..'
 
 export const Notes = ({ data, handlePrisma }: ElPrismaProps) => {
-	const workingData = { ...data }
-
 	return (
 		<FieldGroup>
-			{workingData.query.notes?.map(n => {
+			{data.query.notes?.map(n => {
 				return (
 					<FieldGroup
 						key={n.counter}
@@ -21,29 +19,20 @@ export const Notes = ({ data, handlePrisma }: ElPrismaProps) => {
 								onBlur={e => {
 									handlePrisma(
 										note(
-											workingData,
+											data,
 											'notes',
 											'update',
 											{ note: e.target.value, counter: n.counter },
 											n.counter
 										)
 									)
-									// console.log('thisField', thisField)
-									// if (thisField != -1) {
-									// 	const newData = { ...workingData }
-									// 	console.log('thisField', thisField)
-
-									// 	newData.query.notes[thisField].note = e.target.value
-
-									// 	handlePrisma(newData)
-									// }
 								}}
 							/>
 						</Field>
 						<RemoveButtonWrapper>
 							<RemoveButton
 								onClick={() => {
-									handlePrisma(note(workingData, 'notes', 'remove', undefined, n.counter))
+									handlePrisma(note(data, 'notes', 'remove', undefined, n.counter))
 								}}
 							/>
 						</RemoveButtonWrapper>
@@ -53,7 +42,7 @@ export const Notes = ({ data, handlePrisma }: ElPrismaProps) => {
 
 			<AddButton
 				onClick={() => {
-					handlePrisma(note(workingData, 'notes', 'add'))
+					handlePrisma(note(data, 'notes', 'add'))
 				}}>
 				Note
 			</AddButton>

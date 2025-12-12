@@ -14,3 +14,26 @@ export const betaCountries = [
 	{ name: 'Portugal', code: 'PRT' },
 	{ name: 'Uruguay', code: 'URY' },
 ]
+
+export const timeOptionEls = [
+	{
+		label: 'Days',
+		value: 1,
+		base: 'days',
+	},
+	{
+		label: 'Weeks',
+		value: 7,
+		base: 'weeks',
+	},
+	{
+		label: 'Months',
+		value: 30,
+		base: 'months',
+	},
+	{
+		label: 'Years',
+		value: 365,
+		base: 'years',
+	},
+]

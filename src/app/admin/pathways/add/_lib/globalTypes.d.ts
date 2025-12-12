@@ -86,6 +86,12 @@ declare global {
 		}
 	}
 
+	type PrismaPathwayDuration = {
+		min: number
+		max: number
+		separate: boolean
+	}
+
 	type PrismaPathway = {
 		documents: Array<Omit<P.PathwayDocuments, 'cost'> & { cost: number }>
 		categories: P.PathwayTypes[]
@@ -149,6 +155,11 @@ declare global {
 			max: string[]
 			base: string[]
 		}
+		renewal: {
+			min: string[]
+			max: string[]
+			base: string[]
+		}
 		notes: string[]
 		limitations: string[]
 		requirements: string[]
@@ -165,9 +176,9 @@ declare global {
 			documents: number
 		}
 		durations: {
-			duration: number
-			processTime: number
-			renewal: number
+			duration: PrismaPathwayDuration
+			processTime: PrismaPathwayDuration
+			renewal: PrismaPathwayDuration
 		}
 		piplines: Record<PipelineKeys, boolean>
 		utilities: {
@@ -217,3 +228,184 @@ declare global {
 		S extends `${infer F}${infer L}` ? `${F}${IsCapitalized<L>}${ToTitleCase<L>}` : S
 	// #endregion
 }
+
+/* type CountryModel = {
+	name: string;
+	code: string;
+};
+
+type PathwayModel = {
+	id: number;
+	countryCode: string; // ! RELATION FIELD
+	name: string;
+	link: string;
+	description: string;
+	type: Enums.PathwayType;
+	createdAt: Date;
+	updatedAt: Date;
+	currencyCode: string; // ! RELATION FIELD
+	notes: string[];
+	limitations: string[];
+	requirements: string[];
+	restrictions: string[];
+	duration: ObjectTypes.DurationField | null;
+	processTime: ObjectTypes.ProcessTimeField | null;
+	renewal: ObjectTypes.RenewalField | null;
+	cost: ObjectTypes.CostField | null;
+	createdby: string; // ! RELATION FIELD
+};
+
+type PathwayModelWithRelations = PathwayModel & {
+    country: CountryModel;
+    currency: CurrencyModel;
+    CMS_User: UserModel;
+    categories: PathwayCategoriesModel[];
+    documents: PathwayDocumentsModel[];
+    pipeline: PathwayPipelineModel[];
+    restrictedNationalities: PathwayRestrictedNationalityModel[];
+}
+
+type PathwayDocumentsModel = {
+	id: number;
+	pathwayId: number;
+	documentId: number;
+	description: string | null;
+	cost: number;
+	isRequired: boolean;
+	link: string | null;
+	title: string | null;
+};
+
+type PathwayDocumentsModelWithRelations = PathwayDocumentsModel & {
+    document: DocumentsModel;
+    pathway: PathwayModel;
+}
+
+type PathwayCategoriesModel = {
+	pathwayId: number;
+	pathwayTypeId: number;
+};
+
+type PathwayCategoriesModelWithRelations = PathwayCategoriesModel & {
+    pathway: PathwayModel;
+    pathwayType: PathwayTypesModel;
+}
+
+type PathwayPipelineModel = {
+	id: number;
+	pathwayId: number;
+	pipeline: Enums.PathwayPipelineType;
+	note: string | null;
+};
+
+type PathwayPipelineModelWithRelations = PathwayPipelineModel & {
+    pathway: PathwayModel;
+}
+
+type PathwayRestrictedNationalityModel = {
+	pathwayId: number;
+	note: string | null;
+	countryCode: string;
+};
+type PathwayRestrictedNationalityModelWithRelations = PathwayRestrictedNationalityModel & {
+    pathway: PathwayModel;
+    country: CountryModel;
+}
+
+type PathwayTypesModel = {
+	name: string;
+	id: number;
+	description: string | null;
+	parentId: number | null;
+};
+
+type PathwayTypesModelWithRelations = PathwayTypesModel & {
+    parent: PathwayTypesModel | null;
+    children: PathwayTypesModel[];
+}
+
+type LanguageModel = {
+	name: string;
+	code: string;
+};
+
+type LanguageModelWithRelations = LanguageModel & {
+    countries: CountryModel[];
+}
+
+type CurrencyModel = {
+	symbol: string;
+	name: string;
+	code: string;
+};
+
+type CurrencyModelWithRelations = CurrencyModel & {
+    countries: CountryModel[];
+}
+
+type DocumentsModel = {
+	name: string;
+	id: number;
+	description: string | null;
+	type: Enums.DocumentType[];
+};
+
+type DocumentsModelWithRelations = DocumentsModel & {
+    pathways: PathwayDocumentsModel[];
+}
+
+type CountryLanguageModel = {
+	countryCode: string;
+	languageCode: string;
+};
+
+type CountryLanguageModelWithRelations = CountryLanguageModel & {
+    country: CountryModel;
+}
+
+type CountryCurrencyModel = {
+	countryCode: string;
+	currencyCode: string;
+};
+
+type CountryCurrencyModelWithRelations = CountryCurrencyModel & {
+    country: CountryModel;
+    currency: CurrencyModel;
+}
+
+type UserModel = {
+    name: string;
+    id: string;
+    image: string | null;
+    discordHandle: string | null;
+    email: string | null;
+    emailVerified: Date | null;
+    secret: string;
+    firstName: string | null;
+    lastName: string | null;
+}
+
+
+namespace Enums {
+	export type PathwayType = 'ASYLUM' | 'VISA';
+	export type PathwayNoteType = 'GENERAL' | 'LIMITATION' | 'REQUIREMENT';
+	export type PathwayPipelineType = 'CITIZENSHIP' | 'RESIDENCY' | 'REUNIFICATION';
+	export type DocumentType = 'GENERAL' | 'FINANCIAL' | 'IDENTIFICATION' | 'EVIDENCE' | 'SUPPORTING' | 'SPONSORSHIP' | 'INSURANCE' | 'PLAN';
+}
+
+namespace ObjectTypes {
+	type MinMax = {
+		min: number;
+		max: number;
+	};
+
+	type MinMaxNote = MinMax & {
+		note: string | null;
+	};
+
+	export type CostField = MinMax;
+	export type DurationField = MinMaxNote;
+	export type ProcessTimeField = MinMaxNote;
+	export type RenewalField = MinMaxNote;
+}
+ */

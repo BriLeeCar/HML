@@ -21,7 +21,9 @@ type MinMaxBaseErrorKeys = {
 }[keyof Query['errors']]
 
 type ErrorKeys = Exclude<keyof Query['errors'], MinMaxBaseErrorKeys>
+
 // #endregion ! --------------------
+
 export const error = <I extends 'min' | 'max' | 'base' | undefined = undefined>(
 	workingData: Query,
 	field: I extends 'min' | 'max' | 'base' ? MinMaxBaseErrorKeys : ErrorKeys,
@@ -40,24 +42,6 @@ export const error = <I extends 'min' | 'max' | 'base' | undefined = undefined>(
 	}
 
 	return workingData
-}
-
-export const duration = <K extends keyof Query['durations'] & keyof Query['query']>(
-	data: Query,
-	field: K,
-	newData: number
-) => {
-	const newDurations = {
-		min: (data.query[field].min / data['durations'][field]) * newData,
-		max: (data.query[field].max / data['durations'][field]) * newData,
-		note: data.query[field].note ?? '',
-	}
-
-	return {
-		...data,
-		durations: { ...data.durations, [field]: newData },
-		query: refresh(data, field, newDurations)['query'],
-	}
 }
 
 type NoteKeys = {
@@ -182,6 +166,12 @@ export const createMissingQueryKey = <
 	return workingData
 }
 
+const trackerDuration = () => ({
+	min: 1,
+	max: 1,
+	separate: false,
+})
+
 export const createTracker = (): Omit<Query, 'query'> => ({
 	date: new Date(),
 	errors: {
@@ -204,6 +194,11 @@ export const createTracker = (): Omit<Query, 'query'> => ({
 			max: [],
 			base: [],
 		},
+		renewal: {
+			min: [],
+			max: [],
+			base: [],
+		},
 		notes: [],
 		limitations: [],
 		requirements: [],
@@ -218,9 +213,9 @@ export const createTracker = (): Omit<Query, 'query'> => ({
 		documents: 0,
 	},
 	durations: {
-		duration: 1,
-		processTime: 1,
-		renewal: 1,
+		duration: trackerDuration(),
+		processTime: trackerDuration(),
+		renewal: trackerDuration(),
 	},
 	piplines: {
 		residency: false,
@@ -232,74 +227,3 @@ export const createTracker = (): Omit<Query, 'query'> => ({
 		countryData: null,
 	},
 })
-
-export const createDurationField = (
-	workingData: Query,
-	key: keyof Query['query'] & keyof Query['durations'],
-	raw: boolean = false
-) => {
-	const base = {
-		query: {
-			[key]: {
-				min: 0,
-				max: 0,
-			},
-		},
-		durations: {
-			[key]: 1,
-		},
-		errors: {
-			[key]: {
-				min: [],
-				max: [],
-				base: [],
-			},
-		},
-	}
-
-	if (raw) {
-		const { query, durations, errors } = base
-		return {
-			query,
-			durations,
-			errors,
-		}
-	}
-	Object.assign(workingData.query, base.query)
-	Object.assign(workingData.durations, base.durations)
-	Object.assign(workingData.errors, base.errors)
-	return workingData
-}
-
-export const createCounterField = (
-	workingData: Query,
-	key: keyof Query['counters'] & keyof Query['query'],
-	raw: boolean = false
-) => {
-	const base = {
-		query: {
-			[key]: [],
-		},
-		counters: {
-			[key]: 0,
-		},
-		errors: {
-			[key]: [],
-		},
-	}
-
-	if (raw) {
-		const { query, counters, errors } = base
-		return {
-			query,
-			counters,
-			errors,
-		}
-	}
-
-	Object.assign(workingData.query, base.query)
-	Object.assign(workingData.counters, base.counters)
-	Object.assign(workingData.errors, base.errors)
-
-	return workingData
-}

@@ -1,10 +1,10 @@
 'use client'
 
-import { Button, Form, FormSection, FormSubSection } from '@/admin/_components/'
-import { FieldGroup } from '@/admin/_components/catalyst'
+import { Button, FormSection } from '@/admin/_components/'
+import { Form } from '@/admin/_components/_form'
 import { motion, useScroll } from 'motion/react'
 import { useState } from 'react'
-import { PageHeading, Section, SectionHeading } from '~/components'
+import { Bold, Section, SectionHeading } from '~/components'
 import { api, useToast, type RouterOutputs, type ToastMessage } from '~/lib/index'
 import type { CreatePathwayInput } from '~/server/api/routers'
 import { zCreatePathwayInput } from '~/server/api/zod'
@@ -13,9 +13,10 @@ import {
 	CategorySection,
 	createTracker,
 	Documentation,
-	MinMaxTimeFieldGroup,
+	Duration,
 	Notes,
 	OverviewSection,
+	ProcessingTime,
 	Renewable,
 	RestrictionsOpportunities,
 } from '.'
@@ -141,11 +142,6 @@ export const Base = ({ prisma }: { prisma: RouterOutputs['dataCollection']['Path
 					backgroundColor: 'light-dark(var(--color-v2-yellow), #47274E)',
 				}}
 			/>
-			<PageHeading
-				eyebrow={<span className='text-v2-red dark:text-v2-yellow'>Beta</span>}
-				subtitle={<span>Please let us know of any issues when filling out the form!</span>}>
-				Add Pathway Form
-			</PageHeading>
 
 			<Section>
 				<SectionHeading subtitle="If you have any trouble, please let the staff know so we can either alter to form, or help explain why there's an issue">
@@ -167,25 +163,24 @@ export const Base = ({ prisma }: { prisma: RouterOutputs['dataCollection']['Path
 					{/* ? APPLICATION */}
 					<FormSection
 						description={
-							'This section collects information about the application process for the pathway, including processing time, cost, duration, and renewal options.'
+							<>
+								This section collects information about the application process for the pathway,
+								including processing time, cost, duration, and renewal options.
+								<br />
+								<br />
+								<Bold>
+									If it helps, you can provide these in different units of time (ex: minimum in
+									days, maximum in months/years).
+								</Bold>
+							</>
 						}
 						title='Application'
 						aria-label='Application Details'>
 						{/* ? PROCESSING TIME */}
-						<FormSubSection
-							aria-label='Processing Time'
-							legend='Processing Time'
-							description={
-								'Please provide the processing time for the application of this pathway using whole numbers only. Change the unit of measurement (UOM) as needed.'
-							}>
-							<MinMaxTimeFieldGroup
-								data={data}
-								error={data.errors.processTime.base?.length > 0}
-								handlePrisma={handlePrisma}
-								field='processTime'
-								className='grid gap-x-4 md:grid-cols-3'
-							/>
-						</FormSubSection>
+						<ProcessingTime
+							data={data}
+							handlePrisma={handlePrisma}
+						/>
 						{/* ? COST */}
 						<ApplicationCost
 							data={data}
@@ -193,22 +188,10 @@ export const Base = ({ prisma }: { prisma: RouterOutputs['dataCollection']['Path
 							countries={countries}
 						/>
 						{/* ? DURATION */}
-						<FormSubSection
-							aria-label='Visa Duration'
-							legend='Duration'
-							description={
-								'Please provide the duration of the visa/pathway. If the visa can be renewed, please indicate so by checking the appropriate box(es).'
-							}>
-							<FieldGroup>
-								<MinMaxTimeFieldGroup
-									error={data.errors.duration.base?.length > 0}
-									data={data}
-									handlePrisma={handlePrisma}
-									field='duration'
-									className='grid gap-x-4 md:grid-cols-3'
-								/>
-							</FieldGroup>
-						</FormSubSection>
+						<Duration
+							data={data}
+							handlePrisma={handlePrisma}
+						/>
 					</FormSection>
 					{/* ? DOCUMENTATION */}
 					<FormSection

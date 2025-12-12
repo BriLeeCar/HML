@@ -1,5 +1,15 @@
 import { FormError } from '@/admin/_components'
-import { Field, FieldGroup, Label, Select, Strong, type Input } from '@/admin/_components/catalyst'
+import {
+	Checkbox,
+	CheckboxField,
+	Description,
+	Field,
+	FieldGroup,
+	Label,
+	Select,
+	Strong,
+	type Input,
+} from '@/admin/_components/catalyst'
 import { zMinMax } from '~/server/api/zod'
 import { FieldCost, refresh, type ElPrismaProps, type FieldElProps } from '..'
 
@@ -60,12 +70,12 @@ export const MinMaxCostFieldGroup = ({
 				/>
 			</MinMaxCostField>
 			<MinMaxCostField
+				disabled={currencies.length === 0}
 				required
 				label='Currency'
 				errorMessages={[]}>
 				<Select
 					defaultValue={data.query.currencyCode || ''}
-					disabled={currencies.length === 0}
 					name={`costUOM`}
 					aria-label={`Cost UOM`}
 					className='has-data-disabled:italic *:data-disabled:text-xs/loose'
@@ -89,6 +99,45 @@ export const MinMaxCostFieldGroup = ({
 						</option>
 					}
 				</Select>
+				<CheckboxField className='grow pl-8 text-balance'>
+					<Checkbox
+						color='brand'
+						onChange={e => {
+							const newCode = currencies.length == 1 ? currencies[0].base : ''
+							const allCurrencies = data.utilities.countryData?.currencies as {
+								symbol: string
+								name: string
+								code: string
+							}[]
+							console.log(data.utilities.countryData?.currencies)
+							handlePrisma({
+								...data,
+								query: {
+									...data.query,
+									currencyCode: e ? 'USD' : newCode,
+								},
+								utilities: {
+									...data.utilities,
+									countryData: {
+										...data.utilities.countryData,
+										currencies: [
+											...allCurrencies,
+											{
+												symbol: '$',
+												name: 'United States Dollar',
+												code: 'USD',
+											},
+										],
+									} as Queried.Country.WithRelations,
+								},
+							})
+						}}
+					/>
+					<Label className='text-interactive ml-2'>Use USD?</Label>
+					<Description className='pl-2'>
+						We prefer costs to be in the local currency, but if unavailable, you can select USD.
+					</Description>
+				</CheckboxField>
 			</MinMaxCostField>
 			<span className='row-start-3 mb-8 text-center italic opacity-65 md:col-span-full md:row-start-auto md:mb-0 md:text-xs/10'>
 				If the <Strong>Max</Strong> cost is left blank, it will be assumed that the cost is a fixed
@@ -98,9 +147,11 @@ export const MinMaxCostFieldGroup = ({
 	)
 }
 
-const MinMaxCostField = ({ ...props }: FieldElProps) => {
+const MinMaxCostField = ({ ...props }: FieldElProps & { disabled?: boolean }) => {
 	return (
-		<Field data-invalid={props.errorMessages && props.errorMessages.length > 0 ? true : undefined}>
+		<Field
+			disabled={props.disabled ?? undefined}
+			data-invalid={props.errorMessages && props.errorMessages.length > 0 ? true : undefined}>
 			<div
 				className='grid items-center gap-x-4 gap-y-3 *:first:font-medium md:grid-cols-[0.25fr_1.75fr] md:*:first:text-end'
 				data-slot='control'>

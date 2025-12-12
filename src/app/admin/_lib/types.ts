@@ -6,9 +6,9 @@ type tBreadcrumb = {
 	href: string
 }
 
-export type tLayoutWrapperProps<T extends 'breadcrumbs' | 'eyebrow'> = {
+export type tLayoutWrapperProps<T extends 'breadcrumbs' | 'eyebrow' | '' = ''> = {
 	children: ReactNode
-	title: ReactNode
+	title?: ReactNode
 	subtitle?: ReactNode
 } & Props<typeof PageHeading>
 	& (T extends 'breadcrumbs' ?
@@ -19,4 +19,4 @@ export type tLayoutWrapperProps<T extends 'breadcrumbs' | 'eyebrow'> = {
 		{
 			eyebrow: ReactNode
 		}
-	:	never)
+	:	{ eyebrow?: ReactNode | undefined })

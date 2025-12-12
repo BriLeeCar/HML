@@ -103,12 +103,6 @@ export const OverviewSection = ({
 							name='pathwayOfficialName'
 							onBlur={e => {
 								handlePrisma(refresh(data, 'name', e.currentTarget.value))
-								// onBlurDispatchStringField(
-								// 	e.currentTarget.value,
-								// 	pathwayData,
-								// 	'name',
-								// 	dispatchAction
-								// )
 							}}
 						/>
 					</InputGroup>

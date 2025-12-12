@@ -6,10 +6,10 @@ import { Form } from '@/admin/_components/Form'
 import { AnimatePresence, motion } from 'motion/react'
 import { useState, type ReactNode } from 'react'
 import { Icon } from '~/components'
+import { useToast } from '~/hooks/useToast'
 import { api, type RouterOutputs } from '~/lib/api'
 import { cn } from '~/lib/cn'
 import { toTitleCase } from '~/lib/text'
-import { useToast } from '../../../../../hooks/useToast'
 
 type NewUserData = RouterOutputs['user']['createUserKey']
 

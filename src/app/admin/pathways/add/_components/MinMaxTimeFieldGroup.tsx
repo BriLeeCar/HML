@@ -1,0 +1,342 @@
+import { FormError, FormGroupError } from '@/admin/_components'
+import { Field, FieldGroup, Input, InputGroup, Label, Select } from '@/admin/_components/catalyst'
+import { Icon } from '~/components'
+import { cn } from '~/lib/cn'
+import { toTitleCase } from '~/lib/text'
+import { zMinMax } from '~/server/api/zod'
+import { timeOptionEls, type ElPrismaProps, type FieldElProps, type PrismaQuery } from '..'
+
+type Key = keyof PrismaQuery['durations'] & keyof PrismaQuery['query'] & keyof PrismaQuery['errors']
+
+const handleTimeChange = ({
+	...props
+}: {
+	queryField: Key
+	durationType: 'min' | 'max'
+	seperateUOM: boolean
+	value: string | number
+	data: PrismaQuery
+	change: 'time' | 'unit'
+}) => {
+	const { queryField, durationType, seperateUOM, value, data, change } = props
+	const newDuration = { ...data.durations[queryField] }
+	const newQuery =
+		data.query[queryField] ? { ...data.query[queryField] } : { min: 0, max: 0, note: '' }
+
+	if (change == 'unit') {
+		if (seperateUOM) {
+			newDuration[durationType] = Number(value)
+
+			newQuery[durationType] =
+				(newQuery[durationType] / data.durations[queryField][durationType])
+				* newDuration[durationType]
+		} else {
+			newDuration.min = Number(value)
+			newDuration.max = Number(value)
+			newQuery.min = (newQuery.min / data.durations[queryField].min) * newDuration.min
+			newQuery.max = (newQuery.max / data.durations[queryField].max) * newDuration.min
+		}
+	} else if (change == 'time') {
+		newQuery[durationType] = Number(value) * newDuration[durationType]
+	}
+
+	const newData = { ...data }
+	newData.durations[queryField] = newDuration
+	newData.query[queryField] = newQuery
+
+	console.log(`\n\n`)
+	console.log(`${'-'.repeat(10)} DURATIONS UPDATE ${'-'.repeat(10)}`)
+	console.log(newData.durations[queryField])
+	console.log(`\n\n`)
+	console.log(`${'-'.repeat(10)} QUERY UPDATE ${'-'.repeat(10)}`)
+	console.log(newData.query[queryField])
+
+	const parsed = zMinMax({
+		wholeNumberOnly: true,
+	}).safeParse(newData.query[queryField])
+	if (parsed.success) {
+		newData.errors[queryField] = { min: [], max: [], base: [] }
+	} else {
+		const fieldErrors = { min: [], max: [], base: [] } as {
+			min: string[]
+			max: string[]
+			base: string[]
+		}
+		parsed.error.issues.forEach(issue => {
+			const pathKey = issue.path[0] as keyof typeof fieldErrors
+			if (pathKey == 'min' || pathKey == 'max') {
+				fieldErrors[pathKey].push(issue.message)
+			} else {
+				fieldErrors['base'].push(issue.message)
+			}
+		})
+		newData.errors[queryField] = fieldErrors
+	}
+
+	return newData
+}
+
+export const handleSeperateUOMChange = ({
+	field,
+	newStatus,
+	data,
+	handlePrisma,
+}: {
+	data: Query
+	field: keyof Query['durations'] & keyof Query['query']
+	newStatus: boolean
+	handlePrisma: (data: Query) => void
+}) => {
+	const maxDuration =
+		data.durations[field] && data.durations[field].max ? data.durations[field].max : 1
+	const minDuration =
+		data.durations[field] && data.durations[field].min ? data.durations[field].min : 1
+
+	const newData = {
+		...data,
+		query: {
+			...data.query,
+			[field]: {
+				...data.query[field],
+				max:
+					newStatus ?
+						data.query[field]?.max
+					:	((data.query[field]?.max ?? 0) / maxDuration) * minDuration,
+			},
+		},
+		durations: {
+			...data.durations,
+			[field]: {
+				...data.durations[field],
+				max: newStatus ? maxDuration : minDuration,
+				separate: newStatus,
+			},
+		},
+	}
+
+	handlePrisma(newData)
+}
+
+export const MinMaxTimeFieldGroup = ({
+	error,
+	data,
+	handlePrisma,
+	field,
+	...props
+}: ElPrismaProps
+	& Props & {
+		error: boolean
+		field: Key
+	}) => {
+	return (
+		<FieldGroup
+			{...props}
+			data-uom={data.durations[field].separate ? 'separated' : undefined}
+			data-invalid={error == true ? true : undefined}>
+			<InnerFields
+				data={data}
+				field={field}
+				handlePrisma={handlePrisma}
+			/>
+			{data.errors[field].base?.length > 0 && (
+				<FormGroupError
+					message={data.errors[field].base}
+					className='col-span-full mt-0 text-center font-medium italic *:text-sm/12'
+				/>
+			)}
+		</FieldGroup>
+	)
+}
+
+const InnerFields = ({
+	data,
+	field,
+	handlePrisma,
+}: {
+	data: PrismaQuery
+	field: Key
+	handlePrisma: (data: PrismaQuery) => void
+}) => {
+	const separate = data.durations[field].separate
+	return (
+		<>
+			<MinMaxTimeField
+				required
+				label='Min'
+				field={field}
+				keyMinMax='min'
+				data={data}
+				handlePrisma={handlePrisma}
+				className={cn('md:in-data-uom:col-1 md:in-data-uom:row-1')}
+			/>
+			<MinMaxTimeField
+				required
+				label='Max'
+				field={field}
+				keyMinMax='max'
+				data={data}
+				handlePrisma={handlePrisma}
+				className={cn('in-data-uom:col-1 in-data-uom:row-2')}
+			/>
+			<MinMaxSelect
+				seperateMinMax={separate}
+				sizeKey='min'
+				field={field}
+				data={data}
+				handlePrisma={handlePrisma}
+				className={cn('in-data-uom:col-2 in-data-uom:row-1')}
+			/>
+
+			{separate && (
+				<MinMaxSelect
+					seperateMinMax={separate}
+					sizeKey='max'
+					field={field}
+					data={data}
+					handlePrisma={handlePrisma}
+					className={cn('in-data-uom:col-2 in-data-uom:row-2')}
+				/>
+			)}
+		</>
+	)
+}
+
+const MinMaxTimeField = ({
+	keyMinMax,
+	data,
+	field,
+	handlePrisma,
+	...props
+}: {
+	field: Key
+	keyMinMax: 'min' | 'max'
+} & Props
+	& Omit<FieldElProps, 'children'>
+	& ElPrismaProps) => {
+	const keyCasing = keyMinMax.charAt(0).toUpperCase() + keyMinMax.slice(1)
+
+	const fieldCasing = field
+		.replaceAll(/([A-Z])/g, ' $1')
+		.split(' ')
+		.map(c => c[0].toUpperCase() + c.slice(1))
+		.join(' ')
+
+	const defaultValue =
+		data.query[field] && data.query[field][keyMinMax] ?
+			data.query[field][keyMinMax] / data.durations[field][keyMinMax]
+		:	''
+
+	const { className, ...rest } = props
+
+	return (
+		<Field className={cn(className)}>
+			<Label required={props.required}>{props.label}</Label>
+
+			<InputGroup>
+				<Icon
+					IconName='CalendarAltIcon'
+					data-slot='icon'
+				/>
+				<Input
+					invalid={data.errors[field][keyMinMax]?.length > 0 ? true : undefined}
+					{...rest}
+					placeholder='0'
+					defaultValue={defaultValue}
+					name={`${field}${keyCasing}`}
+					aria-label={`${fieldCasing} ${keyCasing}`}
+					type='number'
+					min={0}
+					step={1}
+					onBlur={e => {
+						handlePrisma(
+							handleTimeChange({
+								data,
+								queryField: field,
+								durationType: keyMinMax,
+								seperateUOM: data.durations[field].separate,
+								value: e.target.value,
+								change: 'time',
+							})
+						)
+					}}
+				/>
+				<SuffixCounter
+					data={data}
+					field={field}
+					minMax={keyMinMax}
+				/>
+			</InputGroup>
+			<FormError
+				message={data.errors[field][keyMinMax]}
+				className='md:col-span-2'
+			/>
+		</Field>
+	)
+}
+
+const SuffixCounter = ({
+	data,
+	field,
+	minMax,
+}: {
+	data: PrismaQuery
+	field: Key
+	minMax: 'min' | 'max'
+}) => {
+	const days = data.query[field]?.[minMax] ?? 1
+	return (
+		<span
+			className='absolute top-1/2 right-3 -translate-y-1/2 text-xs italic opacity-50'
+			data-slot='suffix'>
+			{days} DAY{days > 1 && 'S'}
+		</span>
+	)
+}
+
+const MinMaxSelect = ({
+	seperateMinMax,
+	sizeKey,
+	handlePrisma,
+	data,
+	field,
+	...props
+}: Props
+	& ElPrismaProps & {
+		seperateMinMax: boolean
+		sizeKey: 'min' | 'max'
+		field: Key
+	}) => {
+	const upperKey = seperateMinMax && sizeKey.charAt(0).toUpperCase() + sizeKey.slice(1) + ' '
+	const upperField = seperateMinMax ? (toTitleCase(field) as string).split(' ').join(' ') : field
+
+	return (
+		<Field className={cn(props.className)}>
+			<Label required>{upperKey}UOM</Label>
+			<Select
+				name={`${upperField}UOM`}
+				aria-label={`${toTitleCase(field)} ${upperKey}UOM`}
+				className='text-muted-foreground'
+				defaultValue={data.durations[field][sizeKey] ?? undefined}
+				onChange={e => {
+					handlePrisma(
+						handleTimeChange({
+							data,
+							queryField: field,
+							durationType: sizeKey,
+							seperateUOM: seperateMinMax,
+							value: e.currentTarget.value,
+							change: 'unit',
+						})
+					)
+				}}>
+				{timeOptionEls.map(option => (
+					<option
+						key={option.base}
+						value={option.value}>
+						{option.label}
+					</option>
+				))}
+			</Select>
+		</Field>
+	)
+}
