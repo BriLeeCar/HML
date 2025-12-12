@@ -1,4 +1,4 @@
-import { TimeFieldGroup, TimeSubSection } from '.'
+import { TimeFieldGroup, TimeSubSection } from '..'
 
 export const ProcessingTime = ({
 	data,

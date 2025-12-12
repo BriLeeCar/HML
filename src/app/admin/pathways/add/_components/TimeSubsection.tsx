@@ -50,25 +50,22 @@ export const TimeSubSection = ({
 			aria-label={heading.label}
 			legend={heading.legend}
 			asDiv
-			description={
-				<span className='block max-w-3/4'>
-					{heading.description}
-					<CheckboxField className='inline pl-8 italic'>
-						<Checkbox
-							color='brand'
-							onChange={e => {
-								handleSeperateUOMChange({
-									field: field,
-									newStatus: e,
-									data,
-									handlePrisma,
-								})
-							}}
-						/>
-						<Label className='text-interactive ml-2'>Use Separate UOM</Label>
-					</CheckboxField>
-				</span>
-			}>
+			tooltip={heading.description as string}>
+			<CheckboxField className='mt-1 pl-8 italic [&+div]:mt-2!'>
+				<Checkbox
+					color='brand'
+					onChange={e => {
+						handleSeperateUOMChange({
+							field: field,
+							newStatus: e,
+							data,
+							handlePrisma,
+						})
+					}}
+				/>
+				<Label className='text-interactive ml-2'>Use Separate UOM</Label>
+			</CheckboxField>
+
 			{children}
 		</FormSubSection>
 	)

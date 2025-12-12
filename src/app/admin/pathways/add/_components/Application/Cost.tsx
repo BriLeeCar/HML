@@ -1,6 +1,6 @@
 import { FormError, FormSubSection } from '@/admin/_components'
-import { Field, Strong } from '@/admin/_components/catalyst'
-import { MinMaxCostFieldGroup, type ElPrismaProps } from '..'
+import { Field } from '@/admin/_components/catalyst'
+import { MinMaxCostFieldGroup, type ElPrismaProps } from '../..'
 
 export const ApplicationCost = ({
 	data,
@@ -13,15 +13,10 @@ export const ApplicationCost = ({
 		<FormSubSection
 			aria-label='Cost'
 			legend='Cost'
-			description={
-				<>
-					Please provide the cost associated with applying for this pathway.{' '}
-					<Strong className='text-muted-foreground'>
-						Keep in mind, this will be using the UOM of the country's currency, as was provided
-						above.
-					</Strong>
-				</>
-			}>
+			tooltip={
+				'If the Max cost is left blank, it will be assumed that the cost is a fixed value (Min Value).'
+			}
+			description='The cost associated with applying for this pathway. Do not include costs for documents as those will be covered in the Documentation section.'>
 			<MinMaxCostFieldGroup
 				error={data.errors.cost.base?.length > 0}
 				data={data}

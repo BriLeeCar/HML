@@ -1,13 +1,11 @@
-import { FormError } from '@/admin/_components'
+import { FormError, Tooltip } from '@/admin/_components'
 import {
 	Checkbox,
 	CheckboxField,
-	Description,
 	Field,
 	FieldGroup,
 	Label,
 	Select,
-	Strong,
 	type Input,
 } from '@/admin/_components/catalyst'
 import { zMinMax } from '~/server/api/zod'
@@ -99,50 +97,48 @@ export const MinMaxCostFieldGroup = ({
 						</option>
 					}
 				</Select>
-				<CheckboxField className='grow pl-8 text-balance'>
-					<Checkbox
-						color='brand'
-						onChange={e => {
-							const newCode = currencies.length == 1 ? currencies[0].base : ''
-							const allCurrencies = data.utilities.countryData?.currencies as {
-								symbol: string
-								name: string
-								code: string
-							}[]
-							console.log(data.utilities.countryData?.currencies)
-							handlePrisma({
-								...data,
-								query: {
-									...data.query,
-									currencyCode: e ? 'USD' : newCode,
-								},
-								utilities: {
-									...data.utilities,
-									countryData: {
-										...data.utilities.countryData,
-										currencies: [
-											...allCurrencies,
-											{
-												symbol: '$',
-												name: 'United States Dollar',
-												code: 'USD',
-											},
-										],
-									} as Queried.Country.WithRelations,
-								},
-							})
-						}}
-					/>
-					<Label className='text-interactive ml-2'>Use USD?</Label>
-					<Description className='pl-2'>
-						We prefer costs to be in the local currency, but if unavailable, you can select USD.
-					</Description>
-				</CheckboxField>
 			</MinMaxCostField>
-			<span className='row-start-3 mb-8 text-center italic opacity-65 md:col-span-full md:row-start-auto md:mb-0 md:text-xs/10'>
-				If the <Strong>Max</Strong> cost is left blank, it will be assumed that the cost is a fixed
-				value (<Strong>Min Value</Strong>).
-			</span>
+			<CheckboxField
+				className='my-6 flex grow pl-8 text-balance md:col-span-full md:col-start-1'
+				disabled={currencies.length === 0}>
+				<Checkbox
+					color='brand'
+					onChange={e => {
+						const newCode = currencies.length == 1 ? currencies[0].base : ''
+						const allCurrencies = data.utilities.countryData?.currencies as {
+							symbol: string
+							name: string
+							code: string
+						}[]
+						handlePrisma({
+							...data,
+							query: {
+								...data.query,
+								currencyCode: e ? 'USD' : newCode,
+							},
+							utilities: {
+								...data.utilities,
+								countryData: {
+									...data.utilities.countryData,
+									currencies: [
+										...allCurrencies,
+										{
+											symbol: '$',
+											name: 'United States Dollar',
+											code: 'USD',
+										},
+									],
+								} as Queried.Country.WithRelations,
+							},
+						})
+					}}
+				/>
+				<Label className='text-interactive ml-2 whitespace-nowrap'>
+					<Tooltip target='Use USD?'>
+						Prefer local currency, but if unavailable, you can select USD.
+					</Tooltip>
+				</Label>
+			</CheckboxField>
 		</FieldGroup>
 	)
 }
@@ -155,7 +151,11 @@ const MinMaxCostField = ({ ...props }: FieldElProps & { disabled?: boolean }) =>
 			<div
 				className='grid items-center gap-x-4 gap-y-3 *:first:font-medium md:grid-cols-[0.25fr_1.75fr] md:*:first:text-end'
 				data-slot='control'>
-				<Label required={props.required}>{props.label}</Label>
+				<Label
+					required={props.required}
+					className='whitespace-nowrap'>
+					{props.label}
+				</Label>
 				{props.children}
 				<FormError
 					message={props.errorMessages}

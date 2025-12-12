@@ -18,6 +18,7 @@ export const FormSection = ({
 			role='group'
 			title={props.title}
 			className={cn(
+				'focus-visible:outline-interactive/50',
 				'from-background dark:text-foreground text-v2-red sticky top-0 z-10 bg-linear-to-b from-50% to-transparent to-100% max-md:pt-4 max-md:pb-8 md:static dark:from-[#181c1d]',
 				props.className
 			)}

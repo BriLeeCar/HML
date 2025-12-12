@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, FormSection } from '@/admin/_components/'
+import { Button, CB, FormSection } from '@/admin/_components/'
 import { Form } from '@/admin/_components/_form'
 import { motion, useScroll } from 'motion/react'
 import { useState } from 'react'
@@ -143,6 +143,7 @@ export const Base = ({ prisma }: { prisma: RouterOutputs['dataCollection']['Path
 				}}
 			/>
 
+			<CB />
 			<Section>
 				<SectionHeading subtitle="If you have any trouble, please let the staff know so we can either alter to form, or help explain why there's an issue">
 					Pathway Details

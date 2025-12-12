@@ -1,4 +1,3 @@
-import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
 import { Open_Sans } from 'next/font/google'
 import 'react'
@@ -43,7 +42,7 @@ const RootLayout = async ({
 				<Providers>
 					<TRPCReactProvider>{children}</TRPCReactProvider>
 				</Providers>
-				<Analytics />
+				{/* <Analytics /> */}
 			</body>
 		</html>
 	)

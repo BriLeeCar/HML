@@ -1,4 +1,4 @@
-import { TimeFieldGroup, TimeSubSection } from '.'
+import { TimeFieldGroup, TimeSubSection } from '..'
 
 export const Duration = ({
 	data,
@@ -13,7 +13,7 @@ export const Duration = ({
 				label: 'Visa Duration',
 				legend: 'Duration',
 				description:
-					'Please provide the duration of the visa/pathway. If the visa can be renewed, please indicate so by checking the appropriate box(es).Please provide the duration of the visa/pathway. If the visa can be renewed, please indicate so by checking the appropriate box(es).',
+					'Please provide the duration of the visa/pathway. If the visa can be renewed, please indicate so by checking the appropriate box(es).',
 			}}
 			data={data}
 			handlePrisma={handlePrisma}

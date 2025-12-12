@@ -3,15 +3,7 @@ import type { Metadata } from 'next'
 import { getFrontmatter } from 'next-mdx-remote-client/utils'
 import Image from 'next/image'
 import path from 'path'
-import {
-	Icon,
-	Link,
-	mdxComponents,
-	Page,
-	PageHeading,
-	Section,
-	Tag,
-} from '~/components'
+import { Icon, Link, mdxComponents, Page, PageHeading, Section, Tag } from '~/components'
 import { cn } from '~/lib/cn'
 import { MDXProvider } from '~/lib/mdx'
 import { toTitleCase } from '~/lib/text'
@@ -22,10 +14,10 @@ export const generateStaticParams = async () => {
 	const fileNames = files
 		.toString()
 		.split(',')
-		.filter((file) => file.endsWith('.mdx'))
-		.map((file) => file.replace('.mdx', ''))
+		.filter(file => file.endsWith('.mdx'))
+		.map(file => file.replace('.mdx', ''))
 
-	return fileNames.map((title) => ({ title }))
+	return fileNames.map(title => ({ title }))
 }
 
 export const generateMetadata = async ({
@@ -33,13 +25,7 @@ export const generateMetadata = async ({
 }: PageProps<'/blog/[title]'>): Promise<Metadata> => {
 	const data = (await params).title as string
 
-	const blogDir = path.join(
-		process.cwd(),
-		'src',
-		'data',
-		'blog',
-		data + '.mdx'
-	)
+	const blogDir = path.join(process.cwd(), 'src', 'data', 'blog', data + '.mdx')
 	const files = readFileSync(blogDir, 'utf-8')
 	const { frontmatter } = getFrontmatter(files)
 
@@ -52,10 +38,7 @@ export const generateMetadata = async ({
 	}
 	return {
 		title: title ?? (toTitleCase(data.replace(/-/g, ' ')) as string),
-		description:
-			subtitle ?
-				`${subtitle} by ${author?.name}`
-			:	`A blog post by ${author}`,
+		description: subtitle ? `${subtitle} by ${author?.name}` : `A blog post by ${author}`,
 	}
 }
 
@@ -84,9 +67,8 @@ const SocialIcon = ({
 }) => {
 	const url =
 		name === 'TikTok' ? `https://www.tiktok.com/@${author?.[name]}`
-		: name === 'BlueSky' ?
-			`https://bsky.app/profile/${author?.[name]}`
-		:	'#'
+		: name === 'BlueSky' ? `https://bsky.app/profile/${author?.[name]}`
+		: '#'
 
 	const icon =
 		name === 'TikTok' ? 'TikTokIcon'
@@ -127,8 +109,8 @@ const Brow = ({ frontmatter }: { frontmatter: tFrontMatter }) => (
 		{Object.keys(frontmatter.author ?? []).length > 1 && (
 			<span className='flex gap-4'>
 				{Object.keys(frontmatter.author ?? [])
-					.filter((key) => key !== 'name')
-					.map((key) => (
+					.filter(key => key !== 'name')
+					.map(key => (
 						<SocialIcon
 							key={key}
 							name={key as keyof tFrontMatter['author']}
@@ -140,11 +122,7 @@ const Brow = ({ frontmatter }: { frontmatter: tFrontMatter }) => (
 	</span>
 )
 
-const BlogEntry = async ({
-	params,
-}: {
-	params: Promise<{ title: string }>
-}) => {
+const BlogEntry = async ({ params }: { params: Promise<{ title: string }> }) => {
 	const { title } = await params
 
 	const data = readFileSync(
@@ -159,18 +137,14 @@ const BlogEntry = async ({
 	return (
 		<Page>
 			<PageHeading
-				eyebrow={
-					frontmatter.author ?
-						<Brow frontmatter={frontmatter} />
-					:	<></>
-				}
+				eyebrow={frontmatter.author ? <Brow frontmatter={frontmatter} /> : <></>}
 				subtitle={
 					<>
 						{frontmatter.subtitle}
 						<span className='flex items-center justify-start px-10 py-2'>
 							{frontmatter.tags && frontmatter.tags.length > 0 && (
 								<span className='flex flex-wrap justify-end gap-2'>
-									{frontmatter.tags.map((tag) => (
+									{frontmatter.tags.map(tag => (
 										<Tag
 											key={tag}
 											tag={tag}

@@ -28,6 +28,7 @@ export const Toast = ({
 				{...props}
 				className={cn(
 					'z-999',
+					show ? 'block' : 'hidden',
 					// ! ERROR
 					type == 'error'
 						&& cn(

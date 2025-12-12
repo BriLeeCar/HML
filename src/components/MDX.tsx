@@ -40,10 +40,10 @@ export function mdxComponents() {
 				level={4}
 			/>
 		),
-		p: P,
-		P,
-		blockquote: Blockquote,
-		U,
+		p: ({ ...props }) => <P {...props} />,
+		P: ({ ...props }) => <P {...props} />,
+		blockquote: ({ ...props }) => <Blockquote {...props} />,
+		U: ({ ...props }) => <U {...props} />,
 		Card: ({
 			heading,
 			subheading,
@@ -100,10 +100,10 @@ export function mdxComponents() {
 				/>
 			)
 		},
-		ul: UL,
-		ol: OL,
-		li: Li,
-		Large,
+		ul: ({ ...props }: Props<'ul'>) => <UL {...props} />,
+		ol: ({ ...props }: Props<typeof OL>) => <OL {...props} />,
+		li: ({ ...props }: Props<'li'>) => <Li {...props} />,
+		Large: ({ ...props }: Props<typeof Large>) => <Large {...props} />,
 		table: ({ ...props }: Props<'table'>) => (
 			<table
 				className='bg-accent mx-auto table-auto border-collapse text-left'
@@ -133,15 +133,15 @@ export function mdxComponents() {
 				</Button>
 			)
 		},
-		sup: Sup,
-		Section,
-		SectionHeading,
-		SubSection,
-		Page,
-		PageHeading,
-		InlineLink,
-		a: InlineLink,
-		CTA,
-		strong: Bold,
+		sup: ({ ...props }: Props<'sup'>) => <Sup {...props} />,
+		Section: ({ ...props }: Props<typeof Section>) => <Section {...props} />,
+		SectionHeading: ({ ...props }: Props<typeof SectionHeading>) => <SectionHeading {...props} />,
+		SubSection: ({ ...props }: Props<typeof SubSection>) => <SubSection {...props} />,
+		Page: ({ ...props }: Props<typeof Page>) => <Page {...props} />,
+		PageHeading: ({ ...props }: Props<typeof PageHeading>) => <PageHeading {...props} />,
+		InlineLink: ({ ...props }: Props<typeof InlineLink>) => <InlineLink {...props} />,
+		a: ({ ...props }: Props<typeof InlineLink>) => <InlineLink {...props} />,
+		CTA: ({ ...props }: Props<typeof CTA>) => <CTA {...props} />,
+		strong: ({ ...props }: Props<typeof Bold>) => <Bold {...props} />,
 	}
 }
