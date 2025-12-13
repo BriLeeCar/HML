@@ -214,11 +214,6 @@ const MinMaxTimeField = ({
 		.map(c => c[0].toUpperCase() + c.slice(1))
 		.join(' ')
 
-	const defaultValue =
-		data.query[field] && data.query[field][keyMinMax] ?
-			data.query[field][keyMinMax] / data.durations[field][keyMinMax]
-		:	''
-
 	const { className, ...rest } = props
 
 	return (
@@ -234,7 +229,6 @@ const MinMaxTimeField = ({
 					invalid={data.errors[field][keyMinMax]?.length > 0 ? true : undefined}
 					{...rest}
 					placeholder='0'
-					defaultValue={defaultValue}
 					name={`${field}${keyCasing}`}
 					aria-label={`${fieldCasing} ${keyCasing}`}
 					type='number'
@@ -309,7 +303,6 @@ const MinMaxSelect = ({
 				name={`${upperField}UOM`}
 				aria-label={`${toTitleCase(field)} ${upperKey}UOM`}
 				className='text-muted-foreground'
-				defaultValue={data.durations[field][sizeKey] ?? undefined}
 				onChange={e => {
 					handlePrisma(
 						handleTimeChange({

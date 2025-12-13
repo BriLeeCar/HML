@@ -95,7 +95,6 @@ const RestrictionOpportunitiesCB = <B extends Exclude<keyof Query['piplines'], '
 			</CheckboxField>
 			{data.piplines[field] == true && (
 				<Textarea
-					defaultValue={data.query[field] ?? undefined}
 					name={`${field}Notes`}
 					{...props}
 					className='-mt-4 mb-8'

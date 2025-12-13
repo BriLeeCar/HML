@@ -73,7 +73,6 @@ export const MinMaxCostFieldGroup = ({
 				label='Currency'
 				errorMessages={[]}>
 				<Select
-					defaultValue={data.query.currencyCode || ''}
 					name={`costUOM`}
 					aria-label={`Cost UOM`}
 					className='has-data-disabled:italic *:data-disabled:text-xs/loose'

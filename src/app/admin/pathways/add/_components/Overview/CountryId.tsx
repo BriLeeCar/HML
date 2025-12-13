@@ -34,7 +34,6 @@ export const OverviewCountryId = ({
 						.filter(c => betaCountries.findIndex(b => b.code == c.code) != -1)
 						.sort((a, b) => a.code.localeCompare(b.code))
 						.map(c => c.code)}
-					defaultValue={data.query?.countryCode}
 					onChange={val => {
 						const parsed = z.string().toUpperCase().length(3, 'Invalid Country ID').safeParse(val)
 

@@ -19,7 +19,6 @@ export const OverviewDescription = ({
 			errorMessages={data.errors.description}>
 			<Textarea
 				invalid={data.errors.description.length > 0 ? true : undefined}
-				defaultValue={data.query.description ?? undefined}
 				name='pathwayDescription'
 				onBlur={e => handlePrisma(refresh(data, 'description', e.currentTarget.value))}
 			/>

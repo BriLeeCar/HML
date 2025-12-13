@@ -40,7 +40,6 @@ export const Limitations = ({ data, handlePrisma }: ElPrismaProps) => {
 								className='grid grid-cols-[auto_.15fr] *:items-baseline *:last:grid-cols-1'>
 								<Field className='col-start-1 mb-1'>
 									<Textarea
-										defaultValue={n.note}
 										name={`limitationDetails${n.counter}`}
 										className='mt-1'
 										onBlur={e => {

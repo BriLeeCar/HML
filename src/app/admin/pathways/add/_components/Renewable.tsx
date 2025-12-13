@@ -17,8 +17,8 @@ export const Renewable = ({ data, handlePrisma }: ElPrismaProps) => {
 					<CheckboxField>
 						<Checkbox
 							color='brand'
-							defaultChecked={data.piplines.renewal}
-							onClick={() => {
+							checked={data.piplines.renewal}
+							onChange={() => {
 								handlePrisma({
 									...data,
 									piplines: {

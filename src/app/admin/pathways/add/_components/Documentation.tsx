@@ -47,8 +47,7 @@ export const Documentation = ({
 										n.id
 									)
 								)
-							}}
-							defaultValue={n.documentId?.toString()}>
+							}}>
 							{documentTypes.map(dt => (
 								<option
 									key={dt.id}
@@ -94,7 +93,6 @@ export const Documentation = ({
 						<Input
 							name={`documentTitle-${n.id}`}
 							className='mt-1'
-							defaultValue={n.title ?? undefined}
 							placeholder='ex: Form I-20'
 							onBlur={e => {
 								handlePrisma(
@@ -120,7 +118,6 @@ export const Documentation = ({
 						<Label>Link</Label>
 						<FieldLink
 							className='w-full basis-full'
-							defaultValue={n.link ?? undefined}
 							onBlur={({ data: parsedData }) => {
 								const parsed = { ...data }
 								parsed.query.documents.forEach(doc => {
@@ -159,7 +156,6 @@ export const Documentation = ({
 						}}>
 						<Label>Notes</Label>
 						<Textarea
-							defaultValue={n.description || undefined}
 							placeholder='Any special notes for this document can be written here'
 							onBlurCapture={e => {
 								handlePrisma(

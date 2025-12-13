@@ -9,13 +9,6 @@ import { MDXProvider } from '~/lib/mdx'
 import { toTitleCase } from '~/lib/text'
 
 export const generateStaticParams = async () => {
-	// const blogDir = path.join(process.cwd(), 'src', 'data', 'blog')
-	// const files = readdirSync(blogDir, 'utf-8')
-	// const fileNames = files
-	// 	.toString()
-	// 	.split(',')
-	// 	.filter(file => file.endsWith('.mdx'))
-	// 	.map(file => file.replace('.mdx', ''))
 	const fileNames = ['i-left-appalachia-behind', 'political-prose-over-parables']
 
 	return fileNames.map(title => ({ title: title }))

@@ -35,7 +35,15 @@ export const Base = ({ prisma }: { prisma: RouterOutputs['dataCollection']['Path
 
 	const { mutate } = api.dataCollection.CreatePathway.useMutation({
 		onSuccess: () => {
+			setData({
+				query: {
+					createdAt: new Date(),
+					updatedAt: new Date(),
+				},
+				...createTracker(),
+			} as Query)
 			window.scrollTo(0, 0)
+			document.forms[0].reset()
 			toast.fireToast({
 				title: 'Pathway created successfully!',
 				status: 'success',

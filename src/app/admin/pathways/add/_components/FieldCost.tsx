@@ -3,7 +3,6 @@ import { type ElPrismaProps } from '..'
 
 export const FieldCost = ({
 	data,
-	cost,
 	...props
 }: Props<typeof Input> & {
 	data: ElPrismaProps['data']
@@ -27,7 +26,6 @@ export const FieldCost = ({
 				min={0.0}
 				step={0.01}
 				placeholder='0.00'
-				defaultValue={cost > 0 ? cost.toString() : undefined}
 				{...rest}
 			/>
 		</InputGroup>

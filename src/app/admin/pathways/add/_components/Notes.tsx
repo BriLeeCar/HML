@@ -13,7 +13,6 @@ export const Notes = ({ data, handlePrisma }: ElPrismaProps) => {
 						<Field className='col-start-1 mb-1'>
 							<Label>Details</Label>
 							<Textarea
-								defaultValue={n.note}
 								name={`noteDetails-${n.counter}`}
 								className='mt-1'
 								onBlur={e => {

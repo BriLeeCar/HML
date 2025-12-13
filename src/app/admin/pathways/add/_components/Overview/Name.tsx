@@ -22,7 +22,6 @@ export const OverviewOfficialName = ({
 				/>
 				<Input
 					invalid={data.errors.name.length > 0 ? true : undefined}
-					defaultValue={data.query.name ?? undefined}
 					name='pathwayOfficialName'
 					onBlur={e => {
 						handlePrisma(refresh(data, 'name', e.currentTarget.value))

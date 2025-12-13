@@ -116,9 +116,9 @@ export const NationalityRestrictionsCB = ({
 									<Field className='col-start-1 mb-1'>
 										<Label>Country</Label>
 										<Select
-											defaultValue={n.countryCode}
+											value={n.countryCode}
 											onChange={e => handleCountryChange(n.countryCode, e.currentTarget.value)}>
-											<option>Select a country</option>
+											<option value=''>Select a country</option>
 											{getCountryOptions().map(country => (
 												<option
 													key={country.code}
@@ -131,7 +131,6 @@ export const NationalityRestrictionsCB = ({
 									<Field className='col-start-1'>
 										<Label>Details</Label>
 										<Textarea
-											defaultValue={n.note || undefined}
 											name='nationalityRestrictionDetails'
 											className='mt-1'
 											onBlur={e => handleNoteChange(n.countryCode, e.currentTarget.value)}

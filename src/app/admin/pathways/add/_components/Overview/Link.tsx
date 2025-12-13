@@ -24,7 +24,6 @@ export const OverviewLink = ({
 					handlePrisma(updatedData)
 				}}
 				errors={data.errors.link.length > 0}
-				defaultValue={data.query.link ?? undefined}
 				name='pathwayLink'
 			/>
 		</OverviewField>
