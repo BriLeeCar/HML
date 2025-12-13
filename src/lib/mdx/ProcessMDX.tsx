@@ -35,10 +35,7 @@ export class MDXProcessor {
 		type?: 'path' | 'raw'
 	) {
 		this.sourceType = type ?? setType(source)
-		this.raw = setRaw(this, source as string).replace(
-			/\n\n\n/g,
-			'\n\n'
-		)
+		this.raw = setRaw(this, source as string).replace(/\n\n\n/g, '\n\n')
 	}
 
 	removeTitle = (): this => {
@@ -52,9 +49,7 @@ export class MDXProcessor {
 		return this
 	}
 
-	setComponents = (
-		components?: MDXRemoteProps['components']
-	): this => {
+	setComponents = (components?: MDXRemoteProps['components']): this => {
 		if (!components) return this
 		this.components = {
 			...this.components,
@@ -76,10 +71,10 @@ export class MDXProcessor {
 			this.frontmatter.tags =
 				Array.isArray(this.frontmatter.tags) ? this.frontmatter.tags
 				: typeof this.frontmatter.tags == 'string' ?
-					this.frontmatter.tags.split(',').map((tag) => tag.trim())
+					this.frontmatter.tags.split(',').map(tag => tag.trim())
 				:	this.frontmatter.tags
 			const newBaseTags = [] as Array<string | Record<string, string>>
-			;(this.frontmatter.tags as string[]).forEach((tag) => {
+			;(this.frontmatter.tags as string[]).forEach(tag => {
 				if (tag.includes('/')) {
 					const [base, ...rest] = tag.split('/')
 					!newBaseTags.includes(base) && newBaseTags.push(base.trim())
@@ -107,10 +102,7 @@ export class MDXProcessor {
 	}
 
 	replaceCustomMDX = (): this => {
-		this.raw = this.raw.replaceAll(
-			/^->(.+)$/gm,
-			'<P className="text-center">$1</P>'
-		)
+		this.raw = this.raw.replaceAll(/^->(.+)$/gm, '<P className="text-center">$1</P>')
 
 		return this
 	}
@@ -138,18 +130,14 @@ export class MDXProcessor {
 					if (splitSource[i].toLowerCase().includes('subtitle:'))
 						CTA.subtitle = splitSource[i].split(':')[1].trim()
 					if (splitSource[i].toLowerCase().includes('button 1:')) {
-						const matches = splitSource[i].match(
-							/button 1:\s*\[(.*?)\]\((.*?)\)/i
-						)
+						const matches = splitSource[i].match(/button 1:\s*\[(.*?)\]\((.*?)\)/i)
 						if (matches && matches.length === 3) {
 							CTA.action1.label = matches[1].trim()
 							CTA.action1.link = matches[2].trim()
 						}
 					}
 					if (splitSource[i].toLowerCase().includes('button 2:')) {
-						const matches = splitSource[i].match(
-							/button 2:\s*\[(.*?)\]\((.*?)\)/i
-						)
+						const matches = splitSource[i].match(/button 2:\s*\[(.*?)\]\((.*?)\)/i)
 						if (matches && matches.length === 3) {
 							CTA.action2.label = matches[1].trim()
 							CTA.action2.link = matches[2].trim()
@@ -197,15 +185,9 @@ export class MDXProcessor {
 }
 
 const setRaw = (processor: MDXProcessor, source: string): string => {
-	const { frontmatter, raw } = getSourceRaw(
-		processor.sourceType,
-		source
-	)
+	const { frontmatter, raw } = getSourceRaw(processor.sourceType, source)
 
-	processor.frontmatter = frontmatter as Record<
-		string,
-		string | string[]
-	>
+	processor.frontmatter = frontmatter as Record<string, string | string[]>
 	processor.processTags()
 	processor.raw = raw
 
@@ -215,13 +197,8 @@ const setRaw = (processor: MDXProcessor, source: string): string => {
 	return processor.raw
 }
 
-const setType = (
-	source: MDXRemoteProps['source']
-): 'raw' | 'path' => {
-	const prelimType =
-		Array.isArray(source) || String(source).endsWith('mdx') ?
-			'path'
-		:	'raw'
+const setType = (source: MDXRemoteProps['source']): 'raw' | 'path' => {
+	const prelimType = Array.isArray(source) || String(source).endsWith('mdx') ? 'path' : 'raw'
 
 	if (prelimType == 'path') {
 		return getPrelimSource(prelimType, source as string) as 'path'
@@ -244,17 +221,15 @@ const setPlugins = (
 	if (!plugins) return processor.plugins
 
 	if (pluginKey) {
-		processor.plugins[pluginKey].push(
-			...(plugins?.[pluginKey] as unknown[])
-		)
+		processor.plugins[pluginKey].push(...(plugins?.[pluginKey] as unknown[]))
 		return processor.plugins
 	} else {
 		const keys = Object.keys(plugins) as PluginKeys[]
 
-		keys.forEach((key) => {
+		keys.forEach(key => {
 			if (processor.plugins[key]) {
 				processor.plugins[key]
-					.filter((plug) => plug != plugins[key])
+					.filter(plug => plug != plugins[key])
 					.push(...(plugins ? (plugins[key] as unknown[]) : []))
 			} else {
 				processor.plugins[key] = plugins[key] as unknown[]
@@ -268,9 +243,7 @@ const setPlugins = (
 const MDXSectionHeading = ({ source }: { source: string }) => {
 	let testSource = source
 
-	const sectionRegex = Array.from(
-		testSource.matchAll(/(^> .+\n)?## .+(\n> .+)?/gm)
-	)
+	const sectionRegex = Array.from(testSource.matchAll(/(^> .+\n)?## .+(\n> .+)?/gm))
 
 	sectionRegex.forEach((match: string[], i) => {
 		const finalLines = {
@@ -311,7 +284,7 @@ const MDXSectionHeading = ({ source }: { source: string }) => {
 				ifHeading(splitLines[1])
 			}
 		}
-		const final = Object.values(finalLines).filter((line) => line)
+		const final = Object.values(finalLines).filter(line => line)
 		if (final.length == 0) return
 		testSource = testSource.replace(
 			match[0],
@@ -334,23 +307,16 @@ const MDXSubSection = ({ source }: { source: string }) => {
 				`${removedLines.length > 1 ? '</SubSection>\n' : ''}<SubSection title={"${line.replace('### ', '')}"}>`
 		}
 		if (line.startsWith('## ') || line.startsWith('</Section')) {
-			splitSource[i] =
-				`${removedLines.length > 0 ? '</SubSection>\n' : ''}${line}`
+			splitSource[i] = `${removedLines.length > 0 ? '</SubSection>\n' : ''}${line}`
 			removedLines = []
 		}
 	})
-	return (
-		splitSource.join('\n')
-		+ `${removedLines.length > 0 ? '</SubSection>' : ''}`
-	)
+	return splitSource.join('\n') + `${removedLines.length > 0 ? '</SubSection>' : ''}`
 }
 
 const replaceLinks = (text: string) => {
 	const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g
-	return text.replace(
-		linkRegex,
-		'<InlineLink href="$2">$1</InlineLink>'
-	)
+	return text.replace(linkRegex, '<InlineLink href="$2">$1</InlineLink>')
 }
 
 type PluginKeys = 'recmaPlugins' | 'remarkPlugins' | 'rehypePlugins'

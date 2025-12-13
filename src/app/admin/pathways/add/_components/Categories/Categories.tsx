@@ -19,33 +19,13 @@ export const CategorySection = ({
 		if (data.query.categories == undefined) {
 			newData.query.categories = []
 		}
-		const newCategories = [...data.query.categories]
-			.map(p => {
-				if (p.id == id) {
-					return status ? p : false
-				}
-				return p
-			})
-			.filter(x => x != false)
-		const thisCategory = pathwayTypes.find(c => c.id == id) as {
-			name: string
-			id: number
-			description: string | null
-			parentId: string | null
-		}
-		// @ts-expect-error IDK what is happening here
-		thisCategory && status && newCategories.push(thisCategory)
+		const newCategories = [...data.query.categories, id].filter(c => {
+			if (status) return true
+			return c !== id
+		})
 
-		newData.query.categories = [...newCategories]
-		console.log(newData)
+		newData.query.categories = newCategories
 		handlePrisma(newData)
-	}
-
-	if (data.query.categories?.length > 0) {
-		console.log(
-			'Selected Categories:',
-			data.query.categories.map(c => c)
-		)
 	}
 
 	return (
@@ -87,7 +67,6 @@ export const Group = ({
 				.map(child => (
 					<CategoryCheckboxes
 						onChange={e => {
-							console.log(e)
 							handleCheck(child.id, e)
 						}}
 						handleCheck={handleCheck}

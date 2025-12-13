@@ -157,11 +157,6 @@ exports.Prisma.PathwayScalarFieldEnum = {
   createdby: 'createdby'
 };
 
-exports.Prisma.PathwayCategoriesScalarFieldEnum = {
-  pathwayId: 'pathwayId',
-  pathwayTypeId: 'pathwayTypeId'
-};
-
 exports.Prisma.PathwayPipelineScalarFieldEnum = {
   id: 'id',
   pathwayId: 'pathwayId',
@@ -369,6 +364,11 @@ exports.Prisma.PathwayTypesScalarFieldEnum = {
   description: 'description'
 };
 
+exports.Prisma.PathwayCategoriesScalarFieldEnum = {
+  pathwayId: 'pathwayId',
+  pathwayTypeId: 'pathwayTypeId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -427,7 +427,6 @@ exports.Prisma.ModelName = {
   CountryLanguage: 'CountryLanguage',
   CountryCurrency: 'CountryCurrency',
   Pathway: 'Pathway',
-  PathwayCategories: 'PathwayCategories',
   PathwayPipeline: 'PathwayPipeline',
   PathwayRestrictedNationality: 'PathwayRestrictedNationality',
   PathwayDocuments: 'PathwayDocuments',
@@ -452,7 +451,8 @@ exports.Prisma.ModelName = {
   Roles: 'Roles',
   Social: 'Social',
   PostVersionHistory: 'PostVersionHistory',
-  PathwayTypes: 'PathwayTypes'
+  PathwayTypes: 'PathwayTypes',
+  PathwayCategories: 'PathwayCategories'
 };
 
 /**

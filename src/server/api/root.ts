@@ -21,6 +21,7 @@ export const appRouter = createTRPCRouter({
 	language: router.LanguageRouter,
 	currency: router.CurrencyRouter,
 	admin: router.AdminRouter,
+	post: router.PostRouter,
 })
 
 // export type definition of API

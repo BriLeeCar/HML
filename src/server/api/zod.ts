@@ -34,70 +34,6 @@ export type tUserKey = z.infer<typeof schemaUserKey>
 
 // #endregion ?
 
-// export const zMinMax = ({
-// 	specialMessage,
-// 	include,
-// 	required = false,
-// 	wholeNumberOnly = false,
-// }: {
-// 	min?: string
-// 	max?: string
-// 	specialMessage?: string
-// 	include?: {
-// 		[key: string]: z.ZodType
-// 	}
-// 	required?: boolean
-// 	wholeNumberOnly?: boolean
-// }) => {
-// 	return z
-// 		.object(
-// 			{
-// 				min: z.number().prefault(0),
-// 				max: z.number().prefault(0),
-// 				...(include ? { ...include } : {}),
-// 			},
-// 			required ? 'This field group is required' : undefined
-// 		)
-// 		.superRefine((data, ctx) => {
-// 			Object.keys(data).forEach(key => {
-// 				if (key !== 'min' && key !== 'max') {
-// 					return
-// 				}
-// 				const thisField = data[key as 'min' | 'max']
-
-// 				thisField % 1 > 0
-// 					&& wholeNumberOnly
-// 					&& ctx.addIssue({
-// 						code: 'custom',
-// 						path: [key],
-// 						message: 'Must be a whole number',
-// 					})
-
-// 				thisField < 0
-// 					&& ctx.addIssue({
-// 						code: 'too_small',
-// 						path: [key],
-// 						origin: 'number',
-// 						message: 'Must be a non-negative number',
-// 						minimum: 0,
-// 					})
-// 			})
-// 			if (data.max > 0 && data.max < data.min) {
-// 				ctx.addIssue({
-// 					code: 'custom',
-// 					message: specialMessage || 'Maximum must be greater than or equal to Minimum',
-// 				})
-// 			}
-// 		})
-// 		.transform(({ min, max, ...rest }) => {
-// 			return {
-// 				min: Number(min),
-// 				max: Number(max),
-// 				...rest,
-// 			}
-// 		})
-// }
-
 export const zMinMax = ({
 	wholeNumberOnly = false,
 }: {
@@ -263,6 +199,7 @@ export const zCreatePathwayInput = z
 				})
 				.pipe(zMinMax({ wholeNumberOnly: true }))
 				.optional(),
+			categories: z.array(z.number()).prefault([]),
 		}),
 	})
 	.loose()

@@ -1,5 +1,11 @@
-import type * as Prisma from '@prisma/client'
+import type { PathwayPipelines } from '@prisma/client'
 import z from 'zod/v4'
+import type {
+	Country,
+	CountryCurrency,
+	CountryLanguage,
+	PathwayTypes,
+} from '~/server/prisma/generated'
 import { createTRPCRouter, getCountriesByCode, protectedProcedure } from '.'
 import { zCreatePathwayInput } from '../zod'
 
@@ -18,7 +24,7 @@ export const DataCollectionRouter = createTRPCRouter({
 				'currencies' | 'languages',
 				boolean
 			>
-				& Record<keyof Prisma.Country, boolean>
+				& Record<keyof Country, boolean>
 
 			const [countries, documentTypes, pathwayTypes] = await ctx.db.$transaction(async tx => {
 				const countries = (await tx.country.findMany({
@@ -43,9 +49,9 @@ export const DataCollectionRouter = createTRPCRouter({
 						:	{}),
 					},
 				})) as Array<
-					Prisma.Country & {
-						countryCurrencies: Prisma.CountryCurrency[]
-						countryLanguages: Prisma.CountryLanguage[]
+					Country & {
+						countryCurrencies: CountryCurrency[]
+						countryLanguages: CountryLanguage[]
 					}
 				>
 
@@ -123,12 +129,34 @@ export const DataCollectionRouter = createTRPCRouter({
 	CreatePathway: protectedProcedure.input(zCreatePathwayInput).mutation(async ({ ctx, input }) => {
 		const { piplines, query } = input
 
-		const user = ctx.session.user
+		const user = ctx.session.user!
+
+		const pathwayPiplines = Object.keys(piplines)
+			.map(k => {
+				if (k == 'renewal') return null
+
+				const key = {
+					upper: k.toUpperCase(),
+					lower: k,
+				} as {
+					upper: PathwayPipelines
+					lower: Exclude<keyof typeof piplines, 'renewal'>
+				}
+
+				if (piplines[key.lower] == true) {
+					return {
+						pipeline: key.upper,
+						note: query[key.lower],
+					}
+				}
+				return null
+			})
+			.filter(p => p != null)
 
 		try {
 			const newPathway = await ctx.db.pathway.create({
 				data: {
-					createdby: user!.id,
+					createdby: user.id,
 					countryCode: query.countryCode,
 					name: query.name,
 					createdAt: new Date(),
@@ -140,6 +168,22 @@ export const DataCollectionRouter = createTRPCRouter({
 					requirements: query.requirements.map(q => q.note),
 					limitations: query.limitations.map(q => q.note),
 					notes: query.notes.map(q => q.note),
+					categories: {
+						createMany: {
+							data: query.categories.map(catId => {
+								return {
+									pathwayTypeId: catId,
+								}
+							}),
+							skipDuplicates: true,
+						},
+					},
+					pipelines: {
+						createMany: {
+							data: pathwayPiplines,
+							skipDuplicates: true,
+						},
+					},
 					restrictedNationalities: {
 						createMany: {
 							data: query.restrictedNationalities.map(rn => ({
@@ -200,5 +244,5 @@ export const DataCollectionRouter = createTRPCRouter({
 	}),
 })
 
-type PathwayTypeOmitted = Omit<Prisma.PathwayTypes, 'parentId'>
+type PathwayTypeOmitted = Omit<PathwayTypes, 'parentId'>
 export type PathwayTypeRecursive = PathwayTypeOmitted & { children: PathwayTypeRecursive[] }

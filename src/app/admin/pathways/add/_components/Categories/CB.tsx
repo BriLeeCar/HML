@@ -50,10 +50,7 @@ export const CategoryCheckboxes = ({
 				id={cb.name.split(' ').join('-').toLowerCase()}
 				name={cb.name.split(' ').join('-').toLowerCase()}
 				{...props}
-				onChange={e => {
-					console.log(e)
-					handle(e)
-				}}
+				onChange={handle}
 				color={'brand'}
 			/>
 			<Label

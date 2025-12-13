@@ -34,11 +34,6 @@ export type CountryCurrency = $Result.DefaultSelection<Prisma.$CountryCurrencyPa
  */
 export type Pathway = $Result.DefaultSelection<Prisma.$PathwayPayload>
 /**
- * Model PathwayCategories
- * 
- */
-export type PathwayCategories = $Result.DefaultSelection<Prisma.$PathwayCategoriesPayload>
-/**
  * Model PathwayPipeline
  * 
  */
@@ -163,6 +158,11 @@ export type PostVersionHistory = $Result.DefaultSelection<Prisma.$PostVersionHis
  * 
  */
 export type PathwayTypes = $Result.DefaultSelection<Prisma.$PathwayTypesPayload>
+/**
+ * Model PathwayCategories
+ * 
+ */
+export type PathwayCategories = $Result.DefaultSelection<Prisma.$PathwayCategoriesPayload>
 
 /**
  * Enums
@@ -183,15 +183,6 @@ export const PathwayPipelines: {
 };
 
 export type PathwayPipelines = (typeof PathwayPipelines)[keyof typeof PathwayPipelines]
-
-
-export const PathwayNoteType: {
-  GENERAL: 'GENERAL',
-  LIMITATION: 'LIMITATION',
-  REQUIREMENT: 'REQUIREMENT'
-};
-
-export type PathwayNoteType = (typeof PathwayNoteType)[keyof typeof PathwayNoteType]
 
 
 export const ContentStatus: {
@@ -240,6 +231,15 @@ export const TagColor: {
 
 export type TagColor = (typeof TagColor)[keyof typeof TagColor]
 
+
+export const PathwayNoteType: {
+  GENERAL: 'GENERAL',
+  LIMITATION: 'LIMITATION',
+  REQUIREMENT: 'REQUIREMENT'
+};
+
+export type PathwayNoteType = (typeof PathwayNoteType)[keyof typeof PathwayNoteType]
+
 }
 
 export type PathwayType = $Enums.PathwayType
@@ -249,10 +249,6 @@ export const PathwayType: typeof $Enums.PathwayType
 export type PathwayPipelines = $Enums.PathwayPipelines
 
 export const PathwayPipelines: typeof $Enums.PathwayPipelines
-
-export type PathwayNoteType = $Enums.PathwayNoteType
-
-export const PathwayNoteType: typeof $Enums.PathwayNoteType
 
 export type ContentStatus = $Enums.ContentStatus
 
@@ -265,6 +261,10 @@ export const DocumentType: typeof $Enums.DocumentType
 export type TagColor = $Enums.TagColor
 
 export const TagColor: typeof $Enums.TagColor
+
+export type PathwayNoteType = $Enums.PathwayNoteType
+
+export const PathwayNoteType: typeof $Enums.PathwayNoteType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -423,16 +423,6 @@ export class PrismaClient<
     * ```
     */
   get pathway(): Prisma.PathwayDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.pathwayCategories`: Exposes CRUD operations for the **PathwayCategories** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more PathwayCategories
-    * const pathwayCategories = await prisma.pathwayCategories.findMany()
-    * ```
-    */
-  get pathwayCategories(): Prisma.PathwayCategoriesDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.pathwayPipeline`: Exposes CRUD operations for the **PathwayPipeline** model.
@@ -683,6 +673,16 @@ export class PrismaClient<
     * ```
     */
   get pathwayTypes(): Prisma.PathwayTypesDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.pathwayCategories`: Exposes CRUD operations for the **PathwayCategories** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PathwayCategories
+    * const pathwayCategories = await prisma.pathwayCategories.findMany()
+    * ```
+    */
+  get pathwayCategories(): Prisma.PathwayCategoriesDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1128,7 +1128,6 @@ export namespace Prisma {
     CountryLanguage: 'CountryLanguage',
     CountryCurrency: 'CountryCurrency',
     Pathway: 'Pathway',
-    PathwayCategories: 'PathwayCategories',
     PathwayPipeline: 'PathwayPipeline',
     PathwayRestrictedNationality: 'PathwayRestrictedNationality',
     PathwayDocuments: 'PathwayDocuments',
@@ -1153,7 +1152,8 @@ export namespace Prisma {
     Roles: 'Roles',
     Social: 'Social',
     PostVersionHistory: 'PostVersionHistory',
-    PathwayTypes: 'PathwayTypes'
+    PathwayTypes: 'PathwayTypes',
+    PathwayCategories: 'PathwayCategories'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1172,7 +1172,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "country" | "countryLanguage" | "countryCurrency" | "pathway" | "pathwayCategories" | "pathwayPipeline" | "pathwayRestrictedNationality" | "pathwayDocuments" | "currency" | "documents" | "language" | "post" | "postTag" | "tag" | "tagHierarchy" | "resource" | "block" | "blockField" | "postBlock" | "account" | "session" | "user" | "verificationToken" | "userKey" | "userSocial" | "userRoles" | "roles" | "social" | "postVersionHistory" | "pathwayTypes"
+      modelProps: "country" | "countryLanguage" | "countryCurrency" | "pathway" | "pathwayPipeline" | "pathwayRestrictedNationality" | "pathwayDocuments" | "currency" | "documents" | "language" | "post" | "postTag" | "tag" | "tagHierarchy" | "resource" | "block" | "blockField" | "postBlock" | "account" | "session" | "user" | "verificationToken" | "userKey" | "userSocial" | "userRoles" | "roles" | "social" | "postVersionHistory" | "pathwayTypes" | "pathwayCategories"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1469,80 +1469,6 @@ export namespace Prisma {
           count: {
             args: Prisma.PathwayCountArgs<ExtArgs>
             result: $Utils.Optional<PathwayCountAggregateOutputType> | number
-          }
-        }
-      }
-      PathwayCategories: {
-        payload: Prisma.$PathwayCategoriesPayload<ExtArgs>
-        fields: Prisma.PathwayCategoriesFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.PathwayCategoriesFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PathwayCategoriesPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.PathwayCategoriesFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PathwayCategoriesPayload>
-          }
-          findFirst: {
-            args: Prisma.PathwayCategoriesFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PathwayCategoriesPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.PathwayCategoriesFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PathwayCategoriesPayload>
-          }
-          findMany: {
-            args: Prisma.PathwayCategoriesFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PathwayCategoriesPayload>[]
-          }
-          create: {
-            args: Prisma.PathwayCategoriesCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PathwayCategoriesPayload>
-          }
-          createMany: {
-            args: Prisma.PathwayCategoriesCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.PathwayCategoriesCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PathwayCategoriesPayload>[]
-          }
-          delete: {
-            args: Prisma.PathwayCategoriesDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PathwayCategoriesPayload>
-          }
-          update: {
-            args: Prisma.PathwayCategoriesUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PathwayCategoriesPayload>
-          }
-          deleteMany: {
-            args: Prisma.PathwayCategoriesDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.PathwayCategoriesUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.PathwayCategoriesUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PathwayCategoriesPayload>[]
-          }
-          upsert: {
-            args: Prisma.PathwayCategoriesUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PathwayCategoriesPayload>
-          }
-          aggregate: {
-            args: Prisma.PathwayCategoriesAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregatePathwayCategories>
-          }
-          groupBy: {
-            args: Prisma.PathwayCategoriesGroupByArgs<ExtArgs>
-            result: $Utils.Optional<PathwayCategoriesGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.PathwayCategoriesCountArgs<ExtArgs>
-            result: $Utils.Optional<PathwayCategoriesCountAggregateOutputType> | number
           }
         }
       }
@@ -3396,6 +3322,80 @@ export namespace Prisma {
           }
         }
       }
+      PathwayCategories: {
+        payload: Prisma.$PathwayCategoriesPayload<ExtArgs>
+        fields: Prisma.PathwayCategoriesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PathwayCategoriesFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PathwayCategoriesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PathwayCategoriesFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PathwayCategoriesPayload>
+          }
+          findFirst: {
+            args: Prisma.PathwayCategoriesFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PathwayCategoriesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PathwayCategoriesFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PathwayCategoriesPayload>
+          }
+          findMany: {
+            args: Prisma.PathwayCategoriesFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PathwayCategoriesPayload>[]
+          }
+          create: {
+            args: Prisma.PathwayCategoriesCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PathwayCategoriesPayload>
+          }
+          createMany: {
+            args: Prisma.PathwayCategoriesCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PathwayCategoriesCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PathwayCategoriesPayload>[]
+          }
+          delete: {
+            args: Prisma.PathwayCategoriesDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PathwayCategoriesPayload>
+          }
+          update: {
+            args: Prisma.PathwayCategoriesUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PathwayCategoriesPayload>
+          }
+          deleteMany: {
+            args: Prisma.PathwayCategoriesDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PathwayCategoriesUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PathwayCategoriesUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PathwayCategoriesPayload>[]
+          }
+          upsert: {
+            args: Prisma.PathwayCategoriesUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PathwayCategoriesPayload>
+          }
+          aggregate: {
+            args: Prisma.PathwayCategoriesAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePathwayCategories>
+          }
+          groupBy: {
+            args: Prisma.PathwayCategoriesGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PathwayCategoriesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PathwayCategoriesCountArgs<ExtArgs>
+            result: $Utils.Optional<PathwayCategoriesCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -3496,7 +3496,6 @@ export namespace Prisma {
     countryLanguage?: CountryLanguageOmit
     countryCurrency?: CountryCurrencyOmit
     pathway?: PathwayOmit
-    pathwayCategories?: PathwayCategoriesOmit
     pathwayPipeline?: PathwayPipelineOmit
     pathwayRestrictedNationality?: PathwayRestrictedNationalityOmit
     pathwayDocuments?: PathwayDocumentsOmit
@@ -3522,6 +3521,7 @@ export namespace Prisma {
     social?: SocialOmit
     postVersionHistory?: PostVersionHistoryOmit
     pathwayTypes?: PathwayTypesOmit
+    pathwayCategories?: PathwayCategoriesOmit
   }
 
   /* Types for Logging */
@@ -3604,15 +3604,15 @@ export namespace Prisma {
   export type CountryCountOutputType = {
     countryCurrencies: number
     countryLanguages: number
-    pathways: number
     restrictedPathways: number
+    pathways: number
   }
 
   export type CountryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     countryCurrencies?: boolean | CountryCountOutputTypeCountCountryCurrenciesArgs
     countryLanguages?: boolean | CountryCountOutputTypeCountCountryLanguagesArgs
-    pathways?: boolean | CountryCountOutputTypeCountPathwaysArgs
     restrictedPathways?: boolean | CountryCountOutputTypeCountRestrictedPathwaysArgs
+    pathways?: boolean | CountryCountOutputTypeCountPathwaysArgs
   }
 
   // Custom InputTypes
@@ -3643,15 +3643,15 @@ export namespace Prisma {
   /**
    * CountryCountOutputType without action
    */
-  export type CountryCountOutputTypeCountPathwaysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PathwayWhereInput
+  export type CountryCountOutputTypeCountRestrictedPathwaysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PathwayRestrictedNationalityWhereInput
   }
 
   /**
    * CountryCountOutputType without action
    */
-  export type CountryCountOutputTypeCountRestrictedPathwaysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PathwayRestrictedNationalityWhereInput
+  export type CountryCountOutputTypeCountPathwaysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PathwayWhereInput
   }
 
 
@@ -3660,15 +3660,15 @@ export namespace Prisma {
    */
 
   export type PathwayCountOutputType = {
-    categories: number
     documents: number
+    categories: number
     pipelines: number
     restrictedNationalities: number
   }
 
   export type PathwayCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    categories?: boolean | PathwayCountOutputTypeCountCategoriesArgs
     documents?: boolean | PathwayCountOutputTypeCountDocumentsArgs
+    categories?: boolean | PathwayCountOutputTypeCountCategoriesArgs
     pipelines?: boolean | PathwayCountOutputTypeCountPipelinesArgs
     restrictedNationalities?: boolean | PathwayCountOutputTypeCountRestrictedNationalitiesArgs
   }
@@ -3687,15 +3687,15 @@ export namespace Prisma {
   /**
    * PathwayCountOutputType without action
    */
-  export type PathwayCountOutputTypeCountCategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PathwayCategoriesWhereInput
+  export type PathwayCountOutputTypeCountDocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PathwayDocumentsWhereInput
   }
 
   /**
    * PathwayCountOutputType without action
    */
-  export type PathwayCountOutputTypeCountDocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PathwayDocumentsWhereInput
+  export type PathwayCountOutputTypeCountCategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PathwayCategoriesWhereInput
   }
 
   /**
@@ -3820,15 +3820,15 @@ export namespace Prisma {
    */
 
   export type PostCountOutputType = {
-    postVersionHistories: number
     postBlock: number
     tags: number
+    postVersionHistories: number
   }
 
   export type PostCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    postVersionHistories?: boolean | PostCountOutputTypeCountPostVersionHistoriesArgs
     postBlock?: boolean | PostCountOutputTypeCountPostBlockArgs
     tags?: boolean | PostCountOutputTypeCountTagsArgs
+    postVersionHistories?: boolean | PostCountOutputTypeCountPostVersionHistoriesArgs
   }
 
   // Custom InputTypes
@@ -3845,13 +3845,6 @@ export namespace Prisma {
   /**
    * PostCountOutputType without action
    */
-  export type PostCountOutputTypeCountPostVersionHistoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PostVersionHistoryWhereInput
-  }
-
-  /**
-   * PostCountOutputType without action
-   */
   export type PostCountOutputTypeCountPostBlockArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PostBlockWhereInput
   }
@@ -3863,6 +3856,13 @@ export namespace Prisma {
     where?: PostTagWhereInput
   }
 
+  /**
+   * PostCountOutputType without action
+   */
+  export type PostCountOutputTypeCountPostVersionHistoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PostVersionHistoryWhereInput
+  }
+
 
   /**
    * Count Type TagCountOutputType
@@ -3870,16 +3870,16 @@ export namespace Prisma {
 
   export type TagCountOutputType = {
     posts: number
-    children: number
     childTag: number
     parentTag: number
+    children: number
   }
 
   export type TagCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     posts?: boolean | TagCountOutputTypeCountPostsArgs
-    children?: boolean | TagCountOutputTypeCountChildrenArgs
     childTag?: boolean | TagCountOutputTypeCountChildTagArgs
     parentTag?: boolean | TagCountOutputTypeCountParentTagArgs
+    children?: boolean | TagCountOutputTypeCountChildrenArgs
   }
 
   // Custom InputTypes
@@ -3903,13 +3903,6 @@ export namespace Prisma {
   /**
    * TagCountOutputType without action
    */
-  export type TagCountOutputTypeCountChildrenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TagWhereInput
-  }
-
-  /**
-   * TagCountOutputType without action
-   */
   export type TagCountOutputTypeCountChildTagArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TagHierarchyWhereInput
   }
@@ -3919,6 +3912,13 @@ export namespace Prisma {
    */
   export type TagCountOutputTypeCountParentTagArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TagHierarchyWhereInput
+  }
+
+  /**
+   * TagCountOutputType without action
+   */
+  export type TagCountOutputTypeCountChildrenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TagWhereInput
   }
 
 
@@ -3969,22 +3969,22 @@ export namespace Prisma {
   export type UserCountOutputType = {
     accounts: number
     postVersionHistory: number
+    posts: number
     sessions: number
     roles: number
     socials: number
     Pathway: number
-    posts: number
     resources: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     postVersionHistory?: boolean | UserCountOutputTypeCountPostVersionHistoryArgs
+    posts?: boolean | UserCountOutputTypeCountPostsArgs
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     roles?: boolean | UserCountOutputTypeCountRolesArgs
     socials?: boolean | UserCountOutputTypeCountSocialsArgs
     Pathway?: boolean | UserCountOutputTypeCountPathwayArgs
-    posts?: boolean | UserCountOutputTypeCountPostsArgs
     resources?: boolean | UserCountOutputTypeCountResourcesArgs
   }
 
@@ -4016,6 +4016,13 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PostWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SessionWhereInput
   }
@@ -4039,13 +4046,6 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountPathwayArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PathwayWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PostWhereInput
   }
 
   /**
@@ -4132,12 +4132,12 @@ export namespace Prisma {
    */
 
   export type PathwayTypesCountOutputType = {
-    pathways: number
+    pathwayCategories: number
     children: number
   }
 
   export type PathwayTypesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    pathways?: boolean | PathwayTypesCountOutputTypeCountPathwaysArgs
+    pathwayCategories?: boolean | PathwayTypesCountOutputTypeCountPathwayCategoriesArgs
     children?: boolean | PathwayTypesCountOutputTypeCountChildrenArgs
   }
 
@@ -4155,7 +4155,7 @@ export namespace Prisma {
   /**
    * PathwayTypesCountOutputType without action
    */
-  export type PathwayTypesCountOutputTypeCountPathwaysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PathwayTypesCountOutputTypeCountPathwayCategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PathwayCategoriesWhereInput
   }
 
@@ -4313,8 +4313,8 @@ export namespace Prisma {
     name?: boolean
     countryCurrencies?: boolean | Country$countryCurrenciesArgs<ExtArgs>
     countryLanguages?: boolean | Country$countryLanguagesArgs<ExtArgs>
-    pathways?: boolean | Country$pathwaysArgs<ExtArgs>
     restrictedPathways?: boolean | Country$restrictedPathwaysArgs<ExtArgs>
+    pathways?: boolean | Country$pathwaysArgs<ExtArgs>
     _count?: boolean | CountryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["country"]>
 
@@ -4337,8 +4337,8 @@ export namespace Prisma {
   export type CountryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     countryCurrencies?: boolean | Country$countryCurrenciesArgs<ExtArgs>
     countryLanguages?: boolean | Country$countryLanguagesArgs<ExtArgs>
-    pathways?: boolean | Country$pathwaysArgs<ExtArgs>
     restrictedPathways?: boolean | Country$restrictedPathwaysArgs<ExtArgs>
+    pathways?: boolean | Country$pathwaysArgs<ExtArgs>
     _count?: boolean | CountryCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CountryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -4349,8 +4349,8 @@ export namespace Prisma {
     objects: {
       countryCurrencies: Prisma.$CountryCurrencyPayload<ExtArgs>[]
       countryLanguages: Prisma.$CountryLanguagePayload<ExtArgs>[]
-      pathways: Prisma.$PathwayPayload<ExtArgs>[]
       restrictedPathways: Prisma.$PathwayRestrictedNationalityPayload<ExtArgs>[]
+      pathways: Prisma.$PathwayPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       code: string
@@ -4751,8 +4751,8 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     countryCurrencies<T extends Country$countryCurrenciesArgs<ExtArgs> = {}>(args?: Subset<T, Country$countryCurrenciesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CountryCurrencyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     countryLanguages<T extends Country$countryLanguagesArgs<ExtArgs> = {}>(args?: Subset<T, Country$countryLanguagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CountryLanguagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    pathways<T extends Country$pathwaysArgs<ExtArgs> = {}>(args?: Subset<T, Country$pathwaysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathwayPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     restrictedPathways<T extends Country$restrictedPathwaysArgs<ExtArgs> = {}>(args?: Subset<T, Country$restrictedPathwaysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathwayRestrictedNationalityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    pathways<T extends Country$pathwaysArgs<ExtArgs> = {}>(args?: Subset<T, Country$pathwaysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathwayPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5220,30 +5220,6 @@ export namespace Prisma {
   }
 
   /**
-   * Country.pathways
-   */
-  export type Country$pathwaysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Pathway
-     */
-    select?: PathwaySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Pathway
-     */
-    omit?: PathwayOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PathwayInclude<ExtArgs> | null
-    where?: PathwayWhereInput
-    orderBy?: PathwayOrderByWithRelationInput | PathwayOrderByWithRelationInput[]
-    cursor?: PathwayWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: PathwayScalarFieldEnum | PathwayScalarFieldEnum[]
-  }
-
-  /**
    * Country.restrictedPathways
    */
   export type Country$restrictedPathwaysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5265,6 +5241,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PathwayRestrictedNationalityScalarFieldEnum | PathwayRestrictedNationalityScalarFieldEnum[]
+  }
+
+  /**
+   * Country.pathways
+   */
+  export type Country$pathwaysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pathway
+     */
+    select?: PathwaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pathway
+     */
+    omit?: PathwayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathwayInclude<ExtArgs> | null
+    where?: PathwayWhereInput
+    orderBy?: PathwayOrderByWithRelationInput | PathwayOrderByWithRelationInput[]
+    cursor?: PathwayWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PathwayScalarFieldEnum | PathwayScalarFieldEnum[]
   }
 
   /**
@@ -7610,13 +7610,13 @@ export namespace Prisma {
     renewal?: boolean
     cost?: boolean
     createdby?: boolean
+    documents?: boolean | Pathway$documentsArgs<ExtArgs>
+    categories?: boolean | Pathway$categoriesArgs<ExtArgs>
+    pipelines?: boolean | Pathway$pipelinesArgs<ExtArgs>
+    restrictedNationalities?: boolean | Pathway$restrictedNationalitiesArgs<ExtArgs>
     country?: boolean | CountryDefaultArgs<ExtArgs>
     currency?: boolean | CurrencyDefaultArgs<ExtArgs>
     CMS_User?: boolean | UserDefaultArgs<ExtArgs>
-    categories?: boolean | Pathway$categoriesArgs<ExtArgs>
-    documents?: boolean | Pathway$documentsArgs<ExtArgs>
-    pipelines?: boolean | Pathway$pipelinesArgs<ExtArgs>
-    restrictedNationalities?: boolean | Pathway$restrictedNationalitiesArgs<ExtArgs>
     _count?: boolean | PathwayCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pathway"]>
 
@@ -7691,13 +7691,13 @@ export namespace Prisma {
 
   export type PathwayOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "countryCode" | "name" | "link" | "description" | "type" | "createdAt" | "updatedAt" | "currencyCode" | "notes" | "limitations" | "requirements" | "restrictions" | "duration" | "processTime" | "renewal" | "cost" | "createdby", ExtArgs["result"]["pathway"]>
   export type PathwayInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    documents?: boolean | Pathway$documentsArgs<ExtArgs>
+    categories?: boolean | Pathway$categoriesArgs<ExtArgs>
+    pipelines?: boolean | Pathway$pipelinesArgs<ExtArgs>
+    restrictedNationalities?: boolean | Pathway$restrictedNationalitiesArgs<ExtArgs>
     country?: boolean | CountryDefaultArgs<ExtArgs>
     currency?: boolean | CurrencyDefaultArgs<ExtArgs>
     CMS_User?: boolean | UserDefaultArgs<ExtArgs>
-    categories?: boolean | Pathway$categoriesArgs<ExtArgs>
-    documents?: boolean | Pathway$documentsArgs<ExtArgs>
-    pipelines?: boolean | Pathway$pipelinesArgs<ExtArgs>
-    restrictedNationalities?: boolean | Pathway$restrictedNationalitiesArgs<ExtArgs>
     _count?: boolean | PathwayCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PathwayIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7714,13 +7714,13 @@ export namespace Prisma {
   export type $PathwayPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Pathway"
     objects: {
+      documents: Prisma.$PathwayDocumentsPayload<ExtArgs>[]
+      categories: Prisma.$PathwayCategoriesPayload<ExtArgs>[]
+      pipelines: Prisma.$PathwayPipelinePayload<ExtArgs>[]
+      restrictedNationalities: Prisma.$PathwayRestrictedNationalityPayload<ExtArgs>[]
       country: Prisma.$CountryPayload<ExtArgs>
       currency: Prisma.$CurrencyPayload<ExtArgs>
       CMS_User: Prisma.$UserPayload<ExtArgs>
-      categories: Prisma.$PathwayCategoriesPayload<ExtArgs>[]
-      documents: Prisma.$PathwayDocumentsPayload<ExtArgs>[]
-      pipelines: Prisma.$PathwayPipelinePayload<ExtArgs>[]
-      restrictedNationalities: Prisma.$PathwayRestrictedNationalityPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -8135,13 +8135,13 @@ export namespace Prisma {
    */
   export interface Prisma__PathwayClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    documents<T extends Pathway$documentsArgs<ExtArgs> = {}>(args?: Subset<T, Pathway$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathwayDocumentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    categories<T extends Pathway$categoriesArgs<ExtArgs> = {}>(args?: Subset<T, Pathway$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    pipelines<T extends Pathway$pipelinesArgs<ExtArgs> = {}>(args?: Subset<T, Pathway$pipelinesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathwayPipelinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    restrictedNationalities<T extends Pathway$restrictedNationalitiesArgs<ExtArgs> = {}>(args?: Subset<T, Pathway$restrictedNationalitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathwayRestrictedNationalityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     country<T extends CountryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CountryDefaultArgs<ExtArgs>>): Prisma__CountryClient<$Result.GetResult<Prisma.$CountryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     currency<T extends CurrencyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CurrencyDefaultArgs<ExtArgs>>): Prisma__CurrencyClient<$Result.GetResult<Prisma.$CurrencyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     CMS_User<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    categories<T extends Pathway$categoriesArgs<ExtArgs> = {}>(args?: Subset<T, Pathway$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    documents<T extends Pathway$documentsArgs<ExtArgs> = {}>(args?: Subset<T, Pathway$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathwayDocumentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    pipelines<T extends Pathway$pipelinesArgs<ExtArgs> = {}>(args?: Subset<T, Pathway$pipelinesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathwayPipelinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    restrictedNationalities<T extends Pathway$restrictedNationalitiesArgs<ExtArgs> = {}>(args?: Subset<T, Pathway$restrictedNationalitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathwayRestrictedNationalityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8585,30 +8585,6 @@ export namespace Prisma {
   }
 
   /**
-   * Pathway.categories
-   */
-  export type Pathway$categoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PathwayCategories
-     */
-    select?: PathwayCategoriesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PathwayCategories
-     */
-    omit?: PathwayCategoriesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PathwayCategoriesInclude<ExtArgs> | null
-    where?: PathwayCategoriesWhereInput
-    orderBy?: PathwayCategoriesOrderByWithRelationInput | PathwayCategoriesOrderByWithRelationInput[]
-    cursor?: PathwayCategoriesWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: PathwayCategoriesScalarFieldEnum | PathwayCategoriesScalarFieldEnum[]
-  }
-
-  /**
    * Pathway.documents
    */
   export type Pathway$documentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8630,6 +8606,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PathwayDocumentsScalarFieldEnum | PathwayDocumentsScalarFieldEnum[]
+  }
+
+  /**
+   * Pathway.categories
+   */
+  export type Pathway$categoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PathwayCategories
+     */
+    select?: PathwayCategoriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PathwayCategories
+     */
+    omit?: PathwayCategoriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathwayCategoriesInclude<ExtArgs> | null
+    where?: PathwayCategoriesWhereInput
+    orderBy?: PathwayCategoriesOrderByWithRelationInput | PathwayCategoriesOrderByWithRelationInput[]
+    cursor?: PathwayCategoriesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PathwayCategoriesScalarFieldEnum | PathwayCategoriesScalarFieldEnum[]
   }
 
   /**
@@ -8696,1071 +8696,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: PathwayInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model PathwayCategories
-   */
-
-  export type AggregatePathwayCategories = {
-    _count: PathwayCategoriesCountAggregateOutputType | null
-    _avg: PathwayCategoriesAvgAggregateOutputType | null
-    _sum: PathwayCategoriesSumAggregateOutputType | null
-    _min: PathwayCategoriesMinAggregateOutputType | null
-    _max: PathwayCategoriesMaxAggregateOutputType | null
-  }
-
-  export type PathwayCategoriesAvgAggregateOutputType = {
-    pathwayId: number | null
-    pathwayTypeId: number | null
-  }
-
-  export type PathwayCategoriesSumAggregateOutputType = {
-    pathwayId: number | null
-    pathwayTypeId: number | null
-  }
-
-  export type PathwayCategoriesMinAggregateOutputType = {
-    pathwayId: number | null
-    pathwayTypeId: number | null
-  }
-
-  export type PathwayCategoriesMaxAggregateOutputType = {
-    pathwayId: number | null
-    pathwayTypeId: number | null
-  }
-
-  export type PathwayCategoriesCountAggregateOutputType = {
-    pathwayId: number
-    pathwayTypeId: number
-    _all: number
-  }
-
-
-  export type PathwayCategoriesAvgAggregateInputType = {
-    pathwayId?: true
-    pathwayTypeId?: true
-  }
-
-  export type PathwayCategoriesSumAggregateInputType = {
-    pathwayId?: true
-    pathwayTypeId?: true
-  }
-
-  export type PathwayCategoriesMinAggregateInputType = {
-    pathwayId?: true
-    pathwayTypeId?: true
-  }
-
-  export type PathwayCategoriesMaxAggregateInputType = {
-    pathwayId?: true
-    pathwayTypeId?: true
-  }
-
-  export type PathwayCategoriesCountAggregateInputType = {
-    pathwayId?: true
-    pathwayTypeId?: true
-    _all?: true
-  }
-
-  export type PathwayCategoriesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which PathwayCategories to aggregate.
-     */
-    where?: PathwayCategoriesWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PathwayCategories to fetch.
-     */
-    orderBy?: PathwayCategoriesOrderByWithRelationInput | PathwayCategoriesOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: PathwayCategoriesWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PathwayCategories from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PathwayCategories.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned PathwayCategories
-    **/
-    _count?: true | PathwayCategoriesCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: PathwayCategoriesAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: PathwayCategoriesSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: PathwayCategoriesMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: PathwayCategoriesMaxAggregateInputType
-  }
-
-  export type GetPathwayCategoriesAggregateType<T extends PathwayCategoriesAggregateArgs> = {
-        [P in keyof T & keyof AggregatePathwayCategories]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregatePathwayCategories[P]>
-      : GetScalarType<T[P], AggregatePathwayCategories[P]>
-  }
-
-
-
-
-  export type PathwayCategoriesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PathwayCategoriesWhereInput
-    orderBy?: PathwayCategoriesOrderByWithAggregationInput | PathwayCategoriesOrderByWithAggregationInput[]
-    by: PathwayCategoriesScalarFieldEnum[] | PathwayCategoriesScalarFieldEnum
-    having?: PathwayCategoriesScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: PathwayCategoriesCountAggregateInputType | true
-    _avg?: PathwayCategoriesAvgAggregateInputType
-    _sum?: PathwayCategoriesSumAggregateInputType
-    _min?: PathwayCategoriesMinAggregateInputType
-    _max?: PathwayCategoriesMaxAggregateInputType
-  }
-
-  export type PathwayCategoriesGroupByOutputType = {
-    pathwayId: number
-    pathwayTypeId: number
-    _count: PathwayCategoriesCountAggregateOutputType | null
-    _avg: PathwayCategoriesAvgAggregateOutputType | null
-    _sum: PathwayCategoriesSumAggregateOutputType | null
-    _min: PathwayCategoriesMinAggregateOutputType | null
-    _max: PathwayCategoriesMaxAggregateOutputType | null
-  }
-
-  type GetPathwayCategoriesGroupByPayload<T extends PathwayCategoriesGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<PathwayCategoriesGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof PathwayCategoriesGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], PathwayCategoriesGroupByOutputType[P]>
-            : GetScalarType<T[P], PathwayCategoriesGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type PathwayCategoriesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    pathwayId?: boolean
-    pathwayTypeId?: boolean
-    pathway?: boolean | PathwayDefaultArgs<ExtArgs>
-    pathwayType?: boolean | PathwayTypesDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["pathwayCategories"]>
-
-  export type PathwayCategoriesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    pathwayId?: boolean
-    pathwayTypeId?: boolean
-    pathway?: boolean | PathwayDefaultArgs<ExtArgs>
-    pathwayType?: boolean | PathwayTypesDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["pathwayCategories"]>
-
-  export type PathwayCategoriesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    pathwayId?: boolean
-    pathwayTypeId?: boolean
-    pathway?: boolean | PathwayDefaultArgs<ExtArgs>
-    pathwayType?: boolean | PathwayTypesDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["pathwayCategories"]>
-
-  export type PathwayCategoriesSelectScalar = {
-    pathwayId?: boolean
-    pathwayTypeId?: boolean
-  }
-
-  export type PathwayCategoriesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"pathwayId" | "pathwayTypeId", ExtArgs["result"]["pathwayCategories"]>
-  export type PathwayCategoriesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    pathway?: boolean | PathwayDefaultArgs<ExtArgs>
-    pathwayType?: boolean | PathwayTypesDefaultArgs<ExtArgs>
-  }
-  export type PathwayCategoriesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    pathway?: boolean | PathwayDefaultArgs<ExtArgs>
-    pathwayType?: boolean | PathwayTypesDefaultArgs<ExtArgs>
-  }
-  export type PathwayCategoriesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    pathway?: boolean | PathwayDefaultArgs<ExtArgs>
-    pathwayType?: boolean | PathwayTypesDefaultArgs<ExtArgs>
-  }
-
-  export type $PathwayCategoriesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "PathwayCategories"
-    objects: {
-      pathway: Prisma.$PathwayPayload<ExtArgs>
-      pathwayType: Prisma.$PathwayTypesPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      pathwayId: number
-      pathwayTypeId: number
-    }, ExtArgs["result"]["pathwayCategories"]>
-    composites: {}
-  }
-
-  type PathwayCategoriesGetPayload<S extends boolean | null | undefined | PathwayCategoriesDefaultArgs> = $Result.GetResult<Prisma.$PathwayCategoriesPayload, S>
-
-  type PathwayCategoriesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<PathwayCategoriesFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: PathwayCategoriesCountAggregateInputType | true
-    }
-
-  export interface PathwayCategoriesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PathwayCategories'], meta: { name: 'PathwayCategories' } }
-    /**
-     * Find zero or one PathwayCategories that matches the filter.
-     * @param {PathwayCategoriesFindUniqueArgs} args - Arguments to find a PathwayCategories
-     * @example
-     * // Get one PathwayCategories
-     * const pathwayCategories = await prisma.pathwayCategories.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends PathwayCategoriesFindUniqueArgs>(args: SelectSubset<T, PathwayCategoriesFindUniqueArgs<ExtArgs>>): Prisma__PathwayCategoriesClient<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one PathwayCategories that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {PathwayCategoriesFindUniqueOrThrowArgs} args - Arguments to find a PathwayCategories
-     * @example
-     * // Get one PathwayCategories
-     * const pathwayCategories = await prisma.pathwayCategories.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends PathwayCategoriesFindUniqueOrThrowArgs>(args: SelectSubset<T, PathwayCategoriesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PathwayCategoriesClient<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first PathwayCategories that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PathwayCategoriesFindFirstArgs} args - Arguments to find a PathwayCategories
-     * @example
-     * // Get one PathwayCategories
-     * const pathwayCategories = await prisma.pathwayCategories.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends PathwayCategoriesFindFirstArgs>(args?: SelectSubset<T, PathwayCategoriesFindFirstArgs<ExtArgs>>): Prisma__PathwayCategoriesClient<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first PathwayCategories that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PathwayCategoriesFindFirstOrThrowArgs} args - Arguments to find a PathwayCategories
-     * @example
-     * // Get one PathwayCategories
-     * const pathwayCategories = await prisma.pathwayCategories.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends PathwayCategoriesFindFirstOrThrowArgs>(args?: SelectSubset<T, PathwayCategoriesFindFirstOrThrowArgs<ExtArgs>>): Prisma__PathwayCategoriesClient<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more PathwayCategories that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PathwayCategoriesFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all PathwayCategories
-     * const pathwayCategories = await prisma.pathwayCategories.findMany()
-     * 
-     * // Get first 10 PathwayCategories
-     * const pathwayCategories = await prisma.pathwayCategories.findMany({ take: 10 })
-     * 
-     * // Only select the `pathwayId`
-     * const pathwayCategoriesWithPathwayIdOnly = await prisma.pathwayCategories.findMany({ select: { pathwayId: true } })
-     * 
-     */
-    findMany<T extends PathwayCategoriesFindManyArgs>(args?: SelectSubset<T, PathwayCategoriesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a PathwayCategories.
-     * @param {PathwayCategoriesCreateArgs} args - Arguments to create a PathwayCategories.
-     * @example
-     * // Create one PathwayCategories
-     * const PathwayCategories = await prisma.pathwayCategories.create({
-     *   data: {
-     *     // ... data to create a PathwayCategories
-     *   }
-     * })
-     * 
-     */
-    create<T extends PathwayCategoriesCreateArgs>(args: SelectSubset<T, PathwayCategoriesCreateArgs<ExtArgs>>): Prisma__PathwayCategoriesClient<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many PathwayCategories.
-     * @param {PathwayCategoriesCreateManyArgs} args - Arguments to create many PathwayCategories.
-     * @example
-     * // Create many PathwayCategories
-     * const pathwayCategories = await prisma.pathwayCategories.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends PathwayCategoriesCreateManyArgs>(args?: SelectSubset<T, PathwayCategoriesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many PathwayCategories and returns the data saved in the database.
-     * @param {PathwayCategoriesCreateManyAndReturnArgs} args - Arguments to create many PathwayCategories.
-     * @example
-     * // Create many PathwayCategories
-     * const pathwayCategories = await prisma.pathwayCategories.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many PathwayCategories and only return the `pathwayId`
-     * const pathwayCategoriesWithPathwayIdOnly = await prisma.pathwayCategories.createManyAndReturn({
-     *   select: { pathwayId: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends PathwayCategoriesCreateManyAndReturnArgs>(args?: SelectSubset<T, PathwayCategoriesCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a PathwayCategories.
-     * @param {PathwayCategoriesDeleteArgs} args - Arguments to delete one PathwayCategories.
-     * @example
-     * // Delete one PathwayCategories
-     * const PathwayCategories = await prisma.pathwayCategories.delete({
-     *   where: {
-     *     // ... filter to delete one PathwayCategories
-     *   }
-     * })
-     * 
-     */
-    delete<T extends PathwayCategoriesDeleteArgs>(args: SelectSubset<T, PathwayCategoriesDeleteArgs<ExtArgs>>): Prisma__PathwayCategoriesClient<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one PathwayCategories.
-     * @param {PathwayCategoriesUpdateArgs} args - Arguments to update one PathwayCategories.
-     * @example
-     * // Update one PathwayCategories
-     * const pathwayCategories = await prisma.pathwayCategories.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends PathwayCategoriesUpdateArgs>(args: SelectSubset<T, PathwayCategoriesUpdateArgs<ExtArgs>>): Prisma__PathwayCategoriesClient<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more PathwayCategories.
-     * @param {PathwayCategoriesDeleteManyArgs} args - Arguments to filter PathwayCategories to delete.
-     * @example
-     * // Delete a few PathwayCategories
-     * const { count } = await prisma.pathwayCategories.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends PathwayCategoriesDeleteManyArgs>(args?: SelectSubset<T, PathwayCategoriesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more PathwayCategories.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PathwayCategoriesUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many PathwayCategories
-     * const pathwayCategories = await prisma.pathwayCategories.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends PathwayCategoriesUpdateManyArgs>(args: SelectSubset<T, PathwayCategoriesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more PathwayCategories and returns the data updated in the database.
-     * @param {PathwayCategoriesUpdateManyAndReturnArgs} args - Arguments to update many PathwayCategories.
-     * @example
-     * // Update many PathwayCategories
-     * const pathwayCategories = await prisma.pathwayCategories.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more PathwayCategories and only return the `pathwayId`
-     * const pathwayCategoriesWithPathwayIdOnly = await prisma.pathwayCategories.updateManyAndReturn({
-     *   select: { pathwayId: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends PathwayCategoriesUpdateManyAndReturnArgs>(args: SelectSubset<T, PathwayCategoriesUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one PathwayCategories.
-     * @param {PathwayCategoriesUpsertArgs} args - Arguments to update or create a PathwayCategories.
-     * @example
-     * // Update or create a PathwayCategories
-     * const pathwayCategories = await prisma.pathwayCategories.upsert({
-     *   create: {
-     *     // ... data to create a PathwayCategories
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the PathwayCategories we want to update
-     *   }
-     * })
-     */
-    upsert<T extends PathwayCategoriesUpsertArgs>(args: SelectSubset<T, PathwayCategoriesUpsertArgs<ExtArgs>>): Prisma__PathwayCategoriesClient<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of PathwayCategories.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PathwayCategoriesCountArgs} args - Arguments to filter PathwayCategories to count.
-     * @example
-     * // Count the number of PathwayCategories
-     * const count = await prisma.pathwayCategories.count({
-     *   where: {
-     *     // ... the filter for the PathwayCategories we want to count
-     *   }
-     * })
-    **/
-    count<T extends PathwayCategoriesCountArgs>(
-      args?: Subset<T, PathwayCategoriesCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], PathwayCategoriesCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a PathwayCategories.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PathwayCategoriesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends PathwayCategoriesAggregateArgs>(args: Subset<T, PathwayCategoriesAggregateArgs>): Prisma.PrismaPromise<GetPathwayCategoriesAggregateType<T>>
-
-    /**
-     * Group by PathwayCategories.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PathwayCategoriesGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends PathwayCategoriesGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: PathwayCategoriesGroupByArgs['orderBy'] }
-        : { orderBy?: PathwayCategoriesGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, PathwayCategoriesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPathwayCategoriesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the PathwayCategories model
-   */
-  readonly fields: PathwayCategoriesFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for PathwayCategories.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__PathwayCategoriesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    pathway<T extends PathwayDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PathwayDefaultArgs<ExtArgs>>): Prisma__PathwayClient<$Result.GetResult<Prisma.$PathwayPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    pathwayType<T extends PathwayTypesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PathwayTypesDefaultArgs<ExtArgs>>): Prisma__PathwayTypesClient<$Result.GetResult<Prisma.$PathwayTypesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the PathwayCategories model
-   */
-  interface PathwayCategoriesFieldRefs {
-    readonly pathwayId: FieldRef<"PathwayCategories", 'Int'>
-    readonly pathwayTypeId: FieldRef<"PathwayCategories", 'Int'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * PathwayCategories findUnique
-   */
-  export type PathwayCategoriesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PathwayCategories
-     */
-    select?: PathwayCategoriesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PathwayCategories
-     */
-    omit?: PathwayCategoriesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PathwayCategoriesInclude<ExtArgs> | null
-    /**
-     * Filter, which PathwayCategories to fetch.
-     */
-    where: PathwayCategoriesWhereUniqueInput
-  }
-
-  /**
-   * PathwayCategories findUniqueOrThrow
-   */
-  export type PathwayCategoriesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PathwayCategories
-     */
-    select?: PathwayCategoriesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PathwayCategories
-     */
-    omit?: PathwayCategoriesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PathwayCategoriesInclude<ExtArgs> | null
-    /**
-     * Filter, which PathwayCategories to fetch.
-     */
-    where: PathwayCategoriesWhereUniqueInput
-  }
-
-  /**
-   * PathwayCategories findFirst
-   */
-  export type PathwayCategoriesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PathwayCategories
-     */
-    select?: PathwayCategoriesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PathwayCategories
-     */
-    omit?: PathwayCategoriesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PathwayCategoriesInclude<ExtArgs> | null
-    /**
-     * Filter, which PathwayCategories to fetch.
-     */
-    where?: PathwayCategoriesWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PathwayCategories to fetch.
-     */
-    orderBy?: PathwayCategoriesOrderByWithRelationInput | PathwayCategoriesOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for PathwayCategories.
-     */
-    cursor?: PathwayCategoriesWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PathwayCategories from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PathwayCategories.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of PathwayCategories.
-     */
-    distinct?: PathwayCategoriesScalarFieldEnum | PathwayCategoriesScalarFieldEnum[]
-  }
-
-  /**
-   * PathwayCategories findFirstOrThrow
-   */
-  export type PathwayCategoriesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PathwayCategories
-     */
-    select?: PathwayCategoriesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PathwayCategories
-     */
-    omit?: PathwayCategoriesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PathwayCategoriesInclude<ExtArgs> | null
-    /**
-     * Filter, which PathwayCategories to fetch.
-     */
-    where?: PathwayCategoriesWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PathwayCategories to fetch.
-     */
-    orderBy?: PathwayCategoriesOrderByWithRelationInput | PathwayCategoriesOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for PathwayCategories.
-     */
-    cursor?: PathwayCategoriesWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PathwayCategories from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PathwayCategories.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of PathwayCategories.
-     */
-    distinct?: PathwayCategoriesScalarFieldEnum | PathwayCategoriesScalarFieldEnum[]
-  }
-
-  /**
-   * PathwayCategories findMany
-   */
-  export type PathwayCategoriesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PathwayCategories
-     */
-    select?: PathwayCategoriesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PathwayCategories
-     */
-    omit?: PathwayCategoriesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PathwayCategoriesInclude<ExtArgs> | null
-    /**
-     * Filter, which PathwayCategories to fetch.
-     */
-    where?: PathwayCategoriesWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PathwayCategories to fetch.
-     */
-    orderBy?: PathwayCategoriesOrderByWithRelationInput | PathwayCategoriesOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing PathwayCategories.
-     */
-    cursor?: PathwayCategoriesWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PathwayCategories from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PathwayCategories.
-     */
-    skip?: number
-    distinct?: PathwayCategoriesScalarFieldEnum | PathwayCategoriesScalarFieldEnum[]
-  }
-
-  /**
-   * PathwayCategories create
-   */
-  export type PathwayCategoriesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PathwayCategories
-     */
-    select?: PathwayCategoriesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PathwayCategories
-     */
-    omit?: PathwayCategoriesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PathwayCategoriesInclude<ExtArgs> | null
-    /**
-     * The data needed to create a PathwayCategories.
-     */
-    data: XOR<PathwayCategoriesCreateInput, PathwayCategoriesUncheckedCreateInput>
-  }
-
-  /**
-   * PathwayCategories createMany
-   */
-  export type PathwayCategoriesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many PathwayCategories.
-     */
-    data: PathwayCategoriesCreateManyInput | PathwayCategoriesCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * PathwayCategories createManyAndReturn
-   */
-  export type PathwayCategoriesCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PathwayCategories
-     */
-    select?: PathwayCategoriesSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the PathwayCategories
-     */
-    omit?: PathwayCategoriesOmit<ExtArgs> | null
-    /**
-     * The data used to create many PathwayCategories.
-     */
-    data: PathwayCategoriesCreateManyInput | PathwayCategoriesCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PathwayCategoriesIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * PathwayCategories update
-   */
-  export type PathwayCategoriesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PathwayCategories
-     */
-    select?: PathwayCategoriesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PathwayCategories
-     */
-    omit?: PathwayCategoriesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PathwayCategoriesInclude<ExtArgs> | null
-    /**
-     * The data needed to update a PathwayCategories.
-     */
-    data: XOR<PathwayCategoriesUpdateInput, PathwayCategoriesUncheckedUpdateInput>
-    /**
-     * Choose, which PathwayCategories to update.
-     */
-    where: PathwayCategoriesWhereUniqueInput
-  }
-
-  /**
-   * PathwayCategories updateMany
-   */
-  export type PathwayCategoriesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update PathwayCategories.
-     */
-    data: XOR<PathwayCategoriesUpdateManyMutationInput, PathwayCategoriesUncheckedUpdateManyInput>
-    /**
-     * Filter which PathwayCategories to update
-     */
-    where?: PathwayCategoriesWhereInput
-    /**
-     * Limit how many PathwayCategories to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * PathwayCategories updateManyAndReturn
-   */
-  export type PathwayCategoriesUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PathwayCategories
-     */
-    select?: PathwayCategoriesSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the PathwayCategories
-     */
-    omit?: PathwayCategoriesOmit<ExtArgs> | null
-    /**
-     * The data used to update PathwayCategories.
-     */
-    data: XOR<PathwayCategoriesUpdateManyMutationInput, PathwayCategoriesUncheckedUpdateManyInput>
-    /**
-     * Filter which PathwayCategories to update
-     */
-    where?: PathwayCategoriesWhereInput
-    /**
-     * Limit how many PathwayCategories to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PathwayCategoriesIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * PathwayCategories upsert
-   */
-  export type PathwayCategoriesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PathwayCategories
-     */
-    select?: PathwayCategoriesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PathwayCategories
-     */
-    omit?: PathwayCategoriesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PathwayCategoriesInclude<ExtArgs> | null
-    /**
-     * The filter to search for the PathwayCategories to update in case it exists.
-     */
-    where: PathwayCategoriesWhereUniqueInput
-    /**
-     * In case the PathwayCategories found by the `where` argument doesn't exist, create a new PathwayCategories with this data.
-     */
-    create: XOR<PathwayCategoriesCreateInput, PathwayCategoriesUncheckedCreateInput>
-    /**
-     * In case the PathwayCategories was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<PathwayCategoriesUpdateInput, PathwayCategoriesUncheckedUpdateInput>
-  }
-
-  /**
-   * PathwayCategories delete
-   */
-  export type PathwayCategoriesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PathwayCategories
-     */
-    select?: PathwayCategoriesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PathwayCategories
-     */
-    omit?: PathwayCategoriesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PathwayCategoriesInclude<ExtArgs> | null
-    /**
-     * Filter which PathwayCategories to delete.
-     */
-    where: PathwayCategoriesWhereUniqueInput
-  }
-
-  /**
-   * PathwayCategories deleteMany
-   */
-  export type PathwayCategoriesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which PathwayCategories to delete
-     */
-    where?: PathwayCategoriesWhereInput
-    /**
-     * Limit how many PathwayCategories to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * PathwayCategories without action
-   */
-  export type PathwayCategoriesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PathwayCategories
-     */
-    select?: PathwayCategoriesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PathwayCategories
-     */
-    omit?: PathwayCategoriesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PathwayCategoriesInclude<ExtArgs> | null
   }
 
 
@@ -16544,10 +15479,10 @@ export namespace Prisma {
     contentDelta?: boolean
     imageExt?: boolean
     imageKey?: boolean
-    postVersionHistories?: boolean | Post$postVersionHistoriesArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
     postBlock?: boolean | Post$postBlockArgs<ExtArgs>
     tags?: boolean | Post$tagsArgs<ExtArgs>
+    postVersionHistories?: boolean | Post$postVersionHistoriesArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | PostCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["post"]>
 
@@ -16612,10 +15547,10 @@ export namespace Prisma {
 
   export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt" | "authorId" | "contentHTML" | "contentText" | "subtitle" | "slug" | "image" | "metaDescription" | "metaKeywords" | "status" | "contentDelta" | "imageExt" | "imageKey", ExtArgs["result"]["post"]>
   export type PostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    postVersionHistories?: boolean | Post$postVersionHistoriesArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
     postBlock?: boolean | Post$postBlockArgs<ExtArgs>
     tags?: boolean | Post$tagsArgs<ExtArgs>
+    postVersionHistories?: boolean | Post$postVersionHistoriesArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | PostCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PostIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -16628,10 +15563,10 @@ export namespace Prisma {
   export type $PostPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Post"
     objects: {
-      postVersionHistories: Prisma.$PostVersionHistoryPayload<ExtArgs>[]
-      author: Prisma.$UserPayload<ExtArgs>
       postBlock: Prisma.$PostBlockPayload<ExtArgs>[]
       tags: Prisma.$PostTagPayload<ExtArgs>[]
+      postVersionHistories: Prisma.$PostVersionHistoryPayload<ExtArgs>[]
+      author: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -17044,10 +15979,10 @@ export namespace Prisma {
    */
   export interface Prisma__PostClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    postVersionHistories<T extends Post$postVersionHistoriesArgs<ExtArgs> = {}>(args?: Subset<T, Post$postVersionHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostVersionHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     postBlock<T extends Post$postBlockArgs<ExtArgs> = {}>(args?: Subset<T, Post$postBlockArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostBlockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     tags<T extends Post$tagsArgs<ExtArgs> = {}>(args?: Subset<T, Post$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    postVersionHistories<T extends Post$postVersionHistoriesArgs<ExtArgs> = {}>(args?: Subset<T, Post$postVersionHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostVersionHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -17489,30 +16424,6 @@ export namespace Prisma {
   }
 
   /**
-   * Post.postVersionHistories
-   */
-  export type Post$postVersionHistoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PostVersionHistory
-     */
-    select?: PostVersionHistorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PostVersionHistory
-     */
-    omit?: PostVersionHistoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PostVersionHistoryInclude<ExtArgs> | null
-    where?: PostVersionHistoryWhereInput
-    orderBy?: PostVersionHistoryOrderByWithRelationInput | PostVersionHistoryOrderByWithRelationInput[]
-    cursor?: PostVersionHistoryWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: PostVersionHistoryScalarFieldEnum | PostVersionHistoryScalarFieldEnum[]
-  }
-
-  /**
    * Post.postBlock
    */
   export type Post$postBlockArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -17558,6 +16469,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PostTagScalarFieldEnum | PostTagScalarFieldEnum[]
+  }
+
+  /**
+   * Post.postVersionHistories
+   */
+  export type Post$postVersionHistoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostVersionHistory
+     */
+    select?: PostVersionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostVersionHistory
+     */
+    omit?: PostVersionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostVersionHistoryInclude<ExtArgs> | null
+    where?: PostVersionHistoryWhereInput
+    orderBy?: PostVersionHistoryOrderByWithRelationInput | PostVersionHistoryOrderByWithRelationInput[]
+    cursor?: PostVersionHistoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PostVersionHistoryScalarFieldEnum | PostVersionHistoryScalarFieldEnum[]
   }
 
   /**
@@ -18839,10 +17774,10 @@ export namespace Prisma {
     parentId?: boolean
     color?: boolean
     posts?: boolean | Tag$postsArgs<ExtArgs>
-    parent?: boolean | Tag$parentArgs<ExtArgs>
-    children?: boolean | Tag$childrenArgs<ExtArgs>
     childTag?: boolean | Tag$childTagArgs<ExtArgs>
     parentTag?: boolean | Tag$parentTagArgs<ExtArgs>
+    parent?: boolean | Tag$parentArgs<ExtArgs>
+    children?: boolean | Tag$childrenArgs<ExtArgs>
     _count?: boolean | TagCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tag"]>
 
@@ -18872,10 +17807,10 @@ export namespace Prisma {
   export type TagOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "parentId" | "color", ExtArgs["result"]["tag"]>
   export type TagInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     posts?: boolean | Tag$postsArgs<ExtArgs>
-    parent?: boolean | Tag$parentArgs<ExtArgs>
-    children?: boolean | Tag$childrenArgs<ExtArgs>
     childTag?: boolean | Tag$childTagArgs<ExtArgs>
     parentTag?: boolean | Tag$parentTagArgs<ExtArgs>
+    parent?: boolean | Tag$parentArgs<ExtArgs>
+    children?: boolean | Tag$childrenArgs<ExtArgs>
     _count?: boolean | TagCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TagIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -18889,10 +17824,10 @@ export namespace Prisma {
     name: "Tag"
     objects: {
       posts: Prisma.$PostTagPayload<ExtArgs>[]
-      parent: Prisma.$TagPayload<ExtArgs> | null
-      children: Prisma.$TagPayload<ExtArgs>[]
       childTag: Prisma.$TagHierarchyPayload<ExtArgs>[]
       parentTag: Prisma.$TagHierarchyPayload<ExtArgs>[]
+      parent: Prisma.$TagPayload<ExtArgs> | null
+      children: Prisma.$TagPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -19294,10 +18229,10 @@ export namespace Prisma {
   export interface Prisma__TagClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     posts<T extends Tag$postsArgs<ExtArgs> = {}>(args?: Subset<T, Tag$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    parent<T extends Tag$parentArgs<ExtArgs> = {}>(args?: Subset<T, Tag$parentArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    children<T extends Tag$childrenArgs<ExtArgs> = {}>(args?: Subset<T, Tag$childrenArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     childTag<T extends Tag$childTagArgs<ExtArgs> = {}>(args?: Subset<T, Tag$childTagArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagHierarchyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     parentTag<T extends Tag$parentTagArgs<ExtArgs> = {}>(args?: Subset<T, Tag$parentTagArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagHierarchyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    parent<T extends Tag$parentArgs<ExtArgs> = {}>(args?: Subset<T, Tag$parentArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    children<T extends Tag$childrenArgs<ExtArgs> = {}>(args?: Subset<T, Tag$childrenArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -19751,49 +18686,6 @@ export namespace Prisma {
   }
 
   /**
-   * Tag.parent
-   */
-  export type Tag$parentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-    where?: TagWhereInput
-  }
-
-  /**
-   * Tag.children
-   */
-  export type Tag$childrenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-    where?: TagWhereInput
-    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
-    cursor?: TagWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
-  }
-
-  /**
    * Tag.childTag
    */
   export type Tag$childTagArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -19839,6 +18731,49 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TagHierarchyScalarFieldEnum | TagHierarchyScalarFieldEnum[]
+  }
+
+  /**
+   * Tag.parent
+   */
+  export type Tag$parentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    where?: TagWhereInput
+  }
+
+  /**
+   * Tag.children
+   */
+  export type Tag$childrenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    where?: TagWhereInput
+    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
+    cursor?: TagWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
   }
 
   /**
@@ -27895,12 +26830,12 @@ export namespace Prisma {
     discordHandle?: boolean
     accounts?: boolean | User$accountsArgs<ExtArgs>
     postVersionHistory?: boolean | User$postVersionHistoryArgs<ExtArgs>
+    posts?: boolean | User$postsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     key?: boolean | User$keyArgs<ExtArgs>
     roles?: boolean | User$rolesArgs<ExtArgs>
     socials?: boolean | User$socialsArgs<ExtArgs>
     Pathway?: boolean | User$PathwayArgs<ExtArgs>
-    posts?: boolean | User$postsArgs<ExtArgs>
     resources?: boolean | User$resourcesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -27945,12 +26880,12 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     postVersionHistory?: boolean | User$postVersionHistoryArgs<ExtArgs>
+    posts?: boolean | User$postsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     key?: boolean | User$keyArgs<ExtArgs>
     roles?: boolean | User$rolesArgs<ExtArgs>
     socials?: boolean | User$socialsArgs<ExtArgs>
     Pathway?: boolean | User$PathwayArgs<ExtArgs>
-    posts?: boolean | User$postsArgs<ExtArgs>
     resources?: boolean | User$resourcesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -27962,12 +26897,12 @@ export namespace Prisma {
     objects: {
       accounts: Prisma.$AccountPayload<ExtArgs>[]
       postVersionHistory: Prisma.$PostVersionHistoryPayload<ExtArgs>[]
+      posts: Prisma.$PostPayload<ExtArgs>[]
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       key: Prisma.$UserKeyPayload<ExtArgs> | null
       roles: Prisma.$UserRolesPayload<ExtArgs>[]
       socials: Prisma.$UserSocialPayload<ExtArgs>[]
       Pathway: Prisma.$PathwayPayload<ExtArgs>[]
-      posts: Prisma.$PostPayload<ExtArgs>[]
       resources: Prisma.$ResourcePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -28376,12 +27311,12 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     postVersionHistory<T extends User$postVersionHistoryArgs<ExtArgs> = {}>(args?: Subset<T, User$postVersionHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostVersionHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     key<T extends User$keyArgs<ExtArgs> = {}>(args?: Subset<T, User$keyArgs<ExtArgs>>): Prisma__UserKeyClient<$Result.GetResult<Prisma.$UserKeyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     roles<T extends User$rolesArgs<ExtArgs> = {}>(args?: Subset<T, User$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRolesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     socials<T extends User$socialsArgs<ExtArgs> = {}>(args?: Subset<T, User$socialsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserSocialPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Pathway<T extends User$PathwayArgs<ExtArgs> = {}>(args?: Subset<T, User$PathwayArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathwayPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     resources<T extends User$resourcesArgs<ExtArgs> = {}>(args?: Subset<T, User$resourcesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ResourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -28857,6 +27792,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.posts
+   */
+  export type User$postsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Post
+     */
+    select?: PostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Post
+     */
+    omit?: PostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostInclude<ExtArgs> | null
+    where?: PostWhereInput
+    orderBy?: PostOrderByWithRelationInput | PostOrderByWithRelationInput[]
+    cursor?: PostWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
+  }
+
+  /**
    * User.sessions
    */
   export type User$sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -28969,30 +27928,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PathwayScalarFieldEnum | PathwayScalarFieldEnum[]
-  }
-
-  /**
-   * User.posts
-   */
-  export type User$postsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Post
-     */
-    omit?: PostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PostInclude<ExtArgs> | null
-    where?: PostWhereInput
-    orderBy?: PostOrderByWithRelationInput | PostOrderByWithRelationInput[]
-    cursor?: PostWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
   }
 
   /**
@@ -36714,7 +35649,7 @@ export namespace Prisma {
     name?: boolean
     parentId?: boolean
     description?: boolean
-    pathways?: boolean | PathwayTypes$pathwaysArgs<ExtArgs>
+    pathwayCategories?: boolean | PathwayTypes$pathwayCategoriesArgs<ExtArgs>
     parent?: boolean | PathwayTypes$parentArgs<ExtArgs>
     children?: boolean | PathwayTypes$childrenArgs<ExtArgs>
     _count?: boolean | PathwayTypesCountOutputTypeDefaultArgs<ExtArgs>
@@ -36745,7 +35680,7 @@ export namespace Prisma {
 
   export type PathwayTypesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "parentId" | "description", ExtArgs["result"]["pathwayTypes"]>
   export type PathwayTypesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    pathways?: boolean | PathwayTypes$pathwaysArgs<ExtArgs>
+    pathwayCategories?: boolean | PathwayTypes$pathwayCategoriesArgs<ExtArgs>
     parent?: boolean | PathwayTypes$parentArgs<ExtArgs>
     children?: boolean | PathwayTypes$childrenArgs<ExtArgs>
     _count?: boolean | PathwayTypesCountOutputTypeDefaultArgs<ExtArgs>
@@ -36760,7 +35695,7 @@ export namespace Prisma {
   export type $PathwayTypesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "PathwayTypes"
     objects: {
-      pathways: Prisma.$PathwayCategoriesPayload<ExtArgs>[]
+      pathwayCategories: Prisma.$PathwayCategoriesPayload<ExtArgs>[]
       parent: Prisma.$PathwayTypesPayload<ExtArgs> | null
       children: Prisma.$PathwayTypesPayload<ExtArgs>[]
     }
@@ -37163,7 +36098,7 @@ export namespace Prisma {
    */
   export interface Prisma__PathwayTypesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    pathways<T extends PathwayTypes$pathwaysArgs<ExtArgs> = {}>(args?: Subset<T, PathwayTypes$pathwaysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    pathwayCategories<T extends PathwayTypes$pathwayCategoriesArgs<ExtArgs> = {}>(args?: Subset<T, PathwayTypes$pathwayCategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     parent<T extends PathwayTypes$parentArgs<ExtArgs> = {}>(args?: Subset<T, PathwayTypes$parentArgs<ExtArgs>>): Prisma__PathwayTypesClient<$Result.GetResult<Prisma.$PathwayTypesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     children<T extends PathwayTypes$childrenArgs<ExtArgs> = {}>(args?: Subset<T, PathwayTypes$childrenArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathwayTypesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -37595,9 +36530,9 @@ export namespace Prisma {
   }
 
   /**
-   * PathwayTypes.pathways
+   * PathwayTypes.pathwayCategories
    */
-  export type PathwayTypes$pathwaysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PathwayTypes$pathwayCategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the PathwayCategories
      */
@@ -37681,6 +36616,1071 @@ export namespace Prisma {
 
 
   /**
+   * Model PathwayCategories
+   */
+
+  export type AggregatePathwayCategories = {
+    _count: PathwayCategoriesCountAggregateOutputType | null
+    _avg: PathwayCategoriesAvgAggregateOutputType | null
+    _sum: PathwayCategoriesSumAggregateOutputType | null
+    _min: PathwayCategoriesMinAggregateOutputType | null
+    _max: PathwayCategoriesMaxAggregateOutputType | null
+  }
+
+  export type PathwayCategoriesAvgAggregateOutputType = {
+    pathwayId: number | null
+    pathwayTypeId: number | null
+  }
+
+  export type PathwayCategoriesSumAggregateOutputType = {
+    pathwayId: number | null
+    pathwayTypeId: number | null
+  }
+
+  export type PathwayCategoriesMinAggregateOutputType = {
+    pathwayId: number | null
+    pathwayTypeId: number | null
+  }
+
+  export type PathwayCategoriesMaxAggregateOutputType = {
+    pathwayId: number | null
+    pathwayTypeId: number | null
+  }
+
+  export type PathwayCategoriesCountAggregateOutputType = {
+    pathwayId: number
+    pathwayTypeId: number
+    _all: number
+  }
+
+
+  export type PathwayCategoriesAvgAggregateInputType = {
+    pathwayId?: true
+    pathwayTypeId?: true
+  }
+
+  export type PathwayCategoriesSumAggregateInputType = {
+    pathwayId?: true
+    pathwayTypeId?: true
+  }
+
+  export type PathwayCategoriesMinAggregateInputType = {
+    pathwayId?: true
+    pathwayTypeId?: true
+  }
+
+  export type PathwayCategoriesMaxAggregateInputType = {
+    pathwayId?: true
+    pathwayTypeId?: true
+  }
+
+  export type PathwayCategoriesCountAggregateInputType = {
+    pathwayId?: true
+    pathwayTypeId?: true
+    _all?: true
+  }
+
+  export type PathwayCategoriesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PathwayCategories to aggregate.
+     */
+    where?: PathwayCategoriesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PathwayCategories to fetch.
+     */
+    orderBy?: PathwayCategoriesOrderByWithRelationInput | PathwayCategoriesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PathwayCategoriesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PathwayCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PathwayCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PathwayCategories
+    **/
+    _count?: true | PathwayCategoriesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PathwayCategoriesAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PathwayCategoriesSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PathwayCategoriesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PathwayCategoriesMaxAggregateInputType
+  }
+
+  export type GetPathwayCategoriesAggregateType<T extends PathwayCategoriesAggregateArgs> = {
+        [P in keyof T & keyof AggregatePathwayCategories]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePathwayCategories[P]>
+      : GetScalarType<T[P], AggregatePathwayCategories[P]>
+  }
+
+
+
+
+  export type PathwayCategoriesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PathwayCategoriesWhereInput
+    orderBy?: PathwayCategoriesOrderByWithAggregationInput | PathwayCategoriesOrderByWithAggregationInput[]
+    by: PathwayCategoriesScalarFieldEnum[] | PathwayCategoriesScalarFieldEnum
+    having?: PathwayCategoriesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PathwayCategoriesCountAggregateInputType | true
+    _avg?: PathwayCategoriesAvgAggregateInputType
+    _sum?: PathwayCategoriesSumAggregateInputType
+    _min?: PathwayCategoriesMinAggregateInputType
+    _max?: PathwayCategoriesMaxAggregateInputType
+  }
+
+  export type PathwayCategoriesGroupByOutputType = {
+    pathwayId: number
+    pathwayTypeId: number
+    _count: PathwayCategoriesCountAggregateOutputType | null
+    _avg: PathwayCategoriesAvgAggregateOutputType | null
+    _sum: PathwayCategoriesSumAggregateOutputType | null
+    _min: PathwayCategoriesMinAggregateOutputType | null
+    _max: PathwayCategoriesMaxAggregateOutputType | null
+  }
+
+  type GetPathwayCategoriesGroupByPayload<T extends PathwayCategoriesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PathwayCategoriesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PathwayCategoriesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PathwayCategoriesGroupByOutputType[P]>
+            : GetScalarType<T[P], PathwayCategoriesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PathwayCategoriesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    pathwayId?: boolean
+    pathwayTypeId?: boolean
+    pathways?: boolean | PathwayDefaultArgs<ExtArgs>
+    pathway_categories?: boolean | PathwayTypesDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pathwayCategories"]>
+
+  export type PathwayCategoriesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    pathwayId?: boolean
+    pathwayTypeId?: boolean
+    pathways?: boolean | PathwayDefaultArgs<ExtArgs>
+    pathway_categories?: boolean | PathwayTypesDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pathwayCategories"]>
+
+  export type PathwayCategoriesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    pathwayId?: boolean
+    pathwayTypeId?: boolean
+    pathways?: boolean | PathwayDefaultArgs<ExtArgs>
+    pathway_categories?: boolean | PathwayTypesDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pathwayCategories"]>
+
+  export type PathwayCategoriesSelectScalar = {
+    pathwayId?: boolean
+    pathwayTypeId?: boolean
+  }
+
+  export type PathwayCategoriesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"pathwayId" | "pathwayTypeId", ExtArgs["result"]["pathwayCategories"]>
+  export type PathwayCategoriesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    pathways?: boolean | PathwayDefaultArgs<ExtArgs>
+    pathway_categories?: boolean | PathwayTypesDefaultArgs<ExtArgs>
+  }
+  export type PathwayCategoriesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    pathways?: boolean | PathwayDefaultArgs<ExtArgs>
+    pathway_categories?: boolean | PathwayTypesDefaultArgs<ExtArgs>
+  }
+  export type PathwayCategoriesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    pathways?: boolean | PathwayDefaultArgs<ExtArgs>
+    pathway_categories?: boolean | PathwayTypesDefaultArgs<ExtArgs>
+  }
+
+  export type $PathwayCategoriesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PathwayCategories"
+    objects: {
+      pathways: Prisma.$PathwayPayload<ExtArgs>
+      pathway_categories: Prisma.$PathwayTypesPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      pathwayId: number
+      pathwayTypeId: number
+    }, ExtArgs["result"]["pathwayCategories"]>
+    composites: {}
+  }
+
+  type PathwayCategoriesGetPayload<S extends boolean | null | undefined | PathwayCategoriesDefaultArgs> = $Result.GetResult<Prisma.$PathwayCategoriesPayload, S>
+
+  type PathwayCategoriesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PathwayCategoriesFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PathwayCategoriesCountAggregateInputType | true
+    }
+
+  export interface PathwayCategoriesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PathwayCategories'], meta: { name: 'PathwayCategories' } }
+    /**
+     * Find zero or one PathwayCategories that matches the filter.
+     * @param {PathwayCategoriesFindUniqueArgs} args - Arguments to find a PathwayCategories
+     * @example
+     * // Get one PathwayCategories
+     * const pathwayCategories = await prisma.pathwayCategories.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PathwayCategoriesFindUniqueArgs>(args: SelectSubset<T, PathwayCategoriesFindUniqueArgs<ExtArgs>>): Prisma__PathwayCategoriesClient<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PathwayCategories that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PathwayCategoriesFindUniqueOrThrowArgs} args - Arguments to find a PathwayCategories
+     * @example
+     * // Get one PathwayCategories
+     * const pathwayCategories = await prisma.pathwayCategories.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PathwayCategoriesFindUniqueOrThrowArgs>(args: SelectSubset<T, PathwayCategoriesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PathwayCategoriesClient<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PathwayCategories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PathwayCategoriesFindFirstArgs} args - Arguments to find a PathwayCategories
+     * @example
+     * // Get one PathwayCategories
+     * const pathwayCategories = await prisma.pathwayCategories.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PathwayCategoriesFindFirstArgs>(args?: SelectSubset<T, PathwayCategoriesFindFirstArgs<ExtArgs>>): Prisma__PathwayCategoriesClient<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PathwayCategories that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PathwayCategoriesFindFirstOrThrowArgs} args - Arguments to find a PathwayCategories
+     * @example
+     * // Get one PathwayCategories
+     * const pathwayCategories = await prisma.pathwayCategories.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PathwayCategoriesFindFirstOrThrowArgs>(args?: SelectSubset<T, PathwayCategoriesFindFirstOrThrowArgs<ExtArgs>>): Prisma__PathwayCategoriesClient<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PathwayCategories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PathwayCategoriesFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PathwayCategories
+     * const pathwayCategories = await prisma.pathwayCategories.findMany()
+     * 
+     * // Get first 10 PathwayCategories
+     * const pathwayCategories = await prisma.pathwayCategories.findMany({ take: 10 })
+     * 
+     * // Only select the `pathwayId`
+     * const pathwayCategoriesWithPathwayIdOnly = await prisma.pathwayCategories.findMany({ select: { pathwayId: true } })
+     * 
+     */
+    findMany<T extends PathwayCategoriesFindManyArgs>(args?: SelectSubset<T, PathwayCategoriesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PathwayCategories.
+     * @param {PathwayCategoriesCreateArgs} args - Arguments to create a PathwayCategories.
+     * @example
+     * // Create one PathwayCategories
+     * const PathwayCategories = await prisma.pathwayCategories.create({
+     *   data: {
+     *     // ... data to create a PathwayCategories
+     *   }
+     * })
+     * 
+     */
+    create<T extends PathwayCategoriesCreateArgs>(args: SelectSubset<T, PathwayCategoriesCreateArgs<ExtArgs>>): Prisma__PathwayCategoriesClient<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PathwayCategories.
+     * @param {PathwayCategoriesCreateManyArgs} args - Arguments to create many PathwayCategories.
+     * @example
+     * // Create many PathwayCategories
+     * const pathwayCategories = await prisma.pathwayCategories.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PathwayCategoriesCreateManyArgs>(args?: SelectSubset<T, PathwayCategoriesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PathwayCategories and returns the data saved in the database.
+     * @param {PathwayCategoriesCreateManyAndReturnArgs} args - Arguments to create many PathwayCategories.
+     * @example
+     * // Create many PathwayCategories
+     * const pathwayCategories = await prisma.pathwayCategories.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PathwayCategories and only return the `pathwayId`
+     * const pathwayCategoriesWithPathwayIdOnly = await prisma.pathwayCategories.createManyAndReturn({
+     *   select: { pathwayId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PathwayCategoriesCreateManyAndReturnArgs>(args?: SelectSubset<T, PathwayCategoriesCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PathwayCategories.
+     * @param {PathwayCategoriesDeleteArgs} args - Arguments to delete one PathwayCategories.
+     * @example
+     * // Delete one PathwayCategories
+     * const PathwayCategories = await prisma.pathwayCategories.delete({
+     *   where: {
+     *     // ... filter to delete one PathwayCategories
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PathwayCategoriesDeleteArgs>(args: SelectSubset<T, PathwayCategoriesDeleteArgs<ExtArgs>>): Prisma__PathwayCategoriesClient<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PathwayCategories.
+     * @param {PathwayCategoriesUpdateArgs} args - Arguments to update one PathwayCategories.
+     * @example
+     * // Update one PathwayCategories
+     * const pathwayCategories = await prisma.pathwayCategories.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PathwayCategoriesUpdateArgs>(args: SelectSubset<T, PathwayCategoriesUpdateArgs<ExtArgs>>): Prisma__PathwayCategoriesClient<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PathwayCategories.
+     * @param {PathwayCategoriesDeleteManyArgs} args - Arguments to filter PathwayCategories to delete.
+     * @example
+     * // Delete a few PathwayCategories
+     * const { count } = await prisma.pathwayCategories.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PathwayCategoriesDeleteManyArgs>(args?: SelectSubset<T, PathwayCategoriesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PathwayCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PathwayCategoriesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PathwayCategories
+     * const pathwayCategories = await prisma.pathwayCategories.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PathwayCategoriesUpdateManyArgs>(args: SelectSubset<T, PathwayCategoriesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PathwayCategories and returns the data updated in the database.
+     * @param {PathwayCategoriesUpdateManyAndReturnArgs} args - Arguments to update many PathwayCategories.
+     * @example
+     * // Update many PathwayCategories
+     * const pathwayCategories = await prisma.pathwayCategories.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PathwayCategories and only return the `pathwayId`
+     * const pathwayCategoriesWithPathwayIdOnly = await prisma.pathwayCategories.updateManyAndReturn({
+     *   select: { pathwayId: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PathwayCategoriesUpdateManyAndReturnArgs>(args: SelectSubset<T, PathwayCategoriesUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PathwayCategories.
+     * @param {PathwayCategoriesUpsertArgs} args - Arguments to update or create a PathwayCategories.
+     * @example
+     * // Update or create a PathwayCategories
+     * const pathwayCategories = await prisma.pathwayCategories.upsert({
+     *   create: {
+     *     // ... data to create a PathwayCategories
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PathwayCategories we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PathwayCategoriesUpsertArgs>(args: SelectSubset<T, PathwayCategoriesUpsertArgs<ExtArgs>>): Prisma__PathwayCategoriesClient<$Result.GetResult<Prisma.$PathwayCategoriesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PathwayCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PathwayCategoriesCountArgs} args - Arguments to filter PathwayCategories to count.
+     * @example
+     * // Count the number of PathwayCategories
+     * const count = await prisma.pathwayCategories.count({
+     *   where: {
+     *     // ... the filter for the PathwayCategories we want to count
+     *   }
+     * })
+    **/
+    count<T extends PathwayCategoriesCountArgs>(
+      args?: Subset<T, PathwayCategoriesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PathwayCategoriesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PathwayCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PathwayCategoriesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PathwayCategoriesAggregateArgs>(args: Subset<T, PathwayCategoriesAggregateArgs>): Prisma.PrismaPromise<GetPathwayCategoriesAggregateType<T>>
+
+    /**
+     * Group by PathwayCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PathwayCategoriesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PathwayCategoriesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PathwayCategoriesGroupByArgs['orderBy'] }
+        : { orderBy?: PathwayCategoriesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PathwayCategoriesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPathwayCategoriesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PathwayCategories model
+   */
+  readonly fields: PathwayCategoriesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PathwayCategories.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PathwayCategoriesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    pathways<T extends PathwayDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PathwayDefaultArgs<ExtArgs>>): Prisma__PathwayClient<$Result.GetResult<Prisma.$PathwayPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    pathway_categories<T extends PathwayTypesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PathwayTypesDefaultArgs<ExtArgs>>): Prisma__PathwayTypesClient<$Result.GetResult<Prisma.$PathwayTypesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PathwayCategories model
+   */
+  interface PathwayCategoriesFieldRefs {
+    readonly pathwayId: FieldRef<"PathwayCategories", 'Int'>
+    readonly pathwayTypeId: FieldRef<"PathwayCategories", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PathwayCategories findUnique
+   */
+  export type PathwayCategoriesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PathwayCategories
+     */
+    select?: PathwayCategoriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PathwayCategories
+     */
+    omit?: PathwayCategoriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathwayCategoriesInclude<ExtArgs> | null
+    /**
+     * Filter, which PathwayCategories to fetch.
+     */
+    where: PathwayCategoriesWhereUniqueInput
+  }
+
+  /**
+   * PathwayCategories findUniqueOrThrow
+   */
+  export type PathwayCategoriesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PathwayCategories
+     */
+    select?: PathwayCategoriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PathwayCategories
+     */
+    omit?: PathwayCategoriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathwayCategoriesInclude<ExtArgs> | null
+    /**
+     * Filter, which PathwayCategories to fetch.
+     */
+    where: PathwayCategoriesWhereUniqueInput
+  }
+
+  /**
+   * PathwayCategories findFirst
+   */
+  export type PathwayCategoriesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PathwayCategories
+     */
+    select?: PathwayCategoriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PathwayCategories
+     */
+    omit?: PathwayCategoriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathwayCategoriesInclude<ExtArgs> | null
+    /**
+     * Filter, which PathwayCategories to fetch.
+     */
+    where?: PathwayCategoriesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PathwayCategories to fetch.
+     */
+    orderBy?: PathwayCategoriesOrderByWithRelationInput | PathwayCategoriesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PathwayCategories.
+     */
+    cursor?: PathwayCategoriesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PathwayCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PathwayCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PathwayCategories.
+     */
+    distinct?: PathwayCategoriesScalarFieldEnum | PathwayCategoriesScalarFieldEnum[]
+  }
+
+  /**
+   * PathwayCategories findFirstOrThrow
+   */
+  export type PathwayCategoriesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PathwayCategories
+     */
+    select?: PathwayCategoriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PathwayCategories
+     */
+    omit?: PathwayCategoriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathwayCategoriesInclude<ExtArgs> | null
+    /**
+     * Filter, which PathwayCategories to fetch.
+     */
+    where?: PathwayCategoriesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PathwayCategories to fetch.
+     */
+    orderBy?: PathwayCategoriesOrderByWithRelationInput | PathwayCategoriesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PathwayCategories.
+     */
+    cursor?: PathwayCategoriesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PathwayCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PathwayCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PathwayCategories.
+     */
+    distinct?: PathwayCategoriesScalarFieldEnum | PathwayCategoriesScalarFieldEnum[]
+  }
+
+  /**
+   * PathwayCategories findMany
+   */
+  export type PathwayCategoriesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PathwayCategories
+     */
+    select?: PathwayCategoriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PathwayCategories
+     */
+    omit?: PathwayCategoriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathwayCategoriesInclude<ExtArgs> | null
+    /**
+     * Filter, which PathwayCategories to fetch.
+     */
+    where?: PathwayCategoriesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PathwayCategories to fetch.
+     */
+    orderBy?: PathwayCategoriesOrderByWithRelationInput | PathwayCategoriesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PathwayCategories.
+     */
+    cursor?: PathwayCategoriesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PathwayCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PathwayCategories.
+     */
+    skip?: number
+    distinct?: PathwayCategoriesScalarFieldEnum | PathwayCategoriesScalarFieldEnum[]
+  }
+
+  /**
+   * PathwayCategories create
+   */
+  export type PathwayCategoriesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PathwayCategories
+     */
+    select?: PathwayCategoriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PathwayCategories
+     */
+    omit?: PathwayCategoriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathwayCategoriesInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PathwayCategories.
+     */
+    data: XOR<PathwayCategoriesCreateInput, PathwayCategoriesUncheckedCreateInput>
+  }
+
+  /**
+   * PathwayCategories createMany
+   */
+  export type PathwayCategoriesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PathwayCategories.
+     */
+    data: PathwayCategoriesCreateManyInput | PathwayCategoriesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PathwayCategories createManyAndReturn
+   */
+  export type PathwayCategoriesCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PathwayCategories
+     */
+    select?: PathwayCategoriesSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PathwayCategories
+     */
+    omit?: PathwayCategoriesOmit<ExtArgs> | null
+    /**
+     * The data used to create many PathwayCategories.
+     */
+    data: PathwayCategoriesCreateManyInput | PathwayCategoriesCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathwayCategoriesIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PathwayCategories update
+   */
+  export type PathwayCategoriesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PathwayCategories
+     */
+    select?: PathwayCategoriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PathwayCategories
+     */
+    omit?: PathwayCategoriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathwayCategoriesInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PathwayCategories.
+     */
+    data: XOR<PathwayCategoriesUpdateInput, PathwayCategoriesUncheckedUpdateInput>
+    /**
+     * Choose, which PathwayCategories to update.
+     */
+    where: PathwayCategoriesWhereUniqueInput
+  }
+
+  /**
+   * PathwayCategories updateMany
+   */
+  export type PathwayCategoriesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PathwayCategories.
+     */
+    data: XOR<PathwayCategoriesUpdateManyMutationInput, PathwayCategoriesUncheckedUpdateManyInput>
+    /**
+     * Filter which PathwayCategories to update
+     */
+    where?: PathwayCategoriesWhereInput
+    /**
+     * Limit how many PathwayCategories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PathwayCategories updateManyAndReturn
+   */
+  export type PathwayCategoriesUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PathwayCategories
+     */
+    select?: PathwayCategoriesSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PathwayCategories
+     */
+    omit?: PathwayCategoriesOmit<ExtArgs> | null
+    /**
+     * The data used to update PathwayCategories.
+     */
+    data: XOR<PathwayCategoriesUpdateManyMutationInput, PathwayCategoriesUncheckedUpdateManyInput>
+    /**
+     * Filter which PathwayCategories to update
+     */
+    where?: PathwayCategoriesWhereInput
+    /**
+     * Limit how many PathwayCategories to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathwayCategoriesIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PathwayCategories upsert
+   */
+  export type PathwayCategoriesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PathwayCategories
+     */
+    select?: PathwayCategoriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PathwayCategories
+     */
+    omit?: PathwayCategoriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathwayCategoriesInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PathwayCategories to update in case it exists.
+     */
+    where: PathwayCategoriesWhereUniqueInput
+    /**
+     * In case the PathwayCategories found by the `where` argument doesn't exist, create a new PathwayCategories with this data.
+     */
+    create: XOR<PathwayCategoriesCreateInput, PathwayCategoriesUncheckedCreateInput>
+    /**
+     * In case the PathwayCategories was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PathwayCategoriesUpdateInput, PathwayCategoriesUncheckedUpdateInput>
+  }
+
+  /**
+   * PathwayCategories delete
+   */
+  export type PathwayCategoriesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PathwayCategories
+     */
+    select?: PathwayCategoriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PathwayCategories
+     */
+    omit?: PathwayCategoriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathwayCategoriesInclude<ExtArgs> | null
+    /**
+     * Filter which PathwayCategories to delete.
+     */
+    where: PathwayCategoriesWhereUniqueInput
+  }
+
+  /**
+   * PathwayCategories deleteMany
+   */
+  export type PathwayCategoriesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PathwayCategories to delete
+     */
+    where?: PathwayCategoriesWhereInput
+    /**
+     * Limit how many PathwayCategories to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PathwayCategories without action
+   */
+  export type PathwayCategoriesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PathwayCategories
+     */
+    select?: PathwayCategoriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PathwayCategories
+     */
+    omit?: PathwayCategoriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathwayCategoriesInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -37740,14 +37740,6 @@ export namespace Prisma {
   };
 
   export type PathwayScalarFieldEnum = (typeof PathwayScalarFieldEnum)[keyof typeof PathwayScalarFieldEnum]
-
-
-  export const PathwayCategoriesScalarFieldEnum: {
-    pathwayId: 'pathwayId',
-    pathwayTypeId: 'pathwayTypeId'
-  };
-
-  export type PathwayCategoriesScalarFieldEnum = (typeof PathwayCategoriesScalarFieldEnum)[keyof typeof PathwayCategoriesScalarFieldEnum]
 
 
   export const PathwayPipelineScalarFieldEnum: {
@@ -38032,6 +38024,14 @@ export namespace Prisma {
   export type PathwayTypesScalarFieldEnum = (typeof PathwayTypesScalarFieldEnum)[keyof typeof PathwayTypesScalarFieldEnum]
 
 
+  export const PathwayCategoriesScalarFieldEnum: {
+    pathwayId: 'pathwayId',
+    pathwayTypeId: 'pathwayTypeId'
+  };
+
+  export type PathwayCategoriesScalarFieldEnum = (typeof PathwayCategoriesScalarFieldEnum)[keyof typeof PathwayCategoriesScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -38236,8 +38236,8 @@ export namespace Prisma {
     name?: StringFilter<"Country"> | string
     countryCurrencies?: CountryCurrencyListRelationFilter
     countryLanguages?: CountryLanguageListRelationFilter
-    pathways?: PathwayListRelationFilter
     restrictedPathways?: PathwayRestrictedNationalityListRelationFilter
+    pathways?: PathwayListRelationFilter
   }
 
   export type CountryOrderByWithRelationInput = {
@@ -38245,8 +38245,8 @@ export namespace Prisma {
     name?: SortOrder
     countryCurrencies?: CountryCurrencyOrderByRelationAggregateInput
     countryLanguages?: CountryLanguageOrderByRelationAggregateInput
-    pathways?: PathwayOrderByRelationAggregateInput
     restrictedPathways?: PathwayRestrictedNationalityOrderByRelationAggregateInput
+    pathways?: PathwayOrderByRelationAggregateInput
   }
 
   export type CountryWhereUniqueInput = Prisma.AtLeast<{
@@ -38257,8 +38257,8 @@ export namespace Prisma {
     name?: StringFilter<"Country"> | string
     countryCurrencies?: CountryCurrencyListRelationFilter
     countryLanguages?: CountryLanguageListRelationFilter
-    pathways?: PathwayListRelationFilter
     restrictedPathways?: PathwayRestrictedNationalityListRelationFilter
+    pathways?: PathwayListRelationFilter
   }, "code" | "code">
 
   export type CountryOrderByWithAggregationInput = {
@@ -38387,13 +38387,13 @@ export namespace Prisma {
     renewal?: JsonNullableFilter<"Pathway">
     cost?: JsonNullableFilter<"Pathway">
     createdby?: StringFilter<"Pathway"> | string
+    documents?: PathwayDocumentsListRelationFilter
+    categories?: PathwayCategoriesListRelationFilter
+    pipelines?: PathwayPipelineListRelationFilter
+    restrictedNationalities?: PathwayRestrictedNationalityListRelationFilter
     country?: XOR<CountryScalarRelationFilter, CountryWhereInput>
     currency?: XOR<CurrencyScalarRelationFilter, CurrencyWhereInput>
     CMS_User?: XOR<UserScalarRelationFilter, UserWhereInput>
-    categories?: PathwayCategoriesListRelationFilter
-    documents?: PathwayDocumentsListRelationFilter
-    pipelines?: PathwayPipelineListRelationFilter
-    restrictedNationalities?: PathwayRestrictedNationalityListRelationFilter
   }
 
   export type PathwayOrderByWithRelationInput = {
@@ -38415,13 +38415,13 @@ export namespace Prisma {
     renewal?: SortOrderInput | SortOrder
     cost?: SortOrderInput | SortOrder
     createdby?: SortOrder
+    documents?: PathwayDocumentsOrderByRelationAggregateInput
+    categories?: PathwayCategoriesOrderByRelationAggregateInput
+    pipelines?: PathwayPipelineOrderByRelationAggregateInput
+    restrictedNationalities?: PathwayRestrictedNationalityOrderByRelationAggregateInput
     country?: CountryOrderByWithRelationInput
     currency?: CurrencyOrderByWithRelationInput
     CMS_User?: UserOrderByWithRelationInput
-    categories?: PathwayCategoriesOrderByRelationAggregateInput
-    documents?: PathwayDocumentsOrderByRelationAggregateInput
-    pipelines?: PathwayPipelineOrderByRelationAggregateInput
-    restrictedNationalities?: PathwayRestrictedNationalityOrderByRelationAggregateInput
   }
 
   export type PathwayWhereUniqueInput = Prisma.AtLeast<{
@@ -38446,13 +38446,13 @@ export namespace Prisma {
     renewal?: JsonNullableFilter<"Pathway">
     cost?: JsonNullableFilter<"Pathway">
     createdby?: StringFilter<"Pathway"> | string
+    documents?: PathwayDocumentsListRelationFilter
+    categories?: PathwayCategoriesListRelationFilter
+    pipelines?: PathwayPipelineListRelationFilter
+    restrictedNationalities?: PathwayRestrictedNationalityListRelationFilter
     country?: XOR<CountryScalarRelationFilter, CountryWhereInput>
     currency?: XOR<CurrencyScalarRelationFilter, CurrencyWhereInput>
     CMS_User?: XOR<UserScalarRelationFilter, UserWhereInput>
-    categories?: PathwayCategoriesListRelationFilter
-    documents?: PathwayDocumentsListRelationFilter
-    pipelines?: PathwayPipelineListRelationFilter
-    restrictedNationalities?: PathwayRestrictedNationalityListRelationFilter
   }, "id">
 
   export type PathwayOrderByWithAggregationInput = {
@@ -38503,52 +38503,6 @@ export namespace Prisma {
     renewal?: JsonNullableWithAggregatesFilter<"Pathway">
     cost?: JsonNullableWithAggregatesFilter<"Pathway">
     createdby?: StringWithAggregatesFilter<"Pathway"> | string
-  }
-
-  export type PathwayCategoriesWhereInput = {
-    AND?: PathwayCategoriesWhereInput | PathwayCategoriesWhereInput[]
-    OR?: PathwayCategoriesWhereInput[]
-    NOT?: PathwayCategoriesWhereInput | PathwayCategoriesWhereInput[]
-    pathwayId?: IntFilter<"PathwayCategories"> | number
-    pathwayTypeId?: IntFilter<"PathwayCategories"> | number
-    pathway?: XOR<PathwayScalarRelationFilter, PathwayWhereInput>
-    pathwayType?: XOR<PathwayTypesScalarRelationFilter, PathwayTypesWhereInput>
-  }
-
-  export type PathwayCategoriesOrderByWithRelationInput = {
-    pathwayId?: SortOrder
-    pathwayTypeId?: SortOrder
-    pathway?: PathwayOrderByWithRelationInput
-    pathwayType?: PathwayTypesOrderByWithRelationInput
-  }
-
-  export type PathwayCategoriesWhereUniqueInput = Prisma.AtLeast<{
-    pathwayId_pathwayTypeId?: PathwayCategoriesPathwayIdPathwayTypeIdCompoundUniqueInput
-    AND?: PathwayCategoriesWhereInput | PathwayCategoriesWhereInput[]
-    OR?: PathwayCategoriesWhereInput[]
-    NOT?: PathwayCategoriesWhereInput | PathwayCategoriesWhereInput[]
-    pathwayId?: IntFilter<"PathwayCategories"> | number
-    pathwayTypeId?: IntFilter<"PathwayCategories"> | number
-    pathway?: XOR<PathwayScalarRelationFilter, PathwayWhereInput>
-    pathwayType?: XOR<PathwayTypesScalarRelationFilter, PathwayTypesWhereInput>
-  }, "pathwayId_pathwayTypeId">
-
-  export type PathwayCategoriesOrderByWithAggregationInput = {
-    pathwayId?: SortOrder
-    pathwayTypeId?: SortOrder
-    _count?: PathwayCategoriesCountOrderByAggregateInput
-    _avg?: PathwayCategoriesAvgOrderByAggregateInput
-    _max?: PathwayCategoriesMaxOrderByAggregateInput
-    _min?: PathwayCategoriesMinOrderByAggregateInput
-    _sum?: PathwayCategoriesSumOrderByAggregateInput
-  }
-
-  export type PathwayCategoriesScalarWhereWithAggregatesInput = {
-    AND?: PathwayCategoriesScalarWhereWithAggregatesInput | PathwayCategoriesScalarWhereWithAggregatesInput[]
-    OR?: PathwayCategoriesScalarWhereWithAggregatesInput[]
-    NOT?: PathwayCategoriesScalarWhereWithAggregatesInput | PathwayCategoriesScalarWhereWithAggregatesInput[]
-    pathwayId?: IntWithAggregatesFilter<"PathwayCategories"> | number
-    pathwayTypeId?: IntWithAggregatesFilter<"PathwayCategories"> | number
   }
 
   export type PathwayPipelineWhereInput = {
@@ -38889,10 +38843,10 @@ export namespace Prisma {
     contentDelta?: StringFilter<"Post"> | string
     imageExt?: StringNullableFilter<"Post"> | string | null
     imageKey?: StringNullableFilter<"Post"> | string | null
-    postVersionHistories?: PostVersionHistoryListRelationFilter
-    author?: XOR<UserScalarRelationFilter, UserWhereInput>
     postBlock?: PostBlockListRelationFilter
     tags?: PostTagListRelationFilter
+    postVersionHistories?: PostVersionHistoryListRelationFilter
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type PostOrderByWithRelationInput = {
@@ -38912,10 +38866,10 @@ export namespace Prisma {
     contentDelta?: SortOrder
     imageExt?: SortOrderInput | SortOrder
     imageKey?: SortOrderInput | SortOrder
-    postVersionHistories?: PostVersionHistoryOrderByRelationAggregateInput
-    author?: UserOrderByWithRelationInput
     postBlock?: PostBlockOrderByRelationAggregateInput
     tags?: PostTagOrderByRelationAggregateInput
+    postVersionHistories?: PostVersionHistoryOrderByRelationAggregateInput
+    author?: UserOrderByWithRelationInput
   }
 
   export type PostWhereUniqueInput = Prisma.AtLeast<{
@@ -38938,10 +38892,10 @@ export namespace Prisma {
     contentDelta?: StringFilter<"Post"> | string
     imageExt?: StringNullableFilter<"Post"> | string | null
     imageKey?: StringNullableFilter<"Post"> | string | null
-    postVersionHistories?: PostVersionHistoryListRelationFilter
-    author?: XOR<UserScalarRelationFilter, UserWhereInput>
     postBlock?: PostBlockListRelationFilter
     tags?: PostTagListRelationFilter
+    postVersionHistories?: PostVersionHistoryListRelationFilter
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "slug">
 
   export type PostOrderByWithAggregationInput = {
@@ -39045,10 +38999,10 @@ export namespace Prisma {
     parentId?: IntNullableFilter<"Tag"> | number | null
     color?: StringFilter<"Tag"> | string
     posts?: PostTagListRelationFilter
-    parent?: XOR<TagNullableScalarRelationFilter, TagWhereInput> | null
-    children?: TagListRelationFilter
     childTag?: TagHierarchyListRelationFilter
     parentTag?: TagHierarchyListRelationFilter
+    parent?: XOR<TagNullableScalarRelationFilter, TagWhereInput> | null
+    children?: TagListRelationFilter
   }
 
   export type TagOrderByWithRelationInput = {
@@ -39057,10 +39011,10 @@ export namespace Prisma {
     parentId?: SortOrderInput | SortOrder
     color?: SortOrder
     posts?: PostTagOrderByRelationAggregateInput
-    parent?: TagOrderByWithRelationInput
-    children?: TagOrderByRelationAggregateInput
     childTag?: TagHierarchyOrderByRelationAggregateInput
     parentTag?: TagHierarchyOrderByRelationAggregateInput
+    parent?: TagOrderByWithRelationInput
+    children?: TagOrderByRelationAggregateInput
   }
 
   export type TagWhereUniqueInput = Prisma.AtLeast<{
@@ -39072,10 +39026,10 @@ export namespace Prisma {
     parentId?: IntNullableFilter<"Tag"> | number | null
     color?: StringFilter<"Tag"> | string
     posts?: PostTagListRelationFilter
-    parent?: XOR<TagNullableScalarRelationFilter, TagWhereInput> | null
-    children?: TagListRelationFilter
     childTag?: TagHierarchyListRelationFilter
     parentTag?: TagHierarchyListRelationFilter
+    parent?: XOR<TagNullableScalarRelationFilter, TagWhereInput> | null
+    children?: TagListRelationFilter
   }, "id">
 
   export type TagOrderByWithAggregationInput = {
@@ -39579,12 +39533,12 @@ export namespace Prisma {
     discordHandle?: StringNullableFilter<"User"> | string | null
     accounts?: AccountListRelationFilter
     postVersionHistory?: PostVersionHistoryListRelationFilter
+    posts?: PostListRelationFilter
     sessions?: SessionListRelationFilter
     key?: XOR<UserKeyNullableScalarRelationFilter, UserKeyWhereInput> | null
     roles?: UserRolesListRelationFilter
     socials?: UserSocialListRelationFilter
     Pathway?: PathwayListRelationFilter
-    posts?: PostListRelationFilter
     resources?: ResourceListRelationFilter
   }
 
@@ -39600,12 +39554,12 @@ export namespace Prisma {
     discordHandle?: SortOrderInput | SortOrder
     accounts?: AccountOrderByRelationAggregateInput
     postVersionHistory?: PostVersionHistoryOrderByRelationAggregateInput
+    posts?: PostOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
     key?: UserKeyOrderByWithRelationInput
     roles?: UserRolesOrderByRelationAggregateInput
     socials?: UserSocialOrderByRelationAggregateInput
     Pathway?: PathwayOrderByRelationAggregateInput
-    posts?: PostOrderByRelationAggregateInput
     resources?: ResourceOrderByRelationAggregateInput
   }
 
@@ -39624,12 +39578,12 @@ export namespace Prisma {
     discordHandle?: StringNullableFilter<"User"> | string | null
     accounts?: AccountListRelationFilter
     postVersionHistory?: PostVersionHistoryListRelationFilter
+    posts?: PostListRelationFilter
     sessions?: SessionListRelationFilter
     key?: XOR<UserKeyNullableScalarRelationFilter, UserKeyWhereInput> | null
     roles?: UserRolesListRelationFilter
     socials?: UserSocialListRelationFilter
     Pathway?: PathwayListRelationFilter
-    posts?: PostListRelationFilter
     resources?: ResourceListRelationFilter
   }, "id" | "name">
 
@@ -40039,7 +39993,7 @@ export namespace Prisma {
     name?: StringFilter<"PathwayTypes"> | string
     parentId?: IntNullableFilter<"PathwayTypes"> | number | null
     description?: StringNullableFilter<"PathwayTypes"> | string | null
-    pathways?: PathwayCategoriesListRelationFilter
+    pathwayCategories?: PathwayCategoriesListRelationFilter
     parent?: XOR<PathwayTypesNullableScalarRelationFilter, PathwayTypesWhereInput> | null
     children?: PathwayTypesListRelationFilter
   }
@@ -40049,7 +40003,7 @@ export namespace Prisma {
     name?: SortOrder
     parentId?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
-    pathways?: PathwayCategoriesOrderByRelationAggregateInput
+    pathwayCategories?: PathwayCategoriesOrderByRelationAggregateInput
     parent?: PathwayTypesOrderByWithRelationInput
     children?: PathwayTypesOrderByRelationAggregateInput
   }
@@ -40062,7 +40016,7 @@ export namespace Prisma {
     name?: StringFilter<"PathwayTypes"> | string
     parentId?: IntNullableFilter<"PathwayTypes"> | number | null
     description?: StringNullableFilter<"PathwayTypes"> | string | null
-    pathways?: PathwayCategoriesListRelationFilter
+    pathwayCategories?: PathwayCategoriesListRelationFilter
     parent?: XOR<PathwayTypesNullableScalarRelationFilter, PathwayTypesWhereInput> | null
     children?: PathwayTypesListRelationFilter
   }, "id">
@@ -40089,13 +40043,59 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"PathwayTypes"> | string | null
   }
 
+  export type PathwayCategoriesWhereInput = {
+    AND?: PathwayCategoriesWhereInput | PathwayCategoriesWhereInput[]
+    OR?: PathwayCategoriesWhereInput[]
+    NOT?: PathwayCategoriesWhereInput | PathwayCategoriesWhereInput[]
+    pathwayId?: IntFilter<"PathwayCategories"> | number
+    pathwayTypeId?: IntFilter<"PathwayCategories"> | number
+    pathways?: XOR<PathwayScalarRelationFilter, PathwayWhereInput>
+    pathway_categories?: XOR<PathwayTypesScalarRelationFilter, PathwayTypesWhereInput>
+  }
+
+  export type PathwayCategoriesOrderByWithRelationInput = {
+    pathwayId?: SortOrder
+    pathwayTypeId?: SortOrder
+    pathways?: PathwayOrderByWithRelationInput
+    pathway_categories?: PathwayTypesOrderByWithRelationInput
+  }
+
+  export type PathwayCategoriesWhereUniqueInput = Prisma.AtLeast<{
+    pathwayId_pathwayTypeId?: PathwayCategoriesPathwayIdPathwayTypeIdCompoundUniqueInput
+    AND?: PathwayCategoriesWhereInput | PathwayCategoriesWhereInput[]
+    OR?: PathwayCategoriesWhereInput[]
+    NOT?: PathwayCategoriesWhereInput | PathwayCategoriesWhereInput[]
+    pathwayId?: IntFilter<"PathwayCategories"> | number
+    pathwayTypeId?: IntFilter<"PathwayCategories"> | number
+    pathways?: XOR<PathwayScalarRelationFilter, PathwayWhereInput>
+    pathway_categories?: XOR<PathwayTypesScalarRelationFilter, PathwayTypesWhereInput>
+  }, "pathwayId_pathwayTypeId">
+
+  export type PathwayCategoriesOrderByWithAggregationInput = {
+    pathwayId?: SortOrder
+    pathwayTypeId?: SortOrder
+    _count?: PathwayCategoriesCountOrderByAggregateInput
+    _avg?: PathwayCategoriesAvgOrderByAggregateInput
+    _max?: PathwayCategoriesMaxOrderByAggregateInput
+    _min?: PathwayCategoriesMinOrderByAggregateInput
+    _sum?: PathwayCategoriesSumOrderByAggregateInput
+  }
+
+  export type PathwayCategoriesScalarWhereWithAggregatesInput = {
+    AND?: PathwayCategoriesScalarWhereWithAggregatesInput | PathwayCategoriesScalarWhereWithAggregatesInput[]
+    OR?: PathwayCategoriesScalarWhereWithAggregatesInput[]
+    NOT?: PathwayCategoriesScalarWhereWithAggregatesInput | PathwayCategoriesScalarWhereWithAggregatesInput[]
+    pathwayId?: IntWithAggregatesFilter<"PathwayCategories"> | number
+    pathwayTypeId?: IntWithAggregatesFilter<"PathwayCategories"> | number
+  }
+
   export type CountryCreateInput = {
     code: string
     name: string
     countryCurrencies?: CountryCurrencyCreateNestedManyWithoutCountryInput
     countryLanguages?: CountryLanguageCreateNestedManyWithoutCountryInput
-    pathways?: PathwayCreateNestedManyWithoutCountryInput
     restrictedPathways?: PathwayRestrictedNationalityCreateNestedManyWithoutCountryInput
+    pathways?: PathwayCreateNestedManyWithoutCountryInput
   }
 
   export type CountryUncheckedCreateInput = {
@@ -40103,8 +40103,8 @@ export namespace Prisma {
     name: string
     countryCurrencies?: CountryCurrencyUncheckedCreateNestedManyWithoutCountryInput
     countryLanguages?: CountryLanguageUncheckedCreateNestedManyWithoutCountryInput
-    pathways?: PathwayUncheckedCreateNestedManyWithoutCountryInput
     restrictedPathways?: PathwayRestrictedNationalityUncheckedCreateNestedManyWithoutCountryInput
+    pathways?: PathwayUncheckedCreateNestedManyWithoutCountryInput
   }
 
   export type CountryUpdateInput = {
@@ -40112,8 +40112,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     countryCurrencies?: CountryCurrencyUpdateManyWithoutCountryNestedInput
     countryLanguages?: CountryLanguageUpdateManyWithoutCountryNestedInput
-    pathways?: PathwayUpdateManyWithoutCountryNestedInput
     restrictedPathways?: PathwayRestrictedNationalityUpdateManyWithoutCountryNestedInput
+    pathways?: PathwayUpdateManyWithoutCountryNestedInput
   }
 
   export type CountryUncheckedUpdateInput = {
@@ -40121,8 +40121,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     countryCurrencies?: CountryCurrencyUncheckedUpdateManyWithoutCountryNestedInput
     countryLanguages?: CountryLanguageUncheckedUpdateManyWithoutCountryNestedInput
-    pathways?: PathwayUncheckedUpdateManyWithoutCountryNestedInput
     restrictedPathways?: PathwayRestrictedNationalityUncheckedUpdateManyWithoutCountryNestedInput
+    pathways?: PathwayUncheckedUpdateManyWithoutCountryNestedInput
   }
 
   export type CountryCreateManyInput = {
@@ -40223,13 +40223,13 @@ export namespace Prisma {
     processTime?: NullableJsonNullValueInput | InputJsonValue
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
+    documents?: PathwayDocumentsCreateNestedManyWithoutPathwayInput
+    categories?: PathwayCategoriesCreateNestedManyWithoutPathwaysInput
+    pipelines?: PathwayPipelineCreateNestedManyWithoutPathwayInput
+    restrictedNationalities?: PathwayRestrictedNationalityCreateNestedManyWithoutPathwayInput
     country: CountryCreateNestedOneWithoutPathwaysInput
     currency: CurrencyCreateNestedOneWithoutPathwaysInput
     CMS_User: UserCreateNestedOneWithoutPathwayInput
-    categories?: PathwayCategoriesCreateNestedManyWithoutPathwayInput
-    documents?: PathwayDocumentsCreateNestedManyWithoutPathwayInput
-    pipelines?: PathwayPipelineCreateNestedManyWithoutPathwayInput
-    restrictedNationalities?: PathwayRestrictedNationalityCreateNestedManyWithoutPathwayInput
   }
 
   export type PathwayUncheckedCreateInput = {
@@ -40251,8 +40251,8 @@ export namespace Prisma {
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
     createdby: string
-    categories?: PathwayCategoriesUncheckedCreateNestedManyWithoutPathwayInput
     documents?: PathwayDocumentsUncheckedCreateNestedManyWithoutPathwayInput
+    categories?: PathwayCategoriesUncheckedCreateNestedManyWithoutPathwaysInput
     pipelines?: PathwayPipelineUncheckedCreateNestedManyWithoutPathwayInput
     restrictedNationalities?: PathwayRestrictedNationalityUncheckedCreateNestedManyWithoutPathwayInput
   }
@@ -40272,13 +40272,13 @@ export namespace Prisma {
     processTime?: NullableJsonNullValueInput | InputJsonValue
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
+    documents?: PathwayDocumentsUpdateManyWithoutPathwayNestedInput
+    categories?: PathwayCategoriesUpdateManyWithoutPathwaysNestedInput
+    pipelines?: PathwayPipelineUpdateManyWithoutPathwayNestedInput
+    restrictedNationalities?: PathwayRestrictedNationalityUpdateManyWithoutPathwayNestedInput
     country?: CountryUpdateOneRequiredWithoutPathwaysNestedInput
     currency?: CurrencyUpdateOneRequiredWithoutPathwaysNestedInput
     CMS_User?: UserUpdateOneRequiredWithoutPathwayNestedInput
-    categories?: PathwayCategoriesUpdateManyWithoutPathwayNestedInput
-    documents?: PathwayDocumentsUpdateManyWithoutPathwayNestedInput
-    pipelines?: PathwayPipelineUpdateManyWithoutPathwayNestedInput
-    restrictedNationalities?: PathwayRestrictedNationalityUpdateManyWithoutPathwayNestedInput
   }
 
   export type PathwayUncheckedUpdateInput = {
@@ -40300,8 +40300,8 @@ export namespace Prisma {
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
     createdby?: StringFieldUpdateOperationsInput | string
-    categories?: PathwayCategoriesUncheckedUpdateManyWithoutPathwayNestedInput
     documents?: PathwayDocumentsUncheckedUpdateManyWithoutPathwayNestedInput
+    categories?: PathwayCategoriesUncheckedUpdateManyWithoutPathwaysNestedInput
     pipelines?: PathwayPipelineUncheckedUpdateManyWithoutPathwayNestedInput
     restrictedNationalities?: PathwayRestrictedNationalityUncheckedUpdateManyWithoutPathwayNestedInput
   }
@@ -40363,40 +40363,6 @@ export namespace Prisma {
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
     createdby?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type PathwayCategoriesCreateInput = {
-    pathway: PathwayCreateNestedOneWithoutCategoriesInput
-    pathwayType: PathwayTypesCreateNestedOneWithoutPathwaysInput
-  }
-
-  export type PathwayCategoriesUncheckedCreateInput = {
-    pathwayId: number
-    pathwayTypeId: number
-  }
-
-  export type PathwayCategoriesUpdateInput = {
-    pathway?: PathwayUpdateOneRequiredWithoutCategoriesNestedInput
-    pathwayType?: PathwayTypesUpdateOneRequiredWithoutPathwaysNestedInput
-  }
-
-  export type PathwayCategoriesUncheckedUpdateInput = {
-    pathwayId?: IntFieldUpdateOperationsInput | number
-    pathwayTypeId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type PathwayCategoriesCreateManyInput = {
-    pathwayId: number
-    pathwayTypeId: number
-  }
-
-  export type PathwayCategoriesUpdateManyMutationInput = {
-
-  }
-
-  export type PathwayCategoriesUncheckedUpdateManyInput = {
-    pathwayId?: IntFieldUpdateOperationsInput | number
-    pathwayTypeId?: IntFieldUpdateOperationsInput | number
   }
 
   export type PathwayPipelineCreateInput = {
@@ -40490,14 +40456,14 @@ export namespace Prisma {
     isRequired?: boolean
     link?: string | null
     title?: string | null
-    document: DocumentsCreateNestedOneWithoutPathwayDocumentsInput
+    document?: DocumentsCreateNestedOneWithoutPathwayDocumentsInput
     pathway: PathwayCreateNestedOneWithoutDocumentsInput
   }
 
   export type PathwayDocumentsUncheckedCreateInput = {
     id?: number
     pathwayId: number
-    documentId: number
+    documentId?: number
     description?: string | null
     cost?: Decimal | DecimalJsLike | number | string
     isRequired?: boolean
@@ -40529,7 +40495,7 @@ export namespace Prisma {
   export type PathwayDocumentsCreateManyInput = {
     id?: number
     pathwayId: number
-    documentId: number
+    documentId?: number
     description?: string | null
     cost?: Decimal | DecimalJsLike | number | string
     isRequired?: boolean
@@ -40710,10 +40676,10 @@ export namespace Prisma {
     contentDelta?: string
     imageExt?: string | null
     imageKey?: string | null
-    postVersionHistories?: PostVersionHistoryCreateNestedManyWithoutPostInput
-    author: UserCreateNestedOneWithoutPostsInput
     postBlock?: PostBlockCreateNestedManyWithoutPostInput
     tags?: PostTagCreateNestedManyWithoutPostInput
+    postVersionHistories?: PostVersionHistoryCreateNestedManyWithoutPostInput
+    author: UserCreateNestedOneWithoutPostsInput
   }
 
   export type PostUncheckedCreateInput = {
@@ -40733,9 +40699,9 @@ export namespace Prisma {
     contentDelta?: string
     imageExt?: string | null
     imageKey?: string | null
-    postVersionHistories?: PostVersionHistoryUncheckedCreateNestedManyWithoutPostInput
     postBlock?: PostBlockUncheckedCreateNestedManyWithoutPostInput
     tags?: PostTagUncheckedCreateNestedManyWithoutPostInput
+    postVersionHistories?: PostVersionHistoryUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type PostUpdateInput = {
@@ -40753,10 +40719,10 @@ export namespace Prisma {
     contentDelta?: StringFieldUpdateOperationsInput | string
     imageExt?: NullableStringFieldUpdateOperationsInput | string | null
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
-    postVersionHistories?: PostVersionHistoryUpdateManyWithoutPostNestedInput
-    author?: UserUpdateOneRequiredWithoutPostsNestedInput
     postBlock?: PostBlockUpdateManyWithoutPostNestedInput
     tags?: PostTagUpdateManyWithoutPostNestedInput
+    postVersionHistories?: PostVersionHistoryUpdateManyWithoutPostNestedInput
+    author?: UserUpdateOneRequiredWithoutPostsNestedInput
   }
 
   export type PostUncheckedUpdateInput = {
@@ -40776,9 +40742,9 @@ export namespace Prisma {
     contentDelta?: StringFieldUpdateOperationsInput | string
     imageExt?: NullableStringFieldUpdateOperationsInput | string | null
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
-    postVersionHistories?: PostVersionHistoryUncheckedUpdateManyWithoutPostNestedInput
     postBlock?: PostBlockUncheckedUpdateManyWithoutPostNestedInput
     tags?: PostTagUncheckedUpdateManyWithoutPostNestedInput
+    postVersionHistories?: PostVersionHistoryUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type PostCreateManyInput = {
@@ -40874,10 +40840,10 @@ export namespace Prisma {
     name: string
     color?: string
     posts?: PostTagCreateNestedManyWithoutTagInput
-    parent?: TagCreateNestedOneWithoutChildrenInput
-    children?: TagCreateNestedManyWithoutParentInput
     childTag?: TagHierarchyCreateNestedManyWithoutParentInput
     parentTag?: TagHierarchyCreateNestedManyWithoutChildInput
+    parent?: TagCreateNestedOneWithoutChildrenInput
+    children?: TagCreateNestedManyWithoutParentInput
   }
 
   export type TagUncheckedCreateInput = {
@@ -40886,19 +40852,19 @@ export namespace Prisma {
     parentId?: number | null
     color?: string
     posts?: PostTagUncheckedCreateNestedManyWithoutTagInput
-    children?: TagUncheckedCreateNestedManyWithoutParentInput
     childTag?: TagHierarchyUncheckedCreateNestedManyWithoutParentInput
     parentTag?: TagHierarchyUncheckedCreateNestedManyWithoutChildInput
+    children?: TagUncheckedCreateNestedManyWithoutParentInput
   }
 
   export type TagUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     posts?: PostTagUpdateManyWithoutTagNestedInput
-    parent?: TagUpdateOneWithoutChildrenNestedInput
-    children?: TagUpdateManyWithoutParentNestedInput
     childTag?: TagHierarchyUpdateManyWithoutParentNestedInput
     parentTag?: TagHierarchyUpdateManyWithoutChildNestedInput
+    parent?: TagUpdateOneWithoutChildrenNestedInput
+    children?: TagUpdateManyWithoutParentNestedInput
   }
 
   export type TagUncheckedUpdateInput = {
@@ -40907,9 +40873,9 @@ export namespace Prisma {
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
     color?: StringFieldUpdateOperationsInput | string
     posts?: PostTagUncheckedUpdateManyWithoutTagNestedInput
-    children?: TagUncheckedUpdateManyWithoutParentNestedInput
     childTag?: TagHierarchyUncheckedUpdateManyWithoutParentNestedInput
     parentTag?: TagHierarchyUncheckedUpdateManyWithoutChildNestedInput
+    children?: TagUncheckedUpdateManyWithoutParentNestedInput
   }
 
   export type TagCreateManyInput = {
@@ -41398,12 +41364,12 @@ export namespace Prisma {
     discordHandle?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     postVersionHistory?: PostVersionHistoryCreateNestedManyWithoutUserInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     key?: UserKeyCreateNestedOneWithoutUserInput
     roles?: UserRolesCreateNestedManyWithoutUserInput
     socials?: UserSocialCreateNestedManyWithoutUserInput
     Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
-    posts?: PostCreateNestedManyWithoutAuthorInput
     resources?: ResourceCreateNestedManyWithoutAuthorInput
   }
 
@@ -41419,12 +41385,12 @@ export namespace Prisma {
     discordHandle?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     postVersionHistory?: PostVersionHistoryUncheckedCreateNestedManyWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     key?: UserKeyUncheckedCreateNestedOneWithoutUserInput
     roles?: UserRolesUncheckedCreateNestedManyWithoutUserInput
     socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
     Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
-    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     resources?: ResourceUncheckedCreateNestedManyWithoutAuthorInput
   }
 
@@ -41440,12 +41406,12 @@ export namespace Prisma {
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     postVersionHistory?: PostVersionHistoryUpdateManyWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     key?: UserKeyUpdateOneWithoutUserNestedInput
     roles?: UserRolesUpdateManyWithoutUserNestedInput
     socials?: UserSocialUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
-    posts?: PostUpdateManyWithoutAuthorNestedInput
     resources?: ResourceUpdateManyWithoutAuthorNestedInput
   }
 
@@ -41461,12 +41427,12 @@ export namespace Prisma {
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     postVersionHistory?: PostVersionHistoryUncheckedUpdateManyWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     key?: UserKeyUncheckedUpdateOneWithoutUserNestedInput
     roles?: UserRolesUncheckedUpdateManyWithoutUserNestedInput
     socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     resources?: ResourceUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
@@ -41844,7 +41810,7 @@ export namespace Prisma {
   export type PathwayTypesCreateInput = {
     name: string
     description?: string | null
-    pathways?: PathwayCategoriesCreateNestedManyWithoutPathwayTypeInput
+    pathwayCategories?: PathwayCategoriesCreateNestedManyWithoutPathway_categoriesInput
     parent?: PathwayTypesCreateNestedOneWithoutChildrenInput
     children?: PathwayTypesCreateNestedManyWithoutParentInput
   }
@@ -41854,14 +41820,14 @@ export namespace Prisma {
     name: string
     parentId?: number | null
     description?: string | null
-    pathways?: PathwayCategoriesUncheckedCreateNestedManyWithoutPathwayTypeInput
+    pathwayCategories?: PathwayCategoriesUncheckedCreateNestedManyWithoutPathway_categoriesInput
     children?: PathwayTypesUncheckedCreateNestedManyWithoutParentInput
   }
 
   export type PathwayTypesUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    pathways?: PathwayCategoriesUpdateManyWithoutPathwayTypeNestedInput
+    pathwayCategories?: PathwayCategoriesUpdateManyWithoutPathway_categoriesNestedInput
     parent?: PathwayTypesUpdateOneWithoutChildrenNestedInput
     children?: PathwayTypesUpdateManyWithoutParentNestedInput
   }
@@ -41871,7 +41837,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    pathways?: PathwayCategoriesUncheckedUpdateManyWithoutPathwayTypeNestedInput
+    pathwayCategories?: PathwayCategoriesUncheckedUpdateManyWithoutPathway_categoriesNestedInput
     children?: PathwayTypesUncheckedUpdateManyWithoutParentNestedInput
   }
 
@@ -41892,6 +41858,40 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PathwayCategoriesCreateInput = {
+    pathways: PathwayCreateNestedOneWithoutCategoriesInput
+    pathway_categories: PathwayTypesCreateNestedOneWithoutPathwayCategoriesInput
+  }
+
+  export type PathwayCategoriesUncheckedCreateInput = {
+    pathwayId: number
+    pathwayTypeId: number
+  }
+
+  export type PathwayCategoriesUpdateInput = {
+    pathways?: PathwayUpdateOneRequiredWithoutCategoriesNestedInput
+    pathway_categories?: PathwayTypesUpdateOneRequiredWithoutPathwayCategoriesNestedInput
+  }
+
+  export type PathwayCategoriesUncheckedUpdateInput = {
+    pathwayId?: IntFieldUpdateOperationsInput | number
+    pathwayTypeId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PathwayCategoriesCreateManyInput = {
+    pathwayId: number
+    pathwayTypeId: number
+  }
+
+  export type PathwayCategoriesUpdateManyMutationInput = {
+
+  }
+
+  export type PathwayCategoriesUncheckedUpdateManyInput = {
+    pathwayId?: IntFieldUpdateOperationsInput | number
+    pathwayTypeId?: IntFieldUpdateOperationsInput | number
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -41921,16 +41921,16 @@ export namespace Prisma {
     none?: CountryLanguageWhereInput
   }
 
-  export type PathwayListRelationFilter = {
-    every?: PathwayWhereInput
-    some?: PathwayWhereInput
-    none?: PathwayWhereInput
-  }
-
   export type PathwayRestrictedNationalityListRelationFilter = {
     every?: PathwayRestrictedNationalityWhereInput
     some?: PathwayRestrictedNationalityWhereInput
     none?: PathwayRestrictedNationalityWhereInput
+  }
+
+  export type PathwayListRelationFilter = {
+    every?: PathwayWhereInput
+    some?: PathwayWhereInput
+    none?: PathwayWhereInput
   }
 
   export type CountryCurrencyOrderByRelationAggregateInput = {
@@ -41941,11 +41941,11 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type PathwayOrderByRelationAggregateInput = {
+  export type PathwayRestrictedNationalityOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type PathwayRestrictedNationalityOrderByRelationAggregateInput = {
+  export type PathwayOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -42097,9 +42097,10 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
+  export type PathwayDocumentsListRelationFilter = {
+    every?: PathwayDocumentsWhereInput
+    some?: PathwayDocumentsWhereInput
+    none?: PathwayDocumentsWhereInput
   }
 
   export type PathwayCategoriesListRelationFilter = {
@@ -42108,16 +42109,15 @@ export namespace Prisma {
     none?: PathwayCategoriesWhereInput
   }
 
-  export type PathwayDocumentsListRelationFilter = {
-    every?: PathwayDocumentsWhereInput
-    some?: PathwayDocumentsWhereInput
-    none?: PathwayDocumentsWhereInput
-  }
-
   export type PathwayPipelineListRelationFilter = {
     every?: PathwayPipelineWhereInput
     some?: PathwayPipelineWhereInput
     none?: PathwayPipelineWhereInput
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
   }
 
   export type SortOrderInput = {
@@ -42125,11 +42125,11 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
-  export type PathwayCategoriesOrderByRelationAggregateInput = {
+  export type PathwayDocumentsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type PathwayDocumentsOrderByRelationAggregateInput = {
+  export type PathwayCategoriesOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -42258,46 +42258,6 @@ export namespace Prisma {
     _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
-  export type PathwayScalarRelationFilter = {
-    is?: PathwayWhereInput
-    isNot?: PathwayWhereInput
-  }
-
-  export type PathwayTypesScalarRelationFilter = {
-    is?: PathwayTypesWhereInput
-    isNot?: PathwayTypesWhereInput
-  }
-
-  export type PathwayCategoriesPathwayIdPathwayTypeIdCompoundUniqueInput = {
-    pathwayId: number
-    pathwayTypeId: number
-  }
-
-  export type PathwayCategoriesCountOrderByAggregateInput = {
-    pathwayId?: SortOrder
-    pathwayTypeId?: SortOrder
-  }
-
-  export type PathwayCategoriesAvgOrderByAggregateInput = {
-    pathwayId?: SortOrder
-    pathwayTypeId?: SortOrder
-  }
-
-  export type PathwayCategoriesMaxOrderByAggregateInput = {
-    pathwayId?: SortOrder
-    pathwayTypeId?: SortOrder
-  }
-
-  export type PathwayCategoriesMinOrderByAggregateInput = {
-    pathwayId?: SortOrder
-    pathwayTypeId?: SortOrder
-  }
-
-  export type PathwayCategoriesSumOrderByAggregateInput = {
-    pathwayId?: SortOrder
-    pathwayTypeId?: SortOrder
-  }
-
   export type EnumPathwayPipelinesFilter<$PrismaModel = never> = {
     equals?: $Enums.PathwayPipelines | EnumPathwayPipelinesFieldRefInput<$PrismaModel>
     in?: $Enums.PathwayPipelines[] | ListEnumPathwayPipelinesFieldRefInput<$PrismaModel>
@@ -42318,6 +42278,11 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type PathwayScalarRelationFilter = {
+    is?: PathwayWhereInput
+    isNot?: PathwayWhereInput
   }
 
   export type PathwayPipelineCountOrderByAggregateInput = {
@@ -42577,12 +42542,6 @@ export namespace Prisma {
     not?: NestedEnumContentStatusFilter<$PrismaModel> | $Enums.ContentStatus
   }
 
-  export type PostVersionHistoryListRelationFilter = {
-    every?: PostVersionHistoryWhereInput
-    some?: PostVersionHistoryWhereInput
-    none?: PostVersionHistoryWhereInput
-  }
-
   export type PostBlockListRelationFilter = {
     every?: PostBlockWhereInput
     some?: PostBlockWhereInput
@@ -42595,8 +42554,10 @@ export namespace Prisma {
     none?: PostTagWhereInput
   }
 
-  export type PostVersionHistoryOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type PostVersionHistoryListRelationFilter = {
+    every?: PostVersionHistoryWhereInput
+    some?: PostVersionHistoryWhereInput
+    none?: PostVersionHistoryWhereInput
   }
 
   export type PostBlockOrderByRelationAggregateInput = {
@@ -42604,6 +42565,10 @@ export namespace Prisma {
   }
 
   export type PostTagOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PostVersionHistoryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -42731,6 +42696,12 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type TagHierarchyListRelationFilter = {
+    every?: TagHierarchyWhereInput
+    some?: TagHierarchyWhereInput
+    none?: TagHierarchyWhereInput
+  }
+
   export type TagNullableScalarRelationFilter = {
     is?: TagWhereInput | null
     isNot?: TagWhereInput | null
@@ -42742,17 +42713,11 @@ export namespace Prisma {
     none?: TagWhereInput
   }
 
-  export type TagHierarchyListRelationFilter = {
-    every?: TagHierarchyWhereInput
-    some?: TagHierarchyWhereInput
-    none?: TagHierarchyWhereInput
-  }
-
-  export type TagOrderByRelationAggregateInput = {
+  export type TagHierarchyOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type TagHierarchyOrderByRelationAggregateInput = {
+  export type TagOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -43113,6 +43078,12 @@ export namespace Prisma {
     none?: AccountWhereInput
   }
 
+  export type PostListRelationFilter = {
+    every?: PostWhereInput
+    some?: PostWhereInput
+    none?: PostWhereInput
+  }
+
   export type SessionListRelationFilter = {
     every?: SessionWhereInput
     some?: SessionWhereInput
@@ -43136,12 +43107,6 @@ export namespace Prisma {
     none?: UserSocialWhereInput
   }
 
-  export type PostListRelationFilter = {
-    every?: PostWhereInput
-    some?: PostWhereInput
-    none?: PostWhereInput
-  }
-
   export type ResourceListRelationFilter = {
     every?: ResourceWhereInput
     some?: ResourceWhereInput
@@ -43149,6 +43114,10 @@ export namespace Prisma {
   }
 
   export type AccountOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PostOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -43161,10 +43130,6 @@ export namespace Prisma {
   }
 
   export type UserSocialOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type PostOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -43486,6 +43451,41 @@ export namespace Prisma {
     parentId?: SortOrder
   }
 
+  export type PathwayTypesScalarRelationFilter = {
+    is?: PathwayTypesWhereInput
+    isNot?: PathwayTypesWhereInput
+  }
+
+  export type PathwayCategoriesPathwayIdPathwayTypeIdCompoundUniqueInput = {
+    pathwayId: number
+    pathwayTypeId: number
+  }
+
+  export type PathwayCategoriesCountOrderByAggregateInput = {
+    pathwayId?: SortOrder
+    pathwayTypeId?: SortOrder
+  }
+
+  export type PathwayCategoriesAvgOrderByAggregateInput = {
+    pathwayId?: SortOrder
+    pathwayTypeId?: SortOrder
+  }
+
+  export type PathwayCategoriesMaxOrderByAggregateInput = {
+    pathwayId?: SortOrder
+    pathwayTypeId?: SortOrder
+  }
+
+  export type PathwayCategoriesMinOrderByAggregateInput = {
+    pathwayId?: SortOrder
+    pathwayTypeId?: SortOrder
+  }
+
+  export type PathwayCategoriesSumOrderByAggregateInput = {
+    pathwayId?: SortOrder
+    pathwayTypeId?: SortOrder
+  }
+
   export type CountryCurrencyCreateNestedManyWithoutCountryInput = {
     create?: XOR<CountryCurrencyCreateWithoutCountryInput, CountryCurrencyUncheckedCreateWithoutCountryInput> | CountryCurrencyCreateWithoutCountryInput[] | CountryCurrencyUncheckedCreateWithoutCountryInput[]
     connectOrCreate?: CountryCurrencyCreateOrConnectWithoutCountryInput | CountryCurrencyCreateOrConnectWithoutCountryInput[]
@@ -43500,18 +43500,18 @@ export namespace Prisma {
     connect?: CountryLanguageWhereUniqueInput | CountryLanguageWhereUniqueInput[]
   }
 
-  export type PathwayCreateNestedManyWithoutCountryInput = {
-    create?: XOR<PathwayCreateWithoutCountryInput, PathwayUncheckedCreateWithoutCountryInput> | PathwayCreateWithoutCountryInput[] | PathwayUncheckedCreateWithoutCountryInput[]
-    connectOrCreate?: PathwayCreateOrConnectWithoutCountryInput | PathwayCreateOrConnectWithoutCountryInput[]
-    createMany?: PathwayCreateManyCountryInputEnvelope
-    connect?: PathwayWhereUniqueInput | PathwayWhereUniqueInput[]
-  }
-
   export type PathwayRestrictedNationalityCreateNestedManyWithoutCountryInput = {
     create?: XOR<PathwayRestrictedNationalityCreateWithoutCountryInput, PathwayRestrictedNationalityUncheckedCreateWithoutCountryInput> | PathwayRestrictedNationalityCreateWithoutCountryInput[] | PathwayRestrictedNationalityUncheckedCreateWithoutCountryInput[]
     connectOrCreate?: PathwayRestrictedNationalityCreateOrConnectWithoutCountryInput | PathwayRestrictedNationalityCreateOrConnectWithoutCountryInput[]
     createMany?: PathwayRestrictedNationalityCreateManyCountryInputEnvelope
     connect?: PathwayRestrictedNationalityWhereUniqueInput | PathwayRestrictedNationalityWhereUniqueInput[]
+  }
+
+  export type PathwayCreateNestedManyWithoutCountryInput = {
+    create?: XOR<PathwayCreateWithoutCountryInput, PathwayUncheckedCreateWithoutCountryInput> | PathwayCreateWithoutCountryInput[] | PathwayUncheckedCreateWithoutCountryInput[]
+    connectOrCreate?: PathwayCreateOrConnectWithoutCountryInput | PathwayCreateOrConnectWithoutCountryInput[]
+    createMany?: PathwayCreateManyCountryInputEnvelope
+    connect?: PathwayWhereUniqueInput | PathwayWhereUniqueInput[]
   }
 
   export type CountryCurrencyUncheckedCreateNestedManyWithoutCountryInput = {
@@ -43528,18 +43528,18 @@ export namespace Prisma {
     connect?: CountryLanguageWhereUniqueInput | CountryLanguageWhereUniqueInput[]
   }
 
-  export type PathwayUncheckedCreateNestedManyWithoutCountryInput = {
-    create?: XOR<PathwayCreateWithoutCountryInput, PathwayUncheckedCreateWithoutCountryInput> | PathwayCreateWithoutCountryInput[] | PathwayUncheckedCreateWithoutCountryInput[]
-    connectOrCreate?: PathwayCreateOrConnectWithoutCountryInput | PathwayCreateOrConnectWithoutCountryInput[]
-    createMany?: PathwayCreateManyCountryInputEnvelope
-    connect?: PathwayWhereUniqueInput | PathwayWhereUniqueInput[]
-  }
-
   export type PathwayRestrictedNationalityUncheckedCreateNestedManyWithoutCountryInput = {
     create?: XOR<PathwayRestrictedNationalityCreateWithoutCountryInput, PathwayRestrictedNationalityUncheckedCreateWithoutCountryInput> | PathwayRestrictedNationalityCreateWithoutCountryInput[] | PathwayRestrictedNationalityUncheckedCreateWithoutCountryInput[]
     connectOrCreate?: PathwayRestrictedNationalityCreateOrConnectWithoutCountryInput | PathwayRestrictedNationalityCreateOrConnectWithoutCountryInput[]
     createMany?: PathwayRestrictedNationalityCreateManyCountryInputEnvelope
     connect?: PathwayRestrictedNationalityWhereUniqueInput | PathwayRestrictedNationalityWhereUniqueInput[]
+  }
+
+  export type PathwayUncheckedCreateNestedManyWithoutCountryInput = {
+    create?: XOR<PathwayCreateWithoutCountryInput, PathwayUncheckedCreateWithoutCountryInput> | PathwayCreateWithoutCountryInput[] | PathwayUncheckedCreateWithoutCountryInput[]
+    connectOrCreate?: PathwayCreateOrConnectWithoutCountryInput | PathwayCreateOrConnectWithoutCountryInput[]
+    createMany?: PathwayCreateManyCountryInputEnvelope
+    connect?: PathwayWhereUniqueInput | PathwayWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -43574,20 +43574,6 @@ export namespace Prisma {
     deleteMany?: CountryLanguageScalarWhereInput | CountryLanguageScalarWhereInput[]
   }
 
-  export type PathwayUpdateManyWithoutCountryNestedInput = {
-    create?: XOR<PathwayCreateWithoutCountryInput, PathwayUncheckedCreateWithoutCountryInput> | PathwayCreateWithoutCountryInput[] | PathwayUncheckedCreateWithoutCountryInput[]
-    connectOrCreate?: PathwayCreateOrConnectWithoutCountryInput | PathwayCreateOrConnectWithoutCountryInput[]
-    upsert?: PathwayUpsertWithWhereUniqueWithoutCountryInput | PathwayUpsertWithWhereUniqueWithoutCountryInput[]
-    createMany?: PathwayCreateManyCountryInputEnvelope
-    set?: PathwayWhereUniqueInput | PathwayWhereUniqueInput[]
-    disconnect?: PathwayWhereUniqueInput | PathwayWhereUniqueInput[]
-    delete?: PathwayWhereUniqueInput | PathwayWhereUniqueInput[]
-    connect?: PathwayWhereUniqueInput | PathwayWhereUniqueInput[]
-    update?: PathwayUpdateWithWhereUniqueWithoutCountryInput | PathwayUpdateWithWhereUniqueWithoutCountryInput[]
-    updateMany?: PathwayUpdateManyWithWhereWithoutCountryInput | PathwayUpdateManyWithWhereWithoutCountryInput[]
-    deleteMany?: PathwayScalarWhereInput | PathwayScalarWhereInput[]
-  }
-
   export type PathwayRestrictedNationalityUpdateManyWithoutCountryNestedInput = {
     create?: XOR<PathwayRestrictedNationalityCreateWithoutCountryInput, PathwayRestrictedNationalityUncheckedCreateWithoutCountryInput> | PathwayRestrictedNationalityCreateWithoutCountryInput[] | PathwayRestrictedNationalityUncheckedCreateWithoutCountryInput[]
     connectOrCreate?: PathwayRestrictedNationalityCreateOrConnectWithoutCountryInput | PathwayRestrictedNationalityCreateOrConnectWithoutCountryInput[]
@@ -43600,6 +43586,20 @@ export namespace Prisma {
     update?: PathwayRestrictedNationalityUpdateWithWhereUniqueWithoutCountryInput | PathwayRestrictedNationalityUpdateWithWhereUniqueWithoutCountryInput[]
     updateMany?: PathwayRestrictedNationalityUpdateManyWithWhereWithoutCountryInput | PathwayRestrictedNationalityUpdateManyWithWhereWithoutCountryInput[]
     deleteMany?: PathwayRestrictedNationalityScalarWhereInput | PathwayRestrictedNationalityScalarWhereInput[]
+  }
+
+  export type PathwayUpdateManyWithoutCountryNestedInput = {
+    create?: XOR<PathwayCreateWithoutCountryInput, PathwayUncheckedCreateWithoutCountryInput> | PathwayCreateWithoutCountryInput[] | PathwayUncheckedCreateWithoutCountryInput[]
+    connectOrCreate?: PathwayCreateOrConnectWithoutCountryInput | PathwayCreateOrConnectWithoutCountryInput[]
+    upsert?: PathwayUpsertWithWhereUniqueWithoutCountryInput | PathwayUpsertWithWhereUniqueWithoutCountryInput[]
+    createMany?: PathwayCreateManyCountryInputEnvelope
+    set?: PathwayWhereUniqueInput | PathwayWhereUniqueInput[]
+    disconnect?: PathwayWhereUniqueInput | PathwayWhereUniqueInput[]
+    delete?: PathwayWhereUniqueInput | PathwayWhereUniqueInput[]
+    connect?: PathwayWhereUniqueInput | PathwayWhereUniqueInput[]
+    update?: PathwayUpdateWithWhereUniqueWithoutCountryInput | PathwayUpdateWithWhereUniqueWithoutCountryInput[]
+    updateMany?: PathwayUpdateManyWithWhereWithoutCountryInput | PathwayUpdateManyWithWhereWithoutCountryInput[]
+    deleteMany?: PathwayScalarWhereInput | PathwayScalarWhereInput[]
   }
 
   export type CountryCurrencyUncheckedUpdateManyWithoutCountryNestedInput = {
@@ -43630,20 +43630,6 @@ export namespace Prisma {
     deleteMany?: CountryLanguageScalarWhereInput | CountryLanguageScalarWhereInput[]
   }
 
-  export type PathwayUncheckedUpdateManyWithoutCountryNestedInput = {
-    create?: XOR<PathwayCreateWithoutCountryInput, PathwayUncheckedCreateWithoutCountryInput> | PathwayCreateWithoutCountryInput[] | PathwayUncheckedCreateWithoutCountryInput[]
-    connectOrCreate?: PathwayCreateOrConnectWithoutCountryInput | PathwayCreateOrConnectWithoutCountryInput[]
-    upsert?: PathwayUpsertWithWhereUniqueWithoutCountryInput | PathwayUpsertWithWhereUniqueWithoutCountryInput[]
-    createMany?: PathwayCreateManyCountryInputEnvelope
-    set?: PathwayWhereUniqueInput | PathwayWhereUniqueInput[]
-    disconnect?: PathwayWhereUniqueInput | PathwayWhereUniqueInput[]
-    delete?: PathwayWhereUniqueInput | PathwayWhereUniqueInput[]
-    connect?: PathwayWhereUniqueInput | PathwayWhereUniqueInput[]
-    update?: PathwayUpdateWithWhereUniqueWithoutCountryInput | PathwayUpdateWithWhereUniqueWithoutCountryInput[]
-    updateMany?: PathwayUpdateManyWithWhereWithoutCountryInput | PathwayUpdateManyWithWhereWithoutCountryInput[]
-    deleteMany?: PathwayScalarWhereInput | PathwayScalarWhereInput[]
-  }
-
   export type PathwayRestrictedNationalityUncheckedUpdateManyWithoutCountryNestedInput = {
     create?: XOR<PathwayRestrictedNationalityCreateWithoutCountryInput, PathwayRestrictedNationalityUncheckedCreateWithoutCountryInput> | PathwayRestrictedNationalityCreateWithoutCountryInput[] | PathwayRestrictedNationalityUncheckedCreateWithoutCountryInput[]
     connectOrCreate?: PathwayRestrictedNationalityCreateOrConnectWithoutCountryInput | PathwayRestrictedNationalityCreateOrConnectWithoutCountryInput[]
@@ -43656,6 +43642,20 @@ export namespace Prisma {
     update?: PathwayRestrictedNationalityUpdateWithWhereUniqueWithoutCountryInput | PathwayRestrictedNationalityUpdateWithWhereUniqueWithoutCountryInput[]
     updateMany?: PathwayRestrictedNationalityUpdateManyWithWhereWithoutCountryInput | PathwayRestrictedNationalityUpdateManyWithWhereWithoutCountryInput[]
     deleteMany?: PathwayRestrictedNationalityScalarWhereInput | PathwayRestrictedNationalityScalarWhereInput[]
+  }
+
+  export type PathwayUncheckedUpdateManyWithoutCountryNestedInput = {
+    create?: XOR<PathwayCreateWithoutCountryInput, PathwayUncheckedCreateWithoutCountryInput> | PathwayCreateWithoutCountryInput[] | PathwayUncheckedCreateWithoutCountryInput[]
+    connectOrCreate?: PathwayCreateOrConnectWithoutCountryInput | PathwayCreateOrConnectWithoutCountryInput[]
+    upsert?: PathwayUpsertWithWhereUniqueWithoutCountryInput | PathwayUpsertWithWhereUniqueWithoutCountryInput[]
+    createMany?: PathwayCreateManyCountryInputEnvelope
+    set?: PathwayWhereUniqueInput | PathwayWhereUniqueInput[]
+    disconnect?: PathwayWhereUniqueInput | PathwayWhereUniqueInput[]
+    delete?: PathwayWhereUniqueInput | PathwayWhereUniqueInput[]
+    connect?: PathwayWhereUniqueInput | PathwayWhereUniqueInput[]
+    update?: PathwayUpdateWithWhereUniqueWithoutCountryInput | PathwayUpdateWithWhereUniqueWithoutCountryInput[]
+    updateMany?: PathwayUpdateManyWithWhereWithoutCountryInput | PathwayUpdateManyWithWhereWithoutCountryInput[]
+    deleteMany?: PathwayScalarWhereInput | PathwayScalarWhereInput[]
   }
 
   export type CountryCreateNestedOneWithoutCountryLanguagesInput = {
@@ -43730,6 +43730,34 @@ export namespace Prisma {
     set: string[]
   }
 
+  export type PathwayDocumentsCreateNestedManyWithoutPathwayInput = {
+    create?: XOR<PathwayDocumentsCreateWithoutPathwayInput, PathwayDocumentsUncheckedCreateWithoutPathwayInput> | PathwayDocumentsCreateWithoutPathwayInput[] | PathwayDocumentsUncheckedCreateWithoutPathwayInput[]
+    connectOrCreate?: PathwayDocumentsCreateOrConnectWithoutPathwayInput | PathwayDocumentsCreateOrConnectWithoutPathwayInput[]
+    createMany?: PathwayDocumentsCreateManyPathwayInputEnvelope
+    connect?: PathwayDocumentsWhereUniqueInput | PathwayDocumentsWhereUniqueInput[]
+  }
+
+  export type PathwayCategoriesCreateNestedManyWithoutPathwaysInput = {
+    create?: XOR<PathwayCategoriesCreateWithoutPathwaysInput, PathwayCategoriesUncheckedCreateWithoutPathwaysInput> | PathwayCategoriesCreateWithoutPathwaysInput[] | PathwayCategoriesUncheckedCreateWithoutPathwaysInput[]
+    connectOrCreate?: PathwayCategoriesCreateOrConnectWithoutPathwaysInput | PathwayCategoriesCreateOrConnectWithoutPathwaysInput[]
+    createMany?: PathwayCategoriesCreateManyPathwaysInputEnvelope
+    connect?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
+  }
+
+  export type PathwayPipelineCreateNestedManyWithoutPathwayInput = {
+    create?: XOR<PathwayPipelineCreateWithoutPathwayInput, PathwayPipelineUncheckedCreateWithoutPathwayInput> | PathwayPipelineCreateWithoutPathwayInput[] | PathwayPipelineUncheckedCreateWithoutPathwayInput[]
+    connectOrCreate?: PathwayPipelineCreateOrConnectWithoutPathwayInput | PathwayPipelineCreateOrConnectWithoutPathwayInput[]
+    createMany?: PathwayPipelineCreateManyPathwayInputEnvelope
+    connect?: PathwayPipelineWhereUniqueInput | PathwayPipelineWhereUniqueInput[]
+  }
+
+  export type PathwayRestrictedNationalityCreateNestedManyWithoutPathwayInput = {
+    create?: XOR<PathwayRestrictedNationalityCreateWithoutPathwayInput, PathwayRestrictedNationalityUncheckedCreateWithoutPathwayInput> | PathwayRestrictedNationalityCreateWithoutPathwayInput[] | PathwayRestrictedNationalityUncheckedCreateWithoutPathwayInput[]
+    connectOrCreate?: PathwayRestrictedNationalityCreateOrConnectWithoutPathwayInput | PathwayRestrictedNationalityCreateOrConnectWithoutPathwayInput[]
+    createMany?: PathwayRestrictedNationalityCreateManyPathwayInputEnvelope
+    connect?: PathwayRestrictedNationalityWhereUniqueInput | PathwayRestrictedNationalityWhereUniqueInput[]
+  }
+
   export type CountryCreateNestedOneWithoutPathwaysInput = {
     create?: XOR<CountryCreateWithoutPathwaysInput, CountryUncheckedCreateWithoutPathwaysInput>
     connectOrCreate?: CountryCreateOrConnectWithoutPathwaysInput
@@ -43748,46 +43776,18 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type PathwayCategoriesCreateNestedManyWithoutPathwayInput = {
-    create?: XOR<PathwayCategoriesCreateWithoutPathwayInput, PathwayCategoriesUncheckedCreateWithoutPathwayInput> | PathwayCategoriesCreateWithoutPathwayInput[] | PathwayCategoriesUncheckedCreateWithoutPathwayInput[]
-    connectOrCreate?: PathwayCategoriesCreateOrConnectWithoutPathwayInput | PathwayCategoriesCreateOrConnectWithoutPathwayInput[]
-    createMany?: PathwayCategoriesCreateManyPathwayInputEnvelope
-    connect?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
-  }
-
-  export type PathwayDocumentsCreateNestedManyWithoutPathwayInput = {
-    create?: XOR<PathwayDocumentsCreateWithoutPathwayInput, PathwayDocumentsUncheckedCreateWithoutPathwayInput> | PathwayDocumentsCreateWithoutPathwayInput[] | PathwayDocumentsUncheckedCreateWithoutPathwayInput[]
-    connectOrCreate?: PathwayDocumentsCreateOrConnectWithoutPathwayInput | PathwayDocumentsCreateOrConnectWithoutPathwayInput[]
-    createMany?: PathwayDocumentsCreateManyPathwayInputEnvelope
-    connect?: PathwayDocumentsWhereUniqueInput | PathwayDocumentsWhereUniqueInput[]
-  }
-
-  export type PathwayPipelineCreateNestedManyWithoutPathwayInput = {
-    create?: XOR<PathwayPipelineCreateWithoutPathwayInput, PathwayPipelineUncheckedCreateWithoutPathwayInput> | PathwayPipelineCreateWithoutPathwayInput[] | PathwayPipelineUncheckedCreateWithoutPathwayInput[]
-    connectOrCreate?: PathwayPipelineCreateOrConnectWithoutPathwayInput | PathwayPipelineCreateOrConnectWithoutPathwayInput[]
-    createMany?: PathwayPipelineCreateManyPathwayInputEnvelope
-    connect?: PathwayPipelineWhereUniqueInput | PathwayPipelineWhereUniqueInput[]
-  }
-
-  export type PathwayRestrictedNationalityCreateNestedManyWithoutPathwayInput = {
-    create?: XOR<PathwayRestrictedNationalityCreateWithoutPathwayInput, PathwayRestrictedNationalityUncheckedCreateWithoutPathwayInput> | PathwayRestrictedNationalityCreateWithoutPathwayInput[] | PathwayRestrictedNationalityUncheckedCreateWithoutPathwayInput[]
-    connectOrCreate?: PathwayRestrictedNationalityCreateOrConnectWithoutPathwayInput | PathwayRestrictedNationalityCreateOrConnectWithoutPathwayInput[]
-    createMany?: PathwayRestrictedNationalityCreateManyPathwayInputEnvelope
-    connect?: PathwayRestrictedNationalityWhereUniqueInput | PathwayRestrictedNationalityWhereUniqueInput[]
-  }
-
-  export type PathwayCategoriesUncheckedCreateNestedManyWithoutPathwayInput = {
-    create?: XOR<PathwayCategoriesCreateWithoutPathwayInput, PathwayCategoriesUncheckedCreateWithoutPathwayInput> | PathwayCategoriesCreateWithoutPathwayInput[] | PathwayCategoriesUncheckedCreateWithoutPathwayInput[]
-    connectOrCreate?: PathwayCategoriesCreateOrConnectWithoutPathwayInput | PathwayCategoriesCreateOrConnectWithoutPathwayInput[]
-    createMany?: PathwayCategoriesCreateManyPathwayInputEnvelope
-    connect?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
-  }
-
   export type PathwayDocumentsUncheckedCreateNestedManyWithoutPathwayInput = {
     create?: XOR<PathwayDocumentsCreateWithoutPathwayInput, PathwayDocumentsUncheckedCreateWithoutPathwayInput> | PathwayDocumentsCreateWithoutPathwayInput[] | PathwayDocumentsUncheckedCreateWithoutPathwayInput[]
     connectOrCreate?: PathwayDocumentsCreateOrConnectWithoutPathwayInput | PathwayDocumentsCreateOrConnectWithoutPathwayInput[]
     createMany?: PathwayDocumentsCreateManyPathwayInputEnvelope
     connect?: PathwayDocumentsWhereUniqueInput | PathwayDocumentsWhereUniqueInput[]
+  }
+
+  export type PathwayCategoriesUncheckedCreateNestedManyWithoutPathwaysInput = {
+    create?: XOR<PathwayCategoriesCreateWithoutPathwaysInput, PathwayCategoriesUncheckedCreateWithoutPathwaysInput> | PathwayCategoriesCreateWithoutPathwaysInput[] | PathwayCategoriesUncheckedCreateWithoutPathwaysInput[]
+    connectOrCreate?: PathwayCategoriesCreateOrConnectWithoutPathwaysInput | PathwayCategoriesCreateOrConnectWithoutPathwaysInput[]
+    createMany?: PathwayCategoriesCreateManyPathwaysInputEnvelope
+    connect?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
   }
 
   export type PathwayPipelineUncheckedCreateNestedManyWithoutPathwayInput = {
@@ -43832,44 +43832,6 @@ export namespace Prisma {
     push?: string | string[]
   }
 
-  export type CountryUpdateOneRequiredWithoutPathwaysNestedInput = {
-    create?: XOR<CountryCreateWithoutPathwaysInput, CountryUncheckedCreateWithoutPathwaysInput>
-    connectOrCreate?: CountryCreateOrConnectWithoutPathwaysInput
-    upsert?: CountryUpsertWithoutPathwaysInput
-    connect?: CountryWhereUniqueInput
-    update?: XOR<XOR<CountryUpdateToOneWithWhereWithoutPathwaysInput, CountryUpdateWithoutPathwaysInput>, CountryUncheckedUpdateWithoutPathwaysInput>
-  }
-
-  export type CurrencyUpdateOneRequiredWithoutPathwaysNestedInput = {
-    create?: XOR<CurrencyCreateWithoutPathwaysInput, CurrencyUncheckedCreateWithoutPathwaysInput>
-    connectOrCreate?: CurrencyCreateOrConnectWithoutPathwaysInput
-    upsert?: CurrencyUpsertWithoutPathwaysInput
-    connect?: CurrencyWhereUniqueInput
-    update?: XOR<XOR<CurrencyUpdateToOneWithWhereWithoutPathwaysInput, CurrencyUpdateWithoutPathwaysInput>, CurrencyUncheckedUpdateWithoutPathwaysInput>
-  }
-
-  export type UserUpdateOneRequiredWithoutPathwayNestedInput = {
-    create?: XOR<UserCreateWithoutPathwayInput, UserUncheckedCreateWithoutPathwayInput>
-    connectOrCreate?: UserCreateOrConnectWithoutPathwayInput
-    upsert?: UserUpsertWithoutPathwayInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPathwayInput, UserUpdateWithoutPathwayInput>, UserUncheckedUpdateWithoutPathwayInput>
-  }
-
-  export type PathwayCategoriesUpdateManyWithoutPathwayNestedInput = {
-    create?: XOR<PathwayCategoriesCreateWithoutPathwayInput, PathwayCategoriesUncheckedCreateWithoutPathwayInput> | PathwayCategoriesCreateWithoutPathwayInput[] | PathwayCategoriesUncheckedCreateWithoutPathwayInput[]
-    connectOrCreate?: PathwayCategoriesCreateOrConnectWithoutPathwayInput | PathwayCategoriesCreateOrConnectWithoutPathwayInput[]
-    upsert?: PathwayCategoriesUpsertWithWhereUniqueWithoutPathwayInput | PathwayCategoriesUpsertWithWhereUniqueWithoutPathwayInput[]
-    createMany?: PathwayCategoriesCreateManyPathwayInputEnvelope
-    set?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
-    disconnect?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
-    delete?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
-    connect?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
-    update?: PathwayCategoriesUpdateWithWhereUniqueWithoutPathwayInput | PathwayCategoriesUpdateWithWhereUniqueWithoutPathwayInput[]
-    updateMany?: PathwayCategoriesUpdateManyWithWhereWithoutPathwayInput | PathwayCategoriesUpdateManyWithWhereWithoutPathwayInput[]
-    deleteMany?: PathwayCategoriesScalarWhereInput | PathwayCategoriesScalarWhereInput[]
-  }
-
   export type PathwayDocumentsUpdateManyWithoutPathwayNestedInput = {
     create?: XOR<PathwayDocumentsCreateWithoutPathwayInput, PathwayDocumentsUncheckedCreateWithoutPathwayInput> | PathwayDocumentsCreateWithoutPathwayInput[] | PathwayDocumentsUncheckedCreateWithoutPathwayInput[]
     connectOrCreate?: PathwayDocumentsCreateOrConnectWithoutPathwayInput | PathwayDocumentsCreateOrConnectWithoutPathwayInput[]
@@ -43882,6 +43844,20 @@ export namespace Prisma {
     update?: PathwayDocumentsUpdateWithWhereUniqueWithoutPathwayInput | PathwayDocumentsUpdateWithWhereUniqueWithoutPathwayInput[]
     updateMany?: PathwayDocumentsUpdateManyWithWhereWithoutPathwayInput | PathwayDocumentsUpdateManyWithWhereWithoutPathwayInput[]
     deleteMany?: PathwayDocumentsScalarWhereInput | PathwayDocumentsScalarWhereInput[]
+  }
+
+  export type PathwayCategoriesUpdateManyWithoutPathwaysNestedInput = {
+    create?: XOR<PathwayCategoriesCreateWithoutPathwaysInput, PathwayCategoriesUncheckedCreateWithoutPathwaysInput> | PathwayCategoriesCreateWithoutPathwaysInput[] | PathwayCategoriesUncheckedCreateWithoutPathwaysInput[]
+    connectOrCreate?: PathwayCategoriesCreateOrConnectWithoutPathwaysInput | PathwayCategoriesCreateOrConnectWithoutPathwaysInput[]
+    upsert?: PathwayCategoriesUpsertWithWhereUniqueWithoutPathwaysInput | PathwayCategoriesUpsertWithWhereUniqueWithoutPathwaysInput[]
+    createMany?: PathwayCategoriesCreateManyPathwaysInputEnvelope
+    set?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
+    disconnect?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
+    delete?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
+    connect?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
+    update?: PathwayCategoriesUpdateWithWhereUniqueWithoutPathwaysInput | PathwayCategoriesUpdateWithWhereUniqueWithoutPathwaysInput[]
+    updateMany?: PathwayCategoriesUpdateManyWithWhereWithoutPathwaysInput | PathwayCategoriesUpdateManyWithWhereWithoutPathwaysInput[]
+    deleteMany?: PathwayCategoriesScalarWhereInput | PathwayCategoriesScalarWhereInput[]
   }
 
   export type PathwayPipelineUpdateManyWithoutPathwayNestedInput = {
@@ -43912,26 +43888,36 @@ export namespace Prisma {
     deleteMany?: PathwayRestrictedNationalityScalarWhereInput | PathwayRestrictedNationalityScalarWhereInput[]
   }
 
+  export type CountryUpdateOneRequiredWithoutPathwaysNestedInput = {
+    create?: XOR<CountryCreateWithoutPathwaysInput, CountryUncheckedCreateWithoutPathwaysInput>
+    connectOrCreate?: CountryCreateOrConnectWithoutPathwaysInput
+    upsert?: CountryUpsertWithoutPathwaysInput
+    connect?: CountryWhereUniqueInput
+    update?: XOR<XOR<CountryUpdateToOneWithWhereWithoutPathwaysInput, CountryUpdateWithoutPathwaysInput>, CountryUncheckedUpdateWithoutPathwaysInput>
+  }
+
+  export type CurrencyUpdateOneRequiredWithoutPathwaysNestedInput = {
+    create?: XOR<CurrencyCreateWithoutPathwaysInput, CurrencyUncheckedCreateWithoutPathwaysInput>
+    connectOrCreate?: CurrencyCreateOrConnectWithoutPathwaysInput
+    upsert?: CurrencyUpsertWithoutPathwaysInput
+    connect?: CurrencyWhereUniqueInput
+    update?: XOR<XOR<CurrencyUpdateToOneWithWhereWithoutPathwaysInput, CurrencyUpdateWithoutPathwaysInput>, CurrencyUncheckedUpdateWithoutPathwaysInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutPathwayNestedInput = {
+    create?: XOR<UserCreateWithoutPathwayInput, UserUncheckedCreateWithoutPathwayInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPathwayInput
+    upsert?: UserUpsertWithoutPathwayInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPathwayInput, UserUpdateWithoutPathwayInput>, UserUncheckedUpdateWithoutPathwayInput>
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type PathwayCategoriesUncheckedUpdateManyWithoutPathwayNestedInput = {
-    create?: XOR<PathwayCategoriesCreateWithoutPathwayInput, PathwayCategoriesUncheckedCreateWithoutPathwayInput> | PathwayCategoriesCreateWithoutPathwayInput[] | PathwayCategoriesUncheckedCreateWithoutPathwayInput[]
-    connectOrCreate?: PathwayCategoriesCreateOrConnectWithoutPathwayInput | PathwayCategoriesCreateOrConnectWithoutPathwayInput[]
-    upsert?: PathwayCategoriesUpsertWithWhereUniqueWithoutPathwayInput | PathwayCategoriesUpsertWithWhereUniqueWithoutPathwayInput[]
-    createMany?: PathwayCategoriesCreateManyPathwayInputEnvelope
-    set?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
-    disconnect?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
-    delete?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
-    connect?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
-    update?: PathwayCategoriesUpdateWithWhereUniqueWithoutPathwayInput | PathwayCategoriesUpdateWithWhereUniqueWithoutPathwayInput[]
-    updateMany?: PathwayCategoriesUpdateManyWithWhereWithoutPathwayInput | PathwayCategoriesUpdateManyWithWhereWithoutPathwayInput[]
-    deleteMany?: PathwayCategoriesScalarWhereInput | PathwayCategoriesScalarWhereInput[]
   }
 
   export type PathwayDocumentsUncheckedUpdateManyWithoutPathwayNestedInput = {
@@ -43946,6 +43932,20 @@ export namespace Prisma {
     update?: PathwayDocumentsUpdateWithWhereUniqueWithoutPathwayInput | PathwayDocumentsUpdateWithWhereUniqueWithoutPathwayInput[]
     updateMany?: PathwayDocumentsUpdateManyWithWhereWithoutPathwayInput | PathwayDocumentsUpdateManyWithWhereWithoutPathwayInput[]
     deleteMany?: PathwayDocumentsScalarWhereInput | PathwayDocumentsScalarWhereInput[]
+  }
+
+  export type PathwayCategoriesUncheckedUpdateManyWithoutPathwaysNestedInput = {
+    create?: XOR<PathwayCategoriesCreateWithoutPathwaysInput, PathwayCategoriesUncheckedCreateWithoutPathwaysInput> | PathwayCategoriesCreateWithoutPathwaysInput[] | PathwayCategoriesUncheckedCreateWithoutPathwaysInput[]
+    connectOrCreate?: PathwayCategoriesCreateOrConnectWithoutPathwaysInput | PathwayCategoriesCreateOrConnectWithoutPathwaysInput[]
+    upsert?: PathwayCategoriesUpsertWithWhereUniqueWithoutPathwaysInput | PathwayCategoriesUpsertWithWhereUniqueWithoutPathwaysInput[]
+    createMany?: PathwayCategoriesCreateManyPathwaysInputEnvelope
+    set?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
+    disconnect?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
+    delete?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
+    connect?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
+    update?: PathwayCategoriesUpdateWithWhereUniqueWithoutPathwaysInput | PathwayCategoriesUpdateWithWhereUniqueWithoutPathwaysInput[]
+    updateMany?: PathwayCategoriesUpdateManyWithWhereWithoutPathwaysInput | PathwayCategoriesUpdateManyWithWhereWithoutPathwaysInput[]
+    deleteMany?: PathwayCategoriesScalarWhereInput | PathwayCategoriesScalarWhereInput[]
   }
 
   export type PathwayPipelineUncheckedUpdateManyWithoutPathwayNestedInput = {
@@ -43974,34 +43974,6 @@ export namespace Prisma {
     update?: PathwayRestrictedNationalityUpdateWithWhereUniqueWithoutPathwayInput | PathwayRestrictedNationalityUpdateWithWhereUniqueWithoutPathwayInput[]
     updateMany?: PathwayRestrictedNationalityUpdateManyWithWhereWithoutPathwayInput | PathwayRestrictedNationalityUpdateManyWithWhereWithoutPathwayInput[]
     deleteMany?: PathwayRestrictedNationalityScalarWhereInput | PathwayRestrictedNationalityScalarWhereInput[]
-  }
-
-  export type PathwayCreateNestedOneWithoutCategoriesInput = {
-    create?: XOR<PathwayCreateWithoutCategoriesInput, PathwayUncheckedCreateWithoutCategoriesInput>
-    connectOrCreate?: PathwayCreateOrConnectWithoutCategoriesInput
-    connect?: PathwayWhereUniqueInput
-  }
-
-  export type PathwayTypesCreateNestedOneWithoutPathwaysInput = {
-    create?: XOR<PathwayTypesCreateWithoutPathwaysInput, PathwayTypesUncheckedCreateWithoutPathwaysInput>
-    connectOrCreate?: PathwayTypesCreateOrConnectWithoutPathwaysInput
-    connect?: PathwayTypesWhereUniqueInput
-  }
-
-  export type PathwayUpdateOneRequiredWithoutCategoriesNestedInput = {
-    create?: XOR<PathwayCreateWithoutCategoriesInput, PathwayUncheckedCreateWithoutCategoriesInput>
-    connectOrCreate?: PathwayCreateOrConnectWithoutCategoriesInput
-    upsert?: PathwayUpsertWithoutCategoriesInput
-    connect?: PathwayWhereUniqueInput
-    update?: XOR<XOR<PathwayUpdateToOneWithWhereWithoutCategoriesInput, PathwayUpdateWithoutCategoriesInput>, PathwayUncheckedUpdateWithoutCategoriesInput>
-  }
-
-  export type PathwayTypesUpdateOneRequiredWithoutPathwaysNestedInput = {
-    create?: XOR<PathwayTypesCreateWithoutPathwaysInput, PathwayTypesUncheckedCreateWithoutPathwaysInput>
-    connectOrCreate?: PathwayTypesCreateOrConnectWithoutPathwaysInput
-    upsert?: PathwayTypesUpsertWithoutPathwaysInput
-    connect?: PathwayTypesWhereUniqueInput
-    update?: XOR<XOR<PathwayTypesUpdateToOneWithWhereWithoutPathwaysInput, PathwayTypesUpdateWithoutPathwaysInput>, PathwayTypesUncheckedUpdateWithoutPathwaysInput>
   }
 
   export type PathwayCreateNestedOneWithoutPipelinesInput = {
@@ -44275,19 +44247,6 @@ export namespace Prisma {
     set: string[]
   }
 
-  export type PostVersionHistoryCreateNestedManyWithoutPostInput = {
-    create?: XOR<PostVersionHistoryCreateWithoutPostInput, PostVersionHistoryUncheckedCreateWithoutPostInput> | PostVersionHistoryCreateWithoutPostInput[] | PostVersionHistoryUncheckedCreateWithoutPostInput[]
-    connectOrCreate?: PostVersionHistoryCreateOrConnectWithoutPostInput | PostVersionHistoryCreateOrConnectWithoutPostInput[]
-    createMany?: PostVersionHistoryCreateManyPostInputEnvelope
-    connect?: PostVersionHistoryWhereUniqueInput | PostVersionHistoryWhereUniqueInput[]
-  }
-
-  export type UserCreateNestedOneWithoutPostsInput = {
-    create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutPostsInput
-    connect?: UserWhereUniqueInput
-  }
-
   export type PostBlockCreateNestedManyWithoutPostInput = {
     create?: XOR<PostBlockCreateWithoutPostInput, PostBlockUncheckedCreateWithoutPostInput> | PostBlockCreateWithoutPostInput[] | PostBlockUncheckedCreateWithoutPostInput[]
     connectOrCreate?: PostBlockCreateOrConnectWithoutPostInput | PostBlockCreateOrConnectWithoutPostInput[]
@@ -44302,11 +44261,17 @@ export namespace Prisma {
     connect?: PostTagWhereUniqueInput | PostTagWhereUniqueInput[]
   }
 
-  export type PostVersionHistoryUncheckedCreateNestedManyWithoutPostInput = {
+  export type PostVersionHistoryCreateNestedManyWithoutPostInput = {
     create?: XOR<PostVersionHistoryCreateWithoutPostInput, PostVersionHistoryUncheckedCreateWithoutPostInput> | PostVersionHistoryCreateWithoutPostInput[] | PostVersionHistoryUncheckedCreateWithoutPostInput[]
     connectOrCreate?: PostVersionHistoryCreateOrConnectWithoutPostInput | PostVersionHistoryCreateOrConnectWithoutPostInput[]
     createMany?: PostVersionHistoryCreateManyPostInputEnvelope
     connect?: PostVersionHistoryWhereUniqueInput | PostVersionHistoryWhereUniqueInput[]
+  }
+
+  export type UserCreateNestedOneWithoutPostsInput = {
+    create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPostsInput
+    connect?: UserWhereUniqueInput
   }
 
   export type PostBlockUncheckedCreateNestedManyWithoutPostInput = {
@@ -44323,6 +44288,13 @@ export namespace Prisma {
     connect?: PostTagWhereUniqueInput | PostTagWhereUniqueInput[]
   }
 
+  export type PostVersionHistoryUncheckedCreateNestedManyWithoutPostInput = {
+    create?: XOR<PostVersionHistoryCreateWithoutPostInput, PostVersionHistoryUncheckedCreateWithoutPostInput> | PostVersionHistoryCreateWithoutPostInput[] | PostVersionHistoryUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: PostVersionHistoryCreateOrConnectWithoutPostInput | PostVersionHistoryCreateOrConnectWithoutPostInput[]
+    createMany?: PostVersionHistoryCreateManyPostInputEnvelope
+    connect?: PostVersionHistoryWhereUniqueInput | PostVersionHistoryWhereUniqueInput[]
+  }
+
   export type PostUpdatemetaKeywordsInput = {
     set?: string[]
     push?: string | string[]
@@ -44330,28 +44302,6 @@ export namespace Prisma {
 
   export type EnumContentStatusFieldUpdateOperationsInput = {
     set?: $Enums.ContentStatus
-  }
-
-  export type PostVersionHistoryUpdateManyWithoutPostNestedInput = {
-    create?: XOR<PostVersionHistoryCreateWithoutPostInput, PostVersionHistoryUncheckedCreateWithoutPostInput> | PostVersionHistoryCreateWithoutPostInput[] | PostVersionHistoryUncheckedCreateWithoutPostInput[]
-    connectOrCreate?: PostVersionHistoryCreateOrConnectWithoutPostInput | PostVersionHistoryCreateOrConnectWithoutPostInput[]
-    upsert?: PostVersionHistoryUpsertWithWhereUniqueWithoutPostInput | PostVersionHistoryUpsertWithWhereUniqueWithoutPostInput[]
-    createMany?: PostVersionHistoryCreateManyPostInputEnvelope
-    set?: PostVersionHistoryWhereUniqueInput | PostVersionHistoryWhereUniqueInput[]
-    disconnect?: PostVersionHistoryWhereUniqueInput | PostVersionHistoryWhereUniqueInput[]
-    delete?: PostVersionHistoryWhereUniqueInput | PostVersionHistoryWhereUniqueInput[]
-    connect?: PostVersionHistoryWhereUniqueInput | PostVersionHistoryWhereUniqueInput[]
-    update?: PostVersionHistoryUpdateWithWhereUniqueWithoutPostInput | PostVersionHistoryUpdateWithWhereUniqueWithoutPostInput[]
-    updateMany?: PostVersionHistoryUpdateManyWithWhereWithoutPostInput | PostVersionHistoryUpdateManyWithWhereWithoutPostInput[]
-    deleteMany?: PostVersionHistoryScalarWhereInput | PostVersionHistoryScalarWhereInput[]
-  }
-
-  export type UserUpdateOneRequiredWithoutPostsNestedInput = {
-    create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutPostsInput
-    upsert?: UserUpsertWithoutPostsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPostsInput, UserUpdateWithoutPostsInput>, UserUncheckedUpdateWithoutPostsInput>
   }
 
   export type PostBlockUpdateManyWithoutPostNestedInput = {
@@ -44382,7 +44332,7 @@ export namespace Prisma {
     deleteMany?: PostTagScalarWhereInput | PostTagScalarWhereInput[]
   }
 
-  export type PostVersionHistoryUncheckedUpdateManyWithoutPostNestedInput = {
+  export type PostVersionHistoryUpdateManyWithoutPostNestedInput = {
     create?: XOR<PostVersionHistoryCreateWithoutPostInput, PostVersionHistoryUncheckedCreateWithoutPostInput> | PostVersionHistoryCreateWithoutPostInput[] | PostVersionHistoryUncheckedCreateWithoutPostInput[]
     connectOrCreate?: PostVersionHistoryCreateOrConnectWithoutPostInput | PostVersionHistoryCreateOrConnectWithoutPostInput[]
     upsert?: PostVersionHistoryUpsertWithWhereUniqueWithoutPostInput | PostVersionHistoryUpsertWithWhereUniqueWithoutPostInput[]
@@ -44394,6 +44344,14 @@ export namespace Prisma {
     update?: PostVersionHistoryUpdateWithWhereUniqueWithoutPostInput | PostVersionHistoryUpdateWithWhereUniqueWithoutPostInput[]
     updateMany?: PostVersionHistoryUpdateManyWithWhereWithoutPostInput | PostVersionHistoryUpdateManyWithWhereWithoutPostInput[]
     deleteMany?: PostVersionHistoryScalarWhereInput | PostVersionHistoryScalarWhereInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutPostsNestedInput = {
+    create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPostsInput
+    upsert?: UserUpsertWithoutPostsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPostsInput, UserUpdateWithoutPostsInput>, UserUncheckedUpdateWithoutPostsInput>
   }
 
   export type PostBlockUncheckedUpdateManyWithoutPostNestedInput = {
@@ -44422,6 +44380,20 @@ export namespace Prisma {
     update?: PostTagUpdateWithWhereUniqueWithoutPostInput | PostTagUpdateWithWhereUniqueWithoutPostInput[]
     updateMany?: PostTagUpdateManyWithWhereWithoutPostInput | PostTagUpdateManyWithWhereWithoutPostInput[]
     deleteMany?: PostTagScalarWhereInput | PostTagScalarWhereInput[]
+  }
+
+  export type PostVersionHistoryUncheckedUpdateManyWithoutPostNestedInput = {
+    create?: XOR<PostVersionHistoryCreateWithoutPostInput, PostVersionHistoryUncheckedCreateWithoutPostInput> | PostVersionHistoryCreateWithoutPostInput[] | PostVersionHistoryUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: PostVersionHistoryCreateOrConnectWithoutPostInput | PostVersionHistoryCreateOrConnectWithoutPostInput[]
+    upsert?: PostVersionHistoryUpsertWithWhereUniqueWithoutPostInput | PostVersionHistoryUpsertWithWhereUniqueWithoutPostInput[]
+    createMany?: PostVersionHistoryCreateManyPostInputEnvelope
+    set?: PostVersionHistoryWhereUniqueInput | PostVersionHistoryWhereUniqueInput[]
+    disconnect?: PostVersionHistoryWhereUniqueInput | PostVersionHistoryWhereUniqueInput[]
+    delete?: PostVersionHistoryWhereUniqueInput | PostVersionHistoryWhereUniqueInput[]
+    connect?: PostVersionHistoryWhereUniqueInput | PostVersionHistoryWhereUniqueInput[]
+    update?: PostVersionHistoryUpdateWithWhereUniqueWithoutPostInput | PostVersionHistoryUpdateWithWhereUniqueWithoutPostInput[]
+    updateMany?: PostVersionHistoryUpdateManyWithWhereWithoutPostInput | PostVersionHistoryUpdateManyWithWhereWithoutPostInput[]
+    deleteMany?: PostVersionHistoryScalarWhereInput | PostVersionHistoryScalarWhereInput[]
   }
 
   export type PostCreateNestedOneWithoutTagsInput = {
@@ -44459,19 +44431,6 @@ export namespace Prisma {
     connect?: PostTagWhereUniqueInput | PostTagWhereUniqueInput[]
   }
 
-  export type TagCreateNestedOneWithoutChildrenInput = {
-    create?: XOR<TagCreateWithoutChildrenInput, TagUncheckedCreateWithoutChildrenInput>
-    connectOrCreate?: TagCreateOrConnectWithoutChildrenInput
-    connect?: TagWhereUniqueInput
-  }
-
-  export type TagCreateNestedManyWithoutParentInput = {
-    create?: XOR<TagCreateWithoutParentInput, TagUncheckedCreateWithoutParentInput> | TagCreateWithoutParentInput[] | TagUncheckedCreateWithoutParentInput[]
-    connectOrCreate?: TagCreateOrConnectWithoutParentInput | TagCreateOrConnectWithoutParentInput[]
-    createMany?: TagCreateManyParentInputEnvelope
-    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
-  }
-
   export type TagHierarchyCreateNestedManyWithoutParentInput = {
     create?: XOR<TagHierarchyCreateWithoutParentInput, TagHierarchyUncheckedCreateWithoutParentInput> | TagHierarchyCreateWithoutParentInput[] | TagHierarchyUncheckedCreateWithoutParentInput[]
     connectOrCreate?: TagHierarchyCreateOrConnectWithoutParentInput | TagHierarchyCreateOrConnectWithoutParentInput[]
@@ -44486,18 +44445,24 @@ export namespace Prisma {
     connect?: TagHierarchyWhereUniqueInput | TagHierarchyWhereUniqueInput[]
   }
 
+  export type TagCreateNestedOneWithoutChildrenInput = {
+    create?: XOR<TagCreateWithoutChildrenInput, TagUncheckedCreateWithoutChildrenInput>
+    connectOrCreate?: TagCreateOrConnectWithoutChildrenInput
+    connect?: TagWhereUniqueInput
+  }
+
+  export type TagCreateNestedManyWithoutParentInput = {
+    create?: XOR<TagCreateWithoutParentInput, TagUncheckedCreateWithoutParentInput> | TagCreateWithoutParentInput[] | TagUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutParentInput | TagCreateOrConnectWithoutParentInput[]
+    createMany?: TagCreateManyParentInputEnvelope
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+  }
+
   export type PostTagUncheckedCreateNestedManyWithoutTagInput = {
     create?: XOR<PostTagCreateWithoutTagInput, PostTagUncheckedCreateWithoutTagInput> | PostTagCreateWithoutTagInput[] | PostTagUncheckedCreateWithoutTagInput[]
     connectOrCreate?: PostTagCreateOrConnectWithoutTagInput | PostTagCreateOrConnectWithoutTagInput[]
     createMany?: PostTagCreateManyTagInputEnvelope
     connect?: PostTagWhereUniqueInput | PostTagWhereUniqueInput[]
-  }
-
-  export type TagUncheckedCreateNestedManyWithoutParentInput = {
-    create?: XOR<TagCreateWithoutParentInput, TagUncheckedCreateWithoutParentInput> | TagCreateWithoutParentInput[] | TagUncheckedCreateWithoutParentInput[]
-    connectOrCreate?: TagCreateOrConnectWithoutParentInput | TagCreateOrConnectWithoutParentInput[]
-    createMany?: TagCreateManyParentInputEnvelope
-    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
   }
 
   export type TagHierarchyUncheckedCreateNestedManyWithoutParentInput = {
@@ -44514,6 +44479,13 @@ export namespace Prisma {
     connect?: TagHierarchyWhereUniqueInput | TagHierarchyWhereUniqueInput[]
   }
 
+  export type TagUncheckedCreateNestedManyWithoutParentInput = {
+    create?: XOR<TagCreateWithoutParentInput, TagUncheckedCreateWithoutParentInput> | TagCreateWithoutParentInput[] | TagUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutParentInput | TagCreateOrConnectWithoutParentInput[]
+    createMany?: TagCreateManyParentInputEnvelope
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+  }
+
   export type PostTagUpdateManyWithoutTagNestedInput = {
     create?: XOR<PostTagCreateWithoutTagInput, PostTagUncheckedCreateWithoutTagInput> | PostTagCreateWithoutTagInput[] | PostTagUncheckedCreateWithoutTagInput[]
     connectOrCreate?: PostTagCreateOrConnectWithoutTagInput | PostTagCreateOrConnectWithoutTagInput[]
@@ -44526,30 +44498,6 @@ export namespace Prisma {
     update?: PostTagUpdateWithWhereUniqueWithoutTagInput | PostTagUpdateWithWhereUniqueWithoutTagInput[]
     updateMany?: PostTagUpdateManyWithWhereWithoutTagInput | PostTagUpdateManyWithWhereWithoutTagInput[]
     deleteMany?: PostTagScalarWhereInput | PostTagScalarWhereInput[]
-  }
-
-  export type TagUpdateOneWithoutChildrenNestedInput = {
-    create?: XOR<TagCreateWithoutChildrenInput, TagUncheckedCreateWithoutChildrenInput>
-    connectOrCreate?: TagCreateOrConnectWithoutChildrenInput
-    upsert?: TagUpsertWithoutChildrenInput
-    disconnect?: TagWhereInput | boolean
-    delete?: TagWhereInput | boolean
-    connect?: TagWhereUniqueInput
-    update?: XOR<XOR<TagUpdateToOneWithWhereWithoutChildrenInput, TagUpdateWithoutChildrenInput>, TagUncheckedUpdateWithoutChildrenInput>
-  }
-
-  export type TagUpdateManyWithoutParentNestedInput = {
-    create?: XOR<TagCreateWithoutParentInput, TagUncheckedCreateWithoutParentInput> | TagCreateWithoutParentInput[] | TagUncheckedCreateWithoutParentInput[]
-    connectOrCreate?: TagCreateOrConnectWithoutParentInput | TagCreateOrConnectWithoutParentInput[]
-    upsert?: TagUpsertWithWhereUniqueWithoutParentInput | TagUpsertWithWhereUniqueWithoutParentInput[]
-    createMany?: TagCreateManyParentInputEnvelope
-    set?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    disconnect?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    delete?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    update?: TagUpdateWithWhereUniqueWithoutParentInput | TagUpdateWithWhereUniqueWithoutParentInput[]
-    updateMany?: TagUpdateManyWithWhereWithoutParentInput | TagUpdateManyWithWhereWithoutParentInput[]
-    deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
   }
 
   export type TagHierarchyUpdateManyWithoutParentNestedInput = {
@@ -44580,6 +44528,30 @@ export namespace Prisma {
     deleteMany?: TagHierarchyScalarWhereInput | TagHierarchyScalarWhereInput[]
   }
 
+  export type TagUpdateOneWithoutChildrenNestedInput = {
+    create?: XOR<TagCreateWithoutChildrenInput, TagUncheckedCreateWithoutChildrenInput>
+    connectOrCreate?: TagCreateOrConnectWithoutChildrenInput
+    upsert?: TagUpsertWithoutChildrenInput
+    disconnect?: TagWhereInput | boolean
+    delete?: TagWhereInput | boolean
+    connect?: TagWhereUniqueInput
+    update?: XOR<XOR<TagUpdateToOneWithWhereWithoutChildrenInput, TagUpdateWithoutChildrenInput>, TagUncheckedUpdateWithoutChildrenInput>
+  }
+
+  export type TagUpdateManyWithoutParentNestedInput = {
+    create?: XOR<TagCreateWithoutParentInput, TagUncheckedCreateWithoutParentInput> | TagCreateWithoutParentInput[] | TagUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutParentInput | TagCreateOrConnectWithoutParentInput[]
+    upsert?: TagUpsertWithWhereUniqueWithoutParentInput | TagUpsertWithWhereUniqueWithoutParentInput[]
+    createMany?: TagCreateManyParentInputEnvelope
+    set?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    disconnect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    delete?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    update?: TagUpdateWithWhereUniqueWithoutParentInput | TagUpdateWithWhereUniqueWithoutParentInput[]
+    updateMany?: TagUpdateManyWithWhereWithoutParentInput | TagUpdateManyWithWhereWithoutParentInput[]
+    deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
+  }
+
   export type NullableIntFieldUpdateOperationsInput = {
     set?: number | null
     increment?: number
@@ -44600,20 +44572,6 @@ export namespace Prisma {
     update?: PostTagUpdateWithWhereUniqueWithoutTagInput | PostTagUpdateWithWhereUniqueWithoutTagInput[]
     updateMany?: PostTagUpdateManyWithWhereWithoutTagInput | PostTagUpdateManyWithWhereWithoutTagInput[]
     deleteMany?: PostTagScalarWhereInput | PostTagScalarWhereInput[]
-  }
-
-  export type TagUncheckedUpdateManyWithoutParentNestedInput = {
-    create?: XOR<TagCreateWithoutParentInput, TagUncheckedCreateWithoutParentInput> | TagCreateWithoutParentInput[] | TagUncheckedCreateWithoutParentInput[]
-    connectOrCreate?: TagCreateOrConnectWithoutParentInput | TagCreateOrConnectWithoutParentInput[]
-    upsert?: TagUpsertWithWhereUniqueWithoutParentInput | TagUpsertWithWhereUniqueWithoutParentInput[]
-    createMany?: TagCreateManyParentInputEnvelope
-    set?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    disconnect?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    delete?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    update?: TagUpdateWithWhereUniqueWithoutParentInput | TagUpdateWithWhereUniqueWithoutParentInput[]
-    updateMany?: TagUpdateManyWithWhereWithoutParentInput | TagUpdateManyWithWhereWithoutParentInput[]
-    deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
   }
 
   export type TagHierarchyUncheckedUpdateManyWithoutParentNestedInput = {
@@ -44642,6 +44600,20 @@ export namespace Prisma {
     update?: TagHierarchyUpdateWithWhereUniqueWithoutChildInput | TagHierarchyUpdateWithWhereUniqueWithoutChildInput[]
     updateMany?: TagHierarchyUpdateManyWithWhereWithoutChildInput | TagHierarchyUpdateManyWithWhereWithoutChildInput[]
     deleteMany?: TagHierarchyScalarWhereInput | TagHierarchyScalarWhereInput[]
+  }
+
+  export type TagUncheckedUpdateManyWithoutParentNestedInput = {
+    create?: XOR<TagCreateWithoutParentInput, TagUncheckedCreateWithoutParentInput> | TagCreateWithoutParentInput[] | TagUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutParentInput | TagCreateOrConnectWithoutParentInput[]
+    upsert?: TagUpsertWithWhereUniqueWithoutParentInput | TagUpsertWithWhereUniqueWithoutParentInput[]
+    createMany?: TagCreateManyParentInputEnvelope
+    set?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    disconnect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    delete?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    update?: TagUpdateWithWhereUniqueWithoutParentInput | TagUpdateWithWhereUniqueWithoutParentInput[]
+    updateMany?: TagUpdateManyWithWhereWithoutParentInput | TagUpdateManyWithWhereWithoutParentInput[]
+    deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
   }
 
   export type TagCreateNestedOneWithoutChildTagInput = {
@@ -44854,6 +44826,13 @@ export namespace Prisma {
     connect?: PostVersionHistoryWhereUniqueInput | PostVersionHistoryWhereUniqueInput[]
   }
 
+  export type PostCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
+    createMany?: PostCreateManyAuthorInputEnvelope
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  }
+
   export type SessionCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -44888,13 +44867,6 @@ export namespace Prisma {
     connect?: PathwayWhereUniqueInput | PathwayWhereUniqueInput[]
   }
 
-  export type PostCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
-    createMany?: PostCreateManyAuthorInputEnvelope
-    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-  }
-
   export type ResourceCreateNestedManyWithoutAuthorInput = {
     create?: XOR<ResourceCreateWithoutAuthorInput, ResourceUncheckedCreateWithoutAuthorInput> | ResourceCreateWithoutAuthorInput[] | ResourceUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: ResourceCreateOrConnectWithoutAuthorInput | ResourceCreateOrConnectWithoutAuthorInput[]
@@ -44914,6 +44886,13 @@ export namespace Prisma {
     connectOrCreate?: PostVersionHistoryCreateOrConnectWithoutUserInput | PostVersionHistoryCreateOrConnectWithoutUserInput[]
     createMany?: PostVersionHistoryCreateManyUserInputEnvelope
     connect?: PostVersionHistoryWhereUniqueInput | PostVersionHistoryWhereUniqueInput[]
+  }
+
+  export type PostUncheckedCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
+    createMany?: PostCreateManyAuthorInputEnvelope
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
   }
 
   export type SessionUncheckedCreateNestedManyWithoutUserInput = {
@@ -44948,13 +44927,6 @@ export namespace Prisma {
     connectOrCreate?: PathwayCreateOrConnectWithoutCMS_UserInput | PathwayCreateOrConnectWithoutCMS_UserInput[]
     createMany?: PathwayCreateManyCMS_UserInputEnvelope
     connect?: PathwayWhereUniqueInput | PathwayWhereUniqueInput[]
-  }
-
-  export type PostUncheckedCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
-    createMany?: PostCreateManyAuthorInputEnvelope
-    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
   }
 
   export type ResourceUncheckedCreateNestedManyWithoutAuthorInput = {
@@ -44994,6 +44966,20 @@ export namespace Prisma {
     update?: PostVersionHistoryUpdateWithWhereUniqueWithoutUserInput | PostVersionHistoryUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: PostVersionHistoryUpdateManyWithWhereWithoutUserInput | PostVersionHistoryUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: PostVersionHistoryScalarWhereInput | PostVersionHistoryScalarWhereInput[]
+  }
+
+  export type PostUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
+    upsert?: PostUpsertWithWhereUniqueWithoutAuthorInput | PostUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: PostCreateManyAuthorInputEnvelope
+    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    update?: PostUpdateWithWhereUniqueWithoutAuthorInput | PostUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: PostUpdateManyWithWhereWithoutAuthorInput | PostUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
   export type SessionUpdateManyWithoutUserNestedInput = {
@@ -45062,20 +45048,6 @@ export namespace Prisma {
     deleteMany?: PathwayScalarWhereInput | PathwayScalarWhereInput[]
   }
 
-  export type PostUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
-    upsert?: PostUpsertWithWhereUniqueWithoutAuthorInput | PostUpsertWithWhereUniqueWithoutAuthorInput[]
-    createMany?: PostCreateManyAuthorInputEnvelope
-    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    update?: PostUpdateWithWhereUniqueWithoutAuthorInput | PostUpdateWithWhereUniqueWithoutAuthorInput[]
-    updateMany?: PostUpdateManyWithWhereWithoutAuthorInput | PostUpdateManyWithWhereWithoutAuthorInput[]
-    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
-  }
-
   export type ResourceUpdateManyWithoutAuthorNestedInput = {
     create?: XOR<ResourceCreateWithoutAuthorInput, ResourceUncheckedCreateWithoutAuthorInput> | ResourceCreateWithoutAuthorInput[] | ResourceUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: ResourceCreateOrConnectWithoutAuthorInput | ResourceCreateOrConnectWithoutAuthorInput[]
@@ -45116,6 +45088,20 @@ export namespace Prisma {
     update?: PostVersionHistoryUpdateWithWhereUniqueWithoutUserInput | PostVersionHistoryUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: PostVersionHistoryUpdateManyWithWhereWithoutUserInput | PostVersionHistoryUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: PostVersionHistoryScalarWhereInput | PostVersionHistoryScalarWhereInput[]
+  }
+
+  export type PostUncheckedUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
+    upsert?: PostUpsertWithWhereUniqueWithoutAuthorInput | PostUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: PostCreateManyAuthorInputEnvelope
+    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    update?: PostUpdateWithWhereUniqueWithoutAuthorInput | PostUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: PostUpdateManyWithWhereWithoutAuthorInput | PostUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
   export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
@@ -45182,20 +45168,6 @@ export namespace Prisma {
     update?: PathwayUpdateWithWhereUniqueWithoutCMS_UserInput | PathwayUpdateWithWhereUniqueWithoutCMS_UserInput[]
     updateMany?: PathwayUpdateManyWithWhereWithoutCMS_UserInput | PathwayUpdateManyWithWhereWithoutCMS_UserInput[]
     deleteMany?: PathwayScalarWhereInput | PathwayScalarWhereInput[]
-  }
-
-  export type PostUncheckedUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
-    upsert?: PostUpsertWithWhereUniqueWithoutAuthorInput | PostUpsertWithWhereUniqueWithoutAuthorInput[]
-    createMany?: PostCreateManyAuthorInputEnvelope
-    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    update?: PostUpdateWithWhereUniqueWithoutAuthorInput | PostUpdateWithWhereUniqueWithoutAuthorInput[]
-    updateMany?: PostUpdateManyWithWhereWithoutAuthorInput | PostUpdateManyWithWhereWithoutAuthorInput[]
-    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
   export type ResourceUncheckedUpdateManyWithoutAuthorNestedInput = {
@@ -45452,10 +45424,10 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPostVersionHistoryInput, UserUpdateWithoutPostVersionHistoryInput>, UserUncheckedUpdateWithoutPostVersionHistoryInput>
   }
 
-  export type PathwayCategoriesCreateNestedManyWithoutPathwayTypeInput = {
-    create?: XOR<PathwayCategoriesCreateWithoutPathwayTypeInput, PathwayCategoriesUncheckedCreateWithoutPathwayTypeInput> | PathwayCategoriesCreateWithoutPathwayTypeInput[] | PathwayCategoriesUncheckedCreateWithoutPathwayTypeInput[]
-    connectOrCreate?: PathwayCategoriesCreateOrConnectWithoutPathwayTypeInput | PathwayCategoriesCreateOrConnectWithoutPathwayTypeInput[]
-    createMany?: PathwayCategoriesCreateManyPathwayTypeInputEnvelope
+  export type PathwayCategoriesCreateNestedManyWithoutPathway_categoriesInput = {
+    create?: XOR<PathwayCategoriesCreateWithoutPathway_categoriesInput, PathwayCategoriesUncheckedCreateWithoutPathway_categoriesInput> | PathwayCategoriesCreateWithoutPathway_categoriesInput[] | PathwayCategoriesUncheckedCreateWithoutPathway_categoriesInput[]
+    connectOrCreate?: PathwayCategoriesCreateOrConnectWithoutPathway_categoriesInput | PathwayCategoriesCreateOrConnectWithoutPathway_categoriesInput[]
+    createMany?: PathwayCategoriesCreateManyPathway_categoriesInputEnvelope
     connect?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
   }
 
@@ -45472,10 +45444,10 @@ export namespace Prisma {
     connect?: PathwayTypesWhereUniqueInput | PathwayTypesWhereUniqueInput[]
   }
 
-  export type PathwayCategoriesUncheckedCreateNestedManyWithoutPathwayTypeInput = {
-    create?: XOR<PathwayCategoriesCreateWithoutPathwayTypeInput, PathwayCategoriesUncheckedCreateWithoutPathwayTypeInput> | PathwayCategoriesCreateWithoutPathwayTypeInput[] | PathwayCategoriesUncheckedCreateWithoutPathwayTypeInput[]
-    connectOrCreate?: PathwayCategoriesCreateOrConnectWithoutPathwayTypeInput | PathwayCategoriesCreateOrConnectWithoutPathwayTypeInput[]
-    createMany?: PathwayCategoriesCreateManyPathwayTypeInputEnvelope
+  export type PathwayCategoriesUncheckedCreateNestedManyWithoutPathway_categoriesInput = {
+    create?: XOR<PathwayCategoriesCreateWithoutPathway_categoriesInput, PathwayCategoriesUncheckedCreateWithoutPathway_categoriesInput> | PathwayCategoriesCreateWithoutPathway_categoriesInput[] | PathwayCategoriesUncheckedCreateWithoutPathway_categoriesInput[]
+    connectOrCreate?: PathwayCategoriesCreateOrConnectWithoutPathway_categoriesInput | PathwayCategoriesCreateOrConnectWithoutPathway_categoriesInput[]
+    createMany?: PathwayCategoriesCreateManyPathway_categoriesInputEnvelope
     connect?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
   }
 
@@ -45486,17 +45458,17 @@ export namespace Prisma {
     connect?: PathwayTypesWhereUniqueInput | PathwayTypesWhereUniqueInput[]
   }
 
-  export type PathwayCategoriesUpdateManyWithoutPathwayTypeNestedInput = {
-    create?: XOR<PathwayCategoriesCreateWithoutPathwayTypeInput, PathwayCategoriesUncheckedCreateWithoutPathwayTypeInput> | PathwayCategoriesCreateWithoutPathwayTypeInput[] | PathwayCategoriesUncheckedCreateWithoutPathwayTypeInput[]
-    connectOrCreate?: PathwayCategoriesCreateOrConnectWithoutPathwayTypeInput | PathwayCategoriesCreateOrConnectWithoutPathwayTypeInput[]
-    upsert?: PathwayCategoriesUpsertWithWhereUniqueWithoutPathwayTypeInput | PathwayCategoriesUpsertWithWhereUniqueWithoutPathwayTypeInput[]
-    createMany?: PathwayCategoriesCreateManyPathwayTypeInputEnvelope
+  export type PathwayCategoriesUpdateManyWithoutPathway_categoriesNestedInput = {
+    create?: XOR<PathwayCategoriesCreateWithoutPathway_categoriesInput, PathwayCategoriesUncheckedCreateWithoutPathway_categoriesInput> | PathwayCategoriesCreateWithoutPathway_categoriesInput[] | PathwayCategoriesUncheckedCreateWithoutPathway_categoriesInput[]
+    connectOrCreate?: PathwayCategoriesCreateOrConnectWithoutPathway_categoriesInput | PathwayCategoriesCreateOrConnectWithoutPathway_categoriesInput[]
+    upsert?: PathwayCategoriesUpsertWithWhereUniqueWithoutPathway_categoriesInput | PathwayCategoriesUpsertWithWhereUniqueWithoutPathway_categoriesInput[]
+    createMany?: PathwayCategoriesCreateManyPathway_categoriesInputEnvelope
     set?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
     disconnect?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
     delete?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
     connect?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
-    update?: PathwayCategoriesUpdateWithWhereUniqueWithoutPathwayTypeInput | PathwayCategoriesUpdateWithWhereUniqueWithoutPathwayTypeInput[]
-    updateMany?: PathwayCategoriesUpdateManyWithWhereWithoutPathwayTypeInput | PathwayCategoriesUpdateManyWithWhereWithoutPathwayTypeInput[]
+    update?: PathwayCategoriesUpdateWithWhereUniqueWithoutPathway_categoriesInput | PathwayCategoriesUpdateWithWhereUniqueWithoutPathway_categoriesInput[]
+    updateMany?: PathwayCategoriesUpdateManyWithWhereWithoutPathway_categoriesInput | PathwayCategoriesUpdateManyWithWhereWithoutPathway_categoriesInput[]
     deleteMany?: PathwayCategoriesScalarWhereInput | PathwayCategoriesScalarWhereInput[]
   }
 
@@ -45524,17 +45496,17 @@ export namespace Prisma {
     deleteMany?: PathwayTypesScalarWhereInput | PathwayTypesScalarWhereInput[]
   }
 
-  export type PathwayCategoriesUncheckedUpdateManyWithoutPathwayTypeNestedInput = {
-    create?: XOR<PathwayCategoriesCreateWithoutPathwayTypeInput, PathwayCategoriesUncheckedCreateWithoutPathwayTypeInput> | PathwayCategoriesCreateWithoutPathwayTypeInput[] | PathwayCategoriesUncheckedCreateWithoutPathwayTypeInput[]
-    connectOrCreate?: PathwayCategoriesCreateOrConnectWithoutPathwayTypeInput | PathwayCategoriesCreateOrConnectWithoutPathwayTypeInput[]
-    upsert?: PathwayCategoriesUpsertWithWhereUniqueWithoutPathwayTypeInput | PathwayCategoriesUpsertWithWhereUniqueWithoutPathwayTypeInput[]
-    createMany?: PathwayCategoriesCreateManyPathwayTypeInputEnvelope
+  export type PathwayCategoriesUncheckedUpdateManyWithoutPathway_categoriesNestedInput = {
+    create?: XOR<PathwayCategoriesCreateWithoutPathway_categoriesInput, PathwayCategoriesUncheckedCreateWithoutPathway_categoriesInput> | PathwayCategoriesCreateWithoutPathway_categoriesInput[] | PathwayCategoriesUncheckedCreateWithoutPathway_categoriesInput[]
+    connectOrCreate?: PathwayCategoriesCreateOrConnectWithoutPathway_categoriesInput | PathwayCategoriesCreateOrConnectWithoutPathway_categoriesInput[]
+    upsert?: PathwayCategoriesUpsertWithWhereUniqueWithoutPathway_categoriesInput | PathwayCategoriesUpsertWithWhereUniqueWithoutPathway_categoriesInput[]
+    createMany?: PathwayCategoriesCreateManyPathway_categoriesInputEnvelope
     set?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
     disconnect?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
     delete?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
     connect?: PathwayCategoriesWhereUniqueInput | PathwayCategoriesWhereUniqueInput[]
-    update?: PathwayCategoriesUpdateWithWhereUniqueWithoutPathwayTypeInput | PathwayCategoriesUpdateWithWhereUniqueWithoutPathwayTypeInput[]
-    updateMany?: PathwayCategoriesUpdateManyWithWhereWithoutPathwayTypeInput | PathwayCategoriesUpdateManyWithWhereWithoutPathwayTypeInput[]
+    update?: PathwayCategoriesUpdateWithWhereUniqueWithoutPathway_categoriesInput | PathwayCategoriesUpdateWithWhereUniqueWithoutPathway_categoriesInput[]
+    updateMany?: PathwayCategoriesUpdateManyWithWhereWithoutPathway_categoriesInput | PathwayCategoriesUpdateManyWithWhereWithoutPathway_categoriesInput[]
     deleteMany?: PathwayCategoriesScalarWhereInput | PathwayCategoriesScalarWhereInput[]
   }
 
@@ -45550,6 +45522,34 @@ export namespace Prisma {
     update?: PathwayTypesUpdateWithWhereUniqueWithoutParentInput | PathwayTypesUpdateWithWhereUniqueWithoutParentInput[]
     updateMany?: PathwayTypesUpdateManyWithWhereWithoutParentInput | PathwayTypesUpdateManyWithWhereWithoutParentInput[]
     deleteMany?: PathwayTypesScalarWhereInput | PathwayTypesScalarWhereInput[]
+  }
+
+  export type PathwayCreateNestedOneWithoutCategoriesInput = {
+    create?: XOR<PathwayCreateWithoutCategoriesInput, PathwayUncheckedCreateWithoutCategoriesInput>
+    connectOrCreate?: PathwayCreateOrConnectWithoutCategoriesInput
+    connect?: PathwayWhereUniqueInput
+  }
+
+  export type PathwayTypesCreateNestedOneWithoutPathwayCategoriesInput = {
+    create?: XOR<PathwayTypesCreateWithoutPathwayCategoriesInput, PathwayTypesUncheckedCreateWithoutPathwayCategoriesInput>
+    connectOrCreate?: PathwayTypesCreateOrConnectWithoutPathwayCategoriesInput
+    connect?: PathwayTypesWhereUniqueInput
+  }
+
+  export type PathwayUpdateOneRequiredWithoutCategoriesNestedInput = {
+    create?: XOR<PathwayCreateWithoutCategoriesInput, PathwayUncheckedCreateWithoutCategoriesInput>
+    connectOrCreate?: PathwayCreateOrConnectWithoutCategoriesInput
+    upsert?: PathwayUpsertWithoutCategoriesInput
+    connect?: PathwayWhereUniqueInput
+    update?: XOR<XOR<PathwayUpdateToOneWithWhereWithoutCategoriesInput, PathwayUpdateWithoutCategoriesInput>, PathwayUncheckedUpdateWithoutCategoriesInput>
+  }
+
+  export type PathwayTypesUpdateOneRequiredWithoutPathwayCategoriesNestedInput = {
+    create?: XOR<PathwayTypesCreateWithoutPathwayCategoriesInput, PathwayTypesUncheckedCreateWithoutPathwayCategoriesInput>
+    connectOrCreate?: PathwayTypesCreateOrConnectWithoutPathwayCategoriesInput
+    upsert?: PathwayTypesUpsertWithoutPathwayCategoriesInput
+    connect?: PathwayTypesWhereUniqueInput
+    update?: XOR<XOR<PathwayTypesUpdateToOneWithWhereWithoutPathwayCategoriesInput, PathwayTypesUpdateWithoutPathwayCategoriesInput>, PathwayTypesUncheckedUpdateWithoutPathwayCategoriesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -45890,6 +45890,26 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PathwayRestrictedNationalityCreateWithoutCountryInput = {
+    note?: string | null
+    pathway: PathwayCreateNestedOneWithoutRestrictedNationalitiesInput
+  }
+
+  export type PathwayRestrictedNationalityUncheckedCreateWithoutCountryInput = {
+    pathwayId: number
+    note?: string | null
+  }
+
+  export type PathwayRestrictedNationalityCreateOrConnectWithoutCountryInput = {
+    where: PathwayRestrictedNationalityWhereUniqueInput
+    create: XOR<PathwayRestrictedNationalityCreateWithoutCountryInput, PathwayRestrictedNationalityUncheckedCreateWithoutCountryInput>
+  }
+
+  export type PathwayRestrictedNationalityCreateManyCountryInputEnvelope = {
+    data: PathwayRestrictedNationalityCreateManyCountryInput | PathwayRestrictedNationalityCreateManyCountryInput[]
+    skipDuplicates?: boolean
+  }
+
   export type PathwayCreateWithoutCountryInput = {
     name: string
     link: string
@@ -45905,12 +45925,12 @@ export namespace Prisma {
     processTime?: NullableJsonNullValueInput | InputJsonValue
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
-    currency: CurrencyCreateNestedOneWithoutPathwaysInput
-    CMS_User: UserCreateNestedOneWithoutPathwayInput
-    categories?: PathwayCategoriesCreateNestedManyWithoutPathwayInput
     documents?: PathwayDocumentsCreateNestedManyWithoutPathwayInput
+    categories?: PathwayCategoriesCreateNestedManyWithoutPathwaysInput
     pipelines?: PathwayPipelineCreateNestedManyWithoutPathwayInput
     restrictedNationalities?: PathwayRestrictedNationalityCreateNestedManyWithoutPathwayInput
+    currency: CurrencyCreateNestedOneWithoutPathwaysInput
+    CMS_User: UserCreateNestedOneWithoutPathwayInput
   }
 
   export type PathwayUncheckedCreateWithoutCountryInput = {
@@ -45931,8 +45951,8 @@ export namespace Prisma {
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
     createdby: string
-    categories?: PathwayCategoriesUncheckedCreateNestedManyWithoutPathwayInput
     documents?: PathwayDocumentsUncheckedCreateNestedManyWithoutPathwayInput
+    categories?: PathwayCategoriesUncheckedCreateNestedManyWithoutPathwaysInput
     pipelines?: PathwayPipelineUncheckedCreateNestedManyWithoutPathwayInput
     restrictedNationalities?: PathwayRestrictedNationalityUncheckedCreateNestedManyWithoutPathwayInput
   }
@@ -45944,26 +45964,6 @@ export namespace Prisma {
 
   export type PathwayCreateManyCountryInputEnvelope = {
     data: PathwayCreateManyCountryInput | PathwayCreateManyCountryInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type PathwayRestrictedNationalityCreateWithoutCountryInput = {
-    note?: string | null
-    pathway: PathwayCreateNestedOneWithoutRestrictedNationalitiesInput
-  }
-
-  export type PathwayRestrictedNationalityUncheckedCreateWithoutCountryInput = {
-    pathwayId: number
-    note?: string | null
-  }
-
-  export type PathwayRestrictedNationalityCreateOrConnectWithoutCountryInput = {
-    where: PathwayRestrictedNationalityWhereUniqueInput
-    create: XOR<PathwayRestrictedNationalityCreateWithoutCountryInput, PathwayRestrictedNationalityUncheckedCreateWithoutCountryInput>
-  }
-
-  export type PathwayRestrictedNationalityCreateManyCountryInputEnvelope = {
-    data: PathwayRestrictedNationalityCreateManyCountryInput | PathwayRestrictedNationalityCreateManyCountryInput[]
     skipDuplicates?: boolean
   }
 
@@ -46015,6 +46015,31 @@ export namespace Prisma {
     languageCode?: StringFilter<"CountryLanguage"> | string
   }
 
+  export type PathwayRestrictedNationalityUpsertWithWhereUniqueWithoutCountryInput = {
+    where: PathwayRestrictedNationalityWhereUniqueInput
+    update: XOR<PathwayRestrictedNationalityUpdateWithoutCountryInput, PathwayRestrictedNationalityUncheckedUpdateWithoutCountryInput>
+    create: XOR<PathwayRestrictedNationalityCreateWithoutCountryInput, PathwayRestrictedNationalityUncheckedCreateWithoutCountryInput>
+  }
+
+  export type PathwayRestrictedNationalityUpdateWithWhereUniqueWithoutCountryInput = {
+    where: PathwayRestrictedNationalityWhereUniqueInput
+    data: XOR<PathwayRestrictedNationalityUpdateWithoutCountryInput, PathwayRestrictedNationalityUncheckedUpdateWithoutCountryInput>
+  }
+
+  export type PathwayRestrictedNationalityUpdateManyWithWhereWithoutCountryInput = {
+    where: PathwayRestrictedNationalityScalarWhereInput
+    data: XOR<PathwayRestrictedNationalityUpdateManyMutationInput, PathwayRestrictedNationalityUncheckedUpdateManyWithoutCountryInput>
+  }
+
+  export type PathwayRestrictedNationalityScalarWhereInput = {
+    AND?: PathwayRestrictedNationalityScalarWhereInput | PathwayRestrictedNationalityScalarWhereInput[]
+    OR?: PathwayRestrictedNationalityScalarWhereInput[]
+    NOT?: PathwayRestrictedNationalityScalarWhereInput | PathwayRestrictedNationalityScalarWhereInput[]
+    pathwayId?: IntFilter<"PathwayRestrictedNationality"> | number
+    countryCode?: StringFilter<"PathwayRestrictedNationality"> | string
+    note?: StringNullableFilter<"PathwayRestrictedNationality"> | string | null
+  }
+
   export type PathwayUpsertWithWhereUniqueWithoutCountryInput = {
     where: PathwayWhereUniqueInput
     update: XOR<PathwayUpdateWithoutCountryInput, PathwayUncheckedUpdateWithoutCountryInput>
@@ -46055,45 +46080,20 @@ export namespace Prisma {
     createdby?: StringFilter<"Pathway"> | string
   }
 
-  export type PathwayRestrictedNationalityUpsertWithWhereUniqueWithoutCountryInput = {
-    where: PathwayRestrictedNationalityWhereUniqueInput
-    update: XOR<PathwayRestrictedNationalityUpdateWithoutCountryInput, PathwayRestrictedNationalityUncheckedUpdateWithoutCountryInput>
-    create: XOR<PathwayRestrictedNationalityCreateWithoutCountryInput, PathwayRestrictedNationalityUncheckedCreateWithoutCountryInput>
-  }
-
-  export type PathwayRestrictedNationalityUpdateWithWhereUniqueWithoutCountryInput = {
-    where: PathwayRestrictedNationalityWhereUniqueInput
-    data: XOR<PathwayRestrictedNationalityUpdateWithoutCountryInput, PathwayRestrictedNationalityUncheckedUpdateWithoutCountryInput>
-  }
-
-  export type PathwayRestrictedNationalityUpdateManyWithWhereWithoutCountryInput = {
-    where: PathwayRestrictedNationalityScalarWhereInput
-    data: XOR<PathwayRestrictedNationalityUpdateManyMutationInput, PathwayRestrictedNationalityUncheckedUpdateManyWithoutCountryInput>
-  }
-
-  export type PathwayRestrictedNationalityScalarWhereInput = {
-    AND?: PathwayRestrictedNationalityScalarWhereInput | PathwayRestrictedNationalityScalarWhereInput[]
-    OR?: PathwayRestrictedNationalityScalarWhereInput[]
-    NOT?: PathwayRestrictedNationalityScalarWhereInput | PathwayRestrictedNationalityScalarWhereInput[]
-    pathwayId?: IntFilter<"PathwayRestrictedNationality"> | number
-    countryCode?: StringFilter<"PathwayRestrictedNationality"> | string
-    note?: StringNullableFilter<"PathwayRestrictedNationality"> | string | null
-  }
-
   export type CountryCreateWithoutCountryLanguagesInput = {
     code: string
     name: string
     countryCurrencies?: CountryCurrencyCreateNestedManyWithoutCountryInput
-    pathways?: PathwayCreateNestedManyWithoutCountryInput
     restrictedPathways?: PathwayRestrictedNationalityCreateNestedManyWithoutCountryInput
+    pathways?: PathwayCreateNestedManyWithoutCountryInput
   }
 
   export type CountryUncheckedCreateWithoutCountryLanguagesInput = {
     code: string
     name: string
     countryCurrencies?: CountryCurrencyUncheckedCreateNestedManyWithoutCountryInput
-    pathways?: PathwayUncheckedCreateNestedManyWithoutCountryInput
     restrictedPathways?: PathwayRestrictedNationalityUncheckedCreateNestedManyWithoutCountryInput
+    pathways?: PathwayUncheckedCreateNestedManyWithoutCountryInput
   }
 
   export type CountryCreateOrConnectWithoutCountryLanguagesInput = {
@@ -46131,16 +46131,16 @@ export namespace Prisma {
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     countryCurrencies?: CountryCurrencyUpdateManyWithoutCountryNestedInput
-    pathways?: PathwayUpdateManyWithoutCountryNestedInput
     restrictedPathways?: PathwayRestrictedNationalityUpdateManyWithoutCountryNestedInput
+    pathways?: PathwayUpdateManyWithoutCountryNestedInput
   }
 
   export type CountryUncheckedUpdateWithoutCountryLanguagesInput = {
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     countryCurrencies?: CountryCurrencyUncheckedUpdateManyWithoutCountryNestedInput
-    pathways?: PathwayUncheckedUpdateManyWithoutCountryNestedInput
     restrictedPathways?: PathwayRestrictedNationalityUncheckedUpdateManyWithoutCountryNestedInput
+    pathways?: PathwayUncheckedUpdateManyWithoutCountryNestedInput
   }
 
   export type LanguageUpsertWithoutCountryLanguagesInput = {
@@ -46168,16 +46168,16 @@ export namespace Prisma {
     code: string
     name: string
     countryLanguages?: CountryLanguageCreateNestedManyWithoutCountryInput
-    pathways?: PathwayCreateNestedManyWithoutCountryInput
     restrictedPathways?: PathwayRestrictedNationalityCreateNestedManyWithoutCountryInput
+    pathways?: PathwayCreateNestedManyWithoutCountryInput
   }
 
   export type CountryUncheckedCreateWithoutCountryCurrenciesInput = {
     code: string
     name: string
     countryLanguages?: CountryLanguageUncheckedCreateNestedManyWithoutCountryInput
-    pathways?: PathwayUncheckedCreateNestedManyWithoutCountryInput
     restrictedPathways?: PathwayRestrictedNationalityUncheckedCreateNestedManyWithoutCountryInput
+    pathways?: PathwayUncheckedCreateNestedManyWithoutCountryInput
   }
 
   export type CountryCreateOrConnectWithoutCountryCurrenciesInput = {
@@ -46219,16 +46219,16 @@ export namespace Prisma {
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     countryLanguages?: CountryLanguageUpdateManyWithoutCountryNestedInput
-    pathways?: PathwayUpdateManyWithoutCountryNestedInput
     restrictedPathways?: PathwayRestrictedNationalityUpdateManyWithoutCountryNestedInput
+    pathways?: PathwayUpdateManyWithoutCountryNestedInput
   }
 
   export type CountryUncheckedUpdateWithoutCountryCurrenciesInput = {
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     countryLanguages?: CountryLanguageUncheckedUpdateManyWithoutCountryNestedInput
-    pathways?: PathwayUncheckedUpdateManyWithoutCountryNestedInput
     restrictedPathways?: PathwayRestrictedNationalityUncheckedUpdateManyWithoutCountryNestedInput
+    pathways?: PathwayUncheckedUpdateManyWithoutCountryNestedInput
   }
 
   export type CurrencyUpsertWithoutCountryCurrenciesInput = {
@@ -46254,6 +46254,94 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     symbol?: StringFieldUpdateOperationsInput | string
     pathways?: PathwayUncheckedUpdateManyWithoutCurrencyNestedInput
+  }
+
+  export type PathwayDocumentsCreateWithoutPathwayInput = {
+    description?: string | null
+    cost?: Decimal | DecimalJsLike | number | string
+    isRequired?: boolean
+    link?: string | null
+    title?: string | null
+    document?: DocumentsCreateNestedOneWithoutPathwayDocumentsInput
+  }
+
+  export type PathwayDocumentsUncheckedCreateWithoutPathwayInput = {
+    id?: number
+    documentId?: number
+    description?: string | null
+    cost?: Decimal | DecimalJsLike | number | string
+    isRequired?: boolean
+    link?: string | null
+    title?: string | null
+  }
+
+  export type PathwayDocumentsCreateOrConnectWithoutPathwayInput = {
+    where: PathwayDocumentsWhereUniqueInput
+    create: XOR<PathwayDocumentsCreateWithoutPathwayInput, PathwayDocumentsUncheckedCreateWithoutPathwayInput>
+  }
+
+  export type PathwayDocumentsCreateManyPathwayInputEnvelope = {
+    data: PathwayDocumentsCreateManyPathwayInput | PathwayDocumentsCreateManyPathwayInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PathwayCategoriesCreateWithoutPathwaysInput = {
+    pathway_categories: PathwayTypesCreateNestedOneWithoutPathwayCategoriesInput
+  }
+
+  export type PathwayCategoriesUncheckedCreateWithoutPathwaysInput = {
+    pathwayTypeId: number
+  }
+
+  export type PathwayCategoriesCreateOrConnectWithoutPathwaysInput = {
+    where: PathwayCategoriesWhereUniqueInput
+    create: XOR<PathwayCategoriesCreateWithoutPathwaysInput, PathwayCategoriesUncheckedCreateWithoutPathwaysInput>
+  }
+
+  export type PathwayCategoriesCreateManyPathwaysInputEnvelope = {
+    data: PathwayCategoriesCreateManyPathwaysInput | PathwayCategoriesCreateManyPathwaysInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PathwayPipelineCreateWithoutPathwayInput = {
+    pipeline: $Enums.PathwayPipelines
+    note?: string | null
+  }
+
+  export type PathwayPipelineUncheckedCreateWithoutPathwayInput = {
+    id?: number
+    pipeline: $Enums.PathwayPipelines
+    note?: string | null
+  }
+
+  export type PathwayPipelineCreateOrConnectWithoutPathwayInput = {
+    where: PathwayPipelineWhereUniqueInput
+    create: XOR<PathwayPipelineCreateWithoutPathwayInput, PathwayPipelineUncheckedCreateWithoutPathwayInput>
+  }
+
+  export type PathwayPipelineCreateManyPathwayInputEnvelope = {
+    data: PathwayPipelineCreateManyPathwayInput | PathwayPipelineCreateManyPathwayInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PathwayRestrictedNationalityCreateWithoutPathwayInput = {
+    note?: string | null
+    country: CountryCreateNestedOneWithoutRestrictedPathwaysInput
+  }
+
+  export type PathwayRestrictedNationalityUncheckedCreateWithoutPathwayInput = {
+    countryCode: string
+    note?: string | null
+  }
+
+  export type PathwayRestrictedNationalityCreateOrConnectWithoutPathwayInput = {
+    where: PathwayRestrictedNationalityWhereUniqueInput
+    create: XOR<PathwayRestrictedNationalityCreateWithoutPathwayInput, PathwayRestrictedNationalityUncheckedCreateWithoutPathwayInput>
+  }
+
+  export type PathwayRestrictedNationalityCreateManyPathwayInputEnvelope = {
+    data: PathwayRestrictedNationalityCreateManyPathwayInput | PathwayRestrictedNationalityCreateManyPathwayInput[]
+    skipDuplicates?: boolean
   }
 
   export type CountryCreateWithoutPathwaysInput = {
@@ -46308,11 +46396,11 @@ export namespace Prisma {
     discordHandle?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     postVersionHistory?: PostVersionHistoryCreateNestedManyWithoutUserInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     key?: UserKeyCreateNestedOneWithoutUserInput
     roles?: UserRolesCreateNestedManyWithoutUserInput
     socials?: UserSocialCreateNestedManyWithoutUserInput
-    posts?: PostCreateNestedManyWithoutAuthorInput
     resources?: ResourceCreateNestedManyWithoutAuthorInput
   }
 
@@ -46328,11 +46416,11 @@ export namespace Prisma {
     discordHandle?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     postVersionHistory?: PostVersionHistoryUncheckedCreateNestedManyWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     key?: UserKeyUncheckedCreateNestedOneWithoutUserInput
     roles?: UserRolesUncheckedCreateNestedManyWithoutUserInput
     socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     resources?: ResourceUncheckedCreateNestedManyWithoutAuthorInput
   }
 
@@ -46341,92 +46429,100 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutPathwayInput, UserUncheckedCreateWithoutPathwayInput>
   }
 
-  export type PathwayCategoriesCreateWithoutPathwayInput = {
-    pathwayType: PathwayTypesCreateNestedOneWithoutPathwaysInput
-  }
-
-  export type PathwayCategoriesUncheckedCreateWithoutPathwayInput = {
-    pathwayTypeId: number
-  }
-
-  export type PathwayCategoriesCreateOrConnectWithoutPathwayInput = {
-    where: PathwayCategoriesWhereUniqueInput
-    create: XOR<PathwayCategoriesCreateWithoutPathwayInput, PathwayCategoriesUncheckedCreateWithoutPathwayInput>
-  }
-
-  export type PathwayCategoriesCreateManyPathwayInputEnvelope = {
-    data: PathwayCategoriesCreateManyPathwayInput | PathwayCategoriesCreateManyPathwayInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type PathwayDocumentsCreateWithoutPathwayInput = {
-    description?: string | null
-    cost?: Decimal | DecimalJsLike | number | string
-    isRequired?: boolean
-    link?: string | null
-    title?: string | null
-    document: DocumentsCreateNestedOneWithoutPathwayDocumentsInput
-  }
-
-  export type PathwayDocumentsUncheckedCreateWithoutPathwayInput = {
-    id?: number
-    documentId: number
-    description?: string | null
-    cost?: Decimal | DecimalJsLike | number | string
-    isRequired?: boolean
-    link?: string | null
-    title?: string | null
-  }
-
-  export type PathwayDocumentsCreateOrConnectWithoutPathwayInput = {
+  export type PathwayDocumentsUpsertWithWhereUniqueWithoutPathwayInput = {
     where: PathwayDocumentsWhereUniqueInput
+    update: XOR<PathwayDocumentsUpdateWithoutPathwayInput, PathwayDocumentsUncheckedUpdateWithoutPathwayInput>
     create: XOR<PathwayDocumentsCreateWithoutPathwayInput, PathwayDocumentsUncheckedCreateWithoutPathwayInput>
   }
 
-  export type PathwayDocumentsCreateManyPathwayInputEnvelope = {
-    data: PathwayDocumentsCreateManyPathwayInput | PathwayDocumentsCreateManyPathwayInput[]
-    skipDuplicates?: boolean
+  export type PathwayDocumentsUpdateWithWhereUniqueWithoutPathwayInput = {
+    where: PathwayDocumentsWhereUniqueInput
+    data: XOR<PathwayDocumentsUpdateWithoutPathwayInput, PathwayDocumentsUncheckedUpdateWithoutPathwayInput>
   }
 
-  export type PathwayPipelineCreateWithoutPathwayInput = {
-    pipeline: $Enums.PathwayPipelines
-    note?: string | null
+  export type PathwayDocumentsUpdateManyWithWhereWithoutPathwayInput = {
+    where: PathwayDocumentsScalarWhereInput
+    data: XOR<PathwayDocumentsUpdateManyMutationInput, PathwayDocumentsUncheckedUpdateManyWithoutPathwayInput>
   }
 
-  export type PathwayPipelineUncheckedCreateWithoutPathwayInput = {
-    id?: number
-    pipeline: $Enums.PathwayPipelines
-    note?: string | null
+  export type PathwayDocumentsScalarWhereInput = {
+    AND?: PathwayDocumentsScalarWhereInput | PathwayDocumentsScalarWhereInput[]
+    OR?: PathwayDocumentsScalarWhereInput[]
+    NOT?: PathwayDocumentsScalarWhereInput | PathwayDocumentsScalarWhereInput[]
+    id?: IntFilter<"PathwayDocuments"> | number
+    pathwayId?: IntFilter<"PathwayDocuments"> | number
+    documentId?: IntFilter<"PathwayDocuments"> | number
+    description?: StringNullableFilter<"PathwayDocuments"> | string | null
+    cost?: DecimalFilter<"PathwayDocuments"> | Decimal | DecimalJsLike | number | string
+    isRequired?: BoolFilter<"PathwayDocuments"> | boolean
+    link?: StringNullableFilter<"PathwayDocuments"> | string | null
+    title?: StringNullableFilter<"PathwayDocuments"> | string | null
   }
 
-  export type PathwayPipelineCreateOrConnectWithoutPathwayInput = {
+  export type PathwayCategoriesUpsertWithWhereUniqueWithoutPathwaysInput = {
+    where: PathwayCategoriesWhereUniqueInput
+    update: XOR<PathwayCategoriesUpdateWithoutPathwaysInput, PathwayCategoriesUncheckedUpdateWithoutPathwaysInput>
+    create: XOR<PathwayCategoriesCreateWithoutPathwaysInput, PathwayCategoriesUncheckedCreateWithoutPathwaysInput>
+  }
+
+  export type PathwayCategoriesUpdateWithWhereUniqueWithoutPathwaysInput = {
+    where: PathwayCategoriesWhereUniqueInput
+    data: XOR<PathwayCategoriesUpdateWithoutPathwaysInput, PathwayCategoriesUncheckedUpdateWithoutPathwaysInput>
+  }
+
+  export type PathwayCategoriesUpdateManyWithWhereWithoutPathwaysInput = {
+    where: PathwayCategoriesScalarWhereInput
+    data: XOR<PathwayCategoriesUpdateManyMutationInput, PathwayCategoriesUncheckedUpdateManyWithoutPathwaysInput>
+  }
+
+  export type PathwayCategoriesScalarWhereInput = {
+    AND?: PathwayCategoriesScalarWhereInput | PathwayCategoriesScalarWhereInput[]
+    OR?: PathwayCategoriesScalarWhereInput[]
+    NOT?: PathwayCategoriesScalarWhereInput | PathwayCategoriesScalarWhereInput[]
+    pathwayId?: IntFilter<"PathwayCategories"> | number
+    pathwayTypeId?: IntFilter<"PathwayCategories"> | number
+  }
+
+  export type PathwayPipelineUpsertWithWhereUniqueWithoutPathwayInput = {
     where: PathwayPipelineWhereUniqueInput
+    update: XOR<PathwayPipelineUpdateWithoutPathwayInput, PathwayPipelineUncheckedUpdateWithoutPathwayInput>
     create: XOR<PathwayPipelineCreateWithoutPathwayInput, PathwayPipelineUncheckedCreateWithoutPathwayInput>
   }
 
-  export type PathwayPipelineCreateManyPathwayInputEnvelope = {
-    data: PathwayPipelineCreateManyPathwayInput | PathwayPipelineCreateManyPathwayInput[]
-    skipDuplicates?: boolean
+  export type PathwayPipelineUpdateWithWhereUniqueWithoutPathwayInput = {
+    where: PathwayPipelineWhereUniqueInput
+    data: XOR<PathwayPipelineUpdateWithoutPathwayInput, PathwayPipelineUncheckedUpdateWithoutPathwayInput>
   }
 
-  export type PathwayRestrictedNationalityCreateWithoutPathwayInput = {
-    note?: string | null
-    country: CountryCreateNestedOneWithoutRestrictedPathwaysInput
+  export type PathwayPipelineUpdateManyWithWhereWithoutPathwayInput = {
+    where: PathwayPipelineScalarWhereInput
+    data: XOR<PathwayPipelineUpdateManyMutationInput, PathwayPipelineUncheckedUpdateManyWithoutPathwayInput>
   }
 
-  export type PathwayRestrictedNationalityUncheckedCreateWithoutPathwayInput = {
-    countryCode: string
-    note?: string | null
+  export type PathwayPipelineScalarWhereInput = {
+    AND?: PathwayPipelineScalarWhereInput | PathwayPipelineScalarWhereInput[]
+    OR?: PathwayPipelineScalarWhereInput[]
+    NOT?: PathwayPipelineScalarWhereInput | PathwayPipelineScalarWhereInput[]
+    id?: IntFilter<"PathwayPipeline"> | number
+    pathwayId?: IntFilter<"PathwayPipeline"> | number
+    pipeline?: EnumPathwayPipelinesFilter<"PathwayPipeline"> | $Enums.PathwayPipelines
+    note?: StringNullableFilter<"PathwayPipeline"> | string | null
   }
 
-  export type PathwayRestrictedNationalityCreateOrConnectWithoutPathwayInput = {
+  export type PathwayRestrictedNationalityUpsertWithWhereUniqueWithoutPathwayInput = {
     where: PathwayRestrictedNationalityWhereUniqueInput
+    update: XOR<PathwayRestrictedNationalityUpdateWithoutPathwayInput, PathwayRestrictedNationalityUncheckedUpdateWithoutPathwayInput>
     create: XOR<PathwayRestrictedNationalityCreateWithoutPathwayInput, PathwayRestrictedNationalityUncheckedCreateWithoutPathwayInput>
   }
 
-  export type PathwayRestrictedNationalityCreateManyPathwayInputEnvelope = {
-    data: PathwayRestrictedNationalityCreateManyPathwayInput | PathwayRestrictedNationalityCreateManyPathwayInput[]
-    skipDuplicates?: boolean
+  export type PathwayRestrictedNationalityUpdateWithWhereUniqueWithoutPathwayInput = {
+    where: PathwayRestrictedNationalityWhereUniqueInput
+    data: XOR<PathwayRestrictedNationalityUpdateWithoutPathwayInput, PathwayRestrictedNationalityUncheckedUpdateWithoutPathwayInput>
+  }
+
+  export type PathwayRestrictedNationalityUpdateManyWithWhereWithoutPathwayInput = {
+    where: PathwayRestrictedNationalityScalarWhereInput
+    data: XOR<PathwayRestrictedNationalityUpdateManyMutationInput, PathwayRestrictedNationalityUncheckedUpdateManyWithoutPathwayInput>
   }
 
   export type CountryUpsertWithoutPathwaysInput = {
@@ -46504,11 +46600,11 @@ export namespace Prisma {
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     postVersionHistory?: PostVersionHistoryUpdateManyWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     key?: UserKeyUpdateOneWithoutUserNestedInput
     roles?: UserRolesUpdateManyWithoutUserNestedInput
     socials?: UserSocialUpdateManyWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutAuthorNestedInput
     resources?: ResourceUpdateManyWithoutAuthorNestedInput
   }
 
@@ -46524,264 +46620,12 @@ export namespace Prisma {
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     postVersionHistory?: PostVersionHistoryUncheckedUpdateManyWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     key?: UserKeyUncheckedUpdateOneWithoutUserNestedInput
     roles?: UserRolesUncheckedUpdateManyWithoutUserNestedInput
     socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     resources?: ResourceUncheckedUpdateManyWithoutAuthorNestedInput
-  }
-
-  export type PathwayCategoriesUpsertWithWhereUniqueWithoutPathwayInput = {
-    where: PathwayCategoriesWhereUniqueInput
-    update: XOR<PathwayCategoriesUpdateWithoutPathwayInput, PathwayCategoriesUncheckedUpdateWithoutPathwayInput>
-    create: XOR<PathwayCategoriesCreateWithoutPathwayInput, PathwayCategoriesUncheckedCreateWithoutPathwayInput>
-  }
-
-  export type PathwayCategoriesUpdateWithWhereUniqueWithoutPathwayInput = {
-    where: PathwayCategoriesWhereUniqueInput
-    data: XOR<PathwayCategoriesUpdateWithoutPathwayInput, PathwayCategoriesUncheckedUpdateWithoutPathwayInput>
-  }
-
-  export type PathwayCategoriesUpdateManyWithWhereWithoutPathwayInput = {
-    where: PathwayCategoriesScalarWhereInput
-    data: XOR<PathwayCategoriesUpdateManyMutationInput, PathwayCategoriesUncheckedUpdateManyWithoutPathwayInput>
-  }
-
-  export type PathwayCategoriesScalarWhereInput = {
-    AND?: PathwayCategoriesScalarWhereInput | PathwayCategoriesScalarWhereInput[]
-    OR?: PathwayCategoriesScalarWhereInput[]
-    NOT?: PathwayCategoriesScalarWhereInput | PathwayCategoriesScalarWhereInput[]
-    pathwayId?: IntFilter<"PathwayCategories"> | number
-    pathwayTypeId?: IntFilter<"PathwayCategories"> | number
-  }
-
-  export type PathwayDocumentsUpsertWithWhereUniqueWithoutPathwayInput = {
-    where: PathwayDocumentsWhereUniqueInput
-    update: XOR<PathwayDocumentsUpdateWithoutPathwayInput, PathwayDocumentsUncheckedUpdateWithoutPathwayInput>
-    create: XOR<PathwayDocumentsCreateWithoutPathwayInput, PathwayDocumentsUncheckedCreateWithoutPathwayInput>
-  }
-
-  export type PathwayDocumentsUpdateWithWhereUniqueWithoutPathwayInput = {
-    where: PathwayDocumentsWhereUniqueInput
-    data: XOR<PathwayDocumentsUpdateWithoutPathwayInput, PathwayDocumentsUncheckedUpdateWithoutPathwayInput>
-  }
-
-  export type PathwayDocumentsUpdateManyWithWhereWithoutPathwayInput = {
-    where: PathwayDocumentsScalarWhereInput
-    data: XOR<PathwayDocumentsUpdateManyMutationInput, PathwayDocumentsUncheckedUpdateManyWithoutPathwayInput>
-  }
-
-  export type PathwayDocumentsScalarWhereInput = {
-    AND?: PathwayDocumentsScalarWhereInput | PathwayDocumentsScalarWhereInput[]
-    OR?: PathwayDocumentsScalarWhereInput[]
-    NOT?: PathwayDocumentsScalarWhereInput | PathwayDocumentsScalarWhereInput[]
-    id?: IntFilter<"PathwayDocuments"> | number
-    pathwayId?: IntFilter<"PathwayDocuments"> | number
-    documentId?: IntFilter<"PathwayDocuments"> | number
-    description?: StringNullableFilter<"PathwayDocuments"> | string | null
-    cost?: DecimalFilter<"PathwayDocuments"> | Decimal | DecimalJsLike | number | string
-    isRequired?: BoolFilter<"PathwayDocuments"> | boolean
-    link?: StringNullableFilter<"PathwayDocuments"> | string | null
-    title?: StringNullableFilter<"PathwayDocuments"> | string | null
-  }
-
-  export type PathwayPipelineUpsertWithWhereUniqueWithoutPathwayInput = {
-    where: PathwayPipelineWhereUniqueInput
-    update: XOR<PathwayPipelineUpdateWithoutPathwayInput, PathwayPipelineUncheckedUpdateWithoutPathwayInput>
-    create: XOR<PathwayPipelineCreateWithoutPathwayInput, PathwayPipelineUncheckedCreateWithoutPathwayInput>
-  }
-
-  export type PathwayPipelineUpdateWithWhereUniqueWithoutPathwayInput = {
-    where: PathwayPipelineWhereUniqueInput
-    data: XOR<PathwayPipelineUpdateWithoutPathwayInput, PathwayPipelineUncheckedUpdateWithoutPathwayInput>
-  }
-
-  export type PathwayPipelineUpdateManyWithWhereWithoutPathwayInput = {
-    where: PathwayPipelineScalarWhereInput
-    data: XOR<PathwayPipelineUpdateManyMutationInput, PathwayPipelineUncheckedUpdateManyWithoutPathwayInput>
-  }
-
-  export type PathwayPipelineScalarWhereInput = {
-    AND?: PathwayPipelineScalarWhereInput | PathwayPipelineScalarWhereInput[]
-    OR?: PathwayPipelineScalarWhereInput[]
-    NOT?: PathwayPipelineScalarWhereInput | PathwayPipelineScalarWhereInput[]
-    id?: IntFilter<"PathwayPipeline"> | number
-    pathwayId?: IntFilter<"PathwayPipeline"> | number
-    pipeline?: EnumPathwayPipelinesFilter<"PathwayPipeline"> | $Enums.PathwayPipelines
-    note?: StringNullableFilter<"PathwayPipeline"> | string | null
-  }
-
-  export type PathwayRestrictedNationalityUpsertWithWhereUniqueWithoutPathwayInput = {
-    where: PathwayRestrictedNationalityWhereUniqueInput
-    update: XOR<PathwayRestrictedNationalityUpdateWithoutPathwayInput, PathwayRestrictedNationalityUncheckedUpdateWithoutPathwayInput>
-    create: XOR<PathwayRestrictedNationalityCreateWithoutPathwayInput, PathwayRestrictedNationalityUncheckedCreateWithoutPathwayInput>
-  }
-
-  export type PathwayRestrictedNationalityUpdateWithWhereUniqueWithoutPathwayInput = {
-    where: PathwayRestrictedNationalityWhereUniqueInput
-    data: XOR<PathwayRestrictedNationalityUpdateWithoutPathwayInput, PathwayRestrictedNationalityUncheckedUpdateWithoutPathwayInput>
-  }
-
-  export type PathwayRestrictedNationalityUpdateManyWithWhereWithoutPathwayInput = {
-    where: PathwayRestrictedNationalityScalarWhereInput
-    data: XOR<PathwayRestrictedNationalityUpdateManyMutationInput, PathwayRestrictedNationalityUncheckedUpdateManyWithoutPathwayInput>
-  }
-
-  export type PathwayCreateWithoutCategoriesInput = {
-    name: string
-    link: string
-    description: string
-    type: $Enums.PathwayType
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    notes?: PathwayCreatenotesInput | string[]
-    limitations?: PathwayCreatelimitationsInput | string[]
-    requirements?: PathwayCreaterequirementsInput | string[]
-    restrictions?: PathwayCreaterestrictionsInput | string[]
-    duration?: NullableJsonNullValueInput | InputJsonValue
-    processTime?: NullableJsonNullValueInput | InputJsonValue
-    renewal?: NullableJsonNullValueInput | InputJsonValue
-    cost?: NullableJsonNullValueInput | InputJsonValue
-    country: CountryCreateNestedOneWithoutPathwaysInput
-    currency: CurrencyCreateNestedOneWithoutPathwaysInput
-    CMS_User: UserCreateNestedOneWithoutPathwayInput
-    documents?: PathwayDocumentsCreateNestedManyWithoutPathwayInput
-    pipelines?: PathwayPipelineCreateNestedManyWithoutPathwayInput
-    restrictedNationalities?: PathwayRestrictedNationalityCreateNestedManyWithoutPathwayInput
-  }
-
-  export type PathwayUncheckedCreateWithoutCategoriesInput = {
-    id?: number
-    countryCode: string
-    name: string
-    link: string
-    description: string
-    type: $Enums.PathwayType
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    currencyCode: string
-    notes?: PathwayCreatenotesInput | string[]
-    limitations?: PathwayCreatelimitationsInput | string[]
-    requirements?: PathwayCreaterequirementsInput | string[]
-    restrictions?: PathwayCreaterestrictionsInput | string[]
-    duration?: NullableJsonNullValueInput | InputJsonValue
-    processTime?: NullableJsonNullValueInput | InputJsonValue
-    renewal?: NullableJsonNullValueInput | InputJsonValue
-    cost?: NullableJsonNullValueInput | InputJsonValue
-    createdby: string
-    documents?: PathwayDocumentsUncheckedCreateNestedManyWithoutPathwayInput
-    pipelines?: PathwayPipelineUncheckedCreateNestedManyWithoutPathwayInput
-    restrictedNationalities?: PathwayRestrictedNationalityUncheckedCreateNestedManyWithoutPathwayInput
-  }
-
-  export type PathwayCreateOrConnectWithoutCategoriesInput = {
-    where: PathwayWhereUniqueInput
-    create: XOR<PathwayCreateWithoutCategoriesInput, PathwayUncheckedCreateWithoutCategoriesInput>
-  }
-
-  export type PathwayTypesCreateWithoutPathwaysInput = {
-    name: string
-    description?: string | null
-    parent?: PathwayTypesCreateNestedOneWithoutChildrenInput
-    children?: PathwayTypesCreateNestedManyWithoutParentInput
-  }
-
-  export type PathwayTypesUncheckedCreateWithoutPathwaysInput = {
-    id?: number
-    name: string
-    parentId?: number | null
-    description?: string | null
-    children?: PathwayTypesUncheckedCreateNestedManyWithoutParentInput
-  }
-
-  export type PathwayTypesCreateOrConnectWithoutPathwaysInput = {
-    where: PathwayTypesWhereUniqueInput
-    create: XOR<PathwayTypesCreateWithoutPathwaysInput, PathwayTypesUncheckedCreateWithoutPathwaysInput>
-  }
-
-  export type PathwayUpsertWithoutCategoriesInput = {
-    update: XOR<PathwayUpdateWithoutCategoriesInput, PathwayUncheckedUpdateWithoutCategoriesInput>
-    create: XOR<PathwayCreateWithoutCategoriesInput, PathwayUncheckedCreateWithoutCategoriesInput>
-    where?: PathwayWhereInput
-  }
-
-  export type PathwayUpdateToOneWithWhereWithoutCategoriesInput = {
-    where?: PathwayWhereInput
-    data: XOR<PathwayUpdateWithoutCategoriesInput, PathwayUncheckedUpdateWithoutCategoriesInput>
-  }
-
-  export type PathwayUpdateWithoutCategoriesInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    link?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    type?: EnumPathwayTypeFieldUpdateOperationsInput | $Enums.PathwayType
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    notes?: PathwayUpdatenotesInput | string[]
-    limitations?: PathwayUpdatelimitationsInput | string[]
-    requirements?: PathwayUpdaterequirementsInput | string[]
-    restrictions?: PathwayUpdaterestrictionsInput | string[]
-    duration?: NullableJsonNullValueInput | InputJsonValue
-    processTime?: NullableJsonNullValueInput | InputJsonValue
-    renewal?: NullableJsonNullValueInput | InputJsonValue
-    cost?: NullableJsonNullValueInput | InputJsonValue
-    country?: CountryUpdateOneRequiredWithoutPathwaysNestedInput
-    currency?: CurrencyUpdateOneRequiredWithoutPathwaysNestedInput
-    CMS_User?: UserUpdateOneRequiredWithoutPathwayNestedInput
-    documents?: PathwayDocumentsUpdateManyWithoutPathwayNestedInput
-    pipelines?: PathwayPipelineUpdateManyWithoutPathwayNestedInput
-    restrictedNationalities?: PathwayRestrictedNationalityUpdateManyWithoutPathwayNestedInput
-  }
-
-  export type PathwayUncheckedUpdateWithoutCategoriesInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    countryCode?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    link?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    type?: EnumPathwayTypeFieldUpdateOperationsInput | $Enums.PathwayType
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    currencyCode?: StringFieldUpdateOperationsInput | string
-    notes?: PathwayUpdatenotesInput | string[]
-    limitations?: PathwayUpdatelimitationsInput | string[]
-    requirements?: PathwayUpdaterequirementsInput | string[]
-    restrictions?: PathwayUpdaterestrictionsInput | string[]
-    duration?: NullableJsonNullValueInput | InputJsonValue
-    processTime?: NullableJsonNullValueInput | InputJsonValue
-    renewal?: NullableJsonNullValueInput | InputJsonValue
-    cost?: NullableJsonNullValueInput | InputJsonValue
-    createdby?: StringFieldUpdateOperationsInput | string
-    documents?: PathwayDocumentsUncheckedUpdateManyWithoutPathwayNestedInput
-    pipelines?: PathwayPipelineUncheckedUpdateManyWithoutPathwayNestedInput
-    restrictedNationalities?: PathwayRestrictedNationalityUncheckedUpdateManyWithoutPathwayNestedInput
-  }
-
-  export type PathwayTypesUpsertWithoutPathwaysInput = {
-    update: XOR<PathwayTypesUpdateWithoutPathwaysInput, PathwayTypesUncheckedUpdateWithoutPathwaysInput>
-    create: XOR<PathwayTypesCreateWithoutPathwaysInput, PathwayTypesUncheckedCreateWithoutPathwaysInput>
-    where?: PathwayTypesWhereInput
-  }
-
-  export type PathwayTypesUpdateToOneWithWhereWithoutPathwaysInput = {
-    where?: PathwayTypesWhereInput
-    data: XOR<PathwayTypesUpdateWithoutPathwaysInput, PathwayTypesUncheckedUpdateWithoutPathwaysInput>
-  }
-
-  export type PathwayTypesUpdateWithoutPathwaysInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    parent?: PathwayTypesUpdateOneWithoutChildrenNestedInput
-    children?: PathwayTypesUpdateManyWithoutParentNestedInput
-  }
-
-  export type PathwayTypesUncheckedUpdateWithoutPathwaysInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    parentId?: NullableIntFieldUpdateOperationsInput | number | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    children?: PathwayTypesUncheckedUpdateManyWithoutParentNestedInput
   }
 
   export type PathwayCreateWithoutPipelinesInput = {
@@ -46799,12 +46643,12 @@ export namespace Prisma {
     processTime?: NullableJsonNullValueInput | InputJsonValue
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
+    documents?: PathwayDocumentsCreateNestedManyWithoutPathwayInput
+    categories?: PathwayCategoriesCreateNestedManyWithoutPathwaysInput
+    restrictedNationalities?: PathwayRestrictedNationalityCreateNestedManyWithoutPathwayInput
     country: CountryCreateNestedOneWithoutPathwaysInput
     currency: CurrencyCreateNestedOneWithoutPathwaysInput
     CMS_User: UserCreateNestedOneWithoutPathwayInput
-    categories?: PathwayCategoriesCreateNestedManyWithoutPathwayInput
-    documents?: PathwayDocumentsCreateNestedManyWithoutPathwayInput
-    restrictedNationalities?: PathwayRestrictedNationalityCreateNestedManyWithoutPathwayInput
   }
 
   export type PathwayUncheckedCreateWithoutPipelinesInput = {
@@ -46826,8 +46670,8 @@ export namespace Prisma {
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
     createdby: string
-    categories?: PathwayCategoriesUncheckedCreateNestedManyWithoutPathwayInput
     documents?: PathwayDocumentsUncheckedCreateNestedManyWithoutPathwayInput
+    categories?: PathwayCategoriesUncheckedCreateNestedManyWithoutPathwaysInput
     restrictedNationalities?: PathwayRestrictedNationalityUncheckedCreateNestedManyWithoutPathwayInput
   }
 
@@ -46862,12 +46706,12 @@ export namespace Prisma {
     processTime?: NullableJsonNullValueInput | InputJsonValue
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
+    documents?: PathwayDocumentsUpdateManyWithoutPathwayNestedInput
+    categories?: PathwayCategoriesUpdateManyWithoutPathwaysNestedInput
+    restrictedNationalities?: PathwayRestrictedNationalityUpdateManyWithoutPathwayNestedInput
     country?: CountryUpdateOneRequiredWithoutPathwaysNestedInput
     currency?: CurrencyUpdateOneRequiredWithoutPathwaysNestedInput
     CMS_User?: UserUpdateOneRequiredWithoutPathwayNestedInput
-    categories?: PathwayCategoriesUpdateManyWithoutPathwayNestedInput
-    documents?: PathwayDocumentsUpdateManyWithoutPathwayNestedInput
-    restrictedNationalities?: PathwayRestrictedNationalityUpdateManyWithoutPathwayNestedInput
   }
 
   export type PathwayUncheckedUpdateWithoutPipelinesInput = {
@@ -46889,8 +46733,8 @@ export namespace Prisma {
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
     createdby?: StringFieldUpdateOperationsInput | string
-    categories?: PathwayCategoriesUncheckedUpdateManyWithoutPathwayNestedInput
     documents?: PathwayDocumentsUncheckedUpdateManyWithoutPathwayNestedInput
+    categories?: PathwayCategoriesUncheckedUpdateManyWithoutPathwaysNestedInput
     restrictedNationalities?: PathwayRestrictedNationalityUncheckedUpdateManyWithoutPathwayNestedInput
   }
 
@@ -46930,12 +46774,12 @@ export namespace Prisma {
     processTime?: NullableJsonNullValueInput | InputJsonValue
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
+    documents?: PathwayDocumentsCreateNestedManyWithoutPathwayInput
+    categories?: PathwayCategoriesCreateNestedManyWithoutPathwaysInput
+    pipelines?: PathwayPipelineCreateNestedManyWithoutPathwayInput
     country: CountryCreateNestedOneWithoutPathwaysInput
     currency: CurrencyCreateNestedOneWithoutPathwaysInput
     CMS_User: UserCreateNestedOneWithoutPathwayInput
-    categories?: PathwayCategoriesCreateNestedManyWithoutPathwayInput
-    documents?: PathwayDocumentsCreateNestedManyWithoutPathwayInput
-    pipelines?: PathwayPipelineCreateNestedManyWithoutPathwayInput
   }
 
   export type PathwayUncheckedCreateWithoutRestrictedNationalitiesInput = {
@@ -46957,8 +46801,8 @@ export namespace Prisma {
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
     createdby: string
-    categories?: PathwayCategoriesUncheckedCreateNestedManyWithoutPathwayInput
     documents?: PathwayDocumentsUncheckedCreateNestedManyWithoutPathwayInput
+    categories?: PathwayCategoriesUncheckedCreateNestedManyWithoutPathwaysInput
     pipelines?: PathwayPipelineUncheckedCreateNestedManyWithoutPathwayInput
   }
 
@@ -47020,12 +46864,12 @@ export namespace Prisma {
     processTime?: NullableJsonNullValueInput | InputJsonValue
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
+    documents?: PathwayDocumentsUpdateManyWithoutPathwayNestedInput
+    categories?: PathwayCategoriesUpdateManyWithoutPathwaysNestedInput
+    pipelines?: PathwayPipelineUpdateManyWithoutPathwayNestedInput
     country?: CountryUpdateOneRequiredWithoutPathwaysNestedInput
     currency?: CurrencyUpdateOneRequiredWithoutPathwaysNestedInput
     CMS_User?: UserUpdateOneRequiredWithoutPathwayNestedInput
-    categories?: PathwayCategoriesUpdateManyWithoutPathwayNestedInput
-    documents?: PathwayDocumentsUpdateManyWithoutPathwayNestedInput
-    pipelines?: PathwayPipelineUpdateManyWithoutPathwayNestedInput
   }
 
   export type PathwayUncheckedUpdateWithoutRestrictedNationalitiesInput = {
@@ -47047,8 +46891,8 @@ export namespace Prisma {
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
     createdby?: StringFieldUpdateOperationsInput | string
-    categories?: PathwayCategoriesUncheckedUpdateManyWithoutPathwayNestedInput
     documents?: PathwayDocumentsUncheckedUpdateManyWithoutPathwayNestedInput
+    categories?: PathwayCategoriesUncheckedUpdateManyWithoutPathwaysNestedInput
     pipelines?: PathwayPipelineUncheckedUpdateManyWithoutPathwayNestedInput
   }
 
@@ -47085,12 +46929,12 @@ export namespace Prisma {
     processTime?: NullableJsonNullValueInput | InputJsonValue
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
+    categories?: PathwayCategoriesCreateNestedManyWithoutPathwaysInput
+    pipelines?: PathwayPipelineCreateNestedManyWithoutPathwayInput
+    restrictedNationalities?: PathwayRestrictedNationalityCreateNestedManyWithoutPathwayInput
     country: CountryCreateNestedOneWithoutPathwaysInput
     currency: CurrencyCreateNestedOneWithoutPathwaysInput
     CMS_User: UserCreateNestedOneWithoutPathwayInput
-    categories?: PathwayCategoriesCreateNestedManyWithoutPathwayInput
-    pipelines?: PathwayPipelineCreateNestedManyWithoutPathwayInput
-    restrictedNationalities?: PathwayRestrictedNationalityCreateNestedManyWithoutPathwayInput
   }
 
   export type PathwayUncheckedCreateWithoutDocumentsInput = {
@@ -47112,7 +46956,7 @@ export namespace Prisma {
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
     createdby: string
-    categories?: PathwayCategoriesUncheckedCreateNestedManyWithoutPathwayInput
+    categories?: PathwayCategoriesUncheckedCreateNestedManyWithoutPathwaysInput
     pipelines?: PathwayPipelineUncheckedCreateNestedManyWithoutPathwayInput
     restrictedNationalities?: PathwayRestrictedNationalityUncheckedCreateNestedManyWithoutPathwayInput
   }
@@ -47172,12 +47016,12 @@ export namespace Prisma {
     processTime?: NullableJsonNullValueInput | InputJsonValue
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
+    categories?: PathwayCategoriesUpdateManyWithoutPathwaysNestedInput
+    pipelines?: PathwayPipelineUpdateManyWithoutPathwayNestedInput
+    restrictedNationalities?: PathwayRestrictedNationalityUpdateManyWithoutPathwayNestedInput
     country?: CountryUpdateOneRequiredWithoutPathwaysNestedInput
     currency?: CurrencyUpdateOneRequiredWithoutPathwaysNestedInput
     CMS_User?: UserUpdateOneRequiredWithoutPathwayNestedInput
-    categories?: PathwayCategoriesUpdateManyWithoutPathwayNestedInput
-    pipelines?: PathwayPipelineUpdateManyWithoutPathwayNestedInput
-    restrictedNationalities?: PathwayRestrictedNationalityUpdateManyWithoutPathwayNestedInput
   }
 
   export type PathwayUncheckedUpdateWithoutDocumentsInput = {
@@ -47199,7 +47043,7 @@ export namespace Prisma {
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
     createdby?: StringFieldUpdateOperationsInput | string
-    categories?: PathwayCategoriesUncheckedUpdateManyWithoutPathwayNestedInput
+    categories?: PathwayCategoriesUncheckedUpdateManyWithoutPathwaysNestedInput
     pipelines?: PathwayPipelineUncheckedUpdateManyWithoutPathwayNestedInput
     restrictedNationalities?: PathwayRestrictedNationalityUncheckedUpdateManyWithoutPathwayNestedInput
   }
@@ -47237,12 +47081,12 @@ export namespace Prisma {
     processTime?: NullableJsonNullValueInput | InputJsonValue
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
-    country: CountryCreateNestedOneWithoutPathwaysInput
-    CMS_User: UserCreateNestedOneWithoutPathwayInput
-    categories?: PathwayCategoriesCreateNestedManyWithoutPathwayInput
     documents?: PathwayDocumentsCreateNestedManyWithoutPathwayInput
+    categories?: PathwayCategoriesCreateNestedManyWithoutPathwaysInput
     pipelines?: PathwayPipelineCreateNestedManyWithoutPathwayInput
     restrictedNationalities?: PathwayRestrictedNationalityCreateNestedManyWithoutPathwayInput
+    country: CountryCreateNestedOneWithoutPathwaysInput
+    CMS_User: UserCreateNestedOneWithoutPathwayInput
   }
 
   export type PathwayUncheckedCreateWithoutCurrencyInput = {
@@ -47263,8 +47107,8 @@ export namespace Prisma {
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
     createdby: string
-    categories?: PathwayCategoriesUncheckedCreateNestedManyWithoutPathwayInput
     documents?: PathwayDocumentsUncheckedCreateNestedManyWithoutPathwayInput
+    categories?: PathwayCategoriesUncheckedCreateNestedManyWithoutPathwaysInput
     pipelines?: PathwayPipelineUncheckedCreateNestedManyWithoutPathwayInput
     restrictedNationalities?: PathwayRestrictedNationalityUncheckedCreateNestedManyWithoutPathwayInput
   }
@@ -47390,6 +47234,49 @@ export namespace Prisma {
     data: XOR<CountryLanguageUpdateManyMutationInput, CountryLanguageUncheckedUpdateManyWithoutLanguageInput>
   }
 
+  export type PostBlockCreateWithoutPostInput = {
+    type: string
+    content: string
+    position: number
+    block: BlockCreateNestedOneWithoutPostBlockInput
+  }
+
+  export type PostBlockUncheckedCreateWithoutPostInput = {
+    id?: number
+    blockId: number
+    type: string
+    content: string
+    position: number
+  }
+
+  export type PostBlockCreateOrConnectWithoutPostInput = {
+    where: PostBlockWhereUniqueInput
+    create: XOR<PostBlockCreateWithoutPostInput, PostBlockUncheckedCreateWithoutPostInput>
+  }
+
+  export type PostBlockCreateManyPostInputEnvelope = {
+    data: PostBlockCreateManyPostInput | PostBlockCreateManyPostInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PostTagCreateWithoutPostInput = {
+    tag: TagCreateNestedOneWithoutPostsInput
+  }
+
+  export type PostTagUncheckedCreateWithoutPostInput = {
+    tagId: number
+  }
+
+  export type PostTagCreateOrConnectWithoutPostInput = {
+    where: PostTagWhereUniqueInput
+    create: XOR<PostTagCreateWithoutPostInput, PostTagUncheckedCreateWithoutPostInput>
+  }
+
+  export type PostTagCreateManyPostInputEnvelope = {
+    data: PostTagCreateManyPostInput | PostTagCreateManyPostInput[]
+    skipDuplicates?: boolean
+  }
+
   export type PostVersionHistoryCreateWithoutPostInput = {
     action: string
     instanceAt?: Date | string
@@ -47458,47 +47345,56 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
   }
 
-  export type PostBlockCreateWithoutPostInput = {
-    type: string
-    content: string
-    position: number
-    block: BlockCreateNestedOneWithoutPostBlockInput
-  }
-
-  export type PostBlockUncheckedCreateWithoutPostInput = {
-    id?: number
-    blockId: number
-    type: string
-    content: string
-    position: number
-  }
-
-  export type PostBlockCreateOrConnectWithoutPostInput = {
+  export type PostBlockUpsertWithWhereUniqueWithoutPostInput = {
     where: PostBlockWhereUniqueInput
+    update: XOR<PostBlockUpdateWithoutPostInput, PostBlockUncheckedUpdateWithoutPostInput>
     create: XOR<PostBlockCreateWithoutPostInput, PostBlockUncheckedCreateWithoutPostInput>
   }
 
-  export type PostBlockCreateManyPostInputEnvelope = {
-    data: PostBlockCreateManyPostInput | PostBlockCreateManyPostInput[]
-    skipDuplicates?: boolean
+  export type PostBlockUpdateWithWhereUniqueWithoutPostInput = {
+    where: PostBlockWhereUniqueInput
+    data: XOR<PostBlockUpdateWithoutPostInput, PostBlockUncheckedUpdateWithoutPostInput>
   }
 
-  export type PostTagCreateWithoutPostInput = {
-    tag: TagCreateNestedOneWithoutPostsInput
+  export type PostBlockUpdateManyWithWhereWithoutPostInput = {
+    where: PostBlockScalarWhereInput
+    data: XOR<PostBlockUpdateManyMutationInput, PostBlockUncheckedUpdateManyWithoutPostInput>
   }
 
-  export type PostTagUncheckedCreateWithoutPostInput = {
-    tagId: number
+  export type PostBlockScalarWhereInput = {
+    AND?: PostBlockScalarWhereInput | PostBlockScalarWhereInput[]
+    OR?: PostBlockScalarWhereInput[]
+    NOT?: PostBlockScalarWhereInput | PostBlockScalarWhereInput[]
+    id?: IntFilter<"PostBlock"> | number
+    postId?: IntFilter<"PostBlock"> | number
+    blockId?: IntFilter<"PostBlock"> | number
+    type?: StringFilter<"PostBlock"> | string
+    content?: StringFilter<"PostBlock"> | string
+    position?: IntFilter<"PostBlock"> | number
   }
 
-  export type PostTagCreateOrConnectWithoutPostInput = {
+  export type PostTagUpsertWithWhereUniqueWithoutPostInput = {
     where: PostTagWhereUniqueInput
+    update: XOR<PostTagUpdateWithoutPostInput, PostTagUncheckedUpdateWithoutPostInput>
     create: XOR<PostTagCreateWithoutPostInput, PostTagUncheckedCreateWithoutPostInput>
   }
 
-  export type PostTagCreateManyPostInputEnvelope = {
-    data: PostTagCreateManyPostInput | PostTagCreateManyPostInput[]
-    skipDuplicates?: boolean
+  export type PostTagUpdateWithWhereUniqueWithoutPostInput = {
+    where: PostTagWhereUniqueInput
+    data: XOR<PostTagUpdateWithoutPostInput, PostTagUncheckedUpdateWithoutPostInput>
+  }
+
+  export type PostTagUpdateManyWithWhereWithoutPostInput = {
+    where: PostTagScalarWhereInput
+    data: XOR<PostTagUpdateManyMutationInput, PostTagUncheckedUpdateManyWithoutPostInput>
+  }
+
+  export type PostTagScalarWhereInput = {
+    AND?: PostTagScalarWhereInput | PostTagScalarWhereInput[]
+    OR?: PostTagScalarWhereInput[]
+    NOT?: PostTagScalarWhereInput | PostTagScalarWhereInput[]
+    postId?: IntFilter<"PostTag"> | number
+    tagId?: IntFilter<"PostTag"> | number
   }
 
   export type PostVersionHistoryUpsertWithWhereUniqueWithoutPostInput = {
@@ -47579,58 +47475,6 @@ export namespace Prisma {
     resources?: ResourceUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
-  export type PostBlockUpsertWithWhereUniqueWithoutPostInput = {
-    where: PostBlockWhereUniqueInput
-    update: XOR<PostBlockUpdateWithoutPostInput, PostBlockUncheckedUpdateWithoutPostInput>
-    create: XOR<PostBlockCreateWithoutPostInput, PostBlockUncheckedCreateWithoutPostInput>
-  }
-
-  export type PostBlockUpdateWithWhereUniqueWithoutPostInput = {
-    where: PostBlockWhereUniqueInput
-    data: XOR<PostBlockUpdateWithoutPostInput, PostBlockUncheckedUpdateWithoutPostInput>
-  }
-
-  export type PostBlockUpdateManyWithWhereWithoutPostInput = {
-    where: PostBlockScalarWhereInput
-    data: XOR<PostBlockUpdateManyMutationInput, PostBlockUncheckedUpdateManyWithoutPostInput>
-  }
-
-  export type PostBlockScalarWhereInput = {
-    AND?: PostBlockScalarWhereInput | PostBlockScalarWhereInput[]
-    OR?: PostBlockScalarWhereInput[]
-    NOT?: PostBlockScalarWhereInput | PostBlockScalarWhereInput[]
-    id?: IntFilter<"PostBlock"> | number
-    postId?: IntFilter<"PostBlock"> | number
-    blockId?: IntFilter<"PostBlock"> | number
-    type?: StringFilter<"PostBlock"> | string
-    content?: StringFilter<"PostBlock"> | string
-    position?: IntFilter<"PostBlock"> | number
-  }
-
-  export type PostTagUpsertWithWhereUniqueWithoutPostInput = {
-    where: PostTagWhereUniqueInput
-    update: XOR<PostTagUpdateWithoutPostInput, PostTagUncheckedUpdateWithoutPostInput>
-    create: XOR<PostTagCreateWithoutPostInput, PostTagUncheckedCreateWithoutPostInput>
-  }
-
-  export type PostTagUpdateWithWhereUniqueWithoutPostInput = {
-    where: PostTagWhereUniqueInput
-    data: XOR<PostTagUpdateWithoutPostInput, PostTagUncheckedUpdateWithoutPostInput>
-  }
-
-  export type PostTagUpdateManyWithWhereWithoutPostInput = {
-    where: PostTagScalarWhereInput
-    data: XOR<PostTagUpdateManyMutationInput, PostTagUncheckedUpdateManyWithoutPostInput>
-  }
-
-  export type PostTagScalarWhereInput = {
-    AND?: PostTagScalarWhereInput | PostTagScalarWhereInput[]
-    OR?: PostTagScalarWhereInput[]
-    NOT?: PostTagScalarWhereInput | PostTagScalarWhereInput[]
-    postId?: IntFilter<"PostTag"> | number
-    tagId?: IntFilter<"PostTag"> | number
-  }
-
   export type PostCreateWithoutTagsInput = {
     name: string
     createdAt?: Date | string
@@ -47646,9 +47490,9 @@ export namespace Prisma {
     contentDelta?: string
     imageExt?: string | null
     imageKey?: string | null
+    postBlock?: PostBlockCreateNestedManyWithoutPostInput
     postVersionHistories?: PostVersionHistoryCreateNestedManyWithoutPostInput
     author: UserCreateNestedOneWithoutPostsInput
-    postBlock?: PostBlockCreateNestedManyWithoutPostInput
   }
 
   export type PostUncheckedCreateWithoutTagsInput = {
@@ -47668,8 +47512,8 @@ export namespace Prisma {
     contentDelta?: string
     imageExt?: string | null
     imageKey?: string | null
-    postVersionHistories?: PostVersionHistoryUncheckedCreateNestedManyWithoutPostInput
     postBlock?: PostBlockUncheckedCreateNestedManyWithoutPostInput
+    postVersionHistories?: PostVersionHistoryUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type PostCreateOrConnectWithoutTagsInput = {
@@ -47680,10 +47524,10 @@ export namespace Prisma {
   export type TagCreateWithoutPostsInput = {
     name: string
     color?: string
-    parent?: TagCreateNestedOneWithoutChildrenInput
-    children?: TagCreateNestedManyWithoutParentInput
     childTag?: TagHierarchyCreateNestedManyWithoutParentInput
     parentTag?: TagHierarchyCreateNestedManyWithoutChildInput
+    parent?: TagCreateNestedOneWithoutChildrenInput
+    children?: TagCreateNestedManyWithoutParentInput
   }
 
   export type TagUncheckedCreateWithoutPostsInput = {
@@ -47691,9 +47535,9 @@ export namespace Prisma {
     name: string
     parentId?: number | null
     color?: string
-    children?: TagUncheckedCreateNestedManyWithoutParentInput
     childTag?: TagHierarchyUncheckedCreateNestedManyWithoutParentInput
     parentTag?: TagHierarchyUncheckedCreateNestedManyWithoutChildInput
+    children?: TagUncheckedCreateNestedManyWithoutParentInput
   }
 
   export type TagCreateOrConnectWithoutPostsInput = {
@@ -47727,9 +47571,9 @@ export namespace Prisma {
     contentDelta?: StringFieldUpdateOperationsInput | string
     imageExt?: NullableStringFieldUpdateOperationsInput | string | null
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
+    postBlock?: PostBlockUpdateManyWithoutPostNestedInput
     postVersionHistories?: PostVersionHistoryUpdateManyWithoutPostNestedInput
     author?: UserUpdateOneRequiredWithoutPostsNestedInput
-    postBlock?: PostBlockUpdateManyWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateWithoutTagsInput = {
@@ -47749,8 +47593,8 @@ export namespace Prisma {
     contentDelta?: StringFieldUpdateOperationsInput | string
     imageExt?: NullableStringFieldUpdateOperationsInput | string | null
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
-    postVersionHistories?: PostVersionHistoryUncheckedUpdateManyWithoutPostNestedInput
     postBlock?: PostBlockUncheckedUpdateManyWithoutPostNestedInput
+    postVersionHistories?: PostVersionHistoryUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type TagUpsertWithoutPostsInput = {
@@ -47767,10 +47611,10 @@ export namespace Prisma {
   export type TagUpdateWithoutPostsInput = {
     name?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
-    parent?: TagUpdateOneWithoutChildrenNestedInput
-    children?: TagUpdateManyWithoutParentNestedInput
     childTag?: TagHierarchyUpdateManyWithoutParentNestedInput
     parentTag?: TagHierarchyUpdateManyWithoutChildNestedInput
+    parent?: TagUpdateOneWithoutChildrenNestedInput
+    children?: TagUpdateManyWithoutParentNestedInput
   }
 
   export type TagUncheckedUpdateWithoutPostsInput = {
@@ -47778,9 +47622,9 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
     color?: StringFieldUpdateOperationsInput | string
-    children?: TagUncheckedUpdateManyWithoutParentNestedInput
     childTag?: TagHierarchyUncheckedUpdateManyWithoutParentNestedInput
     parentTag?: TagHierarchyUncheckedUpdateManyWithoutChildNestedInput
+    children?: TagUncheckedUpdateManyWithoutParentNestedInput
   }
 
   export type PostTagCreateWithoutTagInput = {
@@ -47798,59 +47642,6 @@ export namespace Prisma {
 
   export type PostTagCreateManyTagInputEnvelope = {
     data: PostTagCreateManyTagInput | PostTagCreateManyTagInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type TagCreateWithoutChildrenInput = {
-    name: string
-    color?: string
-    posts?: PostTagCreateNestedManyWithoutTagInput
-    parent?: TagCreateNestedOneWithoutChildrenInput
-    childTag?: TagHierarchyCreateNestedManyWithoutParentInput
-    parentTag?: TagHierarchyCreateNestedManyWithoutChildInput
-  }
-
-  export type TagUncheckedCreateWithoutChildrenInput = {
-    id?: number
-    name: string
-    parentId?: number | null
-    color?: string
-    posts?: PostTagUncheckedCreateNestedManyWithoutTagInput
-    childTag?: TagHierarchyUncheckedCreateNestedManyWithoutParentInput
-    parentTag?: TagHierarchyUncheckedCreateNestedManyWithoutChildInput
-  }
-
-  export type TagCreateOrConnectWithoutChildrenInput = {
-    where: TagWhereUniqueInput
-    create: XOR<TagCreateWithoutChildrenInput, TagUncheckedCreateWithoutChildrenInput>
-  }
-
-  export type TagCreateWithoutParentInput = {
-    name: string
-    color?: string
-    posts?: PostTagCreateNestedManyWithoutTagInput
-    children?: TagCreateNestedManyWithoutParentInput
-    childTag?: TagHierarchyCreateNestedManyWithoutParentInput
-    parentTag?: TagHierarchyCreateNestedManyWithoutChildInput
-  }
-
-  export type TagUncheckedCreateWithoutParentInput = {
-    id?: number
-    name: string
-    color?: string
-    posts?: PostTagUncheckedCreateNestedManyWithoutTagInput
-    children?: TagUncheckedCreateNestedManyWithoutParentInput
-    childTag?: TagHierarchyUncheckedCreateNestedManyWithoutParentInput
-    parentTag?: TagHierarchyUncheckedCreateNestedManyWithoutChildInput
-  }
-
-  export type TagCreateOrConnectWithoutParentInput = {
-    where: TagWhereUniqueInput
-    create: XOR<TagCreateWithoutParentInput, TagUncheckedCreateWithoutParentInput>
-  }
-
-  export type TagCreateManyParentInputEnvelope = {
-    data: TagCreateManyParentInput | TagCreateManyParentInput[]
     skipDuplicates?: boolean
   }
 
@@ -47892,6 +47683,59 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type TagCreateWithoutChildrenInput = {
+    name: string
+    color?: string
+    posts?: PostTagCreateNestedManyWithoutTagInput
+    childTag?: TagHierarchyCreateNestedManyWithoutParentInput
+    parentTag?: TagHierarchyCreateNestedManyWithoutChildInput
+    parent?: TagCreateNestedOneWithoutChildrenInput
+  }
+
+  export type TagUncheckedCreateWithoutChildrenInput = {
+    id?: number
+    name: string
+    parentId?: number | null
+    color?: string
+    posts?: PostTagUncheckedCreateNestedManyWithoutTagInput
+    childTag?: TagHierarchyUncheckedCreateNestedManyWithoutParentInput
+    parentTag?: TagHierarchyUncheckedCreateNestedManyWithoutChildInput
+  }
+
+  export type TagCreateOrConnectWithoutChildrenInput = {
+    where: TagWhereUniqueInput
+    create: XOR<TagCreateWithoutChildrenInput, TagUncheckedCreateWithoutChildrenInput>
+  }
+
+  export type TagCreateWithoutParentInput = {
+    name: string
+    color?: string
+    posts?: PostTagCreateNestedManyWithoutTagInput
+    childTag?: TagHierarchyCreateNestedManyWithoutParentInput
+    parentTag?: TagHierarchyCreateNestedManyWithoutChildInput
+    children?: TagCreateNestedManyWithoutParentInput
+  }
+
+  export type TagUncheckedCreateWithoutParentInput = {
+    id?: number
+    name: string
+    color?: string
+    posts?: PostTagUncheckedCreateNestedManyWithoutTagInput
+    childTag?: TagHierarchyUncheckedCreateNestedManyWithoutParentInput
+    parentTag?: TagHierarchyUncheckedCreateNestedManyWithoutChildInput
+    children?: TagUncheckedCreateNestedManyWithoutParentInput
+  }
+
+  export type TagCreateOrConnectWithoutParentInput = {
+    where: TagWhereUniqueInput
+    create: XOR<TagCreateWithoutParentInput, TagUncheckedCreateWithoutParentInput>
+  }
+
+  export type TagCreateManyParentInputEnvelope = {
+    data: TagCreateManyParentInput | TagCreateManyParentInput[]
+    skipDuplicates?: boolean
+  }
+
   export type PostTagUpsertWithWhereUniqueWithoutTagInput = {
     where: PostTagWhereUniqueInput
     update: XOR<PostTagUpdateWithoutTagInput, PostTagUncheckedUpdateWithoutTagInput>
@@ -47906,62 +47750,6 @@ export namespace Prisma {
   export type PostTagUpdateManyWithWhereWithoutTagInput = {
     where: PostTagScalarWhereInput
     data: XOR<PostTagUpdateManyMutationInput, PostTagUncheckedUpdateManyWithoutTagInput>
-  }
-
-  export type TagUpsertWithoutChildrenInput = {
-    update: XOR<TagUpdateWithoutChildrenInput, TagUncheckedUpdateWithoutChildrenInput>
-    create: XOR<TagCreateWithoutChildrenInput, TagUncheckedCreateWithoutChildrenInput>
-    where?: TagWhereInput
-  }
-
-  export type TagUpdateToOneWithWhereWithoutChildrenInput = {
-    where?: TagWhereInput
-    data: XOR<TagUpdateWithoutChildrenInput, TagUncheckedUpdateWithoutChildrenInput>
-  }
-
-  export type TagUpdateWithoutChildrenInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
-    posts?: PostTagUpdateManyWithoutTagNestedInput
-    parent?: TagUpdateOneWithoutChildrenNestedInput
-    childTag?: TagHierarchyUpdateManyWithoutParentNestedInput
-    parentTag?: TagHierarchyUpdateManyWithoutChildNestedInput
-  }
-
-  export type TagUncheckedUpdateWithoutChildrenInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    parentId?: NullableIntFieldUpdateOperationsInput | number | null
-    color?: StringFieldUpdateOperationsInput | string
-    posts?: PostTagUncheckedUpdateManyWithoutTagNestedInput
-    childTag?: TagHierarchyUncheckedUpdateManyWithoutParentNestedInput
-    parentTag?: TagHierarchyUncheckedUpdateManyWithoutChildNestedInput
-  }
-
-  export type TagUpsertWithWhereUniqueWithoutParentInput = {
-    where: TagWhereUniqueInput
-    update: XOR<TagUpdateWithoutParentInput, TagUncheckedUpdateWithoutParentInput>
-    create: XOR<TagCreateWithoutParentInput, TagUncheckedCreateWithoutParentInput>
-  }
-
-  export type TagUpdateWithWhereUniqueWithoutParentInput = {
-    where: TagWhereUniqueInput
-    data: XOR<TagUpdateWithoutParentInput, TagUncheckedUpdateWithoutParentInput>
-  }
-
-  export type TagUpdateManyWithWhereWithoutParentInput = {
-    where: TagScalarWhereInput
-    data: XOR<TagUpdateManyMutationInput, TagUncheckedUpdateManyWithoutParentInput>
-  }
-
-  export type TagScalarWhereInput = {
-    AND?: TagScalarWhereInput | TagScalarWhereInput[]
-    OR?: TagScalarWhereInput[]
-    NOT?: TagScalarWhereInput | TagScalarWhereInput[]
-    id?: IntFilter<"Tag"> | number
-    name?: StringFilter<"Tag"> | string
-    parentId?: IntNullableFilter<"Tag"> | number | null
-    color?: StringFilter<"Tag"> | string
   }
 
   export type TagHierarchyUpsertWithWhereUniqueWithoutParentInput = {
@@ -48005,13 +47793,69 @@ export namespace Prisma {
     data: XOR<TagHierarchyUpdateManyMutationInput, TagHierarchyUncheckedUpdateManyWithoutChildInput>
   }
 
+  export type TagUpsertWithoutChildrenInput = {
+    update: XOR<TagUpdateWithoutChildrenInput, TagUncheckedUpdateWithoutChildrenInput>
+    create: XOR<TagCreateWithoutChildrenInput, TagUncheckedCreateWithoutChildrenInput>
+    where?: TagWhereInput
+  }
+
+  export type TagUpdateToOneWithWhereWithoutChildrenInput = {
+    where?: TagWhereInput
+    data: XOR<TagUpdateWithoutChildrenInput, TagUncheckedUpdateWithoutChildrenInput>
+  }
+
+  export type TagUpdateWithoutChildrenInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    posts?: PostTagUpdateManyWithoutTagNestedInput
+    childTag?: TagHierarchyUpdateManyWithoutParentNestedInput
+    parentTag?: TagHierarchyUpdateManyWithoutChildNestedInput
+    parent?: TagUpdateOneWithoutChildrenNestedInput
+  }
+
+  export type TagUncheckedUpdateWithoutChildrenInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableIntFieldUpdateOperationsInput | number | null
+    color?: StringFieldUpdateOperationsInput | string
+    posts?: PostTagUncheckedUpdateManyWithoutTagNestedInput
+    childTag?: TagHierarchyUncheckedUpdateManyWithoutParentNestedInput
+    parentTag?: TagHierarchyUncheckedUpdateManyWithoutChildNestedInput
+  }
+
+  export type TagUpsertWithWhereUniqueWithoutParentInput = {
+    where: TagWhereUniqueInput
+    update: XOR<TagUpdateWithoutParentInput, TagUncheckedUpdateWithoutParentInput>
+    create: XOR<TagCreateWithoutParentInput, TagUncheckedCreateWithoutParentInput>
+  }
+
+  export type TagUpdateWithWhereUniqueWithoutParentInput = {
+    where: TagWhereUniqueInput
+    data: XOR<TagUpdateWithoutParentInput, TagUncheckedUpdateWithoutParentInput>
+  }
+
+  export type TagUpdateManyWithWhereWithoutParentInput = {
+    where: TagScalarWhereInput
+    data: XOR<TagUpdateManyMutationInput, TagUncheckedUpdateManyWithoutParentInput>
+  }
+
+  export type TagScalarWhereInput = {
+    AND?: TagScalarWhereInput | TagScalarWhereInput[]
+    OR?: TagScalarWhereInput[]
+    NOT?: TagScalarWhereInput | TagScalarWhereInput[]
+    id?: IntFilter<"Tag"> | number
+    name?: StringFilter<"Tag"> | string
+    parentId?: IntNullableFilter<"Tag"> | number | null
+    color?: StringFilter<"Tag"> | string
+  }
+
   export type TagCreateWithoutChildTagInput = {
     name: string
     color?: string
     posts?: PostTagCreateNestedManyWithoutTagInput
+    parentTag?: TagHierarchyCreateNestedManyWithoutChildInput
     parent?: TagCreateNestedOneWithoutChildrenInput
     children?: TagCreateNestedManyWithoutParentInput
-    parentTag?: TagHierarchyCreateNestedManyWithoutChildInput
   }
 
   export type TagUncheckedCreateWithoutChildTagInput = {
@@ -48020,8 +47864,8 @@ export namespace Prisma {
     parentId?: number | null
     color?: string
     posts?: PostTagUncheckedCreateNestedManyWithoutTagInput
-    children?: TagUncheckedCreateNestedManyWithoutParentInput
     parentTag?: TagHierarchyUncheckedCreateNestedManyWithoutChildInput
+    children?: TagUncheckedCreateNestedManyWithoutParentInput
   }
 
   export type TagCreateOrConnectWithoutChildTagInput = {
@@ -48033,9 +47877,9 @@ export namespace Prisma {
     name: string
     color?: string
     posts?: PostTagCreateNestedManyWithoutTagInput
+    childTag?: TagHierarchyCreateNestedManyWithoutParentInput
     parent?: TagCreateNestedOneWithoutChildrenInput
     children?: TagCreateNestedManyWithoutParentInput
-    childTag?: TagHierarchyCreateNestedManyWithoutParentInput
   }
 
   export type TagUncheckedCreateWithoutParentTagInput = {
@@ -48044,8 +47888,8 @@ export namespace Prisma {
     parentId?: number | null
     color?: string
     posts?: PostTagUncheckedCreateNestedManyWithoutTagInput
-    children?: TagUncheckedCreateNestedManyWithoutParentInput
     childTag?: TagHierarchyUncheckedCreateNestedManyWithoutParentInput
+    children?: TagUncheckedCreateNestedManyWithoutParentInput
   }
 
   export type TagCreateOrConnectWithoutParentTagInput = {
@@ -48068,9 +47912,9 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     posts?: PostTagUpdateManyWithoutTagNestedInput
+    parentTag?: TagHierarchyUpdateManyWithoutChildNestedInput
     parent?: TagUpdateOneWithoutChildrenNestedInput
     children?: TagUpdateManyWithoutParentNestedInput
-    parentTag?: TagHierarchyUpdateManyWithoutChildNestedInput
   }
 
   export type TagUncheckedUpdateWithoutChildTagInput = {
@@ -48079,8 +47923,8 @@ export namespace Prisma {
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
     color?: StringFieldUpdateOperationsInput | string
     posts?: PostTagUncheckedUpdateManyWithoutTagNestedInput
-    children?: TagUncheckedUpdateManyWithoutParentNestedInput
     parentTag?: TagHierarchyUncheckedUpdateManyWithoutChildNestedInput
+    children?: TagUncheckedUpdateManyWithoutParentNestedInput
   }
 
   export type TagUpsertWithoutParentTagInput = {
@@ -48098,9 +47942,9 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     posts?: PostTagUpdateManyWithoutTagNestedInput
+    childTag?: TagHierarchyUpdateManyWithoutParentNestedInput
     parent?: TagUpdateOneWithoutChildrenNestedInput
     children?: TagUpdateManyWithoutParentNestedInput
-    childTag?: TagHierarchyUpdateManyWithoutParentNestedInput
   }
 
   export type TagUncheckedUpdateWithoutParentTagInput = {
@@ -48109,8 +47953,8 @@ export namespace Prisma {
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
     color?: StringFieldUpdateOperationsInput | string
     posts?: PostTagUncheckedUpdateManyWithoutTagNestedInput
-    children?: TagUncheckedUpdateManyWithoutParentNestedInput
     childTag?: TagHierarchyUncheckedUpdateManyWithoutParentNestedInput
+    children?: TagUncheckedUpdateManyWithoutParentNestedInput
   }
 
   export type UserCreateWithoutResourcesInput = {
@@ -48125,12 +47969,12 @@ export namespace Prisma {
     discordHandle?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     postVersionHistory?: PostVersionHistoryCreateNestedManyWithoutUserInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     key?: UserKeyCreateNestedOneWithoutUserInput
     roles?: UserRolesCreateNestedManyWithoutUserInput
     socials?: UserSocialCreateNestedManyWithoutUserInput
     Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
-    posts?: PostCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutResourcesInput = {
@@ -48145,12 +47989,12 @@ export namespace Prisma {
     discordHandle?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     postVersionHistory?: PostVersionHistoryUncheckedCreateNestedManyWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     key?: UserKeyUncheckedCreateNestedOneWithoutUserInput
     roles?: UserRolesUncheckedCreateNestedManyWithoutUserInput
     socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
     Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
-    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutResourcesInput = {
@@ -48181,12 +48025,12 @@ export namespace Prisma {
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     postVersionHistory?: PostVersionHistoryUpdateManyWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     key?: UserKeyUpdateOneWithoutUserNestedInput
     roles?: UserRolesUpdateManyWithoutUserNestedInput
     socials?: UserSocialUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
-    posts?: PostUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutResourcesInput = {
@@ -48201,12 +48045,12 @@ export namespace Prisma {
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     postVersionHistory?: PostVersionHistoryUncheckedUpdateManyWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     key?: UserKeyUncheckedUpdateOneWithoutUserNestedInput
     roles?: UserRolesUncheckedUpdateManyWithoutUserNestedInput
     socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type BlockFieldCreateWithoutBlockInput = {
@@ -48393,9 +48237,9 @@ export namespace Prisma {
     contentDelta?: string
     imageExt?: string | null
     imageKey?: string | null
+    tags?: PostTagCreateNestedManyWithoutPostInput
     postVersionHistories?: PostVersionHistoryCreateNestedManyWithoutPostInput
     author: UserCreateNestedOneWithoutPostsInput
-    tags?: PostTagCreateNestedManyWithoutPostInput
   }
 
   export type PostUncheckedCreateWithoutPostBlockInput = {
@@ -48415,8 +48259,8 @@ export namespace Prisma {
     contentDelta?: string
     imageExt?: string | null
     imageKey?: string | null
-    postVersionHistories?: PostVersionHistoryUncheckedCreateNestedManyWithoutPostInput
     tags?: PostTagUncheckedCreateNestedManyWithoutPostInput
+    postVersionHistories?: PostVersionHistoryUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type PostCreateOrConnectWithoutPostBlockInput = {
@@ -48478,9 +48322,9 @@ export namespace Prisma {
     contentDelta?: StringFieldUpdateOperationsInput | string
     imageExt?: NullableStringFieldUpdateOperationsInput | string | null
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: PostTagUpdateManyWithoutPostNestedInput
     postVersionHistories?: PostVersionHistoryUpdateManyWithoutPostNestedInput
     author?: UserUpdateOneRequiredWithoutPostsNestedInput
-    tags?: PostTagUpdateManyWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateWithoutPostBlockInput = {
@@ -48500,8 +48344,8 @@ export namespace Prisma {
     contentDelta?: StringFieldUpdateOperationsInput | string
     imageExt?: NullableStringFieldUpdateOperationsInput | string | null
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
-    postVersionHistories?: PostVersionHistoryUncheckedUpdateManyWithoutPostNestedInput
     tags?: PostTagUncheckedUpdateManyWithoutPostNestedInput
+    postVersionHistories?: PostVersionHistoryUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -48515,12 +48359,12 @@ export namespace Prisma {
     lastName?: string | null
     discordHandle?: string | null
     postVersionHistory?: PostVersionHistoryCreateNestedManyWithoutUserInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     key?: UserKeyCreateNestedOneWithoutUserInput
     roles?: UserRolesCreateNestedManyWithoutUserInput
     socials?: UserSocialCreateNestedManyWithoutUserInput
     Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
-    posts?: PostCreateNestedManyWithoutAuthorInput
     resources?: ResourceCreateNestedManyWithoutAuthorInput
   }
 
@@ -48535,12 +48379,12 @@ export namespace Prisma {
     lastName?: string | null
     discordHandle?: string | null
     postVersionHistory?: PostVersionHistoryUncheckedCreateNestedManyWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     key?: UserKeyUncheckedCreateNestedOneWithoutUserInput
     roles?: UserRolesUncheckedCreateNestedManyWithoutUserInput
     socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
     Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
-    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     resources?: ResourceUncheckedCreateNestedManyWithoutAuthorInput
   }
 
@@ -48571,12 +48415,12 @@ export namespace Prisma {
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
     postVersionHistory?: PostVersionHistoryUpdateManyWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     key?: UserKeyUpdateOneWithoutUserNestedInput
     roles?: UserRolesUpdateManyWithoutUserNestedInput
     socials?: UserSocialUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
-    posts?: PostUpdateManyWithoutAuthorNestedInput
     resources?: ResourceUpdateManyWithoutAuthorNestedInput
   }
 
@@ -48591,12 +48435,12 @@ export namespace Prisma {
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
     postVersionHistory?: PostVersionHistoryUncheckedUpdateManyWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     key?: UserKeyUncheckedUpdateOneWithoutUserNestedInput
     roles?: UserRolesUncheckedUpdateManyWithoutUserNestedInput
     socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     resources?: ResourceUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
@@ -48612,11 +48456,11 @@ export namespace Prisma {
     discordHandle?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     postVersionHistory?: PostVersionHistoryCreateNestedManyWithoutUserInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
     key?: UserKeyCreateNestedOneWithoutUserInput
     roles?: UserRolesCreateNestedManyWithoutUserInput
     socials?: UserSocialCreateNestedManyWithoutUserInput
     Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
-    posts?: PostCreateNestedManyWithoutAuthorInput
     resources?: ResourceCreateNestedManyWithoutAuthorInput
   }
 
@@ -48632,11 +48476,11 @@ export namespace Prisma {
     discordHandle?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     postVersionHistory?: PostVersionHistoryUncheckedCreateNestedManyWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     key?: UserKeyUncheckedCreateNestedOneWithoutUserInput
     roles?: UserRolesUncheckedCreateNestedManyWithoutUserInput
     socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
     Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
-    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     resources?: ResourceUncheckedCreateNestedManyWithoutAuthorInput
   }
 
@@ -48668,11 +48512,11 @@ export namespace Prisma {
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     postVersionHistory?: PostVersionHistoryUpdateManyWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
     key?: UserKeyUpdateOneWithoutUserNestedInput
     roles?: UserRolesUpdateManyWithoutUserNestedInput
     socials?: UserSocialUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
-    posts?: PostUpdateManyWithoutAuthorNestedInput
     resources?: ResourceUpdateManyWithoutAuthorNestedInput
   }
 
@@ -48688,11 +48532,11 @@ export namespace Prisma {
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     postVersionHistory?: PostVersionHistoryUncheckedUpdateManyWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     key?: UserKeyUncheckedUpdateOneWithoutUserNestedInput
     roles?: UserRolesUncheckedUpdateManyWithoutUserNestedInput
     socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     resources?: ResourceUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
@@ -48756,6 +48600,57 @@ export namespace Prisma {
 
   export type PostVersionHistoryCreateManyUserInputEnvelope = {
     data: PostVersionHistoryCreateManyUserInput | PostVersionHistoryCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PostCreateWithoutAuthorInput = {
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    contentHTML: string
+    contentText: string
+    subtitle?: string | null
+    slug: string
+    image?: boolean
+    metaDescription?: string | null
+    metaKeywords?: PostCreatemetaKeywordsInput | string[]
+    status?: $Enums.ContentStatus
+    contentDelta?: string
+    imageExt?: string | null
+    imageKey?: string | null
+    postBlock?: PostBlockCreateNestedManyWithoutPostInput
+    tags?: PostTagCreateNestedManyWithoutPostInput
+    postVersionHistories?: PostVersionHistoryCreateNestedManyWithoutPostInput
+  }
+
+  export type PostUncheckedCreateWithoutAuthorInput = {
+    id?: number
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    contentHTML: string
+    contentText: string
+    subtitle?: string | null
+    slug: string
+    image?: boolean
+    metaDescription?: string | null
+    metaKeywords?: PostCreatemetaKeywordsInput | string[]
+    status?: $Enums.ContentStatus
+    contentDelta?: string
+    imageExt?: string | null
+    imageKey?: string | null
+    postBlock?: PostBlockUncheckedCreateNestedManyWithoutPostInput
+    tags?: PostTagUncheckedCreateNestedManyWithoutPostInput
+    postVersionHistories?: PostVersionHistoryUncheckedCreateNestedManyWithoutPostInput
+  }
+
+  export type PostCreateOrConnectWithoutAuthorInput = {
+    where: PostWhereUniqueInput
+    create: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type PostCreateManyAuthorInputEnvelope = {
+    data: PostCreateManyAuthorInput | PostCreateManyAuthorInput[]
     skipDuplicates?: boolean
   }
 
@@ -48851,12 +48746,12 @@ export namespace Prisma {
     processTime?: NullableJsonNullValueInput | InputJsonValue
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
-    country: CountryCreateNestedOneWithoutPathwaysInput
-    currency: CurrencyCreateNestedOneWithoutPathwaysInput
-    categories?: PathwayCategoriesCreateNestedManyWithoutPathwayInput
     documents?: PathwayDocumentsCreateNestedManyWithoutPathwayInput
+    categories?: PathwayCategoriesCreateNestedManyWithoutPathwaysInput
     pipelines?: PathwayPipelineCreateNestedManyWithoutPathwayInput
     restrictedNationalities?: PathwayRestrictedNationalityCreateNestedManyWithoutPathwayInput
+    country: CountryCreateNestedOneWithoutPathwaysInput
+    currency: CurrencyCreateNestedOneWithoutPathwaysInput
   }
 
   export type PathwayUncheckedCreateWithoutCMS_UserInput = {
@@ -48877,8 +48772,8 @@ export namespace Prisma {
     processTime?: NullableJsonNullValueInput | InputJsonValue
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
-    categories?: PathwayCategoriesUncheckedCreateNestedManyWithoutPathwayInput
     documents?: PathwayDocumentsUncheckedCreateNestedManyWithoutPathwayInput
+    categories?: PathwayCategoriesUncheckedCreateNestedManyWithoutPathwaysInput
     pipelines?: PathwayPipelineUncheckedCreateNestedManyWithoutPathwayInput
     restrictedNationalities?: PathwayRestrictedNationalityUncheckedCreateNestedManyWithoutPathwayInput
   }
@@ -48890,57 +48785,6 @@ export namespace Prisma {
 
   export type PathwayCreateManyCMS_UserInputEnvelope = {
     data: PathwayCreateManyCMS_UserInput | PathwayCreateManyCMS_UserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type PostCreateWithoutAuthorInput = {
-    name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    contentHTML: string
-    contentText: string
-    subtitle?: string | null
-    slug: string
-    image?: boolean
-    metaDescription?: string | null
-    metaKeywords?: PostCreatemetaKeywordsInput | string[]
-    status?: $Enums.ContentStatus
-    contentDelta?: string
-    imageExt?: string | null
-    imageKey?: string | null
-    postVersionHistories?: PostVersionHistoryCreateNestedManyWithoutPostInput
-    postBlock?: PostBlockCreateNestedManyWithoutPostInput
-    tags?: PostTagCreateNestedManyWithoutPostInput
-  }
-
-  export type PostUncheckedCreateWithoutAuthorInput = {
-    id?: number
-    name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    contentHTML: string
-    contentText: string
-    subtitle?: string | null
-    slug: string
-    image?: boolean
-    metaDescription?: string | null
-    metaKeywords?: PostCreatemetaKeywordsInput | string[]
-    status?: $Enums.ContentStatus
-    contentDelta?: string
-    imageExt?: string | null
-    imageKey?: string | null
-    postVersionHistories?: PostVersionHistoryUncheckedCreateNestedManyWithoutPostInput
-    postBlock?: PostBlockUncheckedCreateNestedManyWithoutPostInput
-    tags?: PostTagUncheckedCreateNestedManyWithoutPostInput
-  }
-
-  export type PostCreateOrConnectWithoutAuthorInput = {
-    where: PostWhereUniqueInput
-    create: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput>
-  }
-
-  export type PostCreateManyAuthorInputEnvelope = {
-    data: PostCreateManyAuthorInput | PostCreateManyAuthorInput[]
     skipDuplicates?: boolean
   }
 
@@ -49022,6 +48866,44 @@ export namespace Prisma {
   export type PostVersionHistoryUpdateManyWithWhereWithoutUserInput = {
     where: PostVersionHistoryScalarWhereInput
     data: XOR<PostVersionHistoryUpdateManyMutationInput, PostVersionHistoryUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type PostUpsertWithWhereUniqueWithoutAuthorInput = {
+    where: PostWhereUniqueInput
+    update: XOR<PostUpdateWithoutAuthorInput, PostUncheckedUpdateWithoutAuthorInput>
+    create: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type PostUpdateWithWhereUniqueWithoutAuthorInput = {
+    where: PostWhereUniqueInput
+    data: XOR<PostUpdateWithoutAuthorInput, PostUncheckedUpdateWithoutAuthorInput>
+  }
+
+  export type PostUpdateManyWithWhereWithoutAuthorInput = {
+    where: PostScalarWhereInput
+    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutAuthorInput>
+  }
+
+  export type PostScalarWhereInput = {
+    AND?: PostScalarWhereInput | PostScalarWhereInput[]
+    OR?: PostScalarWhereInput[]
+    NOT?: PostScalarWhereInput | PostScalarWhereInput[]
+    id?: IntFilter<"Post"> | number
+    name?: StringFilter<"Post"> | string
+    createdAt?: DateTimeFilter<"Post"> | Date | string
+    updatedAt?: DateTimeFilter<"Post"> | Date | string
+    authorId?: StringFilter<"Post"> | string
+    contentHTML?: StringFilter<"Post"> | string
+    contentText?: StringFilter<"Post"> | string
+    subtitle?: StringNullableFilter<"Post"> | string | null
+    slug?: StringFilter<"Post"> | string
+    image?: BoolFilter<"Post"> | boolean
+    metaDescription?: StringNullableFilter<"Post"> | string | null
+    metaKeywords?: StringNullableListFilter<"Post">
+    status?: EnumContentStatusFilter<"Post"> | $Enums.ContentStatus
+    contentDelta?: StringFilter<"Post"> | string
+    imageExt?: StringNullableFilter<"Post"> | string | null
+    imageKey?: StringNullableFilter<"Post"> | string | null
   }
 
   export type SessionUpsertWithWhereUniqueWithoutUserInput = {
@@ -49138,44 +49020,6 @@ export namespace Prisma {
     data: XOR<PathwayUpdateManyMutationInput, PathwayUncheckedUpdateManyWithoutCMS_UserInput>
   }
 
-  export type PostUpsertWithWhereUniqueWithoutAuthorInput = {
-    where: PostWhereUniqueInput
-    update: XOR<PostUpdateWithoutAuthorInput, PostUncheckedUpdateWithoutAuthorInput>
-    create: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput>
-  }
-
-  export type PostUpdateWithWhereUniqueWithoutAuthorInput = {
-    where: PostWhereUniqueInput
-    data: XOR<PostUpdateWithoutAuthorInput, PostUncheckedUpdateWithoutAuthorInput>
-  }
-
-  export type PostUpdateManyWithWhereWithoutAuthorInput = {
-    where: PostScalarWhereInput
-    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutAuthorInput>
-  }
-
-  export type PostScalarWhereInput = {
-    AND?: PostScalarWhereInput | PostScalarWhereInput[]
-    OR?: PostScalarWhereInput[]
-    NOT?: PostScalarWhereInput | PostScalarWhereInput[]
-    id?: IntFilter<"Post"> | number
-    name?: StringFilter<"Post"> | string
-    createdAt?: DateTimeFilter<"Post"> | Date | string
-    updatedAt?: DateTimeFilter<"Post"> | Date | string
-    authorId?: StringFilter<"Post"> | string
-    contentHTML?: StringFilter<"Post"> | string
-    contentText?: StringFilter<"Post"> | string
-    subtitle?: StringNullableFilter<"Post"> | string | null
-    slug?: StringFilter<"Post"> | string
-    image?: BoolFilter<"Post"> | boolean
-    metaDescription?: StringNullableFilter<"Post"> | string | null
-    metaKeywords?: StringNullableListFilter<"Post">
-    status?: EnumContentStatusFilter<"Post"> | $Enums.ContentStatus
-    contentDelta?: StringFilter<"Post"> | string
-    imageExt?: StringNullableFilter<"Post"> | string | null
-    imageKey?: StringNullableFilter<"Post"> | string | null
-  }
-
   export type ResourceUpsertWithWhereUniqueWithoutAuthorInput = {
     where: ResourceWhereUniqueInput
     update: XOR<ResourceUpdateWithoutAuthorInput, ResourceUncheckedUpdateWithoutAuthorInput>
@@ -49234,11 +49078,11 @@ export namespace Prisma {
     discordHandle?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     postVersionHistory?: PostVersionHistoryCreateNestedManyWithoutUserInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     roles?: UserRolesCreateNestedManyWithoutUserInput
     socials?: UserSocialCreateNestedManyWithoutUserInput
     Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
-    posts?: PostCreateNestedManyWithoutAuthorInput
     resources?: ResourceCreateNestedManyWithoutAuthorInput
   }
 
@@ -49254,11 +49098,11 @@ export namespace Prisma {
     discordHandle?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     postVersionHistory?: PostVersionHistoryUncheckedCreateNestedManyWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     roles?: UserRolesUncheckedCreateNestedManyWithoutUserInput
     socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
     Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
-    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     resources?: ResourceUncheckedCreateNestedManyWithoutAuthorInput
   }
 
@@ -49312,11 +49156,11 @@ export namespace Prisma {
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     postVersionHistory?: PostVersionHistoryUpdateManyWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     roles?: UserRolesUpdateManyWithoutUserNestedInput
     socials?: UserSocialUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
-    posts?: PostUpdateManyWithoutAuthorNestedInput
     resources?: ResourceUpdateManyWithoutAuthorNestedInput
   }
 
@@ -49332,11 +49176,11 @@ export namespace Prisma {
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     postVersionHistory?: PostVersionHistoryUncheckedUpdateManyWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     roles?: UserRolesUncheckedUpdateManyWithoutUserNestedInput
     socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     resources?: ResourceUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
@@ -49379,11 +49223,11 @@ export namespace Prisma {
     discordHandle?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     postVersionHistory?: PostVersionHistoryCreateNestedManyWithoutUserInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     key?: UserKeyCreateNestedOneWithoutUserInput
     roles?: UserRolesCreateNestedManyWithoutUserInput
     Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
-    posts?: PostCreateNestedManyWithoutAuthorInput
     resources?: ResourceCreateNestedManyWithoutAuthorInput
   }
 
@@ -49399,11 +49243,11 @@ export namespace Prisma {
     discordHandle?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     postVersionHistory?: PostVersionHistoryUncheckedCreateNestedManyWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     key?: UserKeyUncheckedCreateNestedOneWithoutUserInput
     roles?: UserRolesUncheckedCreateNestedManyWithoutUserInput
     Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
-    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     resources?: ResourceUncheckedCreateNestedManyWithoutAuthorInput
   }
 
@@ -49468,11 +49312,11 @@ export namespace Prisma {
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     postVersionHistory?: PostVersionHistoryUpdateManyWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     key?: UserKeyUpdateOneWithoutUserNestedInput
     roles?: UserRolesUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
-    posts?: PostUpdateManyWithoutAuthorNestedInput
     resources?: ResourceUpdateManyWithoutAuthorNestedInput
   }
 
@@ -49488,11 +49332,11 @@ export namespace Prisma {
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     postVersionHistory?: PostVersionHistoryUncheckedUpdateManyWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     key?: UserKeyUncheckedUpdateOneWithoutUserNestedInput
     roles?: UserRolesUncheckedUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     resources?: ResourceUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
@@ -49524,11 +49368,11 @@ export namespace Prisma {
     discordHandle?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     postVersionHistory?: PostVersionHistoryCreateNestedManyWithoutUserInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     key?: UserKeyCreateNestedOneWithoutUserInput
     socials?: UserSocialCreateNestedManyWithoutUserInput
     Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
-    posts?: PostCreateNestedManyWithoutAuthorInput
     resources?: ResourceCreateNestedManyWithoutAuthorInput
   }
 
@@ -49544,11 +49388,11 @@ export namespace Prisma {
     discordHandle?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     postVersionHistory?: PostVersionHistoryUncheckedCreateNestedManyWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     key?: UserKeyUncheckedCreateNestedOneWithoutUserInput
     socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
     Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
-    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     resources?: ResourceUncheckedCreateNestedManyWithoutAuthorInput
   }
 
@@ -49602,11 +49446,11 @@ export namespace Prisma {
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     postVersionHistory?: PostVersionHistoryUpdateManyWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     key?: UserKeyUpdateOneWithoutUserNestedInput
     socials?: UserSocialUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
-    posts?: PostUpdateManyWithoutAuthorNestedInput
     resources?: ResourceUpdateManyWithoutAuthorNestedInput
   }
 
@@ -49622,11 +49466,11 @@ export namespace Prisma {
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     postVersionHistory?: PostVersionHistoryUncheckedUpdateManyWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     key?: UserKeyUncheckedUpdateOneWithoutUserNestedInput
     socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     resources?: ResourceUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
@@ -49763,9 +49607,9 @@ export namespace Prisma {
     contentDelta?: string
     imageExt?: string | null
     imageKey?: string | null
-    author: UserCreateNestedOneWithoutPostsInput
     postBlock?: PostBlockCreateNestedManyWithoutPostInput
     tags?: PostTagCreateNestedManyWithoutPostInput
+    author: UserCreateNestedOneWithoutPostsInput
   }
 
   export type PostUncheckedCreateWithoutPostVersionHistoriesInput = {
@@ -49805,12 +49649,12 @@ export namespace Prisma {
     lastName?: string | null
     discordHandle?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     key?: UserKeyCreateNestedOneWithoutUserInput
     roles?: UserRolesCreateNestedManyWithoutUserInput
     socials?: UserSocialCreateNestedManyWithoutUserInput
     Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
-    posts?: PostCreateNestedManyWithoutAuthorInput
     resources?: ResourceCreateNestedManyWithoutAuthorInput
   }
 
@@ -49825,12 +49669,12 @@ export namespace Prisma {
     lastName?: string | null
     discordHandle?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     key?: UserKeyUncheckedCreateNestedOneWithoutUserInput
     roles?: UserRolesUncheckedCreateNestedManyWithoutUserInput
     socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
     Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
-    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     resources?: ResourceUncheckedCreateNestedManyWithoutAuthorInput
   }
 
@@ -49865,9 +49709,9 @@ export namespace Prisma {
     contentDelta?: StringFieldUpdateOperationsInput | string
     imageExt?: NullableStringFieldUpdateOperationsInput | string | null
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
-    author?: UserUpdateOneRequiredWithoutPostsNestedInput
     postBlock?: PostBlockUpdateManyWithoutPostNestedInput
     tags?: PostTagUpdateManyWithoutPostNestedInput
+    author?: UserUpdateOneRequiredWithoutPostsNestedInput
   }
 
   export type PostUncheckedUpdateWithoutPostVersionHistoriesInput = {
@@ -49913,12 +49757,12 @@ export namespace Prisma {
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     key?: UserKeyUpdateOneWithoutUserNestedInput
     roles?: UserRolesUpdateManyWithoutUserNestedInput
     socials?: UserSocialUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
-    posts?: PostUpdateManyWithoutAuthorNestedInput
     resources?: ResourceUpdateManyWithoutAuthorNestedInput
   }
 
@@ -49933,37 +49777,37 @@ export namespace Prisma {
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     key?: UserKeyUncheckedUpdateOneWithoutUserNestedInput
     roles?: UserRolesUncheckedUpdateManyWithoutUserNestedInput
     socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     resources?: ResourceUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
-  export type PathwayCategoriesCreateWithoutPathwayTypeInput = {
-    pathway: PathwayCreateNestedOneWithoutCategoriesInput
+  export type PathwayCategoriesCreateWithoutPathway_categoriesInput = {
+    pathways: PathwayCreateNestedOneWithoutCategoriesInput
   }
 
-  export type PathwayCategoriesUncheckedCreateWithoutPathwayTypeInput = {
+  export type PathwayCategoriesUncheckedCreateWithoutPathway_categoriesInput = {
     pathwayId: number
   }
 
-  export type PathwayCategoriesCreateOrConnectWithoutPathwayTypeInput = {
+  export type PathwayCategoriesCreateOrConnectWithoutPathway_categoriesInput = {
     where: PathwayCategoriesWhereUniqueInput
-    create: XOR<PathwayCategoriesCreateWithoutPathwayTypeInput, PathwayCategoriesUncheckedCreateWithoutPathwayTypeInput>
+    create: XOR<PathwayCategoriesCreateWithoutPathway_categoriesInput, PathwayCategoriesUncheckedCreateWithoutPathway_categoriesInput>
   }
 
-  export type PathwayCategoriesCreateManyPathwayTypeInputEnvelope = {
-    data: PathwayCategoriesCreateManyPathwayTypeInput | PathwayCategoriesCreateManyPathwayTypeInput[]
+  export type PathwayCategoriesCreateManyPathway_categoriesInputEnvelope = {
+    data: PathwayCategoriesCreateManyPathway_categoriesInput | PathwayCategoriesCreateManyPathway_categoriesInput[]
     skipDuplicates?: boolean
   }
 
   export type PathwayTypesCreateWithoutChildrenInput = {
     name: string
     description?: string | null
-    pathways?: PathwayCategoriesCreateNestedManyWithoutPathwayTypeInput
+    pathwayCategories?: PathwayCategoriesCreateNestedManyWithoutPathway_categoriesInput
     parent?: PathwayTypesCreateNestedOneWithoutChildrenInput
   }
 
@@ -49972,7 +49816,7 @@ export namespace Prisma {
     name: string
     parentId?: number | null
     description?: string | null
-    pathways?: PathwayCategoriesUncheckedCreateNestedManyWithoutPathwayTypeInput
+    pathwayCategories?: PathwayCategoriesUncheckedCreateNestedManyWithoutPathway_categoriesInput
   }
 
   export type PathwayTypesCreateOrConnectWithoutChildrenInput = {
@@ -49983,7 +49827,7 @@ export namespace Prisma {
   export type PathwayTypesCreateWithoutParentInput = {
     name: string
     description?: string | null
-    pathways?: PathwayCategoriesCreateNestedManyWithoutPathwayTypeInput
+    pathwayCategories?: PathwayCategoriesCreateNestedManyWithoutPathway_categoriesInput
     children?: PathwayTypesCreateNestedManyWithoutParentInput
   }
 
@@ -49991,7 +49835,7 @@ export namespace Prisma {
     id?: number
     name: string
     description?: string | null
-    pathways?: PathwayCategoriesUncheckedCreateNestedManyWithoutPathwayTypeInput
+    pathwayCategories?: PathwayCategoriesUncheckedCreateNestedManyWithoutPathway_categoriesInput
     children?: PathwayTypesUncheckedCreateNestedManyWithoutParentInput
   }
 
@@ -50005,20 +49849,20 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type PathwayCategoriesUpsertWithWhereUniqueWithoutPathwayTypeInput = {
+  export type PathwayCategoriesUpsertWithWhereUniqueWithoutPathway_categoriesInput = {
     where: PathwayCategoriesWhereUniqueInput
-    update: XOR<PathwayCategoriesUpdateWithoutPathwayTypeInput, PathwayCategoriesUncheckedUpdateWithoutPathwayTypeInput>
-    create: XOR<PathwayCategoriesCreateWithoutPathwayTypeInput, PathwayCategoriesUncheckedCreateWithoutPathwayTypeInput>
+    update: XOR<PathwayCategoriesUpdateWithoutPathway_categoriesInput, PathwayCategoriesUncheckedUpdateWithoutPathway_categoriesInput>
+    create: XOR<PathwayCategoriesCreateWithoutPathway_categoriesInput, PathwayCategoriesUncheckedCreateWithoutPathway_categoriesInput>
   }
 
-  export type PathwayCategoriesUpdateWithWhereUniqueWithoutPathwayTypeInput = {
+  export type PathwayCategoriesUpdateWithWhereUniqueWithoutPathway_categoriesInput = {
     where: PathwayCategoriesWhereUniqueInput
-    data: XOR<PathwayCategoriesUpdateWithoutPathwayTypeInput, PathwayCategoriesUncheckedUpdateWithoutPathwayTypeInput>
+    data: XOR<PathwayCategoriesUpdateWithoutPathway_categoriesInput, PathwayCategoriesUncheckedUpdateWithoutPathway_categoriesInput>
   }
 
-  export type PathwayCategoriesUpdateManyWithWhereWithoutPathwayTypeInput = {
+  export type PathwayCategoriesUpdateManyWithWhereWithoutPathway_categoriesInput = {
     where: PathwayCategoriesScalarWhereInput
-    data: XOR<PathwayCategoriesUpdateManyMutationInput, PathwayCategoriesUncheckedUpdateManyWithoutPathwayTypeInput>
+    data: XOR<PathwayCategoriesUpdateManyMutationInput, PathwayCategoriesUncheckedUpdateManyWithoutPathway_categoriesInput>
   }
 
   export type PathwayTypesUpsertWithoutChildrenInput = {
@@ -50035,7 +49879,7 @@ export namespace Prisma {
   export type PathwayTypesUpdateWithoutChildrenInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    pathways?: PathwayCategoriesUpdateManyWithoutPathwayTypeNestedInput
+    pathwayCategories?: PathwayCategoriesUpdateManyWithoutPathway_categoriesNestedInput
     parent?: PathwayTypesUpdateOneWithoutChildrenNestedInput
   }
 
@@ -50044,7 +49888,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    pathways?: PathwayCategoriesUncheckedUpdateManyWithoutPathwayTypeNestedInput
+    pathwayCategories?: PathwayCategoriesUncheckedUpdateManyWithoutPathway_categoriesNestedInput
   }
 
   export type PathwayTypesUpsertWithWhereUniqueWithoutParentInput = {
@@ -50073,12 +49917,173 @@ export namespace Prisma {
     description?: StringNullableFilter<"PathwayTypes"> | string | null
   }
 
+  export type PathwayCreateWithoutCategoriesInput = {
+    name: string
+    link: string
+    description: string
+    type: $Enums.PathwayType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    notes?: PathwayCreatenotesInput | string[]
+    limitations?: PathwayCreatelimitationsInput | string[]
+    requirements?: PathwayCreaterequirementsInput | string[]
+    restrictions?: PathwayCreaterestrictionsInput | string[]
+    duration?: NullableJsonNullValueInput | InputJsonValue
+    processTime?: NullableJsonNullValueInput | InputJsonValue
+    renewal?: NullableJsonNullValueInput | InputJsonValue
+    cost?: NullableJsonNullValueInput | InputJsonValue
+    documents?: PathwayDocumentsCreateNestedManyWithoutPathwayInput
+    pipelines?: PathwayPipelineCreateNestedManyWithoutPathwayInput
+    restrictedNationalities?: PathwayRestrictedNationalityCreateNestedManyWithoutPathwayInput
+    country: CountryCreateNestedOneWithoutPathwaysInput
+    currency: CurrencyCreateNestedOneWithoutPathwaysInput
+    CMS_User: UserCreateNestedOneWithoutPathwayInput
+  }
+
+  export type PathwayUncheckedCreateWithoutCategoriesInput = {
+    id?: number
+    countryCode: string
+    name: string
+    link: string
+    description: string
+    type: $Enums.PathwayType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    currencyCode: string
+    notes?: PathwayCreatenotesInput | string[]
+    limitations?: PathwayCreatelimitationsInput | string[]
+    requirements?: PathwayCreaterequirementsInput | string[]
+    restrictions?: PathwayCreaterestrictionsInput | string[]
+    duration?: NullableJsonNullValueInput | InputJsonValue
+    processTime?: NullableJsonNullValueInput | InputJsonValue
+    renewal?: NullableJsonNullValueInput | InputJsonValue
+    cost?: NullableJsonNullValueInput | InputJsonValue
+    createdby: string
+    documents?: PathwayDocumentsUncheckedCreateNestedManyWithoutPathwayInput
+    pipelines?: PathwayPipelineUncheckedCreateNestedManyWithoutPathwayInput
+    restrictedNationalities?: PathwayRestrictedNationalityUncheckedCreateNestedManyWithoutPathwayInput
+  }
+
+  export type PathwayCreateOrConnectWithoutCategoriesInput = {
+    where: PathwayWhereUniqueInput
+    create: XOR<PathwayCreateWithoutCategoriesInput, PathwayUncheckedCreateWithoutCategoriesInput>
+  }
+
+  export type PathwayTypesCreateWithoutPathwayCategoriesInput = {
+    name: string
+    description?: string | null
+    parent?: PathwayTypesCreateNestedOneWithoutChildrenInput
+    children?: PathwayTypesCreateNestedManyWithoutParentInput
+  }
+
+  export type PathwayTypesUncheckedCreateWithoutPathwayCategoriesInput = {
+    id?: number
+    name: string
+    parentId?: number | null
+    description?: string | null
+    children?: PathwayTypesUncheckedCreateNestedManyWithoutParentInput
+  }
+
+  export type PathwayTypesCreateOrConnectWithoutPathwayCategoriesInput = {
+    where: PathwayTypesWhereUniqueInput
+    create: XOR<PathwayTypesCreateWithoutPathwayCategoriesInput, PathwayTypesUncheckedCreateWithoutPathwayCategoriesInput>
+  }
+
+  export type PathwayUpsertWithoutCategoriesInput = {
+    update: XOR<PathwayUpdateWithoutCategoriesInput, PathwayUncheckedUpdateWithoutCategoriesInput>
+    create: XOR<PathwayCreateWithoutCategoriesInput, PathwayUncheckedCreateWithoutCategoriesInput>
+    where?: PathwayWhereInput
+  }
+
+  export type PathwayUpdateToOneWithWhereWithoutCategoriesInput = {
+    where?: PathwayWhereInput
+    data: XOR<PathwayUpdateWithoutCategoriesInput, PathwayUncheckedUpdateWithoutCategoriesInput>
+  }
+
+  export type PathwayUpdateWithoutCategoriesInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    type?: EnumPathwayTypeFieldUpdateOperationsInput | $Enums.PathwayType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: PathwayUpdatenotesInput | string[]
+    limitations?: PathwayUpdatelimitationsInput | string[]
+    requirements?: PathwayUpdaterequirementsInput | string[]
+    restrictions?: PathwayUpdaterestrictionsInput | string[]
+    duration?: NullableJsonNullValueInput | InputJsonValue
+    processTime?: NullableJsonNullValueInput | InputJsonValue
+    renewal?: NullableJsonNullValueInput | InputJsonValue
+    cost?: NullableJsonNullValueInput | InputJsonValue
+    documents?: PathwayDocumentsUpdateManyWithoutPathwayNestedInput
+    pipelines?: PathwayPipelineUpdateManyWithoutPathwayNestedInput
+    restrictedNationalities?: PathwayRestrictedNationalityUpdateManyWithoutPathwayNestedInput
+    country?: CountryUpdateOneRequiredWithoutPathwaysNestedInput
+    currency?: CurrencyUpdateOneRequiredWithoutPathwaysNestedInput
+    CMS_User?: UserUpdateOneRequiredWithoutPathwayNestedInput
+  }
+
+  export type PathwayUncheckedUpdateWithoutCategoriesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    countryCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    type?: EnumPathwayTypeFieldUpdateOperationsInput | $Enums.PathwayType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    currencyCode?: StringFieldUpdateOperationsInput | string
+    notes?: PathwayUpdatenotesInput | string[]
+    limitations?: PathwayUpdatelimitationsInput | string[]
+    requirements?: PathwayUpdaterequirementsInput | string[]
+    restrictions?: PathwayUpdaterestrictionsInput | string[]
+    duration?: NullableJsonNullValueInput | InputJsonValue
+    processTime?: NullableJsonNullValueInput | InputJsonValue
+    renewal?: NullableJsonNullValueInput | InputJsonValue
+    cost?: NullableJsonNullValueInput | InputJsonValue
+    createdby?: StringFieldUpdateOperationsInput | string
+    documents?: PathwayDocumentsUncheckedUpdateManyWithoutPathwayNestedInput
+    pipelines?: PathwayPipelineUncheckedUpdateManyWithoutPathwayNestedInput
+    restrictedNationalities?: PathwayRestrictedNationalityUncheckedUpdateManyWithoutPathwayNestedInput
+  }
+
+  export type PathwayTypesUpsertWithoutPathwayCategoriesInput = {
+    update: XOR<PathwayTypesUpdateWithoutPathwayCategoriesInput, PathwayTypesUncheckedUpdateWithoutPathwayCategoriesInput>
+    create: XOR<PathwayTypesCreateWithoutPathwayCategoriesInput, PathwayTypesUncheckedCreateWithoutPathwayCategoriesInput>
+    where?: PathwayTypesWhereInput
+  }
+
+  export type PathwayTypesUpdateToOneWithWhereWithoutPathwayCategoriesInput = {
+    where?: PathwayTypesWhereInput
+    data: XOR<PathwayTypesUpdateWithoutPathwayCategoriesInput, PathwayTypesUncheckedUpdateWithoutPathwayCategoriesInput>
+  }
+
+  export type PathwayTypesUpdateWithoutPathwayCategoriesInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    parent?: PathwayTypesUpdateOneWithoutChildrenNestedInput
+    children?: PathwayTypesUpdateManyWithoutParentNestedInput
+  }
+
+  export type PathwayTypesUncheckedUpdateWithoutPathwayCategoriesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableIntFieldUpdateOperationsInput | number | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    children?: PathwayTypesUncheckedUpdateManyWithoutParentNestedInput
+  }
+
   export type CountryCurrencyCreateManyCountryInput = {
     currencyCode: string
   }
 
   export type CountryLanguageCreateManyCountryInput = {
     languageCode: string
+  }
+
+  export type PathwayRestrictedNationalityCreateManyCountryInput = {
+    pathwayId: number
+    note?: string | null
   }
 
   export type PathwayCreateManyCountryInput = {
@@ -50099,11 +50104,6 @@ export namespace Prisma {
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
     createdby: string
-  }
-
-  export type PathwayRestrictedNationalityCreateManyCountryInput = {
-    pathwayId: number
-    note?: string | null
   }
 
   export type CountryCurrencyUpdateWithoutCountryInput = {
@@ -50130,6 +50130,21 @@ export namespace Prisma {
     languageCode?: StringFieldUpdateOperationsInput | string
   }
 
+  export type PathwayRestrictedNationalityUpdateWithoutCountryInput = {
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    pathway?: PathwayUpdateOneRequiredWithoutRestrictedNationalitiesNestedInput
+  }
+
+  export type PathwayRestrictedNationalityUncheckedUpdateWithoutCountryInput = {
+    pathwayId?: IntFieldUpdateOperationsInput | number
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PathwayRestrictedNationalityUncheckedUpdateManyWithoutCountryInput = {
+    pathwayId?: IntFieldUpdateOperationsInput | number
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type PathwayUpdateWithoutCountryInput = {
     name?: StringFieldUpdateOperationsInput | string
     link?: StringFieldUpdateOperationsInput | string
@@ -50145,12 +50160,12 @@ export namespace Prisma {
     processTime?: NullableJsonNullValueInput | InputJsonValue
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
-    currency?: CurrencyUpdateOneRequiredWithoutPathwaysNestedInput
-    CMS_User?: UserUpdateOneRequiredWithoutPathwayNestedInput
-    categories?: PathwayCategoriesUpdateManyWithoutPathwayNestedInput
     documents?: PathwayDocumentsUpdateManyWithoutPathwayNestedInput
+    categories?: PathwayCategoriesUpdateManyWithoutPathwaysNestedInput
     pipelines?: PathwayPipelineUpdateManyWithoutPathwayNestedInput
     restrictedNationalities?: PathwayRestrictedNationalityUpdateManyWithoutPathwayNestedInput
+    currency?: CurrencyUpdateOneRequiredWithoutPathwaysNestedInput
+    CMS_User?: UserUpdateOneRequiredWithoutPathwayNestedInput
   }
 
   export type PathwayUncheckedUpdateWithoutCountryInput = {
@@ -50171,8 +50186,8 @@ export namespace Prisma {
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
     createdby?: StringFieldUpdateOperationsInput | string
-    categories?: PathwayCategoriesUncheckedUpdateManyWithoutPathwayNestedInput
     documents?: PathwayDocumentsUncheckedUpdateManyWithoutPathwayNestedInput
+    categories?: PathwayCategoriesUncheckedUpdateManyWithoutPathwaysNestedInput
     pipelines?: PathwayPipelineUncheckedUpdateManyWithoutPathwayNestedInput
     restrictedNationalities?: PathwayRestrictedNationalityUncheckedUpdateManyWithoutPathwayNestedInput
   }
@@ -50197,33 +50212,18 @@ export namespace Prisma {
     createdby?: StringFieldUpdateOperationsInput | string
   }
 
-  export type PathwayRestrictedNationalityUpdateWithoutCountryInput = {
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-    pathway?: PathwayUpdateOneRequiredWithoutRestrictedNationalitiesNestedInput
-  }
-
-  export type PathwayRestrictedNationalityUncheckedUpdateWithoutCountryInput = {
-    pathwayId?: IntFieldUpdateOperationsInput | number
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type PathwayRestrictedNationalityUncheckedUpdateManyWithoutCountryInput = {
-    pathwayId?: IntFieldUpdateOperationsInput | number
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type PathwayCategoriesCreateManyPathwayInput = {
-    pathwayTypeId: number
-  }
-
   export type PathwayDocumentsCreateManyPathwayInput = {
     id?: number
-    documentId: number
+    documentId?: number
     description?: string | null
     cost?: Decimal | DecimalJsLike | number | string
     isRequired?: boolean
     link?: string | null
     title?: string | null
+  }
+
+  export type PathwayCategoriesCreateManyPathwaysInput = {
+    pathwayTypeId: number
   }
 
   export type PathwayPipelineCreateManyPathwayInput = {
@@ -50235,18 +50235,6 @@ export namespace Prisma {
   export type PathwayRestrictedNationalityCreateManyPathwayInput = {
     countryCode: string
     note?: string | null
-  }
-
-  export type PathwayCategoriesUpdateWithoutPathwayInput = {
-    pathwayType?: PathwayTypesUpdateOneRequiredWithoutPathwaysNestedInput
-  }
-
-  export type PathwayCategoriesUncheckedUpdateWithoutPathwayInput = {
-    pathwayTypeId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type PathwayCategoriesUncheckedUpdateManyWithoutPathwayInput = {
-    pathwayTypeId?: IntFieldUpdateOperationsInput | number
   }
 
   export type PathwayDocumentsUpdateWithoutPathwayInput = {
@@ -50276,6 +50264,18 @@ export namespace Prisma {
     isRequired?: BoolFieldUpdateOperationsInput | boolean
     link?: NullableStringFieldUpdateOperationsInput | string | null
     title?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PathwayCategoriesUpdateWithoutPathwaysInput = {
+    pathway_categories?: PathwayTypesUpdateOneRequiredWithoutPathwayCategoriesNestedInput
+  }
+
+  export type PathwayCategoriesUncheckedUpdateWithoutPathwaysInput = {
+    pathwayTypeId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PathwayCategoriesUncheckedUpdateManyWithoutPathwaysInput = {
+    pathwayTypeId?: IntFieldUpdateOperationsInput | number
   }
 
   export type PathwayPipelineUpdateWithoutPathwayInput = {
@@ -50361,12 +50361,12 @@ export namespace Prisma {
     processTime?: NullableJsonNullValueInput | InputJsonValue
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
-    country?: CountryUpdateOneRequiredWithoutPathwaysNestedInput
-    CMS_User?: UserUpdateOneRequiredWithoutPathwayNestedInput
-    categories?: PathwayCategoriesUpdateManyWithoutPathwayNestedInput
     documents?: PathwayDocumentsUpdateManyWithoutPathwayNestedInput
+    categories?: PathwayCategoriesUpdateManyWithoutPathwaysNestedInput
     pipelines?: PathwayPipelineUpdateManyWithoutPathwayNestedInput
     restrictedNationalities?: PathwayRestrictedNationalityUpdateManyWithoutPathwayNestedInput
+    country?: CountryUpdateOneRequiredWithoutPathwaysNestedInput
+    CMS_User?: UserUpdateOneRequiredWithoutPathwayNestedInput
   }
 
   export type PathwayUncheckedUpdateWithoutCurrencyInput = {
@@ -50387,8 +50387,8 @@ export namespace Prisma {
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
     createdby?: StringFieldUpdateOperationsInput | string
-    categories?: PathwayCategoriesUncheckedUpdateManyWithoutPathwayNestedInput
     documents?: PathwayDocumentsUncheckedUpdateManyWithoutPathwayNestedInput
+    categories?: PathwayCategoriesUncheckedUpdateManyWithoutPathwaysNestedInput
     pipelines?: PathwayPipelineUncheckedUpdateManyWithoutPathwayNestedInput
     restrictedNationalities?: PathwayRestrictedNationalityUncheckedUpdateManyWithoutPathwayNestedInput
   }
@@ -50468,13 +50468,6 @@ export namespace Prisma {
     countryCode?: StringFieldUpdateOperationsInput | string
   }
 
-  export type PostVersionHistoryCreateManyPostInput = {
-    id?: number
-    userId: string
-    action: string
-    instanceAt?: Date | string
-  }
-
   export type PostBlockCreateManyPostInput = {
     id?: number
     blockId: number
@@ -50487,24 +50480,11 @@ export namespace Prisma {
     tagId: number
   }
 
-  export type PostVersionHistoryUpdateWithoutPostInput = {
-    action?: StringFieldUpdateOperationsInput | string
-    instanceAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutPostVersionHistoryNestedInput
-  }
-
-  export type PostVersionHistoryUncheckedUpdateWithoutPostInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    userId?: StringFieldUpdateOperationsInput | string
-    action?: StringFieldUpdateOperationsInput | string
-    instanceAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PostVersionHistoryUncheckedUpdateManyWithoutPostInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    userId?: StringFieldUpdateOperationsInput | string
-    action?: StringFieldUpdateOperationsInput | string
-    instanceAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type PostVersionHistoryCreateManyPostInput = {
+    id?: number
+    userId: string
+    action: string
+    instanceAt?: Date | string
   }
 
   export type PostBlockUpdateWithoutPostInput = {
@@ -50542,14 +50522,28 @@ export namespace Prisma {
     tagId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type PostTagCreateManyTagInput = {
-    postId: number
+  export type PostVersionHistoryUpdateWithoutPostInput = {
+    action?: StringFieldUpdateOperationsInput | string
+    instanceAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPostVersionHistoryNestedInput
   }
 
-  export type TagCreateManyParentInput = {
-    id?: number
-    name: string
-    color?: string
+  export type PostVersionHistoryUncheckedUpdateWithoutPostInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    instanceAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PostVersionHistoryUncheckedUpdateManyWithoutPostInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    instanceAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PostTagCreateManyTagInput = {
+    postId: number
   }
 
   export type TagHierarchyCreateManyParentInput = {
@@ -50562,6 +50556,12 @@ export namespace Prisma {
     childId: number
   }
 
+  export type TagCreateManyParentInput = {
+    id?: number
+    name: string
+    color?: string
+  }
+
   export type PostTagUpdateWithoutTagInput = {
     post?: PostUpdateOneRequiredWithoutTagsNestedInput
   }
@@ -50572,31 +50572,6 @@ export namespace Prisma {
 
   export type PostTagUncheckedUpdateManyWithoutTagInput = {
     postId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type TagUpdateWithoutParentInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
-    posts?: PostTagUpdateManyWithoutTagNestedInput
-    children?: TagUpdateManyWithoutParentNestedInput
-    childTag?: TagHierarchyUpdateManyWithoutParentNestedInput
-    parentTag?: TagHierarchyUpdateManyWithoutChildNestedInput
-  }
-
-  export type TagUncheckedUpdateWithoutParentInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
-    posts?: PostTagUncheckedUpdateManyWithoutTagNestedInput
-    children?: TagUncheckedUpdateManyWithoutParentNestedInput
-    childTag?: TagHierarchyUncheckedUpdateManyWithoutParentNestedInput
-    parentTag?: TagHierarchyUncheckedUpdateManyWithoutChildNestedInput
-  }
-
-  export type TagUncheckedUpdateManyWithoutParentInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
   }
 
   export type TagHierarchyUpdateWithoutParentInput = {
@@ -50625,6 +50600,31 @@ export namespace Prisma {
   export type TagHierarchyUncheckedUpdateManyWithoutChildInput = {
     id?: IntFieldUpdateOperationsInput | number
     childId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type TagUpdateWithoutParentInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    posts?: PostTagUpdateManyWithoutTagNestedInput
+    childTag?: TagHierarchyUpdateManyWithoutParentNestedInput
+    parentTag?: TagHierarchyUpdateManyWithoutChildNestedInput
+    children?: TagUpdateManyWithoutParentNestedInput
+  }
+
+  export type TagUncheckedUpdateWithoutParentInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    posts?: PostTagUncheckedUpdateManyWithoutTagNestedInput
+    childTag?: TagHierarchyUncheckedUpdateManyWithoutParentNestedInput
+    parentTag?: TagHierarchyUncheckedUpdateManyWithoutChildNestedInput
+    children?: TagUncheckedUpdateManyWithoutParentNestedInput
+  }
+
+  export type TagUncheckedUpdateManyWithoutParentInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
   }
 
   export type BlockFieldCreateManyBlockInput = {
@@ -50715,6 +50715,24 @@ export namespace Prisma {
     instanceAt?: Date | string
   }
 
+  export type PostCreateManyAuthorInput = {
+    id?: number
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    contentHTML: string
+    contentText: string
+    subtitle?: string | null
+    slug: string
+    image?: boolean
+    metaDescription?: string | null
+    metaKeywords?: PostCreatemetaKeywordsInput | string[]
+    status?: $Enums.ContentStatus
+    contentDelta?: string
+    imageExt?: string | null
+    imageKey?: string | null
+  }
+
   export type SessionCreateManyUserInput = {
     id?: string
     sessionToken: string
@@ -50748,24 +50766,6 @@ export namespace Prisma {
     processTime?: NullableJsonNullValueInput | InputJsonValue
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
-  }
-
-  export type PostCreateManyAuthorInput = {
-    id?: number
-    name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    contentHTML: string
-    contentText: string
-    subtitle?: string | null
-    slug: string
-    image?: boolean
-    metaDescription?: string | null
-    metaKeywords?: PostCreatemetaKeywordsInput | string[]
-    status?: $Enums.ContentStatus
-    contentDelta?: string
-    imageExt?: string | null
-    imageKey?: string | null
   }
 
   export type ResourceCreateManyAuthorInput = {
@@ -50843,6 +50843,65 @@ export namespace Prisma {
     instanceAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PostUpdateWithoutAuthorInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contentHTML?: StringFieldUpdateOperationsInput | string
+    contentText?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    slug?: StringFieldUpdateOperationsInput | string
+    image?: BoolFieldUpdateOperationsInput | boolean
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    metaKeywords?: PostUpdatemetaKeywordsInput | string[]
+    status?: EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+    contentDelta?: StringFieldUpdateOperationsInput | string
+    imageExt?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
+    postBlock?: PostBlockUpdateManyWithoutPostNestedInput
+    tags?: PostTagUpdateManyWithoutPostNestedInput
+    postVersionHistories?: PostVersionHistoryUpdateManyWithoutPostNestedInput
+  }
+
+  export type PostUncheckedUpdateWithoutAuthorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contentHTML?: StringFieldUpdateOperationsInput | string
+    contentText?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    slug?: StringFieldUpdateOperationsInput | string
+    image?: BoolFieldUpdateOperationsInput | boolean
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    metaKeywords?: PostUpdatemetaKeywordsInput | string[]
+    status?: EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+    contentDelta?: StringFieldUpdateOperationsInput | string
+    imageExt?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
+    postBlock?: PostBlockUncheckedUpdateManyWithoutPostNestedInput
+    tags?: PostTagUncheckedUpdateManyWithoutPostNestedInput
+    postVersionHistories?: PostVersionHistoryUncheckedUpdateManyWithoutPostNestedInput
+  }
+
+  export type PostUncheckedUpdateManyWithoutAuthorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contentHTML?: StringFieldUpdateOperationsInput | string
+    contentText?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    slug?: StringFieldUpdateOperationsInput | string
+    image?: BoolFieldUpdateOperationsInput | boolean
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    metaKeywords?: PostUpdatemetaKeywordsInput | string[]
+    status?: EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+    contentDelta?: StringFieldUpdateOperationsInput | string
+    imageExt?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type SessionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     sessionToken?: StringFieldUpdateOperationsInput | string
@@ -50903,12 +50962,12 @@ export namespace Prisma {
     processTime?: NullableJsonNullValueInput | InputJsonValue
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
-    country?: CountryUpdateOneRequiredWithoutPathwaysNestedInput
-    currency?: CurrencyUpdateOneRequiredWithoutPathwaysNestedInput
-    categories?: PathwayCategoriesUpdateManyWithoutPathwayNestedInput
     documents?: PathwayDocumentsUpdateManyWithoutPathwayNestedInput
+    categories?: PathwayCategoriesUpdateManyWithoutPathwaysNestedInput
     pipelines?: PathwayPipelineUpdateManyWithoutPathwayNestedInput
     restrictedNationalities?: PathwayRestrictedNationalityUpdateManyWithoutPathwayNestedInput
+    country?: CountryUpdateOneRequiredWithoutPathwaysNestedInput
+    currency?: CurrencyUpdateOneRequiredWithoutPathwaysNestedInput
   }
 
   export type PathwayUncheckedUpdateWithoutCMS_UserInput = {
@@ -50929,8 +50988,8 @@ export namespace Prisma {
     processTime?: NullableJsonNullValueInput | InputJsonValue
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
-    categories?: PathwayCategoriesUncheckedUpdateManyWithoutPathwayNestedInput
     documents?: PathwayDocumentsUncheckedUpdateManyWithoutPathwayNestedInput
+    categories?: PathwayCategoriesUncheckedUpdateManyWithoutPathwaysNestedInput
     pipelines?: PathwayPipelineUncheckedUpdateManyWithoutPathwayNestedInput
     restrictedNationalities?: PathwayRestrictedNationalityUncheckedUpdateManyWithoutPathwayNestedInput
   }
@@ -50953,65 +51012,6 @@ export namespace Prisma {
     processTime?: NullableJsonNullValueInput | InputJsonValue
     renewal?: NullableJsonNullValueInput | InputJsonValue
     cost?: NullableJsonNullValueInput | InputJsonValue
-  }
-
-  export type PostUpdateWithoutAuthorInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    contentHTML?: StringFieldUpdateOperationsInput | string
-    contentText?: StringFieldUpdateOperationsInput | string
-    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
-    slug?: StringFieldUpdateOperationsInput | string
-    image?: BoolFieldUpdateOperationsInput | boolean
-    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    metaKeywords?: PostUpdatemetaKeywordsInput | string[]
-    status?: EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
-    contentDelta?: StringFieldUpdateOperationsInput | string
-    imageExt?: NullableStringFieldUpdateOperationsInput | string | null
-    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
-    postVersionHistories?: PostVersionHistoryUpdateManyWithoutPostNestedInput
-    postBlock?: PostBlockUpdateManyWithoutPostNestedInput
-    tags?: PostTagUpdateManyWithoutPostNestedInput
-  }
-
-  export type PostUncheckedUpdateWithoutAuthorInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    contentHTML?: StringFieldUpdateOperationsInput | string
-    contentText?: StringFieldUpdateOperationsInput | string
-    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
-    slug?: StringFieldUpdateOperationsInput | string
-    image?: BoolFieldUpdateOperationsInput | boolean
-    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    metaKeywords?: PostUpdatemetaKeywordsInput | string[]
-    status?: EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
-    contentDelta?: StringFieldUpdateOperationsInput | string
-    imageExt?: NullableStringFieldUpdateOperationsInput | string | null
-    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
-    postVersionHistories?: PostVersionHistoryUncheckedUpdateManyWithoutPostNestedInput
-    postBlock?: PostBlockUncheckedUpdateManyWithoutPostNestedInput
-    tags?: PostTagUncheckedUpdateManyWithoutPostNestedInput
-  }
-
-  export type PostUncheckedUpdateManyWithoutAuthorInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    contentHTML?: StringFieldUpdateOperationsInput | string
-    contentText?: StringFieldUpdateOperationsInput | string
-    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
-    slug?: StringFieldUpdateOperationsInput | string
-    image?: BoolFieldUpdateOperationsInput | boolean
-    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    metaKeywords?: PostUpdatemetaKeywordsInput | string[]
-    status?: EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
-    contentDelta?: StringFieldUpdateOperationsInput | string
-    imageExt?: NullableStringFieldUpdateOperationsInput | string | null
-    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ResourceUpdateWithoutAuthorInput = {
@@ -51103,7 +51103,7 @@ export namespace Prisma {
     handle?: StringFieldUpdateOperationsInput | string
   }
 
-  export type PathwayCategoriesCreateManyPathwayTypeInput = {
+  export type PathwayCategoriesCreateManyPathway_categoriesInput = {
     pathwayId: number
   }
 
@@ -51113,22 +51113,22 @@ export namespace Prisma {
     description?: string | null
   }
 
-  export type PathwayCategoriesUpdateWithoutPathwayTypeInput = {
-    pathway?: PathwayUpdateOneRequiredWithoutCategoriesNestedInput
+  export type PathwayCategoriesUpdateWithoutPathway_categoriesInput = {
+    pathways?: PathwayUpdateOneRequiredWithoutCategoriesNestedInput
   }
 
-  export type PathwayCategoriesUncheckedUpdateWithoutPathwayTypeInput = {
+  export type PathwayCategoriesUncheckedUpdateWithoutPathway_categoriesInput = {
     pathwayId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type PathwayCategoriesUncheckedUpdateManyWithoutPathwayTypeInput = {
+  export type PathwayCategoriesUncheckedUpdateManyWithoutPathway_categoriesInput = {
     pathwayId?: IntFieldUpdateOperationsInput | number
   }
 
   export type PathwayTypesUpdateWithoutParentInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    pathways?: PathwayCategoriesUpdateManyWithoutPathwayTypeNestedInput
+    pathwayCategories?: PathwayCategoriesUpdateManyWithoutPathway_categoriesNestedInput
     children?: PathwayTypesUpdateManyWithoutParentNestedInput
   }
 
@@ -51136,7 +51136,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    pathways?: PathwayCategoriesUncheckedUpdateManyWithoutPathwayTypeNestedInput
+    pathwayCategories?: PathwayCategoriesUncheckedUpdateManyWithoutPathway_categoriesNestedInput
     children?: PathwayTypesUncheckedUpdateManyWithoutParentNestedInput
   }
 

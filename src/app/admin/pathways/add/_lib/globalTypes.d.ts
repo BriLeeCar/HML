@@ -94,7 +94,7 @@ declare global {
 
 	type PrismaPathway = {
 		documents: Array<Omit<P.PathwayDocuments, 'cost'> & { cost: number }>
-		categories: P.PathwayTypes[]
+		categories: number[]
 		piplines: P.PathwayPipeline[]
 		restrictedNationalities: P.PathwayRestrictedNationality[]
 		name: string

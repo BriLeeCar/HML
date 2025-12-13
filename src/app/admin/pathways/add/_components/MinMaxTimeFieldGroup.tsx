@@ -44,13 +44,6 @@ const handleTimeChange = ({
 	newData.durations[queryField] = newDuration
 	newData.query[queryField] = newQuery
 
-	console.log(`\n\n`)
-	console.log(`${'-'.repeat(10)} DURATIONS UPDATE ${'-'.repeat(10)}`)
-	console.log(newData.durations[queryField])
-	console.log(`\n\n`)
-	console.log(`${'-'.repeat(10)} QUERY UPDATE ${'-'.repeat(10)}`)
-	console.log(newData.query[queryField])
-
 	const parsed = zMinMax({
 		wholeNumberOnly: true,
 	}).safeParse(newData.query[queryField])

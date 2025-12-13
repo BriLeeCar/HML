@@ -75,6 +75,7 @@ export const Base = ({ prisma }: { prisma: RouterOutputs['dataCollection']['Path
 		})
 
 		const validation = zCreatePathwayInput.safeParse(submission)
+		console.log(submission)
 
 		validation.success && mutate(submission as CreatePathwayInput)
 		if (validation.error) {
