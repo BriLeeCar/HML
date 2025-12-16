@@ -28,7 +28,7 @@ export const Country = ({
 					<TouchTarget className='top-0 bottom-0 h-full w-full p-0 pointer-fine:block'>
 						<Heading
 							size='title'
-							className='font-heading decoration-brand mt-0 mb-0 pb-2 text-center text-3xl font-medium tracking-normal text-white text-shadow-md md:text-5xl'>
+							className='decoration-brand mt-0 mb-0 pb-2 text-center text-3xl font-medium tracking-normal text-white text-shadow-md md:text-5xl'>
 							{country.name}
 						</Heading>
 					</TouchTarget>
@@ -42,13 +42,7 @@ export const Country = ({
 	)
 }
 
-const Figure = ({
-	country,
-	priority,
-}: {
-	country: ApiData.Country
-	priority: boolean
-}) => {
+const Figure = ({ country, priority }: { country: ApiData.Country; priority: boolean }) => {
 	if (!country.images) {
 		return <></>
 	}

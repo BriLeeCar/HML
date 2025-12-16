@@ -35,7 +35,7 @@ export function FieldGroup({ className, ...props }: React.ComponentPropsWithoutR
 		<div
 			data-slot='control'
 			{...props}
-			className={cn('space-y-8', className)}
+			className={cn(className)}
 		/>
 	)
 }

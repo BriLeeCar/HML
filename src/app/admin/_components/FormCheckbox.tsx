@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, type ReactNode } from 'react'
 import { Icon } from '~/components/Icon'
 import { cn } from '~/lib/cn'
@@ -39,7 +41,7 @@ export const CB = ({ ...props }: CBProps) => {
 			onClickCapture={() => setChecked(!checked)}
 			data-el='checkbox'
 			data-slot='control'
-			className='border-input/15 has-data-checked:bg-v2-red/90 hover:click hover:border-input/30 relative block h-4.5 w-4.5 cursor-pointer overflow-hidden rounded-[5px] border bg-white text-white *:cursor-pointer dark:text-black'>
+			className='border-input/15 has-data-checked:bg-v2-red-500/90 hover:click hover:border-input/30 relative block h-4.5 w-4.5 cursor-pointer overflow-hidden rounded-[5px] border bg-white text-white *:cursor-pointer dark:text-black'>
 			<button
 				{...props}
 				type='button'
@@ -50,7 +52,7 @@ export const CB = ({ ...props }: CBProps) => {
 					'block h-4 w-4 rounded-[4px] shadow-xs',
 
 					// ! CHECKED
-					'data-checked:bg-v2-mulberry/70 border-v2-mulberry/50 data-checked:border',
+					'data-checked:bg-v2-mulberry-500/70 border-v2-mulberry-500/50 data-checked:border',
 					// ! FOCUS
 					'ring-interactive ring-offset-2 focus-visible:ring-2 focus-visible:outline-0',
 					'shadow-inner shadow-amber-200',

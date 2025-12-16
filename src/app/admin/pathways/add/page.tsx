@@ -20,9 +20,7 @@ const NewPathway = async () => {
 	})
 
 	return (
-		<LayoutWrapper
-			subtitle={<span>Please let us know of any issues when filling out the form!</span>}
-			title='Add Pathway Form'>
+		<LayoutWrapper title='Add Pathway Form'>
 			<Base prisma={query} />
 		</LayoutWrapper>
 	)

@@ -1,13 +1,22 @@
-import { FormError, FormGroupError } from '@/admin/_components'
-import { Field, FieldGroup, Input, InputGroup, Label, Select } from '@/admin/_components/catalyst'
+import { FormError, FormGroupError, SubSectionFieldset } from '@/admin/_components'
+import {
+	Checkbox,
+	CheckboxField,
+	Field,
+	Input,
+	InputGroup,
+	Label,
+	Select,
+} from '@/admin/_components/catalyst'
 import { Icon } from '~/components'
 import { cn } from '~/lib/cn'
 import { toTitleCase } from '~/lib/text'
 import { zMinMax } from '~/server/api/zod'
-import { timeOptionEls, type ElPrismaProps, type FieldElProps, type PrismaQuery } from '..'
+import { timeOptionEls, type ElPrismaProps, type FieldElProps } from '..'
 
-type Key = keyof PrismaQuery['durations'] & keyof PrismaQuery['query'] & keyof PrismaQuery['errors']
+type Key = keyof Query['durations'] & keyof Query['query'] & keyof Query['errors']
 
+// #region ! ---------- FNS ----------
 const handleTimeChange = ({
 	...props
 }: {
@@ -15,7 +24,7 @@ const handleTimeChange = ({
 	durationType: 'min' | 'max'
 	seperateUOM: boolean
 	value: string | number
-	data: PrismaQuery
+	data: Query
 	change: 'time' | 'unit'
 }) => {
 	const { queryField, durationType, seperateUOM, value, data, change } = props
@@ -69,7 +78,7 @@ const handleTimeChange = ({
 	return newData
 }
 
-export const handleSeperateUOMChange = ({
+const handleSeperateUOMChange = ({
 	field,
 	newStatus,
 	data,
@@ -109,100 +118,99 @@ export const handleSeperateUOMChange = ({
 
 	handlePrisma(newData)
 }
+// #endregion ! --------------------
 
-export const MinMaxTimeFieldGroup = ({
-	error,
+export const DurationGroup = ({
 	data,
 	handlePrisma,
-	field,
-	...props
-}: ElPrismaProps
-	& Props & {
-		error: boolean
-		field: Key
-	}) => {
-	return (
-		<FieldGroup
-			{...props}
-			data-uom={data.durations[field].separate ? 'separated' : undefined}
-			data-invalid={error == true ? true : undefined}>
-			<InnerFields
-				data={data}
-				field={field}
-				handlePrisma={handlePrisma}
-			/>
-			{data.errors[field].base?.length > 0 && (
-				<FormGroupError
-					message={data.errors[field].base}
-					className='col-span-full mt-0 text-center font-medium italic *:text-sm/12'
-				/>
-			)}
-		</FieldGroup>
-	)
-}
-
-const InnerFields = ({
-	data,
-	field,
-	handlePrisma,
+	fieldKey,
+	description,
+	legend,
 }: {
-	data: PrismaQuery
-	field: Key
-	handlePrisma: (data: PrismaQuery) => void
+	data: Query
+	handlePrisma: (data: Query) => void
+	fieldKey: Key
+	description: string
+	legend: string
 }) => {
-	const separate = data.durations[field].separate
-	return (
-		<>
-			<MinMaxTimeField
-				required
-				label='Min'
-				field={field}
-				keyMinMax='min'
-				data={data}
-				handlePrisma={handlePrisma}
-				className={cn('md:in-data-uom:col-1 md:in-data-uom:row-1')}
-			/>
-			<MinMaxTimeField
-				required
-				label='Max'
-				field={field}
-				keyMinMax='max'
-				data={data}
-				handlePrisma={handlePrisma}
-				className={cn('in-data-uom:col-1 in-data-uom:row-2')}
-			/>
-			<MinMaxSelect
-				seperateMinMax={separate}
-				sizeKey='min'
-				field={field}
-				data={data}
-				handlePrisma={handlePrisma}
-				className={cn('in-data-uom:col-2 in-data-uom:row-1')}
-			/>
+	const separate = data.durations[fieldKey].separate
 
-			{separate && (
-				<MinMaxSelect
+	return (
+		<SubSectionFieldset>
+			<SubSectionFieldset.Legend description={description}>{legend}</SubSectionFieldset.Legend>
+			<SubSectionFieldset.Details className='gap-x-8 sm:grid-cols-2'>
+				<DurationInputField
+					required
+					label='Min'
+					field={fieldKey}
+					keyMinMax='min'
+					data={data}
+					handlePrisma={handlePrisma}
+					className={cn('md:in-data-uom:col-1 md:in-data-uom:row-1')}
+				/>
+				<DurationSelectField
+					seperateMinMax={separate}
+					sizeKey='min'
+					field={fieldKey}
+					data={data}
+					handlePrisma={handlePrisma}
+					className={cn('in-data-uom:col-2 in-data-uom:row-1')}
+				/>
+				<DurationInputField
+					required
+					label='Max'
+					field={fieldKey}
+					keyMinMax='max'
+					data={data}
+					handlePrisma={handlePrisma}
+					className={cn('in-data-uom:col-1 in-data-uom:row-2')}
+				/>
+
+				<DurationSelectField
+					disabled={!separate}
 					seperateMinMax={separate}
 					sizeKey='max'
-					field={field}
+					field={fieldKey}
 					data={data}
 					handlePrisma={handlePrisma}
 					className={cn('in-data-uom:col-2 in-data-uom:row-2')}
 				/>
-			)}
-		</>
+				<CheckboxField className='italic'>
+					<Checkbox
+						color='brand'
+						onChange={e => {
+							handleSeperateUOMChange({
+								field: fieldKey,
+								newStatus: e,
+								data,
+								handlePrisma,
+							})
+						}}
+					/>
+					<Label className='text-interactive'>Use Separate UOM</Label>
+				</CheckboxField>
+				{data.errors[fieldKey].base?.length > 0 && (
+					<FormGroupError
+						message={data.errors[fieldKey].base}
+						className='col-span-full mt-0 text-center font-medium italic *:text-sm/12'
+					/>
+				)}
+			</SubSectionFieldset.Details>
+		</SubSectionFieldset>
 	)
 }
 
-const MinMaxTimeField = ({
+const DurationInputField = ({
 	keyMinMax,
 	data,
 	field,
 	handlePrisma,
+	disabled = false,
 	...props
 }: {
 	field: Key
 	keyMinMax: 'min' | 'max'
+	disabled?: boolean
 } & Props
 	& Omit<FieldElProps, 'children'>
 	& ElPrismaProps) => {
@@ -217,7 +225,9 @@ const MinMaxTimeField = ({
 	const { className, ...rest } = props
 
 	return (
-		<Field className={cn(className)}>
+		<Field
+			disabled={disabled ? disabled : undefined}
+			className={cn(className)}>
 			<Label required={props.required}>{props.label}</Label>
 
 			<InputGroup>
@@ -266,7 +276,7 @@ const SuffixCounter = ({
 	field,
 	minMax,
 }: {
-	data: PrismaQuery
+	data: Query
 	field: Key
 	minMax: 'min' | 'max'
 }) => {
@@ -280,24 +290,31 @@ const SuffixCounter = ({
 	)
 }
 
-const MinMaxSelect = ({
+const DurationSelectField = ({
 	seperateMinMax,
 	sizeKey,
 	handlePrisma,
 	data,
 	field,
+	disabled,
 	...props
 }: Props
 	& ElPrismaProps & {
 		seperateMinMax: boolean
 		sizeKey: 'min' | 'max'
 		field: Key
+		disabled?: boolean
 	}) => {
-	const upperKey = seperateMinMax && sizeKey.charAt(0).toUpperCase() + sizeKey.slice(1) + ' '
+	const upperKey =
+		sizeKey == 'max' ?
+			sizeKey.charAt(0).toUpperCase() + sizeKey.slice(1) + ' '
+		:	seperateMinMax && sizeKey.charAt(0).toUpperCase() + sizeKey.slice(1) + ' '
 	const upperField = seperateMinMax ? (toTitleCase(field) as string).split(' ').join(' ') : field
 
 	return (
-		<Field className={cn(props.className)}>
+		<Field
+			disabled={disabled ? disabled : undefined}
+			className={cn(props.className)}>
 			<Label required>{upperKey}UOM</Label>
 			<Select
 				name={`${upperField}UOM`}

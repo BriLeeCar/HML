@@ -1,39 +1,31 @@
 import {
 	Button,
 	CheckBox,
-	FormSubSection,
 	RemoveButton,
 	RemoveButtonWrapper,
-	Tooltip,
+	SubSectionFieldset,
 } from '@/admin/_components'
-import { Field, FieldGroup, Textarea } from '@/admin/_components/catalyst'
+import { Field, Textarea } from '@/admin/_components/catalyst'
 import { Icon } from '~/components/Icon'
 import { type ElPrismaProps, note } from '../../_lib'
 
 export const Limitations = ({ data, handlePrisma }: ElPrismaProps) => {
 	return (
-		<FieldGroup>
+		<>
 			<CheckBox
-				defaultChecked={data.query.limitations?.length > 0}
 				onClick={() => {
 					handlePrisma(note(data, 'limitations', 'add'))
 				}}
-				label={
-					<Tooltip target='Has Other Limitations'>
-						Limitations such as employment for work visas or age for working holiday visas would not
-						be covered here
-					</Tooltip>
-				}
+				label='Has Other Limitations'
 				description={<>This pathway has other limitations outside of the pathway type</>}
 			/>
 
 			{data.query.limitations?.length > 0 && (
-				<FormSubSection
-					className='md:pl-8'
-					legend='Limitations'
-					aria-label='Limitations'
-					description='Please include each limitation as a separate entry'>
-					<FieldGroup className='flex flex-col'>
+				<SubSectionFieldset className='md:pl-8'>
+					<SubSectionFieldset.Legend description='Please include each limitation as a separate entry'>
+						Limitations
+					</SubSectionFieldset.Legend>
+					<div className='flex flex-col'>
 						{data.query.limitations.map(n => (
 							<div
 								key={n.counter}
@@ -65,8 +57,8 @@ export const Limitations = ({ data, handlePrisma }: ElPrismaProps) => {
 								</RemoveButtonWrapper>
 							</div>
 						))}
-					</FieldGroup>
-				</FormSubSection>
+					</div>
+				</SubSectionFieldset>
 			)}
 			{data.query.limitations?.length > 0 && (
 				<Button
@@ -85,6 +77,6 @@ export const Limitations = ({ data, handlePrisma }: ElPrismaProps) => {
 					Add Limitation
 				</Button>
 			)}
-		</FieldGroup>
+		</>
 	)
 }

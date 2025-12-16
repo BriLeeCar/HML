@@ -1,13 +1,5 @@
-import { FormSection } from '@/admin/_components'
-import {
-	Checkbox,
-	CheckboxField,
-	CheckboxGroup,
-	Description,
-	FieldGroup,
-	Label,
-	Textarea,
-} from '@/admin/_components/catalyst'
+import { FormSection } from '@/admin/_components/_form/clientFieldset'
+import { Checkbox, CheckboxField, Description, Label, Textarea } from '@/admin/_components/catalyst'
 import { type ReactNode } from 'react'
 import { refresh, type ElPrismaProps } from '../..'
 import { Limitations } from './Limitations'
@@ -21,14 +13,14 @@ export const RestrictionsOpportunities = ({
 	countries: Array<{ code: string; name: string }>
 }) => {
 	return (
-		<FormSection
-			title='Restrictions & Opportunities'
-			role='group'
-			aria-label='Limitations & Requirements'
-			description={
-				'This section gathers any specific limitations or requirements associated with the pathway. This may include eligibility criteria, nationality restrictions, or other important notes.'
-			}>
-			<CheckboxGroup>
+		<FormSection>
+			<FormSection.Legend
+				description={
+					'This section gathers any specific limitations or requirements associated with the pathway. This may include eligibility criteria, nationality restrictions, or other important notes.'
+				}>
+				Restrictions & Opportunities
+			</FormSection.Legend>
+			<FormSection.Details>
 				<NationalityRestrictionsCB
 					data={data}
 					handlePrisma={handlePrisma}
@@ -59,7 +51,7 @@ export const RestrictionsOpportunities = ({
 					data={data}
 					handlePrisma={handlePrisma}
 				/>
-			</CheckboxGroup>
+			</FormSection.Details>
 		</FormSection>
 	)
 }
@@ -78,7 +70,7 @@ const RestrictionOpportunitiesCB = <B extends Exclude<keyof Query['piplines'], '
 		field: B
 	}) => {
 	return (
-		<FieldGroup>
+		<>
 			<CheckboxField>
 				<Checkbox
 					name={field}
@@ -103,6 +95,6 @@ const RestrictionOpportunitiesCB = <B extends Exclude<keyof Query['piplines'], '
 					}}
 				/>
 			)}
-		</FieldGroup>
+		</>
 	)
 }

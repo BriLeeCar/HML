@@ -1,4 +1,4 @@
-import { FormSection } from '@/admin/_components'
+import { FormSection } from '@/admin/_components/_form/clientFieldset'
 import { CheckboxGroup } from '@/admin/_components/catalyst/'
 import { cn } from '~/lib/cn'
 import type { PathwayTypeRecursive } from '~/server/api/routers'
@@ -29,21 +29,25 @@ export const CategorySection = ({
 	}
 
 	return (
-		<FormSection
-			title='Categories'
-			aria-label='Pathway Categories'
-			description={
-				"To best classify this pathway, please fill out the category information below. We use this to help users filter and find relevant pathways, as well as suggest similar pathways they might be interested in but haven't discovered yet."
-			}>
-			{/* ? BASE CATEGORIES */}
-			<Group
-				handleCheck={handleCheck}
-				checkBoxes={pathwayTypes.sort((a, b) =>
-					a.name == 'Other' ? 1
-					: b.name == 'Other' ? -1
-					: a.name.localeCompare(b.name)
-				)}
-			/>
+		<FormSection aria-label='Pathway Categories'>
+			<FormSection.Legend
+				description={
+					"To best classify this pathway, please fill out the category information below. We use this to help users filter and find relevant pathways, as well as suggest similar pathways they might be interested in but haven't discovered yet."
+				}>
+				Categories
+			</FormSection.Legend>
+			<FormSection.Details>
+				{/* ? BASE CATEGORIES */}
+				<Group
+					handleCheck={handleCheck}
+					checkBoxes={pathwayTypes.sort((a, b) =>
+						a.name == 'Other' ? 1
+						: b.name == 'Other' ? -1
+						: a.name.localeCompare(b.name)
+					)}
+					className='pl-0'
+				/>
+			</FormSection.Details>
 		</FormSection>
 	)
 }
@@ -51,13 +55,18 @@ export const CategorySection = ({
 export const Group = ({
 	checkBoxes,
 	handleCheck,
-}: {
+	...props
+}: Props & {
 	handleCheck: (id: number, status: boolean) => void
 	checkBoxes: Categories[]
 }) => {
 	return (
 		<CheckboxGroup
-			className={cn('col-span-2 row-start-3! grid w-full grid-cols-2 justify-between pl-10')}>
+			{...props}
+			className={cn(
+				'col-span-2 grid w-full grid-cols-1 justify-between gap-y-8 pl-10 md:grid-cols-2',
+				props.className
+			)}>
 			{checkBoxes
 				.sort((a, b) => {
 					const childCompare = a.children.length - b.children.length

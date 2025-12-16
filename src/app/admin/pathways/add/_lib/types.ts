@@ -13,7 +13,6 @@ export type ElPrismaProps = {
 	data: Query
 	handlePrisma: (data: ElPrismaProps['data']) => void
 }
-export type PrismaQuery = ElPrismaProps['data']
 
 export type NewData<E extends string[] | null> =
 	E extends null ?

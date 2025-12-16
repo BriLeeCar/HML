@@ -1,4 +1,4 @@
-import { TimeFieldGroup, TimeSubSection } from '..'
+import { DurationGroup } from '..'
 
 export const ProcessingTime = ({
 	data,
@@ -8,21 +8,12 @@ export const ProcessingTime = ({
 	handlePrisma: (data: Query) => void
 }) => {
 	return (
-		<TimeSubSection
-			heading={{
-				label: 'Processing Time',
-				legend: 'Processing Time',
-				description:
-					'From application submission to decision, how long does it typically take to process this visa/pathway?',
-			}}
+		<DurationGroup
 			data={data}
 			handlePrisma={handlePrisma}
-			field='processTime'>
-			<TimeFieldGroup
-				data={data}
-				handlePrisma={handlePrisma}
-				field='processTime'
-			/>
-		</TimeSubSection>
+			fieldKey='processTime'
+			description='From application submission to decision, how long does it typically take to process this visa/pathway?'
+			legend='Processing Time'
+		/>
 	)
 }

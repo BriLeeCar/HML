@@ -1,13 +1,57 @@
 @theme {
-	--color-v2-red: #ac162b;
-	--color-v2-mulberry: #7a2235;
-	--color-v2-yellow: #dae638;
-	--color-v2-purple-brand: #47274e;
-	--color-v2-slate: #222d30;
-	--color-v2-grey: #e9edf3;
+	--color-v2-brand-slate: #222d30;
+	--color-v2-brand-red: #ac162b;
+	--color-v2-brand-mulberry: #7a2235;
+	--color-v2-brand-grey: #e9edf3;
+	--color-v2-brand-yellow: #dae638;
+	--color-v2-brand-purple: #47274e;
 
-	--color-ring-color: light-dark(var(--color-v2-red), var(--color-v2-yellow));
-	--color-interactive: light-dark(var(--color-v2-red), var(--color-v2-yellow));
+	--color-v2-grey-900: #222d30;
+	--color-v2-grey-600: #2a2e34;
+	--color-v2-grey-400: #5e646e;
+	--color-v2-grey-300: #7e8691;
+	--color-v2-grey-200: #a8b0bc;
+	--color-v2-grey-50: var(--color-v2-brand-grey);
+
+	--color-v2-red-900: #2d060b;
+	--color-v2-red-700: #680d1a;
+	--color-v2-red-500: var(--color-v2-brand-red);
+	--color-v2-red-300: #e9586d;
+	--color-v2-red-100: #f39ba8;
+	--color-v2-red-50: #fbdfe3;
+
+	--color-v2-mulberry-900: #250e11;
+	--color-v2-mulberry-700: #552027;
+	--color-v2-mulberry-500: var(--color-v2-brand-mulberry);
+	--color-v2-mulberry-300: #b7576c;
+	--color-v2-mulberry-100: #dbb3bc;
+	--color-v2-mulberry-50: #f2e8ea;
+
+	--color-v2-yellow-900: #222404;
+	--color-v2-yellow-700: #5a5f0c;
+	--color-v2-yellow-500: #a2ac15;
+	--color-v2-yellow-300: var(--color-v2-brand-yellow);
+	--color-v2-yellow-100: #f0f4a8;
+	--color-v2-yellow-50: #f9fbe1;
+
+	--color-v2-purple-900: #261a28;
+	--color-v2-purple-700: var(--color-v2-brand-purple);
+	--color-v2-purple-500: #74447e;
+	--color-v2-purple-300: #ae8bb6;
+	--color-v2-purple-100: #ccbdd0;
+	--color-v2-purple-50: #f0ebf1;
+
+	--color-v2-slate-900: #161b1d;
+	--color-v2-slate-700: var(--color-v2-brand-slate);
+	--color-v2-slate-500: #42585e;
+	--color-v2-slate-300: #81989e;
+	--color-v2-slate-100: #d4dadc;
+	--color-v2-slate-50: #edf1f2;
+
+	--color-ring-color: light-dark(var(--color-v2-red-500), var(--color-v2-yellow-300));
+	--color-interactive: light-dark(var(--color-v2-red-500), var(--color-v2-yellow-300));
+
+	--color-v2-foreground: var(--color-v2-slate-700);
 }
 
 section > *:is(h1, h2, h3, h4, h5, h6) + form {
@@ -16,10 +60,55 @@ section > *:is(h1, h2, h3, h4, h5, h6) + form {
 
 [data-layout="page"]:has([class*="page-full"]) {
 	@apply px-0;
-	[class*="page-full"] .page-auto {
-		@apply px-6 lg:px-8;
+}
+
+body:has(.admin) {
+	@apply mb-12;
+}
+
+main:has(.admin) {
+	@apply mx-0 w-full px-0 sm:px-0 md:max-w-screen lg:max-w-screen lg:px-0;
+}
+
+@utility eyebrow {
+	@apply text-v2-red-500 px-1 text-sm leading-[1.25lh] italic;
+}
+
+@utility subtitle {
+	@apply text-v2-grey-300 font-sans leading-relaxed font-extralight sm:text-balance;
+}
+
+@utility title-page {
+	@apply grid gap-1;
+	& > .eyebrow {
+		@apply text-v2-red-500 font-subtitle px-1 text-sm leading-[1.25lh] italic;
 	}
-	& > *:not([class*="page-full"]) {
-		@apply px-6 lg:px-8;
+	& > .subtitle {
+		@apply text-2xl font-light;
+	}
+	& > *:not(.eyebrow):not(.subtitle),
+	&:not(*:has(.eyebrow)):not(*:has(.subtitle)) {
+		@apply text-v2-foreground font-heading text-[2.5rem] leading-none font-bold tracking-tight text-pretty capitalize dark:text-white;
+	}
+}
+
+@utility title-section {
+	@apply title-page;
+	& > .eyebrow {
+		@apply text-v2-red-500 px-1 text-sm leading-[1.25lh] italic;
+	}
+	& > .subtitle {
+		@apply text-[1.1em] leading-[1.25lh];
+	}
+	& > *:not(.eyebrow):not(.subtitle),
+	&:not(*:has(.eyebrow)):not(*:has(.subtitle)) {
+		@apply text-3xl;
+	}
+}
+
+@utility title-subsection {
+	@apply text-v2-mulberry-500 dark:text-v2-yellow-100 font-sans text-[1.3rem] font-semibold tracking-wider uppercase italic;
+	& + .subtitle {
+		@apply text-[1.025rem];
 	}
 }

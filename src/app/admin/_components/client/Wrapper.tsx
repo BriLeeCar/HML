@@ -4,8 +4,8 @@ import type { tLayoutWrapperProps } from '@/admin/_lib/types'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Fragment } from 'react'
-import { PageHeading } from '~/components'
 import { toTitleCase } from '~/lib/text'
+import { PageHeading } from '../'
 
 const handleCrumbs = (path: string) => {
 	return path
@@ -30,7 +30,7 @@ const Breadcrumbs = ({
 			.join('/')
 
 	return (
-		<span className='text-v2-red dark:text-v2-yellow flex items-center gap-0 text-xs/4 font-normal italic *:not-last:hover:underline'>
+		<span className='eyebrow dark:text-v2-yellow-300 flex items-center gap-0 *:not-last:hover:underline'>
 			{items.map((item, index) => {
 				const thisCrumb = joinCrumbs(index)
 				return (

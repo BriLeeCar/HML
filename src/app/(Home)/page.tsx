@@ -87,7 +87,7 @@ const MobileHome = () => {
 					<Button
 						variant='ghost'
 						href='/leave-now'
-						className='decoration-brand-bright font-heading hover:text-brand-bright to-background text-foreground/85 flex h-min grow items-start justify-center bg-linear-to-b from-transparent to-25% pb-8 text-8xl tracking-tight italic underline underline-offset-12'>
+						className='decoration-brand-bright hover:text-brand-bright to-background text-foreground/85 flex h-min grow items-start justify-center bg-linear-to-b from-transparent to-25% pb-8 text-8xl tracking-tight italic underline underline-offset-12'>
 						NOW
 					</Button>
 				</h2>

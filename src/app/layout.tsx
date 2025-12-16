@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Open_Sans } from 'next/font/google'
+import { Atkinson_Hyperlegible_Next, Open_Sans, Roboto } from 'next/font/google'
 import 'react'
 import type { ReactNode } from 'react'
 import 'rehype-callouts/theme/vitepress'
@@ -23,6 +23,20 @@ const openSans = Open_Sans({
 	adjustFontFallback: true,
 })
 
+const headingFont = Atkinson_Hyperlegible_Next({
+	variable: '--font-atkinson-hyperlegible',
+	weight: 'variable',
+	subsets: ['latin'],
+	style: ['normal', 'italic'],
+})
+
+const subtitleFont = Roboto({
+	variable: '--font-roboto',
+	weight: ['100', '200', '300'],
+	subsets: ['latin'],
+	style: ['normal', 'italic'],
+})
+
 const RootLayout = async ({
 	children,
 }: Readonly<{
@@ -31,7 +45,7 @@ const RootLayout = async ({
 	return (
 		<html
 			lang='en'
-			className={cn(openSans.variable)}
+			className={cn(openSans.variable, headingFont.variable, subtitleFont.variable)}
 			suppressHydrationWarning>
 			<body
 				className={cn(

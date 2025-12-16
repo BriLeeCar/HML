@@ -20,7 +20,7 @@ const colors = {
 	teal: 'bg-teal-500/15 text-teal-700 group-data-hover:bg-teal-500/25 dark:bg-teal-500/10 dark:text-teal-300 dark:group-data-hover:bg-teal-500/20',
 	cyan: 'bg-cyan-400/20 text-cyan-700 group-data-hover:bg-cyan-400/30 dark:bg-cyan-400/10 dark:text-cyan-300 dark:group-data-hover:bg-cyan-400/15',
 	sky: 'bg-sky-500/15 text-sky-700 group-data-hover:bg-sky-500/25 dark:bg-sky-500/10 dark:text-sky-300 dark:group-data-hover:bg-sky-500/20',
-	blue: 'bg-v2-red/15 text-blue-700 group-data-hover:bg-v2-red/25 dark:text-blue-400 dark:group-data-hover:bg-v2-red/25',
+	blue: 'bg-v2-red-500/15 text-blue-700 group-data-hover:bg-v2-red-500/25 dark:text-blue-400 dark:group-data-hover:bg-v2-red-500/25',
 	indigo:
 		'bg-indigo-500/15 text-indigo-700 group-data-hover:bg-indigo-500/25 dark:text-indigo-400 dark:group-data-hover:bg-indigo-500/20',
 	violet:

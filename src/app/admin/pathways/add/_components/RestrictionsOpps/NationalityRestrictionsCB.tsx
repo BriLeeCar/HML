@@ -1,11 +1,11 @@
 import {
 	AddButton,
 	CheckBox,
-	FormSubSection,
 	RemoveButton,
 	RemoveButtonWrapper,
+	SubSectionFieldset,
 } from '@/admin/_components'
-import { Field, FieldGroup, Label, Select, Textarea } from '@/admin/_components/catalyst'
+import { Field, Label, Select, Textarea } from '@/admin/_components/catalyst'
 import type { ElPrismaProps } from '../../_lib'
 
 export const NationalityRestrictionsCB = ({
@@ -72,7 +72,7 @@ export const NationalityRestrictionsCB = ({
 	}
 
 	return (
-		<FieldGroup>
+		<>
 			<CheckBox
 				name='nationalityCB'
 				color='brand'
@@ -103,46 +103,47 @@ export const NationalityRestrictionsCB = ({
 
 			{cbValue && (
 				<>
-					<FormSubSection
-						className='*:data-[slot="legend"]:text-current/70 md:pl-8'
-						legend='Countries with Restrictions'
-						aria-label='Countries with Restrictions'
-						description='Please include each country as a separate entry'>
-						<FieldGroup className='flex flex-col'>
-							{data.query.restrictedNationalities.map(n => (
-								<FieldGroup
-									key={n.countryCode}
-									className='grid grid-cols-[auto_.15fr] *:grid *:grid-cols-[3.5rem_auto] *:items-baseline *:gap-x-8 *:last:grid-cols-1'>
-									<Field className='col-start-1 mb-1'>
-										<Label>Country</Label>
-										<Select
-											value={n.countryCode}
-											onChange={e => handleCountryChange(n.countryCode, e.currentTarget.value)}>
-											<option value=''>Select a country</option>
-											{getCountryOptions().map(country => (
-												<option
-													key={country.code}
-													value={country.code}>
-													{country.name}
-												</option>
-											))}
-										</Select>
-									</Field>
-									<Field className='col-start-1'>
-										<Label>Details</Label>
-										<Textarea
-											name='nationalityRestrictionDetails'
-											className='mt-1'
-											onBlur={e => handleNoteChange(n.countryCode, e.currentTarget.value)}
-										/>
-									</Field>
-									<RemoveButtonWrapper className='mt-3 self-start'>
-										<RemoveButton onClick={() => handleDelete(n.countryCode)} />
-									</RemoveButtonWrapper>
-								</FieldGroup>
-							))}
-						</FieldGroup>
-					</FormSubSection>
+					<SubSectionFieldset className='*:data-[slot="legend"]:text-current/70 md:pl-8'>
+						<SubSectionFieldset.Legend description='Please include each country as a separate entry'>
+							Countries with Restrictions
+						</SubSectionFieldset.Legend>
+						<SubSectionFieldset.Details>
+							<div className='flex flex-col'>
+								{data.query.restrictedNationalities.map(n => (
+									<div
+										key={n.countryCode}
+										className='grid grid-cols-[auto_.15fr] *:grid *:grid-cols-[3.5rem_auto] *:items-baseline *:gap-x-8 *:last:grid-cols-1'>
+										<Field className='col-start-1 mb-1'>
+											<Label>Country</Label>
+											<Select
+												value={n.countryCode}
+												onChange={e => handleCountryChange(n.countryCode, e.currentTarget.value)}>
+												<option value=''>Select a country</option>
+												{getCountryOptions().map(country => (
+													<option
+														key={country.code}
+														value={country.code}>
+														{country.name}
+													</option>
+												))}
+											</Select>
+										</Field>
+										<Field className='col-start-1'>
+											<Label>Details</Label>
+											<Textarea
+												name='nationalityRestrictionDetails'
+												className='mt-1'
+												onBlur={e => handleNoteChange(n.countryCode, e.currentTarget.value)}
+											/>
+										</Field>
+										<RemoveButtonWrapper className='mt-3 self-start'>
+											<RemoveButton onClick={() => handleDelete(n.countryCode)} />
+										</RemoveButtonWrapper>
+									</div>
+								))}
+							</div>
+						</SubSectionFieldset.Details>
+					</SubSectionFieldset>
 
 					<AddButton
 						onClick={() => {
@@ -165,6 +166,6 @@ export const NationalityRestrictionsCB = ({
 					</AddButton>
 				</>
 			)}
-		</FieldGroup>
+		</>
 	)
 }

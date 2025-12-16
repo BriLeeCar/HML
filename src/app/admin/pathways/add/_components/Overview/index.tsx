@@ -1,5 +1,4 @@
-import { FormSection } from '@/admin/_components'
-import { FieldGroup } from '@/admin/_components/catalyst'
+import { FormSection } from '@/admin/_components/_form/clientFieldset'
 import { type ElPrismaProps } from '../..'
 import { OverviewCountryId } from './CountryId'
 import { OverviewDescription } from './Description'
@@ -16,11 +15,11 @@ export const OverviewSection = ({
 	return (
 		<FormSection
 			title='Overview'
-			aria-label='Pathway Overview'
-			description={
-				'This section collects the basic information about the pathway. Please ensure that all information is accurate and corresponds to official sources where applicable.'
-			}>
-			<FieldGroup className='grid gap-x-8 md:grid-cols-2'>
+			aria-label='Pathway Overview'>
+			<FormSection.Legend description='This section collects the basic information about the pathway. Please ensure that all information is accurate and corresponds to official sources where applicable.'>
+				Overview
+			</FormSection.Legend>
+			<FormSection.Details className='gap-x-8 sm:grid-cols-2'>
 				{/* ? COUNTRY ID */}
 				<OverviewCountryId
 					data={data}
@@ -42,7 +41,7 @@ export const OverviewSection = ({
 					data={data}
 					handlePrisma={handlePrisma}
 				/>
-			</FieldGroup>
+			</FormSection.Details>
 		</FormSection>
 	)
 }

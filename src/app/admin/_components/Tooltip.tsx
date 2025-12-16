@@ -34,15 +34,15 @@ export const Tooltip = ({ target, children }: { target: ReactNode; children: Rea
 									}}>
 									<div
 										className={cn(
-											'border-v2-grey/15 rounded-md border',
-											'bg-v2-slate',
+											'border-v2-grey-50/15 rounded-md border',
+											'bg-v2-slate-700',
 											'relative ml-2 flex w-2xs max-w-3xs flex-col px-3 py-2 pb-2',
-											'text-v2-grey shadow-v2-slate/20 text-xs italic shadow-2xs'
+											'text-v2-grey-50 shadow-v2-slate-700/20 text-xs italic shadow-2xs'
 										)}>
 										{children}
 										<span className='absolute top-1/2 -left-1 flex -translate-y-1/2 items-center justify-center text-center'>
 											<span
-												className='border-v2-grey/15 bg-v2-slate z-10 block h-2 w-2 border'
+												className='border-v2-grey-50/15 bg-v2-slate-700 z-10 block h-2 w-2 border'
 												style={{
 													rotate: '45deg',
 													clipPath: 'polygon(0% 0%, 0% 100%, 100% 100%, 0% 0%)',

@@ -111,8 +111,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-	--font-sans: var(--font-open-sans, Open Sans), sans-serif;
-	--font-heading: questa-grande, serif;
+	--font-sans: var(--font-test);
+	--font-subtitle: var(--font-roboto);
+
+	--font-heading: var(--font-atkinson-hyperlegible);
 	--font-serif: questa, serif;
 	--breakpoint-xs: 400px;
 
@@ -366,16 +368,6 @@ input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
-}
-
-body:has(.admin) {
-	main {
-		@apply max-md:px-0;
-	}
-	div:has(> p + h1 + p),
-	hgroup {
-		@apply max-md:px-6;
-	}
 }
 
 @utility admin-mobile-padding {

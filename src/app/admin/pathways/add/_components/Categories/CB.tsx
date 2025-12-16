@@ -3,7 +3,7 @@ import { useState, type MouseEvent } from 'react'
 import { Icon } from '~/components/Icon'
 import { cn } from '~/lib/cn'
 import type { PathwayTypeRecursive } from '~/server/api/routers'
-import { Group, type Categories } from './Categories'
+import { Group, type Categories } from '.'
 
 export const CategoryCheckboxes = ({
 	cb,
@@ -45,8 +45,9 @@ export const CategoryCheckboxes = ({
 	}
 
 	return (
-		<CheckboxField className='mb-6 gap-y-0 has-data-checked:has-[div]:col-span-full'>
+		<CheckboxField className='my-0 h-max gap-y-1 has-data-checked:has-[div]:col-span-full'>
 			<Checkbox
+				className='h-max'
 				id={cb.name.split(' ').join('-').toLowerCase()}
 				name={cb.name.split(' ').join('-').toLowerCase()}
 				{...props}
@@ -55,16 +56,14 @@ export const CategoryCheckboxes = ({
 			/>
 			<Label
 				htmlFor={cb.name.split(' ').join('-').toLowerCase()}
-				className={cbStatus.checked ? 'text-interactive flex basis-full font-bold!' : ''}
+				className={cbStatus.checked ? 'text-interactive flex h-max basis-full font-bold!' : ''}
 				onClick={handleToggle}>
 				{cb.name.trim()}
 				{cbStatus.checked && cb.children.length > 0 && (
-					<span className='w-full'>
-						<Icon
-							IconName='ChevronDownIcon'
-							className={cn(!cbStatus.open ? '-rotate-90' : '', 'transition-all')}
-						/>
-					</span>
+					<Icon
+						IconName='ChevronDownIcon'
+						className={cn(!cbStatus.open ? '-rotate-90' : '', 'transition-all')}
+					/>
 				)}
 			</Label>
 			<Description className='text-sm'>{cb.description}</Description>
@@ -94,6 +93,7 @@ const CheckboxInnerGrp = ({
 	if (checked && hasKids) {
 		return open ?
 				<Group
+					className='gap-y-1'
 					handleCheck={handleCheck}
 					checkBoxes={kids}
 				/>
