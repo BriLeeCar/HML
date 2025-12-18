@@ -2,33 +2,94 @@ import { z } from 'zod/v4'
 import { hash, verify } from '~/lib/index'
 import { generateKey } from '~/lib/security/keyGen'
 import { createTRPCRouter, protectedProcedure, publicProcedure } from '.'
+import type { tNACTX, tProtectedCTX, tPublicCTX } from './types'
+type CTXProps<T extends undefined | 'protected' | null = null> = {
+	ctx: T extends undefined ? tNACTX
+	: T extends 'protected' ? tProtectedCTX
+	: tPublicCTX
+}
+
+const getUserRoles = async ({ ctx }: CTXProps) => {
+	const userId = ctx.session?.user?.id
+	if (!userId) return { roles: [] }
+	const roles = await ctx.db.user.findUnique({
+		where: {
+			id: userId,
+		},
+		select: {
+			roles: {
+				select: {
+					roleId: true,
+				},
+			},
+		},
+	})
+
+	return {
+		roles: roles?.roles.map(r => r.roleId) || [],
+	}
+}
+
+const getCurrent = async ({ ctx }: CTXProps) => {
+	const userId = ctx.session?.user
+	return (
+		userId
+		&& (await ctx.db.user.findUnique({
+			where: {
+				id: userId.id,
+			},
+		}))
+	)
+}
+
+const getUserById = async ({ ctx, input }: CTXProps & { input: string | undefined }) => {
+	return input ?
+			await ctx.db.user.findUnique({
+				where: {
+					id: input,
+				},
+			})
+		:	false
+}
+
+const createUserKey = async ({
+	input,
+	ctx,
+}: CTXProps<undefined> & {
+	input: {
+		name: string
+		roleId: number
+	}
+}) => {
+	return await ctx.db.userKey.create(queryCreateUserKey(input.name, input.roleId))
+}
+
+const getUsers = async ({
+	ctx,
+	input,
+}: CTXProps & {
+	input?: number
+}) => {
+	return await ctx.db.userKey.findMany({
+		skip: input ? (input - 1) * 10 : 0,
+		orderBy: {
+			role: {
+				name: 'asc',
+			},
+		},
+		take: 10,
+		include: {
+			user: true,
+		},
+	})
+}
 
 export const UserRouter = createTRPCRouter({
-	current: publicProcedure.query(async ({ ctx }) => {
-		const userId = ctx.session?.user
-		return (
-			userId
-			&& (await ctx.db.user.findUnique({
-				where: {
-					id: userId.id,
-				},
-			}))
-		)
-	}),
-	getUserById: publicProcedure.input(z.string().or(z.undefined())).query(async ({ ctx, input }) => {
-		return input ?
-				await ctx.db.user.findUnique({
-					where: {
-						id: input,
-					},
-				})
-			:	false
-	}),
+	current: publicProcedure.query(getCurrent),
+	getUserById: publicProcedure.input(z.string().or(z.undefined())).query(getUserById),
 	createUserKey: protectedProcedure
 		.input(z.object({ name: z.string(), roleId: z.number().gt(0, 'Invalid Role') }))
-		.mutation(async ({ input, ctx }) => {
-			return await ctx.db.userKey.create(queryCreateUserKey(input.name, input.roleId))
-		}),
+		.mutation(createUserKey),
 	getUserRoles: publicProcedure.query(async ({ ctx }) => {
 		return await ctx.db.roles.findMany()
 	}),
@@ -98,6 +159,8 @@ export const UserRouter = createTRPCRouter({
 			)
 			if (!query) throw new Error('Old password is incorrect')
 		}),
+	getUsersRoles: publicProcedure.query(getUserRoles),
+	getUsers: publicProcedure.input(z.number().optional()).query(getUsers),
 })
 
 const queryUpdatePassword = (userId: string, newPassword: string, oldPassword: string) => ({

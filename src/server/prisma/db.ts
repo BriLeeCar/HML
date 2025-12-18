@@ -1,3 +1,4 @@
+import { withAccelerate } from '@prisma/extension-accelerate'
 import { PrismaClient } from './generated/client'
 
 import { env } from '../../env'
@@ -5,7 +6,7 @@ import { env } from '../../env'
 const createPrismaClient = () =>
 	new PrismaClient({
 		log: ['error', 'warn'],
-	})
+	}).$extends(withAccelerate())
 
 const globalForPrisma = globalThis as unknown as {
 	prisma: ReturnType<typeof createPrismaClient> | undefined

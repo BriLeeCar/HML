@@ -42,7 +42,9 @@
 	--color-v2-purple-50: #f0ebf1;
 
 	--color-v2-slate-900: #161b1d;
+	--color-v2-slate-800: #1d2426;
 	--color-v2-slate-700: var(--color-v2-brand-slate);
+	--color-v2-slate-600: #324146;
 	--color-v2-slate-500: #42585e;
 	--color-v2-slate-300: #81989e;
 	--color-v2-slate-100: #d4dadc;
@@ -64,6 +66,10 @@ section > *:is(h1, h2, h3, h4, h5, h6) + form {
 
 body:has(.admin) {
 	@apply mb-12;
+}
+
+body:has([data-el="mobile-nav"]) {
+	@apply h-screen overflow-hidden;
 }
 
 main:has(.admin) {

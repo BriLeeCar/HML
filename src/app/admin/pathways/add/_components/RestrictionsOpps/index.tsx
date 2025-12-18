@@ -89,7 +89,7 @@ const RestrictionOpportunitiesCB = <B extends Exclude<keyof Query['piplines'], '
 				<Textarea
 					name={`${field}Notes`}
 					{...props}
-					className='-mt-4 mb-8'
+					className='mx-auto -mt-4 mb-8 w-full max-w-lg'
 					onBlur={e => {
 						handlePrisma(refresh(data, field, e.target.value))
 					}}

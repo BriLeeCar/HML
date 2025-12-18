@@ -7,43 +7,6 @@ export const refresh = <K extends keyof Query['query']>(
 	return workingData
 }
 
-// #region ! ---------- ERROR TYPES ----------
-type MinMaxBaseErrorKeys = {
-	[key in keyof Query['errors']]: Query['errors'][key] extends (
-		{
-			min: string[]
-			max: string[]
-			base: string[]
-		}
-	) ?
-		key
-	:	never
-}[keyof Query['errors']]
-
-type ErrorKeys = Exclude<keyof Query['errors'], MinMaxBaseErrorKeys>
-
-// #endregion ! --------------------
-
-export const error = <I extends 'min' | 'max' | 'base' | undefined = undefined>(
-	workingData: Query,
-	field: I extends 'min' | 'max' | 'base' ? MinMaxBaseErrorKeys : ErrorKeys,
-	error: string[],
-	innerField?: I extends 'min' | 'max' | 'base' ? I : undefined
-) => {
-	if (innerField != undefined) {
-		Object.assign(workingData.errors[field], {
-			[innerField]: error,
-		})
-	} else {
-		workingData.errors = {
-			...workingData.errors,
-			[field]: error,
-		}
-	}
-
-	return workingData
-}
-
 type NoteKeys = {
 	[key in keyof Query['query']]: Query['query'][key] extends (
 		{
@@ -136,44 +99,45 @@ export const document = (
 	return workingData
 }
 
-type MissingQueryErrorKeys<E extends true | undefined = undefined> =
-	E extends true ? QueryErrorKeys : QueryQueryKeys
-
-type QueryQueryKeys = keyof Query['query']
-type QueryErrorKeys = keyof Query['errors'] & keyof Query['query']
-
-export const createMissingQueryKey = <
-	K extends keyof Query['query'],
-	E extends true | undefined = undefined,
->(
-	workingData: Query,
-	field: MissingQueryErrorKeys<E>,
-	defaultValue: Query['query'][K],
-	errorsField?: E
-) => {
-	if (workingData.query[field] === undefined) {
-		Object.assign(workingData.query, {
-			[field]: defaultValue,
-		})
-	}
-	if (errorsField && errorsField == true) {
-		if (field == 'cost' || field == 'duration' || field == 'processTime') {
-			;['min', 'max', 'base'].forEach(key => {
-				workingData = error(workingData, field, [], key as 'min' | 'max' | 'base')
-			})
-		}
-	}
-	return workingData
-}
-
 const trackerDuration = () => ({
 	min: 1,
 	max: 1,
 	separate: false,
 })
 
-export const createTracker = (): Omit<Query, 'query'> => ({
+export const createTracker = (): Query => ({
 	date: new Date(),
+	query: {
+		createdAt: new Date(),
+		updatedAt: new Date(),
+		documents: [] as Query['query']['documents'],
+		categories: [] as number[],
+		piplines: [] as Query['query']['piplines'],
+		restrictedNationalities: [] as Query['query']['restrictedNationalities'],
+		processTime: {
+			min: 0,
+			max: 0,
+			note: '',
+			na: false,
+		},
+		duration: {
+			min: 0,
+			max: 0,
+			note: '',
+			na: false,
+		},
+		renewal: {
+			min: 0,
+			max: 0,
+			note: '',
+			na: false,
+		},
+		cost: {
+			min: 0,
+			max: 0,
+			na: false,
+		},
+	} as PrismaPathway,
 	errors: {
 		countryCode: [],
 		name: [],

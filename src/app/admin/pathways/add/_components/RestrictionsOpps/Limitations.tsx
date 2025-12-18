@@ -1,13 +1,12 @@
 import {
-	Button,
+	AddButton,
 	CheckBox,
 	RemoveButton,
 	RemoveButtonWrapper,
 	SubSectionFieldset,
 } from '@/admin/_components'
 import { Field, Textarea } from '@/admin/_components/catalyst'
-import { Icon } from '~/components/Icon'
-import { type ElPrismaProps, note } from '../../_lib'
+import { type ElPrismaProps, note } from '@/admin/pathways/add'
 
 export const Limitations = ({ data, handlePrisma }: ElPrismaProps) => {
 	return (
@@ -25,7 +24,7 @@ export const Limitations = ({ data, handlePrisma }: ElPrismaProps) => {
 					<SubSectionFieldset.Legend description='Please include each limitation as a separate entry'>
 						Limitations
 					</SubSectionFieldset.Legend>
-					<div className='flex flex-col'>
+					<SubSectionFieldset.Details>
 						{data.query.limitations.map(n => (
 							<div
 								key={n.counter}
@@ -57,25 +56,14 @@ export const Limitations = ({ data, handlePrisma }: ElPrismaProps) => {
 								</RemoveButtonWrapper>
 							</div>
 						))}
-					</div>
+						<AddButton
+							onClick={() => {
+								handlePrisma(note(data, 'limitations', 'add'))
+							}}>
+							Limitation
+						</AddButton>
+					</SubSectionFieldset.Details>
 				</SubSectionFieldset>
-			)}
-			{data.query.limitations?.length > 0 && (
-				<Button
-					type='button'
-					size='sm'
-					innerButton
-					onClick={() => {
-						handlePrisma(note(data, 'limitations', 'add'))
-					}}>
-					<Icon
-						IconName='PlusCircleIcon'
-						className='h-4 w-4 text-current/75'
-						data-slot='icon'
-						solid
-					/>
-					Add Limitation
-				</Button>
 			)}
 		</>
 	)

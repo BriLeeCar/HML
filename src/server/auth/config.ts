@@ -2,6 +2,7 @@ import { PrismaAdapter } from '@auth/prisma-adapter'
 import { type DefaultSession, type NextAuthConfig } from 'next-auth'
 
 import db from '~/server/prisma/db'
+import type { Roles } from '../prisma/generated'
 import { CredentialsConfig } from './lib/credentials'
 
 /**
@@ -14,8 +15,11 @@ declare module 'next-auth' {
 	interface Session extends DefaultSession {
 		user: {
 			id: string
-			role: Queried.User.Role['id']
+			role: Roles['id']
 		} & DefaultSession['user']
+	}
+	interface User {
+		role?: Roles['id']
 	}
 }
 
@@ -26,7 +30,6 @@ declare module 'next-auth' {
  */
 export const authConfig = {
 	providers: [CredentialsConfig],
-	// @ts-expect-error PrismaAdapter type issue
 	adapter: PrismaAdapter(db),
 	session: {
 		strategy: 'jwt',
@@ -34,15 +37,21 @@ export const authConfig = {
 	callbacks: {
 		session: data => {
 			return {
+				token: data.token,
 				...data.session,
 				user: {
 					sessionId: data.session.user.id ?? 0,
 					id: data.token.sub,
+					role: data.token.role as Roles['id'],
 				},
 			}
 		},
 		jwt: data => {
-			return data.token
+			const token = data.token
+			if (data.user) {
+				token.role = (data.user as { role: Roles['id'] }).role
+			}
+			return token
 		},
 		redirect: async data => {
 			return data.baseUrl + '/admin'

@@ -67,7 +67,7 @@ export const AddButton = ({ ...props }: Props<typeof Button>) => {
 	return (
 		<Button
 			{...props}
-			className='mx-auto mb-8 max-w-lg'
+			className='mx-auto mb-8 w-full max-w-sm'
 			type='button'
 			size='sm'
 			innerButton>

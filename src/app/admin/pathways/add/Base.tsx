@@ -39,7 +39,7 @@ const handleSubmitBase = async (
 	})
 
 	const validation = zCreatePathwayInput.safeParse(submission)
-	console.log(submission)
+	// console.log(submission)
 
 	validation.success && mutate(submission as CreatePathwayInput)
 	if (validation.error) {
@@ -96,20 +96,12 @@ export const Base = ({ prisma }: { prisma: RouterOutputs['dataCollection']['Path
 
 	const toast = useToast()
 	const [data, setData] = useState({
-		query: {
-			createdAt: new Date(),
-			updatedAt: new Date(),
-		},
 		...createTracker(),
 	} as Query)
 
 	const { mutate } = api.dataCollection.CreatePathway.useMutation({
 		onSuccess: () => {
 			setData({
-				query: {
-					createdAt: new Date(),
-					updatedAt: new Date(),
-				},
 				...createTracker(),
 			} as Query)
 			window.scrollTo(0, 0)
@@ -121,8 +113,8 @@ export const Base = ({ prisma }: { prisma: RouterOutputs['dataCollection']['Path
 					data.query.name ? `You have successfully created the pathway: ${data.query.name}` : '',
 			} as ToastMessage)
 		},
-		onError: data => {
-			console.log(data.message)
+		onError: () => {
+			// console.log(data.message)
 			window.scrollTo({
 				behavior: 'smooth',
 				top: 0,
@@ -130,7 +122,7 @@ export const Base = ({ prisma }: { prisma: RouterOutputs['dataCollection']['Path
 			toast.fireToast({
 				title: 'Error creating pathway',
 				status: 'error',
-				body: <>There was an error creating the pathway. Please verify the following:</>,
+				body: <>There was an error creating the pathway</>,
 			} as ToastMessage)
 		},
 	})

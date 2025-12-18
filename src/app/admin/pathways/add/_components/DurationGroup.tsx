@@ -29,8 +29,7 @@ const handleTimeChange = ({
 }) => {
 	const { queryField, durationType, seperateUOM, value, data, change } = props
 	const newDuration = { ...data.durations[queryField] }
-	const newQuery =
-		data.query[queryField] ? { ...data.query[queryField] } : { min: 0, max: 0, note: '' }
+	const newQuery = { ...data.query[queryField] }
 
 	if (change == 'unit') {
 		if (seperateUOM) {
@@ -57,7 +56,11 @@ const handleTimeChange = ({
 		wholeNumberOnly: true,
 	}).safeParse(newData.query[queryField])
 	if (parsed.success) {
-		newData.errors[queryField] = { min: [], max: [], base: [] }
+		Object.assign(newData.query[queryField], {
+			min: [],
+			max: [],
+			base: [],
+		})
 	} else {
 		const fieldErrors = { min: [], max: [], base: [] } as {
 			min: string[]
@@ -72,7 +75,15 @@ const handleTimeChange = ({
 				fieldErrors['base'].push(issue.message)
 			}
 		})
-		newData.errors[queryField] = fieldErrors
+		Object.assign(
+			newData.errors[queryField],
+			{
+				min: [],
+				max: [],
+				base: [],
+			},
+			fieldErrors
+		)
 	}
 
 	return newData
@@ -139,6 +150,34 @@ export const DurationGroup = ({
 		<SubSectionFieldset>
 			<SubSectionFieldset.Legend description={description}>{legend}</SubSectionFieldset.Legend>
 			<SubSectionFieldset.Details className='gap-x-8 sm:grid-cols-2'>
+				<CheckboxField className='italic'>
+					<Checkbox
+						color='brand'
+						onChange={e => {
+							handleSeperateUOMChange({
+								field: fieldKey,
+								newStatus: e,
+								data,
+								handlePrisma,
+							})
+						}}
+					/>
+					<Label className='text-interactive'>Use Separate UOM</Label>
+				</CheckboxField>{' '}
+				<CheckboxField className='italic'>
+					<Checkbox
+						color='brand'
+						onChange={e => {
+							handleSeperateUOMChange({
+								field: fieldKey,
+								newStatus: e,
+								data,
+								handlePrisma,
+							})
+						}}
+					/>
+					<Label className='text-interactive'>Information Not Available</Label>
+				</CheckboxField>
 				<DurationInputField
 					required
 					label='Min'
@@ -165,7 +204,6 @@ export const DurationGroup = ({
 					handlePrisma={handlePrisma}
 					className={cn('in-data-uom:col-1 in-data-uom:row-2')}
 				/>
-
 				<DurationSelectField
 					disabled={!separate}
 					seperateMinMax={separate}
@@ -175,20 +213,6 @@ export const DurationGroup = ({
 					handlePrisma={handlePrisma}
 					className={cn('in-data-uom:col-2 in-data-uom:row-2')}
 				/>
-				<CheckboxField className='italic'>
-					<Checkbox
-						color='brand'
-						onChange={e => {
-							handleSeperateUOMChange({
-								field: fieldKey,
-								newStatus: e,
-								data,
-								handlePrisma,
-							})
-						}}
-					/>
-					<Label className='text-interactive'>Use Separate UOM</Label>
-				</CheckboxField>
 				{data.errors[fieldKey].base?.length > 0 && (
 					<FormGroupError
 						message={data.errors[fieldKey].base}

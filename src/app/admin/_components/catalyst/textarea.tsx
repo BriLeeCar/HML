@@ -27,6 +27,7 @@ export const Textarea = forwardRef(function Textarea(
 				'has-data-disabled:opacity-50 has-data-disabled:before:bg-zinc-950/5 has-data-disabled:before:shadow-none',
 			])}>
 			<Headless.Textarea
+				rows={4}
 				ref={ref}
 				{...props}
 				className={cn([

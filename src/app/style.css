@@ -114,7 +114,7 @@
 	--font-sans: var(--font-test);
 	--font-subtitle: var(--font-roboto);
 
-	--font-heading: var(--font-atkinson-hyperlegible);
+	--font-heading: var(--font-atkinson-hyperlegible), sans-serif;
 	--font-serif: questa, serif;
 	--breakpoint-xs: 400px;
 

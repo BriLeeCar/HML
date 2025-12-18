@@ -6,7 +6,7 @@ import {
 	SubSectionFieldset,
 } from '@/admin/_components'
 import { Field, Label, Select, Textarea } from '@/admin/_components/catalyst'
-import type { ElPrismaProps } from '../../_lib'
+import type { ElPrismaProps } from '@/admin/pathways/add'
 
 export const NationalityRestrictionsCB = ({
 	data,
@@ -142,28 +142,28 @@ export const NationalityRestrictionsCB = ({
 									</div>
 								))}
 							</div>
+
+							<AddButton
+								onClick={() => {
+									handlePrisma({
+										...data,
+										query: {
+											...data.query,
+											restrictedNationalities: [
+												...data.query.restrictedNationalities,
+												{
+													pathwayId: 0,
+													countryCode: '',
+													note: '',
+												},
+											],
+										},
+									})
+								}}>
+								Nationality
+							</AddButton>
 						</SubSectionFieldset.Details>
 					</SubSectionFieldset>
-
-					<AddButton
-						onClick={() => {
-							handlePrisma({
-								...data,
-								query: {
-									...data.query,
-									restrictedNationalities: [
-										...data.query.restrictedNationalities,
-										{
-											pathwayId: 0,
-											countryCode: '',
-											note: '',
-										},
-									],
-								},
-							})
-						}}>
-						Nationality
-					</AddButton>
 				</>
 			)}
 		</>

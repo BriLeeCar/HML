@@ -1,15 +1,63 @@
-import { Button, SubSectionFieldset } from '@/admin/_components'
+import { AddButton, Button, SubSectionFieldset } from '@/admin/_components'
 import { FormSection } from '@/admin/_components/_form/clientFieldset'
 import { Field, Input, Label, Select, Strong, Textarea } from '@/admin/_components/catalyst/'
+import type { ChangeEvent } from 'react'
 import { Icon } from '~/components'
+import type { Documents } from '~/server/prisma/generated'
 import { document, FieldCost, FieldLink, type ElPrismaProps } from '../..'
+
+const DocumentType = ({
+	doc,
+	documentTypes,
+	data,
+	handlePrisma,
+}: ElPrismaProps & {
+	documentTypes: Documents[]
+	doc: Query['query']['documents'][number]
+}) => {
+	const showPlaceholder = typeof doc.documentId != 'number'
+	const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+		handlePrisma(
+			document(
+				data,
+				'update',
+				{
+					...doc,
+					documentId: Number(e.currentTarget.value),
+				},
+				doc.id
+			)
+		)
+	}
+
+	return (
+		<Field>
+			<Label required>Type</Label>
+			<Select
+				placeholder={{
+					label: 'Select a document type',
+					value: '',
+					selected: showPlaceholder,
+				}}
+				onChange={handleChange}>
+				{documentTypes.map(dt => (
+					<option
+						key={dt.id}
+						value={dt.id}>
+						{dt.name}
+					</option>
+				))}
+			</Select>
+		</Field>
+	)
+}
 
 export const Documentation = ({
 	documentTypes,
 	data,
 	handlePrisma,
 }: ElPrismaProps & {
-	documentTypes: Queried.Models.Documents[]
+	documentTypes: Documents[]
 }) => {
 	const baseData = { ...data }
 
@@ -23,7 +71,7 @@ export const Documentation = ({
 					<SubSectionFieldset key={n.id}>
 						<SubSectionFieldset.Legend>
 							<span>
-								Document ID: <Strong>{n.id}</Strong>
+								Document ID: <Strong className='text-interactive'>{n.id}</Strong>
 							</span>
 							<Button
 								type='button'
@@ -42,36 +90,12 @@ export const Documentation = ({
 						</SubSectionFieldset.Legend>
 						<SubSectionFieldset.Details className='gap-x-8 sm:grid-cols-2'>
 							{/* ! TYPE */}
-							<Field>
-								<Label required>Type</Label>
-								<Select
-									placeholder={{
-										label: 'Select a document type',
-										value: '',
-										selected: typeof n.documentId != 'number',
-									}}
-									onChange={e => {
-										handlePrisma(
-											document(
-												data,
-												'update',
-												{
-													...n,
-													documentId: Number(e.currentTarget.value),
-												},
-												n.id
-											)
-										)
-									}}>
-									{documentTypes.map(dt => (
-										<option
-											key={dt.id}
-											value={dt.id}>
-											{dt.name}
-										</option>
-									))}
-								</Select>
-							</Field>
+							<DocumentType
+								doc={n}
+								documentTypes={documentTypes}
+								data={data}
+								handlePrisma={handlePrisma}
+							/>
 							{/* ! COST */}
 							<Field>
 								<Label>Cost</Label>
@@ -160,21 +184,12 @@ export const Documentation = ({
 					</SubSectionFieldset>
 				))}
 
-				<Button
-					type='button'
-					size='sm'
-					innerButton
+				<AddButton
 					onClick={() => {
 						handlePrisma(document(data, 'add'))
 					}}>
-					<Icon
-						IconName='PlusCircleIcon'
-						className='h-4 w-4 text-current/75'
-						data-slot='icon'
-						solid
-					/>
-					Add Document
-				</Button>
+					Document
+				</AddButton>
 			</FormSection.Details>
 		</FormSection>
 	)

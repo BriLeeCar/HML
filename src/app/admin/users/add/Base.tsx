@@ -10,10 +10,12 @@ import { useToast } from '~/hooks/useToast'
 import { api, type RouterOutputs } from '~/lib/api'
 import { cn } from '~/lib/cn'
 import { toTitleCase } from '~/lib/text'
+import type { Roles } from '~/server/prisma/generated'
+import { HeadlessCB } from './Headless'
 
 type NewUserData = RouterOutputs['user']['createUserKey']
 
-export const NewUserForm = ({ roles }: { roles: Queried.User.Role[] }) => {
+export const NewUserForm = ({ roles }: { roles: Roles[] }) => {
 	const Toaster = useToast()
 	const { mutate } = api.user.createUserKey.useMutation({
 		onSuccess: data => {
@@ -52,6 +54,7 @@ export const NewUserForm = ({ roles }: { roles: Queried.User.Role[] }) => {
 
 	return (
 		<>
+			<HeadlessCB />
 			<Form className='grid max-w-sm grid-cols-1 items-baseline gap-y-6'>
 				<Toaster.El />
 				<FormField

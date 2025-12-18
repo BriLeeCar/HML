@@ -1,4 +1,4 @@
-import { DurationGroup } from '..'
+import { DurationGroup } from '../..'
 
 export const Duration = ({
 	data,

@@ -2,23 +2,14 @@ import { Button, Page } from '@/admin/_components'
 import type { ReactNode } from 'react'
 import { Icon } from '~/components'
 import { cn } from '~/lib/cn'
-
-const sideNav = [
-	{ name: 'Dashboard', href: '/admin', icon: 'GlobeIcon', solid: true },
-	{ name: 'Pathways', href: '/admin/data-collection/pathways', icon: 'UserCircleIcon' },
-	{ name: 'Profile', href: '/admin/settings/profile', icon: 'UserCircleIcon', solid: true },
-] as {
-	name: string
-	href: string
-	icon: IconKey
-	solid?: boolean
-}[]
+import { MobileNav } from './_components/client/MobileNav'
+import { navList } from './_lib/navLinks'
 
 const Nav = () => {
 	return (
-		<nav className='admin bg-v2-slate-700 text-v2-grey-50 *:*:click sticky top-0 z-900 flex w-screen items-center justify-between p-2 max-md:hidden dark:bg-[hsl(196,16%,12%)]'>
-			<ul className='flex items-center gap-6'>
-				{sideNav.map(item => (
+		<nav className='admin bg-v2-slate-700 text-v2-grey-50 sticky top-0 z-900 flex w-screen items-center justify-between p-2 dark:bg-[hsl(196,16%,12%)]'>
+			<ul className='hidden items-center gap-6 md:flex'>
+				{navList.map(item => (
 					<li key={item.href}>
 						<NavbarLink
 							icon={item.icon as IconKey}
@@ -29,6 +20,7 @@ const Nav = () => {
 					</li>
 				))}
 			</ul>
+			<MobileNav />
 			<NavbarLink
 				icon='LogoutIcon'
 				href='/admin/auth/signout'>
@@ -50,6 +42,7 @@ const NavbarLink = ({
 	solid?: boolean
 }) => {
 	const className = cn(
+		'max-sm:hidden',
 		'inline-flex items-center text-xs',
 		'text-v2-yellow-300 hover:text-v2-slate-700',
 		'hover:bg-v2-yellow-300',

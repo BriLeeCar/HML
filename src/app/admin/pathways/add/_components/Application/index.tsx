@@ -1,7 +1,7 @@
 import { FormSection } from '@/admin/_components/_form/clientFieldset'
+import { ApplicationCost } from '@/admin/pathways/add/_components/Application/_components/Cost'
 import type { ElPrismaProps } from '../../_lib'
-import { ApplicationCost } from './Cost'
-import { Duration } from './Duration'
+import { Duration } from './_components/Duration'
 import { ProcessingTime } from './ProcessingTime'
 
 export const Application = ({

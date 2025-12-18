@@ -17,7 +17,7 @@ export const CredentialsConfig = Credentials({
 		username: {
 			label: 'Name',
 			type: 'text',
-			placeholder: 'Charlotte',
+			placeholder: 'Jane',
 			name: 'username',
 			required: true,
 		},
