@@ -59,8 +59,8 @@
 		"@types/quill": "^2.0.14",
 		"@types/react": "^19.1.12",
 		"@types/react-dom": "^19.1.9",
-		"@typescript-eslint/eslint-plugin": "^8.50.0",
-		"@typescript-eslint/parser": "^8.50.0",
+		"@typescript-eslint/eslint-plugin": "^8.48.1",
+		"@typescript-eslint/parser": "^8.48.1",
 		"eslint": "^9.33.0",
 		"eslint-config-next": "^15.5.9",
 		"eslint-plugin-react": "^7.37.5",
@@ -85,6 +85,6 @@
 		"typedoc-plugin-rename-defaults": "^0.7.3",
 		"typedoc-plugin-zod": "^1.4.3",
 		"typescript": "^5.9.2",
-		"typescript-eslint": "^8.50.0"
+		"typescript-eslint": "^8.48.1"
 	}
 }
