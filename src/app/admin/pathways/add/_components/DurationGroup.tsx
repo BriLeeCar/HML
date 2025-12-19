@@ -51,12 +51,13 @@ const handleTimeChange = ({
 	const newData = { ...data }
 	newData.durations[queryField] = newDuration
 	newData.query[queryField] = newQuery
+	console.log('NEW DATA', newData)
 
 	const parsed = zMinMax({
 		wholeNumberOnly: true,
 	}).safeParse(newData.query[queryField])
 	if (parsed.success) {
-		Object.assign(newData.query[queryField], {
+		Object.assign(newData.errors[queryField], {
 			min: [],
 			max: [],
 			base: [],
@@ -68,6 +69,8 @@ const handleTimeChange = ({
 			base: string[]
 		}
 		parsed.error.issues.forEach(issue => {
+			// ! CL
+			console.log(issue)
 			const pathKey = issue.path[0] as keyof typeof fieldErrors
 			if (pathKey == 'min' || pathKey == 'max') {
 				fieldErrors[pathKey].push(issue.message)
@@ -145,6 +148,7 @@ export const DurationGroup = ({
 	legend: string
 }) => {
 	const separate = data.durations[fieldKey].separate
+	const disabled = data.query[fieldKey].na
 
 	return (
 		<SubSectionFieldset>
@@ -168,17 +172,20 @@ export const DurationGroup = ({
 					<Checkbox
 						color='brand'
 						onChange={e => {
-							handleSeperateUOMChange({
-								field: fieldKey,
-								newStatus: e,
-								data,
-								handlePrisma,
-							})
+							const newData = { ...data }
+							if (e) {
+								newData.query[fieldKey] = { min: 0, max: 0, na: true, note: '' }
+							} else {
+								newData.query[fieldKey].na = false
+							}
+
+							handlePrisma(newData)
 						}}
 					/>
 					<Label className='text-interactive'>Information Not Available</Label>
 				</CheckboxField>
 				<DurationInputField
+					disabled={disabled}
 					required
 					label='Min'
 					field={fieldKey}
@@ -188,16 +195,19 @@ export const DurationGroup = ({
 					className={cn('md:in-data-uom:col-1 md:in-data-uom:row-1')}
 				/>
 				<DurationSelectField
+					disabled={disabled}
 					seperateMinMax={separate}
 					sizeKey='min'
 					field={fieldKey}
 					data={data}
+					required
 					handlePrisma={handlePrisma}
 					className={cn('in-data-uom:col-2 in-data-uom:row-1')}
 				/>
 				<DurationInputField
-					required
+					disabled={disabled}
 					label='Max'
+					required={separate}
 					field={fieldKey}
 					keyMinMax='max'
 					data={data}
@@ -205,8 +215,9 @@ export const DurationGroup = ({
 					className={cn('in-data-uom:col-1 in-data-uom:row-2')}
 				/>
 				<DurationSelectField
-					disabled={!separate}
+					disabled={!separate || disabled}
 					seperateMinMax={separate}
+					required={separate}
 					sizeKey='max'
 					field={fieldKey}
 					data={data}
@@ -328,6 +339,7 @@ const DurationSelectField = ({
 		sizeKey: 'min' | 'max'
 		field: Key
 		disabled?: boolean
+		required?: boolean
 	}) => {
 	const upperKey =
 		sizeKey == 'max' ?
@@ -339,7 +351,7 @@ const DurationSelectField = ({
 		<Field
 			disabled={disabled ? disabled : undefined}
 			className={cn(props.className)}>
-			<Label required>{upperKey}UOM</Label>
+			<Label required={props.required && props.required == true}>{upperKey}UOM</Label>
 			<Select
 				name={`${upperField}UOM`}
 				aria-label={`${toTitleCase(field)} ${upperKey}UOM`}

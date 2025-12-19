@@ -41,9 +41,12 @@ export const zMinMax = ({
 	required?: boolean
 }) =>
 	z
-		.object({ min: z.number(), max: z.number() })
+		.object({ min: z.number(), max: z.number(), na: z.boolean() })
 		.loose()
 		.superRefine((data, ctx) => {
+			if (data.na == true) {
+				return
+			}
 			Object.keys(data).forEach(key => {
 				if (key !== 'min' && key !== 'max') {
 					return
@@ -119,14 +122,23 @@ export const zCreatePathwayInput = z
 					min: z.number().prefault(0),
 					max: z.number().prefault(0),
 					note: z.string().optional(),
+					na: z.boolean().default(false),
 				})
 				.pipe(zMinMax({ wholeNumberOnly: true })),
-			cost: zMinMax({ required: true }).nonoptional(),
+			cost: z
+				.object({
+					min: z.number().prefault(0),
+					max: z.number().prefault(0),
+					na: z.boolean().default(false),
+				})
+				.pipe(zMinMax({ required: true }))
+				.nonoptional(),
 			duration: z
 				.object({
 					min: z.number().prefault(0),
 					max: z.number().prefault(0),
 					note: z.string().optional(),
+					na: z.boolean().default(false),
 				})
 				.pipe(zMinMax({ wholeNumberOnly: true })),
 			documents: z
@@ -196,10 +208,14 @@ export const zCreatePathwayInput = z
 					min: z.number().prefault(0),
 					max: z.number().prefault(0),
 					note: z.string().optional(),
+					na: z.boolean().default(false),
 				})
 				.pipe(zMinMax({ wholeNumberOnly: true }))
 				.optional(),
-			categories: z.array(z.number()).prefault([]),
+			categories: z
+				.array(z.number())
+				.refine(val => val.length >= 1, 'At least one category must be included')
+				.prefault([]),
 		}),
 	})
 	.loose()

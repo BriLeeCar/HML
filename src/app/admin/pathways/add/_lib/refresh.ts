@@ -163,6 +163,7 @@ export const createTracker = (): Query => ({
 			max: [],
 			base: [],
 		},
+		categories: [],
 		notes: [],
 		limitations: [],
 		requirements: [],

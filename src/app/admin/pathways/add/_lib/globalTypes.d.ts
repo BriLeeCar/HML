@@ -152,7 +152,8 @@ declare global {
 		limitations: string[]
 		requirements: string[]
 		restrictions: string[]
-		documents: Array<string>
+		categories: string[]
+		documents: string[]
 	}
 
 	type PrismaTrackers = {

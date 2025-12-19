@@ -33,16 +33,14 @@ const handleSubmitBase = async (
 	setData: (value: SetStateAction<Query>) => void,
 	mutate: ReturnType<typeof api.dataCollection.CreatePathway.useMutation>['mutate']
 ) => {
-	const submission = { ...data }
-	Object.assign(submission, {
-		type: 'VISA',
-	})
+	const submission = { ...data, type: 'VISA' }
 
 	const validation = zCreatePathwayInput.safeParse(submission)
-	// console.log(submission)
 
 	validation.success && mutate(submission as CreatePathwayInput)
 	if (validation.error) {
+		console.log(validation.error)
+		console.log(submission)
 		const zodErrors = {
 			...data.errors,
 			...createTracker().errors,
@@ -113,8 +111,8 @@ export const Base = ({ prisma }: { prisma: RouterOutputs['dataCollection']['Path
 					data.query.name ? `You have successfully created the pathway: ${data.query.name}` : '',
 			} as ToastMessage)
 		},
-		onError: () => {
-			// console.log(data.message)
+		onError: data => {
+			console.log(data)
 			window.scrollTo({
 				behavior: 'smooth',
 				top: 0,

@@ -34,6 +34,7 @@ export const ApplicationCost = ({
 	// #endregion ! --------------------
 
 	const currencies = currencyOptionEls()
+	const disabled = data.query.cost.na
 
 	return (
 		<SubSectionFieldset>
@@ -44,6 +45,7 @@ export const ApplicationCost = ({
 			</SubSectionFieldset.Legend>
 			<SubSectionFieldset.Details className='gap-x-8 sm:grid-cols-3'>
 				<CostRangeFieldsGroup
+					disabled={disabled}
 					required
 					label='Min'
 					errorMessages={data.errors.cost.min}>
@@ -54,6 +56,7 @@ export const ApplicationCost = ({
 					/>
 				</CostRangeFieldsGroup>
 				<CostRangeFieldsGroup
+					disabled={disabled}
 					label='Max'
 					errorMessages={data.errors.cost.max}>
 					<CostInput
@@ -63,7 +66,7 @@ export const ApplicationCost = ({
 					/>
 				</CostRangeFieldsGroup>
 				<CostRangeFieldsGroup
-					disabled={currencies.length === 0}
+					disabled={currencies.length === 0 || disabled}
 					required
 					label='Currency'
 					errorMessages={[]}>
@@ -92,7 +95,7 @@ export const ApplicationCost = ({
 						}
 					</Select>
 				</CostRangeFieldsGroup>
-				<CheckboxField disabled={currencies.length === 0}>
+				<CheckboxField disabled={currencies.length === 0 || disabled}>
 					<Checkbox
 						color='brand'
 						onChange={e => {
@@ -126,6 +129,23 @@ export const ApplicationCost = ({
 						}}
 					/>
 					<Label className='text-interactive ml-2 whitespace-nowrap'>Use USD?</Label>
+				</CheckboxField>
+				<CheckboxField>
+					<Checkbox
+						color='brand'
+						onChange={e => {
+							const newData = { ...data }
+							if (e) {
+								newData.query.cost = {min: 0, max: 0, na: true}
+							}
+							else {
+								newData.query.cost.na = false
+							}
+
+							handlePrisma(newData)
+						}}
+					/>
+					<Label className='text-interactive ml-2 whitespace-nowrap'>Information Not Available</Label>
 				</CheckboxField>
 			</SubSectionFieldset.Details>
 		</SubSectionFieldset>

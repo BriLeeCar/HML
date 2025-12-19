@@ -1,3 +1,4 @@
+import { FormGroupError } from '@/admin/_components'
 import { FormSection } from '@/admin/_components/_form/clientFieldset'
 import { CheckboxGroup } from '@/admin/_components/catalyst/'
 import { cn } from '~/lib/cn'
@@ -37,6 +38,7 @@ export const CategorySection = ({
 				Categories
 			</FormSection.Legend>
 			<FormSection.Details>
+				{data.errors.categories.length > 0 && <FormGroupError message={data.errors.categories} />}
 				{/* ? BASE CATEGORIES */}
 				<Group
 					handleCheck={handleCheck}
@@ -62,6 +64,7 @@ export const Group = ({
 }) => {
 	return (
 		<CheckboxGroup
+			aria-required
 			{...props}
 			className={cn(
 				'col-span-2 grid w-full grid-cols-1 justify-between gap-y-8 pl-10 md:grid-cols-2',
