@@ -20,7 +20,7 @@ const Layout = async ({
 	children: ReactNode
 }>) => {
 	return (
-		<body className={cn('text-foreground relative font-sans antialiased', 'pb-4')}>
+		<body className={cn('text-foreground font-open-sans relative antialiased', 'pb-4')}>
 			<Providers>
 				<TRPCReactProvider>{children}</TRPCReactProvider>
 			</Providers>

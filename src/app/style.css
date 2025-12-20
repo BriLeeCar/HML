@@ -110,7 +110,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-	--font-sans: var(--font-test);
+	--font-sans: var(--font-open-sans);
 	--font-subtitle: var(--font-roboto);
 
 	--font-heading: var(--font-atkinson-hyperlegible), sans-serif;
