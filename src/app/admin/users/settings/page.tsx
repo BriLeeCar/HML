@@ -1,6 +1,6 @@
 import { LayoutWrapper } from '@/admin/_components/client'
 import { redirect } from 'next/navigation'
-import { api } from 'query'
+import { api } from '~/serverQuery'
 import { AdminUsersSettingsBase } from './Base'
 
 const ProfilePage = async () => {

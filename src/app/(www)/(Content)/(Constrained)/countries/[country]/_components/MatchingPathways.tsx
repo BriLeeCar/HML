@@ -2,8 +2,8 @@
 
 import { Fragment, useContext } from 'react'
 import { DL, Section, SectionHeading } from '~/components'
+import { useLocalData } from '~/hooks/useLocalData'
 import { DBContext } from '~/server/db/provider'
-import { useLocalData } from '../../../../../../hooks/useLocalData'
 
 export const MatchingPathways = ({ country }: { country: ApiData.Country['abbr'] }) => {
 	const data = useContext(DBContext).countries.find(c => c.abbr.toLowerCase() == country)

@@ -10,7 +10,7 @@ const styles = {
 		// Sizing
 		'px-[calc(--spacing(3.5)-1px)] py-[calc(--spacing(2.5)-1px)] sm:px-[calc(--spacing(3)-1px)] sm:py-[calc(--spacing(1.5)-1px)] sm:text-sm/6',
 		// Focus
-		'focus:not-data-focus:outline-hidden data-focus:outline-2 data-focus:outline-offset-2 data-focus:outline-blue-500',
+		'focus:not-data-focus:outline-hidden data-focus:outline-2 data-focus:outline-offset-2 data-focus:btn-focus',
 		// Disabled
 		'data-disabled:opacity-50',
 		// Icon
@@ -50,11 +50,11 @@ const styles = {
 	],
 	plain: [
 		// Base
-		'border-transparent text-zinc-950 data-active:bg-zinc-950/5 data-hover:bg-zinc-950/5',
+		'border-transparent text-v2-foreground data-active:bg-v2-slate-900/5 data-hover:bg-v2-slate-900/5',
 		// Dark mode
-		'dark:text-white dark:data-active:bg-white/10 dark:data-hover:bg-white/10',
+		'dark:data-active:bg-v2-slate-100/10 dark:data-hover:bg-v2-slate-100/10',
 		// Icon
-		'[--btn-icon:var(--color-zinc-500)] data-active:[--btn-icon:var(--color-zinc-700)] data-hover:[--btn-icon:var(--color-zinc-700)] dark:[--btn-icon:var(--color-zinc-500)] dark:data-active:[--btn-icon:var(--color-zinc-400)] dark:data-hover:[--btn-icon:var(--color-zinc-400)]',
+		'[--btn-icon:currentColor] data-active:[--btn-icon:var(--color-zinc-700)] data-hover:[--btn-icon:var(--color-zinc-700)] dark:data-active:[--btn-icon:var(--color-zinc-400)] dark:data-hover:[--btn-icon:var(--color-zinc-400)]',
 	],
 	colors: {
 		'dark/zinc': [
@@ -155,6 +155,9 @@ const styles = {
 			'text-white [--btn-hover-overlay:var(--color-white)]/10 [--btn-bg:var(--color-rose-500)] [--btn-border:var(--color-rose-600)]/90',
 			'[--btn-icon:var(--color-rose-300)] data-active:[--btn-icon:var(--color-rose-200)] data-hover:[--btn-icon:var(--color-rose-200)]',
 		],
+		none: [
+			'text-v2-foreground [--btn-bg:transparent] [--btn-border:transparent] [--btn-hover-overlay:transparent]',
+		],
 	},
 }
 
@@ -172,11 +175,11 @@ export const CatalystButton = forwardRef(function Button(
 	ref: React.ForwardedRef<HTMLElement>
 ) {
 	let classes = cn(
-		className,
 		styles.base,
 		outline ? styles.outline
 		: plain ? styles.plain
-		: cn(styles.solid, styles.colors[color ?? 'dark/zinc'])
+		: cn(styles.solid, styles.colors[color ?? 'dark/zinc']),
+		className
 	)
 
 	return typeof props.href === 'string' ?
@@ -188,7 +191,7 @@ export const CatalystButton = forwardRef(function Button(
 			</Link>
 		:	<Headless.Button
 				{...props}
-				className={cn(classes, 'cursor-default')}
+				className={cn(classes, 'click')}
 				ref={ref}>
 				<TouchTarget>{children}</TouchTarget>
 			</Headless.Button>

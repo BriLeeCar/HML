@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "./admin/adminStyles.css";
-@import "tw-animate-css";
 
 /* #region THEME */
 :root {
@@ -317,17 +316,16 @@
 }
 
 @layer base {
-	body,
-	html {
+	html,
+	body {
 		font-family: var(--font-sans), sans-serif;
 		min-width: 100vw;
 		min-height: 100vh;
 		margin: 0;
 		padding: 0;
+	}
+	body {
 		background-color: var(--background);
-		@media (prefers-color-scheme: dark) {
-			background-color: var(--color-zinc-900);
-		}
 	}
 
 	:is(body, html) {

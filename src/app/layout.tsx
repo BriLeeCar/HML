@@ -4,9 +4,6 @@ import 'react'
 import type { ReactNode } from 'react'
 import 'rehype-callouts/theme/vitepress'
 import { cn } from '~/lib/cn'
-import { TRPCReactProvider } from '../trpc/react'
-import { Providers } from './providers'
-import './style.css'
 
 export const metadata: Metadata = {
 	title: {
@@ -47,17 +44,7 @@ const RootLayout = async ({
 			lang='en'
 			className={cn(openSans.variable, headingFont.variable, subtitleFont.variable)}
 			suppressHydrationWarning>
-			<body
-				className={cn(
-					'text-foreground bg-background relative font-sans antialiased',
-					'pb-4',
-					'has-[.admin]:dark:bg-[#181c1d]'
-				)}>
-				<Providers>
-					<TRPCReactProvider>{children}</TRPCReactProvider>
-				</Providers>
-				{/* <Analytics /> */}
-			</body>
+			{children}
 		</html>
 	)
 }

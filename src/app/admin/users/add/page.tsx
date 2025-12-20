@@ -1,5 +1,5 @@
 import { LayoutWrapper } from '@/admin/_components/client/Wrapper'
-import { api } from 'query'
+import { api } from '~/serverQuery'
 import { NewUserForm } from './Base'
 
 export default async function NewUserPage() {

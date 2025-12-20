@@ -1,6 +1,6 @@
-import { api } from 'query'
 import { Icon } from '~/components/Icon'
 import type { RouterOutputs } from '~/lib/api'
+import { api } from '~/serverQuery'
 import {
 	Table,
 	TableBody,

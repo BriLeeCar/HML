@@ -52,8 +52,13 @@
 
 	--color-ring-color: light-dark(var(--color-v2-red-500), var(--color-v2-yellow-300));
 	--color-interactive: light-dark(var(--color-v2-red-500), var(--color-v2-yellow-300));
+	--color-interactive-secondary: light-dark(
+		var(--color-v2-brand-purple),
+		var(--color-v2-purple-500)
+	);
 
-	--color-v2-foreground: var(--color-v2-slate-700);
+	--color-v2-foreground: light-dark(var(--color-v2-slate-700), var(--color-v2-brand-grey));
+	--color-v2-muted: light-dark(var(--color-v2-grey-600), var(--color-v2-slate-100));
 }
 
 section > *:is(h1, h2, h3, h4, h5, h6) + form {
@@ -62,18 +67,6 @@ section > *:is(h1, h2, h3, h4, h5, h6) + form {
 
 [data-layout="page"]:has([class*="page-full"]) {
 	@apply px-0;
-}
-
-body:has(.admin) {
-	@apply mb-12;
-}
-
-body:has([data-el="mobile-nav"]) {
-	@apply h-screen overflow-hidden;
-}
-
-main:has(.admin) {
-	@apply mx-0 w-full px-0 sm:px-0 md:max-w-screen lg:max-w-screen lg:px-0;
 }
 
 @utility eyebrow {
@@ -94,7 +87,7 @@ main:has(.admin) {
 	}
 	& > *:not(.eyebrow):not(.subtitle),
 	&:not(*:has(.eyebrow)):not(*:has(.subtitle)) {
-		@apply text-v2-foreground font-heading text-[2.5rem] leading-none font-bold tracking-tight text-pretty capitalize dark:text-white;
+		@apply text-v2-foreground font-heading text-[2.5rem] leading-none font-bold tracking-tight text-pretty capitalize;
 	}
 }
 
@@ -116,5 +109,57 @@ main:has(.admin) {
 	@apply text-v2-mulberry-500 dark:text-v2-yellow-100 font-sans text-[1.3rem] font-semibold tracking-wider uppercase italic;
 	& + .subtitle {
 		@apply text-[1.025rem];
+	}
+}
+
+@utility btn-focus {
+	@apply focus-outline;
+	&:hover:focus {
+		@apply outline-interactive;
+	}
+}
+@utility link-focus {
+	@apply focus-outline decoration-v2-foreground rounded transition-all focus-visible:decoration-1 focus-visible:outline-offset-6;
+	&:hover:focus-visible {
+		@apply outline-interactive;
+	}
+}
+
+@utility focus-outline {
+	@apply outline-interactive-secondary outline-offset-4 transition-colors;
+	&:is(a) {
+		@apply outline-offset-6;
+	}
+}
+
+@layer base {
+	html:has(.admin) {
+		overflow-y: hidden;
+	}
+	body:has(.admin) {
+		background: linear-gradient(180deg, #222d30 2%, #ffffff 2%) !important;
+		min-height: 100vh;
+		max-height: 100vh;
+		overflow-y: scroll;
+		padding-bottom: 5rem;
+		margin-bottom: 0px !important;
+	}
+	body {
+		&:has(main[class*="admin"]) {
+			background-image: linear-gradient(
+				to right,
+				var(--tw-gradient-from) var(--body-gradient-left-side),
+				var(--tw-gradient-via) var(--body-gradient-left-side),
+				var(--tw-gradient-via) var(--body-gradient-right-side),
+				var(--tw-gradient-from) var(--body-gradient-right-side)
+			);
+			@apply text-v2-foreground mb-12;
+			main {
+				@apply px-0 sm:px-0 md:max-w-screen lg:max-w-screen lg:px-0;
+			}
+		}
+		&:has([data-el="mobile-nav"]) {
+			@apply h-screen overflow-hidden;
+		}
 	}
 }

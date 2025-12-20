@@ -38,7 +38,11 @@ const Breadcrumbs = ({
 						{index == items.length - 1 ?
 							<span className='font-medium opacity-65'>{item.label}</span>
 						:	<>
-								<Link href={thisCrumb}>{item.label}</Link>
+								<Link
+									href={thisCrumb}
+									className='focus-outline rounded leading-none'>
+									{item.label}
+								</Link>
 								<span className='text-muted-foreground mx-1 font-bold opacity-75'>/</span>
 							</>
 						}

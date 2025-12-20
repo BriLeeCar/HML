@@ -39,9 +39,7 @@ export function Table({
 					{...props}
 					className={cn(className, '-mx-(--gutter) overflow-x-auto whitespace-nowrap')}>
 					<div className={cn('inline-block min-w-full align-middle', !bleed && 'sm:px-(--gutter)')}>
-						<table className='min-w-full text-left text-sm/6 text-zinc-950 dark:text-white'>
-							{children}
-						</table>
+						<table className='min-w-full text-left text-sm/6'>{children}</table>
 					</div>
 				</div>
 			</div>
@@ -53,7 +51,7 @@ export function TableHead({ className, ...props }: React.ComponentPropsWithoutRe
 	return (
 		<thead
 			{...props}
-			className={cn(className, 'text-zinc-500 dark:text-zinc-400')}
+			className={cn(className, 'text-v2-muted dark:text-zinc-400')}
 		/>
 	)
 }

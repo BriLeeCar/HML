@@ -3,7 +3,6 @@ import type { tMasonryActions, tMasonryState } from './types'
 
 export const masonryReducer = (state: tMasonryState, action: tMasonryActions) => {
 	const newState = { ...state }
-	console.log('Action:', action)
 
 	if (action.type == 'SET_DRAWER') {
 		Object.assign(newState, {

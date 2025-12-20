@@ -1,3 +1,4 @@
+import { redirect, RedirectType } from 'next/navigation'
 import {
 	Basics,
 	Briefcase,
@@ -6,8 +7,7 @@ import {
 	Medical,
 	Pathways,
 	PiggyBank,
-} from '@/(Content)/_components/SVG'
-import { redirect, RedirectType } from 'next/navigation'
+} from 'www/(Content)/_components/SVG'
 
 export const SubMenu = ({ country, active }: { country: string; active?: string }) => {
 	const links = [

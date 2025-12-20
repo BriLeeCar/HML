@@ -1,4 +1,4 @@
-import { api } from 'query'
+import { api } from '~/serverQuery'
 import { Base } from './Base'
 
 import { LayoutWrapper } from '@/admin/_components/client'
