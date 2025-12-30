@@ -10,7 +10,7 @@ const Layout = async ({ children }: Readonly<{ children: ReactNode }>) => {
 				'grid-cols-[1fr_1fr] md:grid',
 				'flex flex-col',
 				'min-[1200px]:static min-[1200px]:w-[75vw]',
-				'min-h-screen w-screen overflow-x-hidden'
+				'h-screen max-h-screen w-screen overflow-hidden'
 			)}>
 			<Image
 				src='/flag.png'

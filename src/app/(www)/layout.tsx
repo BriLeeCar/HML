@@ -12,7 +12,10 @@ const Layout = async ({
 	children: ReactNode
 }>) => {
 	return (
-		<body className={cn('text-foreground relative overflow-hidden pb-4 antialiased')}>
+		<body
+			className={cn(
+				'text-foreground relative h-screen overflow-x-hidden antialiased has-[#homepage]:overflow-hidden has-[main#homepage]:pb-0!'
+			)}>
 			<Providers>
 				<TRPCReactProvider>{children}</TRPCReactProvider>
 			</Providers>

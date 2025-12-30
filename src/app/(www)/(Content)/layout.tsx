@@ -8,7 +8,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
 				<NavMenu />
 				<AnnouncementBanner />
 			</header>
-			{children}
+			<div className='h-full w-full'>{children}</div>
 		</>
 	)
 }

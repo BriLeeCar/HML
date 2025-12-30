@@ -18,7 +18,7 @@ const Home = () => {
 			<Img />
 			<div
 				className={cn(
-					'relative z-10 hidden h-screen',
+					'relative z-10 hidden h-screen max-h-screen overflow-y-hidden',
 					'items-around flex-col justify-between pt-28 pl-0 md:flex',
 					'max-w-[70vw] items-center justify-center gap-6 py-3',
 					'flex-col self-stretch'
