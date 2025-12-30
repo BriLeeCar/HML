@@ -106,8 +106,6 @@
 	--card: #2a2a2a;
 }
 
-@custom-variant dark (&:is(.dark *));
-
 @theme inline {
 	--font-sans: var(--font-open-sans);
 	--font-subtitle: var(--font-roboto);
