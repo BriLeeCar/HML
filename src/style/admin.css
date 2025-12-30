@@ -2,6 +2,33 @@
 @import "./style.css";
 @import "./colors.css";
 
+:root {
+	color-scheme: light dark;
+	--radius: 0.625rem;
+}
+
+@layer base {
+	@media (prefers-color-scheme: dark) {
+		:root {
+			color-scheme: dark;
+		}
+	}
+	html,
+	body {
+		font-family: var(--font-sans), sans-serif;
+		min-width: 100vw;
+		max-width: 100vw;
+		min-height: 100vh;
+		margin: 0;
+		padding: 0;
+	}
+
+	strong,
+	b {
+		font-weight: 600;
+	}
+}
+
 @utility eyebrow {
 	@apply text-hml-red-500 px-1 text-sm leading-[1.25lh] italic;
 }

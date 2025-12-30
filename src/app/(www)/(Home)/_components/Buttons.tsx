@@ -44,7 +44,7 @@ export const SmallBtns = () => {
 	]
 
 	return (
-		<span className='*:[button]:bg-muted dark:*:[button]:bg-brand/10 text-muted-foreground *:hover:[button]:bg-foreground/10 z-10 grid w-full grid-cols-1 gap-4 grayscale-100 dark:grayscale-0 *:[button]:cursor-not-allowed'>
+		<span className='*:[button]:bg-muted/50 text-background *:hover:[button]:bg-foreground/20 z-10 grid w-full grid-cols-1 gap-4 opacity-50 *:[button]:cursor-not-allowed'>
 			{btns.map((btn, i) => {
 				return (
 					<Button

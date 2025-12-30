@@ -55,7 +55,7 @@
 
 @theme {
 	--color-foreground: light-dark(var(--color-zinc-800), var(--color-zinc-100));
-	--color-background: light-dark(var(--color-zinc-50), var(--color-zinc-900));
+	--color-background: light-dark(var(--color-zinc-50), #17191c);
 	--color-input: light-dark(var(--color-white), var(--color-hml-grey-600));
 
 	--color-interactive: light-dark(var(--color-hml-red-500), var(--color-hml-yellow-300));
@@ -80,6 +80,7 @@
 @utility form-base-shadow {
 	@apply before:bg-input before:absolute before:inset-px before:rounded-[calc(var(--radius-lg)-1px)] before:shadow-sm dark:before:hidden;
 }
+
 @utility form-base-focus {
 	@apply sm:focus-within:after:ring-interactive/60 after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-transparent after:ring-inset sm:focus-within:after:ring-2;
 }

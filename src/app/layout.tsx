@@ -45,7 +45,7 @@ const RootLayout = async ({
 				openSans.variable,
 				headingFont.variable,
 				subtitleFont.variable,
-				'h-screen max-h-screen w-screen max-w-screen overflow-hidden'
+				'bg-background h-screen max-h-screen w-screen max-w-screen overflow-hidden'
 			)}
 			suppressHydrationWarning>
 			{children}

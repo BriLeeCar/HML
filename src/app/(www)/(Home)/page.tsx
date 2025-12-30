@@ -38,7 +38,7 @@ const Home = () => {
 					'min-[1200px]:translate-x-3/4 min-[1200px]:translate-y-0 min-[1200px]:rotate-0 min-[1200px]:overflow-visible',
 					'hidden h-1/2 w-[50vw] overflow-clip min-[600px]:h-screen md:block'
 				)}>
-				<MapSvg className='lg:max-h-fill xl: stroke-background fill-muted h-auto w-screen stroke-1 shadow-none select-none lg:relative lg:w-screen'>
+				<MapSvg className='lg:max-h-fill xl: stroke-background fill-muted/50 h-auto w-screen stroke-1 shadow-none select-none lg:relative lg:w-screen'>
 					{db.getMapPaths().map(country => {
 						const { svgPath, abbr, name } = country
 
