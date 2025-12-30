@@ -1,9 +1,13 @@
+import analyzer from '@next/bundle-analyzer'
 import type { NextConfig } from 'next'
+
+const withBundleAnalyzer = analyzer({
+	enabled: process.env.ANALYZE === 'true',
+})
 
 const nextConfig: NextConfig = {
 	pageExtensions: ['tsx', 'ts', 'jsx', 'js', 'mdx'],
 	images: {
-		unoptimized: true,
 		remotePatterns: [
 			{
 				protocol: 'https',
@@ -50,4 +54,4 @@ const nextConfig: NextConfig = {
 	},
 }
 
-export default nextConfig
+export default withBundleAnalyzer(nextConfig)

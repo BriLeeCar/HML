@@ -16,7 +16,7 @@ export const Base = ({
 }: {
 	countryName: string
 	section?: string
-	children: React.ReactNode
+	children: ReactNode
 }) => {
 	const db = useContext(DBContext)
 	const country = db.getCountryByAbbr(countryName)

@@ -1,75 +1,13 @@
-import * as P from '@prisma/client'
+import type {
+	Country,
+	Currency,
+	PathwayDocuments,
+	PathwayPipeline,
+	PathwayRestrictedNationality,
+	PathwayType,
+} from '~/server/prisma/generated'
 
 declare global {
-	namespace Queried {
-		namespace Currency {
-			type Model = P.Currency
-		}
-		namespace Language {
-			type Model = P.Language
-		}
-		namespace Documents {
-			type Model = P.Documents
-		}
-		namespace Pathway {
-			type Model = Omit<P.Pathway, 'duration' | 'processTime' | 'renewal' | 'cost'> & {
-				duration: {
-					min: number
-					max: number
-					note: string
-				}
-				processTime: {
-					min: number
-					max: number
-					note: string
-				}
-				renewal: {
-					min: number
-					max: number
-					note: string
-				}
-				cost: {
-					min: number
-					max: number
-				}
-			}
-
-			type Relations = {
-				country: Country.Model
-				currencies: Currency.Model[]
-				languages: Language.Model[]
-				documents: Documents.Model[]
-			}
-
-			type WithRelations<C extends keyof Queried.Pathway.Relations> = Queried.Pathway.Model & {
-				[K in C]: Queried.Pathway.Relations[K]
-			}
-			type TypeEnum = P.PathwayType
-		}
-
-		namespace Country {
-			type Model = P.Country
-
-			type WithRelations = Country.Model & {
-				currencies: P.Currency[]
-				languages: P.Language[]
-			}
-		}
-
-		namespace Models {
-			type Country = P.Country
-			type CountryWithRelations = Country & {
-				currencies: Currency[]
-				languages: Language[]
-			}
-
-			type Currency = P.Currency
-			type Documents = P.Documents
-			type Language = P.Language
-			type Pathway = P.Pathway
-		}
-	}
-
 	type PrismaPathwayDuration = {
 		min: number
 		max: number
@@ -77,16 +15,16 @@ declare global {
 	}
 
 	type PrismaPathway = {
-		documents: Array<Omit<P.PathwayDocuments, 'cost'> & { cost: number }>
+		documents: Array<Omit<PathwayDocuments, 'cost'> & { cost: number }>
 		categories: number[]
-		piplines: P.PathwayPipeline[]
-		restrictedNationalities: P.PathwayRestrictedNationality[]
+		piplines: PathwayPipeline[]
+		restrictedNationalities: PathwayRestrictedNationality[]
 		name: string
 		id: number
 		countryCode: string
 		link: string
 		description: string
-		type: P.PathwayType
+		type: PathwayType
 		discordHandle: string
 		createdAt: Date
 		updatedAt: Date
@@ -171,11 +109,11 @@ declare global {
 		}
 		piplines: Record<PipelineKeys, boolean>
 		utilities: {
-			countryData: (P.Country & { currencies: P.Currency[] }) | null
+			countryData: (Country & { currencies: Currency[] }) | null
 		}
 	}
 
-	type PipelineKeys = Lowercase<`${P.PathwayPipelines}`> | 'renewal'
+	type PipelineKeys = Lowercase<`${PathwayPipeline['pipeline']}`> | 'renewal'
 
 	type Query = {
 		date: Date

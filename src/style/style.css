@@ -1,0 +1,38 @@
+:root {
+	color-scheme: light dark;
+	--radius: 0.625rem;
+}
+
+@theme inline {
+	--font-sans: var(--font-open-sans);
+	--font-subtitle: var(--font-roboto);
+	--font-heading: var(--font-atkinson-hyperlegible), sans-serif;
+	--font-serif: questa, serif;
+	--breakpoint-xs: 400px;
+}
+
+@utility click {
+	cursor: pointer;
+}
+
+@layer base {
+	@media (prefers-color-scheme: dark) {
+		:root {
+			color-scheme: dark;
+		}
+	}
+	html,
+	body {
+		font-family: var(--font-sans), sans-serif;
+		min-width: 100vw;
+		max-width: 100vw;
+		min-height: 100vh;
+		margin: 0;
+		padding: 0;
+	}
+
+	strong,
+	b {
+		font-weight: 600;
+	}
+}

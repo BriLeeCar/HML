@@ -270,26 +270,26 @@ model PostBlock {
   @@schema("public")
 }
 
-model Account {
-  id                       String  @id(map: "Account_pkey") @default(cuid())
-  userId                   String
-  type                     String
-  provider                 String
-  providerAccountId        String
-  refresh_token            String?
-  access_token             String?
-  expires_at               Int?
-  token_type               String?
-  scope                    String?
-  id_token                 String?
-  session_state            String?
-  refresh_token_expires_in Int?
-  user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade, map: "Account_userId_fkey")
+// model Account {
+//   id                       String  @id(map: "Account_pkey") @default(cuid())
+//   userId                   String
+//   type                     String
+//   provider                 String
+//   providerAccountId        String
+//   refresh_token            String?
+//   access_token             String?
+//   expires_at               Int?
+//   token_type               String?
+//   scope                    String?
+//   id_token                 String?
+//   session_state            String?
+//   refresh_token_expires_in Int?
+//   user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade, map: "Account_userId_fkey")
 
-  @@unique([provider, providerAccountId], map: "Account_provider_providerAccountId_key")
-  @@map("cms__accounts")
-  @@schema("public")
-}
+//   @@unique([provider, providerAccountId], map: "Account_provider_providerAccountId_key")
+//   @@map("cms__accounts")
+//   @@schema("public")
+// }
 
 model Session {
   id           String   @id(map: "Session_pkey") @default(cuid())
@@ -303,20 +303,21 @@ model Session {
 }
 
 model User {
-  id                 String               @id(map: "User_pkey") @default(cuid())
-  name               String               @unique(map: "User_name_key")
-  email              String?
-  emailVerified      DateTime?
-  image              String?
-  secret             String
-  firstName          String?
-  lastName           String?
-  discordHandle      String?
-  accounts           Account[]
+  id            String    @id(map: "User_pkey") @default(cuid())
+  name          String    @unique(map: "User_name_key")
+  email         String?
+  emailVerified DateTime?
+  image         String?
+  secret        String?
+  firstName     String?
+  lastName      String?
+  discordHandle String?
+  key           String?
+  created       DateTime  @default(now())
+
   postVersionHistory PostVersionHistory[]
   posts              Post[]
   sessions           Session[]
-  key                UserKey?
   roles              UserRoles[]
   socials            UserSocial[]
   Pathway            Pathway[]
@@ -336,17 +337,18 @@ model VerificationToken {
   @@schema("public")
 }
 
-model UserKey {
-  key    String  @id(map: "UserKey_pkey") @default(cuid())
-  name   String
-  userId String? @unique(map: "UserKey_userId_key")
-  roleId Int
-  role   Roles   @relation(fields: [roleId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "CMS_UserKey_Role")
-  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade, map: "UserKey_userId_fkey")
+// model UserKey {
+//   key    String  @id(map: "UserKey_pkey") @default(cuid())
+//   name   String
+//   userId String? @unique(map: "UserKey_userId_key")
 
-  @@map("cms__user_keys")
-  @@schema("public")
-}
+//   roleId Int
+//   role   Roles @relation(fields: [roleId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "CMS_UserKey_Role")
+//   user   User? @relation(fields: [userId], references: [id], onDelete: Cascade, map: "UserKey_userId_fkey")
+
+//   @@map("cms__user_keys")
+//   @@schema("public")
+// }
 
 model UserSocial {
   userId     String
@@ -374,7 +376,6 @@ model UserRoles {
 model Roles {
   id        Int         @id(map: "Roles_pkey") @default(autoincrement())
   name      String      @unique(map: "Roles_name_key")
-  userKeys  UserKey[]
   UserRoles UserRoles[]
 
   @@map("cms__roles")

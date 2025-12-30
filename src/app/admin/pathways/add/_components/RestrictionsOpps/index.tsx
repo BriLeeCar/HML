@@ -13,7 +13,7 @@ export const RestrictionsOpportunities = ({
 	countries: Array<{ code: string; name: string }>
 }) => {
 	return (
-		<FormSection>
+		<FormSection aria-label='Restrictions & Opportunities'>
 			<FormSection.Legend
 				description={
 					'This section gathers any specific limitations or requirements associated with the pathway. This may include eligibility criteria, nationality restrictions, or other important notes.'

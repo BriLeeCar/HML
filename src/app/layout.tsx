@@ -1,13 +1,12 @@
 import type { Metadata } from 'next'
 import { Atkinson_Hyperlegible_Next, Open_Sans, Roboto } from 'next/font/google'
 import 'react'
-import type { ReactNode } from 'react'
-import 'rehype-callouts/theme/vitepress'
+
 import { cn } from '~/lib/cn'
 
 export const metadata: Metadata = {
 	title: {
-		template: '%s | Help Me Leave',
+		template: 'HML | %s',
 		default: 'Help Me Leave',
 	},
 }
@@ -42,7 +41,12 @@ const RootLayout = async ({
 	return (
 		<html
 			lang='en'
-			className={cn(openSans.variable, headingFont.variable, subtitleFont.variable)}
+			className={cn(
+				openSans.variable,
+				headingFont.variable,
+				subtitleFont.variable,
+				'h-screen max-h-screen w-screen max-w-screen overflow-hidden'
+			)}
 			suppressHydrationWarning>
 			{children}
 		</html>

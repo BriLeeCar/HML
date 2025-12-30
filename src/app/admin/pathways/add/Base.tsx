@@ -132,11 +132,13 @@ export const Base = ({ prisma }: { prisma: RouterOutputs['dataCollection']['Path
 	return (
 		<>
 			<toast.El />
-			<Section>
+			<Section className='w-full md:mx-auto lg:max-w-198'>
 				<SectionHeading subtitle='If you have any trouble, please let HML staff members know so that we can either help you, or improve the form!'>
 					Pathway Details
 				</SectionHeading>
-				<Form>
+				<Form
+					title='New Pathway Form'
+					className='mx-auto max-w-3xl'>
 					{/* ? OVERVIEW */}
 					<OverviewSection
 						data={data}

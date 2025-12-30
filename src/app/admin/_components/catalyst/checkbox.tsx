@@ -1,8 +1,7 @@
 import * as Headless from '@headlessui/react'
-import type React from 'react'
 import { cn } from '~/lib/cn'
 
-export function CheckboxGroup({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
+export function CheckboxGroup({ className, ...props }: Props<'div'>) {
 	return (
 		<div
 			data-slot='control'
@@ -48,7 +47,7 @@ const base = [
 	// Basic layout
 	'relative isolate flex size-4.5 items-center justify-center rounded-[0.3125rem] sm:size-4',
 	// Background color + shadow applied to inset pseudo element, so shadow blends with border in light mode
-	'before:absolute before:inset-0 before:-z-10 before:rounded-[calc(0.3125rem-1px)] before:bg-white before:shadow-sm',
+	'before:absolute before:inset-0 before:-z-10 before:rounded-[calc(0.3125rem-1px)] before:bg-input before:shadow-sm',
 	// Background color when checked
 	'group-data-checked:before:bg-(--checkbox-checked-bg)',
 	// Background color is moved to control and shadow is removed in dark mode so hide `before` pseudo

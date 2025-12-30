@@ -51,9 +51,9 @@ export function mdxComponents() {
 			size = 'default',
 			...props
 		}: Props<'div'> & {
-			heading?: React.ReactNode
-			subheading?: React.ReactNode
-			footer?: React.ReactNode
+			heading?: ReactNode
+			subheading?: ReactNode
+			footer?: ReactNode
 			size?: 'default' | 'sm' | 'lg'
 		}) => {
 			return (

@@ -14,10 +14,10 @@ export const Button = ({
 			{...props}
 			className={cn(
 				iconOnly ?
-					'text-v2-red-500 hover:text-v2-mulberry-500 focus-visible:ring-offset-0'
-				:	'ring-interactive dark:bg-v2-purple-700 bg-v2-slate-700 rounded-lg text-sm text-white transition-colors hover:bg-[#42585E] dark:text-white dark:hover:bg-[#261A28]',
+					'text-hml-red-500 hover:text-hml-mulberry-500 focus-visible:ring-offset-0'
+				:	'ring-interactive dark:bg-hml-purple-700 bg-hml-slate-700 rounded-lg text-sm text-white transition-colors hover:bg-[#42585E] dark:text-white dark:hover:bg-[#261A28]',
 				innerButton
-					&& 'dark:text-background dark:bg-v2-yellow-300 text-v2-slate-700 bg-v2-grey-50 ml-auto flex w-full items-center justify-center gap-x-2 text-center hover:bg-[#161B1D] hover:text-white dark:hover:bg-[#F0F4A8]',
+					&& 'dark:text-background dark:bg-hml-yellow-300 text-hml-slate-700 bg-hml-grey-50 ml-auto flex w-full items-center justify-center gap-x-2 text-center hover:bg-[#161B1D] hover:text-white dark:hover:bg-[#F0F4A8]',
 
 				props.className
 			)}
@@ -36,8 +36,8 @@ export const RemoveButton = ({ ...props }: Props<typeof Button>) => {
 			iconOnly
 			className={cn(
 				'rounded-full px-1 py-0 transition-colors has-[svg]:py-1',
-				'text-v2-red-500 hover:bg-v2-red-500 hover:text-white',
-				'focus-visible:bg-v2-red-500',
+				'text-hml-red-500 hover:bg-hml-red-500 hover:text-white',
+				'focus-visible:bg-hml-red-500',
 				'focus-visible:-ring-offset-4 focus-visible:ring-transparent focus-visible:*:text-white',
 				props.className
 			)}>

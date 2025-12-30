@@ -1,5 +1,6 @@
 import { FormSection } from '@/admin/_components/_form/clientFieldset'
 import { ApplicationCost } from '@/admin/pathways/add/_components/Application/_components/Cost'
+import type { Country, Currency } from '~/server/prisma/generated'
 import type { ElPrismaProps } from '../../_lib'
 import { Duration } from './_components/Duration'
 import { ProcessingTime } from './ProcessingTime'
@@ -9,7 +10,11 @@ export const Application = ({
 	handlePrisma,
 	countries,
 }: ElPrismaProps & {
-	countries: Array<Queried.Country.WithRelations>
+	countries: Array<
+		Country & {
+			currencies: Currency[]
+		}
+	>
 }) => {
 	return (
 		<FormSection aria-label='Application Details'>

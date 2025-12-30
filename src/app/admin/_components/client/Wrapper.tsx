@@ -30,7 +30,9 @@ const Breadcrumbs = ({
 			.join('/')
 
 	return (
-		<span className='eyebrow dark:text-v2-yellow-300 flex items-center gap-0 *:not-last:hover:underline'>
+		<span
+			className='eyebrow dark:text-hml-yellow-300 flex items-center gap-0 *:not-last:hover:underline'
+			aria-label='Breadcrumb'>
 			{items.map((item, index) => {
 				const thisCrumb = joinCrumbs(index)
 				return (

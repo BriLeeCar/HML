@@ -1,5 +1,5 @@
 import { Input, InputGroup } from '@/admin/_components/catalyst/input'
-import type { FocusEvent } from 'react'
+
 import z from 'zod'
 import { Icon } from '~/components'
 import type { NewData } from '..'
@@ -10,7 +10,7 @@ type FieldLinkProps = Omit<Props<typeof Input>, 'onBlur'> & {
 }
 
 export const FieldLink = ({ errors, onBlur, ...props }: FieldLinkProps) => {
-	const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
+	const handleBlur = (e: EFocus<HTMLInputElement>) => {
 		const parsed = z
 			.url('Invalid URL')
 			.or(z.literal(''))

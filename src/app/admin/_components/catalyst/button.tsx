@@ -1,5 +1,5 @@
 import * as Headless from '@headlessui/react'
-import React, { forwardRef } from 'react'
+import { forwardRef, type ForwardedRef } from 'react'
 import { cn } from '~/lib/cn'
 import { Link } from './link'
 
@@ -50,9 +50,9 @@ const styles = {
 	],
 	plain: [
 		// Base
-		'border-transparent text-v2-foreground data-active:bg-v2-slate-900/5 data-hover:bg-v2-slate-900/5',
+		'border-transparent text-foreground data-active:bg-hml-slate-900/5 data-hover:bg-hml-slate-900/5',
 		// Dark mode
-		'dark:data-active:bg-v2-slate-100/10 dark:data-hover:bg-v2-slate-100/10',
+		'dark:data-active:bg-hml-slate-100/10 dark:data-hover:bg-hml-slate-100/10',
 		// Icon
 		'[--btn-icon:currentColor] data-active:[--btn-icon:var(--color-zinc-700)] data-hover:[--btn-icon:var(--color-zinc-700)] dark:data-active:[--btn-icon:var(--color-zinc-400)] dark:data-hover:[--btn-icon:var(--color-zinc-400)]',
 	],
@@ -156,7 +156,7 @@ const styles = {
 			'[--btn-icon:var(--color-rose-300)] data-active:[--btn-icon:var(--color-rose-200)] data-hover:[--btn-icon:var(--color-rose-200)]',
 		],
 		none: [
-			'text-v2-foreground [--btn-bg:transparent] [--btn-border:transparent] [--btn-hover-overlay:transparent]',
+			'text-foreground [--btn-bg:transparent] [--btn-border:transparent] [--btn-hover-overlay:transparent]',
 		],
 	},
 }
@@ -165,14 +165,14 @@ type ButtonProps = (
 	| { color?: keyof typeof styles.colors; outline?: never; plain?: never }
 	| { color?: never; outline: true; plain?: never }
 	| { color?: never; outline?: never; plain: true }
-) & { className?: string; children: React.ReactNode } & (
+) & { className?: string; children: ReactNode } & (
 		| ({ href?: never } & Omit<Headless.ButtonProps, 'as' | 'className'>)
-		| ({ href: string } & Omit<React.ComponentPropsWithoutRef<typeof Link>, 'className'>)
+		| ({ href: string } & Omit<Props<typeof Link>, 'className'>)
 	)
 
 export const CatalystButton = forwardRef(function Button(
 	{ color, outline, plain, className, children, ...props }: ButtonProps,
-	ref: React.ForwardedRef<HTMLElement>
+	ref: ForwardedRef<HTMLElement>
 ) {
 	let classes = cn(
 		styles.base,
@@ -186,7 +186,7 @@ export const CatalystButton = forwardRef(function Button(
 			<Link
 				{...props}
 				className={classes}
-				ref={ref as React.ForwardedRef<HTMLAnchorElement>}>
+				ref={ref as ForwardedRef<HTMLAnchorElement>}>
 				<TouchTarget>{children}</TouchTarget>
 			</Link>
 		:	<Headless.Button
@@ -200,7 +200,7 @@ export const CatalystButton = forwardRef(function Button(
 /**
  * Expand the hit area to at least 44×44px on touch devices
  */
-export function TouchTarget({ children }: { children: React.ReactNode }) {
+export function TouchTarget({ children }: { children: ReactNode }) {
 	return (
 		<>
 			<span

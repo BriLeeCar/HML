@@ -13,10 +13,10 @@ export function Listbox<T>({
 	...props
 }: {
 	className?: string
-	placeholder?: React.ReactNode
+	placeholder?: ReactNode
 	autoFocus?: boolean
 	'aria-label'?: string
-	children?: React.ReactNode
+	children?: ReactNode
 } & Omit<Headless.ListboxProps<typeof Fragment, T>, 'as' | 'multiple'>) {
 	return (
 		<Headless.Listbox
@@ -37,7 +37,7 @@ export function Listbox<T>({
 					// Hide default focus styles
 					'focus:outline-hidden',
 					// Focus ring
-					'data-focus:after:ring-v2-red-500 after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-transparent after:ring-inset data-focus:after:ring-2',
+					'data-focus:after:ring-hml-red-500 after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-transparent after:ring-inset data-focus:after:ring-2',
 					// Disabled state
 					'data-disabled:opacity-50 data-disabled:before:bg-zinc-950/5 data-disabled:before:shadow-none',
 				])}>
@@ -116,7 +116,7 @@ export function ListboxOption<T>({
 	children,
 	className,
 	...props
-}: { className?: string; children?: React.ReactNode } & Omit<
+}: { className?: string; children?: ReactNode } & Omit<
 	Headless.ListboxOptionProps<'div', T>,
 	'as' | 'className'
 >) {
@@ -148,7 +148,7 @@ export function ListboxOption<T>({
 							// Typography
 							'text-base/6 text-zinc-950 sm:text-sm/6 dark:text-white forced-colors:text-[CanvasText]',
 							// Focus
-							'data-focus:bg-v2-red-500 outline-hidden data-focus:text-white',
+							'data-focus:bg-hml-red-500 outline-hidden data-focus:text-white',
 							// Forced colors mode
 							'forced-color-adjust-none forced-colors:data-focus:bg-[Highlight] forced-colors:data-focus:text-[HighlightText]',
 							// Disabled
@@ -174,7 +174,7 @@ export function ListboxOption<T>({
 	)
 }
 
-export function ListboxLabel({ className, ...props }: React.ComponentPropsWithoutRef<'span'>) {
+export function ListboxLabel({ className, ...props }: Props<'span'>) {
 	return (
 		<span
 			{...props}
@@ -183,11 +183,7 @@ export function ListboxLabel({ className, ...props }: React.ComponentPropsWithou
 	)
 }
 
-export function ListboxDescription({
-	className,
-	children,
-	...props
-}: React.ComponentPropsWithoutRef<'span'>) {
+export function ListboxDescription({ className, children, ...props }: Props<'span'>) {
 	return (
 		<span
 			{...props}

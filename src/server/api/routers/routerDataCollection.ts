@@ -1,9 +1,9 @@
-import type { PathwayPipelines } from '@prisma/client'
 import z from 'zod/v4'
 import type {
 	Country,
 	CountryCurrency,
 	CountryLanguage,
+	PathwayPipelines,
 	PathwayTypes,
 } from '~/server/prisma/generated'
 import { createTRPCRouter, getCountriesByCode, protectedProcedure } from '.'

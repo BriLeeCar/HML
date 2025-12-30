@@ -1,5 +1,4 @@
 import * as Headless from '@headlessui/react'
-import type React from 'react'
 import { cn } from '~/lib/cn'
 import { Text } from './text'
 
@@ -23,7 +22,7 @@ export function Dialog({
 }: {
 	size?: keyof typeof sizes
 	className?: string
-	children: React.ReactNode
+	children: ReactNode
 } & Omit<Headless.DialogProps, 'as' | 'className'>) {
 	return (
 		<Headless.Dialog {...props}>
@@ -53,10 +52,7 @@ export function Dialog({
 export function DialogTitle({
 	className,
 	...props
-}: { className?: string } & Omit<
-	Headless.DialogTitleProps,
-	'as' | 'className'
->) {
+}: { className?: string } & Omit<Headless.DialogTitleProps, 'as' | 'className'>) {
 	return (
 		<Headless.DialogTitle
 			{...props}
@@ -71,10 +67,7 @@ export function DialogTitle({
 export function DialogDescription({
 	className,
 	...props
-}: { className?: string } & Omit<
-	Headless.DescriptionProps<typeof Text>,
-	'as' | 'className'
->) {
+}: { className?: string } & Omit<Headless.DescriptionProps<typeof Text>, 'as' | 'className'>) {
 	return (
 		<Headless.Description
 			as={Text}
@@ -84,10 +77,7 @@ export function DialogDescription({
 	)
 }
 
-export function DialogBody({
-	className,
-	...props
-}: React.ComponentPropsWithoutRef<'div'>) {
+export function DialogBody({ className, ...props }: Props<'div'>) {
 	return (
 		<div
 			{...props}
@@ -96,10 +86,7 @@ export function DialogBody({
 	)
 }
 
-export function DialogActions({
-	className,
-	...props
-}: React.ComponentPropsWithoutRef<'div'>) {
+export function DialogActions({ className, ...props }: Props<'div'>) {
 	return (
 		<div
 			{...props}

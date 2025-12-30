@@ -1,18 +1,10 @@
 import { Analytics } from '@vercel/analytics/next'
-import type { Metadata } from 'next'
 import 'react'
-import type { ReactNode } from 'react'
+
 import { Providers } from '~/app/providers'
 import { cn } from '~/lib/cn'
+import '~/style/www.css'
 import { TRPCReactProvider } from '~/trpc/react'
-import '../style.css'
-
-export const metadata: Metadata = {
-	title: {
-		template: '%s | Help Me Leave',
-		default: 'Help Me Leave',
-	},
-}
 
 const Layout = async ({
 	children,
@@ -20,7 +12,7 @@ const Layout = async ({
 	children: ReactNode
 }>) => {
 	return (
-		<body className={cn('text-foreground font-open-sans relative antialiased', 'pb-4')}>
+		<body className={cn('text-foreground relative overflow-hidden pb-4 antialiased')}>
 			<Providers>
 				<TRPCReactProvider>{children}</TRPCReactProvider>
 			</Providers>

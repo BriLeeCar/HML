@@ -11,13 +11,23 @@
 	"arrowParens": "avoid",
 	"bracketSpacing": true,
 	"objectWrap": "preserve",
-	"proseWrap": "always",
 	"printWidth": 100,
 	"semi": false,
 	"quoteProps": "as-needed",
-	"plugins": ["prettier-plugin-organize-imports", "prettier-plugin-tailwindcss"],
-	"tailwindStyleSheet": "./src/styles/global.css",
-	"tailwindFunctions": ["cn", "cva"],
+	"plugins": [
+		"prettier-plugin-organize-imports",
+		"prettier-plugin-tailwindcss"
+	],
+	"tailwindStyleSheet": [
+		"./src/styles/style.css",
+		"./src/styles/colors.css",
+		"./src/styles/admin.css",
+		"./src/styles/www.css"
+	],
+	"tailwindFunctions": [
+		"cn",
+		"cva"
+	],
 	"overrides": [
 		{
 			"files": "*.css",

@@ -10,7 +10,7 @@ import type { ElPrismaProps } from '../..'
 
 export const Renewable = ({ data, handlePrisma }: ElPrismaProps) => {
 	return (
-		<FormSection>
+		<FormSection aria-label='Renewal'>
 			<FormSection.Legend
 				description={
 					<>

@@ -1,6 +1,6 @@
 'use client'
 import * as Headless from '@headlessui/react'
-import { useState } from 'react'
+import { useState, type ReactElement } from 'react'
 import { cn } from '~/lib/cn'
 
 export function Combobox<T>({
@@ -24,7 +24,7 @@ export function Combobox<T>({
 	autoFocus?: boolean
 	'aria-label'?: string
 	multi?: boolean
-	children: (value: NonNullable<T>) => React.ReactElement
+	children: (value: NonNullable<T>) => ReactElement
 } & Omit<Headless.ComboboxProps<T, false>, 'multuple' | 'as' | 'children'> & {
 		anchor?: 'top' | 'bottom'
 	}) {
@@ -104,7 +104,7 @@ export function Combobox<T>({
 				/>
 				<Headless.ComboboxButton className='group absolute inset-y-0 right-0 flex items-center px-2'>
 					<svg
-						className='group-data-category:bg-v2-slate-700/95 size-5 stroke-zinc-500 group-has-data-disabled:stroke-zinc-600 group-data-hover:stroke-zinc-700 sm:size-4 dark:stroke-zinc-400 forced-colors:stroke-[CanvasText]'
+						className='group-data-category:bg-hml-slate-700/95 size-5 stroke-zinc-500 group-has-data-disabled:stroke-zinc-600 group-data-hover:stroke-zinc-700 sm:size-4 dark:stroke-zinc-400 forced-colors:stroke-[CanvasText]'
 						viewBox='0 0 16 16'
 						aria-hidden='true'
 						fill='none'>
@@ -152,7 +152,7 @@ export function ComboboxOption<T>({
 	children,
 	className,
 	...props
-}: { className?: string; children?: React.ReactNode } & Omit<
+}: { className?: string; children?: ReactNode } & Omit<
 	Headless.ComboboxOptionProps<'div', T>,
 	'as' | 'className'
 >) {
@@ -171,13 +171,13 @@ export function ComboboxOption<T>({
 		<Headless.ComboboxOption
 			{...props}
 			className={cn(
-				'data-category:*:text-v2-red-500 dark:data-category:*:text-v2-yellow-300 data-category:opacity-100',
+				'data-category:*:text-hml-red-500 dark:data-category:*:text-hml-yellow-300 data-category:opacity-100',
 				// Basic layout
 				'group/option grid w-full cursor-default grid-cols-[1fr_--spacing(5)] items-baseline gap-x-2 rounded-lg py-2.5 pr-2 pl-3.5 sm:grid-cols-[1fr_--spacing(4)] sm:py-1.5 sm:pr-2 sm:pl-3',
 				// Typography
 				'text-base/6 text-zinc-950 sm:text-sm/6 dark:text-white forced-colors:text-[CanvasText]',
 				// Focus
-				'data-focus:bg-v2-grey-50 data-focus:text-v2-slate-700 outline-hidden data-category:rounded-none dark:data-category:bg-[#181818]/50 dark:[[data-category][data-focus]]:bg-zinc-900',
+				'data-focus:bg-hml-grey-50 data-focus:text-hml-slate-700 outline-hidden data-category:rounded-none dark:data-category:bg-[#181818]/50 dark:[[data-category][data-focus]]:bg-zinc-900',
 				// Forced colors mode
 				'forced-color-adjust-none forced-colors:data-focus:bg-[Highlight] forced-colors:data-focus:text-[HighlightText] [[data-category][data-focus]]:bg-red-500',
 				// Disabled
@@ -200,7 +200,7 @@ export function ComboboxOption<T>({
 	)
 }
 
-export function ComboboxLabel({ className, ...props }: React.ComponentPropsWithoutRef<'span'>) {
+export function ComboboxLabel({ className, ...props }: Props<'span'>) {
 	return (
 		<span
 			{...props}
@@ -212,11 +212,7 @@ export function ComboboxLabel({ className, ...props }: React.ComponentPropsWitho
 	)
 }
 
-export function ComboboxDescription({
-	className,
-	children,
-	...props
-}: React.ComponentPropsWithoutRef<'span'>) {
+export function ComboboxDescription({ className, children, ...props }: Props<'span'>) {
 	return (
 		<span
 			{...props}

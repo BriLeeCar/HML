@@ -1,7 +1,7 @@
 import { AddButton, Button, SubSectionFieldset } from '@/admin/_components'
 import { FormSection } from '@/admin/_components/_form/clientFieldset'
 import { Field, Input, Label, Select, Strong, Textarea } from '@/admin/_components/catalyst/'
-import type { ChangeEvent } from 'react'
+
 import { Icon } from '~/components'
 import type { Documents } from '~/server/prisma/generated'
 import { document, FieldCost, FieldLink, type ElPrismaProps } from '../..'
@@ -16,7 +16,7 @@ const DocumentType = ({
 	doc: Query['query']['documents'][number]
 }) => {
 	const showPlaceholder = typeof doc.documentId != 'number'
-	const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+	const handleChange = (e: EChange<HTMLSelectElement>) => {
 		handlePrisma(
 			document(
 				data,

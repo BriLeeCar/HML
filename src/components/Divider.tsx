@@ -1,5 +1,3 @@
-import type { ReactNode } from 'react'
-
 export const Divider = ({ children }: { children?: ReactNode }) => {
 	return (
 		<div className='my-10 flex items-center'>

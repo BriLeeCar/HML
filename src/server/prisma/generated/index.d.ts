@@ -104,11 +104,6 @@ export type BlockField = $Result.DefaultSelection<Prisma.$BlockFieldPayload>
  */
 export type PostBlock = $Result.DefaultSelection<Prisma.$PostBlockPayload>
 /**
- * Model Account
- * 
- */
-export type Account = $Result.DefaultSelection<Prisma.$AccountPayload>
-/**
  * Model Session
  * 
  */
@@ -123,11 +118,6 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  * 
  */
 export type VerificationToken = $Result.DefaultSelection<Prisma.$VerificationTokenPayload>
-/**
- * Model UserKey
- * 
- */
-export type UserKey = $Result.DefaultSelection<Prisma.$UserKeyPayload>
 /**
  * Model UserSocial
  * 
@@ -565,16 +555,6 @@ export class PrismaClient<
   get postBlock(): Prisma.PostBlockDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.account`: Exposes CRUD operations for the **Account** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Accounts
-    * const accounts = await prisma.account.findMany()
-    * ```
-    */
-  get account(): Prisma.AccountDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.session`: Exposes CRUD operations for the **Session** model.
     * Example usage:
     * ```ts
@@ -603,16 +583,6 @@ export class PrismaClient<
     * ```
     */
   get verificationToken(): Prisma.VerificationTokenDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.userKey`: Exposes CRUD operations for the **UserKey** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more UserKeys
-    * const userKeys = await prisma.userKey.findMany()
-    * ```
-    */
-  get userKey(): Prisma.UserKeyDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.userSocial`: Exposes CRUD operations for the **UserSocial** model.
@@ -741,8 +711,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.19.0
-   * Query Engine version: 2ba551f319ab1df4bc874a89965d8b3641056773
+   * Prisma Client JS version: 6.19.1
+   * Query Engine version: c2990dca591cba766e3b7ef5d9e8a84796e47ab7
    */
   export type PrismaVersion = {
     client: string
@@ -1142,11 +1112,9 @@ export namespace Prisma {
     Block: 'Block',
     BlockField: 'BlockField',
     PostBlock: 'PostBlock',
-    Account: 'Account',
     Session: 'Session',
     User: 'User',
     VerificationToken: 'VerificationToken',
-    UserKey: 'UserKey',
     UserSocial: 'UserSocial',
     UserRoles: 'UserRoles',
     Roles: 'Roles',
@@ -1172,7 +1140,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "country" | "countryLanguage" | "countryCurrency" | "pathway" | "pathwayPipeline" | "pathwayRestrictedNationality" | "pathwayDocuments" | "currency" | "documents" | "language" | "post" | "postTag" | "tag" | "tagHierarchy" | "resource" | "block" | "blockField" | "postBlock" | "account" | "session" | "user" | "verificationToken" | "userKey" | "userSocial" | "userRoles" | "roles" | "social" | "postVersionHistory" | "pathwayTypes" | "pathwayCategories"
+      modelProps: "country" | "countryLanguage" | "countryCurrency" | "pathway" | "pathwayPipeline" | "pathwayRestrictedNationality" | "pathwayDocuments" | "currency" | "documents" | "language" | "post" | "postTag" | "tag" | "tagHierarchy" | "resource" | "block" | "blockField" | "postBlock" | "session" | "user" | "verificationToken" | "userSocial" | "userRoles" | "roles" | "social" | "postVersionHistory" | "pathwayTypes" | "pathwayCategories"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2508,80 +2476,6 @@ export namespace Prisma {
           }
         }
       }
-      Account: {
-        payload: Prisma.$AccountPayload<ExtArgs>
-        fields: Prisma.AccountFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.AccountFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AccountPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.AccountFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AccountPayload>
-          }
-          findFirst: {
-            args: Prisma.AccountFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AccountPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.AccountFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AccountPayload>
-          }
-          findMany: {
-            args: Prisma.AccountFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AccountPayload>[]
-          }
-          create: {
-            args: Prisma.AccountCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AccountPayload>
-          }
-          createMany: {
-            args: Prisma.AccountCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.AccountCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AccountPayload>[]
-          }
-          delete: {
-            args: Prisma.AccountDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AccountPayload>
-          }
-          update: {
-            args: Prisma.AccountUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AccountPayload>
-          }
-          deleteMany: {
-            args: Prisma.AccountDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.AccountUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.AccountUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AccountPayload>[]
-          }
-          upsert: {
-            args: Prisma.AccountUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AccountPayload>
-          }
-          aggregate: {
-            args: Prisma.AccountAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateAccount>
-          }
-          groupBy: {
-            args: Prisma.AccountGroupByArgs<ExtArgs>
-            result: $Utils.Optional<AccountGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.AccountCountArgs<ExtArgs>
-            result: $Utils.Optional<AccountCountAggregateOutputType> | number
-          }
-        }
-      }
       Session: {
         payload: Prisma.$SessionPayload<ExtArgs>
         fields: Prisma.SessionFieldRefs
@@ -2801,80 +2695,6 @@ export namespace Prisma {
           count: {
             args: Prisma.VerificationTokenCountArgs<ExtArgs>
             result: $Utils.Optional<VerificationTokenCountAggregateOutputType> | number
-          }
-        }
-      }
-      UserKey: {
-        payload: Prisma.$UserKeyPayload<ExtArgs>
-        fields: Prisma.UserKeyFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.UserKeyFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserKeyPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.UserKeyFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserKeyPayload>
-          }
-          findFirst: {
-            args: Prisma.UserKeyFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserKeyPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.UserKeyFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserKeyPayload>
-          }
-          findMany: {
-            args: Prisma.UserKeyFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserKeyPayload>[]
-          }
-          create: {
-            args: Prisma.UserKeyCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserKeyPayload>
-          }
-          createMany: {
-            args: Prisma.UserKeyCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.UserKeyCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserKeyPayload>[]
-          }
-          delete: {
-            args: Prisma.UserKeyDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserKeyPayload>
-          }
-          update: {
-            args: Prisma.UserKeyUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserKeyPayload>
-          }
-          deleteMany: {
-            args: Prisma.UserKeyDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.UserKeyUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.UserKeyUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserKeyPayload>[]
-          }
-          upsert: {
-            args: Prisma.UserKeyUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserKeyPayload>
-          }
-          aggregate: {
-            args: Prisma.UserKeyAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateUserKey>
-          }
-          groupBy: {
-            args: Prisma.UserKeyGroupByArgs<ExtArgs>
-            result: $Utils.Optional<UserKeyGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.UserKeyCountArgs<ExtArgs>
-            result: $Utils.Optional<UserKeyCountAggregateOutputType> | number
           }
         }
       }
@@ -3510,11 +3330,9 @@ export namespace Prisma {
     block?: BlockOmit
     blockField?: BlockFieldOmit
     postBlock?: PostBlockOmit
-    account?: AccountOmit
     session?: SessionOmit
     user?: UserOmit
     verificationToken?: VerificationTokenOmit
-    userKey?: UserKeyOmit
     userSocial?: UserSocialOmit
     userRoles?: UserRolesOmit
     roles?: RolesOmit
@@ -3967,7 +3785,6 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    accounts: number
     postVersionHistory: number
     posts: number
     sessions: number
@@ -3978,7 +3795,6 @@ export namespace Prisma {
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     postVersionHistory?: boolean | UserCountOutputTypeCountPostVersionHistoryArgs
     posts?: boolean | UserCountOutputTypeCountPostsArgs
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
@@ -3997,13 +3813,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the UserCountOutputType
      */
     select?: UserCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AccountWhereInput
   }
 
   /**
@@ -4061,12 +3870,10 @@ export namespace Prisma {
    */
 
   export type RolesCountOutputType = {
-    userKeys: number
     UserRoles: number
   }
 
   export type RolesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    userKeys?: boolean | RolesCountOutputTypeCountUserKeysArgs
     UserRoles?: boolean | RolesCountOutputTypeCountUserRolesArgs
   }
 
@@ -4079,13 +3886,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the RolesCountOutputType
      */
     select?: RolesCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * RolesCountOutputType without action
-   */
-  export type RolesCountOutputTypeCountUserKeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserKeyWhereInput
   }
 
   /**
@@ -24388,1206 +24188,6 @@ export namespace Prisma {
 
 
   /**
-   * Model Account
-   */
-
-  export type AggregateAccount = {
-    _count: AccountCountAggregateOutputType | null
-    _avg: AccountAvgAggregateOutputType | null
-    _sum: AccountSumAggregateOutputType | null
-    _min: AccountMinAggregateOutputType | null
-    _max: AccountMaxAggregateOutputType | null
-  }
-
-  export type AccountAvgAggregateOutputType = {
-    expires_at: number | null
-    refresh_token_expires_in: number | null
-  }
-
-  export type AccountSumAggregateOutputType = {
-    expires_at: number | null
-    refresh_token_expires_in: number | null
-  }
-
-  export type AccountMinAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    type: string | null
-    provider: string | null
-    providerAccountId: string | null
-    refresh_token: string | null
-    access_token: string | null
-    expires_at: number | null
-    token_type: string | null
-    scope: string | null
-    id_token: string | null
-    session_state: string | null
-    refresh_token_expires_in: number | null
-  }
-
-  export type AccountMaxAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    type: string | null
-    provider: string | null
-    providerAccountId: string | null
-    refresh_token: string | null
-    access_token: string | null
-    expires_at: number | null
-    token_type: string | null
-    scope: string | null
-    id_token: string | null
-    session_state: string | null
-    refresh_token_expires_in: number | null
-  }
-
-  export type AccountCountAggregateOutputType = {
-    id: number
-    userId: number
-    type: number
-    provider: number
-    providerAccountId: number
-    refresh_token: number
-    access_token: number
-    expires_at: number
-    token_type: number
-    scope: number
-    id_token: number
-    session_state: number
-    refresh_token_expires_in: number
-    _all: number
-  }
-
-
-  export type AccountAvgAggregateInputType = {
-    expires_at?: true
-    refresh_token_expires_in?: true
-  }
-
-  export type AccountSumAggregateInputType = {
-    expires_at?: true
-    refresh_token_expires_in?: true
-  }
-
-  export type AccountMinAggregateInputType = {
-    id?: true
-    userId?: true
-    type?: true
-    provider?: true
-    providerAccountId?: true
-    refresh_token?: true
-    access_token?: true
-    expires_at?: true
-    token_type?: true
-    scope?: true
-    id_token?: true
-    session_state?: true
-    refresh_token_expires_in?: true
-  }
-
-  export type AccountMaxAggregateInputType = {
-    id?: true
-    userId?: true
-    type?: true
-    provider?: true
-    providerAccountId?: true
-    refresh_token?: true
-    access_token?: true
-    expires_at?: true
-    token_type?: true
-    scope?: true
-    id_token?: true
-    session_state?: true
-    refresh_token_expires_in?: true
-  }
-
-  export type AccountCountAggregateInputType = {
-    id?: true
-    userId?: true
-    type?: true
-    provider?: true
-    providerAccountId?: true
-    refresh_token?: true
-    access_token?: true
-    expires_at?: true
-    token_type?: true
-    scope?: true
-    id_token?: true
-    session_state?: true
-    refresh_token_expires_in?: true
-    _all?: true
-  }
-
-  export type AccountAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Account to aggregate.
-     */
-    where?: AccountWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Accounts to fetch.
-     */
-    orderBy?: AccountOrderByWithRelationInput | AccountOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: AccountWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Accounts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Accounts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Accounts
-    **/
-    _count?: true | AccountCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: AccountAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: AccountSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: AccountMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: AccountMaxAggregateInputType
-  }
-
-  export type GetAccountAggregateType<T extends AccountAggregateArgs> = {
-        [P in keyof T & keyof AggregateAccount]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateAccount[P]>
-      : GetScalarType<T[P], AggregateAccount[P]>
-  }
-
-
-
-
-  export type AccountGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AccountWhereInput
-    orderBy?: AccountOrderByWithAggregationInput | AccountOrderByWithAggregationInput[]
-    by: AccountScalarFieldEnum[] | AccountScalarFieldEnum
-    having?: AccountScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: AccountCountAggregateInputType | true
-    _avg?: AccountAvgAggregateInputType
-    _sum?: AccountSumAggregateInputType
-    _min?: AccountMinAggregateInputType
-    _max?: AccountMaxAggregateInputType
-  }
-
-  export type AccountGroupByOutputType = {
-    id: string
-    userId: string
-    type: string
-    provider: string
-    providerAccountId: string
-    refresh_token: string | null
-    access_token: string | null
-    expires_at: number | null
-    token_type: string | null
-    scope: string | null
-    id_token: string | null
-    session_state: string | null
-    refresh_token_expires_in: number | null
-    _count: AccountCountAggregateOutputType | null
-    _avg: AccountAvgAggregateOutputType | null
-    _sum: AccountSumAggregateOutputType | null
-    _min: AccountMinAggregateOutputType | null
-    _max: AccountMaxAggregateOutputType | null
-  }
-
-  type GetAccountGroupByPayload<T extends AccountGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<AccountGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof AccountGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], AccountGroupByOutputType[P]>
-            : GetScalarType<T[P], AccountGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type AccountSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    type?: boolean
-    provider?: boolean
-    providerAccountId?: boolean
-    refresh_token?: boolean
-    access_token?: boolean
-    expires_at?: boolean
-    token_type?: boolean
-    scope?: boolean
-    id_token?: boolean
-    session_state?: boolean
-    refresh_token_expires_in?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["account"]>
-
-  export type AccountSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    type?: boolean
-    provider?: boolean
-    providerAccountId?: boolean
-    refresh_token?: boolean
-    access_token?: boolean
-    expires_at?: boolean
-    token_type?: boolean
-    scope?: boolean
-    id_token?: boolean
-    session_state?: boolean
-    refresh_token_expires_in?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["account"]>
-
-  export type AccountSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    type?: boolean
-    provider?: boolean
-    providerAccountId?: boolean
-    refresh_token?: boolean
-    access_token?: boolean
-    expires_at?: boolean
-    token_type?: boolean
-    scope?: boolean
-    id_token?: boolean
-    session_state?: boolean
-    refresh_token_expires_in?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["account"]>
-
-  export type AccountSelectScalar = {
-    id?: boolean
-    userId?: boolean
-    type?: boolean
-    provider?: boolean
-    providerAccountId?: boolean
-    refresh_token?: boolean
-    access_token?: boolean
-    expires_at?: boolean
-    token_type?: boolean
-    scope?: boolean
-    id_token?: boolean
-    session_state?: boolean
-    refresh_token_expires_in?: boolean
-  }
-
-  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "type" | "provider" | "providerAccountId" | "refresh_token" | "access_token" | "expires_at" | "token_type" | "scope" | "id_token" | "session_state" | "refresh_token_expires_in", ExtArgs["result"]["account"]>
-  export type AccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type AccountIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type AccountIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-
-  export type $AccountPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Account"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      userId: string
-      type: string
-      provider: string
-      providerAccountId: string
-      refresh_token: string | null
-      access_token: string | null
-      expires_at: number | null
-      token_type: string | null
-      scope: string | null
-      id_token: string | null
-      session_state: string | null
-      refresh_token_expires_in: number | null
-    }, ExtArgs["result"]["account"]>
-    composites: {}
-  }
-
-  type AccountGetPayload<S extends boolean | null | undefined | AccountDefaultArgs> = $Result.GetResult<Prisma.$AccountPayload, S>
-
-  type AccountCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<AccountFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: AccountCountAggregateInputType | true
-    }
-
-  export interface AccountDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Account'], meta: { name: 'Account' } }
-    /**
-     * Find zero or one Account that matches the filter.
-     * @param {AccountFindUniqueArgs} args - Arguments to find a Account
-     * @example
-     * // Get one Account
-     * const account = await prisma.account.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends AccountFindUniqueArgs>(args: SelectSubset<T, AccountFindUniqueArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Account that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {AccountFindUniqueOrThrowArgs} args - Arguments to find a Account
-     * @example
-     * // Get one Account
-     * const account = await prisma.account.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends AccountFindUniqueOrThrowArgs>(args: SelectSubset<T, AccountFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Account that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AccountFindFirstArgs} args - Arguments to find a Account
-     * @example
-     * // Get one Account
-     * const account = await prisma.account.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends AccountFindFirstArgs>(args?: SelectSubset<T, AccountFindFirstArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Account that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AccountFindFirstOrThrowArgs} args - Arguments to find a Account
-     * @example
-     * // Get one Account
-     * const account = await prisma.account.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends AccountFindFirstOrThrowArgs>(args?: SelectSubset<T, AccountFindFirstOrThrowArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Accounts that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AccountFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Accounts
-     * const accounts = await prisma.account.findMany()
-     * 
-     * // Get first 10 Accounts
-     * const accounts = await prisma.account.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const accountWithIdOnly = await prisma.account.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends AccountFindManyArgs>(args?: SelectSubset<T, AccountFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Account.
-     * @param {AccountCreateArgs} args - Arguments to create a Account.
-     * @example
-     * // Create one Account
-     * const Account = await prisma.account.create({
-     *   data: {
-     *     // ... data to create a Account
-     *   }
-     * })
-     * 
-     */
-    create<T extends AccountCreateArgs>(args: SelectSubset<T, AccountCreateArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Accounts.
-     * @param {AccountCreateManyArgs} args - Arguments to create many Accounts.
-     * @example
-     * // Create many Accounts
-     * const account = await prisma.account.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends AccountCreateManyArgs>(args?: SelectSubset<T, AccountCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Accounts and returns the data saved in the database.
-     * @param {AccountCreateManyAndReturnArgs} args - Arguments to create many Accounts.
-     * @example
-     * // Create many Accounts
-     * const account = await prisma.account.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Accounts and only return the `id`
-     * const accountWithIdOnly = await prisma.account.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends AccountCreateManyAndReturnArgs>(args?: SelectSubset<T, AccountCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Account.
-     * @param {AccountDeleteArgs} args - Arguments to delete one Account.
-     * @example
-     * // Delete one Account
-     * const Account = await prisma.account.delete({
-     *   where: {
-     *     // ... filter to delete one Account
-     *   }
-     * })
-     * 
-     */
-    delete<T extends AccountDeleteArgs>(args: SelectSubset<T, AccountDeleteArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Account.
-     * @param {AccountUpdateArgs} args - Arguments to update one Account.
-     * @example
-     * // Update one Account
-     * const account = await prisma.account.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends AccountUpdateArgs>(args: SelectSubset<T, AccountUpdateArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Accounts.
-     * @param {AccountDeleteManyArgs} args - Arguments to filter Accounts to delete.
-     * @example
-     * // Delete a few Accounts
-     * const { count } = await prisma.account.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends AccountDeleteManyArgs>(args?: SelectSubset<T, AccountDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Accounts.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AccountUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Accounts
-     * const account = await prisma.account.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends AccountUpdateManyArgs>(args: SelectSubset<T, AccountUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Accounts and returns the data updated in the database.
-     * @param {AccountUpdateManyAndReturnArgs} args - Arguments to update many Accounts.
-     * @example
-     * // Update many Accounts
-     * const account = await prisma.account.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Accounts and only return the `id`
-     * const accountWithIdOnly = await prisma.account.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends AccountUpdateManyAndReturnArgs>(args: SelectSubset<T, AccountUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Account.
-     * @param {AccountUpsertArgs} args - Arguments to update or create a Account.
-     * @example
-     * // Update or create a Account
-     * const account = await prisma.account.upsert({
-     *   create: {
-     *     // ... data to create a Account
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Account we want to update
-     *   }
-     * })
-     */
-    upsert<T extends AccountUpsertArgs>(args: SelectSubset<T, AccountUpsertArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Accounts.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AccountCountArgs} args - Arguments to filter Accounts to count.
-     * @example
-     * // Count the number of Accounts
-     * const count = await prisma.account.count({
-     *   where: {
-     *     // ... the filter for the Accounts we want to count
-     *   }
-     * })
-    **/
-    count<T extends AccountCountArgs>(
-      args?: Subset<T, AccountCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], AccountCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Account.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AccountAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends AccountAggregateArgs>(args: Subset<T, AccountAggregateArgs>): Prisma.PrismaPromise<GetAccountAggregateType<T>>
-
-    /**
-     * Group by Account.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AccountGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends AccountGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: AccountGroupByArgs['orderBy'] }
-        : { orderBy?: AccountGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, AccountGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAccountGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Account model
-   */
-  readonly fields: AccountFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Account.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__AccountClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Account model
-   */
-  interface AccountFieldRefs {
-    readonly id: FieldRef<"Account", 'String'>
-    readonly userId: FieldRef<"Account", 'String'>
-    readonly type: FieldRef<"Account", 'String'>
-    readonly provider: FieldRef<"Account", 'String'>
-    readonly providerAccountId: FieldRef<"Account", 'String'>
-    readonly refresh_token: FieldRef<"Account", 'String'>
-    readonly access_token: FieldRef<"Account", 'String'>
-    readonly expires_at: FieldRef<"Account", 'Int'>
-    readonly token_type: FieldRef<"Account", 'String'>
-    readonly scope: FieldRef<"Account", 'String'>
-    readonly id_token: FieldRef<"Account", 'String'>
-    readonly session_state: FieldRef<"Account", 'String'>
-    readonly refresh_token_expires_in: FieldRef<"Account", 'Int'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Account findUnique
-   */
-  export type AccountFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Account
-     */
-    select?: AccountSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Account
-     */
-    omit?: AccountOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AccountInclude<ExtArgs> | null
-    /**
-     * Filter, which Account to fetch.
-     */
-    where: AccountWhereUniqueInput
-  }
-
-  /**
-   * Account findUniqueOrThrow
-   */
-  export type AccountFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Account
-     */
-    select?: AccountSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Account
-     */
-    omit?: AccountOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AccountInclude<ExtArgs> | null
-    /**
-     * Filter, which Account to fetch.
-     */
-    where: AccountWhereUniqueInput
-  }
-
-  /**
-   * Account findFirst
-   */
-  export type AccountFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Account
-     */
-    select?: AccountSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Account
-     */
-    omit?: AccountOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AccountInclude<ExtArgs> | null
-    /**
-     * Filter, which Account to fetch.
-     */
-    where?: AccountWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Accounts to fetch.
-     */
-    orderBy?: AccountOrderByWithRelationInput | AccountOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Accounts.
-     */
-    cursor?: AccountWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Accounts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Accounts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Accounts.
-     */
-    distinct?: AccountScalarFieldEnum | AccountScalarFieldEnum[]
-  }
-
-  /**
-   * Account findFirstOrThrow
-   */
-  export type AccountFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Account
-     */
-    select?: AccountSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Account
-     */
-    omit?: AccountOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AccountInclude<ExtArgs> | null
-    /**
-     * Filter, which Account to fetch.
-     */
-    where?: AccountWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Accounts to fetch.
-     */
-    orderBy?: AccountOrderByWithRelationInput | AccountOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Accounts.
-     */
-    cursor?: AccountWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Accounts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Accounts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Accounts.
-     */
-    distinct?: AccountScalarFieldEnum | AccountScalarFieldEnum[]
-  }
-
-  /**
-   * Account findMany
-   */
-  export type AccountFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Account
-     */
-    select?: AccountSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Account
-     */
-    omit?: AccountOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AccountInclude<ExtArgs> | null
-    /**
-     * Filter, which Accounts to fetch.
-     */
-    where?: AccountWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Accounts to fetch.
-     */
-    orderBy?: AccountOrderByWithRelationInput | AccountOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Accounts.
-     */
-    cursor?: AccountWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Accounts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Accounts.
-     */
-    skip?: number
-    distinct?: AccountScalarFieldEnum | AccountScalarFieldEnum[]
-  }
-
-  /**
-   * Account create
-   */
-  export type AccountCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Account
-     */
-    select?: AccountSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Account
-     */
-    omit?: AccountOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AccountInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Account.
-     */
-    data: XOR<AccountCreateInput, AccountUncheckedCreateInput>
-  }
-
-  /**
-   * Account createMany
-   */
-  export type AccountCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Accounts.
-     */
-    data: AccountCreateManyInput | AccountCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Account createManyAndReturn
-   */
-  export type AccountCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Account
-     */
-    select?: AccountSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Account
-     */
-    omit?: AccountOmit<ExtArgs> | null
-    /**
-     * The data used to create many Accounts.
-     */
-    data: AccountCreateManyInput | AccountCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AccountIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Account update
-   */
-  export type AccountUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Account
-     */
-    select?: AccountSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Account
-     */
-    omit?: AccountOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AccountInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Account.
-     */
-    data: XOR<AccountUpdateInput, AccountUncheckedUpdateInput>
-    /**
-     * Choose, which Account to update.
-     */
-    where: AccountWhereUniqueInput
-  }
-
-  /**
-   * Account updateMany
-   */
-  export type AccountUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Accounts.
-     */
-    data: XOR<AccountUpdateManyMutationInput, AccountUncheckedUpdateManyInput>
-    /**
-     * Filter which Accounts to update
-     */
-    where?: AccountWhereInput
-    /**
-     * Limit how many Accounts to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Account updateManyAndReturn
-   */
-  export type AccountUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Account
-     */
-    select?: AccountSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Account
-     */
-    omit?: AccountOmit<ExtArgs> | null
-    /**
-     * The data used to update Accounts.
-     */
-    data: XOR<AccountUpdateManyMutationInput, AccountUncheckedUpdateManyInput>
-    /**
-     * Filter which Accounts to update
-     */
-    where?: AccountWhereInput
-    /**
-     * Limit how many Accounts to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AccountIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Account upsert
-   */
-  export type AccountUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Account
-     */
-    select?: AccountSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Account
-     */
-    omit?: AccountOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AccountInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Account to update in case it exists.
-     */
-    where: AccountWhereUniqueInput
-    /**
-     * In case the Account found by the `where` argument doesn't exist, create a new Account with this data.
-     */
-    create: XOR<AccountCreateInput, AccountUncheckedCreateInput>
-    /**
-     * In case the Account was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<AccountUpdateInput, AccountUncheckedUpdateInput>
-  }
-
-  /**
-   * Account delete
-   */
-  export type AccountDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Account
-     */
-    select?: AccountSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Account
-     */
-    omit?: AccountOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AccountInclude<ExtArgs> | null
-    /**
-     * Filter which Account to delete.
-     */
-    where: AccountWhereUniqueInput
-  }
-
-  /**
-   * Account deleteMany
-   */
-  export type AccountDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Accounts to delete
-     */
-    where?: AccountWhereInput
-    /**
-     * Limit how many Accounts to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Account without action
-   */
-  export type AccountDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Account
-     */
-    select?: AccountSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Account
-     */
-    omit?: AccountOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AccountInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model Session
    */
 
@@ -26652,6 +25252,8 @@ export namespace Prisma {
     firstName: string | null
     lastName: string | null
     discordHandle: string | null
+    key: string | null
+    created: Date | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -26664,6 +25266,8 @@ export namespace Prisma {
     firstName: string | null
     lastName: string | null
     discordHandle: string | null
+    key: string | null
+    created: Date | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -26676,6 +25280,8 @@ export namespace Prisma {
     firstName: number
     lastName: number
     discordHandle: number
+    key: number
+    created: number
     _all: number
   }
 
@@ -26690,6 +25296,8 @@ export namespace Prisma {
     firstName?: true
     lastName?: true
     discordHandle?: true
+    key?: true
+    created?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -26702,6 +25310,8 @@ export namespace Prisma {
     firstName?: true
     lastName?: true
     discordHandle?: true
+    key?: true
+    created?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -26714,6 +25324,8 @@ export namespace Prisma {
     firstName?: true
     lastName?: true
     discordHandle?: true
+    key?: true
+    created?: true
     _all?: true
   }
 
@@ -26795,10 +25407,12 @@ export namespace Prisma {
     email: string | null
     emailVerified: Date | null
     image: string | null
-    secret: string
+    secret: string | null
     firstName: string | null
     lastName: string | null
     discordHandle: string | null
+    key: string | null
+    created: Date
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -26828,11 +25442,11 @@ export namespace Prisma {
     firstName?: boolean
     lastName?: boolean
     discordHandle?: boolean
-    accounts?: boolean | User$accountsArgs<ExtArgs>
+    key?: boolean
+    created?: boolean
     postVersionHistory?: boolean | User$postVersionHistoryArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
-    key?: boolean | User$keyArgs<ExtArgs>
     roles?: boolean | User$rolesArgs<ExtArgs>
     socials?: boolean | User$socialsArgs<ExtArgs>
     Pathway?: boolean | User$PathwayArgs<ExtArgs>
@@ -26850,6 +25464,8 @@ export namespace Prisma {
     firstName?: boolean
     lastName?: boolean
     discordHandle?: boolean
+    key?: boolean
+    created?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -26862,6 +25478,8 @@ export namespace Prisma {
     firstName?: boolean
     lastName?: boolean
     discordHandle?: boolean
+    key?: boolean
+    created?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -26874,15 +25492,15 @@ export namespace Prisma {
     firstName?: boolean
     lastName?: boolean
     discordHandle?: boolean
+    key?: boolean
+    created?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "secret" | "firstName" | "lastName" | "discordHandle", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "secret" | "firstName" | "lastName" | "discordHandle" | "key" | "created", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    accounts?: boolean | User$accountsArgs<ExtArgs>
     postVersionHistory?: boolean | User$postVersionHistoryArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
-    key?: boolean | User$keyArgs<ExtArgs>
     roles?: boolean | User$rolesArgs<ExtArgs>
     socials?: boolean | User$socialsArgs<ExtArgs>
     Pathway?: boolean | User$PathwayArgs<ExtArgs>
@@ -26895,11 +25513,9 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      accounts: Prisma.$AccountPayload<ExtArgs>[]
       postVersionHistory: Prisma.$PostVersionHistoryPayload<ExtArgs>[]
       posts: Prisma.$PostPayload<ExtArgs>[]
       sessions: Prisma.$SessionPayload<ExtArgs>[]
-      key: Prisma.$UserKeyPayload<ExtArgs> | null
       roles: Prisma.$UserRolesPayload<ExtArgs>[]
       socials: Prisma.$UserSocialPayload<ExtArgs>[]
       Pathway: Prisma.$PathwayPayload<ExtArgs>[]
@@ -26911,10 +25527,12 @@ export namespace Prisma {
       email: string | null
       emailVerified: Date | null
       image: string | null
-      secret: string
+      secret: string | null
       firstName: string | null
       lastName: string | null
       discordHandle: string | null
+      key: string | null
+      created: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -27309,11 +25927,9 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     postVersionHistory<T extends User$postVersionHistoryArgs<ExtArgs> = {}>(args?: Subset<T, User$postVersionHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostVersionHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    key<T extends User$keyArgs<ExtArgs> = {}>(args?: Subset<T, User$keyArgs<ExtArgs>>): Prisma__UserKeyClient<$Result.GetResult<Prisma.$UserKeyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     roles<T extends User$rolesArgs<ExtArgs> = {}>(args?: Subset<T, User$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRolesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     socials<T extends User$socialsArgs<ExtArgs> = {}>(args?: Subset<T, User$socialsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserSocialPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Pathway<T extends User$PathwayArgs<ExtArgs> = {}>(args?: Subset<T, User$PathwayArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathwayPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -27356,6 +25972,8 @@ export namespace Prisma {
     readonly firstName: FieldRef<"User", 'String'>
     readonly lastName: FieldRef<"User", 'String'>
     readonly discordHandle: FieldRef<"User", 'String'>
+    readonly key: FieldRef<"User", 'String'>
+    readonly created: FieldRef<"User", 'DateTime'>
   }
     
 
@@ -27744,30 +26362,6 @@ export namespace Prisma {
   }
 
   /**
-   * User.accounts
-   */
-  export type User$accountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Account
-     */
-    select?: AccountSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Account
-     */
-    omit?: AccountOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AccountInclude<ExtArgs> | null
-    where?: AccountWhereInput
-    orderBy?: AccountOrderByWithRelationInput | AccountOrderByWithRelationInput[]
-    cursor?: AccountWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: AccountScalarFieldEnum | AccountScalarFieldEnum[]
-  }
-
-  /**
    * User.postVersionHistory
    */
   export type User$postVersionHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -27837,25 +26431,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
-  }
-
-  /**
-   * User.key
-   */
-  export type User$keyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserKey
-     */
-    select?: UserKeySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserKey
-     */
-    omit?: UserKeyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserKeyInclude<ExtArgs> | null
-    where?: UserKeyWhereInput
   }
 
   /**
@@ -28939,1112 +27514,6 @@ export namespace Prisma {
      * Omit specific fields from the VerificationToken
      */
     omit?: VerificationTokenOmit<ExtArgs> | null
-  }
-
-
-  /**
-   * Model UserKey
-   */
-
-  export type AggregateUserKey = {
-    _count: UserKeyCountAggregateOutputType | null
-    _avg: UserKeyAvgAggregateOutputType | null
-    _sum: UserKeySumAggregateOutputType | null
-    _min: UserKeyMinAggregateOutputType | null
-    _max: UserKeyMaxAggregateOutputType | null
-  }
-
-  export type UserKeyAvgAggregateOutputType = {
-    roleId: number | null
-  }
-
-  export type UserKeySumAggregateOutputType = {
-    roleId: number | null
-  }
-
-  export type UserKeyMinAggregateOutputType = {
-    key: string | null
-    name: string | null
-    userId: string | null
-    roleId: number | null
-  }
-
-  export type UserKeyMaxAggregateOutputType = {
-    key: string | null
-    name: string | null
-    userId: string | null
-    roleId: number | null
-  }
-
-  export type UserKeyCountAggregateOutputType = {
-    key: number
-    name: number
-    userId: number
-    roleId: number
-    _all: number
-  }
-
-
-  export type UserKeyAvgAggregateInputType = {
-    roleId?: true
-  }
-
-  export type UserKeySumAggregateInputType = {
-    roleId?: true
-  }
-
-  export type UserKeyMinAggregateInputType = {
-    key?: true
-    name?: true
-    userId?: true
-    roleId?: true
-  }
-
-  export type UserKeyMaxAggregateInputType = {
-    key?: true
-    name?: true
-    userId?: true
-    roleId?: true
-  }
-
-  export type UserKeyCountAggregateInputType = {
-    key?: true
-    name?: true
-    userId?: true
-    roleId?: true
-    _all?: true
-  }
-
-  export type UserKeyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which UserKey to aggregate.
-     */
-    where?: UserKeyWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of UserKeys to fetch.
-     */
-    orderBy?: UserKeyOrderByWithRelationInput | UserKeyOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: UserKeyWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` UserKeys from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` UserKeys.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned UserKeys
-    **/
-    _count?: true | UserKeyCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: UserKeyAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: UserKeySumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: UserKeyMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: UserKeyMaxAggregateInputType
-  }
-
-  export type GetUserKeyAggregateType<T extends UserKeyAggregateArgs> = {
-        [P in keyof T & keyof AggregateUserKey]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateUserKey[P]>
-      : GetScalarType<T[P], AggregateUserKey[P]>
-  }
-
-
-
-
-  export type UserKeyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserKeyWhereInput
-    orderBy?: UserKeyOrderByWithAggregationInput | UserKeyOrderByWithAggregationInput[]
-    by: UserKeyScalarFieldEnum[] | UserKeyScalarFieldEnum
-    having?: UserKeyScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: UserKeyCountAggregateInputType | true
-    _avg?: UserKeyAvgAggregateInputType
-    _sum?: UserKeySumAggregateInputType
-    _min?: UserKeyMinAggregateInputType
-    _max?: UserKeyMaxAggregateInputType
-  }
-
-  export type UserKeyGroupByOutputType = {
-    key: string
-    name: string
-    userId: string | null
-    roleId: number
-    _count: UserKeyCountAggregateOutputType | null
-    _avg: UserKeyAvgAggregateOutputType | null
-    _sum: UserKeySumAggregateOutputType | null
-    _min: UserKeyMinAggregateOutputType | null
-    _max: UserKeyMaxAggregateOutputType | null
-  }
-
-  type GetUserKeyGroupByPayload<T extends UserKeyGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<UserKeyGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof UserKeyGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], UserKeyGroupByOutputType[P]>
-            : GetScalarType<T[P], UserKeyGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type UserKeySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    key?: boolean
-    name?: boolean
-    userId?: boolean
-    roleId?: boolean
-    role?: boolean | RolesDefaultArgs<ExtArgs>
-    user?: boolean | UserKey$userArgs<ExtArgs>
-  }, ExtArgs["result"]["userKey"]>
-
-  export type UserKeySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    key?: boolean
-    name?: boolean
-    userId?: boolean
-    roleId?: boolean
-    role?: boolean | RolesDefaultArgs<ExtArgs>
-    user?: boolean | UserKey$userArgs<ExtArgs>
-  }, ExtArgs["result"]["userKey"]>
-
-  export type UserKeySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    key?: boolean
-    name?: boolean
-    userId?: boolean
-    roleId?: boolean
-    role?: boolean | RolesDefaultArgs<ExtArgs>
-    user?: boolean | UserKey$userArgs<ExtArgs>
-  }, ExtArgs["result"]["userKey"]>
-
-  export type UserKeySelectScalar = {
-    key?: boolean
-    name?: boolean
-    userId?: boolean
-    roleId?: boolean
-  }
-
-  export type UserKeyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"key" | "name" | "userId" | "roleId", ExtArgs["result"]["userKey"]>
-  export type UserKeyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    role?: boolean | RolesDefaultArgs<ExtArgs>
-    user?: boolean | UserKey$userArgs<ExtArgs>
-  }
-  export type UserKeyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    role?: boolean | RolesDefaultArgs<ExtArgs>
-    user?: boolean | UserKey$userArgs<ExtArgs>
-  }
-  export type UserKeyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    role?: boolean | RolesDefaultArgs<ExtArgs>
-    user?: boolean | UserKey$userArgs<ExtArgs>
-  }
-
-  export type $UserKeyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "UserKey"
-    objects: {
-      role: Prisma.$RolesPayload<ExtArgs>
-      user: Prisma.$UserPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      key: string
-      name: string
-      userId: string | null
-      roleId: number
-    }, ExtArgs["result"]["userKey"]>
-    composites: {}
-  }
-
-  type UserKeyGetPayload<S extends boolean | null | undefined | UserKeyDefaultArgs> = $Result.GetResult<Prisma.$UserKeyPayload, S>
-
-  type UserKeyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<UserKeyFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: UserKeyCountAggregateInputType | true
-    }
-
-  export interface UserKeyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserKey'], meta: { name: 'UserKey' } }
-    /**
-     * Find zero or one UserKey that matches the filter.
-     * @param {UserKeyFindUniqueArgs} args - Arguments to find a UserKey
-     * @example
-     * // Get one UserKey
-     * const userKey = await prisma.userKey.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends UserKeyFindUniqueArgs>(args: SelectSubset<T, UserKeyFindUniqueArgs<ExtArgs>>): Prisma__UserKeyClient<$Result.GetResult<Prisma.$UserKeyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one UserKey that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {UserKeyFindUniqueOrThrowArgs} args - Arguments to find a UserKey
-     * @example
-     * // Get one UserKey
-     * const userKey = await prisma.userKey.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends UserKeyFindUniqueOrThrowArgs>(args: SelectSubset<T, UserKeyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserKeyClient<$Result.GetResult<Prisma.$UserKeyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first UserKey that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserKeyFindFirstArgs} args - Arguments to find a UserKey
-     * @example
-     * // Get one UserKey
-     * const userKey = await prisma.userKey.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends UserKeyFindFirstArgs>(args?: SelectSubset<T, UserKeyFindFirstArgs<ExtArgs>>): Prisma__UserKeyClient<$Result.GetResult<Prisma.$UserKeyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first UserKey that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserKeyFindFirstOrThrowArgs} args - Arguments to find a UserKey
-     * @example
-     * // Get one UserKey
-     * const userKey = await prisma.userKey.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends UserKeyFindFirstOrThrowArgs>(args?: SelectSubset<T, UserKeyFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserKeyClient<$Result.GetResult<Prisma.$UserKeyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more UserKeys that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserKeyFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all UserKeys
-     * const userKeys = await prisma.userKey.findMany()
-     * 
-     * // Get first 10 UserKeys
-     * const userKeys = await prisma.userKey.findMany({ take: 10 })
-     * 
-     * // Only select the `key`
-     * const userKeyWithKeyOnly = await prisma.userKey.findMany({ select: { key: true } })
-     * 
-     */
-    findMany<T extends UserKeyFindManyArgs>(args?: SelectSubset<T, UserKeyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a UserKey.
-     * @param {UserKeyCreateArgs} args - Arguments to create a UserKey.
-     * @example
-     * // Create one UserKey
-     * const UserKey = await prisma.userKey.create({
-     *   data: {
-     *     // ... data to create a UserKey
-     *   }
-     * })
-     * 
-     */
-    create<T extends UserKeyCreateArgs>(args: SelectSubset<T, UserKeyCreateArgs<ExtArgs>>): Prisma__UserKeyClient<$Result.GetResult<Prisma.$UserKeyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many UserKeys.
-     * @param {UserKeyCreateManyArgs} args - Arguments to create many UserKeys.
-     * @example
-     * // Create many UserKeys
-     * const userKey = await prisma.userKey.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends UserKeyCreateManyArgs>(args?: SelectSubset<T, UserKeyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many UserKeys and returns the data saved in the database.
-     * @param {UserKeyCreateManyAndReturnArgs} args - Arguments to create many UserKeys.
-     * @example
-     * // Create many UserKeys
-     * const userKey = await prisma.userKey.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many UserKeys and only return the `key`
-     * const userKeyWithKeyOnly = await prisma.userKey.createManyAndReturn({
-     *   select: { key: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends UserKeyCreateManyAndReturnArgs>(args?: SelectSubset<T, UserKeyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserKeyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a UserKey.
-     * @param {UserKeyDeleteArgs} args - Arguments to delete one UserKey.
-     * @example
-     * // Delete one UserKey
-     * const UserKey = await prisma.userKey.delete({
-     *   where: {
-     *     // ... filter to delete one UserKey
-     *   }
-     * })
-     * 
-     */
-    delete<T extends UserKeyDeleteArgs>(args: SelectSubset<T, UserKeyDeleteArgs<ExtArgs>>): Prisma__UserKeyClient<$Result.GetResult<Prisma.$UserKeyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one UserKey.
-     * @param {UserKeyUpdateArgs} args - Arguments to update one UserKey.
-     * @example
-     * // Update one UserKey
-     * const userKey = await prisma.userKey.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends UserKeyUpdateArgs>(args: SelectSubset<T, UserKeyUpdateArgs<ExtArgs>>): Prisma__UserKeyClient<$Result.GetResult<Prisma.$UserKeyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more UserKeys.
-     * @param {UserKeyDeleteManyArgs} args - Arguments to filter UserKeys to delete.
-     * @example
-     * // Delete a few UserKeys
-     * const { count } = await prisma.userKey.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends UserKeyDeleteManyArgs>(args?: SelectSubset<T, UserKeyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more UserKeys.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserKeyUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many UserKeys
-     * const userKey = await prisma.userKey.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends UserKeyUpdateManyArgs>(args: SelectSubset<T, UserKeyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more UserKeys and returns the data updated in the database.
-     * @param {UserKeyUpdateManyAndReturnArgs} args - Arguments to update many UserKeys.
-     * @example
-     * // Update many UserKeys
-     * const userKey = await prisma.userKey.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more UserKeys and only return the `key`
-     * const userKeyWithKeyOnly = await prisma.userKey.updateManyAndReturn({
-     *   select: { key: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends UserKeyUpdateManyAndReturnArgs>(args: SelectSubset<T, UserKeyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserKeyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one UserKey.
-     * @param {UserKeyUpsertArgs} args - Arguments to update or create a UserKey.
-     * @example
-     * // Update or create a UserKey
-     * const userKey = await prisma.userKey.upsert({
-     *   create: {
-     *     // ... data to create a UserKey
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the UserKey we want to update
-     *   }
-     * })
-     */
-    upsert<T extends UserKeyUpsertArgs>(args: SelectSubset<T, UserKeyUpsertArgs<ExtArgs>>): Prisma__UserKeyClient<$Result.GetResult<Prisma.$UserKeyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of UserKeys.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserKeyCountArgs} args - Arguments to filter UserKeys to count.
-     * @example
-     * // Count the number of UserKeys
-     * const count = await prisma.userKey.count({
-     *   where: {
-     *     // ... the filter for the UserKeys we want to count
-     *   }
-     * })
-    **/
-    count<T extends UserKeyCountArgs>(
-      args?: Subset<T, UserKeyCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], UserKeyCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a UserKey.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserKeyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends UserKeyAggregateArgs>(args: Subset<T, UserKeyAggregateArgs>): Prisma.PrismaPromise<GetUserKeyAggregateType<T>>
-
-    /**
-     * Group by UserKey.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserKeyGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends UserKeyGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: UserKeyGroupByArgs['orderBy'] }
-        : { orderBy?: UserKeyGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, UserKeyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserKeyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the UserKey model
-   */
-  readonly fields: UserKeyFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for UserKey.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__UserKeyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    role<T extends RolesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RolesDefaultArgs<ExtArgs>>): Prisma__RolesClient<$Result.GetResult<Prisma.$RolesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    user<T extends UserKey$userArgs<ExtArgs> = {}>(args?: Subset<T, UserKey$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the UserKey model
-   */
-  interface UserKeyFieldRefs {
-    readonly key: FieldRef<"UserKey", 'String'>
-    readonly name: FieldRef<"UserKey", 'String'>
-    readonly userId: FieldRef<"UserKey", 'String'>
-    readonly roleId: FieldRef<"UserKey", 'Int'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * UserKey findUnique
-   */
-  export type UserKeyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserKey
-     */
-    select?: UserKeySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserKey
-     */
-    omit?: UserKeyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserKeyInclude<ExtArgs> | null
-    /**
-     * Filter, which UserKey to fetch.
-     */
-    where: UserKeyWhereUniqueInput
-  }
-
-  /**
-   * UserKey findUniqueOrThrow
-   */
-  export type UserKeyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserKey
-     */
-    select?: UserKeySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserKey
-     */
-    omit?: UserKeyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserKeyInclude<ExtArgs> | null
-    /**
-     * Filter, which UserKey to fetch.
-     */
-    where: UserKeyWhereUniqueInput
-  }
-
-  /**
-   * UserKey findFirst
-   */
-  export type UserKeyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserKey
-     */
-    select?: UserKeySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserKey
-     */
-    omit?: UserKeyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserKeyInclude<ExtArgs> | null
-    /**
-     * Filter, which UserKey to fetch.
-     */
-    where?: UserKeyWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of UserKeys to fetch.
-     */
-    orderBy?: UserKeyOrderByWithRelationInput | UserKeyOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for UserKeys.
-     */
-    cursor?: UserKeyWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` UserKeys from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` UserKeys.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of UserKeys.
-     */
-    distinct?: UserKeyScalarFieldEnum | UserKeyScalarFieldEnum[]
-  }
-
-  /**
-   * UserKey findFirstOrThrow
-   */
-  export type UserKeyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserKey
-     */
-    select?: UserKeySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserKey
-     */
-    omit?: UserKeyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserKeyInclude<ExtArgs> | null
-    /**
-     * Filter, which UserKey to fetch.
-     */
-    where?: UserKeyWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of UserKeys to fetch.
-     */
-    orderBy?: UserKeyOrderByWithRelationInput | UserKeyOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for UserKeys.
-     */
-    cursor?: UserKeyWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` UserKeys from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` UserKeys.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of UserKeys.
-     */
-    distinct?: UserKeyScalarFieldEnum | UserKeyScalarFieldEnum[]
-  }
-
-  /**
-   * UserKey findMany
-   */
-  export type UserKeyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserKey
-     */
-    select?: UserKeySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserKey
-     */
-    omit?: UserKeyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserKeyInclude<ExtArgs> | null
-    /**
-     * Filter, which UserKeys to fetch.
-     */
-    where?: UserKeyWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of UserKeys to fetch.
-     */
-    orderBy?: UserKeyOrderByWithRelationInput | UserKeyOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing UserKeys.
-     */
-    cursor?: UserKeyWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` UserKeys from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` UserKeys.
-     */
-    skip?: number
-    distinct?: UserKeyScalarFieldEnum | UserKeyScalarFieldEnum[]
-  }
-
-  /**
-   * UserKey create
-   */
-  export type UserKeyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserKey
-     */
-    select?: UserKeySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserKey
-     */
-    omit?: UserKeyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserKeyInclude<ExtArgs> | null
-    /**
-     * The data needed to create a UserKey.
-     */
-    data: XOR<UserKeyCreateInput, UserKeyUncheckedCreateInput>
-  }
-
-  /**
-   * UserKey createMany
-   */
-  export type UserKeyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many UserKeys.
-     */
-    data: UserKeyCreateManyInput | UserKeyCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * UserKey createManyAndReturn
-   */
-  export type UserKeyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserKey
-     */
-    select?: UserKeySelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserKey
-     */
-    omit?: UserKeyOmit<ExtArgs> | null
-    /**
-     * The data used to create many UserKeys.
-     */
-    data: UserKeyCreateManyInput | UserKeyCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserKeyIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * UserKey update
-   */
-  export type UserKeyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserKey
-     */
-    select?: UserKeySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserKey
-     */
-    omit?: UserKeyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserKeyInclude<ExtArgs> | null
-    /**
-     * The data needed to update a UserKey.
-     */
-    data: XOR<UserKeyUpdateInput, UserKeyUncheckedUpdateInput>
-    /**
-     * Choose, which UserKey to update.
-     */
-    where: UserKeyWhereUniqueInput
-  }
-
-  /**
-   * UserKey updateMany
-   */
-  export type UserKeyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update UserKeys.
-     */
-    data: XOR<UserKeyUpdateManyMutationInput, UserKeyUncheckedUpdateManyInput>
-    /**
-     * Filter which UserKeys to update
-     */
-    where?: UserKeyWhereInput
-    /**
-     * Limit how many UserKeys to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * UserKey updateManyAndReturn
-   */
-  export type UserKeyUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserKey
-     */
-    select?: UserKeySelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserKey
-     */
-    omit?: UserKeyOmit<ExtArgs> | null
-    /**
-     * The data used to update UserKeys.
-     */
-    data: XOR<UserKeyUpdateManyMutationInput, UserKeyUncheckedUpdateManyInput>
-    /**
-     * Filter which UserKeys to update
-     */
-    where?: UserKeyWhereInput
-    /**
-     * Limit how many UserKeys to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserKeyIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * UserKey upsert
-   */
-  export type UserKeyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserKey
-     */
-    select?: UserKeySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserKey
-     */
-    omit?: UserKeyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserKeyInclude<ExtArgs> | null
-    /**
-     * The filter to search for the UserKey to update in case it exists.
-     */
-    where: UserKeyWhereUniqueInput
-    /**
-     * In case the UserKey found by the `where` argument doesn't exist, create a new UserKey with this data.
-     */
-    create: XOR<UserKeyCreateInput, UserKeyUncheckedCreateInput>
-    /**
-     * In case the UserKey was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<UserKeyUpdateInput, UserKeyUncheckedUpdateInput>
-  }
-
-  /**
-   * UserKey delete
-   */
-  export type UserKeyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserKey
-     */
-    select?: UserKeySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserKey
-     */
-    omit?: UserKeyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserKeyInclude<ExtArgs> | null
-    /**
-     * Filter which UserKey to delete.
-     */
-    where: UserKeyWhereUniqueInput
-  }
-
-  /**
-   * UserKey deleteMany
-   */
-  export type UserKeyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which UserKeys to delete
-     */
-    where?: UserKeyWhereInput
-    /**
-     * Limit how many UserKeys to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * UserKey.user
-   */
-  export type UserKey$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-  }
-
-  /**
-   * UserKey without action
-   */
-  export type UserKeyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserKey
-     */
-    select?: UserKeySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserKey
-     */
-    omit?: UserKeyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserKeyInclude<ExtArgs> | null
   }
 
 
@@ -32323,7 +29792,6 @@ export namespace Prisma {
   export type RolesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    userKeys?: boolean | Roles$userKeysArgs<ExtArgs>
     UserRoles?: boolean | Roles$UserRolesArgs<ExtArgs>
     _count?: boolean | RolesCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["roles"]>
@@ -32345,7 +29813,6 @@ export namespace Prisma {
 
   export type RolesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["roles"]>
   export type RolesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    userKeys?: boolean | Roles$userKeysArgs<ExtArgs>
     UserRoles?: boolean | Roles$UserRolesArgs<ExtArgs>
     _count?: boolean | RolesCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -32355,7 +29822,6 @@ export namespace Prisma {
   export type $RolesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Roles"
     objects: {
-      userKeys: Prisma.$UserKeyPayload<ExtArgs>[]
       UserRoles: Prisma.$UserRolesPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -32755,7 +30221,6 @@ export namespace Prisma {
    */
   export interface Prisma__RolesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    userKeys<T extends Roles$userKeysArgs<ExtArgs> = {}>(args?: Subset<T, Roles$userKeysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     UserRoles<T extends Roles$UserRolesArgs<ExtArgs> = {}>(args?: Subset<T, Roles$UserRolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRolesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -33173,30 +30638,6 @@ export namespace Prisma {
      * Limit how many Roles to delete.
      */
     limit?: number
-  }
-
-  /**
-   * Roles.userKeys
-   */
-  export type Roles$userKeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserKey
-     */
-    select?: UserKeySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserKey
-     */
-    omit?: UserKeyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserKeyInclude<ExtArgs> | null
-    where?: UserKeyWhereInput
-    orderBy?: UserKeyOrderByWithRelationInput | UserKeyOrderByWithRelationInput[]
-    cursor?: UserKeyWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: UserKeyScalarFieldEnum | UserKeyScalarFieldEnum[]
   }
 
   /**
@@ -37901,25 +35342,6 @@ export namespace Prisma {
   export type PostBlockScalarFieldEnum = (typeof PostBlockScalarFieldEnum)[keyof typeof PostBlockScalarFieldEnum]
 
 
-  export const AccountScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    type: 'type',
-    provider: 'provider',
-    providerAccountId: 'providerAccountId',
-    refresh_token: 'refresh_token',
-    access_token: 'access_token',
-    expires_at: 'expires_at',
-    token_type: 'token_type',
-    scope: 'scope',
-    id_token: 'id_token',
-    session_state: 'session_state',
-    refresh_token_expires_in: 'refresh_token_expires_in'
-  };
-
-  export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
-
-
   export const SessionScalarFieldEnum: {
     id: 'id',
     sessionToken: 'sessionToken',
@@ -37939,7 +35361,9 @@ export namespace Prisma {
     secret: 'secret',
     firstName: 'firstName',
     lastName: 'lastName',
-    discordHandle: 'discordHandle'
+    discordHandle: 'discordHandle',
+    key: 'key',
+    created: 'created'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -37952,16 +35376,6 @@ export namespace Prisma {
   };
 
   export type VerificationTokenScalarFieldEnum = (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum]
-
-
-  export const UserKeyScalarFieldEnum: {
-    key: 'key',
-    name: 'name',
-    userId: 'userId',
-    roleId: 'roleId'
-  };
-
-  export type UserKeyScalarFieldEnum = (typeof UserKeyScalarFieldEnum)[keyof typeof UserKeyScalarFieldEnum]
 
 
   export const UserSocialScalarFieldEnum: {
@@ -39370,104 +36784,6 @@ export namespace Prisma {
     position?: IntWithAggregatesFilter<"PostBlock"> | number
   }
 
-  export type AccountWhereInput = {
-    AND?: AccountWhereInput | AccountWhereInput[]
-    OR?: AccountWhereInput[]
-    NOT?: AccountWhereInput | AccountWhereInput[]
-    id?: StringFilter<"Account"> | string
-    userId?: StringFilter<"Account"> | string
-    type?: StringFilter<"Account"> | string
-    provider?: StringFilter<"Account"> | string
-    providerAccountId?: StringFilter<"Account"> | string
-    refresh_token?: StringNullableFilter<"Account"> | string | null
-    access_token?: StringNullableFilter<"Account"> | string | null
-    expires_at?: IntNullableFilter<"Account"> | number | null
-    token_type?: StringNullableFilter<"Account"> | string | null
-    scope?: StringNullableFilter<"Account"> | string | null
-    id_token?: StringNullableFilter<"Account"> | string | null
-    session_state?: StringNullableFilter<"Account"> | string | null
-    refresh_token_expires_in?: IntNullableFilter<"Account"> | number | null
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }
-
-  export type AccountOrderByWithRelationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    type?: SortOrder
-    provider?: SortOrder
-    providerAccountId?: SortOrder
-    refresh_token?: SortOrderInput | SortOrder
-    access_token?: SortOrderInput | SortOrder
-    expires_at?: SortOrderInput | SortOrder
-    token_type?: SortOrderInput | SortOrder
-    scope?: SortOrderInput | SortOrder
-    id_token?: SortOrderInput | SortOrder
-    session_state?: SortOrderInput | SortOrder
-    refresh_token_expires_in?: SortOrderInput | SortOrder
-    user?: UserOrderByWithRelationInput
-  }
-
-  export type AccountWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    provider_providerAccountId?: AccountProviderProviderAccountIdCompoundUniqueInput
-    AND?: AccountWhereInput | AccountWhereInput[]
-    OR?: AccountWhereInput[]
-    NOT?: AccountWhereInput | AccountWhereInput[]
-    userId?: StringFilter<"Account"> | string
-    type?: StringFilter<"Account"> | string
-    provider?: StringFilter<"Account"> | string
-    providerAccountId?: StringFilter<"Account"> | string
-    refresh_token?: StringNullableFilter<"Account"> | string | null
-    access_token?: StringNullableFilter<"Account"> | string | null
-    expires_at?: IntNullableFilter<"Account"> | number | null
-    token_type?: StringNullableFilter<"Account"> | string | null
-    scope?: StringNullableFilter<"Account"> | string | null
-    id_token?: StringNullableFilter<"Account"> | string | null
-    session_state?: StringNullableFilter<"Account"> | string | null
-    refresh_token_expires_in?: IntNullableFilter<"Account"> | number | null
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "provider_providerAccountId">
-
-  export type AccountOrderByWithAggregationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    type?: SortOrder
-    provider?: SortOrder
-    providerAccountId?: SortOrder
-    refresh_token?: SortOrderInput | SortOrder
-    access_token?: SortOrderInput | SortOrder
-    expires_at?: SortOrderInput | SortOrder
-    token_type?: SortOrderInput | SortOrder
-    scope?: SortOrderInput | SortOrder
-    id_token?: SortOrderInput | SortOrder
-    session_state?: SortOrderInput | SortOrder
-    refresh_token_expires_in?: SortOrderInput | SortOrder
-    _count?: AccountCountOrderByAggregateInput
-    _avg?: AccountAvgOrderByAggregateInput
-    _max?: AccountMaxOrderByAggregateInput
-    _min?: AccountMinOrderByAggregateInput
-    _sum?: AccountSumOrderByAggregateInput
-  }
-
-  export type AccountScalarWhereWithAggregatesInput = {
-    AND?: AccountScalarWhereWithAggregatesInput | AccountScalarWhereWithAggregatesInput[]
-    OR?: AccountScalarWhereWithAggregatesInput[]
-    NOT?: AccountScalarWhereWithAggregatesInput | AccountScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Account"> | string
-    userId?: StringWithAggregatesFilter<"Account"> | string
-    type?: StringWithAggregatesFilter<"Account"> | string
-    provider?: StringWithAggregatesFilter<"Account"> | string
-    providerAccountId?: StringWithAggregatesFilter<"Account"> | string
-    refresh_token?: StringNullableWithAggregatesFilter<"Account"> | string | null
-    access_token?: StringNullableWithAggregatesFilter<"Account"> | string | null
-    expires_at?: IntNullableWithAggregatesFilter<"Account"> | number | null
-    token_type?: StringNullableWithAggregatesFilter<"Account"> | string | null
-    scope?: StringNullableWithAggregatesFilter<"Account"> | string | null
-    id_token?: StringNullableWithAggregatesFilter<"Account"> | string | null
-    session_state?: StringNullableWithAggregatesFilter<"Account"> | string | null
-    refresh_token_expires_in?: IntNullableWithAggregatesFilter<"Account"> | number | null
-  }
-
   export type SessionWhereInput = {
     AND?: SessionWhereInput | SessionWhereInput[]
     OR?: SessionWhereInput[]
@@ -39527,15 +36843,15 @@ export namespace Prisma {
     email?: StringNullableFilter<"User"> | string | null
     emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
     image?: StringNullableFilter<"User"> | string | null
-    secret?: StringFilter<"User"> | string
+    secret?: StringNullableFilter<"User"> | string | null
     firstName?: StringNullableFilter<"User"> | string | null
     lastName?: StringNullableFilter<"User"> | string | null
     discordHandle?: StringNullableFilter<"User"> | string | null
-    accounts?: AccountListRelationFilter
+    key?: StringNullableFilter<"User"> | string | null
+    created?: DateTimeFilter<"User"> | Date | string
     postVersionHistory?: PostVersionHistoryListRelationFilter
     posts?: PostListRelationFilter
     sessions?: SessionListRelationFilter
-    key?: XOR<UserKeyNullableScalarRelationFilter, UserKeyWhereInput> | null
     roles?: UserRolesListRelationFilter
     socials?: UserSocialListRelationFilter
     Pathway?: PathwayListRelationFilter
@@ -39548,15 +36864,15 @@ export namespace Prisma {
     email?: SortOrderInput | SortOrder
     emailVerified?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
-    secret?: SortOrder
+    secret?: SortOrderInput | SortOrder
     firstName?: SortOrderInput | SortOrder
     lastName?: SortOrderInput | SortOrder
     discordHandle?: SortOrderInput | SortOrder
-    accounts?: AccountOrderByRelationAggregateInput
+    key?: SortOrderInput | SortOrder
+    created?: SortOrder
     postVersionHistory?: PostVersionHistoryOrderByRelationAggregateInput
     posts?: PostOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
-    key?: UserKeyOrderByWithRelationInput
     roles?: UserRolesOrderByRelationAggregateInput
     socials?: UserSocialOrderByRelationAggregateInput
     Pathway?: PathwayOrderByRelationAggregateInput
@@ -39572,15 +36888,15 @@ export namespace Prisma {
     email?: StringNullableFilter<"User"> | string | null
     emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
     image?: StringNullableFilter<"User"> | string | null
-    secret?: StringFilter<"User"> | string
+    secret?: StringNullableFilter<"User"> | string | null
     firstName?: StringNullableFilter<"User"> | string | null
     lastName?: StringNullableFilter<"User"> | string | null
     discordHandle?: StringNullableFilter<"User"> | string | null
-    accounts?: AccountListRelationFilter
+    key?: StringNullableFilter<"User"> | string | null
+    created?: DateTimeFilter<"User"> | Date | string
     postVersionHistory?: PostVersionHistoryListRelationFilter
     posts?: PostListRelationFilter
     sessions?: SessionListRelationFilter
-    key?: XOR<UserKeyNullableScalarRelationFilter, UserKeyWhereInput> | null
     roles?: UserRolesListRelationFilter
     socials?: UserSocialListRelationFilter
     Pathway?: PathwayListRelationFilter
@@ -39593,10 +36909,12 @@ export namespace Prisma {
     email?: SortOrderInput | SortOrder
     emailVerified?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
-    secret?: SortOrder
+    secret?: SortOrderInput | SortOrder
     firstName?: SortOrderInput | SortOrder
     lastName?: SortOrderInput | SortOrder
     discordHandle?: SortOrderInput | SortOrder
+    key?: SortOrderInput | SortOrder
+    created?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -39611,10 +36929,12 @@ export namespace Prisma {
     email?: StringNullableWithAggregatesFilter<"User"> | string | null
     emailVerified?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
-    secret?: StringWithAggregatesFilter<"User"> | string
+    secret?: StringNullableWithAggregatesFilter<"User"> | string | null
     firstName?: StringNullableWithAggregatesFilter<"User"> | string | null
     lastName?: StringNullableWithAggregatesFilter<"User"> | string | null
     discordHandle?: StringNullableWithAggregatesFilter<"User"> | string | null
+    key?: StringNullableWithAggregatesFilter<"User"> | string | null
+    created?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
   export type VerificationTokenWhereInput = {
@@ -39658,61 +36978,6 @@ export namespace Prisma {
     identifier?: StringWithAggregatesFilter<"VerificationToken"> | string
     token?: StringWithAggregatesFilter<"VerificationToken"> | string
     expires?: DateTimeWithAggregatesFilter<"VerificationToken"> | Date | string
-  }
-
-  export type UserKeyWhereInput = {
-    AND?: UserKeyWhereInput | UserKeyWhereInput[]
-    OR?: UserKeyWhereInput[]
-    NOT?: UserKeyWhereInput | UserKeyWhereInput[]
-    key?: StringFilter<"UserKey"> | string
-    name?: StringFilter<"UserKey"> | string
-    userId?: StringNullableFilter<"UserKey"> | string | null
-    roleId?: IntFilter<"UserKey"> | number
-    role?: XOR<RolesScalarRelationFilter, RolesWhereInput>
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-  }
-
-  export type UserKeyOrderByWithRelationInput = {
-    key?: SortOrder
-    name?: SortOrder
-    userId?: SortOrderInput | SortOrder
-    roleId?: SortOrder
-    role?: RolesOrderByWithRelationInput
-    user?: UserOrderByWithRelationInput
-  }
-
-  export type UserKeyWhereUniqueInput = Prisma.AtLeast<{
-    key?: string
-    userId?: string
-    AND?: UserKeyWhereInput | UserKeyWhereInput[]
-    OR?: UserKeyWhereInput[]
-    NOT?: UserKeyWhereInput | UserKeyWhereInput[]
-    name?: StringFilter<"UserKey"> | string
-    roleId?: IntFilter<"UserKey"> | number
-    role?: XOR<RolesScalarRelationFilter, RolesWhereInput>
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-  }, "key" | "userId">
-
-  export type UserKeyOrderByWithAggregationInput = {
-    key?: SortOrder
-    name?: SortOrder
-    userId?: SortOrderInput | SortOrder
-    roleId?: SortOrder
-    _count?: UserKeyCountOrderByAggregateInput
-    _avg?: UserKeyAvgOrderByAggregateInput
-    _max?: UserKeyMaxOrderByAggregateInput
-    _min?: UserKeyMinOrderByAggregateInput
-    _sum?: UserKeySumOrderByAggregateInput
-  }
-
-  export type UserKeyScalarWhereWithAggregatesInput = {
-    AND?: UserKeyScalarWhereWithAggregatesInput | UserKeyScalarWhereWithAggregatesInput[]
-    OR?: UserKeyScalarWhereWithAggregatesInput[]
-    NOT?: UserKeyScalarWhereWithAggregatesInput | UserKeyScalarWhereWithAggregatesInput[]
-    key?: StringWithAggregatesFilter<"UserKey"> | string
-    name?: StringWithAggregatesFilter<"UserKey"> | string
-    userId?: StringNullableWithAggregatesFilter<"UserKey"> | string | null
-    roleId?: IntWithAggregatesFilter<"UserKey"> | number
   }
 
   export type UserSocialWhereInput = {
@@ -39816,14 +37081,12 @@ export namespace Prisma {
     NOT?: RolesWhereInput | RolesWhereInput[]
     id?: IntFilter<"Roles"> | number
     name?: StringFilter<"Roles"> | string
-    userKeys?: UserKeyListRelationFilter
     UserRoles?: UserRolesListRelationFilter
   }
 
   export type RolesOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    userKeys?: UserKeyOrderByRelationAggregateInput
     UserRoles?: UserRolesOrderByRelationAggregateInput
   }
 
@@ -39833,7 +37096,6 @@ export namespace Prisma {
     AND?: RolesWhereInput | RolesWhereInput[]
     OR?: RolesWhereInput[]
     NOT?: RolesWhereInput | RolesWhereInput[]
-    userKeys?: UserKeyListRelationFilter
     UserRoles?: UserRolesListRelationFilter
   }, "id" | "name">
 
@@ -41193,117 +38455,6 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
   }
 
-  export type AccountCreateInput = {
-    id?: string
-    type: string
-    provider: string
-    providerAccountId: string
-    refresh_token?: string | null
-    access_token?: string | null
-    expires_at?: number | null
-    token_type?: string | null
-    scope?: string | null
-    id_token?: string | null
-    session_state?: string | null
-    refresh_token_expires_in?: number | null
-    user: UserCreateNestedOneWithoutAccountsInput
-  }
-
-  export type AccountUncheckedCreateInput = {
-    id?: string
-    userId: string
-    type: string
-    provider: string
-    providerAccountId: string
-    refresh_token?: string | null
-    access_token?: string | null
-    expires_at?: number | null
-    token_type?: string | null
-    scope?: string | null
-    id_token?: string | null
-    session_state?: string | null
-    refresh_token_expires_in?: number | null
-  }
-
-  export type AccountUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    provider?: StringFieldUpdateOperationsInput | string
-    providerAccountId?: StringFieldUpdateOperationsInput | string
-    refresh_token?: NullableStringFieldUpdateOperationsInput | string | null
-    access_token?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: NullableIntFieldUpdateOperationsInput | number | null
-    token_type?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: NullableStringFieldUpdateOperationsInput | string | null
-    id_token?: NullableStringFieldUpdateOperationsInput | string | null
-    session_state?: NullableStringFieldUpdateOperationsInput | string | null
-    refresh_token_expires_in?: NullableIntFieldUpdateOperationsInput | number | null
-    user?: UserUpdateOneRequiredWithoutAccountsNestedInput
-  }
-
-  export type AccountUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    provider?: StringFieldUpdateOperationsInput | string
-    providerAccountId?: StringFieldUpdateOperationsInput | string
-    refresh_token?: NullableStringFieldUpdateOperationsInput | string | null
-    access_token?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: NullableIntFieldUpdateOperationsInput | number | null
-    token_type?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: NullableStringFieldUpdateOperationsInput | string | null
-    id_token?: NullableStringFieldUpdateOperationsInput | string | null
-    session_state?: NullableStringFieldUpdateOperationsInput | string | null
-    refresh_token_expires_in?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type AccountCreateManyInput = {
-    id?: string
-    userId: string
-    type: string
-    provider: string
-    providerAccountId: string
-    refresh_token?: string | null
-    access_token?: string | null
-    expires_at?: number | null
-    token_type?: string | null
-    scope?: string | null
-    id_token?: string | null
-    session_state?: string | null
-    refresh_token_expires_in?: number | null
-  }
-
-  export type AccountUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    provider?: StringFieldUpdateOperationsInput | string
-    providerAccountId?: StringFieldUpdateOperationsInput | string
-    refresh_token?: NullableStringFieldUpdateOperationsInput | string | null
-    access_token?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: NullableIntFieldUpdateOperationsInput | number | null
-    token_type?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: NullableStringFieldUpdateOperationsInput | string | null
-    id_token?: NullableStringFieldUpdateOperationsInput | string | null
-    session_state?: NullableStringFieldUpdateOperationsInput | string | null
-    refresh_token_expires_in?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type AccountUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    provider?: StringFieldUpdateOperationsInput | string
-    providerAccountId?: StringFieldUpdateOperationsInput | string
-    refresh_token?: NullableStringFieldUpdateOperationsInput | string | null
-    access_token?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: NullableIntFieldUpdateOperationsInput | number | null
-    token_type?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: NullableStringFieldUpdateOperationsInput | string | null
-    id_token?: NullableStringFieldUpdateOperationsInput | string | null
-    session_state?: NullableStringFieldUpdateOperationsInput | string | null
-    refresh_token_expires_in?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
   export type SessionCreateInput = {
     id?: string
     sessionToken: string
@@ -41358,15 +38509,15 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
-    secret: string
+    secret?: string | null
     firstName?: string | null
     lastName?: string | null
     discordHandle?: string | null
-    accounts?: AccountCreateNestedManyWithoutUserInput
+    key?: string | null
+    created?: Date | string
     postVersionHistory?: PostVersionHistoryCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutAuthorInput
     sessions?: SessionCreateNestedManyWithoutUserInput
-    key?: UserKeyCreateNestedOneWithoutUserInput
     roles?: UserRolesCreateNestedManyWithoutUserInput
     socials?: UserSocialCreateNestedManyWithoutUserInput
     Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
@@ -41379,15 +38530,15 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
-    secret: string
+    secret?: string | null
     firstName?: string | null
     lastName?: string | null
     discordHandle?: string | null
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    key?: string | null
+    created?: Date | string
     postVersionHistory?: PostVersionHistoryUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    key?: UserKeyUncheckedCreateNestedOneWithoutUserInput
     roles?: UserRolesUncheckedCreateNestedManyWithoutUserInput
     socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
     Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
@@ -41400,15 +38551,15 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    secret?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
-    accounts?: AccountUpdateManyWithoutUserNestedInput
+    key?: NullableStringFieldUpdateOperationsInput | string | null
+    created?: DateTimeFieldUpdateOperationsInput | Date | string
     postVersionHistory?: PostVersionHistoryUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
-    key?: UserKeyUpdateOneWithoutUserNestedInput
     roles?: UserRolesUpdateManyWithoutUserNestedInput
     socials?: UserSocialUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
@@ -41421,15 +38572,15 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    secret?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    key?: NullableStringFieldUpdateOperationsInput | string | null
+    created?: DateTimeFieldUpdateOperationsInput | Date | string
     postVersionHistory?: PostVersionHistoryUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    key?: UserKeyUncheckedUpdateOneWithoutUserNestedInput
     roles?: UserRolesUncheckedUpdateManyWithoutUserNestedInput
     socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
@@ -41442,10 +38593,12 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
-    secret: string
+    secret?: string | null
     firstName?: string | null
     lastName?: string | null
     discordHandle?: string | null
+    key?: string | null
+    created?: Date | string
   }
 
   export type UserUpdateManyMutationInput = {
@@ -41454,10 +38607,12 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    secret?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
+    key?: NullableStringFieldUpdateOperationsInput | string | null
+    created?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -41466,10 +38621,12 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    secret?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
+    key?: NullableStringFieldUpdateOperationsInput | string | null
+    created?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type VerificationTokenCreateInput = {
@@ -41512,53 +38669,6 @@ export namespace Prisma {
     identifier?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserKeyCreateInput = {
-    key?: string
-    name: string
-    role: RolesCreateNestedOneWithoutUserKeysInput
-    user?: UserCreateNestedOneWithoutKeyInput
-  }
-
-  export type UserKeyUncheckedCreateInput = {
-    key?: string
-    name: string
-    userId?: string | null
-    roleId: number
-  }
-
-  export type UserKeyUpdateInput = {
-    key?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    role?: RolesUpdateOneRequiredWithoutUserKeysNestedInput
-    user?: UserUpdateOneWithoutKeyNestedInput
-  }
-
-  export type UserKeyUncheckedUpdateInput = {
-    key?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    roleId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type UserKeyCreateManyInput = {
-    key?: string
-    name: string
-    userId?: string | null
-    roleId: number
-  }
-
-  export type UserKeyUpdateManyMutationInput = {
-    key?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type UserKeyUncheckedUpdateManyInput = {
-    key?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    roleId?: IntFieldUpdateOperationsInput | number
   }
 
   export type UserSocialCreateInput = {
@@ -41637,27 +38747,23 @@ export namespace Prisma {
 
   export type RolesCreateInput = {
     name: string
-    userKeys?: UserKeyCreateNestedManyWithoutRoleInput
     UserRoles?: UserRolesCreateNestedManyWithoutRoleInput
   }
 
   export type RolesUncheckedCreateInput = {
     id?: number
     name: string
-    userKeys?: UserKeyUncheckedCreateNestedManyWithoutRoleInput
     UserRoles?: UserRolesUncheckedCreateNestedManyWithoutRoleInput
   }
 
   export type RolesUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
-    userKeys?: UserKeyUpdateManyWithoutRoleNestedInput
     UserRoles?: UserRolesUpdateManyWithoutRoleNestedInput
   }
 
   export type RolesUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    userKeys?: UserKeyUncheckedUpdateManyWithoutRoleNestedInput
     UserRoles?: UserRolesUncheckedUpdateManyWithoutRoleNestedInput
   }
 
@@ -42977,69 +40083,6 @@ export namespace Prisma {
     position?: SortOrder
   }
 
-  export type AccountProviderProviderAccountIdCompoundUniqueInput = {
-    provider: string
-    providerAccountId: string
-  }
-
-  export type AccountCountOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    type?: SortOrder
-    provider?: SortOrder
-    providerAccountId?: SortOrder
-    refresh_token?: SortOrder
-    access_token?: SortOrder
-    expires_at?: SortOrder
-    token_type?: SortOrder
-    scope?: SortOrder
-    id_token?: SortOrder
-    session_state?: SortOrder
-    refresh_token_expires_in?: SortOrder
-  }
-
-  export type AccountAvgOrderByAggregateInput = {
-    expires_at?: SortOrder
-    refresh_token_expires_in?: SortOrder
-  }
-
-  export type AccountMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    type?: SortOrder
-    provider?: SortOrder
-    providerAccountId?: SortOrder
-    refresh_token?: SortOrder
-    access_token?: SortOrder
-    expires_at?: SortOrder
-    token_type?: SortOrder
-    scope?: SortOrder
-    id_token?: SortOrder
-    session_state?: SortOrder
-    refresh_token_expires_in?: SortOrder
-  }
-
-  export type AccountMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    type?: SortOrder
-    provider?: SortOrder
-    providerAccountId?: SortOrder
-    refresh_token?: SortOrder
-    access_token?: SortOrder
-    expires_at?: SortOrder
-    token_type?: SortOrder
-    scope?: SortOrder
-    id_token?: SortOrder
-    session_state?: SortOrder
-    refresh_token_expires_in?: SortOrder
-  }
-
-  export type AccountSumOrderByAggregateInput = {
-    expires_at?: SortOrder
-    refresh_token_expires_in?: SortOrder
-  }
-
   export type SessionCountOrderByAggregateInput = {
     id?: SortOrder
     sessionToken?: SortOrder
@@ -43072,12 +40115,6 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type AccountListRelationFilter = {
-    every?: AccountWhereInput
-    some?: AccountWhereInput
-    none?: AccountWhereInput
-  }
-
   export type PostListRelationFilter = {
     every?: PostWhereInput
     some?: PostWhereInput
@@ -43088,11 +40125,6 @@ export namespace Prisma {
     every?: SessionWhereInput
     some?: SessionWhereInput
     none?: SessionWhereInput
-  }
-
-  export type UserKeyNullableScalarRelationFilter = {
-    is?: UserKeyWhereInput | null
-    isNot?: UserKeyWhereInput | null
   }
 
   export type UserRolesListRelationFilter = {
@@ -43111,10 +40143,6 @@ export namespace Prisma {
     every?: ResourceWhereInput
     some?: ResourceWhereInput
     none?: ResourceWhereInput
-  }
-
-  export type AccountOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type PostOrderByRelationAggregateInput = {
@@ -43147,6 +40175,8 @@ export namespace Prisma {
     firstName?: SortOrder
     lastName?: SortOrder
     discordHandle?: SortOrder
+    key?: SortOrder
+    created?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -43159,6 +40189,8 @@ export namespace Prisma {
     firstName?: SortOrder
     lastName?: SortOrder
     discordHandle?: SortOrder
+    key?: SortOrder
+    created?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -43171,6 +40203,8 @@ export namespace Prisma {
     firstName?: SortOrder
     lastName?: SortOrder
     discordHandle?: SortOrder
+    key?: SortOrder
+    created?: SortOrder
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -43210,45 +40244,6 @@ export namespace Prisma {
     expires?: SortOrder
   }
 
-  export type RolesScalarRelationFilter = {
-    is?: RolesWhereInput
-    isNot?: RolesWhereInput
-  }
-
-  export type UserNullableScalarRelationFilter = {
-    is?: UserWhereInput | null
-    isNot?: UserWhereInput | null
-  }
-
-  export type UserKeyCountOrderByAggregateInput = {
-    key?: SortOrder
-    name?: SortOrder
-    userId?: SortOrder
-    roleId?: SortOrder
-  }
-
-  export type UserKeyAvgOrderByAggregateInput = {
-    roleId?: SortOrder
-  }
-
-  export type UserKeyMaxOrderByAggregateInput = {
-    key?: SortOrder
-    name?: SortOrder
-    userId?: SortOrder
-    roleId?: SortOrder
-  }
-
-  export type UserKeyMinOrderByAggregateInput = {
-    key?: SortOrder
-    name?: SortOrder
-    userId?: SortOrder
-    roleId?: SortOrder
-  }
-
-  export type UserKeySumOrderByAggregateInput = {
-    roleId?: SortOrder
-  }
-
   export type SocialScalarRelationFilter = {
     is?: SocialWhereInput
     isNot?: SocialWhereInput
@@ -43277,6 +40272,11 @@ export namespace Prisma {
     socialCode?: SortOrder
   }
 
+  export type RolesScalarRelationFilter = {
+    is?: RolesWhereInput
+    isNot?: RolesWhereInput
+  }
+
   export type UserRolesUserIdRoleIdCompoundUniqueInput = {
     userId: string
     roleId: number
@@ -43303,16 +40303,6 @@ export namespace Prisma {
 
   export type UserRolesSumOrderByAggregateInput = {
     roleId?: SortOrder
-  }
-
-  export type UserKeyListRelationFilter = {
-    every?: UserKeyWhereInput
-    some?: UserKeyWhereInput
-    none?: UserKeyWhereInput
-  }
-
-  export type UserKeyOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type RolesCountOrderByAggregateInput = {
@@ -44784,20 +41774,6 @@ export namespace Prisma {
     update?: XOR<XOR<PostUpdateToOneWithWhereWithoutPostBlockInput, PostUpdateWithoutPostBlockInput>, PostUncheckedUpdateWithoutPostBlockInput>
   }
 
-  export type UserCreateNestedOneWithoutAccountsInput = {
-    create?: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAccountsInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
-    create?: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAccountsInput
-    upsert?: UserUpsertWithoutAccountsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAccountsInput, UserUpdateWithoutAccountsInput>, UserUncheckedUpdateWithoutAccountsInput>
-  }
-
   export type UserCreateNestedOneWithoutSessionsInput = {
     create?: XOR<UserCreateWithoutSessionsInput, UserUncheckedCreateWithoutSessionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutSessionsInput
@@ -44810,13 +41786,6 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutSessionsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSessionsInput, UserUpdateWithoutSessionsInput>, UserUncheckedUpdateWithoutSessionsInput>
-  }
-
-  export type AccountCreateNestedManyWithoutUserInput = {
-    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
-    createMany?: AccountCreateManyUserInputEnvelope
-    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
   }
 
   export type PostVersionHistoryCreateNestedManyWithoutUserInput = {
@@ -44838,12 +41807,6 @@ export namespace Prisma {
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
     createMany?: SessionCreateManyUserInputEnvelope
     connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-  }
-
-  export type UserKeyCreateNestedOneWithoutUserInput = {
-    create?: XOR<UserKeyCreateWithoutUserInput, UserKeyUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserKeyCreateOrConnectWithoutUserInput
-    connect?: UserKeyWhereUniqueInput
   }
 
   export type UserRolesCreateNestedManyWithoutUserInput = {
@@ -44874,13 +41837,6 @@ export namespace Prisma {
     connect?: ResourceWhereUniqueInput | ResourceWhereUniqueInput[]
   }
 
-  export type AccountUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
-    createMany?: AccountCreateManyUserInputEnvelope
-    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-  }
-
   export type PostVersionHistoryUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<PostVersionHistoryCreateWithoutUserInput, PostVersionHistoryUncheckedCreateWithoutUserInput> | PostVersionHistoryCreateWithoutUserInput[] | PostVersionHistoryUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PostVersionHistoryCreateOrConnectWithoutUserInput | PostVersionHistoryCreateOrConnectWithoutUserInput[]
@@ -44900,12 +41856,6 @@ export namespace Prisma {
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
     createMany?: SessionCreateManyUserInputEnvelope
     connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-  }
-
-  export type UserKeyUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<UserKeyCreateWithoutUserInput, UserKeyUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserKeyCreateOrConnectWithoutUserInput
-    connect?: UserKeyWhereUniqueInput
   }
 
   export type UserRolesUncheckedCreateNestedManyWithoutUserInput = {
@@ -44938,20 +41888,6 @@ export namespace Prisma {
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
-  }
-
-  export type AccountUpdateManyWithoutUserNestedInput = {
-    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
-    upsert?: AccountUpsertWithWhereUniqueWithoutUserInput | AccountUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: AccountCreateManyUserInputEnvelope
-    set?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    disconnect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    delete?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
   export type PostVersionHistoryUpdateManyWithoutUserNestedInput = {
@@ -44994,16 +41930,6 @@ export namespace Prisma {
     update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
-  }
-
-  export type UserKeyUpdateOneWithoutUserNestedInput = {
-    create?: XOR<UserKeyCreateWithoutUserInput, UserKeyUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserKeyCreateOrConnectWithoutUserInput
-    upsert?: UserKeyUpsertWithoutUserInput
-    disconnect?: UserKeyWhereInput | boolean
-    delete?: UserKeyWhereInput | boolean
-    connect?: UserKeyWhereUniqueInput
-    update?: XOR<XOR<UserKeyUpdateToOneWithWhereWithoutUserInput, UserKeyUpdateWithoutUserInput>, UserKeyUncheckedUpdateWithoutUserInput>
   }
 
   export type UserRolesUpdateManyWithoutUserNestedInput = {
@@ -45062,20 +41988,6 @@ export namespace Prisma {
     deleteMany?: ResourceScalarWhereInput | ResourceScalarWhereInput[]
   }
 
-  export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
-    upsert?: AccountUpsertWithWhereUniqueWithoutUserInput | AccountUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: AccountCreateManyUserInputEnvelope
-    set?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    disconnect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    delete?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
-  }
-
   export type PostVersionHistoryUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<PostVersionHistoryCreateWithoutUserInput, PostVersionHistoryUncheckedCreateWithoutUserInput> | PostVersionHistoryCreateWithoutUserInput[] | PostVersionHistoryUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PostVersionHistoryCreateOrConnectWithoutUserInput | PostVersionHistoryCreateOrConnectWithoutUserInput[]
@@ -45116,16 +42028,6 @@ export namespace Prisma {
     update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
-  }
-
-  export type UserKeyUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<UserKeyCreateWithoutUserInput, UserKeyUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserKeyCreateOrConnectWithoutUserInput
-    upsert?: UserKeyUpsertWithoutUserInput
-    disconnect?: UserKeyWhereInput | boolean
-    delete?: UserKeyWhereInput | boolean
-    connect?: UserKeyWhereUniqueInput
-    update?: XOR<XOR<UserKeyUpdateToOneWithWhereWithoutUserInput, UserKeyUpdateWithoutUserInput>, UserKeyUncheckedUpdateWithoutUserInput>
   }
 
   export type UserRolesUncheckedUpdateManyWithoutUserNestedInput = {
@@ -45184,36 +42086,6 @@ export namespace Prisma {
     deleteMany?: ResourceScalarWhereInput | ResourceScalarWhereInput[]
   }
 
-  export type RolesCreateNestedOneWithoutUserKeysInput = {
-    create?: XOR<RolesCreateWithoutUserKeysInput, RolesUncheckedCreateWithoutUserKeysInput>
-    connectOrCreate?: RolesCreateOrConnectWithoutUserKeysInput
-    connect?: RolesWhereUniqueInput
-  }
-
-  export type UserCreateNestedOneWithoutKeyInput = {
-    create?: XOR<UserCreateWithoutKeyInput, UserUncheckedCreateWithoutKeyInput>
-    connectOrCreate?: UserCreateOrConnectWithoutKeyInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type RolesUpdateOneRequiredWithoutUserKeysNestedInput = {
-    create?: XOR<RolesCreateWithoutUserKeysInput, RolesUncheckedCreateWithoutUserKeysInput>
-    connectOrCreate?: RolesCreateOrConnectWithoutUserKeysInput
-    upsert?: RolesUpsertWithoutUserKeysInput
-    connect?: RolesWhereUniqueInput
-    update?: XOR<XOR<RolesUpdateToOneWithWhereWithoutUserKeysInput, RolesUpdateWithoutUserKeysInput>, RolesUncheckedUpdateWithoutUserKeysInput>
-  }
-
-  export type UserUpdateOneWithoutKeyNestedInput = {
-    create?: XOR<UserCreateWithoutKeyInput, UserUncheckedCreateWithoutKeyInput>
-    connectOrCreate?: UserCreateOrConnectWithoutKeyInput
-    upsert?: UserUpsertWithoutKeyInput
-    disconnect?: UserWhereInput | boolean
-    delete?: UserWhereInput | boolean
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutKeyInput, UserUpdateWithoutKeyInput>, UserUncheckedUpdateWithoutKeyInput>
-  }
-
   export type SocialCreateNestedOneWithoutUsersInput = {
     create?: XOR<SocialCreateWithoutUsersInput, SocialUncheckedCreateWithoutUsersInput>
     connectOrCreate?: SocialCreateOrConnectWithoutUsersInput
@@ -45270,13 +42142,6 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRolesInput, UserUpdateWithoutRolesInput>, UserUncheckedUpdateWithoutRolesInput>
   }
 
-  export type UserKeyCreateNestedManyWithoutRoleInput = {
-    create?: XOR<UserKeyCreateWithoutRoleInput, UserKeyUncheckedCreateWithoutRoleInput> | UserKeyCreateWithoutRoleInput[] | UserKeyUncheckedCreateWithoutRoleInput[]
-    connectOrCreate?: UserKeyCreateOrConnectWithoutRoleInput | UserKeyCreateOrConnectWithoutRoleInput[]
-    createMany?: UserKeyCreateManyRoleInputEnvelope
-    connect?: UserKeyWhereUniqueInput | UserKeyWhereUniqueInput[]
-  }
-
   export type UserRolesCreateNestedManyWithoutRoleInput = {
     create?: XOR<UserRolesCreateWithoutRoleInput, UserRolesUncheckedCreateWithoutRoleInput> | UserRolesCreateWithoutRoleInput[] | UserRolesUncheckedCreateWithoutRoleInput[]
     connectOrCreate?: UserRolesCreateOrConnectWithoutRoleInput | UserRolesCreateOrConnectWithoutRoleInput[]
@@ -45284,32 +42149,11 @@ export namespace Prisma {
     connect?: UserRolesWhereUniqueInput | UserRolesWhereUniqueInput[]
   }
 
-  export type UserKeyUncheckedCreateNestedManyWithoutRoleInput = {
-    create?: XOR<UserKeyCreateWithoutRoleInput, UserKeyUncheckedCreateWithoutRoleInput> | UserKeyCreateWithoutRoleInput[] | UserKeyUncheckedCreateWithoutRoleInput[]
-    connectOrCreate?: UserKeyCreateOrConnectWithoutRoleInput | UserKeyCreateOrConnectWithoutRoleInput[]
-    createMany?: UserKeyCreateManyRoleInputEnvelope
-    connect?: UserKeyWhereUniqueInput | UserKeyWhereUniqueInput[]
-  }
-
   export type UserRolesUncheckedCreateNestedManyWithoutRoleInput = {
     create?: XOR<UserRolesCreateWithoutRoleInput, UserRolesUncheckedCreateWithoutRoleInput> | UserRolesCreateWithoutRoleInput[] | UserRolesUncheckedCreateWithoutRoleInput[]
     connectOrCreate?: UserRolesCreateOrConnectWithoutRoleInput | UserRolesCreateOrConnectWithoutRoleInput[]
     createMany?: UserRolesCreateManyRoleInputEnvelope
     connect?: UserRolesWhereUniqueInput | UserRolesWhereUniqueInput[]
-  }
-
-  export type UserKeyUpdateManyWithoutRoleNestedInput = {
-    create?: XOR<UserKeyCreateWithoutRoleInput, UserKeyUncheckedCreateWithoutRoleInput> | UserKeyCreateWithoutRoleInput[] | UserKeyUncheckedCreateWithoutRoleInput[]
-    connectOrCreate?: UserKeyCreateOrConnectWithoutRoleInput | UserKeyCreateOrConnectWithoutRoleInput[]
-    upsert?: UserKeyUpsertWithWhereUniqueWithoutRoleInput | UserKeyUpsertWithWhereUniqueWithoutRoleInput[]
-    createMany?: UserKeyCreateManyRoleInputEnvelope
-    set?: UserKeyWhereUniqueInput | UserKeyWhereUniqueInput[]
-    disconnect?: UserKeyWhereUniqueInput | UserKeyWhereUniqueInput[]
-    delete?: UserKeyWhereUniqueInput | UserKeyWhereUniqueInput[]
-    connect?: UserKeyWhereUniqueInput | UserKeyWhereUniqueInput[]
-    update?: UserKeyUpdateWithWhereUniqueWithoutRoleInput | UserKeyUpdateWithWhereUniqueWithoutRoleInput[]
-    updateMany?: UserKeyUpdateManyWithWhereWithoutRoleInput | UserKeyUpdateManyWithWhereWithoutRoleInput[]
-    deleteMany?: UserKeyScalarWhereInput | UserKeyScalarWhereInput[]
   }
 
   export type UserRolesUpdateManyWithoutRoleNestedInput = {
@@ -45324,20 +42168,6 @@ export namespace Prisma {
     update?: UserRolesUpdateWithWhereUniqueWithoutRoleInput | UserRolesUpdateWithWhereUniqueWithoutRoleInput[]
     updateMany?: UserRolesUpdateManyWithWhereWithoutRoleInput | UserRolesUpdateManyWithWhereWithoutRoleInput[]
     deleteMany?: UserRolesScalarWhereInput | UserRolesScalarWhereInput[]
-  }
-
-  export type UserKeyUncheckedUpdateManyWithoutRoleNestedInput = {
-    create?: XOR<UserKeyCreateWithoutRoleInput, UserKeyUncheckedCreateWithoutRoleInput> | UserKeyCreateWithoutRoleInput[] | UserKeyUncheckedCreateWithoutRoleInput[]
-    connectOrCreate?: UserKeyCreateOrConnectWithoutRoleInput | UserKeyCreateOrConnectWithoutRoleInput[]
-    upsert?: UserKeyUpsertWithWhereUniqueWithoutRoleInput | UserKeyUpsertWithWhereUniqueWithoutRoleInput[]
-    createMany?: UserKeyCreateManyRoleInputEnvelope
-    set?: UserKeyWhereUniqueInput | UserKeyWhereUniqueInput[]
-    disconnect?: UserKeyWhereUniqueInput | UserKeyWhereUniqueInput[]
-    delete?: UserKeyWhereUniqueInput | UserKeyWhereUniqueInput[]
-    connect?: UserKeyWhereUniqueInput | UserKeyWhereUniqueInput[]
-    update?: UserKeyUpdateWithWhereUniqueWithoutRoleInput | UserKeyUpdateWithWhereUniqueWithoutRoleInput[]
-    updateMany?: UserKeyUpdateManyWithWhereWithoutRoleInput | UserKeyUpdateManyWithWhereWithoutRoleInput[]
-    deleteMany?: UserKeyScalarWhereInput | UserKeyScalarWhereInput[]
   }
 
   export type UserRolesUncheckedUpdateManyWithoutRoleNestedInput = {
@@ -46390,15 +43220,15 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
-    secret: string
+    secret?: string | null
     firstName?: string | null
     lastName?: string | null
     discordHandle?: string | null
-    accounts?: AccountCreateNestedManyWithoutUserInput
+    key?: string | null
+    created?: Date | string
     postVersionHistory?: PostVersionHistoryCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutAuthorInput
     sessions?: SessionCreateNestedManyWithoutUserInput
-    key?: UserKeyCreateNestedOneWithoutUserInput
     roles?: UserRolesCreateNestedManyWithoutUserInput
     socials?: UserSocialCreateNestedManyWithoutUserInput
     resources?: ResourceCreateNestedManyWithoutAuthorInput
@@ -46410,15 +43240,15 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
-    secret: string
+    secret?: string | null
     firstName?: string | null
     lastName?: string | null
     discordHandle?: string | null
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    key?: string | null
+    created?: Date | string
     postVersionHistory?: PostVersionHistoryUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    key?: UserKeyUncheckedCreateNestedOneWithoutUserInput
     roles?: UserRolesUncheckedCreateNestedManyWithoutUserInput
     socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
     resources?: ResourceUncheckedCreateNestedManyWithoutAuthorInput
@@ -46594,15 +43424,15 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    secret?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
-    accounts?: AccountUpdateManyWithoutUserNestedInput
+    key?: NullableStringFieldUpdateOperationsInput | string | null
+    created?: DateTimeFieldUpdateOperationsInput | Date | string
     postVersionHistory?: PostVersionHistoryUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
-    key?: UserKeyUpdateOneWithoutUserNestedInput
     roles?: UserRolesUpdateManyWithoutUserNestedInput
     socials?: UserSocialUpdateManyWithoutUserNestedInput
     resources?: ResourceUpdateManyWithoutAuthorNestedInput
@@ -46614,15 +43444,15 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    secret?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    key?: NullableStringFieldUpdateOperationsInput | string | null
+    created?: DateTimeFieldUpdateOperationsInput | Date | string
     postVersionHistory?: PostVersionHistoryUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    key?: UserKeyUncheckedUpdateOneWithoutUserNestedInput
     roles?: UserRolesUncheckedUpdateManyWithoutUserNestedInput
     socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
     resources?: ResourceUncheckedUpdateManyWithoutAuthorNestedInput
@@ -47306,14 +44136,14 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
-    secret: string
+    secret?: string | null
     firstName?: string | null
     lastName?: string | null
     discordHandle?: string | null
-    accounts?: AccountCreateNestedManyWithoutUserInput
+    key?: string | null
+    created?: Date | string
     postVersionHistory?: PostVersionHistoryCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
-    key?: UserKeyCreateNestedOneWithoutUserInput
     roles?: UserRolesCreateNestedManyWithoutUserInput
     socials?: UserSocialCreateNestedManyWithoutUserInput
     Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
@@ -47326,14 +44156,14 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
-    secret: string
+    secret?: string | null
     firstName?: string | null
     lastName?: string | null
     discordHandle?: string | null
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    key?: string | null
+    created?: Date | string
     postVersionHistory?: PostVersionHistoryUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    key?: UserKeyUncheckedCreateNestedOneWithoutUserInput
     roles?: UserRolesUncheckedCreateNestedManyWithoutUserInput
     socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
     Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
@@ -47441,14 +44271,14 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    secret?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
-    accounts?: AccountUpdateManyWithoutUserNestedInput
+    key?: NullableStringFieldUpdateOperationsInput | string | null
+    created?: DateTimeFieldUpdateOperationsInput | Date | string
     postVersionHistory?: PostVersionHistoryUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
-    key?: UserKeyUpdateOneWithoutUserNestedInput
     roles?: UserRolesUpdateManyWithoutUserNestedInput
     socials?: UserSocialUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
@@ -47461,14 +44291,14 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    secret?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    key?: NullableStringFieldUpdateOperationsInput | string | null
+    created?: DateTimeFieldUpdateOperationsInput | Date | string
     postVersionHistory?: PostVersionHistoryUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    key?: UserKeyUncheckedUpdateOneWithoutUserNestedInput
     roles?: UserRolesUncheckedUpdateManyWithoutUserNestedInput
     socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
@@ -47963,15 +44793,15 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
-    secret: string
+    secret?: string | null
     firstName?: string | null
     lastName?: string | null
     discordHandle?: string | null
-    accounts?: AccountCreateNestedManyWithoutUserInput
+    key?: string | null
+    created?: Date | string
     postVersionHistory?: PostVersionHistoryCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutAuthorInput
     sessions?: SessionCreateNestedManyWithoutUserInput
-    key?: UserKeyCreateNestedOneWithoutUserInput
     roles?: UserRolesCreateNestedManyWithoutUserInput
     socials?: UserSocialCreateNestedManyWithoutUserInput
     Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
@@ -47983,15 +44813,15 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
-    secret: string
+    secret?: string | null
     firstName?: string | null
     lastName?: string | null
     discordHandle?: string | null
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    key?: string | null
+    created?: Date | string
     postVersionHistory?: PostVersionHistoryUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    key?: UserKeyUncheckedCreateNestedOneWithoutUserInput
     roles?: UserRolesUncheckedCreateNestedManyWithoutUserInput
     socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
     Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
@@ -48019,15 +44849,15 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    secret?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
-    accounts?: AccountUpdateManyWithoutUserNestedInput
+    key?: NullableStringFieldUpdateOperationsInput | string | null
+    created?: DateTimeFieldUpdateOperationsInput | Date | string
     postVersionHistory?: PostVersionHistoryUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
-    key?: UserKeyUpdateOneWithoutUserNestedInput
     roles?: UserRolesUpdateManyWithoutUserNestedInput
     socials?: UserSocialUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
@@ -48039,15 +44869,15 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    secret?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    key?: NullableStringFieldUpdateOperationsInput | string | null
+    created?: DateTimeFieldUpdateOperationsInput | Date | string
     postVersionHistory?: PostVersionHistoryUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    key?: UserKeyUncheckedUpdateOneWithoutUserNestedInput
     roles?: UserRolesUncheckedUpdateManyWithoutUserNestedInput
     socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
@@ -48348,116 +45178,20 @@ export namespace Prisma {
     postVersionHistories?: PostVersionHistoryUncheckedUpdateManyWithoutPostNestedInput
   }
 
-  export type UserCreateWithoutAccountsInput = {
-    id?: string
-    name: string
-    email?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    secret: string
-    firstName?: string | null
-    lastName?: string | null
-    discordHandle?: string | null
-    postVersionHistory?: PostVersionHistoryCreateNestedManyWithoutUserInput
-    posts?: PostCreateNestedManyWithoutAuthorInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    key?: UserKeyCreateNestedOneWithoutUserInput
-    roles?: UserRolesCreateNestedManyWithoutUserInput
-    socials?: UserSocialCreateNestedManyWithoutUserInput
-    Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
-    resources?: ResourceCreateNestedManyWithoutAuthorInput
-  }
-
-  export type UserUncheckedCreateWithoutAccountsInput = {
-    id?: string
-    name: string
-    email?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    secret: string
-    firstName?: string | null
-    lastName?: string | null
-    discordHandle?: string | null
-    postVersionHistory?: PostVersionHistoryUncheckedCreateNestedManyWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    key?: UserKeyUncheckedCreateNestedOneWithoutUserInput
-    roles?: UserRolesUncheckedCreateNestedManyWithoutUserInput
-    socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
-    Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
-    resources?: ResourceUncheckedCreateNestedManyWithoutAuthorInput
-  }
-
-  export type UserCreateOrConnectWithoutAccountsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
-  }
-
-  export type UserUpsertWithoutAccountsInput = {
-    update: XOR<UserUpdateWithoutAccountsInput, UserUncheckedUpdateWithoutAccountsInput>
-    create: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutAccountsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutAccountsInput, UserUncheckedUpdateWithoutAccountsInput>
-  }
-
-  export type UserUpdateWithoutAccountsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    secret?: StringFieldUpdateOperationsInput | string
-    firstName?: NullableStringFieldUpdateOperationsInput | string | null
-    lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
-    postVersionHistory?: PostVersionHistoryUpdateManyWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutAuthorNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    key?: UserKeyUpdateOneWithoutUserNestedInput
-    roles?: UserRolesUpdateManyWithoutUserNestedInput
-    socials?: UserSocialUpdateManyWithoutUserNestedInput
-    Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
-    resources?: ResourceUpdateManyWithoutAuthorNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutAccountsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    secret?: StringFieldUpdateOperationsInput | string
-    firstName?: NullableStringFieldUpdateOperationsInput | string | null
-    lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
-    postVersionHistory?: PostVersionHistoryUncheckedUpdateManyWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    key?: UserKeyUncheckedUpdateOneWithoutUserNestedInput
-    roles?: UserRolesUncheckedUpdateManyWithoutUserNestedInput
-    socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
-    Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
-    resources?: ResourceUncheckedUpdateManyWithoutAuthorNestedInput
-  }
-
   export type UserCreateWithoutSessionsInput = {
     id?: string
     name: string
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
-    secret: string
+    secret?: string | null
     firstName?: string | null
     lastName?: string | null
     discordHandle?: string | null
-    accounts?: AccountCreateNestedManyWithoutUserInput
+    key?: string | null
+    created?: Date | string
     postVersionHistory?: PostVersionHistoryCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutAuthorInput
-    key?: UserKeyCreateNestedOneWithoutUserInput
     roles?: UserRolesCreateNestedManyWithoutUserInput
     socials?: UserSocialCreateNestedManyWithoutUserInput
     Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
@@ -48470,14 +45204,14 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
-    secret: string
+    secret?: string | null
     firstName?: string | null
     lastName?: string | null
     discordHandle?: string | null
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    key?: string | null
+    created?: Date | string
     postVersionHistory?: PostVersionHistoryUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
-    key?: UserKeyUncheckedCreateNestedOneWithoutUserInput
     roles?: UserRolesUncheckedCreateNestedManyWithoutUserInput
     socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
     Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
@@ -48506,14 +45240,14 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    secret?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
-    accounts?: AccountUpdateManyWithoutUserNestedInput
+    key?: NullableStringFieldUpdateOperationsInput | string | null
+    created?: DateTimeFieldUpdateOperationsInput | Date | string
     postVersionHistory?: PostVersionHistoryUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutAuthorNestedInput
-    key?: UserKeyUpdateOneWithoutUserNestedInput
     roles?: UserRolesUpdateManyWithoutUserNestedInput
     socials?: UserSocialUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
@@ -48526,58 +45260,18 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    secret?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    key?: NullableStringFieldUpdateOperationsInput | string | null
+    created?: DateTimeFieldUpdateOperationsInput | Date | string
     postVersionHistory?: PostVersionHistoryUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
-    key?: UserKeyUncheckedUpdateOneWithoutUserNestedInput
     roles?: UserRolesUncheckedUpdateManyWithoutUserNestedInput
     socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
     resources?: ResourceUncheckedUpdateManyWithoutAuthorNestedInput
-  }
-
-  export type AccountCreateWithoutUserInput = {
-    id?: string
-    type: string
-    provider: string
-    providerAccountId: string
-    refresh_token?: string | null
-    access_token?: string | null
-    expires_at?: number | null
-    token_type?: string | null
-    scope?: string | null
-    id_token?: string | null
-    session_state?: string | null
-    refresh_token_expires_in?: number | null
-  }
-
-  export type AccountUncheckedCreateWithoutUserInput = {
-    id?: string
-    type: string
-    provider: string
-    providerAccountId: string
-    refresh_token?: string | null
-    access_token?: string | null
-    expires_at?: number | null
-    token_type?: string | null
-    scope?: string | null
-    id_token?: string | null
-    session_state?: string | null
-    refresh_token_expires_in?: number | null
-  }
-
-  export type AccountCreateOrConnectWithoutUserInput = {
-    where: AccountWhereUniqueInput
-    create: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput>
-  }
-
-  export type AccountCreateManyUserInputEnvelope = {
-    data: AccountCreateManyUserInput | AccountCreateManyUserInput[]
-    skipDuplicates?: boolean
   }
 
   export type PostVersionHistoryCreateWithoutUserInput = {
@@ -48674,23 +45368,6 @@ export namespace Prisma {
   export type SessionCreateManyUserInputEnvelope = {
     data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
     skipDuplicates?: boolean
-  }
-
-  export type UserKeyCreateWithoutUserInput = {
-    key?: string
-    name: string
-    role: RolesCreateNestedOneWithoutUserKeysInput
-  }
-
-  export type UserKeyUncheckedCreateWithoutUserInput = {
-    key?: string
-    name: string
-    roleId: number
-  }
-
-  export type UserKeyCreateOrConnectWithoutUserInput = {
-    where: UserKeyWhereUniqueInput
-    create: XOR<UserKeyCreateWithoutUserInput, UserKeyUncheckedCreateWithoutUserInput>
   }
 
   export type UserRolesCreateWithoutUserInput = {
@@ -48817,41 +45494,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type AccountUpsertWithWhereUniqueWithoutUserInput = {
-    where: AccountWhereUniqueInput
-    update: XOR<AccountUpdateWithoutUserInput, AccountUncheckedUpdateWithoutUserInput>
-    create: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput>
-  }
-
-  export type AccountUpdateWithWhereUniqueWithoutUserInput = {
-    where: AccountWhereUniqueInput
-    data: XOR<AccountUpdateWithoutUserInput, AccountUncheckedUpdateWithoutUserInput>
-  }
-
-  export type AccountUpdateManyWithWhereWithoutUserInput = {
-    where: AccountScalarWhereInput
-    data: XOR<AccountUpdateManyMutationInput, AccountUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type AccountScalarWhereInput = {
-    AND?: AccountScalarWhereInput | AccountScalarWhereInput[]
-    OR?: AccountScalarWhereInput[]
-    NOT?: AccountScalarWhereInput | AccountScalarWhereInput[]
-    id?: StringFilter<"Account"> | string
-    userId?: StringFilter<"Account"> | string
-    type?: StringFilter<"Account"> | string
-    provider?: StringFilter<"Account"> | string
-    providerAccountId?: StringFilter<"Account"> | string
-    refresh_token?: StringNullableFilter<"Account"> | string | null
-    access_token?: StringNullableFilter<"Account"> | string | null
-    expires_at?: IntNullableFilter<"Account"> | number | null
-    token_type?: StringNullableFilter<"Account"> | string | null
-    scope?: StringNullableFilter<"Account"> | string | null
-    id_token?: StringNullableFilter<"Account"> | string | null
-    session_state?: StringNullableFilter<"Account"> | string | null
-    refresh_token_expires_in?: IntNullableFilter<"Account"> | number | null
-  }
-
   export type PostVersionHistoryUpsertWithWhereUniqueWithoutUserInput = {
     where: PostVersionHistoryWhereUniqueInput
     update: XOR<PostVersionHistoryUpdateWithoutUserInput, PostVersionHistoryUncheckedUpdateWithoutUserInput>
@@ -48930,29 +45572,6 @@ export namespace Prisma {
     sessionToken?: StringFilter<"Session"> | string
     userId?: StringFilter<"Session"> | string
     expires?: DateTimeFilter<"Session"> | Date | string
-  }
-
-  export type UserKeyUpsertWithoutUserInput = {
-    update: XOR<UserKeyUpdateWithoutUserInput, UserKeyUncheckedUpdateWithoutUserInput>
-    create: XOR<UserKeyCreateWithoutUserInput, UserKeyUncheckedCreateWithoutUserInput>
-    where?: UserKeyWhereInput
-  }
-
-  export type UserKeyUpdateToOneWithWhereWithoutUserInput = {
-    where?: UserKeyWhereInput
-    data: XOR<UserKeyUpdateWithoutUserInput, UserKeyUncheckedUpdateWithoutUserInput>
-  }
-
-  export type UserKeyUpdateWithoutUserInput = {
-    key?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    role?: RolesUpdateOneRequiredWithoutUserKeysNestedInput
-  }
-
-  export type UserKeyUncheckedUpdateWithoutUserInput = {
-    key?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    roleId?: IntFieldUpdateOperationsInput | number
   }
 
   export type UserRolesUpsertWithWhereUniqueWithoutUserInput = {
@@ -49050,140 +45669,6 @@ export namespace Prisma {
     content?: StringFilter<"Resource"> | string
   }
 
-  export type RolesCreateWithoutUserKeysInput = {
-    name: string
-    UserRoles?: UserRolesCreateNestedManyWithoutRoleInput
-  }
-
-  export type RolesUncheckedCreateWithoutUserKeysInput = {
-    id?: number
-    name: string
-    UserRoles?: UserRolesUncheckedCreateNestedManyWithoutRoleInput
-  }
-
-  export type RolesCreateOrConnectWithoutUserKeysInput = {
-    where: RolesWhereUniqueInput
-    create: XOR<RolesCreateWithoutUserKeysInput, RolesUncheckedCreateWithoutUserKeysInput>
-  }
-
-  export type UserCreateWithoutKeyInput = {
-    id?: string
-    name: string
-    email?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    secret: string
-    firstName?: string | null
-    lastName?: string | null
-    discordHandle?: string | null
-    accounts?: AccountCreateNestedManyWithoutUserInput
-    postVersionHistory?: PostVersionHistoryCreateNestedManyWithoutUserInput
-    posts?: PostCreateNestedManyWithoutAuthorInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    roles?: UserRolesCreateNestedManyWithoutUserInput
-    socials?: UserSocialCreateNestedManyWithoutUserInput
-    Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
-    resources?: ResourceCreateNestedManyWithoutAuthorInput
-  }
-
-  export type UserUncheckedCreateWithoutKeyInput = {
-    id?: string
-    name: string
-    email?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    secret: string
-    firstName?: string | null
-    lastName?: string | null
-    discordHandle?: string | null
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    postVersionHistory?: PostVersionHistoryUncheckedCreateNestedManyWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    roles?: UserRolesUncheckedCreateNestedManyWithoutUserInput
-    socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
-    Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
-    resources?: ResourceUncheckedCreateNestedManyWithoutAuthorInput
-  }
-
-  export type UserCreateOrConnectWithoutKeyInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutKeyInput, UserUncheckedCreateWithoutKeyInput>
-  }
-
-  export type RolesUpsertWithoutUserKeysInput = {
-    update: XOR<RolesUpdateWithoutUserKeysInput, RolesUncheckedUpdateWithoutUserKeysInput>
-    create: XOR<RolesCreateWithoutUserKeysInput, RolesUncheckedCreateWithoutUserKeysInput>
-    where?: RolesWhereInput
-  }
-
-  export type RolesUpdateToOneWithWhereWithoutUserKeysInput = {
-    where?: RolesWhereInput
-    data: XOR<RolesUpdateWithoutUserKeysInput, RolesUncheckedUpdateWithoutUserKeysInput>
-  }
-
-  export type RolesUpdateWithoutUserKeysInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    UserRoles?: UserRolesUpdateManyWithoutRoleNestedInput
-  }
-
-  export type RolesUncheckedUpdateWithoutUserKeysInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    UserRoles?: UserRolesUncheckedUpdateManyWithoutRoleNestedInput
-  }
-
-  export type UserUpsertWithoutKeyInput = {
-    update: XOR<UserUpdateWithoutKeyInput, UserUncheckedUpdateWithoutKeyInput>
-    create: XOR<UserCreateWithoutKeyInput, UserUncheckedCreateWithoutKeyInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutKeyInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutKeyInput, UserUncheckedUpdateWithoutKeyInput>
-  }
-
-  export type UserUpdateWithoutKeyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    secret?: StringFieldUpdateOperationsInput | string
-    firstName?: NullableStringFieldUpdateOperationsInput | string | null
-    lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
-    accounts?: AccountUpdateManyWithoutUserNestedInput
-    postVersionHistory?: PostVersionHistoryUpdateManyWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutAuthorNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    roles?: UserRolesUpdateManyWithoutUserNestedInput
-    socials?: UserSocialUpdateManyWithoutUserNestedInput
-    Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
-    resources?: ResourceUpdateManyWithoutAuthorNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutKeyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    secret?: StringFieldUpdateOperationsInput | string
-    firstName?: NullableStringFieldUpdateOperationsInput | string | null
-    lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    postVersionHistory?: PostVersionHistoryUncheckedUpdateManyWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    roles?: UserRolesUncheckedUpdateManyWithoutUserNestedInput
-    socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
-    Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
-    resources?: ResourceUncheckedUpdateManyWithoutAuthorNestedInput
-  }
-
   export type SocialCreateWithoutUsersInput = {
     name: string
     url: string
@@ -49217,15 +45702,15 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
-    secret: string
+    secret?: string | null
     firstName?: string | null
     lastName?: string | null
     discordHandle?: string | null
-    accounts?: AccountCreateNestedManyWithoutUserInput
+    key?: string | null
+    created?: Date | string
     postVersionHistory?: PostVersionHistoryCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutAuthorInput
     sessions?: SessionCreateNestedManyWithoutUserInput
-    key?: UserKeyCreateNestedOneWithoutUserInput
     roles?: UserRolesCreateNestedManyWithoutUserInput
     Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
     resources?: ResourceCreateNestedManyWithoutAuthorInput
@@ -49237,15 +45722,15 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
-    secret: string
+    secret?: string | null
     firstName?: string | null
     lastName?: string | null
     discordHandle?: string | null
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    key?: string | null
+    created?: Date | string
     postVersionHistory?: PostVersionHistoryUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    key?: UserKeyUncheckedCreateNestedOneWithoutUserInput
     roles?: UserRolesUncheckedCreateNestedManyWithoutUserInput
     Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
     resources?: ResourceUncheckedCreateNestedManyWithoutAuthorInput
@@ -49306,15 +45791,15 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    secret?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
-    accounts?: AccountUpdateManyWithoutUserNestedInput
+    key?: NullableStringFieldUpdateOperationsInput | string | null
+    created?: DateTimeFieldUpdateOperationsInput | Date | string
     postVersionHistory?: PostVersionHistoryUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
-    key?: UserKeyUpdateOneWithoutUserNestedInput
     roles?: UserRolesUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
     resources?: ResourceUpdateManyWithoutAuthorNestedInput
@@ -49326,15 +45811,15 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    secret?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    key?: NullableStringFieldUpdateOperationsInput | string | null
+    created?: DateTimeFieldUpdateOperationsInput | Date | string
     postVersionHistory?: PostVersionHistoryUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    key?: UserKeyUncheckedUpdateOneWithoutUserNestedInput
     roles?: UserRolesUncheckedUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
     resources?: ResourceUncheckedUpdateManyWithoutAuthorNestedInput
@@ -49342,13 +45827,11 @@ export namespace Prisma {
 
   export type RolesCreateWithoutUserRolesInput = {
     name: string
-    userKeys?: UserKeyCreateNestedManyWithoutRoleInput
   }
 
   export type RolesUncheckedCreateWithoutUserRolesInput = {
     id?: number
     name: string
-    userKeys?: UserKeyUncheckedCreateNestedManyWithoutRoleInput
   }
 
   export type RolesCreateOrConnectWithoutUserRolesInput = {
@@ -49362,15 +45845,15 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
-    secret: string
+    secret?: string | null
     firstName?: string | null
     lastName?: string | null
     discordHandle?: string | null
-    accounts?: AccountCreateNestedManyWithoutUserInput
+    key?: string | null
+    created?: Date | string
     postVersionHistory?: PostVersionHistoryCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutAuthorInput
     sessions?: SessionCreateNestedManyWithoutUserInput
-    key?: UserKeyCreateNestedOneWithoutUserInput
     socials?: UserSocialCreateNestedManyWithoutUserInput
     Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
     resources?: ResourceCreateNestedManyWithoutAuthorInput
@@ -49382,15 +45865,15 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
-    secret: string
+    secret?: string | null
     firstName?: string | null
     lastName?: string | null
     discordHandle?: string | null
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    key?: string | null
+    created?: Date | string
     postVersionHistory?: PostVersionHistoryUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    key?: UserKeyUncheckedCreateNestedOneWithoutUserInput
     socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
     Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
     resources?: ResourceUncheckedCreateNestedManyWithoutAuthorInput
@@ -49414,13 +45897,11 @@ export namespace Prisma {
 
   export type RolesUpdateWithoutUserRolesInput = {
     name?: StringFieldUpdateOperationsInput | string
-    userKeys?: UserKeyUpdateManyWithoutRoleNestedInput
   }
 
   export type RolesUncheckedUpdateWithoutUserRolesInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    userKeys?: UserKeyUncheckedUpdateManyWithoutRoleNestedInput
   }
 
   export type UserUpsertWithoutRolesInput = {
@@ -49440,15 +45921,15 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    secret?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
-    accounts?: AccountUpdateManyWithoutUserNestedInput
+    key?: NullableStringFieldUpdateOperationsInput | string | null
+    created?: DateTimeFieldUpdateOperationsInput | Date | string
     postVersionHistory?: PostVersionHistoryUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
-    key?: UserKeyUpdateOneWithoutUserNestedInput
     socials?: UserSocialUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
     resources?: ResourceUpdateManyWithoutAuthorNestedInput
@@ -49460,40 +45941,18 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    secret?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    key?: NullableStringFieldUpdateOperationsInput | string | null
+    created?: DateTimeFieldUpdateOperationsInput | Date | string
     postVersionHistory?: PostVersionHistoryUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    key?: UserKeyUncheckedUpdateOneWithoutUserNestedInput
     socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
     resources?: ResourceUncheckedUpdateManyWithoutAuthorNestedInput
-  }
-
-  export type UserKeyCreateWithoutRoleInput = {
-    key?: string
-    name: string
-    user?: UserCreateNestedOneWithoutKeyInput
-  }
-
-  export type UserKeyUncheckedCreateWithoutRoleInput = {
-    key?: string
-    name: string
-    userId?: string | null
-  }
-
-  export type UserKeyCreateOrConnectWithoutRoleInput = {
-    where: UserKeyWhereUniqueInput
-    create: XOR<UserKeyCreateWithoutRoleInput, UserKeyUncheckedCreateWithoutRoleInput>
-  }
-
-  export type UserKeyCreateManyRoleInputEnvelope = {
-    data: UserKeyCreateManyRoleInput | UserKeyCreateManyRoleInput[]
-    skipDuplicates?: boolean
   }
 
   export type UserRolesCreateWithoutRoleInput = {
@@ -49512,32 +45971,6 @@ export namespace Prisma {
   export type UserRolesCreateManyRoleInputEnvelope = {
     data: UserRolesCreateManyRoleInput | UserRolesCreateManyRoleInput[]
     skipDuplicates?: boolean
-  }
-
-  export type UserKeyUpsertWithWhereUniqueWithoutRoleInput = {
-    where: UserKeyWhereUniqueInput
-    update: XOR<UserKeyUpdateWithoutRoleInput, UserKeyUncheckedUpdateWithoutRoleInput>
-    create: XOR<UserKeyCreateWithoutRoleInput, UserKeyUncheckedCreateWithoutRoleInput>
-  }
-
-  export type UserKeyUpdateWithWhereUniqueWithoutRoleInput = {
-    where: UserKeyWhereUniqueInput
-    data: XOR<UserKeyUpdateWithoutRoleInput, UserKeyUncheckedUpdateWithoutRoleInput>
-  }
-
-  export type UserKeyUpdateManyWithWhereWithoutRoleInput = {
-    where: UserKeyScalarWhereInput
-    data: XOR<UserKeyUpdateManyMutationInput, UserKeyUncheckedUpdateManyWithoutRoleInput>
-  }
-
-  export type UserKeyScalarWhereInput = {
-    AND?: UserKeyScalarWhereInput | UserKeyScalarWhereInput[]
-    OR?: UserKeyScalarWhereInput[]
-    NOT?: UserKeyScalarWhereInput | UserKeyScalarWhereInput[]
-    key?: StringFilter<"UserKey"> | string
-    name?: StringFilter<"UserKey"> | string
-    userId?: StringNullableFilter<"UserKey"> | string | null
-    roleId?: IntFilter<"UserKey"> | number
   }
 
   export type UserRolesUpsertWithWhereUniqueWithoutRoleInput = {
@@ -49644,14 +46077,14 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
-    secret: string
+    secret?: string | null
     firstName?: string | null
     lastName?: string | null
     discordHandle?: string | null
-    accounts?: AccountCreateNestedManyWithoutUserInput
+    key?: string | null
+    created?: Date | string
     posts?: PostCreateNestedManyWithoutAuthorInput
     sessions?: SessionCreateNestedManyWithoutUserInput
-    key?: UserKeyCreateNestedOneWithoutUserInput
     roles?: UserRolesCreateNestedManyWithoutUserInput
     socials?: UserSocialCreateNestedManyWithoutUserInput
     Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
@@ -49664,14 +46097,14 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
-    secret: string
+    secret?: string | null
     firstName?: string | null
     lastName?: string | null
     discordHandle?: string | null
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    key?: string | null
+    created?: Date | string
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    key?: UserKeyUncheckedCreateNestedOneWithoutUserInput
     roles?: UserRolesUncheckedCreateNestedManyWithoutUserInput
     socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
     Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
@@ -49752,14 +46185,14 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    secret?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
-    accounts?: AccountUpdateManyWithoutUserNestedInput
+    key?: NullableStringFieldUpdateOperationsInput | string | null
+    created?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
-    key?: UserKeyUpdateOneWithoutUserNestedInput
     roles?: UserRolesUpdateManyWithoutUserNestedInput
     socials?: UserSocialUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
@@ -49772,14 +46205,14 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    secret?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    key?: NullableStringFieldUpdateOperationsInput | string | null
+    created?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    key?: UserKeyUncheckedUpdateOneWithoutUserNestedInput
     roles?: UserRolesUncheckedUpdateManyWithoutUserNestedInput
     socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
@@ -50693,21 +47126,6 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
   }
 
-  export type AccountCreateManyUserInput = {
-    id?: string
-    type: string
-    provider: string
-    providerAccountId: string
-    refresh_token?: string | null
-    access_token?: string | null
-    expires_at?: number | null
-    token_type?: string | null
-    scope?: string | null
-    id_token?: string | null
-    session_state?: string | null
-    refresh_token_expires_in?: number | null
-  }
-
   export type PostVersionHistoryCreateManyUserInput = {
     id?: number
     postId: number
@@ -50776,51 +47194,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     content: string
-  }
-
-  export type AccountUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    provider?: StringFieldUpdateOperationsInput | string
-    providerAccountId?: StringFieldUpdateOperationsInput | string
-    refresh_token?: NullableStringFieldUpdateOperationsInput | string | null
-    access_token?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: NullableIntFieldUpdateOperationsInput | number | null
-    token_type?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: NullableStringFieldUpdateOperationsInput | string | null
-    id_token?: NullableStringFieldUpdateOperationsInput | string | null
-    session_state?: NullableStringFieldUpdateOperationsInput | string | null
-    refresh_token_expires_in?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type AccountUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    provider?: StringFieldUpdateOperationsInput | string
-    providerAccountId?: StringFieldUpdateOperationsInput | string
-    refresh_token?: NullableStringFieldUpdateOperationsInput | string | null
-    access_token?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: NullableIntFieldUpdateOperationsInput | number | null
-    token_type?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: NullableStringFieldUpdateOperationsInput | string | null
-    id_token?: NullableStringFieldUpdateOperationsInput | string | null
-    session_state?: NullableStringFieldUpdateOperationsInput | string | null
-    refresh_token_expires_in?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type AccountUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    provider?: StringFieldUpdateOperationsInput | string
-    providerAccountId?: StringFieldUpdateOperationsInput | string
-    refresh_token?: NullableStringFieldUpdateOperationsInput | string | null
-    access_token?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: NullableIntFieldUpdateOperationsInput | number | null
-    token_type?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: NullableStringFieldUpdateOperationsInput | string | null
-    id_token?: NullableStringFieldUpdateOperationsInput | string | null
-    session_state?: NullableStringFieldUpdateOperationsInput | string | null
-    refresh_token_expires_in?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PostVersionHistoryUpdateWithoutUserInput = {
@@ -51043,32 +47416,8 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
   }
 
-  export type UserKeyCreateManyRoleInput = {
-    key?: string
-    name: string
-    userId?: string | null
-  }
-
   export type UserRolesCreateManyRoleInput = {
     userId: string
-  }
-
-  export type UserKeyUpdateWithoutRoleInput = {
-    key?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    user?: UserUpdateOneWithoutKeyNestedInput
-  }
-
-  export type UserKeyUncheckedUpdateWithoutRoleInput = {
-    key?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type UserKeyUncheckedUpdateManyWithoutRoleInput = {
-    key?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserRolesUpdateWithoutRoleInput = {

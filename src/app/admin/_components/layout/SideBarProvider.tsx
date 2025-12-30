@@ -1,0 +1,52 @@
+'use client'
+import { usePathname } from 'next/navigation'
+import { type ReactNode, useCallback, useMemo, useState } from 'react'
+import { api } from '~/lib'
+import { CurrentPathContext } from './SidebarContext'
+import type { NavReducerAction } from './types'
+
+export const SideBarProvider = ({ children }: { children: ReactNode }) => {
+	const currentPath = usePathname()
+	const [open, setOpen] = useState(false)
+	const [pin, setPin] = useState(true)
+
+	const userRole = api.user.getUsersRoles.useQuery() ?? {
+		roles: [],
+	}
+
+	const sidebarContextAction = useCallback((action: NavReducerAction<'SET' | 'TOGGLE'>) => {
+		if (action.type === 'TOGGLE') {
+			if (action.key === 'open') {
+				setOpen(prev => !prev)
+			} else if (action.key === 'pin') {
+				setPin(prev => !prev)
+			}
+		} else if (action.type === 'SET') {
+			if (action.key === 'open') {
+				setOpen(action.payload)
+			} else if (action.key === 'pin') {
+				setPin(action.payload)
+			}
+		}
+	}, [])
+
+	const sidebarContextValue = useMemo(
+		() => ({
+			open,
+			pin,
+			set: sidebarContextAction,
+			userRole: userRole.data?.roles,
+		}),
+		[open, pin, sidebarContextAction, userRole.data]
+	)
+
+	return (
+		<CurrentPathContext.Provider
+			value={{
+				currentPath,
+				...sidebarContextValue,
+			}}>
+			{children}
+		</CurrentPathContext.Provider>
+	)
+}

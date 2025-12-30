@@ -1,4 +1,3 @@
-export * from './callouts'
 export * from './getSourceRaw'
 export * from './MDXProvider'
 export * from './plugins'

@@ -1,5 +1,3 @@
-import type { ReactNode } from 'react'
-
 export type FieldElProps = {
 	label: string
 	labelProps?: Props<'label'>

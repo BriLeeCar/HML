@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, type MotionProps } from 'motion/react'
-import type { MouseEvent, RefObject } from 'react'
+
 import { Button, Checkbox, Icon, Label, SectionHeading, SubSection } from '~/components'
 import { cn } from '~/lib/cn'
 import { filterCbs, masonryReducer } from '..'
@@ -164,7 +164,7 @@ const ClearButton = ({ dispatchReducer }: { dispatchReducer: tReducerDispatch })
 	<Button
 		variant='default'
 		className='mt-4 flex items-center justify-center gap-2'
-		onClick={(e: MouseEvent<HTMLButtonElement>) => {
+		onClick={(e: EMouse<HTMLButtonElement>) => {
 			handleClear(e, dispatchReducer)
 		}}>
 		<Icon
@@ -175,7 +175,7 @@ const ClearButton = ({ dispatchReducer }: { dispatchReducer: tReducerDispatch })
 		Clear all filters
 	</Button>
 )
-const handleClear = (e: MouseEvent<HTMLButtonElement>, dispatchReducer: tReducerDispatch) => {
+const handleClear = (e: EMouse<HTMLButtonElement>, dispatchReducer: tReducerDispatch) => {
 	if (e.currentTarget.form) {
 		const checkBoxes = e.currentTarget.form.querySelectorAll('input[type="checkbox"]')
 		checkBoxes.forEach(checkbox => {

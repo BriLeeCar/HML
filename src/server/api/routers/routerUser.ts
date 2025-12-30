@@ -1,6 +1,7 @@
 import { z } from 'zod/v4'
 import { hash, verify } from '~/lib/index'
 import { generateKey } from '~/lib/security/keyGen'
+import type { User } from '~/server/prisma/generated'
 import { createTRPCRouter, protectedProcedure, publicProcedure } from '.'
 import type { tNACTX, tProtectedCTX, tPublicCTX } from './types'
 type CTXProps<T extends undefined | 'protected' | null = null> = {
@@ -58,10 +59,9 @@ const createUserKey = async ({
 }: CTXProps<undefined> & {
 	input: {
 		name: string
-		roleId: number
 	}
 }) => {
-	return await ctx.db.userKey.create(queryCreateUserKey(input.name, input.roleId))
+	return await ctx.db.user.create(queryCreateUserKey(input.name))
 }
 
 const getUsers = async ({
@@ -70,16 +70,14 @@ const getUsers = async ({
 }: CTXProps & {
 	input?: number
 }) => {
-	return await ctx.db.userKey.findMany({
+	return await ctx.db.user.findMany({
 		skip: input ? (input - 1) * 10 : 0,
 		orderBy: {
-			role: {
-				name: 'asc',
-			},
+			key: 'desc',
 		},
 		take: 10,
 		include: {
-			user: true,
+			roles: true,
 		},
 	})
 }
@@ -87,9 +85,7 @@ const getUsers = async ({
 export const UserRouter = createTRPCRouter({
 	current: publicProcedure.query(getCurrent),
 	getUserById: publicProcedure.input(z.string().or(z.undefined())).query(getUserById),
-	createUserKey: protectedProcedure
-		.input(z.object({ name: z.string(), roleId: z.number().gt(0, 'Invalid Role') }))
-		.mutation(createUserKey),
+	createUserKey: protectedProcedure.input(z.object({ name: z.string() })).mutation(createUserKey),
 	getUserRoles: publicProcedure.query(async ({ ctx }) => {
 		return await ctx.db.roles.findMany()
 	}),
@@ -105,11 +101,11 @@ export const UserRouter = createTRPCRouter({
 		)
 		.mutation(async ({ input, ctx }) => {
 			const { updated } = input as {
-				updated: PrismaSchema.UserModel
+				updated: User
 			}
 
-			const updateData = {} as PrismaSchema.UserModel
-			const updatedKeys = Object.keys(updated) as Array<keyof PrismaSchema.UserModel>
+			const updateData = {} as User
+			const updatedKeys = Object.keys(updated) as Array<keyof User>
 
 			updatedKeys.forEach(key => {
 				if (['id', 'secret'].includes(key) || updated[key] == undefined) return
@@ -173,10 +169,9 @@ const queryUpdatePassword = (userId: string, newPassword: string, oldPassword: s
 	},
 })
 
-const queryCreateUserKey = (name: string, roleId: number) => ({
+const queryCreateUserKey = (name: string) => ({
 	data: {
 		name: name,
 		key: generateKey(),
-		roleId: roleId,
 	},
 })

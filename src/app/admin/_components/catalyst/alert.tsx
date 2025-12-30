@@ -1,6 +1,5 @@
 import { Text } from '@/admin/_components/catalyst'
 import * as Headless from '@headlessui/react'
-import type React from 'react'
 import { cn } from '~/lib/cn'
 
 const sizes = {
@@ -15,31 +14,37 @@ const sizes = {
 	'5xl': 'sm:max-w-5xl',
 }
 
+type types = ['info', 'warning', 'danger', 'success', '']
+
 export function Alert({
 	size = 'md',
+	type = '',
 	className,
 	children,
 	...props
 }: {
+	type?: types[number]
 	size?: keyof typeof sizes
 	className?: string
-	children: React.ReactNode
+	children: ReactNode
 } & Omit<Headless.DialogProps, 'as' | 'className'>) {
 	return (
 		<Headless.Dialog {...props}>
 			<Headless.DialogBackdrop
 				transition
-				className='fixed inset-0 flex w-screen justify-center overflow-y-auto bg-zinc-950/15 px-2 py-2 transition duration-100 focus:outline-0 data-closed:opacity-0 data-enter:ease-out data-leave:ease-in sm:px-6 sm:py-8 lg:px-8 lg:py-16 dark:bg-zinc-950/50'
+				className='bg-foreground/25 fixed inset-0 z-998 flex w-screen justify-center overflow-y-auto px-2 py-2 transition duration-100 focus:outline-0 data-closed:opacity-0 data-enter:ease-out data-leave:ease-in sm:px-6 sm:py-8 lg:px-8 lg:py-16 dark:bg-zinc-950/50'
 			/>
 
-			<div className='fixed inset-0 w-screen overflow-y-auto pt-6 sm:pt-0'>
+			<div
+				className='fixed inset-0 z-999 w-screen overflow-y-auto pt-6 sm:pt-0'
+				data-type={type || undefined}>
 				<div className='grid min-h-full grid-rows-[1fr_auto_1fr] justify-items-center p-8 sm:grid-rows-[1fr_auto_3fr] sm:p-4'>
 					<Headless.DialogPanel
 						transition
 						className={cn(
 							className,
 							sizes[size],
-							'row-start-2 w-full rounded-2xl bg-white p-8 shadow-lg ring-1 ring-zinc-950/10 sm:rounded-2xl sm:p-6 dark:bg-zinc-900 dark:ring-white/10 forced-colors:outline',
+							'bg-background ring-hml-slate-700/10 row-start-2 w-full rounded-2xl p-8 shadow-lg ring-1 sm:rounded-2xl sm:p-6 forced-colors:outline',
 							'transition duration-100 will-change-transform data-closed:opacity-0 data-enter:ease-out data-closed:data-enter:scale-95 data-leave:ease-in'
 						)}>
 						{children}
@@ -58,8 +63,9 @@ export function AlertTitle({
 		<Headless.DialogTitle
 			{...props}
 			className={cn(
-				className,
-				'text-center text-base/6 font-semibold text-balance text-zinc-950 sm:text-left sm:text-sm/6 sm:text-wrap dark:text-white'
+				'text-foreground text-center text-base/6 font-semibold text-balance sm:text-left sm:text-lg/6 sm:text-wrap',
+				'in-data-[type=danger]:text-interactive',
+				className
 			)}
 		/>
 	)
@@ -73,12 +79,12 @@ export function AlertDescription({
 		<Headless.Description
 			as={Text}
 			{...props}
-			className={cn(className, 'mt-2 text-center text-pretty sm:text-left')}
+			className={cn('mt-2 text-center font-medium text-pretty sm:text-left', className)}
 		/>
 	)
 }
 
-export function AlertBody({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
+export function AlertBody({ className, ...props }: Props<'div'>) {
 	return (
 		<div
 			{...props}
@@ -87,13 +93,15 @@ export function AlertBody({ className, ...props }: React.ComponentPropsWithoutRe
 	)
 }
 
-export function AlertActions({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
+export function AlertActions({ className, ...props }: Props<'div'>) {
 	return (
 		<div
 			{...props}
 			className={cn(
-				className,
-				'mt-6 flex flex-col-reverse items-center justify-end gap-3 *:w-full sm:mt-4 sm:flex-row sm:*:w-auto'
+				'mt-6 flex flex-col-reverse items-center justify-end gap-3 *:w-full sm:mt-4 sm:flex-row sm:*:w-auto',
+				'*:data-[type=danger]:bg-hml-red-500 *:data-[type=danger]:hover:bg-hml-red-700',
+				'dark:*:data-[type=danger]:hover:bg-hml-red-700 dark:*:data-[type=danger]:bg-hml-red-500',
+				className
 			)}
 		/>
 	)

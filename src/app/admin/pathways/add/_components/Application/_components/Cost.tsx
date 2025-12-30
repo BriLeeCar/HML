@@ -1,13 +1,18 @@
 import { SubSectionFieldset } from '@/admin/_components'
 import { Checkbox, CheckboxField, Label, Select } from '@/admin/_components/catalyst'
 import { CostInput, CostRangeFieldsGroup, refresh, type ElPrismaProps } from '@/admin/pathways/add'
+import type { Country, Currency } from '~/server/prisma/generated'
 
 export const ApplicationCost = ({
 	data,
 	handlePrisma,
 	countries,
 }: ElPrismaProps & {
-	countries: Array<Queried.Country.WithRelations>
+	countries: Array<
+		Country & {
+			currencies: Currency[]
+		}
+	>
 }) => {
 	// #region ! ---------- FNS ----------
 	const currencyOptions = countries
@@ -123,7 +128,9 @@ export const ApplicationCost = ({
 												code: 'USD',
 											},
 										],
-									} as Queried.Country.WithRelations,
+									} as Country & {
+										currencies: Currency[]
+									},
 								},
 							})
 						}}
@@ -136,16 +143,17 @@ export const ApplicationCost = ({
 						onChange={e => {
 							const newData = { ...data }
 							if (e) {
-								newData.query.cost = {min: 0, max: 0, na: true}
-							}
-							else {
+								newData.query.cost = { min: 0, max: 0, na: true }
+							} else {
 								newData.query.cost.na = false
 							}
 
 							handlePrisma(newData)
 						}}
 					/>
-					<Label className='text-interactive ml-2 whitespace-nowrap'>Information Not Available</Label>
+					<Label className='text-interactive ml-2 whitespace-nowrap'>
+						Information Not Available
+					</Label>
 				</CheckboxField>
 			</SubSectionFieldset.Details>
 		</SubSectionFieldset>

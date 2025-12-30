@@ -1,4 +1,4 @@
-import type React from 'react'
+import type { PropsWithChildren } from 'react'
 import { cn } from '~/lib/cn'
 import { CatalystButton } from './button'
 
@@ -6,7 +6,7 @@ export function Pagination({
 	'aria-label': ariaLabel = 'Page navigation',
 	className,
 	...props
-}: React.ComponentPropsWithoutRef<'nav'>) {
+}: Props<'nav'>) {
 	return (
 		<nav
 			aria-label={ariaLabel}
@@ -20,7 +20,7 @@ export function PaginationPrevious({
 	href = null,
 	className,
 	children = 'Previous',
-}: React.PropsWithChildren<{
+}: PropsWithChildren<{
 	href?: string | null
 	className?: string
 }>) {
@@ -53,7 +53,7 @@ export function PaginationNext({
 	href = null,
 	className,
 	children = 'Next',
-}: React.PropsWithChildren<{
+}: PropsWithChildren<{
 	href?: string | null
 	className?: string
 }>) {
@@ -82,7 +82,7 @@ export function PaginationNext({
 	)
 }
 
-export function PaginationList({ className, ...props }: React.ComponentPropsWithoutRef<'span'>) {
+export function PaginationList({ className, ...props }: Props<'span'>) {
 	return (
 		<span
 			{...props}
@@ -96,7 +96,7 @@ export function PaginationPage({
 	className,
 	current = false,
 	children,
-}: React.PropsWithChildren<{
+}: PropsWithChildren<{
 	href: string
 	className?: string
 	current?: boolean
@@ -117,11 +117,7 @@ export function PaginationPage({
 	)
 }
 
-export function PaginationGap({
-	className,
-	children = <>&hellip;</>,
-	...props
-}: React.ComponentPropsWithoutRef<'span'>) {
+export function PaginationGap({ className, children = <>&hellip;</>, ...props }: Props<'span'>) {
 	return (
 		<span
 			aria-hidden='true'

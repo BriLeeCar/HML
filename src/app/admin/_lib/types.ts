@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react'
 import type { PageHeading } from '~/components'
 
 type tBreadcrumb = {

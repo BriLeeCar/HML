@@ -1,11 +1,7 @@
 import { cn } from '~/lib/cn'
 import { Link } from './link'
 
-export function Text({
-	className,
-	asDiv,
-	...props
-}: React.ComponentPropsWithoutRef<'p'> & { asDiv?: boolean }) {
+export function Text({ className, asDiv, ...props }: Props<'p'> & { asDiv?: boolean }) {
 	return asDiv ?
 			<div
 				data-slot='text'
@@ -19,7 +15,7 @@ export function Text({
 			/>
 }
 
-export function TextLink({ className, ...props }: React.ComponentPropsWithoutRef<typeof Link>) {
+export function TextLink({ className, ...props }: Props<typeof Link>) {
 	return (
 		<Link
 			{...props}
@@ -31,7 +27,7 @@ export function TextLink({ className, ...props }: React.ComponentPropsWithoutRef
 	)
 }
 
-export function Strong({ className, ...props }: React.ComponentPropsWithoutRef<'strong'>) {
+export function Strong({ className, ...props }: Props<'strong'>) {
 	return (
 		<strong
 			{...props}
@@ -40,7 +36,7 @@ export function Strong({ className, ...props }: React.ComponentPropsWithoutRef<'
 	)
 }
 
-export function Code({ className, ...props }: React.ComponentPropsWithoutRef<'code'>) {
+export function Code({ className, ...props }: Props<'code'>) {
 	return (
 		<code
 			{...props}

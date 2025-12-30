@@ -21,12 +21,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.19.0
- * Query Engine version: 2ba551f319ab1df4bc874a89965d8b3641056773
+ * Prisma Client JS version: 6.19.1
+ * Query Engine version: c2990dca591cba766e3b7ef5d9e8a84796e47ab7
  */
 Prisma.prismaVersion = {
-  client: "6.19.0",
-  engine: "2ba551f319ab1df4bc874a89965d8b3641056773"
+  client: "6.19.1",
+  engine: "c2990dca591cba766e3b7ef5d9e8a84796e47ab7"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -274,22 +274,6 @@ exports.Prisma.PostBlockScalarFieldEnum = {
   position: 'position'
 };
 
-exports.Prisma.AccountScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  type: 'type',
-  provider: 'provider',
-  providerAccountId: 'providerAccountId',
-  refresh_token: 'refresh_token',
-  access_token: 'access_token',
-  expires_at: 'expires_at',
-  token_type: 'token_type',
-  scope: 'scope',
-  id_token: 'id_token',
-  session_state: 'session_state',
-  refresh_token_expires_in: 'refresh_token_expires_in'
-};
-
 exports.Prisma.SessionScalarFieldEnum = {
   id: 'id',
   sessionToken: 'sessionToken',
@@ -306,20 +290,15 @@ exports.Prisma.UserScalarFieldEnum = {
   secret: 'secret',
   firstName: 'firstName',
   lastName: 'lastName',
-  discordHandle: 'discordHandle'
+  discordHandle: 'discordHandle',
+  key: 'key',
+  created: 'created'
 };
 
 exports.Prisma.VerificationTokenScalarFieldEnum = {
   identifier: 'identifier',
   token: 'token',
   expires: 'expires'
-};
-
-exports.Prisma.UserKeyScalarFieldEnum = {
-  key: 'key',
-  name: 'name',
-  userId: 'userId',
-  roleId: 'roleId'
 };
 
 exports.Prisma.UserSocialScalarFieldEnum = {
@@ -441,11 +420,9 @@ exports.Prisma.ModelName = {
   Block: 'Block',
   BlockField: 'BlockField',
   PostBlock: 'PostBlock',
-  Account: 'Account',
   Session: 'Session',
   User: 'User',
   VerificationToken: 'VerificationToken',
-  UserKey: 'UserKey',
   UserSocial: 'UserSocial',
   UserRoles: 'UserRoles',
   Roles: 'Roles',

@@ -5,16 +5,8 @@ export const DBContext = createContext<ReturnType<typeof db>>(
 	null as unknown as ReturnType<typeof db>
 )
 
-export const DBProvider = ({
-	children,
-}: {
-	children: React.ReactNode
-}) => {
+export const DBProvider = ({ children }: { children: ReactNode }) => {
 	const database = db()
 
-	return (
-		<DBContext.Provider value={database}>
-			{children}
-		</DBContext.Provider>
-	)
+	return <DBContext.Provider value={database}>{children}</DBContext.Provider>
 }

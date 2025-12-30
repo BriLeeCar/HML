@@ -5,7 +5,9 @@ import { note, type ElPrismaProps } from '../..'
 
 export const Notes = ({ data, handlePrisma }: ElPrismaProps) => {
 	return (
-		<FormSection>
+		<FormSection
+			title='Additional Notes'
+			aria-label='Additional Notes'>
 			<FormSection.Legend
 				description={
 					'Please provide any additional notes or important information about the pathway that may not have been covered in the previous sections. This could include special conditions, exceptions, or other relevant details.'

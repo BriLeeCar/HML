@@ -1,21 +1,35 @@
 'use client'
 
 import { Button } from '@/admin/_components/Button'
-import { Field, Input, InputGroup, Label, Select, Strong } from '@/admin/_components/catalyst'
+import { Field, Input, InputGroup, Label, Strong } from '@/admin/_components/catalyst'
 import { Form } from '@/admin/_components/Form'
 import { AnimatePresence, motion } from 'motion/react'
 import { useState, type ReactNode } from 'react'
 import { Icon } from '~/components'
 import { useToast } from '~/hooks/useToast'
-import { api, type RouterOutputs } from '~/lib/api'
+import { api } from '~/lib/api'
 import { cn } from '~/lib/cn'
-import { toTitleCase } from '~/lib/text'
-import type { Roles } from '~/server/prisma/generated'
 import { HeadlessCB } from './Headless'
 
-type NewUserData = RouterOutputs['user']['createUserKey']
+type NewUserData = Partial<U> & {
+	success: boolean
+}
 
-export const NewUserForm = ({ roles }: { roles: Roles[] }) => {
+type U = {
+	image: string | null
+	key: string | null
+	id: string
+	name: string
+	email: string | null
+	emailVerified: Date | null
+	secret: string | null
+	firstName: string | null
+	lastName: string | null
+	discordHandle: string | null
+	created: Date
+}
+
+export const NewUserForm = () => {
 	const Toaster = useToast()
 	const { mutate } = api.user.createUserKey.useMutation({
 		onSuccess: data => {
@@ -39,15 +53,13 @@ export const NewUserForm = ({ roles }: { roles: Roles[] }) => {
 			setData({
 				name: '',
 				key: '',
-				roleId: 0,
 				success: false,
 			})
 		},
 	})
 
-	const [data, setData] = useState<Omit<NewUserData, 'userId'> & { success: boolean }>({
+	const [data, setData] = useState<NewUserData>({
 		name: '',
-		roleId: 0,
 		key: '',
 		success: false,
 	})
@@ -78,7 +90,7 @@ export const NewUserForm = ({ roles }: { roles: Roles[] }) => {
 						required
 					/>
 				</FormField>
-				<FormField
+				{/* <FormField
 					icon='AlertTriangleIcon'
 					label='Role'
 					name='roleId'>
@@ -95,11 +107,11 @@ export const NewUserForm = ({ roles }: { roles: Roles[] }) => {
 							</option>
 						))}
 					</Select>
-				</FormField>
+				</FormField> */}
 				<Button
 					className='mt-8'
 					type='button'
-					onClick={() => mutate({ name: data.name, roleId: Number(data.roleId) })}>
+					onClick={() => data.name && mutate({ name: data.name })}>
 					Create User Key
 				</Button>
 			</Form>
@@ -123,7 +135,7 @@ export const NewUserForm = ({ roles }: { roles: Roles[] }) => {
 							IconName='ClipboardIcon'
 							className='hover:text-foreground/70 col-start-3 row-span-2 row-start-1 ml-4 inline size-6 cursor-pointer self-center align-middle opacity-50 transition-all hover:opacity-100 active:scale-85'
 							onClick={() => {
-								navigator.clipboard.writeText(data.key)
+								navigator.clipboard.writeText(data.key ?? '')
 								Toaster.fireToast({
 									title: 'Copied to clipboard',
 									status: 'info',

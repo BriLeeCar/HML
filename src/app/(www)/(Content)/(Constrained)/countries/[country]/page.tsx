@@ -19,7 +19,10 @@ export const generateMetadata = async ({
 	)
 
 	return {
-		title: `${country}`,
+		title: {
+			default: `${country}`,
+			template: `${country} %s`,
+		},
 		description: `Information about asylum pathways, visa options, and travel resources for ${country}.`,
 	}
 }

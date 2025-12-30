@@ -9,13 +9,16 @@ const SectionFieldset = ({ 'aria-label': ariaLabel, ...props }: Props<'fieldset'
 		<fieldset
 			{...props}
 			aria-label={ariaLabel}
-			className={'grid w-full gap-y-8 has-data-open:mb-0 md:-mb-8 lg:max-w-3xl'}>
+			className={cn(
+				'grid w-full gap-y-8 has-data-open:mb-0 md:-mb-8 lg:max-w-3xl',
+				props.className
+			)}>
 			{props.children}
 		</fieldset>
 	)
 }
 
-const Legend = ({
+export const FormSectionLegend = ({
 	description,
 	defaultOpen = true,
 	...props
@@ -52,7 +55,7 @@ const Legend = ({
 	)
 }
 
-const Details = ({ ...props }: Props) => {
+export const FormSectionDetails = ({ ...props }: Props) => {
 	return (
 		<div
 			{...props}
@@ -64,7 +67,7 @@ const Details = ({ ...props }: Props) => {
 	)
 }
 
-SectionFieldset.Legend = Legend
-SectionFieldset.Details = Details
+SectionFieldset.Legend = FormSectionLegend
+SectionFieldset.Details = FormSectionDetails
 
 export { SectionFieldset as FormSection }

@@ -1,7 +1,5 @@
-import callouts from 'rehype-callouts'
 import flexibleMarkers from 'remark-flexible-markers'
 import gfm from 'remark-gfm'
-import { calloutProps, customCallouts } from '~/lib/mdx'
 
 export const remarkPlugins = [
 	[
@@ -22,15 +20,6 @@ export const remarkPlugins = [
 	],
 ]
 
-export const rehypePlugins = [
-	[
-		callouts,
-		{
-			theme: 'obsidian',
-			callouts: customCallouts,
-			...calloutProps,
-		},
-	],
-]
+export const rehypePlugins = []
 
 export const recmaPlugins = []

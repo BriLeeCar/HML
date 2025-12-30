@@ -7,6 +7,7 @@ import {
 } from '@/admin/_components/catalyst/client/combobox'
 import z from 'zod'
 import { Icon } from '~/components/Icon'
+import type { Country } from '~/server/prisma/generated'
 import { betaCountries, type ElPrismaProps } from '../../_lib'
 import { OverviewField } from './OverviewField'
 
@@ -15,7 +16,7 @@ export const OverviewCountryId = ({
 	handlePrisma,
 	countries,
 }: ElPrismaProps & {
-	countries: Queried.Country.WithRelations[]
+	countries: Country[]
 }) => {
 	return (
 		<OverviewField

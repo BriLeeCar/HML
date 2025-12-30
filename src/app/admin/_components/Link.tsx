@@ -6,7 +6,7 @@ export const InlineLink = ({ ...props }: Props<typeof Link>) => {
 		<Link
 			{...props}
 			className={cn(
-				'text-v2-muted decoration-interactive hover:text-v2-foreground hover:decoration-interactive-secondary link-focus',
+				'text-muted decoration-interactive hover:text-foreground hover:decoration-foreground link-focus [font-size:inherit]',
 				props.className
 			)}
 		/>

@@ -1,9 +1,7 @@
 import Image from 'next/image'
 import { cn } from '~/lib/cn'
 
-const Layout = async ({
-	children,
-}: Readonly<{ children: React.ReactNode }>) => {
+const Layout = async ({ children }: Readonly<{ children: ReactNode }>) => {
 	return (
 		<main
 			id='homePage'

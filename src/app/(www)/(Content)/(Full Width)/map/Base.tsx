@@ -2,7 +2,7 @@
 
 import { AnimatePresence, useDragControls } from 'motion/react'
 import { useRouter } from 'next/navigation'
-import { type MouseEvent, useContext, useEffect, useReducer } from 'react'
+import { useContext, useEffect, useReducer, type Dispatch } from 'react'
 import { cn } from '~/lib/cn'
 import { DBContext } from '~/server/db/provider'
 import {
@@ -16,8 +16,8 @@ import {
 } from '.'
 
 const actionEnterExit = (
-	e: MouseEvent<SVGPathElement>,
-	mapDispatch: React.Dispatch<tMapReducer['action']>
+	e: EMouse<SVGPathElement>,
+	mapDispatch: Dispatch<tMapReducer['action']>
 ) => {
 	const target = e.currentTarget as SVGPathElement
 	if (target.getAttribute('data-abb') != 'USA') {

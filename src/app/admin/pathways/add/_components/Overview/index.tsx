@@ -1,4 +1,5 @@
 import { FormSection } from '@/admin/_components/_form/clientFieldset'
+import type { Country, Currency } from '~/server/prisma/generated'
 import { type ElPrismaProps } from '../..'
 import { OverviewCountryId } from './CountryId'
 import { OverviewDescription } from './Description'
@@ -10,7 +11,11 @@ export const OverviewSection = ({
 	handlePrisma,
 	countries,
 }: ElPrismaProps & {
-	countries: Queried.Country.WithRelations[]
+	countries: Array<
+		Country & {
+			currencies: Currency[]
+		}
+	>
 }) => {
 	return (
 		<FormSection

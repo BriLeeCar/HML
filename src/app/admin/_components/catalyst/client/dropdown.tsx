@@ -2,7 +2,7 @@
 import { cn } from '~/lib/cn'
 
 import * as Headless from '@headlessui/react'
-import type React from 'react'
+import type { ElementType } from 'react'
 import { CatalystButton } from '../button'
 import { Link } from '../link'
 
@@ -10,7 +10,7 @@ export function Dropdown(props: Headless.MenuProps) {
 	return <Headless.Menu {...props} />
 }
 
-export function DropdownButton<T extends React.ElementType = typeof CatalystButton>({
+export function DropdownButton<T extends ElementType = typeof CatalystButton>({
 	as = CatalystButton,
 	...props
 }: { className?: string } & Omit<Headless.MenuButtonProps<T>, 'className'>) {
@@ -69,7 +69,7 @@ export function DropdownItem({
 		// Text styles
 		'text-left text-base/6 text-zinc-950 sm:text-sm/6 dark:text-white forced-colors:text-[CanvasText]',
 		// Focus
-		'data-focus:bg-v2-red-500 data-focus:text-white',
+		'data-focus:bg-hml-red-500 data-focus:text-white',
 		// Disabled state
 		'data-disabled:opacity-50',
 		// Forced colors mode
@@ -97,7 +97,7 @@ export function DropdownItem({
 			/>
 }
 
-export function DropdownHeader({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
+export function DropdownHeader({ className, ...props }: Props<'div'>) {
 	return (
 		<div
 			{...props}
@@ -152,7 +152,7 @@ export function DropdownDivider({
 	)
 }
 
-export function DropdownLabel({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
+export function DropdownLabel({ className, ...props }: Props<'div'>) {
 	return (
 		<div
 			{...props}

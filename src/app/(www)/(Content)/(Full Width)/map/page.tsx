@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { WorldMap } from './Base'
 
 export const metadata: Metadata = {
-	title: 'Map',
+	title: 'World Map',
 	description: 'Interactive map to explore country profiles.',
 }
 

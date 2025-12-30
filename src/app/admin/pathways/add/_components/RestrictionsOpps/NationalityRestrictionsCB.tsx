@@ -7,13 +7,14 @@ import {
 } from '@/admin/_components'
 import { Field, Label, Select, Textarea } from '@/admin/_components/catalyst'
 import type { ElPrismaProps } from '@/admin/pathways/add'
+import type { Country } from '~/server/prisma/generated'
 
 export const NationalityRestrictionsCB = ({
 	data,
 	handlePrisma,
 	countries,
 }: ElPrismaProps & {
-	countries: PrismaSchema.CountryModel[]
+	countries: Country[]
 }) => {
 	const cbValue = data.query['restrictedNationalities']?.length > 0
 

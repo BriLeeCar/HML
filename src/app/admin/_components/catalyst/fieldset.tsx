@@ -1,4 +1,5 @@
 import * as Headless from '@headlessui/react'
+import type { ElementType } from 'react'
 import { cn } from '~/lib/cn'
 
 export function Fieldset({
@@ -30,7 +31,7 @@ export function Legend({
 	)
 }
 
-export function FieldGroup({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
+export function FieldGroup({ className, ...props }: Props<'div'>) {
 	return (
 		<div
 			data-slot='control'
@@ -42,11 +43,13 @@ export function FieldGroup({ className, ...props }: React.ComponentPropsWithoutR
 
 export function Field({
 	className,
+	as,
 	...props
-}: { className?: string } & Omit<Headless.FieldProps, 'as' | 'className'>) {
+}: { className?: string; as?: ElementType } & Omit<Headless.FieldProps, 'as' | 'className'>) {
 	return (
 		<Headless.Field
 			{...props}
+			as={as}
 			className={cn(
 				'[&>[data-slot=label]+[data-slot=control]]:mt-3',
 				'[&>[data-slot=label]+[data-slot=description]]:mt-1',
@@ -63,13 +66,18 @@ export function Field({
 
 export function Label({
 	required,
+	as,
 	className,
 	...props
-}: { className?: string; required?: boolean } & Omit<Headless.LabelProps, 'as' | 'className'>) {
+}: { className?: string; required?: boolean; as?: ElementType } & Omit<
+	Headless.LabelProps,
+	'as' | 'className'
+>) {
 	return (
 		<Headless.Label
 			data-slot='label'
 			aria-required={required ? 'true' : undefined}
+			as={as}
 			{...props}
 			className={cn(
 				'text-base/6 font-semibold text-zinc-950 select-none data-disabled:opacity-50 sm:text-sm/6 dark:text-white',

@@ -8,11 +8,12 @@ import { api } from '~/clientQuery'
 import { Icon, Section, SectionHeading } from '~/components'
 import { useToast, type ToastMessage } from '~/hooks/useToast'
 import { cn } from '~/lib/cn'
+import type { User } from '~/server/prisma/generated'
 import { CheckSecretInput } from './_components/CheckSecretInput'
 import { ThisLabelEl } from './_components/LabelEl'
 import { ThisSection } from './_components/SectionHeading'
 
-export const AdminUsersSettingsBase = ({ user }: { user: PrismaSchema.UserModel }) => {
+export const AdminUsersSettingsBase = ({ user }: { user: User }) => {
 	const toaster = useToast()
 
 	// const { mutate } = api.user.updateUser.useMutation({
@@ -24,7 +25,7 @@ export const AdminUsersSettingsBase = ({ user }: { user: PrismaSchema.UserModel 
 	// 	},
 	// })
 
-	const [userData, setUserData] = useState<PrismaSchema.UserModel>(user)
+	const [userData, setUserData] = useState<User>(user)
 
 	const canSave = user && user == userData ? false : true
 	const handleToaster = ({ ...props }: ToastMessage) => {

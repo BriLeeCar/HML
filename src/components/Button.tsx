@@ -35,6 +35,7 @@ export const Button = ({
 		)
 	}
 	const buttonProps = props as Props<'button'>
+
 	return (
 		<button
 			{...buttonProps}
@@ -53,7 +54,7 @@ export function TouchTarget({
 	children,
 	...props
 }: {
-	children: React.ReactNode
+	children: ReactNode
 } & Props) {
 	return (
 		<>
@@ -80,7 +81,7 @@ const Inner = ({
 	...props
 }: {
 	preIcon?: Props.Icon['IconName']
-	children: React.ReactNode
+	children: ReactNode
 }) => {
 	return (
 		<>

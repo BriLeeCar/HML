@@ -11,7 +11,8 @@ export const hash = async (secret: string) => {
 	}
 }
 
-export const verify = async (knownHash: string, enteredSecret: string) => {
+export const verify = async (knownHash: string | null, enteredSecret: string | null) => {
+	if (!enteredSecret || !knownHash) return false
 	try {
 		return await bcrypt.compare(enteredSecret, knownHash)
 	} catch (e) {

@@ -1,7 +1,7 @@
 'use client'
 
 import * as Headless from '@headlessui/react'
-import React, { useState } from 'react'
+import { useState, type PropsWithChildren } from 'react'
 import { NavbarItem } from './navbar'
 
 function OpenMenuIcon() {
@@ -30,7 +30,7 @@ function MobileSidebar({
 	open,
 	close,
 	children,
-}: React.PropsWithChildren<{ open: boolean; close: () => void }>) {
+}: PropsWithChildren<{ open: boolean; close: () => void }>) {
 	return (
 		<Headless.Dialog
 			open={open}
@@ -62,7 +62,7 @@ export function SidebarLayout({
 	navbar,
 	sidebar,
 	children,
-}: React.PropsWithChildren<{ navbar: React.ReactNode; sidebar: React.ReactNode }>) {
+}: PropsWithChildren<{ navbar: ReactNode; sidebar: ReactNode }>) {
 	let [showSidebar, setShowSidebar] = useState(false)
 
 	return (

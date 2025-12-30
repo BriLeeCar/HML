@@ -32,8 +32,10 @@ export const CredentialsConfig = Credentials({
 	authorize: async credentials => {
 		if (!credentials) return null
 		if (!credentials.key) {
+			console.log('SIGN IN')
 			return SignInPath(credentials as CredentialsBase)
 		} else {
+			console.log('SIGN up')
 			return SignUpPath(credentials as CredentialsBase)
 		}
 	},

@@ -1,81 +1,40 @@
-import { Icon } from '~/components/Icon'
-import type { RouterOutputs } from '~/lib/api'
 import { api } from '~/serverQuery'
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
-} from '../_components/catalyst/client/table'
+import { Section, SectionHeading } from '../_components'
+import { Table } from '../_components/catalyst/client/table'
+import { LayoutWrapper } from '../_components/client'
+import { TableDetails } from './_components/Table'
 
 const UserPage = async () => {
 	const users = await api.user.getUsers()
+	const grouped = Object.groupBy(users, user => (user.key == null ? 'Active' : 'Pending'))
 
-	const grouped = Object.groupBy(users, user => (user.userId == null ? 'Pending' : 'Active'))
+	const pendingUsers = grouped['Pending']?.toSorted((a, b) => a.name.localeCompare(b.name)) || []
 
-	return Object.keys(grouped).map(k => {
-		const key = k as keyof typeof grouped
-		return (
-			<Table key={k}>
-				<TableHead>
-					<TableRow>
-						<TableHeader></TableHeader>
-						<TableHeader>Name</TableHeader>
-						<TableHeader>Handle</TableHeader>
-					</TableRow>
-				</TableHead>
-				<TableBody>
-					{grouped[key]?.map(user => (
-						<UserRow
-							key={user.userId}
-							user={user}
-						/>
-					))}
-				</TableBody>
-			</Table>
-		)
-	})
-}
+	const activeUsers = grouped['Active']?.toSorted((a, b) => a.name.localeCompare(b.name)) || []
 
-const UserRow = ({ user }: { user: RouterOutputs['user']['getUsers'][number] }) => {
 	return (
-		<TableRow key={user.userId}>
-			<TableCell width={'0%'}>
-				<span className='flex gap-2'>
-					<Icon
-						IconName='TrashXIcon'
-						className='click size-3 text-red-500 hover:text-red-600'
-						solid
+		<LayoutWrapper title={'Current Users'}>
+			<Section gap='sm'>
+				<SectionHeading>Pending Users</SectionHeading>
+				<Table
+					dense
+					className='mx-auto w-max self-center'>
+					<TableDetails
+						rows={pendingUsers}
+						columns={['edit', 'name', 'date']}
 					/>
-					<Icon
-						IconName='EditIcon'
-						className='click size-3 text-red-500 hover:text-red-600'
-						solid
+				</Table>
+			</Section>
+			<Section gap='sm'>
+				<SectionHeading>Active Users</SectionHeading>
+				<Table dense>
+					<TableDetails
+						rows={activeUsers}
+						columns={['edit', 'name', 'handle', 'date']}
 					/>
-				</span>
-			</TableCell>
-			<TableCell
-				className='font-bold'
-				width={'100%'}>
-				{user.name}
-			</TableCell>
-			<TableCell width={'full'}>
-				{user.user?.discordHandle ?
-					<DiscordHandle handle={user.user.discordHandle} />
-				:	null}
-			</TableCell>
-		</TableRow>
-	)
-}
-
-const DiscordHandle = ({ handle }: { handle: string }) => {
-	return (
-		<>
-			<span className='text-muted-foreground/50 mr-0.5 text-xs font-light italic'>@</span>
-			{handle}
-		</>
+				</Table>
+			</Section>
+		</LayoutWrapper>
 	)
 }
 

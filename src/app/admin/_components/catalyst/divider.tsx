@@ -1,9 +1,5 @@
 import { cn } from '~/lib/cn'
-export function Divider({
-	soft = false,
-	className,
-	...props
-}: { soft?: boolean } & React.ComponentPropsWithoutRef<'hr'>) {
+export function Divider({ soft = false, className, ...props }: { soft?: boolean } & Props<'hr'>) {
 	return (
 		<hr
 			role='presentation'

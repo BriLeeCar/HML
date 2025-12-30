@@ -23,55 +23,43 @@ export const validateSignUpInput = (data: { username: string; password: string; 
 	}
 }
 
-const checkForUserMatch = (enteredName: string, storedName?: string) => {
-	return storedName ? enteredName.toLowerCase() === storedName.toLowerCase() : true
-}
-
-export const checkKeyVaidity = (enteredName: string, storedName: string) => {
-	if (!checkForUserMatch(enteredName, storedName)) {
-		throw new SignUpError('key already assigned')
-	}
-	return true
-}
-
-const getUserKey = async (key: string) => {
-	const user = await db.userKey.findUnique({
-		where: {
-			key: key,
-		},
-	})
-
-	if (!user) throw new SignUpError('invalid key')
-
-	if (!user.name) throw new SignUpError('key is not assigned to a name')
-
-	if (user.userId) throw new SignUpError('key already assigned')
-
-	return user
-}
-
 export const SignUpPath = async (data: CredentialsBase) => {
 	const validated = validateSignUpInput(data)
 	if (validated) {
 		const { username, password, key } = validated
-		const dbKey = await getUserKey(key)
-		const validatedKey = checkKeyVaidity(validated.username, dbKey.name)
 
-		if (validatedKey) {
-			const newUser = await db.user.create({
-				data: {
-					name: username,
-					secret: await hash(password),
-					key: {
-						connect: {
-							key: key,
-						},
+		const query = await db.$transaction(async tx => {
+			const userKey = await tx.user.findFirst({
+				where: {
+					name: {
+						equals: username,
+						mode: 'insensitive',
 					},
+					key: key,
+				},
+				select: {
+					id: true,
 				},
 			})
-			if (!newUser) throw new SignUpError('invalid entry')
-			return newUser
-		}
+
+			if (!userKey) {
+				throw new SignUpError('invalid key')
+			}
+
+			return await tx.user.update({
+				where: { id: userKey.id },
+				data: {
+					secret: await hash(password),
+					key: null,
+				},
+				include: {
+					roles: true,
+				},
+			})
+		})
+
+		if (!query) throw new SignUpError('invalid entry')
+		return query
 	}
 	throw new SignUpError('invalid entry')
 }

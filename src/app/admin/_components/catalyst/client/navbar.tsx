@@ -2,12 +2,12 @@
 
 import * as Headless from '@headlessui/react'
 import { LayoutGroup, motion } from 'motion/react'
-import React, { forwardRef, useId } from 'react'
+import { forwardRef, useId, type ForwardedRef } from 'react'
 import { cn } from '~/lib/cn'
 import { TouchTarget } from '../button'
 import { Link } from '../link'
 
-export function Navbar({ className, ...props }: React.ComponentPropsWithoutRef<'nav'>) {
+export function Navbar({ className, ...props }: Props<'nav'>) {
 	return (
 		<nav
 			{...props}
@@ -16,7 +16,7 @@ export function Navbar({ className, ...props }: React.ComponentPropsWithoutRef<'
 	)
 }
 
-export function NavbarDivider({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
+export function NavbarDivider({ className, ...props }: Props<'div'>) {
 	return (
 		<div
 			aria-hidden='true'
@@ -26,7 +26,7 @@ export function NavbarDivider({ className, ...props }: React.ComponentPropsWitho
 	)
 }
 
-export function NavbarSection({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
+export function NavbarSection({ className, ...props }: Props<'div'>) {
 	let id = useId()
 
 	return (
@@ -39,7 +39,7 @@ export function NavbarSection({ className, ...props }: React.ComponentPropsWitho
 	)
 }
 
-export function NavbarSpacer({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
+export function NavbarSpacer({ className, ...props }: Props<'div'>) {
 	return (
 		<div
 			aria-hidden='true'
@@ -58,12 +58,12 @@ export const NavbarItem = forwardRef(function NavbarItem(
 	}: {
 		current?: boolean
 		className?: string
-		children: React.ReactNode
+		children: ReactNode
 	} & (
 		| ({ href?: never } & Omit<Headless.ButtonProps, 'as' | 'className'>)
-		| ({ href: string } & Omit<React.ComponentPropsWithoutRef<typeof Link>, 'className'>)
+		| ({ href: string } & Omit<Props<typeof Link>, 'className'>)
 	),
-	ref: React.ForwardedRef<HTMLAnchorElement | HTMLButtonElement>
+	ref: ForwardedRef<HTMLAnchorElement | HTMLButtonElement>
 ) {
 	let classes = cn(
 		// Base
@@ -97,7 +97,7 @@ export const NavbarItem = forwardRef(function NavbarItem(
 					{...props}
 					className={classes}
 					data-current={current ? 'true' : undefined}
-					ref={ref as React.ForwardedRef<HTMLAnchorElement>}>
+					ref={ref as ForwardedRef<HTMLAnchorElement>}>
 					<TouchTarget>{children}</TouchTarget>
 				</Link>
 			:	<Headless.Button
@@ -112,7 +112,7 @@ export const NavbarItem = forwardRef(function NavbarItem(
 	)
 })
 
-export function NavbarLabel({ className, ...props }: React.ComponentPropsWithoutRef<'span'>) {
+export function NavbarLabel({ className, ...props }: Props<'span'>) {
 	return (
 		<span
 			{...props}

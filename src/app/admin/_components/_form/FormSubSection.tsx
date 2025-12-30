@@ -1,11 +1,10 @@
-import type { ReactNode } from 'react'
 import { cn } from '~/lib/cn'
 
 const SubSectionFieldset = ({ ...props }: Props<'fieldset'>) => {
 	return (
 		<fieldset
 			{...props}
-			className='mx-auto w-full max-w-2xl not-first:mt-4 not-last:mb-2'>
+			className={cn('mx-auto w-full max-w-2xl not-first:mt-4 not-last:mb-2', props.className)}>
 			{props.children}
 		</fieldset>
 	)
@@ -21,7 +20,7 @@ const Divider = ({ side }: { side?: 'left' | 'right' }) => (
 	/>
 )
 
-const Legend = ({
+export const SubSectionLegend = ({
 	description,
 	...props
 }: Props<'legend'> & {
@@ -48,7 +47,7 @@ const Legend = ({
 	)
 }
 
-const Details = ({ ...props }: Props) => {
+export const SubSectionDetails = ({ ...props }: Props) => {
 	return (
 		<div
 			{...props}
@@ -57,7 +56,45 @@ const Details = ({ ...props }: Props) => {
 	)
 }
 
-SubSectionFieldset.Legend = Legend
-SubSectionFieldset.Details = Details
+SubSectionFieldset.Legend = SubSectionLegend
+SubSectionFieldset.Details = SubSectionDetails
 
-export { SubSectionFieldset }
+const Subsection = ({ ...props }: Props<'div'>) => {
+	return (
+		<div
+			{...props}
+			className='mx-auto w-full max-w-2xl space-y-4 not-first:mt-4 *:not-first:px-6 not-last:mb-2'>
+			{props.children}
+		</div>
+	)
+}
+const SubsectionHeading = ({
+	description,
+	...props
+}: Props<'h3'> & {
+	description?: ReactNode
+}) => {
+	return (
+		<div
+			role='heading'
+			{...props}
+			className={cn(
+				'relative mb-4 grid w-full grid-cols-[1fr_max-content_1fr] items-center gap-x-2 text-lg whitespace-nowrap',
+				props.className
+			)}>
+			<Divider side='left' />
+			{props.children}
+			<Divider side='right' />
+			{description && (
+				<p
+					data-slot='description'
+					className='subtitle col-span-full row-start-2 text-sm font-light text-wrap italic'>
+					{description}
+				</p>
+			)}
+		</div>
+	)
+}
+Subsection.Heading = SubsectionHeading
+
+export { Subsection, SubSectionFieldset }

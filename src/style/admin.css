@@ -1,0 +1,66 @@
+@import "tailwindcss";
+@import "./style.css";
+@import "./colors.css";
+
+@utility eyebrow {
+	@apply text-hml-red-500 px-1 text-sm leading-[1.25lh] italic;
+}
+
+@utility subtitle {
+	@apply text-muted font-sans leading-relaxed font-extralight sm:text-balance;
+}
+
+@utility title-page {
+	@apply grid content-start gap-1;
+	& > .eyebrow {
+		@apply text-hml-red-500 px-1 font-sans text-sm leading-[1.25lh] italic;
+	}
+	& > .subtitle {
+		@apply text-2xl font-light;
+	}
+	& > *:not(.eyebrow):not(.subtitle),
+	&:not(*:has(.eyebrow)):not(*:has(.subtitle)) {
+		@apply text-foreground font-heading text-[2.5rem] leading-none font-bold tracking-tight text-pretty capitalize;
+	}
+}
+
+@utility title-section {
+	@apply title-page;
+	& > .eyebrow {
+		@apply text-hml-red-500 px-1 text-sm leading-[1.25lh] italic;
+	}
+	& > .subtitle {
+		@apply text-[1.1em] leading-[1.25lh];
+	}
+	& > *:not(.eyebrow):not(.subtitle),
+	&:not(*:has(.eyebrow)):not(*:has(.subtitle)) {
+		@apply text-3xl;
+	}
+}
+
+@utility title-subsection {
+	@apply text-hml-mulberry-500 dark:text-hml-yellow-100 font-sans text-[1.3rem] font-semibold tracking-wider uppercase italic;
+	& + .subtitle {
+		@apply text-[1.025rem];
+	}
+}
+
+@utility btn-focus {
+	@apply focus-outline;
+	&:hover:focus {
+		@apply outline-interactive;
+	}
+}
+@utility link-focus {
+	@apply focus-outline decoration-foreground rounded transition-all focus-visible:decoration-1 focus-visible:outline-offset-6;
+	&:hover:focus-visible {
+		@apply outline-interactive;
+	}
+}
+
+@utility focus-outline {
+	@apply outline-interactive outline-offset-4 transition-colors;
+	&:is(a) {
+		@apply outline-offset-6;
+	}
+}

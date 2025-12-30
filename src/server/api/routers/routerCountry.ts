@@ -1,7 +1,6 @@
-import type { Country, CountryCurrency, CountryLanguage } from '@prisma/client'
-
 import type { User } from 'next-auth'
 import z from 'zod/v4'
+import type { Country, CountryCurrency, CountryLanguage } from '~/server/prisma/generated'
 import { createTRPCRouter, publicProcedure } from '.'
 import { transformCountryCurrency } from './routerCurrency'
 import { transformCountryLanguage } from './routerLanguage'
