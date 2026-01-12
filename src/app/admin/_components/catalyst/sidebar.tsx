@@ -33,20 +33,16 @@ export const SidebarItem = forwardRef(function SidebarItem(
 		// Trailing icon (down chevron or similar)
 		'*:last:data-[slot=icon]:ml-auto *:last:data-[slot=icon]:size-5 sm:*:last:data-[slot=icon]:size-4',
 		// Hover
-		'click data-hover:bg-hml-slate-100/15 data-hover:*:data-[slot=icon]:fill-hml-yellow-100',
-		// Active
-		'data-active:bg-zinc-950/5 data-active:*:data-[slot=icon]:fill-zinc-950',
+		'click data-hover:not-data-current:bg-hml-yellow-300/25 data-hover:not-data-current:*:data-[slot=icon]:fill-hml-yellow-100',
+
 		// Current
-		'data-current:*:data-[slot=icon]:fill-hml-yellow-300 data-current:bg-hml-slate-100/15',
-		// Dark mode
-		'dark:text-white dark:*:data-[slot=icon]:fill-zinc-400',
-		'dark:data-hover:bg-white/5 dark:data-hover:*:data-[slot=icon]:fill-white',
-		'dark:data-active:bg-white/5 dark:data-active:*:data-[slot=icon]:fill-white',
-		'dark:data-current:*:data-[slot=icon]:fill-white'
+		'data-current:bg-hml-yellow-300 data-current:*:data-[slot=icon]:fill-hml-slate-800 data-current:text-hml-slate-800',
+		// Focus
+		'data-focus:not-data-current:bg-hml-yellow-300/80 data-focus:*:data-[slot=icon]:fill-hml-slate-800 data-focus:text-hml-slate-800 focus-visible:outline-0 data-focus:outline-none'
 	)
 
 	return (
-		<span className={cn(className, 'relative')}>
+		<span className={cn(className, 'relative focus-visible:outline-0')}>
 			{typeof props.href === 'string' ?
 				<Headless.CloseButton
 					as={Link}

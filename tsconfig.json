@@ -21,9 +21,9 @@
 		],
 		"paths": {
 			"@/*": ["./src/app/*"],
-			"www/*": ["./src/app/(www)/*"],
-			"@/data-collection/*": ["./src/app/admin/data-collection/*"],
+			"www/*": ["./src/app/(www)/(Content)/*"],
 
+			"@/data-collection/*": ["./src/app/admin/data-collection/*"],
 			"~/*": ["./src/*"],
 			"~/components/*": ["./src/components/*"],
 			"~/components": ["./src/components/index.ts"],

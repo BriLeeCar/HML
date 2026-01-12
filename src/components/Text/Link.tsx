@@ -30,7 +30,7 @@ export const InlineLink = ({ ...props }: Props<typeof Link>) => (
 	<Link
 		{...props}
 		className={cn(
-			'text-foreground decoration-brand-bright-link/50 hover:text-brand-bright-link font-semibold underline decoration-2 underline-offset-2 transition-all dark:font-medium',
+			'text-foreground decoration-hml-mulberry/50 hover:text-hml-mulberry dark:hover:text-hml-red-300 font-semibold underline decoration-2 underline-offset-2 transition-all dark:font-medium',
 			props.className
 		)}
 		prefetch={false}

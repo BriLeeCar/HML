@@ -1,4 +1,5 @@
-import { AnnouncementBanner } from './_components/TopBanner'
+import { AnnouncementBanner } from './_components/AnnouncementBanner'
+import { Footer } from './_components/Footer'
 import { NavMenu } from './_components/TopNav'
 
 const Layout = ({ children }: { children: ReactNode }) => {
@@ -6,9 +7,12 @@ const Layout = ({ children }: { children: ReactNode }) => {
 		<>
 			<header className='sticky top-0 z-99 w-full backdrop-blur-sm'>
 				<NavMenu />
-				<AnnouncementBanner />
 			</header>
-			<div className='h-full w-full'>{children}</div>
+			<div className='h-full w-full'>
+				{children}
+				<Footer />
+			</div>
+			<AnnouncementBanner />
 		</>
 	)
 }

@@ -2,6 +2,35 @@
 @import "./style.css";
 @import "./colors.css";
 
+@theme {
+	--animate-nav-open: nav-open cubic-bezier(0.6, -0.28, 0.74, 0.05) forwards;
+	--animate-nav-close: nav-open cubic-bezier(0.6, -0.28, 0.74, 0.05) backwards;
+	--animate-nav-pinned: nav-pinned 0.5s ease forwards;
+	--animate-nav-unpinned: nav-pinned 0.5s ease backwards;
+
+	@keyframes nav-open {
+		from {
+			width: 3.5rem;
+		}
+		to {
+			width: 14rem;
+		}
+	}
+
+	@keyframes nav-pinned {
+		from {
+			padding-left: 0rem;
+			padding-right: 0rem;
+			padding-block: 0rem;
+		}
+		to {
+			padding-block: 0.5rem;
+			padding-left: 0.5rem;
+			padding-right: 0rem;
+		}
+	}
+}
+
 :root {
 	color-scheme: light dark;
 	--radius: 0.625rem;

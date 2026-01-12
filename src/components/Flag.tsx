@@ -172,30 +172,14 @@ const InnerAttributeLI = ({
 	attr: ReturnType<ApiData.DB['getCommunityAttributes']>
 }) => {
 	return (
-		<>
-			{attr.isUn && (
-				<li
-					className={
-						'font-bold text-[#498DD5] uppercase no-underline! decoration-transparent decoration-0!'
-					}>
-					{attr.prideScore && attr.prideScore >= 0 && (
-						<>
-							<PrideFlag className='mr-1 inline-block' />
-						</>
-					)}
-				</li>
-			)}
-			{attr.transSafety && (
-				<li className={'text-current'}>
-					<TransFlag />
-				</li>
-			)}
-			{attr.prideScore && attr.prideScore >= 0 && (
-				<li className='text-current/50'>
-					<PrideFlag className='mr-1 inline-block' />
-				</li>
-			)}
-		</>
+		<li
+			className={
+				'flex items-center gap-x-2 font-bold text-[#498DD5] uppercase no-underline! decoration-transparent decoration-0!'
+			}>
+			{attr.isUn && <span>UN</span>}
+			{attr.prideScore && attr.prideScore >= 0 && <PrideFlag />}
+			{attr.transSafety && <TransFlag />}
+		</li>
 	)
 }
 const InnerAttributeSpan = ({

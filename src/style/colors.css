@@ -56,12 +56,12 @@
 @theme {
 	--color-foreground: light-dark(var(--color-zinc-800), var(--color-zinc-100));
 	--color-background: light-dark(var(--color-zinc-50), #17191c);
-	--color-input: light-dark(var(--color-white), var(--color-hml-grey-600));
 
 	--color-interactive: light-dark(var(--color-hml-red-500), var(--color-hml-yellow-300));
 	--color-muted: light-dark(var(--color-hml-grey-400), var(--color-hml-slate-100));
 
 	/* ! FORM FIELDS */
+
 	--color-input: light-dark(var(--color-white), var(--color-hml-grey-600));
 	--color-form-border: light-dark(var(--color-zinc-300), var(--color-hml-grey-600));
 }

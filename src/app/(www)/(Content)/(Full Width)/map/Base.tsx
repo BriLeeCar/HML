@@ -5,15 +5,12 @@ import { useRouter } from 'next/navigation'
 import { useContext, useEffect, useReducer, type Dispatch } from 'react'
 import { cn } from '~/lib/cn'
 import { DBContext } from '~/server/db/provider'
-import {
-	CountryHeading,
-	FirstVisitOverlay,
-	MapPathEl,
-	mapReducer,
-	MapSvg,
-	Search,
-	type tMapReducer,
-} from '.'
+import { FirstVisitOverlay } from './_components/FirstVisitOverlay'
+import { CountryHeading } from './_components/Heading'
+import { MapPathEl, MapSvg } from './_components/Map'
+import { Search } from './_components/SearchBtn'
+import { mapReducer } from './_lib/Reducer'
+import type { tMapReducer } from './_lib/types'
 
 const actionEnterExit = (
 	e: EMouse<SVGPathElement>,

@@ -1,5 +1,5 @@
-import { allFilters } from '..'
 import type { tMasonryActions, tMasonryState } from './types'
+import { allFilters } from './util'
 
 export const masonryReducer = (state: tMasonryState, action: tMasonryActions) => {
 	const newState = { ...state }

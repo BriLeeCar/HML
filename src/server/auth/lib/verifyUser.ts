@@ -8,7 +8,3 @@ export const verifyUser = async () => {
 	if (!user) redirect('/admin/auth/signin')
 	return user
 }
-
-export const verifyAdmin = async () => {
-	return await api.admin.verify()
-}

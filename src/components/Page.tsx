@@ -4,7 +4,7 @@ import { type ReactNode, useState } from 'react'
 import { cn } from '~/lib/cn'
 import { Icon, Main } from '.'
 
-export const Page = ({ ...props }) => (
+export const Page = ({ ...props }: Props) => (
 	<Main>
 		<section
 			data-layout='page'
@@ -55,7 +55,7 @@ export const SubSection = ({
 					type == 'default'
 						&& 'text-lg font-semibold tracking-tight text-pretty text-red-500 saturate-75',
 					type == 'grey'
-						&& 'dark:text-accent-foreground text-muted-foreground border-border/20 border-b font-sans text-xl font-bold tracking-tighter brightness-75',
+						&& 'text-muted-foreground border-border/20 border-b font-sans text-xl font-bold tracking-tighter brightness-75 dark:text-white',
 					open && 'mb-4',
 					props.className
 				)}

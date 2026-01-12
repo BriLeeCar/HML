@@ -4,14 +4,10 @@ import { motion } from 'motion/react'
 import { Heading } from '~/components'
 import { cn } from '~/lib/cn'
 
-export const CountryHeading = ({
-	hoveredData,
-}: {
-	hoveredData: ApiData.Country | undefined
-}) => {
+export const CountryHeading = ({ hoveredData }: { hoveredData: ApiData.Country | undefined }) => {
 	return (
 		<span className='absolute bottom-0 left-0 z-10 flex w-full max-w-[75vw] items-center rounded-r-lg pointer-coarse:hidden'>
-			<aside className='block max-w-[570px] select-none'>
+			<aside className='block max-w-142.5 select-none'>
 				<motion.hgroup
 					className='backdrop-blur-[1px]'
 					id={hoveredData?.abbr || 'default'}
@@ -22,8 +18,7 @@ export const CountryHeading = ({
 					<Heading
 						className={cn(
 							'text-foreground/70 shadow-background flex w-full items-baseline gap-3 border-0 px-6 not-italic text-shadow-sm',
-							!hoveredData
-								&& 'font-normal text-zinc-700 italic opacity-50 dark:text-zinc-400'
+							!hoveredData && 'font-normal text-zinc-700 italic opacity-50 dark:text-zinc-400'
 						)}
 						size='2xl'>
 						{hoveredData?.name ?? 'Hover over a country'}

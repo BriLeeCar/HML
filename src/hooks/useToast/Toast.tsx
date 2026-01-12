@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { type Dispatch, type ReactNode, type SetStateAction } from 'react'
 import { Icon } from '~/components'
 import { cn } from '~/lib/cn'
-import type { ToastTypes } from '../hooks/useToast'
+import type { ToastTypes } from '.'
 
 type UniversalProps = {
 	type: ToastTypes

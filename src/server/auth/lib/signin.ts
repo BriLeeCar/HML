@@ -15,6 +15,9 @@ export const SignInPath = async (data: CredentialsBase) => {
 	if (validated.success) {
 		const { username, password } = validated.data
 		const returningUser = await db.user.findFirst({
+			cacheStrategy: {
+				ttl: 300000,
+			},
 			where: {
 				name: username,
 			},

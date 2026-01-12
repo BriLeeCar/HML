@@ -15,7 +15,7 @@ import { cn } from '~/lib/cn'
 
 export const Heading = ({ level = 2, size = 'md', ...props }: Props.Heading) => {
 	const className = cn(
-		`text-foreground dark:text-accent-foreground mt-6 mb-2 font-sans font-bold tracking-tighter`,
+		`text-foreground mt-6 mb-2 font-sans font-bold tracking-tighter dark:text-white`,
 		size == 'title' && 'text-4xl font-black',
 		size == '2xl' && 'text-5xl',
 		size == 'xl' && 'text-3xl',

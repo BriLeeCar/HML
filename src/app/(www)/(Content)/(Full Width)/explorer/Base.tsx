@@ -5,7 +5,11 @@ import { Suspense, useContext, useReducer, useRef } from 'react'
 import { PageHeading } from '~/components'
 import { useLocalData } from '~/hooks/useLocalData'
 import { DBContext } from '~/server/db/provider'
-import { allFilters, Drawer, FilterBtn, handleColumns, Masonry, masonryReducer } from '.'
+import { FilterBtn } from './_components/Filter'
+import { Drawer } from './_components/FilterDrawer'
+import { Masonry } from './_components/Masonary'
+import { masonryReducer } from './_lib/reducer'
+import { allFilters, handleColumns } from './_lib/util'
 
 export const Base = () => {
 	const db = useContext(DBContext)

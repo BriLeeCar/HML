@@ -2,9 +2,9 @@
 
 import { SidebarItem } from '@/admin/_components/catalyst'
 import { navList } from '@/admin/_lib/navLinks'
-import { LayoutGroup, motion } from 'motion/react'
 import { useContext, type ReactNode } from 'react'
 import { Icon } from '~/components'
+import { cn } from '~/lib'
 import { SidebarBody } from './SidebarBody'
 import { CurrentPathContext } from './SidebarContext'
 import { SidebarFooter } from './SidebarFooter'
@@ -16,50 +16,60 @@ import { SidebarSection } from './SidebarSection'
 const SidebarReceiver = ({ children }: { children: ReactNode }) => {
 	const { open, pin, set } = useContext(CurrentPathContext)!
 
-	return (
-		<motion.div
-			layout
-			initial={false}
-			animate={{
-				width: open || pin ? '14rem' : '3.5rem',
-				paddingLeft: open && !pin ? '0.5rem' : '0rem',
-				paddingBlock: open && !pin ? '0.5rem' : '0rem',
-			}}
-			className='relative p-1'
-			onMouseEnter={() => {
-				if (!pin)
+	const handleHover = (target: HTMLDivElement, type: 'enter' | 'exit') => {
+		if (pin) return
+		if (type == 'exit') {
+			set({
+				type: 'SET',
+				key: 'open',
+				payload: false,
+			})
+		} else {
+			const hovered = setTimeout(() => {
+				if (target.matches(':hover') || target.querySelector(':hover')) {
 					set({
 						type: 'SET',
 						key: 'open',
 						payload: true,
 					})
-			}}
-			onMouseLeave={() => {
-				if (!pin) {
-					set({
-						type: 'SET',
-						key: 'open',
-						payload: false,
-					})
 				}
-			}}>
-			<motion.nav
-				animate={{
-					borderRadius: open && !pin ? '0.5rem' : '0px',
-					'--tw-shadow-color':
-						open && !pin ?
-							'color-mix(in oklab, var(--color-hml-slate-900) 30%, transparent)'
-						:	'rgb(0 0 0 / 0)',
-					'--tw-shadow':
-						'0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1))',
-					boxShadow: 'var(--tw-shadow)',
-				}}
-				className='bg-hml-slate-900 relative z-900 hidden h-full min-h-0 w-full flex-col md:flex dark:bg-[#1C1E21]'
-				{...(open || pin ? { 'data-open': true } : {})}
-				{...(pin ? { 'data-pinned': true } : {})}>
-				<LayoutGroup>{children}</LayoutGroup>
-			</motion.nav>
-		</motion.div>
+			}, 200)
+
+			target.addEventListener('mouseleave', () => clearTimeout(hovered))
+		}
+	}
+
+	const handleEnter = (e: EMouse<HTMLDivElement>) => {
+		handleHover(e.currentTarget, 'enter')
+	}
+	const handleLeave = (e: EMouse<HTMLDivElement>) => {
+		handleHover(e.currentTarget, 'exit')
+	}
+
+	return (
+		<div
+			className={cn(
+				'transition-all duration-200',
+				'data-pinned:animate-nav-pin',
+				'not-data-pinned:animate-nav-unpin',
+				'data-open:animate-nav-open not-data-open:animate-nav-close relative p-0 data-open:not-data-pinned:p-2'
+			)}
+			{...(open || pin ? { 'data-open': true } : {})}
+			{...(open || pin ? { 'data-open': true } : {})}
+			{...(pin ? { 'data-pinned': true } : {})}
+			onMouseEnter={handleEnter}
+			onMouseLeave={handleLeave}>
+			<nav
+				className={cn(
+					'transition-all duration-500',
+					'bg-hml-slate-900 relative z-900 hidden h-full min-h-0 w-full flex-col in-data-open:translate-x-0 md:flex dark:bg-[#1C1E21]',
+					open && !pin ?
+						'[--tw-shadow-color:color-mix(in oklab, var(--color-hml-slate-900) 30%, transparent)] rounded-xl shadow-[0_1px_3px_0_var(--tw-shadow-color,rgba(0,0,0,0.1)),0_1px_2px_-1px_var(--tw-shadow-color,rgba(0,0,0,0.1))]'
+					:	'[--tw-shadow-color:rgb(0 0 0 / 0)] rounded-none'
+				)}>
+				{children}
+			</nav>
+		</div>
 	)
 }
 
@@ -91,7 +101,7 @@ export const Sidebar = () => {
 	return (
 		<SideBarProvider>
 			<SidebarReceiver>
-				<SidebarHeader></SidebarHeader>
+				<SidebarHeader />
 				<SidebarBody>
 					<SidebarSection>
 						{navList.map(item => (

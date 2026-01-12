@@ -43,7 +43,7 @@ export const PageHeading = ({
 	children: ReactNode
 } & Props<'div'>) => (
 	<header
-		className='title-page max-h-min'
+		className='title-page mx-auto max-h-min w-198 max-w-full'
 		aria-label={children?.toString()}>
 		{eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
 		<PageTitle {...props}>{children}</PageTitle>

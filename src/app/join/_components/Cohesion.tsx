@@ -18,12 +18,12 @@ import {
 import { Fragment, useState } from 'react'
 import { ThisSubSectionLegend } from './Designer/Practical'
 
-export type Tool = {
+type Tool = {
 	label: string
 	name: string
 }
 
-export type Strength = Tool & { type: string }
+type Strength = Tool & { type: string }
 
 const ToolsUsed = ({ tools }: { tools: Tool[] }) => {
 	return (

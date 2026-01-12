@@ -106,7 +106,7 @@ export function mdxComponents() {
 		Large: ({ ...props }: Props<typeof Large>) => <Large {...props} />,
 		table: ({ ...props }: Props<'table'>) => (
 			<table
-				className='bg-accent mx-auto table-auto border-collapse text-left'
+				className='bg-background mx-auto table-auto border-collapse text-left'
 				{...props}
 			/>
 		),

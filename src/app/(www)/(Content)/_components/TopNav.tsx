@@ -1,179 +1,137 @@
 'use client'
 
-import { AnimatePresence, motion } from 'motion/react'
+import { FullLogo } from '@/admin/_components/layout/Logo'
+import { motion } from 'motion/react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { type Dispatch, type SetStateAction, useState } from 'react'
-import { Button, Icon, TouchTarget } from '~/components'
+import { useState } from 'react'
+import { links } from 'www/_lib/navLinks'
+import { Button, Icon } from '~/components'
 import { cn } from '~/lib/cn'
-import { Books, Certificate, HeartMap, HML, Mission, Support } from './SVG'
-
-const links = [
-	{
-		text: 'Resource Map',
-		Icon: HeartMap,
-		href: '/map',
-	},
-	{
-		text: 'Visa Explorer',
-		Icon: Certificate,
-		href: '/explorer',
-	},
-	{
-		text: 'Guides & Resources',
-		Icon: Books,
-		href: '/guides-resources',
-	},
-	{
-		text: 'Support Team',
-		Icon: Support,
-		href: '/support',
-	},
-	{
-		text: 'Our Mission',
-		Icon: Mission,
-		href: '/our-mission',
-	},
-]
-
-const NavMenuItem = ({
-	Icon,
-	active,
-	...props
-}: Props.Link & {
-	Icon: (typeof links)[number]['Icon']
-	active: boolean
-}) => {
-	return (
-		<Link
-			prefetch={false}
-			{...props}
-			className={cn(
-				'hover:text-brand-bright-link relative flex h-full gap-3 rounded-lg px-3 transition-all',
-				active && 'dark:md:text-foreground dark:md:bg-brand/20 md:text-brand',
-				props.className
-			)}
-			{...(active && { 'data-active': '' })}
-			title={props.children as string}>
-			<Icon className={cn('text-muted-foreground size-6')} />
-			<TouchTarget>
-				<span>{props.children}</span>
-			</TouchTarget>
-		</Link>
-	)
-}
 
 export const NavMenu = () => {
-	const active = usePathname()
 	const [menuOpen, setMenuOpen] = useState(false)
+
+	const cleanup = () => {
+		document.body.style.overflow = 'auto'
+		document.removeEventListener('click', handleOutsideClick)
+		setMenuOpen(false)
+	}
+	const handleOutsideClick = (event: MouseEvent) => {
+		const target = event.target as HTMLElement
+		const canClose = () => {
+			if (
+				(target.tagName == 'BUTTON' && target.closest('header'))
+				|| (target.closest('button') && target.closest('button')?.ariaLabel == 'Close Menu')
+				|| target.tagName == 'NAV'
+			) {
+				return true
+			}
+			return false
+		}
+
+		if (canClose()) {
+			event.stopPropagation()
+			cleanup()
+		}
+	}
+
+	const handleClick = () => {
+		if (!menuOpen) {
+			setMenuOpen(true)
+			document.body.style.overflow = 'hidden'
+			document.addEventListener('click', handleOutsideClick)
+		} else {
+			cleanup()
+		}
+	}
 
 	return (
 		<>
-			<nav
-				className={cn(
-					'flex w-full overflow-hidden',
-					'text-sidebar-foreground z-99 bg-zinc-200/70 py-2 text-xs font-semibold tracking-tight uppercase italic dark:bg-neutral-900'
-				)}>
+			<div className={cn('z-99 w-full py-1', 'flex justify-between', 'text-sm')}>
 				<Link
 					prefetch={false}
 					href='/'
-					className='relative'>
-					<HML className='text-brand dark:text-brand-bright-link flex h-full w-auto items-center gap-0 px-4 py-1 text-3xl font-bold -tracking-widest' />
+					className='text-hml-mulberry relative min-h-10 w-47.5'>
+					<FullLogo className='flex h-full min-h-16 w-auto items-center gap-0 px-4' />
 				</Link>
-				<menu className='hidden w-full items-center justify-around md:flex'>
-					{links.map((link, index) => (
-						<NavMenuItem
-							key={index}
-							href={link.href}
-							prefetch={false}
-							active={active === link.href}
-							className='flex items-center justify-between gap-2'
-							Icon={link.Icon}
-							title={link.text}>
-							{link.text}
-						</NavMenuItem>
-					))}
-				</menu>
-				<menu className='flex w-full items-center justify-end gap-4 pr-4 md:hidden'>
-					<Button
-						variant='ghost'
-						onClick={() => setMenuOpen(true)}
-						title='Resource Map'>
+				<Button
+					data-toggles='menu'
+					aria-expanded={menuOpen}
+					aria-label='Open Menu'
+					onClick={handleClick}
+					variant='ghost'
+					className='text-hml-mulberry'>
+					{!menuOpen && (
 						<Icon
 							IconName='MenuIcon'
 							className='size-10'
+							strokeWidth={1}
 						/>
-					</Button>
-				</menu>
-			</nav>
-			<MobileNavMenu
-				active={active}
-				menuOpen={menuOpen}
-				setMenuOpen={setMenuOpen}
-			/>
+					)}
+					{menuOpen && (
+						<Icon
+							IconName='XIcon'
+							className='size-10'
+							strokeWidth={1}
+						/>
+					)}
+				</Button>
+			</div>
+
+			<motion.nav
+				initial={{ height: '0rem' }}
+				animate={{ height: menuOpen ? '100vh' : '0rem' }}
+				className={cn('absolute top-0 flex w-full flex-col overflow-clip md:rounded-b-4xl')}>
+				<div className='bg-hml-slate flex h-screen w-full flex-col md:h-auto'>
+					<span className={cn('z-99 w-full py-1 pb-4', 'flex justify-between', 'text-sm')}>
+						<Link
+							prefetch={false}
+							href='/'
+							className='text-hml-yellow relative min-h-10 w-47.5'>
+							<FullLogo className='flex h-full min-h-16 w-auto items-center gap-0 px-4' />
+						</Link>
+						<Button
+							data-toggles='menu'
+							aria-expanded={menuOpen}
+							aria-label='Close Menu'
+							onClick={handleClick}
+							variant='ghost'
+							className='text-hml-yellow'>
+							<Icon
+								IconName='XIcon'
+								className='size-10'
+								strokeWidth={1}
+							/>
+						</Button>
+					</span>
+					<span className='overflow-hidden rounded-b-4xl bg-white/15'>
+						<menu className='grid grid-cols-2 gap-x-px gap-y-px pt-px *:last:odd:col-span-2'>
+							{links.map((link, index) => (
+								<li
+									key={index}
+									className='bg-hml-slate click block brightness-100 hover:brightness-120'>
+									<DesktopLink
+										href={link.href}
+										children={link.text}
+										onNavigate={() => cleanup()}
+									/>
+								</li>
+							))}
+						</menu>
+					</span>
+				</div>
+			</motion.nav>
 		</>
 	)
 }
 
-const MobileNavMenu = ({
-	active,
-	menuOpen,
-	setMenuOpen,
-}: {
-	active: string
-	menuOpen: boolean
-	setMenuOpen: Dispatch<SetStateAction<boolean>>
-}) => {
+const DesktopLink = ({ ...props }: Props<typeof Link>) => {
 	return (
-		<AnimatePresence>
-			{menuOpen && (
-				<>
-					<motion.div
-						initial={{ y: '-100vh' }}
-						animate={{ y: 0 }}
-						exit={{ y: '-100vh' }}
-						transition={{
-							type: 'spring',
-							stiffness: 100,
-							damping: 20,
-						}}
-						className={cn(
-							'bg-background fixed inset-0 z-50 flex h-full min-h-screen w-full flex-col backdrop-blur-sm'
-						)}>
-						<header className='mb-4 flex w-full items-center justify-between p-4'>
-							<Link
-								prefetch={false}
-								href='/'>
-								<HML className='text-brand dark:text-brand-bright-link flex h-full w-auto items-center gap-0 px-4 py-1 text-3xl font-bold -tracking-widest' />
-							</Link>
-							<Button
-								variant='ghost'
-								onClick={() => setMenuOpen(false)}
-								title='Close Menu'>
-								<Icon
-									IconName='XIcon'
-									className='size-10'
-								/>
-							</Button>
-						</header>
-						<menu className='flex basis-full flex-col justify-around gap-0'>
-							{links.map((link, index) => (
-								<NavMenuItem
-									prefetch={false}
-									key={index}
-									href={link.href}
-									active={active === link.href}
-									className='bg-background flex items-center gap-4 rounded-none px-4 py-3 text-xl font-semibold shadow-sm dark:border *:[svg]:size-6'
-									Icon={link.Icon}
-									title={link.text}
-									onClick={() => setMenuOpen(false)}>
-									{link.text}
-								</NavMenuItem>
-							))}
-						</menu>
-					</motion.div>
-				</>
-			)}
-		</AnimatePresence>
+		<Link
+			{...props}
+			scroll={true}
+			prefetch={false}
+			className={cn('text-hml-grey block p-8 text-2xl font-bold')}
+		/>
 	)
 }

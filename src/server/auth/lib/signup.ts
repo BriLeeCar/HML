@@ -5,7 +5,7 @@ import { User, UserKey } from '~/server/api/zod'
 import db from '~/server/prisma/db'
 import type { CredentialsBase } from './credentials'
 
-export const validateSignUpInput = (data: { username: string; password: string; key: string }) => {
+const validateSignUpInput = (data: { username: string; password: string; key: string }) => {
 	const validated = z
 		.object({
 			username: User.shape.name.refine(val => val.length > 0, 'username required'),
@@ -64,7 +64,7 @@ export const SignUpPath = async (data: CredentialsBase) => {
 	throw new SignUpError('invalid entry')
 }
 
-export class SignUpError extends CredentialsSignin {
+class SignUpError extends CredentialsSignin {
 	message: string
 	constructor(message: string) {
 		super('')

@@ -1,6 +1,6 @@
 'use client'
 import { useState, type ReactNode } from 'react'
-import { Toast } from '~/components/Toast'
+import { Toast } from '~/hooks/useToast/Toast'
 
 export type ToastTypes = 'error' | 'success' | 'warning' | 'info'
 

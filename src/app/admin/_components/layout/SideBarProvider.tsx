@@ -7,7 +7,7 @@ import type { NavReducerAction } from './types'
 
 export const SideBarProvider = ({ children }: { children: ReactNode }) => {
 	const currentPath = usePathname()
-	const [open, setOpen] = useState(false)
+	const [open, setOpen] = useState(true)
 	const [pin, setPin] = useState(true)
 
 	const userRole = api.user.getUsersRoles.useQuery() ?? {

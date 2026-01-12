@@ -7,7 +7,7 @@ import {
 	Medical,
 	Pathways,
 	PiggyBank,
-} from 'www/(Content)/_components/SVG'
+} from 'www/_components/SVG'
 
 export const SubMenu = ({ country, active }: { country: string; active?: string }) => {
 	const links = [

@@ -1,4 +1,4 @@
-import type { tMapReducer } from '..'
+import type { tMapReducer } from './types'
 
 export const mapReducer = (state: tMapReducer['state'], action: tMapReducer['action']) => {
 	if (action.type) {

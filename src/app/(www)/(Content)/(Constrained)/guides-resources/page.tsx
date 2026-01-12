@@ -1,5 +1,6 @@
 import { readdirSync, readFileSync } from 'fs'
 import type { Metadata } from 'next'
+
 import { getFrontmatter } from 'next-mdx-remote-client/utils'
 import path from 'path'
 import { Suspense } from 'react'
@@ -7,16 +8,11 @@ import { Page, PageHeading } from '~/components'
 import { BlogContent } from './_components/BlogContent'
 import { GuidesContent } from './_components/Guides'
 
-export const metadata: Metadata = {
-	title: 'Guides & Resources',
-	description: `Explore step-by-step guides and resources for asylum, tracel, documents, and safety — get started with Help Me Leave now.`,
-}
+const getBlogPosts = () => readdirSync(path.join(process.cwd(), 'src/data/blog'))
 
-const GuidesResourcesPage = async () => {
-	const getBlogPosts = readdirSync(path.join(process.cwd(), 'src/data/blog'))
-
-	const blogPosts = (await Promise.all(
-		getBlogPosts.map(async file => {
+const processBlogPosts = async () =>
+	(await Promise.all(
+		getBlogPosts().map(async file => {
 			const post = readFileSync(path.join(process.cwd(), 'src/data/blog', file))
 			return {
 				...getFrontmatter(post.toString()).frontmatter,
@@ -31,6 +27,17 @@ const GuidesResourcesPage = async () => {
 		file: string
 	}[]
 
+export const generateStaticParams = async () => {
+	const posts = await processBlogPosts()
+	return posts.map(ea => ea.file)
+}
+
+export const metadata: Metadata = {
+	title: 'Guides & Resources',
+	description: `Explore step-by-step guides and resources for asylum, tracel, documents, and safety — get started with Help Me Leave now.`,
+}
+
+const GuidesResourcesPage = async () => {
 	return (
 		<Page>
 			<PageHeading
@@ -47,7 +54,7 @@ const GuidesResourcesPage = async () => {
 
 			<Suspense fallback={<div>Loading...</div>}>
 				<GuidesContent />
-				<BlogContent blogPosts={blogPosts} />
+				<BlogContent blogPosts={await processBlogPosts()} />
 			</Suspense>
 		</Page>
 	)

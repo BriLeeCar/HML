@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useContext } from 'react'
-import { MapPathEl, MapSvg } from 'www/(Content)/(Full Width)/map/_components/Map'
+import { MapPathEl, MapSvg } from 'www/(Full Width)/map/_components/Map'
 import { Button } from '~/components/Button'
 import { cn } from '~/lib/cn'
 import { DBContext } from '~/server/db/provider'

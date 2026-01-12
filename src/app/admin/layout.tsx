@@ -88,9 +88,9 @@ export default function Layout({ children }: { children: ReactNode }) {
 			<TopNav />
 			<Providers>
 				<TRPCReactProvider>
-					<div className='grid max-h-[calc(100vh-3rem)] w-full grid-cols-[3.5rem_auto] gap-x-4 has-data-pinned:grid-cols-[14rem_auto] md:max-h-screen'>
+					<div className='grid max-h-[calc(100vh-3rem)] w-full gap-x-4 md:max-h-screen md:grid-cols-[3.5rem_auto] md:has-data-pinned:grid-cols-[14rem_auto]'>
 						<Sidebar />
-						<Page className='mx-auto flex max-w-2xl overflow-x-hidden overflow-y-auto *:last:mb-12'>
+						<Page className='mx-auto flex w-full flex-col overflow-x-hidden overflow-y-auto *:last:mb-12'>
 							{children}
 						</Page>
 					</div>

@@ -29,6 +29,9 @@ import db from '~/server/prisma/db'
 export const createTRPCContext = async (opts: { headers: Headers }) => {
 	const session = await auth()
 	const userData = await db.user.findFirst({
+		cacheStrategy: {
+			ttl: 300000,
+		},
 		where: { id: session?.user?.id },
 		select: {
 			roles: {

@@ -11,38 +11,30 @@ export class DB {
 	}
 
 	getCountryByAbbr(abbr: string) {
-		return this.countries.find(
-			(country) => country.abbr.toLowerCase() === abbr.toLowerCase()
-		)
+		return this.countries.find(country => country.abbr.toLowerCase() === abbr.toLowerCase())
 	}
 
 	getMapPaths() {
 		return this.countries
-			.filter((c) => c.svgPath)
-			.map((country) => ({
+			.filter(c => c.svgPath)
+			.map(country => ({
 				...country,
 				svgPath: country.svgPath || '',
 			}))
 	}
 
-	getCountriesForFilter(
-		filterBy?: Array<keyof ApiData.ExplorerFilters>
-	) {
+	getCountriesForFilter(filterBy?: Array<keyof ApiData.ExplorerFilters>) {
 		return this.countries
-			.map((country) => {
+			.map(country => {
 				return {
 					abbr: country.abbr,
 					name: country.name,
 					unMember: country.api.unMember,
-					prideScore:
-						country.communities?.prideScore
-						&& country.communities?.prideScore > 0,
+					prideScore: country.communities?.prideScore && country.communities?.prideScore > 0,
 					transSafety: country.communities?.transSafety,
 				}
 			})
-			.filter((ea: ApiData.ExplorerFilters) =>
-				filterBy ? filterBy.every((key) => ea[key]) : true
-			)
+			.filter((ea: ApiData.ExplorerFilters) => (filterBy ? filterBy.every(key => ea[key]) : true))
 	}
 
 	filterByCommunities(
@@ -50,7 +42,7 @@ export class DB {
 		country: ApiData.CountryBase & ApiData.CountryETCData
 	) {
 		const { prideScore, transSafety } = country.communities || {}
-		const results = communities.map((key) => {
+		const results = communities.map(key => {
 			if (key === 'prideScore' && prideScore && prideScore > 0) {
 				return true
 			} else if (key === 'transSafety' && transSafety === true) {
@@ -59,13 +51,11 @@ export class DB {
 				return true
 			} else return false
 		})
-		if (results.some((r) => r === false)) return false
+		if (results.some(r => r === false)) return false
 		return true
 	}
 
-	getCountryStats(
-		country: ApiData.CountryBase & ApiData.CountryETCData
-	) {
+	getCountryStats(country: ApiData.CountryBase & ApiData.CountryETCData) {
 		const stats = [
 			{
 				title: 'Safety Index',
@@ -91,9 +81,7 @@ export class DB {
 		return stats
 	}
 
-	getCommunityAttributes(
-		country: ApiData.CountryBase & ApiData.CountryETCData
-	) {
+	getCommunityAttributes(country: ApiData.CountryBase & ApiData.CountryETCData) {
 		return {
 			isUn: country.api.unMember,
 			prideScore: country.communities?.prideScore,
@@ -103,13 +91,10 @@ export class DB {
 	}
 
 	getCountriesWithPathways() {
-		return this.countries.filter(
-			(country) => country.pathways && country.pathways.length > 0
-		)
+		return this.countries.filter(country => country.pathways && country.pathways.length > 0)
 	}
 }
 
-export type tDB = ReturnType<typeof db>
 const db = () => new DB()
 
 export default db

@@ -27,7 +27,7 @@ export const Base = ({
 
 	return (
 		<>
-			<Page>
+			<Page className='mb-8'>
 				<PageHeading
 					eyebrow={
 						<IconAttributes

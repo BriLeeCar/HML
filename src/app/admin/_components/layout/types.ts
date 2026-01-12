@@ -10,7 +10,7 @@ export type NavReducerAction<A extends 'TOGGLE' | 'SET'> =
 			payload: boolean
 		}
 
-export type NavReducerState = {
+type NavReducerState = {
 	open: boolean
 	pin: boolean
 }
