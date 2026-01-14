@@ -19,7 +19,10 @@ export const SignInPath = async (data: CredentialsBase) => {
 				ttl: 300000,
 			},
 			where: {
-				name: username,
+				name: {
+					equals: username,
+					mode: 'insensitive',
+				},
 			},
 			include: {
 				roles: true,
