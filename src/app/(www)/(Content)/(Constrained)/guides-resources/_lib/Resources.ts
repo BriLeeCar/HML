@@ -49,6 +49,16 @@ export const resources: tResource = {
 				date: 'October 27, 2025',
 				Icon: { name: 'GlobeIcon', color: 'text-current' },
 			},
+			{
+				subtitle: 'Calling On the International Community',
+				title: 'Reassess the U.S.\' "Safe Country" Designation Due to Escalating Violence',
+				href: '/pdf/01162026-help-me-leave-calls-on-the-international-community-to-reassess-the-u-s-safe-country-designation-due-to-escalating-violence.pdf',
+				type: 'press release',
+				target: '_blank',
+				author: 'HelpMeLeave Team',
+				date: 'January 16, 2026',
+				Icon: { name: 'GlobeIcon', color: 'text-current' },
+			},
 		],
 	},
 	'Creating Community': {

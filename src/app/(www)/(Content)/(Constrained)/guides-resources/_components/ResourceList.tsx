@@ -113,19 +113,26 @@ export const ResourceSection = ({
 		<Subsection>
 			<SubsectionHeading>{sectionTitle}</SubsectionHeading>
 			<SubsectionContent className='grid auto-rows-fr grid-cols-1 gap-8 md:mx-0 md:max-w-none md:grid-cols-2'>
-				{resourceArray.map(post => (
-					<Resource
-						key={post.href}
-						href={post.href}
-						title={post.title}
-						subtitle={post.subtitle}
-						type={post.type}
-						Icon={post.Icon}
-						author={post.author}
-						date={post.date}
-						target={post.target || '_self'}
-					/>
-				))}
+				{resourceArray
+					.sort((a, b) => {
+						if (a.date && b.date) {
+							return new Date(b.date).getTime() - new Date(a.date).getTime()
+						}
+						return 0
+					})
+					.map(post => (
+						<Resource
+							key={post.href}
+							href={post.href}
+							title={post.title}
+							subtitle={post.subtitle}
+							type={post.type}
+							Icon={post.Icon}
+							author={post.author}
+							date={post.date}
+							target={post.target || '_self'}
+						/>
+					))}
 			</SubsectionContent>
 		</Subsection>
 	)
