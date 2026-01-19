@@ -3,7 +3,6 @@
 # Next JS
 /.next/
 /build/
-src/app/layout.tsx
 
 # User
 /.vscode/

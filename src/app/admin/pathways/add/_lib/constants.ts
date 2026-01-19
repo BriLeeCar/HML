@@ -13,6 +13,7 @@ export const betaCountries = [
 	{ name: 'Norway', code: 'NOR' },
 	{ name: 'Portugal', code: 'PRT' },
 	{ name: 'Uruguay', code: 'URY' },
+	{ name: 'South Africa', code: 'ZAF' },
 ]
 
 export const timeOptionEls = [
