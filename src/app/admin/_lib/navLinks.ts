@@ -19,7 +19,7 @@ export const navList: tNavListItem[] = [
 	{ name: 'Pathways', href: '/admin/pathways/add', icon: 'PlaneIcon', solid: true, roles: [] },
 	{
 		name: 'Profile',
-		href: '/admin/settings/profile',
+		href: '/admin/users/settings',
 		icon: 'UserCircleIcon',
 		solid: true,
 		roles: [],
