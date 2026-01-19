@@ -16,6 +16,7 @@ export const NowBtn = ({
 			href='/leave-now'
 			{...props}
 			className={cn(
+				// 'dark:bg-hml-red dark:text-hml-grey',
 				'click z-10 mb-4 grid w-full grid-cols-2 items-center justify-center lg:grid-cols-[max-content_auto]',
 				props.className || ''
 			)}>

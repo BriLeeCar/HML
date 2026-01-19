@@ -6,7 +6,7 @@ import { cn } from '~/lib/cn'
 
 export const CountryHeading = ({ hoveredData }: { hoveredData: ApiData.Country | undefined }) => {
 	return (
-		<span className='absolute bottom-0 left-0 z-10 flex w-full max-w-[75vw] items-center rounded-r-lg pointer-coarse:hidden'>
+		<span className='absolute bottom-0 left-0 z-10 flex w-full max-w-[75vw] items-center rounded-r-lg in-[body:has(#urgentBanner)]:bottom-15 pointer-coarse:hidden'>
 			<aside className='block max-w-142.5 select-none'>
 				<motion.hgroup
 					className='backdrop-blur-[1px]'

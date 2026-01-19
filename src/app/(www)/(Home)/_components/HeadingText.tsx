@@ -3,8 +3,8 @@ export const HeadingText = () => {
 		<hgroup className='relative py-6'>
 			<span className='sr-only'>Help Me Leave</span>
 
-			<Text className='text-brand-bright h-auto w-full md:hidden' />
-			<WithDashed className='text-brand-bright hidden h-auto w-full pr-3 md:block' />
+			<Text className='text-hml-red dark:text-hml-grey h-auto w-full md:hidden' />
+			<WithDashed className='text-hml-red dark:text-hml-grey hidden h-auto w-full pr-3 md:block' />
 			<p className='text-foreground/70 bg-background/75 top-[70%] block w-full justify-start p-2 font-sans text-base/4 italic md:absolute lg:top-[75%] 2xl:bg-transparent'>
 				A resource hub for at-risk Americans seeking safety abroad
 			</p>

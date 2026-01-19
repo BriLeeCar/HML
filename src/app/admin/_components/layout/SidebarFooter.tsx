@@ -7,7 +7,7 @@ import { CurrentPathContext } from './SidebarContext'
 import { SidebarLabel } from './SidebarLabel'
 
 export function SidebarFooter({ className, ...props }: ComponentPropsWithoutRef<'div'>) {
-	const { set, pin } = useContext(CurrentPathContext)!
+	const { set, open, pin } = useContext(CurrentPathContext)!
 	return (
 		<div
 			{...props}
@@ -20,23 +20,39 @@ export function SidebarFooter({ className, ...props }: ComponentPropsWithoutRef<
 				<Icon
 					IconName='LogoutIcon'
 					data-slot='icon'
-					solid
 				/>
 			</SidebarItem>
-			<SidebarItem
-				onClick={() =>
-					set({
-						type: 'TOGGLE',
-						key: 'pin',
-					})
-				}>
-				<SidebarLabel>Pin Open</SidebarLabel>
-				<Icon
-					IconName={pin ? 'PinIcon' : 'PinAltIcon'}
-					data-slot='icon'
-					solid
-				/>
-			</SidebarItem>
+			{open ?
+				<SidebarItem
+					onClick={() =>
+						set({
+							type: 'TOGGLE',
+							key: 'pin',
+						})
+					}>
+					<SidebarLabel>Pin Open</SidebarLabel>
+					<Icon
+						IconName={pin ? 'PinIcon' : 'PinAltIcon'}
+						data-slot='icon'
+						solid
+					/>
+				</SidebarItem>
+			:	<SidebarItem
+					onClick={() =>
+						set({
+							type: 'SET',
+							key: 'open',
+							payload: true,
+						})
+					}>
+					<SidebarLabel>Open</SidebarLabel>
+					<Icon
+						IconName={'ChevronDoubleRightIcon'}
+						data-slot='icon'
+						solid
+					/>
+				</SidebarItem>
+			}
 		</div>
 	)
 }

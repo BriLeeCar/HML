@@ -1,7 +1,17 @@
 import fs from 'fs'
 import type { Metadata } from 'next'
 import path from 'path'
-import { CTA, Divider, InlineLink, Section, SectionHeading } from '~/components'
+
+import { CTA } from '~/components/CTA'
+import { Divider } from '~/components/Divider'
+import { Section } from '~/components/Page'
+import {
+	SectionEyebrow,
+	SectionHeading,
+	SectionHGroup,
+	SectionSubtitle,
+} from '~/components/Structure/Section'
+import { InlineLink } from '~/components/Text/Link'
 import { MDXProcessor } from '~/lib/mdx'
 import { toTitleCase } from '~/lib/text'
 import countriesMeta from '~/server/db/countries.json'
@@ -104,16 +114,14 @@ const SectionPage = async ({
 				<content.Provider />
 			:	<>
 					<Section>
-						<SectionHeading
-							eyebrow='No content found'
-							subtitle={
-								<>
-									I'm sure someone will add some soon! Please keep checking back, or{' '}
-									<InlineLink href='/guides-resources'>read our guides</InlineLink> in the meantime.
-								</>
-							}>
-							This country doesn't have any content yet.
-						</SectionHeading>
+						<SectionHGroup>
+							<SectionEyebrow>No content found</SectionEyebrow>
+							<SectionHeading>This country doesn't have any content yet.</SectionHeading>
+							<SectionSubtitle>
+								I'm sure someone will add some soon! Please keep checking back, or{' '}
+								<InlineLink href='/guides-resources'>read our guides</InlineLink> in the meantime.
+							</SectionSubtitle>
+						</SectionHGroup>
 					</Section>
 
 					<Divider />

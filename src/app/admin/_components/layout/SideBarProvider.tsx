@@ -1,7 +1,6 @@
 'use client'
 import { usePathname } from 'next/navigation'
 import { type ReactNode, useCallback, useMemo, useState } from 'react'
-import { api } from '~/lib'
 import { CurrentPathContext } from './SidebarContext'
 import type { NavReducerAction } from './types'
 
@@ -9,10 +8,6 @@ export const SideBarProvider = ({ children }: { children: ReactNode }) => {
 	const currentPath = usePathname()
 	const [open, setOpen] = useState(true)
 	const [pin, setPin] = useState(true)
-
-	const userRole = api.user.getUsersRoles.useQuery() ?? {
-		roles: [],
-	}
 
 	const sidebarContextAction = useCallback((action: NavReducerAction<'SET' | 'TOGGLE'>) => {
 		if (action.type === 'TOGGLE') {
@@ -35,9 +30,8 @@ export const SideBarProvider = ({ children }: { children: ReactNode }) => {
 			open,
 			pin,
 			set: sidebarContextAction,
-			userRole: userRole.data?.roles,
 		}),
-		[open, pin, sidebarContextAction, userRole.data]
+		[open, pin, sidebarContextAction]
 	)
 
 	return (

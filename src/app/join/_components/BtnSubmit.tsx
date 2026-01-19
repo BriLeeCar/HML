@@ -6,7 +6,6 @@ import { cn } from '~/lib'
 
 export const SubmitButton = ({ ...props }) => {
 	const handleSubmit = (e: FormEvent) => {
-		console.log(e)
 		e.preventDefault()
 		const form = document.forms[0]
 		const data = new FormData(form)

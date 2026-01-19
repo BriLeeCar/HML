@@ -25,21 +25,14 @@ const schemaUserKey = z.object({
 	name: UserName,
 })
 
-export { schemaUser as User, schemaUserKey as UserKey }
 // #endregion ?
 
 // #region ? TYPES
-export type tUser = z.infer<typeof schemaUser>
-export type tUserKey = z.infer<typeof schemaUserKey>
-
+export type ztUser = z.infer<typeof schemaUser>
+export type ztUserKey = z.infer<typeof schemaUserKey>
 // #endregion ?
 
-export const zMinMax = ({
-	wholeNumberOnly = false,
-}: {
-	wholeNumberOnly?: boolean
-	required?: boolean
-}) =>
+const zMinMax = ({ wholeNumberOnly = false }: { wholeNumberOnly?: boolean; required?: boolean }) =>
 	z
 		.object({ min: z.number(), max: z.number(), na: z.boolean() })
 		.loose()
@@ -90,7 +83,7 @@ const zDuration = z.object({
 	separate: z.boolean().prefault(false),
 })
 
-export const zCreatePathwayInput = z
+const zCreatePathwayInput = z
 	.object({
 		counters: z.object({
 			notes: z.number(),
@@ -219,3 +212,5 @@ export const zCreatePathwayInput = z
 		}),
 	})
 	.loose()
+
+export { schemaUser as User, schemaUserKey as UserKey, zCreatePathwayInput, zMinMax }

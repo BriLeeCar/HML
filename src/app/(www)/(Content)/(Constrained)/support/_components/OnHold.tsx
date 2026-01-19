@@ -5,24 +5,17 @@ export const OnHold = ({ reason }: { reason?: string }) => {
 		<CTA
 			subtitle={
 				<>
-					We are so grateful for the outpouring of support and
-					interest we have received. At this time, our Support Team is
-					at capacity and we are not accepting new requests for
-					assistance.
-					{reason && (
-						<>
-							<br />
-							<br />
-							{reason}
-						</>
-					)}
-					<br />
-					<br />
-					In the meantime, please join our{' '}
-					<InlineLink href='https://discord.gg/TcHKRgED6y'>
-						Discord community
-					</InlineLink>{' '}
-					to connect with others and explore our Guides & Resources .
+					<span>
+						We are so grateful for the outpouring of support and interest we have received. At this
+						time, our Support Team is at capacity and we are not accepting new requests for
+						assistance.
+					</span>
+					{reason && <span>{reason}</span>}
+					<span>
+						In the meantime, please join our{' '}
+						<InlineLink href='https://discord.gg/TcHKRgED6y'>Discord community</InlineLink> to
+						connect with others and explore our Guides & Resources.
+					</span>
 				</>
 			}
 			primaryAction={{

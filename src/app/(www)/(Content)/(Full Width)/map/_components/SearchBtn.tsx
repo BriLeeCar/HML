@@ -57,7 +57,10 @@ export const Search = ({
 			)
 
 	return (
-		<span className={cn('fixed right-4 bottom-4 z-50 flex items-end gap-2')}>
+		<span
+			className={cn(
+				'fixed right-4 bottom-4 z-50 flex items-end gap-2 in-[body:has(#urgentBanner)]:bottom-15'
+			)}>
 			<AnimatePresence>
 				{searchState.isOpen && (
 					<SearchInput>

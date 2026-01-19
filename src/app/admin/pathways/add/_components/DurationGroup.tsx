@@ -51,7 +51,6 @@ const handleTimeChange = ({
 	const newData = { ...data }
 	newData.durations[queryField] = newDuration
 	newData.query[queryField] = newQuery
-	console.log('NEW DATA', newData)
 
 	const parsed = zMinMax({
 		wholeNumberOnly: true,
@@ -70,7 +69,7 @@ const handleTimeChange = ({
 		}
 		parsed.error.issues.forEach(issue => {
 			// ! CL
-			console.log(issue)
+
 			const pathKey = issue.path[0] as keyof typeof fieldErrors
 			if (pathKey == 'min' || pathKey == 'max') {
 				fieldErrors[pathKey].push(issue.message)

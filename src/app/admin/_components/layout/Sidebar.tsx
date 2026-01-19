@@ -1,19 +1,94 @@
 'use client'
 
 import { SidebarItem } from '@/admin/_components/catalyst'
-import { navList } from '@/admin/_lib/navLinks'
+import { navList, navListSections } from '@/admin/_lib/navLinks'
+import Link from 'next/link'
 import { useContext, type ReactNode } from 'react'
 import { Icon } from '~/components'
 import { cn } from '~/lib'
-import { SidebarBody } from './SidebarBody'
+import { FullLogo } from './Logo'
 import { CurrentPathContext } from './SidebarContext'
 import { SidebarFooter } from './SidebarFooter'
-import { SidebarHeader } from './SidebarHeader'
 import { SidebarLabel } from './SidebarLabel'
 import { SideBarProvider } from './SideBarProvider'
 import { SidebarSection } from './SidebarSection'
+import type { tSidebarReceiverItem } from './types'
 
-const SidebarReceiver = ({ children }: { children: ReactNode }) => {
+export const Sidebar = ({ userRoles }: { userRoles: string[] }) => {
+	const sections = [
+		{
+			key: 'general',
+			name: undefined,
+		},
+		...navListSections,
+	].map(section => ({
+		...section,
+		items:
+			section.key != 'general' ?
+				navList.filter(item => item.section === section.key)
+			:	navList.filter(item => !item.section),
+	}))
+
+	return (
+		<SideBarProvider>
+			<Body>
+				<Header />
+				<Main>
+					{sections.map(s => (
+						<SidebarSection
+							key={s.key}
+							heading={s.name}>
+							{s.items.map(item => (
+								<SidebarReceiverItem
+									userRoles={userRoles}
+									roles={item.roles || []}
+									key={item.href}
+									href={item.href}
+									name={item.name}
+									icon={(item.icon + (item.solid ? '-s' : '')) as IconKey}
+								/>
+							))}
+						</SidebarSection>
+					))}
+				</Main>
+				<SidebarFooter />
+			</Body>
+		</SideBarProvider>
+	)
+}
+
+const Header = ({ children }: Props) => {
+	const { open } = useContext(CurrentPathContext)!
+	return (
+		<div
+			className={
+				'border-hml-slate-100/5 text-hml-grey flex flex-col border-b py-4 dark:border-white/5 [&>[data-slot=section]+[data-slot=section]]:mt-2.5'
+			}>
+			<Link
+				href='/admin'
+				className='pr-4 pl-2'>
+				<FullLogo
+					className='in-[a:hover]:*:[#Icon]:fill-hml-yellow mx-auto h-auto in-data-open:max-w-full not-in-data-open:*:[#Text]:hidden'
+					viewBox={!open ? '0 0 260.38 260.38' : '0 0 642.77 260.38'}
+				/>
+			</Link>
+			{children}
+		</div>
+	)
+}
+
+const Main = ({ children }: { children: ReactNode }) => {
+	return (
+		<div
+			className={
+				'flex flex-1 flex-col overflow-y-auto py-4 [&>[data-slot=section]+[data-slot=section]]:mt-8'
+			}>
+			{children}
+		</div>
+	)
+}
+
+const Body = ({ children }: { children: ReactNode }) => {
 	const { open, pin, set } = useContext(CurrentPathContext)!
 
 	const handleHover = (target: HTMLDivElement, type: 'enter' | 'exit') => {
@@ -73,11 +148,16 @@ const SidebarReceiver = ({ children }: { children: ReactNode }) => {
 	)
 }
 
-export const SidebarReceiverItem = ({ icon, ...props }: Props<'a'> & { icon?: SolidIcon }) => {
+export const SidebarReceiverItem = ({ icon, userRoles, roles, ...props }: tSidebarReceiverItem) => {
 	const { currentPath } = useContext(CurrentPathContext)!
 
 	const isSolid = icon?.endsWith('-s')
 	const iconName = icon?.split('-s')[0] as IconKey
+
+	if (roles && roles.length > 0) {
+		const hasRole = userRoles?.some(role => roles.includes(role))
+		if (!hasRole) return <></>
+	}
 
 	return (
 		<SidebarItem
@@ -90,32 +170,7 @@ export const SidebarReceiverItem = ({ icon, ...props }: Props<'a'> & { icon?: So
 					solid={isSolid}
 				/>
 			)}
-			<SidebarLabel>{props.children}</SidebarLabel>
+			<SidebarLabel>{props.name}</SidebarLabel>
 		</SidebarItem>
-	)
-}
-
-type SolidIcon = IconKey | `${IconKey}-s`
-
-export const Sidebar = () => {
-	return (
-		<SideBarProvider>
-			<SidebarReceiver>
-				<SidebarHeader />
-				<SidebarBody>
-					<SidebarSection>
-						{navList.map(item => (
-							<SidebarReceiverItem
-								key={item.href}
-								href={item.href}
-								icon={(item.icon + (item.solid ? '-s' : '')) as SolidIcon}>
-								{item.name}
-							</SidebarReceiverItem>
-						))}
-					</SidebarSection>
-				</SidebarBody>
-				<SidebarFooter />
-			</SidebarReceiver>
-		</SideBarProvider>
 	)
 }

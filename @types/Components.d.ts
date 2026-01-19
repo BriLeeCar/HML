@@ -5,7 +5,7 @@ declare global {
 	namespace Props {
 		type Icon = Props<'svg'> & {
 			solid?: boolean
-			IconName: IconKey
+			IconName?: IconKey
 		}
 
 		type IconPath = Omit<Icon, 'IconName'>

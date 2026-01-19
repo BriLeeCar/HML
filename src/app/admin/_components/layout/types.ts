@@ -1,3 +1,5 @@
+import type { SolidIcon, tNavListItem } from '@/admin/_lib/navLinks'
+
 export type NavReducerAction<A extends 'TOGGLE' | 'SET'> =
 	A extends 'TOGGLE' ?
 		{
@@ -14,3 +16,9 @@ type NavReducerState = {
 	open: boolean
 	pin: boolean
 }
+
+export type tSidebarReceiverItem = Exclude<Props<'a'>, 'name'>
+	& Exclude<tNavListItem, 'icon'> & {
+		userRoles?: string[]
+		icon: SolidIcon
+	}

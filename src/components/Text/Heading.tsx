@@ -1,3 +1,5 @@
+import { Eyebrow } from '~/components/Text/Eyebrow'
+import { Subtitle } from '~/components/Text/Subtitle'
 import { cn } from '~/lib/cn'
 
 /**
@@ -71,6 +73,19 @@ export const Heading = ({ level = 2, size = 'md', ...props }: Props.Heading) => 
 	)
 }
 
+export const SectionHeading = ({ ...props }: Props<'h2'>) => {
+	return (
+		<h2
+			{...props}
+			className={cn(
+				'text-2xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white',
+				props.className
+			)}>
+			{props.children}
+		</h2>
+	)
+}
+
 export const PageHeading = ({
 	eyebrow,
 	subtitle,
@@ -82,9 +97,9 @@ export const PageHeading = ({
 	children: ReactNode
 } & Props<'div'>) => (
 	<div className='max-w-4xl'>
-		{eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+		{eyebrow && <PageEyebrow>{eyebrow}</PageEyebrow>}
 		<PageTitle {...props}>{children}</PageTitle>
-		{subtitle && <Subtitle>{subtitle}</Subtitle>}
+		{subtitle && <PageSubtitle>{subtitle}</PageSubtitle>}
 	</div>
 )
 
@@ -98,50 +113,17 @@ const PageTitle = ({ ...props }) => (
 	</h1>
 )
 
-export const Subtitle = ({ ...props }: Props<'p'>) => (
-	<p className={cn('mt-6 text-xl/8 text-gray-700 dark:text-gray-300', props.className)}>
-		{props.children}
-	</p>
+export const PageSubtitle = ({ ...props }: Props<'p'>) => (
+	<Subtitle
+		{...props}
+		className={cn('mt-6 text-xl/8', props.className)}
+	/>
 )
-
-const Eyebrow = ({ ...props }: Props<'p'>) => {
+export const PageEyebrow = ({ ...props }: Props<'p'>) => {
 	return (
-		<p
-			className={cn(
-				'text-brand-bright text-base/7 font-semibold dark:text-[#f3736c]',
-				props.className
-			)}>
-			{props.children}
-		</p>
+		<Eyebrow
+			{...props}
+			className={cn('text-base/7', props.className)}
+		/>
 	)
 }
-
-export const SectionHeading = ({
-	eyebrow,
-	subtitle,
-	...props
-}: Props<'h2'> & {
-	eyebrow?: ReactNode
-	subtitle?: ReactNode
-}) => {
-	if (eyebrow || subtitle) {
-		return (
-			<hgroup className='mb-0'>
-				{eyebrow && <Eyebrow className='text-sm/8'>{eyebrow}</Eyebrow>}
-				<SectionHeadingInner {...props} />
-				{subtitle && <Subtitle className='text-lg md:mt-4'>{subtitle}</Subtitle>}
-			</hgroup>
-		)
-	}
-	return <SectionHeadingInner {...props} />
-}
-const SectionHeadingInner = ({ ...props }: Props<'h2'>) => (
-	<h2
-		{...props}
-		className={cn(
-			'text-2xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white',
-			props.className
-		)}>
-		{props.children}
-	</h2>
-)

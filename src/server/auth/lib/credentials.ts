@@ -1,14 +1,7 @@
 import Credentials from 'next-auth/providers/credentials'
-
-import { type tUser, type tUserKey } from '~/server/api/zod'
+import type { CredentialsBase } from '~/server/types'
 import { SignInPath } from './signin'
 import { SignUpPath } from './signup'
-
-export type CredentialsBase = {
-	username: tUser['name']
-	password: tUser['secret']
-	key: tUserKey['key']
-}
 
 export const CredentialsConfig = Credentials({
 	name: 'HML',
@@ -29,14 +22,28 @@ export const CredentialsConfig = Credentials({
 		},
 		key: { label: 'Key', type: 'text', name: 'key' },
 	},
-	authorize: async credentials => {
+
+	authorize: async (credentials): Promise<Auth.User | null> => {
 		if (!credentials) return null
+		let user = null
 		if (!credentials.key) {
-			console.log('SIGN IN')
-			return SignInPath(credentials as CredentialsBase)
+			user = SignInPath(credentials as CredentialsBase)
 		} else {
-			console.log('SIGN up')
-			return SignUpPath(credentials as CredentialsBase)
+			user = SignUpPath(credentials as CredentialsBase)
 		}
+		if (user != null) {
+			Object.entries(user).forEach(([key, value]) => {
+				if (key == 'roles' && Array.isArray(value)) {
+					Object.assign(user, {
+						roles: value.map(r => ({
+							id: r.role.id,
+							name: r.role.name,
+						})),
+					})
+				}
+			})
+		}
+
+		return user as unknown as Auth.User | null
 	},
 })

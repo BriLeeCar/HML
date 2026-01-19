@@ -1,17 +1,11 @@
 import { type Metadata } from 'next'
-import {
-	Bold,
-	CTA,
-	InlineLink,
-	Li,
-	OL,
-	P,
-	Page,
-	PageHeading,
-	Section,
-	SectionHeading,
-} from '~/components'
+import { CTA, InlineLink, Li, OL, Text } from '~/components'
+import { Page } from '~/components/Structure/Page'
+import { Section } from '~/components/Structure/Section'
+import db from '~/server/prisma/db'
 import { FAQ } from './_components/faq'
+import { SupportHeading } from './_components/Heading'
+import { OnHold } from './_components/OnHold'
 
 export const metadata: Metadata = {
 	title: 'Support Team',
@@ -19,45 +13,50 @@ export const metadata: Metadata = {
 		'Our Support Team is here to help you create an evacuation plan that works best for you.',
 }
 
-export default function SupportTeam() {
+export default async function SupportTeam() {
+	const supportForm = await db.settings.findUnique({
+		where: {
+			key: 'contact-form',
+		},
+	})
+
+	const isOn = supportForm?.value === 'on'
+
 	return (
 		<Page>
-			<PageHeading
-				eyebrow='Support Team'
-				subtitle={
-					<>
-						Our goal is to make sure you feel supported in creating the evacuation plan that works
-						best for you.
-						<Bold className='block'>You are not alone</Bold>
-					</>
-				}>
-				We're here to help
-			</PageHeading>
-			<P>
+			<SupportHeading />
+
+			<Text>
 				We’ll help you identify your most important support needs, explore which pathways may suit
 				you best, and then walk with you through the steps of organizing, arranging, and planning
 				along that pathway.
-			</P>
-			<P>
+			</Text>
+			<Text>
 				Many members of the Support Team have also had to leave their home country. Whenever
 				possible, you’ll speak with someone who has chosen and experienced a pathway similar to your
 				own. We know that leaving behind a life—people, places, and things—is never easy. If you are
 				truly ready to leave, or if you feel you cannot stay, we are here to make the logistics and
 				mechanics as clear and manageable as possible.
-			</P>
+			</Text>
 
 			<FAQ />
 
 			<Section>
-				<SectionHeading
-					eyebrow='Before Reaching Out'
-					subtitle='To make sure we can help you as best as possible, please
-					read the following information before contacting us. These
-					documents will help you understand the process and prepare
-					for your conversation with our Support Team.'>
-					Reaching out can be scary, but asking for help is always the right choice—the best choice
-					for you.
-				</SectionHeading>
+				<Section.HGroup>
+					<Section.Eyebrow>Help Us Help You</Section.Eyebrow>
+					<Section.Heading>Before Reaching Out</Section.Heading>
+					<Section.Subtitle>
+						Reaching out can be scary, but asking for help is always the right choice—the best
+						choice for you.
+					</Section.Subtitle>
+				</Section.HGroup>
+				<Text>
+					To make sure we can help you as best as possible, please read the following information
+					before contacting us. These documents will help you understand the process and prepare for
+					your conversation with our Support Team.
+				</Text>
+
+				{/* ! TODO: CHANGE THIS */}
 				<OL className='text-balance *:mt-4'>
 					<Li className='not-list-label'>
 						<InlineLink href='/get-ready-to-leave'>Get Ready to Leave</InlineLink>
@@ -93,26 +92,27 @@ export default function SupportTeam() {
 				</OL>
 			</Section>
 
-			<CTA
-				primaryAction={{
-					href: 'https://forms.clickup.com/90151711045/f/2kyqbwa5-195/251K9UAW6C3E3HIJIG',
-					label: 'Reach Out',
-					target: '_blank',
-				}}
-				secondaryAction={{
-					href: '/get-ready-to-leave',
-					label: 'Get Ready to Leave',
-				}}>
-				If you're ready,
-				<br />
-				we're ready.
-			</CTA>
-
-			{/* <OnHold
-				reason='We are working hard to expand our team and resources to
+			{isOn ?
+				<CTA
+					primaryAction={{
+						href: 'https://forms.clickup.com/90151711045/f/2kyqbwa5-195/251K9UAW6C3E3HIJIG',
+						label: 'Reach Out',
+						target: '_blank',
+					}}
+					secondaryAction={{
+						href: '/get-ready-to-leave',
+						label: 'Get Ready to Leave',
+					}}>
+					If you're ready,
+					<br />
+					we're ready.
+				</CTA>
+			:	<OnHold
+					reason='We are working hard to expand our team and resources to
                             better serve you. Please check back in the coming days for
                             updates on when we will be able to accept new requests.'
-			/> */}
+				/>
+			}
 		</Page>
 	)
 }

@@ -18,6 +18,7 @@
 	--color-hml-red-900: #2d060b;
 	--color-hml-red-700: #680d1a;
 	--color-hml-red-500: var(--color-hml-red);
+	--color-hml-red-400: #cb374c;
 	--color-hml-red-300: #e9586d;
 	--color-hml-red-100: #f39ba8;
 	--color-hml-red-50: #fbdfe3;
@@ -48,6 +49,7 @@
 	--color-hml-slate-700: var(--color-hml-slate);
 	--color-hml-slate-600: #324146;
 	--color-hml-slate-500: #42585e;
+	--color-hml-slate-400: #5f7a80;
 	--color-hml-slate-300: #81989e;
 	--color-hml-slate-100: #d4dadc;
 	--color-hml-slate-50: #edf1f2;
@@ -60,6 +62,11 @@
 	--color-interactive: light-dark(var(--color-hml-red-500), var(--color-hml-yellow-300));
 	--color-muted: light-dark(var(--color-hml-grey-400), var(--color-hml-slate-100));
 
+	--color-card: light-dark(
+		color-mix(in sRgb, var(--color-hml-grey) 20%, transparent 100%),
+		rgba(0, 0, 0, 0.07)
+	);
+
 	/* ! FORM FIELDS */
 
 	--color-input: light-dark(var(--color-white), var(--color-hml-grey-600));
@@ -70,39 +77,6 @@
 	html {
 		background-color: var(--color-background);
 		color: var(--color-foreground);
+		color: --alpha(var(--color-foreground) / 90%);
 	}
-}
-
-@utility form-base {
-	@apply has-data-disabled:opacity-50 has-data-disabled:before:bg-zinc-950/5 has-data-disabled:before:shadow-none;
-}
-
-@utility form-base-shadow {
-	@apply before:bg-input before:absolute before:inset-px before:rounded-[calc(var(--radius-lg)-1px)] before:shadow-sm dark:before:hidden;
-}
-
-@utility form-base-focus {
-	@apply sm:focus-within:after:ring-interactive/60 after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-transparent after:ring-inset sm:focus-within:after:ring-2;
-}
-
-@utility form-border {
-	@apply dark:border-form-border rounded-lg border border-zinc-950/10 focus:outline-hidden data-hover:border-zinc-950/20 dark:data-hover:border-white/20;
-
-	&[data-invalid] {
-		@apply border-red-500/40 data-hover:border-red-500 dark:border-red-600/40 dark:data-hover:border-red-600;
-	}
-	&:is([data-invalid] *) {
-		@apply border-red-500/40 data-hover:border-red-500 dark:border-red-600/40 dark:data-hover:border-red-600;
-	}
-	&[data-disabled] {
-		@apply border-form-border dark:border-form-border dark:data-hover:border-form-border;
-	}
-}
-
-@utility form-bg {
-	@apply dark:bg-input/30 dark:data-disabled:bg-input/15 bg-transparent;
-}
-
-@utility form-text {
-	@apply text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white;
 }

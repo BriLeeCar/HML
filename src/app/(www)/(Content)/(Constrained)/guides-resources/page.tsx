@@ -4,7 +4,13 @@ import type { Metadata } from 'next'
 import { getFrontmatter } from 'next-mdx-remote-client/utils'
 import path from 'path'
 import { Suspense } from 'react'
-import { Page, PageHeading } from '~/components'
+import {
+	Page,
+	PageEyebrow,
+	PageHeading,
+	PageHGroup,
+	PageSubtitle,
+} from '~/components/Structure/Page'
 import { BlogContent } from './_components/BlogContent'
 import { GuidesContent } from './_components/Guides'
 
@@ -40,17 +46,15 @@ export const metadata: Metadata = {
 const GuidesResourcesPage = async () => {
 	return (
 		<Page>
-			<PageHeading
-				eyebrow='Guides & Resources'
-				subtitle={
-					<>
-						Welcome to our library of heavily researched and thoughtfully curated resources. We will
-						be adding to this collection over time, so please check back often for new insights and
-						information to support your journey.
-					</>
-				}>
-				The Library
-			</PageHeading>
+			<PageHGroup>
+				<PageEyebrow>Guides & Resources</PageEyebrow>
+				<PageHeading>The Library</PageHeading>
+				<PageSubtitle>
+					Welcome to our library of heavily researched and thoughtfully curated resources. We will
+					be adding to this collection over time, so please check back often for new insights and
+					information to support your journey.
+				</PageSubtitle>
+			</PageHGroup>
 
 			<Suspense fallback={<div>Loading...</div>}>
 				<GuidesContent />

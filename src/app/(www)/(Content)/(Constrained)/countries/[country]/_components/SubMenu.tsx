@@ -51,7 +51,7 @@ export const SubMenu = ({ country, active }: { country: string; active?: string 
 	return (
 		<>
 			<select
-				className='bg-card mt-8 w-full rounded-md border px-4 py-2 text-sm font-semibold shadow-sm lg:w-1/2'
+				className='bg-card w-full rounded-md border px-4 py-2 text-sm font-semibold shadow-sm lg:w-1/2'
 				onChange={e => {
 					const value = e.target.value
 					if (value) {

@@ -117,8 +117,8 @@ export const WorldMap = () => {
 							onMouseLeave={e => actionEnterExit(e, mapDispatch)}
 							className={cn(
 								'dark:stroke-background',
-								abbr != 'USA' && 'hover:fill-brand-bright',
-								'fill-red-500/20 transition-all'
+								abbr != 'USA' && 'hover:fill-hml-mulberry',
+								'fill-hml-mulberry/20 transition-all'
 							)}
 							onClick={() => router.push(`/countries/${country.abbr.toLowerCase()}`)}
 						/>

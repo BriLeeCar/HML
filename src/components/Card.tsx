@@ -1,5 +1,5 @@
+import { Heading } from '~/components/Text/Heading'
 import { cn } from '~/lib/cn'
-import { Heading } from './Text'
 
 const Card = ({ ...props }: Props<'article'>) => {
 	return <CardWrapper {...props} />

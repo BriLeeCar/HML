@@ -5,7 +5,7 @@ import { Button } from '@/admin/_components/'
 import { Form } from '@/admin/_components/_form/Form'
 import { useState, type SetStateAction } from 'react'
 import { useToast, type ToastMessage } from '~/hooks/useToast'
-import { api, type RouterOutputs } from '~/lib'
+import { api } from '~/lib'
 import type { CreatePathwayInput } from '~/server/api/routers'
 import { zCreatePathwayInput } from '~/server/api/zod'
 import {
@@ -40,8 +40,6 @@ const handleSubmitBase = async (
 
 	validation.success && mutate(submission as CreatePathwayInput)
 	if (validation.error) {
-		console.log(validation.error)
-		console.log(submission)
 		const zodErrors = {
 			...data.errors,
 			...createTracker().errors,
@@ -90,7 +88,11 @@ const handleSubmitBase = async (
 	}
 }
 
-export const Base = ({ prisma }: { prisma: RouterOutputs['dataCollection']['PathwayInit'] }) => {
+export const Base = ({
+	prisma,
+}: {
+	prisma: TRPC.RouterOutputs['dataCollection']['PathwayInit']
+}) => {
 	const { documentTypes, countries, pathwayTypes } = prisma
 
 	const toast = useToast()
@@ -112,8 +114,7 @@ export const Base = ({ prisma }: { prisma: RouterOutputs['dataCollection']['Path
 					data.query.name ? `You have successfully created the pathway: ${data.query.name}` : '',
 			} as ToastMessage)
 		},
-		onError: data => {
-			console.log(data)
+		onError: () => {
 			window.scrollTo({
 				behavior: 'smooth',
 				top: 0,

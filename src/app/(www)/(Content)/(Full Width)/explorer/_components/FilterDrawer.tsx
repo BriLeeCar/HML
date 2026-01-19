@@ -2,12 +2,14 @@
 
 import { motion, type MotionProps } from 'motion/react'
 
-import { Button, Checkbox, Icon, Label, SectionHeading, SubSection } from '~/components'
+import { Button, Checkbox, Icon, Label } from '~/components'
 import { cn } from '~/lib/cn'
 
 import type { masonryReducer } from 'www/(Full Width)/explorer/_lib/reducer'
 import type { tDrawerFilter, tReducerDispatch } from 'www/(Full Width)/explorer/_lib/types'
 import { filterCbs } from 'www/(Full Width)/explorer/_lib/util'
+import { Section } from '~/components/Structure/Section'
+import { Subsection } from '~/components/Structure/Subsection'
 
 export const Drawer = ({
 	overlayRef,
@@ -72,23 +74,23 @@ export const Drawer = ({
 
 					<form className='mt-4 flex flex-col gap-2 pointer-coarse:mb-12'>
 						{filterCbs.map(grp => (
-							<SubSection
-								wrapperProps={{
-									className: 'flex flex-col gap-1 *:[div]:flex *:[div]:flex-col *:[div]:gap-2',
-								}}
-								title={grp.group}
+							<Subsection
+								className='flex flex-col gap-1 *:[div]:flex *:[div]:flex-col *:[div]:gap-2'
 								key={grp.group}>
-								{grp.items.map(cb => (
-									<FilterCB
-										key={cb.dataKey}
-										dataKey={cb.dataKey}
-										label={cb.label}
-										reducer={reducer}
-										matches={cb.matches}
-										dispatchReducer={dispatchReducer}
-									/>
-								))}
-							</SubSection>
+								<Subsection.Heading>{grp.group}</Subsection.Heading>
+								<Subsection.Content>
+									{grp.items.map(cb => (
+										<FilterCB
+											key={cb.dataKey}
+											dataKey={cb.dataKey}
+											label={cb.label}
+											reducer={reducer}
+											matches={cb.matches}
+											dispatchReducer={dispatchReducer}
+										/>
+									))}
+								</Subsection.Content>
+							</Subsection>
 						))}
 						<ClearButton dispatchReducer={dispatchReducer} />
 						<CloseButton dispatchReducer={dispatchReducer} />
@@ -100,17 +102,15 @@ export const Drawer = ({
 }
 
 const FilterHeading = () => (
-	<SectionHeading
-		eyebrow='Filter'
-		subtitle={
-			<span className='pointer-coarse:hidden'>
-				We can help narrow down the selection if you tell us a little bit about yourself - don’t
-				worry, we don’t keep a record of any of this and none of it can be traced back to you! If
-				you don’t select anything, you will just be shown the full list of pathways
-			</span>
-		}>
-		Let's get you matched!
-	</SectionHeading>
+	<Section.HGroup>
+		<Section.Eyebrow>Filter</Section.Eyebrow>
+		<Section.Heading>Let's get you matched!</Section.Heading>
+		<Section.Subtitle className='pointer-coarse:hidden'>
+			We can help narrow down the selection if you tell us a little bit about yourself - don’t
+			worry, we don’t keep a record of any of this and none of it can be traced back to you! If you
+			don’t select anything, you will just be shown the full list of pathways
+		</Section.Subtitle>
+	</Section.HGroup>
 )
 
 const FilterCB = ({

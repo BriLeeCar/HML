@@ -1,12 +1,16 @@
-import { CTA, Divider, Page, PageHeading } from '~/components'
+import { CTA, Divider } from '~/components'
+import { Page } from '~/components/Structure/Page'
 
 const Layout = ({ children }: { children?: ReactNode }) => (
 	<Page>
-		<PageHeading
-			eyebrow='Escape Routes'
-			subtitle='We know that many people need to leave quickly. We are here to help you explore your options and make a plan.'>
-			Help Me Leave NOW
-		</PageHeading>
+		<Page.HGroup>
+			<Page.Eyebrow>Escape Routes</Page.Eyebrow>
+			<Page.Heading>Help Me Leave NOW</Page.Heading>
+			<Page.Subtitle>
+				We know that many people need to leave quickly. We are here to help you explore your options
+				and make a plan.
+			</Page.Subtitle>
+		</Page.HGroup>
 
 		{children}
 

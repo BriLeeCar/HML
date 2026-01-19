@@ -1,5 +1,6 @@
 import { cn } from '~/lib/cn'
-import { Button, Subtitle } from '.'
+import { Button } from '.'
+import { Section, SectionHeading } from './Structure/Section'
 
 type CTAProps = Props<'div'> & {
 	primaryAction?: {
@@ -15,54 +16,39 @@ type CTAProps = Props<'div'> & {
 }
 
 export const CTA = ({ primaryAction, secondaryAction, subtitle, ...props }: CTAProps) => {
-	if (subtitle && (primaryAction || secondaryAction)) {
-		return (
-			<div className='relative mx-auto grid w-full grid-cols-1 py-16 sm:grid-cols-[auto_1fr] sm:py-8'>
-				<Head>{props.children}</Head>
-				<Actions
-					primaryAction={primaryAction}
-					secondaryAction={secondaryAction}
-					subtitle={subtitle}
-				/>
-				<Subtitle className='col-span-2'>{subtitle}</Subtitle>
-			</div>
-		)
-	}
-
 	return (
-		<div
+		<Section
 			className={cn(
-				'mx-auto flex flex-col items-center justify-between py-16 sm:py-8',
-				subtitle ? 'flex-col items-start' : 'md:flex-row lg:mx-8',
+				'grid gap-y-2 md:grid-cols-[auto_minmax(0px,150px)]',
+				!secondaryAction && 'grid-cols-[auto_minmax(0px,150px)]',
 				props.className
 			)}>
-			{subtitle ?
-				<hgroup className='mb-6 max-w-2xl'>
-					<Head />
-					<Subtitle>{subtitle}</Subtitle>
-				</hgroup>
-			:	<Head>{props.children}</Head>}
+			<SectionHeading className='text-hml-red dark:text-hml-yellow col-start-1'>
+				{props.children}
+			</SectionHeading>
+			<span
+				className={cn(
+					'text-muted-foreground col-start-1 flex w-full flex-col gap-y-2 text-base text-[.95rem] leading-[1.85] md:gap-y-6 md:pr-4 md:pl-2',
+					!primaryAction && !secondaryAction && 'max-w-[calc(100%-150px)]'
+				)}>
+				{subtitle}
+			</span>
 			{(primaryAction || secondaryAction) && (
 				<Actions
 					primaryAction={primaryAction}
 					secondaryAction={secondaryAction}
 				/>
 			)}
-		</div>
+		</Section>
 	)
 }
-
-const Head = ({ ...props }: CTAProps) => (
-	<h2 className='max-w-2xl text-4xl font-semibold tracking-tight text-gray-900 sm:text-4xl dark:text-white'>
-		{props.children}
-	</h2>
-)
 
 const PrimaryAction = ({ primaryAction }: CTAProps) => {
 	const { label, ...actions } = primaryAction!
 	return (
 		<Button
 			{...actions}
+			className='max-h-min'
 			href={actions?.href || '#'}
 			target={actions?.target || '_self'}
 			variant='default'>
@@ -74,17 +60,18 @@ const PrimaryAction = ({ primaryAction }: CTAProps) => {
 const SecondaryAction = ({ secondaryAction }: CTAProps) => (
 	<a
 		href={secondaryAction?.href}
-		className='text-xs/6 font-semibold text-zinc-900 hover:opacity-80 dark:text-zinc-100'>
+		className='max-h-min text-xs/6 font-semibold whitespace-nowrap text-zinc-900 hover:opacity-80 dark:text-zinc-100'>
 		{secondaryAction?.label}
 		<span aria-hidden='true'>→</span>
 	</a>
 )
 
-const Actions = ({ primaryAction, secondaryAction, subtitle }: CTAProps) => (
+const Actions = ({ primaryAction, secondaryAction, className }: CTAProps) => (
 	<div
 		className={cn(
-			'col-span-full row-start-3 mt-10 flex w-full items-center gap-x-6 pt-10 sm:col-span-1 sm:col-start-2 sm:row-start-1 sm:w-auto sm:pt-0 md:mt-0 md:shrink-0',
-			subtitle && 'mt-0 items-end justify-self-end'
+			'relative top-2 row-start-auto h-full content-start gap-y-6 self-center md:col-start-2 md:row-span-2 md:row-start-1',
+			'flex w-full flex-wrap justify-around',
+			className
 		)}>
 		{primaryAction && <PrimaryAction primaryAction={primaryAction} />}
 		{secondaryAction && <SecondaryAction secondaryAction={secondaryAction} />}

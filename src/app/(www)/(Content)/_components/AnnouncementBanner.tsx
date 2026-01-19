@@ -9,16 +9,18 @@ export const AnnouncementBanner = () => {
 
 	return (
 		isVisible && (
-			<div className='bg-hml-slate dark:bg-hml-grey-900 fixed bottom-0 grid w-full grid-cols-[1fr_auto] items-center gap-6 px-6 py-3.5 sm:px-3.5'>
+			<div
+				id='urgentBanner'
+				className='bg-hml-red grid w-full grid-cols-[1fr_auto] items-center gap-6 px-6 py-3.5 sm:px-6.5'>
 				<InlineLink
-					className='flex w-full max-w-full items-center justify-start gap-x-3 overflow-hidden no-underline decoration-0 md:justify-center md:text-lg/4'
+					className='dark:decoration-hml-mulberry-100 flex w-full max-w-full items-center justify-start gap-x-3 overflow-hidden md:justify-center md:text-lg/4'
 					href={`/${topBarAnnouncement.link.folder}/${topBarAnnouncement.link.fileName}.${topBarAnnouncement.link.ext}`}
 					target={topBarAnnouncement.link.target}
 					rel='noopener noreferrer'>
-					<strong className='text-hml-yellow text-xl font-bold uppercase'>
+					<strong className='text-hml-mulberry-50 text-xl font-bold uppercase'>
 						{topBarAnnouncement.type}:
 					</strong>
-					<span className='text-hml-yellow block w-fit truncate text-sm font-semibold italic'>
+					<span className='text-hml-grey block w-fit truncate text-sm font-semibold italic'>
 						{topBarAnnouncement.message}
 					</span>
 				</InlineLink>

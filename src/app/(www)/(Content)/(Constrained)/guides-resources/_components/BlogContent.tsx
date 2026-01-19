@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { Section, SectionHeading } from '~/components'
+import { Section } from '~/components/Structure/Section'
 
 export const BlogContent = ({
 	blogPosts,
@@ -17,15 +17,17 @@ export const BlogContent = ({
 }) => {
 	return (
 		<Section>
-			<SectionHeading
-				id='member-blogs'
-				eyebrow='Team Member Blogs'
-				subtitle='We are people going through this process too. Here are some of our stories and reflections.'>
-				What We Think
-			</SectionHeading>
+			<Section.HGroup>
+				<Section.Eyebrow>Team Member Blogs</Section.Eyebrow>
+				<Section.Heading>What We Think</Section.Heading>
+				<Section.Subtitle>
+					We are people going through this process too. Here are some of our stories and
+					reflections.
+				</Section.Subtitle>
+			</Section.HGroup>
 			<div
 				{...props}
-				className='mx-auto my-10 grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 md:mx-0 md:max-w-none md:grid-cols-3'>
+				className='mx-auto grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 md:mx-0 md:max-w-none md:grid-cols-3'>
 				{blogPosts.map(post => (
 					<article
 						key={post.file}

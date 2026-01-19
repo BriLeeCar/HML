@@ -1,5 +1,4 @@
 import { Icon } from '~/components/Icon'
-import type { RouterOutputs } from '~/lib/api'
 import { api } from '~/serverQuery'
 import { InlineLink, Section, SectionHeading } from '../_components'
 import {
@@ -67,7 +66,7 @@ const PathwayPage = async ({ searchParams }: PageProps<'/admin/pathways'>) => {
 	)
 }
 
-const UserRow = ({ pathway }: { pathway: RouterOutputs['pathway']['page'][number] }) => {
+const UserRow = ({ pathway }: { pathway: TRPC.RouterOutputs['pathway']['page'][number] }) => {
 	return (
 		<TableRow
 			key={pathway.id}

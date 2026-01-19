@@ -121,6 +121,12 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.SettingsScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  value: 'value'
+};
+
 exports.Prisma.CountryScalarFieldEnum = {
   code: 'code',
   name: 'name'
@@ -348,6 +354,32 @@ exports.Prisma.PathwayCategoriesScalarFieldEnum = {
   pathwayTypeId: 'pathwayTypeId'
 };
 
+exports.Prisma.ContentResourceTypeScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  icon: 'icon',
+  color: 'color'
+};
+
+exports.Prisma.ContentResourceAreaScalarFieldEnum = {
+  id: 'id',
+  area: 'area',
+  tagline: 'tagline'
+};
+
+exports.Prisma.ContentResourceScalarFieldEnum = {
+  id: 'id',
+  href: 'href',
+  title: 'title',
+  subtitle: 'subtitle',
+  typeId: 'typeId',
+  icon: 'icon',
+  authorId: 'authorId',
+  date: 'date',
+  areaId: 'areaId',
+  authorString: 'authorString'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -355,6 +387,10 @@ exports.Prisma.SortOrder = {
 
 exports.Prisma.NullableJsonNullValueInput = {
   DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.JsonNullValueInput = {
   JsonNull: Prisma.JsonNull
 };
 
@@ -402,6 +438,7 @@ exports.ContentStatus = exports.$Enums.ContentStatus = {
 };
 
 exports.Prisma.ModelName = {
+  Settings: 'Settings',
   Country: 'Country',
   CountryLanguage: 'CountryLanguage',
   CountryCurrency: 'CountryCurrency',
@@ -429,7 +466,10 @@ exports.Prisma.ModelName = {
   Social: 'Social',
   PostVersionHistory: 'PostVersionHistory',
   PathwayTypes: 'PathwayTypes',
-  PathwayCategories: 'PathwayCategories'
+  PathwayCategories: 'PathwayCategories',
+  ContentResourceType: 'ContentResourceType',
+  ContentResourceArea: 'ContentResourceArea',
+  ContentResource: 'ContentResource'
 };
 
 /**

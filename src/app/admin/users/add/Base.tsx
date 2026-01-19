@@ -9,7 +9,6 @@ import { Icon } from '~/components'
 import { useToast } from '~/hooks/useToast'
 import { api } from '~/lib/api'
 import { cn } from '~/lib/cn'
-import { HeadlessCB } from './Headless'
 
 type NewUserData = Partial<U> & {
 	success: boolean
@@ -66,7 +65,6 @@ export const NewUserForm = () => {
 
 	return (
 		<>
-			<HeadlessCB />
 			<Form className='grid max-w-sm grid-cols-1 items-baseline gap-y-6'>
 				<Toaster.El />
 				<FormField

@@ -1,4 +1,6 @@
-import { Icon as IconEl, SubSection } from '~/components'
+import { InlineLink } from '@/admin/_components/Link'
+import { Icon as IconEl } from '~/components/Icon'
+import { Subsection, SubsectionContent, SubsectionHeading } from '~/components/Structure/Subsection'
 import { cn } from '~/lib/cn'
 import type { tResource } from '..'
 
@@ -18,12 +20,12 @@ export const ResourceLink = ({
 	target?: string
 }) => (
 	<div>
-		<a
+		<InlineLink
 			href={href}
-			className='text-lg/1 font-semibold text-zinc-900 hover:underline dark:text-zinc-100'
+			className='text-foreground text-lg/1 font-semibold hover:underline dark:text-zinc-100'
 			target={target}>
 			{title}
-		</a>
+		</InlineLink>
 		{subtitle && (
 			<p className='mt-0 text-sm text-zinc-600 dark:text-zinc-400'>
 				{author || date ?
@@ -49,7 +51,7 @@ export const ResourceIcon = ({ type }: { type: string }) => (
 		: type === 'guide' ?
 			<IconEl
 				IconName='BookLibraryIcon'
-				className='text-brand-bright h-6 w-6'
+				className='text-hml-red h-6 w-6'
 			/>
 		:	<IconEl
 				IconName='InfoCircleIcon'
@@ -108,10 +110,9 @@ export const ResourceSection = ({
 	resourceArray: tResource[string]['links']
 }) => {
 	return (
-		<SubSection
-			title={sectionTitle}
-			className='mb-8'>
-			<div className='mx-auto my-10 grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 md:mx-0 md:max-w-none md:grid-cols-2'>
+		<Subsection>
+			<SubsectionHeading>{sectionTitle}</SubsectionHeading>
+			<SubsectionContent className='grid auto-rows-fr grid-cols-1 gap-8 md:mx-0 md:max-w-none md:grid-cols-2'>
 				{resourceArray.map(post => (
 					<Resource
 						key={post.href}
@@ -125,7 +126,7 @@ export const ResourceSection = ({
 						target={post.target || '_self'}
 					/>
 				))}
-			</div>
-		</SubSection>
+			</SubsectionContent>
+		</Subsection>
 	)
 }

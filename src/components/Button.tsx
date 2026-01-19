@@ -10,11 +10,11 @@ export const Button = ({
 	preIcon?: Props.Icon['IconName']
 }) => {
 	const classes = cn(
-		'click relative rounded-md px-3.5 py-2.5 text-xs font-semibold tracking-wide whitespace-nowrap uppercase transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-0 has-[svg]:py-2',
-		variant == 'default' && 'bg-brand hover:bg-brand-bright text-white ring-zinc-600',
-		variant == 'bright' && 'bg-brand-bright hover:bg-brand text-white ring-zinc-600',
+		'click relative rounded-md px-3.5 py-2.5 text-xs font-semibold tracking-wide whitespace-nowrap uppercase transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-0 has-[svg]:py-2 dark:tracking-normal',
+		(variant == 'default' || variant == 'bright')
+			&& 'dark:bg-hml-mulberry dark:hover:bg-hml-mulberry-700 bg-hml-red hover:bg-hml-mulberry text-white',
 		variant == 'muted'
-			&& 'text-brand-bright hover:bg-muted outline-brand-bright ring-zinc-600 outline-1 hover:outline-current/10',
+			&& 'text-hml-red hover:bg-muted outline-hml-red dark:text-hml-grey dark:bg-hml-mulberry-100/10 ring-zinc-600 outline-1 hover:outline-current/10 dark:outline-transparent',
 		variant == 'ghost' && 'border-0 bg-transparent text-current',
 		props.className
 	)

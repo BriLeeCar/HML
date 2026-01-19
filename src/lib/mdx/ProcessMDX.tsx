@@ -304,14 +304,14 @@ const MDXSubSection = ({ source }: { source: string }) => {
 		if (line.startsWith('### ')) {
 			removedLines.push(i)
 			splitSource[i] =
-				`${removedLines.length > 1 ? '</SubSection>\n' : ''}<SubSection title={"${line.replace('### ', '')}"}>`
+				`${removedLines.length > 1 ? '</Subsection>\n' : ''}<Subsection title={"${line.replace('### ', '')}"}>`
 		}
 		if (line.startsWith('## ') || line.startsWith('</Section')) {
-			splitSource[i] = `${removedLines.length > 0 ? '</SubSection>\n' : ''}${line}`
+			splitSource[i] = `${removedLines.length > 0 ? '</Subsection>\n' : ''}${line}`
 			removedLines = []
 		}
 	})
-	return splitSource.join('\n') + `${removedLines.length > 0 ? '</SubSection>' : ''}`
+	return splitSource.join('\n') + `${removedLines.length > 0 ? '</Subsection>' : ''}`
 }
 
 const replaceLinks = (text: string) => {

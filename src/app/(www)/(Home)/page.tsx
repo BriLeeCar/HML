@@ -19,12 +19,11 @@ const Home = () => {
 			<div
 				className={cn(
 					'relative z-10 hidden h-screen max-h-screen overflow-y-hidden',
-					'items-around flex-col justify-between pt-28 pl-0 md:flex',
-					'max-w-[70vw] items-center justify-center gap-6 py-3',
+					'items-around max-w-[70vw] flex-col items-center justify-start gap-6 py-3 pt-28 pl-0 md:flex',
 					'flex-col self-stretch'
 				)}>
 				<HeadingText />
-				<div className='flex flex-col items-center justify-start self-stretch px-3 pt-12 text-white italic'>
+				<div className='text-foreground flex flex-col items-center justify-start self-stretch px-3 pt-12 italic'>
 					<NowBtn />
 					<SmallBtns />
 				</div>
@@ -38,7 +37,7 @@ const Home = () => {
 					'min-[1200px]:translate-x-3/4 min-[1200px]:translate-y-0 min-[1200px]:rotate-0 min-[1200px]:overflow-visible',
 					'hidden h-1/2 w-[50vw] overflow-clip min-[600px]:h-screen md:block'
 				)}>
-				<MapSvg className='lg:max-h-fill xl: stroke-background fill-muted/50 h-auto w-screen stroke-1 shadow-none select-none lg:relative lg:w-screen'>
+				<MapSvg className='lg:max-h-fill xl: stroke-background fill-muted/20 dark:fill-hml-red/25 dark:*:stroke-background h-auto w-screen stroke-1 shadow-none select-none lg:relative lg:w-screen'>
 					{db.getMapPaths().map(country => {
 						const { svgPath, abbr, name } = country
 
@@ -70,7 +69,7 @@ const MobileHome = () => {
 					'inline-flex flex-col self-stretch'
 				)}>
 				<hgroup className='pl-4'>
-					<TopText className='text-brand-bright pt-8' />
+					<TopText className='text-hml-red pt-8' />
 					<h1 className='sr-only'>Help Me Leave</h1>
 
 					<span className='-mt-6 block px-4 text-xl leading-[1.25lh] font-medium text-black italic dark:text-white dark:text-shadow-xs'>
@@ -87,7 +86,7 @@ const MobileHome = () => {
 					<Button
 						variant='ghost'
 						href='/leave-now'
-						className='decoration-brand-bright hover:text-brand-bright to-background text-foreground/85 flex h-min grow items-start justify-center bg-linear-to-b from-transparent to-25% pb-8 text-8xl tracking-tight italic underline underline-offset-12'>
+						className='decoration-hml-red hover:text-hml-mulberry to-background text-foreground/85 flex h-min grow items-start justify-center bg-linear-to-b from-transparent to-25% pb-8 text-8xl tracking-tight italic underline underline-offset-12'>
 						NOW
 					</Button>
 				</h2>

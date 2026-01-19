@@ -80,8 +80,6 @@ export const fetchData = async ({ urlID }: { urlID?: string }) => {
 		}
 	}
 
-	console.log(applicants)
-
 	if (urlID) {
 		return applicants.filter(applicant => applicant.id === urlID)
 	}

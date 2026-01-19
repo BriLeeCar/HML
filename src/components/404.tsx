@@ -1,12 +1,27 @@
 'use client'
 
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { Icon } from './Icon'
+
 export const NotFound404 = () => {
+	const path = usePathname()
+	const link =
+		path?.includes('/admin') ?
+			{
+				href: '/admin',
+				text: 'Admin Dashboard',
+			}
+		:	{
+				href: '/',
+				text: 'Homepage',
+			}
 	return (
-		<div className='relative flex h-screen w-full flex-col items-center justify-center gap-1'>
-			<span className='font-playfair block text-9xl font-thin text-shadow-xs'>404</span>
-			<span className='font-sans text-2xl font-extralight tracking-tight text-gray-400 uppercase'>
-				page not found
-			</span>
-		</div>
+		<Link
+			href={link.href}
+			className='mt-2 flex items-center gap-x-2 font-semibold'>
+			<Icon IconName='ArrowLeftStrokeIcon' />
+			Go to the {link.text}
+		</Link>
 	)
 }

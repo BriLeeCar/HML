@@ -46,6 +46,10 @@ export const linkGroups = [
 				title: 'World Map',
 				href: '/map',
 			},
+			{
+				title: 'Media & Press',
+				href: '/media',
+			},
 		],
 	},
 	{

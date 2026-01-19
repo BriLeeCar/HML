@@ -8,7 +8,7 @@ export const JuneteenthFlag = ({ ...props }: Props.IconPath) => {
 			width='23'
 			height='26'
 			viewBox='0 0 23 26'
-			fill='none'
+			fill='currentColor'
 			xmlns='http://www.w3.org/2000/svg'>
 			<path
 				d='M18.3003 8.17453C18.0507 7.99888 17.7272 7.96193 17.4406 8.08211L16.812 8.33168C14.9908 9.05276 12.9662 8.90487 11.2559 7.95267C9.1296 6.75085 6.5411 6.68612 4.35011 7.75851L4.1652 7.85099C4.00804 7.92495 3.90638 8.09136 3.90638 8.26701L3.90637 17.5664C3.90637 17.7464 4.09306 17.8729 4.26359 17.8154C4.97053 17.5771 6.43111 17.174 7.6228 17.174C9.09049 17.174 8.95395 17.1049 10.7936 18.1404C11.9215 18.7782 13.1696 19.0925 14.4176 19.0925C15.3328 19.0925 16.2573 18.9169 17.1356 18.5748L18.1062 18.1958C18.4668 18.0571 18.6887 17.7151 18.6887 17.3361V8.9326C18.6887 8.62753 18.5407 8.34093 18.2819 8.16528H18.3003V8.17453Z'
@@ -136,13 +136,7 @@ export const IconAttributes = ({
 	as?: keyof JSX.IntrinsicElements
 	attr: ReturnType<ApiData.DB['getCommunityAttributes']>
 }) => {
-	const classNames = cn(
-		'*:border-foreground/20',
-		'flex',
-		'items-center justify-between',
-		'px-2 *:border-r *:px-2 *:last:border-0',
-		props.className
-	)
+	const classNames = cn('flex', 'items-center justify-between', 'px-2 *:px-2', props.className)
 
 	if (!as) {
 		return (
@@ -150,20 +144,12 @@ export const IconAttributes = ({
 				<InnerAttributeLI attr={attr} />
 			</ul>
 		)
-	}
-
-	return (
-		<span
-			className={cn(
-				'*:border-foreground/20',
-				'flex',
-				'items-center justify-between',
-				'px-2 *:border-r *:px-2 *:last:border-0',
-				props.className
-			)}>
-			<InnerAttributeSpan attr={attr} />
-		</span>
-	)
+	} else
+		return (
+			<span className={cn('flex', 'items-center justify-between', 'gap-x-4 px-2', props.className)}>
+				<InnerAttributeSpan attr={attr} />
+			</span>
+		)
 }
 
 const InnerAttributeLI = ({
@@ -194,11 +180,7 @@ const InnerAttributeSpan = ({
 					className={
 						'font-bold text-[#498DD5] uppercase no-underline! decoration-transparent decoration-0!'
 					}>
-					{attr.prideScore && attr.prideScore >= 0 && (
-						<>
-							<PrideFlag className='mr-1 inline-block' />
-						</>
-					)}
+					UN
 				</span>
 			)}
 			{attr.transSafety && (
@@ -208,7 +190,7 @@ const InnerAttributeSpan = ({
 			)}
 			{attr.prideScore && attr.prideScore >= 0 && (
 				<span className='text-current/50'>
-					<PrideFlag className='mr-1 inline-block' />
+					<PrideFlag />
 				</span>
 			)}
 		</>

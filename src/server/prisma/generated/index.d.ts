@@ -14,6 +14,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model Settings
+ * 
+ */
+export type Settings = $Result.DefaultSelection<Prisma.$SettingsPayload>
+/**
  * Model Country
  * 
  */
@@ -153,6 +158,21 @@ export type PathwayTypes = $Result.DefaultSelection<Prisma.$PathwayTypesPayload>
  * 
  */
 export type PathwayCategories = $Result.DefaultSelection<Prisma.$PathwayCategoriesPayload>
+/**
+ * Model ContentResourceType
+ * 
+ */
+export type ContentResourceType = $Result.DefaultSelection<Prisma.$ContentResourceTypePayload>
+/**
+ * Model ContentResourceArea
+ * 
+ */
+export type ContentResourceArea = $Result.DefaultSelection<Prisma.$ContentResourceAreaPayload>
+/**
+ * Model ContentResource
+ * 
+ */
+export type ContentResource = $Result.DefaultSelection<Prisma.$ContentResourcePayload>
 
 /**
  * Enums
@@ -263,8 +283,8 @@ export const PathwayNoteType: typeof $Enums.PathwayNoteType
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Countries
- * const countries = await prisma.country.findMany()
+ * // Fetch zero or more Settings
+ * const settings = await prisma.settings.findMany()
  * ```
  *
  *
@@ -284,8 +304,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Countries
-   * const countries = await prisma.country.findMany()
+   * // Fetch zero or more Settings
+   * const settings = await prisma.settings.findMany()
    * ```
    *
    *
@@ -375,6 +395,16 @@ export class PrismaClient<
   }>>
 
       /**
+   * `prisma.settings`: Exposes CRUD operations for the **Settings** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Settings
+    * const settings = await prisma.settings.findMany()
+    * ```
+    */
+  get settings(): Prisma.SettingsDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.country`: Exposes CRUD operations for the **Country** model.
     * Example usage:
     * ```ts
@@ -653,6 +683,36 @@ export class PrismaClient<
     * ```
     */
   get pathwayCategories(): Prisma.PathwayCategoriesDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.contentResourceType`: Exposes CRUD operations for the **ContentResourceType** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ContentResourceTypes
+    * const contentResourceTypes = await prisma.contentResourceType.findMany()
+    * ```
+    */
+  get contentResourceType(): Prisma.ContentResourceTypeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.contentResourceArea`: Exposes CRUD operations for the **ContentResourceArea** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ContentResourceAreas
+    * const contentResourceAreas = await prisma.contentResourceArea.findMany()
+    * ```
+    */
+  get contentResourceArea(): Prisma.ContentResourceAreaDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.contentResource`: Exposes CRUD operations for the **ContentResource** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ContentResources
+    * const contentResources = await prisma.contentResource.findMany()
+    * ```
+    */
+  get contentResource(): Prisma.ContentResourceDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1094,6 +1154,7 @@ export namespace Prisma {
 
 
   export const ModelName: {
+    Settings: 'Settings',
     Country: 'Country',
     CountryLanguage: 'CountryLanguage',
     CountryCurrency: 'CountryCurrency',
@@ -1121,7 +1182,10 @@ export namespace Prisma {
     Social: 'Social',
     PostVersionHistory: 'PostVersionHistory',
     PathwayTypes: 'PathwayTypes',
-    PathwayCategories: 'PathwayCategories'
+    PathwayCategories: 'PathwayCategories',
+    ContentResourceType: 'ContentResourceType',
+    ContentResourceArea: 'ContentResourceArea',
+    ContentResource: 'ContentResource'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1140,10 +1204,84 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "country" | "countryLanguage" | "countryCurrency" | "pathway" | "pathwayPipeline" | "pathwayRestrictedNationality" | "pathwayDocuments" | "currency" | "documents" | "language" | "post" | "postTag" | "tag" | "tagHierarchy" | "resource" | "block" | "blockField" | "postBlock" | "session" | "user" | "verificationToken" | "userSocial" | "userRoles" | "roles" | "social" | "postVersionHistory" | "pathwayTypes" | "pathwayCategories"
+      modelProps: "settings" | "country" | "countryLanguage" | "countryCurrency" | "pathway" | "pathwayPipeline" | "pathwayRestrictedNationality" | "pathwayDocuments" | "currency" | "documents" | "language" | "post" | "postTag" | "tag" | "tagHierarchy" | "resource" | "block" | "blockField" | "postBlock" | "session" | "user" | "verificationToken" | "userSocial" | "userRoles" | "roles" | "social" | "postVersionHistory" | "pathwayTypes" | "pathwayCategories" | "contentResourceType" | "contentResourceArea" | "contentResource"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
+      Settings: {
+        payload: Prisma.$SettingsPayload<ExtArgs>
+        fields: Prisma.SettingsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SettingsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SettingsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SettingsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SettingsPayload>
+          }
+          findFirst: {
+            args: Prisma.SettingsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SettingsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SettingsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SettingsPayload>
+          }
+          findMany: {
+            args: Prisma.SettingsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SettingsPayload>[]
+          }
+          create: {
+            args: Prisma.SettingsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SettingsPayload>
+          }
+          createMany: {
+            args: Prisma.SettingsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SettingsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SettingsPayload>[]
+          }
+          delete: {
+            args: Prisma.SettingsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SettingsPayload>
+          }
+          update: {
+            args: Prisma.SettingsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SettingsPayload>
+          }
+          deleteMany: {
+            args: Prisma.SettingsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SettingsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SettingsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SettingsPayload>[]
+          }
+          upsert: {
+            args: Prisma.SettingsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SettingsPayload>
+          }
+          aggregate: {
+            args: Prisma.SettingsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSettings>
+          }
+          groupBy: {
+            args: Prisma.SettingsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SettingsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SettingsCountArgs<ExtArgs>
+            result: $Utils.Optional<SettingsCountAggregateOutputType> | number
+          }
+        }
+      }
       Country: {
         payload: Prisma.$CountryPayload<ExtArgs>
         fields: Prisma.CountryFieldRefs
@@ -3216,6 +3354,228 @@ export namespace Prisma {
           }
         }
       }
+      ContentResourceType: {
+        payload: Prisma.$ContentResourceTypePayload<ExtArgs>
+        fields: Prisma.ContentResourceTypeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ContentResourceTypeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourceTypePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ContentResourceTypeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourceTypePayload>
+          }
+          findFirst: {
+            args: Prisma.ContentResourceTypeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourceTypePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ContentResourceTypeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourceTypePayload>
+          }
+          findMany: {
+            args: Prisma.ContentResourceTypeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourceTypePayload>[]
+          }
+          create: {
+            args: Prisma.ContentResourceTypeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourceTypePayload>
+          }
+          createMany: {
+            args: Prisma.ContentResourceTypeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ContentResourceTypeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourceTypePayload>[]
+          }
+          delete: {
+            args: Prisma.ContentResourceTypeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourceTypePayload>
+          }
+          update: {
+            args: Prisma.ContentResourceTypeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourceTypePayload>
+          }
+          deleteMany: {
+            args: Prisma.ContentResourceTypeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ContentResourceTypeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ContentResourceTypeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourceTypePayload>[]
+          }
+          upsert: {
+            args: Prisma.ContentResourceTypeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourceTypePayload>
+          }
+          aggregate: {
+            args: Prisma.ContentResourceTypeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateContentResourceType>
+          }
+          groupBy: {
+            args: Prisma.ContentResourceTypeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ContentResourceTypeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ContentResourceTypeCountArgs<ExtArgs>
+            result: $Utils.Optional<ContentResourceTypeCountAggregateOutputType> | number
+          }
+        }
+      }
+      ContentResourceArea: {
+        payload: Prisma.$ContentResourceAreaPayload<ExtArgs>
+        fields: Prisma.ContentResourceAreaFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ContentResourceAreaFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourceAreaPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ContentResourceAreaFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourceAreaPayload>
+          }
+          findFirst: {
+            args: Prisma.ContentResourceAreaFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourceAreaPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ContentResourceAreaFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourceAreaPayload>
+          }
+          findMany: {
+            args: Prisma.ContentResourceAreaFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourceAreaPayload>[]
+          }
+          create: {
+            args: Prisma.ContentResourceAreaCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourceAreaPayload>
+          }
+          createMany: {
+            args: Prisma.ContentResourceAreaCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ContentResourceAreaCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourceAreaPayload>[]
+          }
+          delete: {
+            args: Prisma.ContentResourceAreaDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourceAreaPayload>
+          }
+          update: {
+            args: Prisma.ContentResourceAreaUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourceAreaPayload>
+          }
+          deleteMany: {
+            args: Prisma.ContentResourceAreaDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ContentResourceAreaUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ContentResourceAreaUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourceAreaPayload>[]
+          }
+          upsert: {
+            args: Prisma.ContentResourceAreaUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourceAreaPayload>
+          }
+          aggregate: {
+            args: Prisma.ContentResourceAreaAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateContentResourceArea>
+          }
+          groupBy: {
+            args: Prisma.ContentResourceAreaGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ContentResourceAreaGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ContentResourceAreaCountArgs<ExtArgs>
+            result: $Utils.Optional<ContentResourceAreaCountAggregateOutputType> | number
+          }
+        }
+      }
+      ContentResource: {
+        payload: Prisma.$ContentResourcePayload<ExtArgs>
+        fields: Prisma.ContentResourceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ContentResourceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourcePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ContentResourceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourcePayload>
+          }
+          findFirst: {
+            args: Prisma.ContentResourceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourcePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ContentResourceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourcePayload>
+          }
+          findMany: {
+            args: Prisma.ContentResourceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourcePayload>[]
+          }
+          create: {
+            args: Prisma.ContentResourceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourcePayload>
+          }
+          createMany: {
+            args: Prisma.ContentResourceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ContentResourceCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourcePayload>[]
+          }
+          delete: {
+            args: Prisma.ContentResourceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourcePayload>
+          }
+          update: {
+            args: Prisma.ContentResourceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourcePayload>
+          }
+          deleteMany: {
+            args: Prisma.ContentResourceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ContentResourceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ContentResourceUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourcePayload>[]
+          }
+          upsert: {
+            args: Prisma.ContentResourceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentResourcePayload>
+          }
+          aggregate: {
+            args: Prisma.ContentResourceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateContentResource>
+          }
+          groupBy: {
+            args: Prisma.ContentResourceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ContentResourceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ContentResourceCountArgs<ExtArgs>
+            result: $Utils.Optional<ContentResourceCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -3312,6 +3672,7 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
+    settings?: SettingsOmit
     country?: CountryOmit
     countryLanguage?: CountryLanguageOmit
     countryCurrency?: CountryCurrencyOmit
@@ -3340,6 +3701,9 @@ export namespace Prisma {
     postVersionHistory?: PostVersionHistoryOmit
     pathwayTypes?: PathwayTypesOmit
     pathwayCategories?: PathwayCategoriesOmit
+    contentResourceType?: ContentResourceTypeOmit
+    contentResourceArea?: ContentResourceAreaOmit
+    contentResource?: ContentResourceOmit
   }
 
   /* Types for Logging */
@@ -3792,6 +4156,7 @@ export namespace Prisma {
     socials: number
     Pathway: number
     resources: number
+    contentResources: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3802,6 +4167,7 @@ export namespace Prisma {
     socials?: boolean | UserCountOutputTypeCountSocialsArgs
     Pathway?: boolean | UserCountOutputTypeCountPathwayArgs
     resources?: boolean | UserCountOutputTypeCountResourcesArgs
+    contentResources?: boolean | UserCountOutputTypeCountContentResourcesArgs
   }
 
   // Custom InputTypes
@@ -3862,6 +4228,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountResourcesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ResourceWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountContentResourcesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContentResourceWhereInput
   }
 
 
@@ -3968,8 +4341,1073 @@ export namespace Prisma {
 
 
   /**
+   * Count Type ContentResourceTypeCountOutputType
+   */
+
+  export type ContentResourceTypeCountOutputType = {
+    contentResources: number
+  }
+
+  export type ContentResourceTypeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    contentResources?: boolean | ContentResourceTypeCountOutputTypeCountContentResourcesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ContentResourceTypeCountOutputType without action
+   */
+  export type ContentResourceTypeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceTypeCountOutputType
+     */
+    select?: ContentResourceTypeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ContentResourceTypeCountOutputType without action
+   */
+  export type ContentResourceTypeCountOutputTypeCountContentResourcesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContentResourceWhereInput
+  }
+
+
+  /**
+   * Count Type ContentResourceAreaCountOutputType
+   */
+
+  export type ContentResourceAreaCountOutputType = {
+    contentResources: number
+  }
+
+  export type ContentResourceAreaCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    contentResources?: boolean | ContentResourceAreaCountOutputTypeCountContentResourcesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ContentResourceAreaCountOutputType without action
+   */
+  export type ContentResourceAreaCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceAreaCountOutputType
+     */
+    select?: ContentResourceAreaCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ContentResourceAreaCountOutputType without action
+   */
+  export type ContentResourceAreaCountOutputTypeCountContentResourcesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContentResourceWhereInput
+  }
+
+
+  /**
    * Models
    */
+
+  /**
+   * Model Settings
+   */
+
+  export type AggregateSettings = {
+    _count: SettingsCountAggregateOutputType | null
+    _avg: SettingsAvgAggregateOutputType | null
+    _sum: SettingsSumAggregateOutputType | null
+    _min: SettingsMinAggregateOutputType | null
+    _max: SettingsMaxAggregateOutputType | null
+  }
+
+  export type SettingsAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type SettingsSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type SettingsMinAggregateOutputType = {
+    id: number | null
+    key: string | null
+    value: string | null
+  }
+
+  export type SettingsMaxAggregateOutputType = {
+    id: number | null
+    key: string | null
+    value: string | null
+  }
+
+  export type SettingsCountAggregateOutputType = {
+    id: number
+    key: number
+    value: number
+    _all: number
+  }
+
+
+  export type SettingsAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type SettingsSumAggregateInputType = {
+    id?: true
+  }
+
+  export type SettingsMinAggregateInputType = {
+    id?: true
+    key?: true
+    value?: true
+  }
+
+  export type SettingsMaxAggregateInputType = {
+    id?: true
+    key?: true
+    value?: true
+  }
+
+  export type SettingsCountAggregateInputType = {
+    id?: true
+    key?: true
+    value?: true
+    _all?: true
+  }
+
+  export type SettingsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Settings to aggregate.
+     */
+    where?: SettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Settings to fetch.
+     */
+    orderBy?: SettingsOrderByWithRelationInput | SettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Settings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Settings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Settings
+    **/
+    _count?: true | SettingsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SettingsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SettingsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SettingsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SettingsMaxAggregateInputType
+  }
+
+  export type GetSettingsAggregateType<T extends SettingsAggregateArgs> = {
+        [P in keyof T & keyof AggregateSettings]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSettings[P]>
+      : GetScalarType<T[P], AggregateSettings[P]>
+  }
+
+
+
+
+  export type SettingsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SettingsWhereInput
+    orderBy?: SettingsOrderByWithAggregationInput | SettingsOrderByWithAggregationInput[]
+    by: SettingsScalarFieldEnum[] | SettingsScalarFieldEnum
+    having?: SettingsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SettingsCountAggregateInputType | true
+    _avg?: SettingsAvgAggregateInputType
+    _sum?: SettingsSumAggregateInputType
+    _min?: SettingsMinAggregateInputType
+    _max?: SettingsMaxAggregateInputType
+  }
+
+  export type SettingsGroupByOutputType = {
+    id: number
+    key: string
+    value: string
+    _count: SettingsCountAggregateOutputType | null
+    _avg: SettingsAvgAggregateOutputType | null
+    _sum: SettingsSumAggregateOutputType | null
+    _min: SettingsMinAggregateOutputType | null
+    _max: SettingsMaxAggregateOutputType | null
+  }
+
+  type GetSettingsGroupByPayload<T extends SettingsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SettingsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SettingsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SettingsGroupByOutputType[P]>
+            : GetScalarType<T[P], SettingsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SettingsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    key?: boolean
+    value?: boolean
+  }, ExtArgs["result"]["settings"]>
+
+  export type SettingsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    key?: boolean
+    value?: boolean
+  }, ExtArgs["result"]["settings"]>
+
+  export type SettingsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    key?: boolean
+    value?: boolean
+  }, ExtArgs["result"]["settings"]>
+
+  export type SettingsSelectScalar = {
+    id?: boolean
+    key?: boolean
+    value?: boolean
+  }
+
+  export type SettingsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "key" | "value", ExtArgs["result"]["settings"]>
+
+  export type $SettingsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Settings"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      key: string
+      value: string
+    }, ExtArgs["result"]["settings"]>
+    composites: {}
+  }
+
+  type SettingsGetPayload<S extends boolean | null | undefined | SettingsDefaultArgs> = $Result.GetResult<Prisma.$SettingsPayload, S>
+
+  type SettingsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SettingsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SettingsCountAggregateInputType | true
+    }
+
+  export interface SettingsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Settings'], meta: { name: 'Settings' } }
+    /**
+     * Find zero or one Settings that matches the filter.
+     * @param {SettingsFindUniqueArgs} args - Arguments to find a Settings
+     * @example
+     * // Get one Settings
+     * const settings = await prisma.settings.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SettingsFindUniqueArgs>(args: SelectSubset<T, SettingsFindUniqueArgs<ExtArgs>>): Prisma__SettingsClient<$Result.GetResult<Prisma.$SettingsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Settings that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SettingsFindUniqueOrThrowArgs} args - Arguments to find a Settings
+     * @example
+     * // Get one Settings
+     * const settings = await prisma.settings.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SettingsFindUniqueOrThrowArgs>(args: SelectSubset<T, SettingsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SettingsClient<$Result.GetResult<Prisma.$SettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Settings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SettingsFindFirstArgs} args - Arguments to find a Settings
+     * @example
+     * // Get one Settings
+     * const settings = await prisma.settings.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SettingsFindFirstArgs>(args?: SelectSubset<T, SettingsFindFirstArgs<ExtArgs>>): Prisma__SettingsClient<$Result.GetResult<Prisma.$SettingsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Settings that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SettingsFindFirstOrThrowArgs} args - Arguments to find a Settings
+     * @example
+     * // Get one Settings
+     * const settings = await prisma.settings.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SettingsFindFirstOrThrowArgs>(args?: SelectSubset<T, SettingsFindFirstOrThrowArgs<ExtArgs>>): Prisma__SettingsClient<$Result.GetResult<Prisma.$SettingsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Settings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SettingsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Settings
+     * const settings = await prisma.settings.findMany()
+     * 
+     * // Get first 10 Settings
+     * const settings = await prisma.settings.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const settingsWithIdOnly = await prisma.settings.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SettingsFindManyArgs>(args?: SelectSubset<T, SettingsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SettingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Settings.
+     * @param {SettingsCreateArgs} args - Arguments to create a Settings.
+     * @example
+     * // Create one Settings
+     * const Settings = await prisma.settings.create({
+     *   data: {
+     *     // ... data to create a Settings
+     *   }
+     * })
+     * 
+     */
+    create<T extends SettingsCreateArgs>(args: SelectSubset<T, SettingsCreateArgs<ExtArgs>>): Prisma__SettingsClient<$Result.GetResult<Prisma.$SettingsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Settings.
+     * @param {SettingsCreateManyArgs} args - Arguments to create many Settings.
+     * @example
+     * // Create many Settings
+     * const settings = await prisma.settings.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SettingsCreateManyArgs>(args?: SelectSubset<T, SettingsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Settings and returns the data saved in the database.
+     * @param {SettingsCreateManyAndReturnArgs} args - Arguments to create many Settings.
+     * @example
+     * // Create many Settings
+     * const settings = await prisma.settings.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Settings and only return the `id`
+     * const settingsWithIdOnly = await prisma.settings.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SettingsCreateManyAndReturnArgs>(args?: SelectSubset<T, SettingsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SettingsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Settings.
+     * @param {SettingsDeleteArgs} args - Arguments to delete one Settings.
+     * @example
+     * // Delete one Settings
+     * const Settings = await prisma.settings.delete({
+     *   where: {
+     *     // ... filter to delete one Settings
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SettingsDeleteArgs>(args: SelectSubset<T, SettingsDeleteArgs<ExtArgs>>): Prisma__SettingsClient<$Result.GetResult<Prisma.$SettingsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Settings.
+     * @param {SettingsUpdateArgs} args - Arguments to update one Settings.
+     * @example
+     * // Update one Settings
+     * const settings = await prisma.settings.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SettingsUpdateArgs>(args: SelectSubset<T, SettingsUpdateArgs<ExtArgs>>): Prisma__SettingsClient<$Result.GetResult<Prisma.$SettingsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Settings.
+     * @param {SettingsDeleteManyArgs} args - Arguments to filter Settings to delete.
+     * @example
+     * // Delete a few Settings
+     * const { count } = await prisma.settings.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SettingsDeleteManyArgs>(args?: SelectSubset<T, SettingsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Settings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SettingsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Settings
+     * const settings = await prisma.settings.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SettingsUpdateManyArgs>(args: SelectSubset<T, SettingsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Settings and returns the data updated in the database.
+     * @param {SettingsUpdateManyAndReturnArgs} args - Arguments to update many Settings.
+     * @example
+     * // Update many Settings
+     * const settings = await prisma.settings.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Settings and only return the `id`
+     * const settingsWithIdOnly = await prisma.settings.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SettingsUpdateManyAndReturnArgs>(args: SelectSubset<T, SettingsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SettingsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Settings.
+     * @param {SettingsUpsertArgs} args - Arguments to update or create a Settings.
+     * @example
+     * // Update or create a Settings
+     * const settings = await prisma.settings.upsert({
+     *   create: {
+     *     // ... data to create a Settings
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Settings we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SettingsUpsertArgs>(args: SelectSubset<T, SettingsUpsertArgs<ExtArgs>>): Prisma__SettingsClient<$Result.GetResult<Prisma.$SettingsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Settings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SettingsCountArgs} args - Arguments to filter Settings to count.
+     * @example
+     * // Count the number of Settings
+     * const count = await prisma.settings.count({
+     *   where: {
+     *     // ... the filter for the Settings we want to count
+     *   }
+     * })
+    **/
+    count<T extends SettingsCountArgs>(
+      args?: Subset<T, SettingsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SettingsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Settings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SettingsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SettingsAggregateArgs>(args: Subset<T, SettingsAggregateArgs>): Prisma.PrismaPromise<GetSettingsAggregateType<T>>
+
+    /**
+     * Group by Settings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SettingsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SettingsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SettingsGroupByArgs['orderBy'] }
+        : { orderBy?: SettingsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SettingsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSettingsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Settings model
+   */
+  readonly fields: SettingsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Settings.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SettingsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Settings model
+   */
+  interface SettingsFieldRefs {
+    readonly id: FieldRef<"Settings", 'Int'>
+    readonly key: FieldRef<"Settings", 'String'>
+    readonly value: FieldRef<"Settings", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Settings findUnique
+   */
+  export type SettingsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Settings
+     */
+    select?: SettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Settings
+     */
+    omit?: SettingsOmit<ExtArgs> | null
+    /**
+     * Filter, which Settings to fetch.
+     */
+    where: SettingsWhereUniqueInput
+  }
+
+  /**
+   * Settings findUniqueOrThrow
+   */
+  export type SettingsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Settings
+     */
+    select?: SettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Settings
+     */
+    omit?: SettingsOmit<ExtArgs> | null
+    /**
+     * Filter, which Settings to fetch.
+     */
+    where: SettingsWhereUniqueInput
+  }
+
+  /**
+   * Settings findFirst
+   */
+  export type SettingsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Settings
+     */
+    select?: SettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Settings
+     */
+    omit?: SettingsOmit<ExtArgs> | null
+    /**
+     * Filter, which Settings to fetch.
+     */
+    where?: SettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Settings to fetch.
+     */
+    orderBy?: SettingsOrderByWithRelationInput | SettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Settings.
+     */
+    cursor?: SettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Settings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Settings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Settings.
+     */
+    distinct?: SettingsScalarFieldEnum | SettingsScalarFieldEnum[]
+  }
+
+  /**
+   * Settings findFirstOrThrow
+   */
+  export type SettingsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Settings
+     */
+    select?: SettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Settings
+     */
+    omit?: SettingsOmit<ExtArgs> | null
+    /**
+     * Filter, which Settings to fetch.
+     */
+    where?: SettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Settings to fetch.
+     */
+    orderBy?: SettingsOrderByWithRelationInput | SettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Settings.
+     */
+    cursor?: SettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Settings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Settings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Settings.
+     */
+    distinct?: SettingsScalarFieldEnum | SettingsScalarFieldEnum[]
+  }
+
+  /**
+   * Settings findMany
+   */
+  export type SettingsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Settings
+     */
+    select?: SettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Settings
+     */
+    omit?: SettingsOmit<ExtArgs> | null
+    /**
+     * Filter, which Settings to fetch.
+     */
+    where?: SettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Settings to fetch.
+     */
+    orderBy?: SettingsOrderByWithRelationInput | SettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Settings.
+     */
+    cursor?: SettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Settings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Settings.
+     */
+    skip?: number
+    distinct?: SettingsScalarFieldEnum | SettingsScalarFieldEnum[]
+  }
+
+  /**
+   * Settings create
+   */
+  export type SettingsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Settings
+     */
+    select?: SettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Settings
+     */
+    omit?: SettingsOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Settings.
+     */
+    data: XOR<SettingsCreateInput, SettingsUncheckedCreateInput>
+  }
+
+  /**
+   * Settings createMany
+   */
+  export type SettingsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Settings.
+     */
+    data: SettingsCreateManyInput | SettingsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Settings createManyAndReturn
+   */
+  export type SettingsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Settings
+     */
+    select?: SettingsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Settings
+     */
+    omit?: SettingsOmit<ExtArgs> | null
+    /**
+     * The data used to create many Settings.
+     */
+    data: SettingsCreateManyInput | SettingsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Settings update
+   */
+  export type SettingsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Settings
+     */
+    select?: SettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Settings
+     */
+    omit?: SettingsOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Settings.
+     */
+    data: XOR<SettingsUpdateInput, SettingsUncheckedUpdateInput>
+    /**
+     * Choose, which Settings to update.
+     */
+    where: SettingsWhereUniqueInput
+  }
+
+  /**
+   * Settings updateMany
+   */
+  export type SettingsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Settings.
+     */
+    data: XOR<SettingsUpdateManyMutationInput, SettingsUncheckedUpdateManyInput>
+    /**
+     * Filter which Settings to update
+     */
+    where?: SettingsWhereInput
+    /**
+     * Limit how many Settings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Settings updateManyAndReturn
+   */
+  export type SettingsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Settings
+     */
+    select?: SettingsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Settings
+     */
+    omit?: SettingsOmit<ExtArgs> | null
+    /**
+     * The data used to update Settings.
+     */
+    data: XOR<SettingsUpdateManyMutationInput, SettingsUncheckedUpdateManyInput>
+    /**
+     * Filter which Settings to update
+     */
+    where?: SettingsWhereInput
+    /**
+     * Limit how many Settings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Settings upsert
+   */
+  export type SettingsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Settings
+     */
+    select?: SettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Settings
+     */
+    omit?: SettingsOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Settings to update in case it exists.
+     */
+    where: SettingsWhereUniqueInput
+    /**
+     * In case the Settings found by the `where` argument doesn't exist, create a new Settings with this data.
+     */
+    create: XOR<SettingsCreateInput, SettingsUncheckedCreateInput>
+    /**
+     * In case the Settings was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SettingsUpdateInput, SettingsUncheckedUpdateInput>
+  }
+
+  /**
+   * Settings delete
+   */
+  export type SettingsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Settings
+     */
+    select?: SettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Settings
+     */
+    omit?: SettingsOmit<ExtArgs> | null
+    /**
+     * Filter which Settings to delete.
+     */
+    where: SettingsWhereUniqueInput
+  }
+
+  /**
+   * Settings deleteMany
+   */
+  export type SettingsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Settings to delete
+     */
+    where?: SettingsWhereInput
+    /**
+     * Limit how many Settings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Settings without action
+   */
+  export type SettingsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Settings
+     */
+    select?: SettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Settings
+     */
+    omit?: SettingsOmit<ExtArgs> | null
+  }
+
 
   /**
    * Model Country
@@ -25451,6 +26889,7 @@ export namespace Prisma {
     socials?: boolean | User$socialsArgs<ExtArgs>
     Pathway?: boolean | User$PathwayArgs<ExtArgs>
     resources?: boolean | User$resourcesArgs<ExtArgs>
+    contentResources?: boolean | User$contentResourcesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -25505,6 +26944,7 @@ export namespace Prisma {
     socials?: boolean | User$socialsArgs<ExtArgs>
     Pathway?: boolean | User$PathwayArgs<ExtArgs>
     resources?: boolean | User$resourcesArgs<ExtArgs>
+    contentResources?: boolean | User$contentResourcesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -25520,6 +26960,7 @@ export namespace Prisma {
       socials: Prisma.$UserSocialPayload<ExtArgs>[]
       Pathway: Prisma.$PathwayPayload<ExtArgs>[]
       resources: Prisma.$ResourcePayload<ExtArgs>[]
+      contentResources: Prisma.$ContentResourcePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -25934,6 +27375,7 @@ export namespace Prisma {
     socials<T extends User$socialsArgs<ExtArgs> = {}>(args?: Subset<T, User$socialsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserSocialPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Pathway<T extends User$PathwayArgs<ExtArgs> = {}>(args?: Subset<T, User$PathwayArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathwayPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     resources<T extends User$resourcesArgs<ExtArgs> = {}>(args?: Subset<T, User$resourcesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ResourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    contentResources<T extends User$contentResourcesArgs<ExtArgs> = {}>(args?: Subset<T, User$contentResourcesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContentResourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -26527,6 +27969,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ResourceScalarFieldEnum | ResourceScalarFieldEnum[]
+  }
+
+  /**
+   * User.contentResources
+   */
+  export type User$contentResourcesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResource
+     */
+    select?: ContentResourceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResource
+     */
+    omit?: ContentResourceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceInclude<ExtArgs> | null
+    where?: ContentResourceWhereInput
+    orderBy?: ContentResourceOrderByWithRelationInput | ContentResourceOrderByWithRelationInput[]
+    cursor?: ContentResourceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContentResourceScalarFieldEnum | ContentResourceScalarFieldEnum[]
   }
 
   /**
@@ -35122,6 +36588,3371 @@ export namespace Prisma {
 
 
   /**
+   * Model ContentResourceType
+   */
+
+  export type AggregateContentResourceType = {
+    _count: ContentResourceTypeCountAggregateOutputType | null
+    _avg: ContentResourceTypeAvgAggregateOutputType | null
+    _sum: ContentResourceTypeSumAggregateOutputType | null
+    _min: ContentResourceTypeMinAggregateOutputType | null
+    _max: ContentResourceTypeMaxAggregateOutputType | null
+  }
+
+  export type ContentResourceTypeAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ContentResourceTypeSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ContentResourceTypeMinAggregateOutputType = {
+    id: number | null
+    type: string | null
+    icon: string | null
+    color: string | null
+  }
+
+  export type ContentResourceTypeMaxAggregateOutputType = {
+    id: number | null
+    type: string | null
+    icon: string | null
+    color: string | null
+  }
+
+  export type ContentResourceTypeCountAggregateOutputType = {
+    id: number
+    type: number
+    icon: number
+    color: number
+    _all: number
+  }
+
+
+  export type ContentResourceTypeAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type ContentResourceTypeSumAggregateInputType = {
+    id?: true
+  }
+
+  export type ContentResourceTypeMinAggregateInputType = {
+    id?: true
+    type?: true
+    icon?: true
+    color?: true
+  }
+
+  export type ContentResourceTypeMaxAggregateInputType = {
+    id?: true
+    type?: true
+    icon?: true
+    color?: true
+  }
+
+  export type ContentResourceTypeCountAggregateInputType = {
+    id?: true
+    type?: true
+    icon?: true
+    color?: true
+    _all?: true
+  }
+
+  export type ContentResourceTypeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContentResourceType to aggregate.
+     */
+    where?: ContentResourceTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContentResourceTypes to fetch.
+     */
+    orderBy?: ContentResourceTypeOrderByWithRelationInput | ContentResourceTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ContentResourceTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContentResourceTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContentResourceTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ContentResourceTypes
+    **/
+    _count?: true | ContentResourceTypeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ContentResourceTypeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ContentResourceTypeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ContentResourceTypeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ContentResourceTypeMaxAggregateInputType
+  }
+
+  export type GetContentResourceTypeAggregateType<T extends ContentResourceTypeAggregateArgs> = {
+        [P in keyof T & keyof AggregateContentResourceType]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateContentResourceType[P]>
+      : GetScalarType<T[P], AggregateContentResourceType[P]>
+  }
+
+
+
+
+  export type ContentResourceTypeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContentResourceTypeWhereInput
+    orderBy?: ContentResourceTypeOrderByWithAggregationInput | ContentResourceTypeOrderByWithAggregationInput[]
+    by: ContentResourceTypeScalarFieldEnum[] | ContentResourceTypeScalarFieldEnum
+    having?: ContentResourceTypeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ContentResourceTypeCountAggregateInputType | true
+    _avg?: ContentResourceTypeAvgAggregateInputType
+    _sum?: ContentResourceTypeSumAggregateInputType
+    _min?: ContentResourceTypeMinAggregateInputType
+    _max?: ContentResourceTypeMaxAggregateInputType
+  }
+
+  export type ContentResourceTypeGroupByOutputType = {
+    id: number
+    type: string
+    icon: string | null
+    color: string | null
+    _count: ContentResourceTypeCountAggregateOutputType | null
+    _avg: ContentResourceTypeAvgAggregateOutputType | null
+    _sum: ContentResourceTypeSumAggregateOutputType | null
+    _min: ContentResourceTypeMinAggregateOutputType | null
+    _max: ContentResourceTypeMaxAggregateOutputType | null
+  }
+
+  type GetContentResourceTypeGroupByPayload<T extends ContentResourceTypeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ContentResourceTypeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ContentResourceTypeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ContentResourceTypeGroupByOutputType[P]>
+            : GetScalarType<T[P], ContentResourceTypeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ContentResourceTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    icon?: boolean
+    color?: boolean
+    contentResources?: boolean | ContentResourceType$contentResourcesArgs<ExtArgs>
+    _count?: boolean | ContentResourceTypeCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contentResourceType"]>
+
+  export type ContentResourceTypeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    icon?: boolean
+    color?: boolean
+  }, ExtArgs["result"]["contentResourceType"]>
+
+  export type ContentResourceTypeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    icon?: boolean
+    color?: boolean
+  }, ExtArgs["result"]["contentResourceType"]>
+
+  export type ContentResourceTypeSelectScalar = {
+    id?: boolean
+    type?: boolean
+    icon?: boolean
+    color?: boolean
+  }
+
+  export type ContentResourceTypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "icon" | "color", ExtArgs["result"]["contentResourceType"]>
+  export type ContentResourceTypeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    contentResources?: boolean | ContentResourceType$contentResourcesArgs<ExtArgs>
+    _count?: boolean | ContentResourceTypeCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ContentResourceTypeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ContentResourceTypeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $ContentResourceTypePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ContentResourceType"
+    objects: {
+      contentResources: Prisma.$ContentResourcePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      type: string
+      icon: string | null
+      color: string | null
+    }, ExtArgs["result"]["contentResourceType"]>
+    composites: {}
+  }
+
+  type ContentResourceTypeGetPayload<S extends boolean | null | undefined | ContentResourceTypeDefaultArgs> = $Result.GetResult<Prisma.$ContentResourceTypePayload, S>
+
+  type ContentResourceTypeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ContentResourceTypeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ContentResourceTypeCountAggregateInputType | true
+    }
+
+  export interface ContentResourceTypeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ContentResourceType'], meta: { name: 'ContentResourceType' } }
+    /**
+     * Find zero or one ContentResourceType that matches the filter.
+     * @param {ContentResourceTypeFindUniqueArgs} args - Arguments to find a ContentResourceType
+     * @example
+     * // Get one ContentResourceType
+     * const contentResourceType = await prisma.contentResourceType.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ContentResourceTypeFindUniqueArgs>(args: SelectSubset<T, ContentResourceTypeFindUniqueArgs<ExtArgs>>): Prisma__ContentResourceTypeClient<$Result.GetResult<Prisma.$ContentResourceTypePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ContentResourceType that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ContentResourceTypeFindUniqueOrThrowArgs} args - Arguments to find a ContentResourceType
+     * @example
+     * // Get one ContentResourceType
+     * const contentResourceType = await prisma.contentResourceType.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ContentResourceTypeFindUniqueOrThrowArgs>(args: SelectSubset<T, ContentResourceTypeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ContentResourceTypeClient<$Result.GetResult<Prisma.$ContentResourceTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContentResourceType that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContentResourceTypeFindFirstArgs} args - Arguments to find a ContentResourceType
+     * @example
+     * // Get one ContentResourceType
+     * const contentResourceType = await prisma.contentResourceType.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ContentResourceTypeFindFirstArgs>(args?: SelectSubset<T, ContentResourceTypeFindFirstArgs<ExtArgs>>): Prisma__ContentResourceTypeClient<$Result.GetResult<Prisma.$ContentResourceTypePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContentResourceType that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContentResourceTypeFindFirstOrThrowArgs} args - Arguments to find a ContentResourceType
+     * @example
+     * // Get one ContentResourceType
+     * const contentResourceType = await prisma.contentResourceType.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ContentResourceTypeFindFirstOrThrowArgs>(args?: SelectSubset<T, ContentResourceTypeFindFirstOrThrowArgs<ExtArgs>>): Prisma__ContentResourceTypeClient<$Result.GetResult<Prisma.$ContentResourceTypePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ContentResourceTypes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContentResourceTypeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ContentResourceTypes
+     * const contentResourceTypes = await prisma.contentResourceType.findMany()
+     * 
+     * // Get first 10 ContentResourceTypes
+     * const contentResourceTypes = await prisma.contentResourceType.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const contentResourceTypeWithIdOnly = await prisma.contentResourceType.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ContentResourceTypeFindManyArgs>(args?: SelectSubset<T, ContentResourceTypeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContentResourceTypePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ContentResourceType.
+     * @param {ContentResourceTypeCreateArgs} args - Arguments to create a ContentResourceType.
+     * @example
+     * // Create one ContentResourceType
+     * const ContentResourceType = await prisma.contentResourceType.create({
+     *   data: {
+     *     // ... data to create a ContentResourceType
+     *   }
+     * })
+     * 
+     */
+    create<T extends ContentResourceTypeCreateArgs>(args: SelectSubset<T, ContentResourceTypeCreateArgs<ExtArgs>>): Prisma__ContentResourceTypeClient<$Result.GetResult<Prisma.$ContentResourceTypePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ContentResourceTypes.
+     * @param {ContentResourceTypeCreateManyArgs} args - Arguments to create many ContentResourceTypes.
+     * @example
+     * // Create many ContentResourceTypes
+     * const contentResourceType = await prisma.contentResourceType.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ContentResourceTypeCreateManyArgs>(args?: SelectSubset<T, ContentResourceTypeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ContentResourceTypes and returns the data saved in the database.
+     * @param {ContentResourceTypeCreateManyAndReturnArgs} args - Arguments to create many ContentResourceTypes.
+     * @example
+     * // Create many ContentResourceTypes
+     * const contentResourceType = await prisma.contentResourceType.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ContentResourceTypes and only return the `id`
+     * const contentResourceTypeWithIdOnly = await prisma.contentResourceType.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ContentResourceTypeCreateManyAndReturnArgs>(args?: SelectSubset<T, ContentResourceTypeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContentResourceTypePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ContentResourceType.
+     * @param {ContentResourceTypeDeleteArgs} args - Arguments to delete one ContentResourceType.
+     * @example
+     * // Delete one ContentResourceType
+     * const ContentResourceType = await prisma.contentResourceType.delete({
+     *   where: {
+     *     // ... filter to delete one ContentResourceType
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ContentResourceTypeDeleteArgs>(args: SelectSubset<T, ContentResourceTypeDeleteArgs<ExtArgs>>): Prisma__ContentResourceTypeClient<$Result.GetResult<Prisma.$ContentResourceTypePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ContentResourceType.
+     * @param {ContentResourceTypeUpdateArgs} args - Arguments to update one ContentResourceType.
+     * @example
+     * // Update one ContentResourceType
+     * const contentResourceType = await prisma.contentResourceType.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ContentResourceTypeUpdateArgs>(args: SelectSubset<T, ContentResourceTypeUpdateArgs<ExtArgs>>): Prisma__ContentResourceTypeClient<$Result.GetResult<Prisma.$ContentResourceTypePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ContentResourceTypes.
+     * @param {ContentResourceTypeDeleteManyArgs} args - Arguments to filter ContentResourceTypes to delete.
+     * @example
+     * // Delete a few ContentResourceTypes
+     * const { count } = await prisma.contentResourceType.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ContentResourceTypeDeleteManyArgs>(args?: SelectSubset<T, ContentResourceTypeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContentResourceTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContentResourceTypeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ContentResourceTypes
+     * const contentResourceType = await prisma.contentResourceType.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ContentResourceTypeUpdateManyArgs>(args: SelectSubset<T, ContentResourceTypeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContentResourceTypes and returns the data updated in the database.
+     * @param {ContentResourceTypeUpdateManyAndReturnArgs} args - Arguments to update many ContentResourceTypes.
+     * @example
+     * // Update many ContentResourceTypes
+     * const contentResourceType = await prisma.contentResourceType.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ContentResourceTypes and only return the `id`
+     * const contentResourceTypeWithIdOnly = await prisma.contentResourceType.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ContentResourceTypeUpdateManyAndReturnArgs>(args: SelectSubset<T, ContentResourceTypeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContentResourceTypePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ContentResourceType.
+     * @param {ContentResourceTypeUpsertArgs} args - Arguments to update or create a ContentResourceType.
+     * @example
+     * // Update or create a ContentResourceType
+     * const contentResourceType = await prisma.contentResourceType.upsert({
+     *   create: {
+     *     // ... data to create a ContentResourceType
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ContentResourceType we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ContentResourceTypeUpsertArgs>(args: SelectSubset<T, ContentResourceTypeUpsertArgs<ExtArgs>>): Prisma__ContentResourceTypeClient<$Result.GetResult<Prisma.$ContentResourceTypePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ContentResourceTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContentResourceTypeCountArgs} args - Arguments to filter ContentResourceTypes to count.
+     * @example
+     * // Count the number of ContentResourceTypes
+     * const count = await prisma.contentResourceType.count({
+     *   where: {
+     *     // ... the filter for the ContentResourceTypes we want to count
+     *   }
+     * })
+    **/
+    count<T extends ContentResourceTypeCountArgs>(
+      args?: Subset<T, ContentResourceTypeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ContentResourceTypeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ContentResourceType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContentResourceTypeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ContentResourceTypeAggregateArgs>(args: Subset<T, ContentResourceTypeAggregateArgs>): Prisma.PrismaPromise<GetContentResourceTypeAggregateType<T>>
+
+    /**
+     * Group by ContentResourceType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContentResourceTypeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ContentResourceTypeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ContentResourceTypeGroupByArgs['orderBy'] }
+        : { orderBy?: ContentResourceTypeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ContentResourceTypeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContentResourceTypeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ContentResourceType model
+   */
+  readonly fields: ContentResourceTypeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ContentResourceType.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ContentResourceTypeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    contentResources<T extends ContentResourceType$contentResourcesArgs<ExtArgs> = {}>(args?: Subset<T, ContentResourceType$contentResourcesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContentResourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ContentResourceType model
+   */
+  interface ContentResourceTypeFieldRefs {
+    readonly id: FieldRef<"ContentResourceType", 'Int'>
+    readonly type: FieldRef<"ContentResourceType", 'String'>
+    readonly icon: FieldRef<"ContentResourceType", 'String'>
+    readonly color: FieldRef<"ContentResourceType", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ContentResourceType findUnique
+   */
+  export type ContentResourceTypeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceType
+     */
+    select?: ContentResourceTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceType
+     */
+    omit?: ContentResourceTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which ContentResourceType to fetch.
+     */
+    where: ContentResourceTypeWhereUniqueInput
+  }
+
+  /**
+   * ContentResourceType findUniqueOrThrow
+   */
+  export type ContentResourceTypeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceType
+     */
+    select?: ContentResourceTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceType
+     */
+    omit?: ContentResourceTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which ContentResourceType to fetch.
+     */
+    where: ContentResourceTypeWhereUniqueInput
+  }
+
+  /**
+   * ContentResourceType findFirst
+   */
+  export type ContentResourceTypeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceType
+     */
+    select?: ContentResourceTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceType
+     */
+    omit?: ContentResourceTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which ContentResourceType to fetch.
+     */
+    where?: ContentResourceTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContentResourceTypes to fetch.
+     */
+    orderBy?: ContentResourceTypeOrderByWithRelationInput | ContentResourceTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContentResourceTypes.
+     */
+    cursor?: ContentResourceTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContentResourceTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContentResourceTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContentResourceTypes.
+     */
+    distinct?: ContentResourceTypeScalarFieldEnum | ContentResourceTypeScalarFieldEnum[]
+  }
+
+  /**
+   * ContentResourceType findFirstOrThrow
+   */
+  export type ContentResourceTypeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceType
+     */
+    select?: ContentResourceTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceType
+     */
+    omit?: ContentResourceTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which ContentResourceType to fetch.
+     */
+    where?: ContentResourceTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContentResourceTypes to fetch.
+     */
+    orderBy?: ContentResourceTypeOrderByWithRelationInput | ContentResourceTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContentResourceTypes.
+     */
+    cursor?: ContentResourceTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContentResourceTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContentResourceTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContentResourceTypes.
+     */
+    distinct?: ContentResourceTypeScalarFieldEnum | ContentResourceTypeScalarFieldEnum[]
+  }
+
+  /**
+   * ContentResourceType findMany
+   */
+  export type ContentResourceTypeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceType
+     */
+    select?: ContentResourceTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceType
+     */
+    omit?: ContentResourceTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which ContentResourceTypes to fetch.
+     */
+    where?: ContentResourceTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContentResourceTypes to fetch.
+     */
+    orderBy?: ContentResourceTypeOrderByWithRelationInput | ContentResourceTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ContentResourceTypes.
+     */
+    cursor?: ContentResourceTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContentResourceTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContentResourceTypes.
+     */
+    skip?: number
+    distinct?: ContentResourceTypeScalarFieldEnum | ContentResourceTypeScalarFieldEnum[]
+  }
+
+  /**
+   * ContentResourceType create
+   */
+  export type ContentResourceTypeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceType
+     */
+    select?: ContentResourceTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceType
+     */
+    omit?: ContentResourceTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceTypeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ContentResourceType.
+     */
+    data: XOR<ContentResourceTypeCreateInput, ContentResourceTypeUncheckedCreateInput>
+  }
+
+  /**
+   * ContentResourceType createMany
+   */
+  export type ContentResourceTypeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ContentResourceTypes.
+     */
+    data: ContentResourceTypeCreateManyInput | ContentResourceTypeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ContentResourceType createManyAndReturn
+   */
+  export type ContentResourceTypeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceType
+     */
+    select?: ContentResourceTypeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceType
+     */
+    omit?: ContentResourceTypeOmit<ExtArgs> | null
+    /**
+     * The data used to create many ContentResourceTypes.
+     */
+    data: ContentResourceTypeCreateManyInput | ContentResourceTypeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ContentResourceType update
+   */
+  export type ContentResourceTypeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceType
+     */
+    select?: ContentResourceTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceType
+     */
+    omit?: ContentResourceTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceTypeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ContentResourceType.
+     */
+    data: XOR<ContentResourceTypeUpdateInput, ContentResourceTypeUncheckedUpdateInput>
+    /**
+     * Choose, which ContentResourceType to update.
+     */
+    where: ContentResourceTypeWhereUniqueInput
+  }
+
+  /**
+   * ContentResourceType updateMany
+   */
+  export type ContentResourceTypeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ContentResourceTypes.
+     */
+    data: XOR<ContentResourceTypeUpdateManyMutationInput, ContentResourceTypeUncheckedUpdateManyInput>
+    /**
+     * Filter which ContentResourceTypes to update
+     */
+    where?: ContentResourceTypeWhereInput
+    /**
+     * Limit how many ContentResourceTypes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContentResourceType updateManyAndReturn
+   */
+  export type ContentResourceTypeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceType
+     */
+    select?: ContentResourceTypeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceType
+     */
+    omit?: ContentResourceTypeOmit<ExtArgs> | null
+    /**
+     * The data used to update ContentResourceTypes.
+     */
+    data: XOR<ContentResourceTypeUpdateManyMutationInput, ContentResourceTypeUncheckedUpdateManyInput>
+    /**
+     * Filter which ContentResourceTypes to update
+     */
+    where?: ContentResourceTypeWhereInput
+    /**
+     * Limit how many ContentResourceTypes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContentResourceType upsert
+   */
+  export type ContentResourceTypeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceType
+     */
+    select?: ContentResourceTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceType
+     */
+    omit?: ContentResourceTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceTypeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ContentResourceType to update in case it exists.
+     */
+    where: ContentResourceTypeWhereUniqueInput
+    /**
+     * In case the ContentResourceType found by the `where` argument doesn't exist, create a new ContentResourceType with this data.
+     */
+    create: XOR<ContentResourceTypeCreateInput, ContentResourceTypeUncheckedCreateInput>
+    /**
+     * In case the ContentResourceType was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ContentResourceTypeUpdateInput, ContentResourceTypeUncheckedUpdateInput>
+  }
+
+  /**
+   * ContentResourceType delete
+   */
+  export type ContentResourceTypeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceType
+     */
+    select?: ContentResourceTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceType
+     */
+    omit?: ContentResourceTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceTypeInclude<ExtArgs> | null
+    /**
+     * Filter which ContentResourceType to delete.
+     */
+    where: ContentResourceTypeWhereUniqueInput
+  }
+
+  /**
+   * ContentResourceType deleteMany
+   */
+  export type ContentResourceTypeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContentResourceTypes to delete
+     */
+    where?: ContentResourceTypeWhereInput
+    /**
+     * Limit how many ContentResourceTypes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContentResourceType.contentResources
+   */
+  export type ContentResourceType$contentResourcesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResource
+     */
+    select?: ContentResourceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResource
+     */
+    omit?: ContentResourceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceInclude<ExtArgs> | null
+    where?: ContentResourceWhereInput
+    orderBy?: ContentResourceOrderByWithRelationInput | ContentResourceOrderByWithRelationInput[]
+    cursor?: ContentResourceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContentResourceScalarFieldEnum | ContentResourceScalarFieldEnum[]
+  }
+
+  /**
+   * ContentResourceType without action
+   */
+  export type ContentResourceTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceType
+     */
+    select?: ContentResourceTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceType
+     */
+    omit?: ContentResourceTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceTypeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ContentResourceArea
+   */
+
+  export type AggregateContentResourceArea = {
+    _count: ContentResourceAreaCountAggregateOutputType | null
+    _avg: ContentResourceAreaAvgAggregateOutputType | null
+    _sum: ContentResourceAreaSumAggregateOutputType | null
+    _min: ContentResourceAreaMinAggregateOutputType | null
+    _max: ContentResourceAreaMaxAggregateOutputType | null
+  }
+
+  export type ContentResourceAreaAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ContentResourceAreaSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ContentResourceAreaMinAggregateOutputType = {
+    id: number | null
+    area: string | null
+    tagline: string | null
+  }
+
+  export type ContentResourceAreaMaxAggregateOutputType = {
+    id: number | null
+    area: string | null
+    tagline: string | null
+  }
+
+  export type ContentResourceAreaCountAggregateOutputType = {
+    id: number
+    area: number
+    tagline: number
+    _all: number
+  }
+
+
+  export type ContentResourceAreaAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type ContentResourceAreaSumAggregateInputType = {
+    id?: true
+  }
+
+  export type ContentResourceAreaMinAggregateInputType = {
+    id?: true
+    area?: true
+    tagline?: true
+  }
+
+  export type ContentResourceAreaMaxAggregateInputType = {
+    id?: true
+    area?: true
+    tagline?: true
+  }
+
+  export type ContentResourceAreaCountAggregateInputType = {
+    id?: true
+    area?: true
+    tagline?: true
+    _all?: true
+  }
+
+  export type ContentResourceAreaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContentResourceArea to aggregate.
+     */
+    where?: ContentResourceAreaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContentResourceAreas to fetch.
+     */
+    orderBy?: ContentResourceAreaOrderByWithRelationInput | ContentResourceAreaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ContentResourceAreaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContentResourceAreas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContentResourceAreas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ContentResourceAreas
+    **/
+    _count?: true | ContentResourceAreaCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ContentResourceAreaAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ContentResourceAreaSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ContentResourceAreaMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ContentResourceAreaMaxAggregateInputType
+  }
+
+  export type GetContentResourceAreaAggregateType<T extends ContentResourceAreaAggregateArgs> = {
+        [P in keyof T & keyof AggregateContentResourceArea]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateContentResourceArea[P]>
+      : GetScalarType<T[P], AggregateContentResourceArea[P]>
+  }
+
+
+
+
+  export type ContentResourceAreaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContentResourceAreaWhereInput
+    orderBy?: ContentResourceAreaOrderByWithAggregationInput | ContentResourceAreaOrderByWithAggregationInput[]
+    by: ContentResourceAreaScalarFieldEnum[] | ContentResourceAreaScalarFieldEnum
+    having?: ContentResourceAreaScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ContentResourceAreaCountAggregateInputType | true
+    _avg?: ContentResourceAreaAvgAggregateInputType
+    _sum?: ContentResourceAreaSumAggregateInputType
+    _min?: ContentResourceAreaMinAggregateInputType
+    _max?: ContentResourceAreaMaxAggregateInputType
+  }
+
+  export type ContentResourceAreaGroupByOutputType = {
+    id: number
+    area: string
+    tagline: string | null
+    _count: ContentResourceAreaCountAggregateOutputType | null
+    _avg: ContentResourceAreaAvgAggregateOutputType | null
+    _sum: ContentResourceAreaSumAggregateOutputType | null
+    _min: ContentResourceAreaMinAggregateOutputType | null
+    _max: ContentResourceAreaMaxAggregateOutputType | null
+  }
+
+  type GetContentResourceAreaGroupByPayload<T extends ContentResourceAreaGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ContentResourceAreaGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ContentResourceAreaGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ContentResourceAreaGroupByOutputType[P]>
+            : GetScalarType<T[P], ContentResourceAreaGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ContentResourceAreaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    area?: boolean
+    tagline?: boolean
+    contentResources?: boolean | ContentResourceArea$contentResourcesArgs<ExtArgs>
+    _count?: boolean | ContentResourceAreaCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contentResourceArea"]>
+
+  export type ContentResourceAreaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    area?: boolean
+    tagline?: boolean
+  }, ExtArgs["result"]["contentResourceArea"]>
+
+  export type ContentResourceAreaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    area?: boolean
+    tagline?: boolean
+  }, ExtArgs["result"]["contentResourceArea"]>
+
+  export type ContentResourceAreaSelectScalar = {
+    id?: boolean
+    area?: boolean
+    tagline?: boolean
+  }
+
+  export type ContentResourceAreaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "area" | "tagline", ExtArgs["result"]["contentResourceArea"]>
+  export type ContentResourceAreaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    contentResources?: boolean | ContentResourceArea$contentResourcesArgs<ExtArgs>
+    _count?: boolean | ContentResourceAreaCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ContentResourceAreaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ContentResourceAreaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $ContentResourceAreaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ContentResourceArea"
+    objects: {
+      contentResources: Prisma.$ContentResourcePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      area: string
+      tagline: string | null
+    }, ExtArgs["result"]["contentResourceArea"]>
+    composites: {}
+  }
+
+  type ContentResourceAreaGetPayload<S extends boolean | null | undefined | ContentResourceAreaDefaultArgs> = $Result.GetResult<Prisma.$ContentResourceAreaPayload, S>
+
+  type ContentResourceAreaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ContentResourceAreaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ContentResourceAreaCountAggregateInputType | true
+    }
+
+  export interface ContentResourceAreaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ContentResourceArea'], meta: { name: 'ContentResourceArea' } }
+    /**
+     * Find zero or one ContentResourceArea that matches the filter.
+     * @param {ContentResourceAreaFindUniqueArgs} args - Arguments to find a ContentResourceArea
+     * @example
+     * // Get one ContentResourceArea
+     * const contentResourceArea = await prisma.contentResourceArea.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ContentResourceAreaFindUniqueArgs>(args: SelectSubset<T, ContentResourceAreaFindUniqueArgs<ExtArgs>>): Prisma__ContentResourceAreaClient<$Result.GetResult<Prisma.$ContentResourceAreaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ContentResourceArea that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ContentResourceAreaFindUniqueOrThrowArgs} args - Arguments to find a ContentResourceArea
+     * @example
+     * // Get one ContentResourceArea
+     * const contentResourceArea = await prisma.contentResourceArea.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ContentResourceAreaFindUniqueOrThrowArgs>(args: SelectSubset<T, ContentResourceAreaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ContentResourceAreaClient<$Result.GetResult<Prisma.$ContentResourceAreaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContentResourceArea that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContentResourceAreaFindFirstArgs} args - Arguments to find a ContentResourceArea
+     * @example
+     * // Get one ContentResourceArea
+     * const contentResourceArea = await prisma.contentResourceArea.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ContentResourceAreaFindFirstArgs>(args?: SelectSubset<T, ContentResourceAreaFindFirstArgs<ExtArgs>>): Prisma__ContentResourceAreaClient<$Result.GetResult<Prisma.$ContentResourceAreaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContentResourceArea that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContentResourceAreaFindFirstOrThrowArgs} args - Arguments to find a ContentResourceArea
+     * @example
+     * // Get one ContentResourceArea
+     * const contentResourceArea = await prisma.contentResourceArea.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ContentResourceAreaFindFirstOrThrowArgs>(args?: SelectSubset<T, ContentResourceAreaFindFirstOrThrowArgs<ExtArgs>>): Prisma__ContentResourceAreaClient<$Result.GetResult<Prisma.$ContentResourceAreaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ContentResourceAreas that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContentResourceAreaFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ContentResourceAreas
+     * const contentResourceAreas = await prisma.contentResourceArea.findMany()
+     * 
+     * // Get first 10 ContentResourceAreas
+     * const contentResourceAreas = await prisma.contentResourceArea.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const contentResourceAreaWithIdOnly = await prisma.contentResourceArea.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ContentResourceAreaFindManyArgs>(args?: SelectSubset<T, ContentResourceAreaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContentResourceAreaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ContentResourceArea.
+     * @param {ContentResourceAreaCreateArgs} args - Arguments to create a ContentResourceArea.
+     * @example
+     * // Create one ContentResourceArea
+     * const ContentResourceArea = await prisma.contentResourceArea.create({
+     *   data: {
+     *     // ... data to create a ContentResourceArea
+     *   }
+     * })
+     * 
+     */
+    create<T extends ContentResourceAreaCreateArgs>(args: SelectSubset<T, ContentResourceAreaCreateArgs<ExtArgs>>): Prisma__ContentResourceAreaClient<$Result.GetResult<Prisma.$ContentResourceAreaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ContentResourceAreas.
+     * @param {ContentResourceAreaCreateManyArgs} args - Arguments to create many ContentResourceAreas.
+     * @example
+     * // Create many ContentResourceAreas
+     * const contentResourceArea = await prisma.contentResourceArea.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ContentResourceAreaCreateManyArgs>(args?: SelectSubset<T, ContentResourceAreaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ContentResourceAreas and returns the data saved in the database.
+     * @param {ContentResourceAreaCreateManyAndReturnArgs} args - Arguments to create many ContentResourceAreas.
+     * @example
+     * // Create many ContentResourceAreas
+     * const contentResourceArea = await prisma.contentResourceArea.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ContentResourceAreas and only return the `id`
+     * const contentResourceAreaWithIdOnly = await prisma.contentResourceArea.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ContentResourceAreaCreateManyAndReturnArgs>(args?: SelectSubset<T, ContentResourceAreaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContentResourceAreaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ContentResourceArea.
+     * @param {ContentResourceAreaDeleteArgs} args - Arguments to delete one ContentResourceArea.
+     * @example
+     * // Delete one ContentResourceArea
+     * const ContentResourceArea = await prisma.contentResourceArea.delete({
+     *   where: {
+     *     // ... filter to delete one ContentResourceArea
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ContentResourceAreaDeleteArgs>(args: SelectSubset<T, ContentResourceAreaDeleteArgs<ExtArgs>>): Prisma__ContentResourceAreaClient<$Result.GetResult<Prisma.$ContentResourceAreaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ContentResourceArea.
+     * @param {ContentResourceAreaUpdateArgs} args - Arguments to update one ContentResourceArea.
+     * @example
+     * // Update one ContentResourceArea
+     * const contentResourceArea = await prisma.contentResourceArea.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ContentResourceAreaUpdateArgs>(args: SelectSubset<T, ContentResourceAreaUpdateArgs<ExtArgs>>): Prisma__ContentResourceAreaClient<$Result.GetResult<Prisma.$ContentResourceAreaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ContentResourceAreas.
+     * @param {ContentResourceAreaDeleteManyArgs} args - Arguments to filter ContentResourceAreas to delete.
+     * @example
+     * // Delete a few ContentResourceAreas
+     * const { count } = await prisma.contentResourceArea.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ContentResourceAreaDeleteManyArgs>(args?: SelectSubset<T, ContentResourceAreaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContentResourceAreas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContentResourceAreaUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ContentResourceAreas
+     * const contentResourceArea = await prisma.contentResourceArea.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ContentResourceAreaUpdateManyArgs>(args: SelectSubset<T, ContentResourceAreaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContentResourceAreas and returns the data updated in the database.
+     * @param {ContentResourceAreaUpdateManyAndReturnArgs} args - Arguments to update many ContentResourceAreas.
+     * @example
+     * // Update many ContentResourceAreas
+     * const contentResourceArea = await prisma.contentResourceArea.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ContentResourceAreas and only return the `id`
+     * const contentResourceAreaWithIdOnly = await prisma.contentResourceArea.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ContentResourceAreaUpdateManyAndReturnArgs>(args: SelectSubset<T, ContentResourceAreaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContentResourceAreaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ContentResourceArea.
+     * @param {ContentResourceAreaUpsertArgs} args - Arguments to update or create a ContentResourceArea.
+     * @example
+     * // Update or create a ContentResourceArea
+     * const contentResourceArea = await prisma.contentResourceArea.upsert({
+     *   create: {
+     *     // ... data to create a ContentResourceArea
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ContentResourceArea we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ContentResourceAreaUpsertArgs>(args: SelectSubset<T, ContentResourceAreaUpsertArgs<ExtArgs>>): Prisma__ContentResourceAreaClient<$Result.GetResult<Prisma.$ContentResourceAreaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ContentResourceAreas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContentResourceAreaCountArgs} args - Arguments to filter ContentResourceAreas to count.
+     * @example
+     * // Count the number of ContentResourceAreas
+     * const count = await prisma.contentResourceArea.count({
+     *   where: {
+     *     // ... the filter for the ContentResourceAreas we want to count
+     *   }
+     * })
+    **/
+    count<T extends ContentResourceAreaCountArgs>(
+      args?: Subset<T, ContentResourceAreaCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ContentResourceAreaCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ContentResourceArea.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContentResourceAreaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ContentResourceAreaAggregateArgs>(args: Subset<T, ContentResourceAreaAggregateArgs>): Prisma.PrismaPromise<GetContentResourceAreaAggregateType<T>>
+
+    /**
+     * Group by ContentResourceArea.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContentResourceAreaGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ContentResourceAreaGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ContentResourceAreaGroupByArgs['orderBy'] }
+        : { orderBy?: ContentResourceAreaGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ContentResourceAreaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContentResourceAreaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ContentResourceArea model
+   */
+  readonly fields: ContentResourceAreaFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ContentResourceArea.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ContentResourceAreaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    contentResources<T extends ContentResourceArea$contentResourcesArgs<ExtArgs> = {}>(args?: Subset<T, ContentResourceArea$contentResourcesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContentResourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ContentResourceArea model
+   */
+  interface ContentResourceAreaFieldRefs {
+    readonly id: FieldRef<"ContentResourceArea", 'Int'>
+    readonly area: FieldRef<"ContentResourceArea", 'String'>
+    readonly tagline: FieldRef<"ContentResourceArea", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ContentResourceArea findUnique
+   */
+  export type ContentResourceAreaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceArea
+     */
+    select?: ContentResourceAreaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceArea
+     */
+    omit?: ContentResourceAreaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceAreaInclude<ExtArgs> | null
+    /**
+     * Filter, which ContentResourceArea to fetch.
+     */
+    where: ContentResourceAreaWhereUniqueInput
+  }
+
+  /**
+   * ContentResourceArea findUniqueOrThrow
+   */
+  export type ContentResourceAreaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceArea
+     */
+    select?: ContentResourceAreaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceArea
+     */
+    omit?: ContentResourceAreaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceAreaInclude<ExtArgs> | null
+    /**
+     * Filter, which ContentResourceArea to fetch.
+     */
+    where: ContentResourceAreaWhereUniqueInput
+  }
+
+  /**
+   * ContentResourceArea findFirst
+   */
+  export type ContentResourceAreaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceArea
+     */
+    select?: ContentResourceAreaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceArea
+     */
+    omit?: ContentResourceAreaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceAreaInclude<ExtArgs> | null
+    /**
+     * Filter, which ContentResourceArea to fetch.
+     */
+    where?: ContentResourceAreaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContentResourceAreas to fetch.
+     */
+    orderBy?: ContentResourceAreaOrderByWithRelationInput | ContentResourceAreaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContentResourceAreas.
+     */
+    cursor?: ContentResourceAreaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContentResourceAreas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContentResourceAreas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContentResourceAreas.
+     */
+    distinct?: ContentResourceAreaScalarFieldEnum | ContentResourceAreaScalarFieldEnum[]
+  }
+
+  /**
+   * ContentResourceArea findFirstOrThrow
+   */
+  export type ContentResourceAreaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceArea
+     */
+    select?: ContentResourceAreaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceArea
+     */
+    omit?: ContentResourceAreaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceAreaInclude<ExtArgs> | null
+    /**
+     * Filter, which ContentResourceArea to fetch.
+     */
+    where?: ContentResourceAreaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContentResourceAreas to fetch.
+     */
+    orderBy?: ContentResourceAreaOrderByWithRelationInput | ContentResourceAreaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContentResourceAreas.
+     */
+    cursor?: ContentResourceAreaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContentResourceAreas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContentResourceAreas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContentResourceAreas.
+     */
+    distinct?: ContentResourceAreaScalarFieldEnum | ContentResourceAreaScalarFieldEnum[]
+  }
+
+  /**
+   * ContentResourceArea findMany
+   */
+  export type ContentResourceAreaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceArea
+     */
+    select?: ContentResourceAreaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceArea
+     */
+    omit?: ContentResourceAreaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceAreaInclude<ExtArgs> | null
+    /**
+     * Filter, which ContentResourceAreas to fetch.
+     */
+    where?: ContentResourceAreaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContentResourceAreas to fetch.
+     */
+    orderBy?: ContentResourceAreaOrderByWithRelationInput | ContentResourceAreaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ContentResourceAreas.
+     */
+    cursor?: ContentResourceAreaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContentResourceAreas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContentResourceAreas.
+     */
+    skip?: number
+    distinct?: ContentResourceAreaScalarFieldEnum | ContentResourceAreaScalarFieldEnum[]
+  }
+
+  /**
+   * ContentResourceArea create
+   */
+  export type ContentResourceAreaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceArea
+     */
+    select?: ContentResourceAreaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceArea
+     */
+    omit?: ContentResourceAreaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceAreaInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ContentResourceArea.
+     */
+    data: XOR<ContentResourceAreaCreateInput, ContentResourceAreaUncheckedCreateInput>
+  }
+
+  /**
+   * ContentResourceArea createMany
+   */
+  export type ContentResourceAreaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ContentResourceAreas.
+     */
+    data: ContentResourceAreaCreateManyInput | ContentResourceAreaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ContentResourceArea createManyAndReturn
+   */
+  export type ContentResourceAreaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceArea
+     */
+    select?: ContentResourceAreaSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceArea
+     */
+    omit?: ContentResourceAreaOmit<ExtArgs> | null
+    /**
+     * The data used to create many ContentResourceAreas.
+     */
+    data: ContentResourceAreaCreateManyInput | ContentResourceAreaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ContentResourceArea update
+   */
+  export type ContentResourceAreaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceArea
+     */
+    select?: ContentResourceAreaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceArea
+     */
+    omit?: ContentResourceAreaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceAreaInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ContentResourceArea.
+     */
+    data: XOR<ContentResourceAreaUpdateInput, ContentResourceAreaUncheckedUpdateInput>
+    /**
+     * Choose, which ContentResourceArea to update.
+     */
+    where: ContentResourceAreaWhereUniqueInput
+  }
+
+  /**
+   * ContentResourceArea updateMany
+   */
+  export type ContentResourceAreaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ContentResourceAreas.
+     */
+    data: XOR<ContentResourceAreaUpdateManyMutationInput, ContentResourceAreaUncheckedUpdateManyInput>
+    /**
+     * Filter which ContentResourceAreas to update
+     */
+    where?: ContentResourceAreaWhereInput
+    /**
+     * Limit how many ContentResourceAreas to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContentResourceArea updateManyAndReturn
+   */
+  export type ContentResourceAreaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceArea
+     */
+    select?: ContentResourceAreaSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceArea
+     */
+    omit?: ContentResourceAreaOmit<ExtArgs> | null
+    /**
+     * The data used to update ContentResourceAreas.
+     */
+    data: XOR<ContentResourceAreaUpdateManyMutationInput, ContentResourceAreaUncheckedUpdateManyInput>
+    /**
+     * Filter which ContentResourceAreas to update
+     */
+    where?: ContentResourceAreaWhereInput
+    /**
+     * Limit how many ContentResourceAreas to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContentResourceArea upsert
+   */
+  export type ContentResourceAreaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceArea
+     */
+    select?: ContentResourceAreaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceArea
+     */
+    omit?: ContentResourceAreaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceAreaInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ContentResourceArea to update in case it exists.
+     */
+    where: ContentResourceAreaWhereUniqueInput
+    /**
+     * In case the ContentResourceArea found by the `where` argument doesn't exist, create a new ContentResourceArea with this data.
+     */
+    create: XOR<ContentResourceAreaCreateInput, ContentResourceAreaUncheckedCreateInput>
+    /**
+     * In case the ContentResourceArea was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ContentResourceAreaUpdateInput, ContentResourceAreaUncheckedUpdateInput>
+  }
+
+  /**
+   * ContentResourceArea delete
+   */
+  export type ContentResourceAreaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceArea
+     */
+    select?: ContentResourceAreaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceArea
+     */
+    omit?: ContentResourceAreaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceAreaInclude<ExtArgs> | null
+    /**
+     * Filter which ContentResourceArea to delete.
+     */
+    where: ContentResourceAreaWhereUniqueInput
+  }
+
+  /**
+   * ContentResourceArea deleteMany
+   */
+  export type ContentResourceAreaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContentResourceAreas to delete
+     */
+    where?: ContentResourceAreaWhereInput
+    /**
+     * Limit how many ContentResourceAreas to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContentResourceArea.contentResources
+   */
+  export type ContentResourceArea$contentResourcesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResource
+     */
+    select?: ContentResourceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResource
+     */
+    omit?: ContentResourceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceInclude<ExtArgs> | null
+    where?: ContentResourceWhereInput
+    orderBy?: ContentResourceOrderByWithRelationInput | ContentResourceOrderByWithRelationInput[]
+    cursor?: ContentResourceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContentResourceScalarFieldEnum | ContentResourceScalarFieldEnum[]
+  }
+
+  /**
+   * ContentResourceArea without action
+   */
+  export type ContentResourceAreaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResourceArea
+     */
+    select?: ContentResourceAreaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResourceArea
+     */
+    omit?: ContentResourceAreaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceAreaInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ContentResource
+   */
+
+  export type AggregateContentResource = {
+    _count: ContentResourceCountAggregateOutputType | null
+    _avg: ContentResourceAvgAggregateOutputType | null
+    _sum: ContentResourceSumAggregateOutputType | null
+    _min: ContentResourceMinAggregateOutputType | null
+    _max: ContentResourceMaxAggregateOutputType | null
+  }
+
+  export type ContentResourceAvgAggregateOutputType = {
+    id: number | null
+    typeId: number | null
+    areaId: number | null
+  }
+
+  export type ContentResourceSumAggregateOutputType = {
+    id: number | null
+    typeId: number | null
+    areaId: number | null
+  }
+
+  export type ContentResourceMinAggregateOutputType = {
+    id: number | null
+    title: string | null
+    subtitle: string | null
+    typeId: number | null
+    icon: string | null
+    authorId: string | null
+    date: Date | null
+    areaId: number | null
+    authorString: string | null
+  }
+
+  export type ContentResourceMaxAggregateOutputType = {
+    id: number | null
+    title: string | null
+    subtitle: string | null
+    typeId: number | null
+    icon: string | null
+    authorId: string | null
+    date: Date | null
+    areaId: number | null
+    authorString: string | null
+  }
+
+  export type ContentResourceCountAggregateOutputType = {
+    id: number
+    href: number
+    title: number
+    subtitle: number
+    typeId: number
+    icon: number
+    authorId: number
+    date: number
+    areaId: number
+    authorString: number
+    _all: number
+  }
+
+
+  export type ContentResourceAvgAggregateInputType = {
+    id?: true
+    typeId?: true
+    areaId?: true
+  }
+
+  export type ContentResourceSumAggregateInputType = {
+    id?: true
+    typeId?: true
+    areaId?: true
+  }
+
+  export type ContentResourceMinAggregateInputType = {
+    id?: true
+    title?: true
+    subtitle?: true
+    typeId?: true
+    icon?: true
+    authorId?: true
+    date?: true
+    areaId?: true
+    authorString?: true
+  }
+
+  export type ContentResourceMaxAggregateInputType = {
+    id?: true
+    title?: true
+    subtitle?: true
+    typeId?: true
+    icon?: true
+    authorId?: true
+    date?: true
+    areaId?: true
+    authorString?: true
+  }
+
+  export type ContentResourceCountAggregateInputType = {
+    id?: true
+    href?: true
+    title?: true
+    subtitle?: true
+    typeId?: true
+    icon?: true
+    authorId?: true
+    date?: true
+    areaId?: true
+    authorString?: true
+    _all?: true
+  }
+
+  export type ContentResourceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContentResource to aggregate.
+     */
+    where?: ContentResourceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContentResources to fetch.
+     */
+    orderBy?: ContentResourceOrderByWithRelationInput | ContentResourceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ContentResourceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContentResources from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContentResources.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ContentResources
+    **/
+    _count?: true | ContentResourceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ContentResourceAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ContentResourceSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ContentResourceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ContentResourceMaxAggregateInputType
+  }
+
+  export type GetContentResourceAggregateType<T extends ContentResourceAggregateArgs> = {
+        [P in keyof T & keyof AggregateContentResource]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateContentResource[P]>
+      : GetScalarType<T[P], AggregateContentResource[P]>
+  }
+
+
+
+
+  export type ContentResourceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContentResourceWhereInput
+    orderBy?: ContentResourceOrderByWithAggregationInput | ContentResourceOrderByWithAggregationInput[]
+    by: ContentResourceScalarFieldEnum[] | ContentResourceScalarFieldEnum
+    having?: ContentResourceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ContentResourceCountAggregateInputType | true
+    _avg?: ContentResourceAvgAggregateInputType
+    _sum?: ContentResourceSumAggregateInputType
+    _min?: ContentResourceMinAggregateInputType
+    _max?: ContentResourceMaxAggregateInputType
+  }
+
+  export type ContentResourceGroupByOutputType = {
+    id: number
+    href: JsonValue
+    title: string
+    subtitle: string | null
+    typeId: number
+    icon: string | null
+    authorId: string | null
+    date: Date
+    areaId: number
+    authorString: string | null
+    _count: ContentResourceCountAggregateOutputType | null
+    _avg: ContentResourceAvgAggregateOutputType | null
+    _sum: ContentResourceSumAggregateOutputType | null
+    _min: ContentResourceMinAggregateOutputType | null
+    _max: ContentResourceMaxAggregateOutputType | null
+  }
+
+  type GetContentResourceGroupByPayload<T extends ContentResourceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ContentResourceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ContentResourceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ContentResourceGroupByOutputType[P]>
+            : GetScalarType<T[P], ContentResourceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ContentResourceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    href?: boolean
+    title?: boolean
+    subtitle?: boolean
+    typeId?: boolean
+    icon?: boolean
+    authorId?: boolean
+    date?: boolean
+    areaId?: boolean
+    authorString?: boolean
+    area?: boolean | ContentResourceAreaDefaultArgs<ExtArgs>
+    author?: boolean | ContentResource$authorArgs<ExtArgs>
+    type?: boolean | ContentResourceTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contentResource"]>
+
+  export type ContentResourceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    href?: boolean
+    title?: boolean
+    subtitle?: boolean
+    typeId?: boolean
+    icon?: boolean
+    authorId?: boolean
+    date?: boolean
+    areaId?: boolean
+    authorString?: boolean
+    area?: boolean | ContentResourceAreaDefaultArgs<ExtArgs>
+    author?: boolean | ContentResource$authorArgs<ExtArgs>
+    type?: boolean | ContentResourceTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contentResource"]>
+
+  export type ContentResourceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    href?: boolean
+    title?: boolean
+    subtitle?: boolean
+    typeId?: boolean
+    icon?: boolean
+    authorId?: boolean
+    date?: boolean
+    areaId?: boolean
+    authorString?: boolean
+    area?: boolean | ContentResourceAreaDefaultArgs<ExtArgs>
+    author?: boolean | ContentResource$authorArgs<ExtArgs>
+    type?: boolean | ContentResourceTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contentResource"]>
+
+  export type ContentResourceSelectScalar = {
+    id?: boolean
+    href?: boolean
+    title?: boolean
+    subtitle?: boolean
+    typeId?: boolean
+    icon?: boolean
+    authorId?: boolean
+    date?: boolean
+    areaId?: boolean
+    authorString?: boolean
+  }
+
+  export type ContentResourceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "href" | "title" | "subtitle" | "typeId" | "icon" | "authorId" | "date" | "areaId" | "authorString", ExtArgs["result"]["contentResource"]>
+  export type ContentResourceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    area?: boolean | ContentResourceAreaDefaultArgs<ExtArgs>
+    author?: boolean | ContentResource$authorArgs<ExtArgs>
+    type?: boolean | ContentResourceTypeDefaultArgs<ExtArgs>
+  }
+  export type ContentResourceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    area?: boolean | ContentResourceAreaDefaultArgs<ExtArgs>
+    author?: boolean | ContentResource$authorArgs<ExtArgs>
+    type?: boolean | ContentResourceTypeDefaultArgs<ExtArgs>
+  }
+  export type ContentResourceIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    area?: boolean | ContentResourceAreaDefaultArgs<ExtArgs>
+    author?: boolean | ContentResource$authorArgs<ExtArgs>
+    type?: boolean | ContentResourceTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $ContentResourcePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ContentResource"
+    objects: {
+      area: Prisma.$ContentResourceAreaPayload<ExtArgs>
+      author: Prisma.$UserPayload<ExtArgs> | null
+      type: Prisma.$ContentResourceTypePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      href: Prisma.JsonValue
+      title: string
+      subtitle: string | null
+      typeId: number
+      icon: string | null
+      authorId: string | null
+      date: Date
+      areaId: number
+      authorString: string | null
+    }, ExtArgs["result"]["contentResource"]>
+    composites: {}
+  }
+
+  type ContentResourceGetPayload<S extends boolean | null | undefined | ContentResourceDefaultArgs> = $Result.GetResult<Prisma.$ContentResourcePayload, S>
+
+  type ContentResourceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ContentResourceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ContentResourceCountAggregateInputType | true
+    }
+
+  export interface ContentResourceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ContentResource'], meta: { name: 'ContentResource' } }
+    /**
+     * Find zero or one ContentResource that matches the filter.
+     * @param {ContentResourceFindUniqueArgs} args - Arguments to find a ContentResource
+     * @example
+     * // Get one ContentResource
+     * const contentResource = await prisma.contentResource.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ContentResourceFindUniqueArgs>(args: SelectSubset<T, ContentResourceFindUniqueArgs<ExtArgs>>): Prisma__ContentResourceClient<$Result.GetResult<Prisma.$ContentResourcePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ContentResource that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ContentResourceFindUniqueOrThrowArgs} args - Arguments to find a ContentResource
+     * @example
+     * // Get one ContentResource
+     * const contentResource = await prisma.contentResource.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ContentResourceFindUniqueOrThrowArgs>(args: SelectSubset<T, ContentResourceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ContentResourceClient<$Result.GetResult<Prisma.$ContentResourcePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContentResource that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContentResourceFindFirstArgs} args - Arguments to find a ContentResource
+     * @example
+     * // Get one ContentResource
+     * const contentResource = await prisma.contentResource.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ContentResourceFindFirstArgs>(args?: SelectSubset<T, ContentResourceFindFirstArgs<ExtArgs>>): Prisma__ContentResourceClient<$Result.GetResult<Prisma.$ContentResourcePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContentResource that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContentResourceFindFirstOrThrowArgs} args - Arguments to find a ContentResource
+     * @example
+     * // Get one ContentResource
+     * const contentResource = await prisma.contentResource.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ContentResourceFindFirstOrThrowArgs>(args?: SelectSubset<T, ContentResourceFindFirstOrThrowArgs<ExtArgs>>): Prisma__ContentResourceClient<$Result.GetResult<Prisma.$ContentResourcePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ContentResources that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContentResourceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ContentResources
+     * const contentResources = await prisma.contentResource.findMany()
+     * 
+     * // Get first 10 ContentResources
+     * const contentResources = await prisma.contentResource.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const contentResourceWithIdOnly = await prisma.contentResource.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ContentResourceFindManyArgs>(args?: SelectSubset<T, ContentResourceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContentResourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ContentResource.
+     * @param {ContentResourceCreateArgs} args - Arguments to create a ContentResource.
+     * @example
+     * // Create one ContentResource
+     * const ContentResource = await prisma.contentResource.create({
+     *   data: {
+     *     // ... data to create a ContentResource
+     *   }
+     * })
+     * 
+     */
+    create<T extends ContentResourceCreateArgs>(args: SelectSubset<T, ContentResourceCreateArgs<ExtArgs>>): Prisma__ContentResourceClient<$Result.GetResult<Prisma.$ContentResourcePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ContentResources.
+     * @param {ContentResourceCreateManyArgs} args - Arguments to create many ContentResources.
+     * @example
+     * // Create many ContentResources
+     * const contentResource = await prisma.contentResource.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ContentResourceCreateManyArgs>(args?: SelectSubset<T, ContentResourceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ContentResources and returns the data saved in the database.
+     * @param {ContentResourceCreateManyAndReturnArgs} args - Arguments to create many ContentResources.
+     * @example
+     * // Create many ContentResources
+     * const contentResource = await prisma.contentResource.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ContentResources and only return the `id`
+     * const contentResourceWithIdOnly = await prisma.contentResource.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ContentResourceCreateManyAndReturnArgs>(args?: SelectSubset<T, ContentResourceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContentResourcePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ContentResource.
+     * @param {ContentResourceDeleteArgs} args - Arguments to delete one ContentResource.
+     * @example
+     * // Delete one ContentResource
+     * const ContentResource = await prisma.contentResource.delete({
+     *   where: {
+     *     // ... filter to delete one ContentResource
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ContentResourceDeleteArgs>(args: SelectSubset<T, ContentResourceDeleteArgs<ExtArgs>>): Prisma__ContentResourceClient<$Result.GetResult<Prisma.$ContentResourcePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ContentResource.
+     * @param {ContentResourceUpdateArgs} args - Arguments to update one ContentResource.
+     * @example
+     * // Update one ContentResource
+     * const contentResource = await prisma.contentResource.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ContentResourceUpdateArgs>(args: SelectSubset<T, ContentResourceUpdateArgs<ExtArgs>>): Prisma__ContentResourceClient<$Result.GetResult<Prisma.$ContentResourcePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ContentResources.
+     * @param {ContentResourceDeleteManyArgs} args - Arguments to filter ContentResources to delete.
+     * @example
+     * // Delete a few ContentResources
+     * const { count } = await prisma.contentResource.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ContentResourceDeleteManyArgs>(args?: SelectSubset<T, ContentResourceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContentResources.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContentResourceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ContentResources
+     * const contentResource = await prisma.contentResource.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ContentResourceUpdateManyArgs>(args: SelectSubset<T, ContentResourceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContentResources and returns the data updated in the database.
+     * @param {ContentResourceUpdateManyAndReturnArgs} args - Arguments to update many ContentResources.
+     * @example
+     * // Update many ContentResources
+     * const contentResource = await prisma.contentResource.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ContentResources and only return the `id`
+     * const contentResourceWithIdOnly = await prisma.contentResource.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ContentResourceUpdateManyAndReturnArgs>(args: SelectSubset<T, ContentResourceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContentResourcePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ContentResource.
+     * @param {ContentResourceUpsertArgs} args - Arguments to update or create a ContentResource.
+     * @example
+     * // Update or create a ContentResource
+     * const contentResource = await prisma.contentResource.upsert({
+     *   create: {
+     *     // ... data to create a ContentResource
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ContentResource we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ContentResourceUpsertArgs>(args: SelectSubset<T, ContentResourceUpsertArgs<ExtArgs>>): Prisma__ContentResourceClient<$Result.GetResult<Prisma.$ContentResourcePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ContentResources.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContentResourceCountArgs} args - Arguments to filter ContentResources to count.
+     * @example
+     * // Count the number of ContentResources
+     * const count = await prisma.contentResource.count({
+     *   where: {
+     *     // ... the filter for the ContentResources we want to count
+     *   }
+     * })
+    **/
+    count<T extends ContentResourceCountArgs>(
+      args?: Subset<T, ContentResourceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ContentResourceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ContentResource.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContentResourceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ContentResourceAggregateArgs>(args: Subset<T, ContentResourceAggregateArgs>): Prisma.PrismaPromise<GetContentResourceAggregateType<T>>
+
+    /**
+     * Group by ContentResource.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContentResourceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ContentResourceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ContentResourceGroupByArgs['orderBy'] }
+        : { orderBy?: ContentResourceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ContentResourceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContentResourceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ContentResource model
+   */
+  readonly fields: ContentResourceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ContentResource.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ContentResourceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    area<T extends ContentResourceAreaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ContentResourceAreaDefaultArgs<ExtArgs>>): Prisma__ContentResourceAreaClient<$Result.GetResult<Prisma.$ContentResourceAreaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    author<T extends ContentResource$authorArgs<ExtArgs> = {}>(args?: Subset<T, ContentResource$authorArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    type<T extends ContentResourceTypeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ContentResourceTypeDefaultArgs<ExtArgs>>): Prisma__ContentResourceTypeClient<$Result.GetResult<Prisma.$ContentResourceTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ContentResource model
+   */
+  interface ContentResourceFieldRefs {
+    readonly id: FieldRef<"ContentResource", 'Int'>
+    readonly href: FieldRef<"ContentResource", 'Json'>
+    readonly title: FieldRef<"ContentResource", 'String'>
+    readonly subtitle: FieldRef<"ContentResource", 'String'>
+    readonly typeId: FieldRef<"ContentResource", 'Int'>
+    readonly icon: FieldRef<"ContentResource", 'String'>
+    readonly authorId: FieldRef<"ContentResource", 'String'>
+    readonly date: FieldRef<"ContentResource", 'DateTime'>
+    readonly areaId: FieldRef<"ContentResource", 'Int'>
+    readonly authorString: FieldRef<"ContentResource", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ContentResource findUnique
+   */
+  export type ContentResourceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResource
+     */
+    select?: ContentResourceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResource
+     */
+    omit?: ContentResourceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceInclude<ExtArgs> | null
+    /**
+     * Filter, which ContentResource to fetch.
+     */
+    where: ContentResourceWhereUniqueInput
+  }
+
+  /**
+   * ContentResource findUniqueOrThrow
+   */
+  export type ContentResourceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResource
+     */
+    select?: ContentResourceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResource
+     */
+    omit?: ContentResourceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceInclude<ExtArgs> | null
+    /**
+     * Filter, which ContentResource to fetch.
+     */
+    where: ContentResourceWhereUniqueInput
+  }
+
+  /**
+   * ContentResource findFirst
+   */
+  export type ContentResourceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResource
+     */
+    select?: ContentResourceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResource
+     */
+    omit?: ContentResourceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceInclude<ExtArgs> | null
+    /**
+     * Filter, which ContentResource to fetch.
+     */
+    where?: ContentResourceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContentResources to fetch.
+     */
+    orderBy?: ContentResourceOrderByWithRelationInput | ContentResourceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContentResources.
+     */
+    cursor?: ContentResourceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContentResources from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContentResources.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContentResources.
+     */
+    distinct?: ContentResourceScalarFieldEnum | ContentResourceScalarFieldEnum[]
+  }
+
+  /**
+   * ContentResource findFirstOrThrow
+   */
+  export type ContentResourceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResource
+     */
+    select?: ContentResourceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResource
+     */
+    omit?: ContentResourceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceInclude<ExtArgs> | null
+    /**
+     * Filter, which ContentResource to fetch.
+     */
+    where?: ContentResourceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContentResources to fetch.
+     */
+    orderBy?: ContentResourceOrderByWithRelationInput | ContentResourceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContentResources.
+     */
+    cursor?: ContentResourceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContentResources from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContentResources.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContentResources.
+     */
+    distinct?: ContentResourceScalarFieldEnum | ContentResourceScalarFieldEnum[]
+  }
+
+  /**
+   * ContentResource findMany
+   */
+  export type ContentResourceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResource
+     */
+    select?: ContentResourceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResource
+     */
+    omit?: ContentResourceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceInclude<ExtArgs> | null
+    /**
+     * Filter, which ContentResources to fetch.
+     */
+    where?: ContentResourceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContentResources to fetch.
+     */
+    orderBy?: ContentResourceOrderByWithRelationInput | ContentResourceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ContentResources.
+     */
+    cursor?: ContentResourceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContentResources from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContentResources.
+     */
+    skip?: number
+    distinct?: ContentResourceScalarFieldEnum | ContentResourceScalarFieldEnum[]
+  }
+
+  /**
+   * ContentResource create
+   */
+  export type ContentResourceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResource
+     */
+    select?: ContentResourceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResource
+     */
+    omit?: ContentResourceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ContentResource.
+     */
+    data: XOR<ContentResourceCreateInput, ContentResourceUncheckedCreateInput>
+  }
+
+  /**
+   * ContentResource createMany
+   */
+  export type ContentResourceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ContentResources.
+     */
+    data: ContentResourceCreateManyInput | ContentResourceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ContentResource createManyAndReturn
+   */
+  export type ContentResourceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResource
+     */
+    select?: ContentResourceSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResource
+     */
+    omit?: ContentResourceOmit<ExtArgs> | null
+    /**
+     * The data used to create many ContentResources.
+     */
+    data: ContentResourceCreateManyInput | ContentResourceCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ContentResource update
+   */
+  export type ContentResourceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResource
+     */
+    select?: ContentResourceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResource
+     */
+    omit?: ContentResourceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ContentResource.
+     */
+    data: XOR<ContentResourceUpdateInput, ContentResourceUncheckedUpdateInput>
+    /**
+     * Choose, which ContentResource to update.
+     */
+    where: ContentResourceWhereUniqueInput
+  }
+
+  /**
+   * ContentResource updateMany
+   */
+  export type ContentResourceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ContentResources.
+     */
+    data: XOR<ContentResourceUpdateManyMutationInput, ContentResourceUncheckedUpdateManyInput>
+    /**
+     * Filter which ContentResources to update
+     */
+    where?: ContentResourceWhereInput
+    /**
+     * Limit how many ContentResources to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContentResource updateManyAndReturn
+   */
+  export type ContentResourceUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResource
+     */
+    select?: ContentResourceSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResource
+     */
+    omit?: ContentResourceOmit<ExtArgs> | null
+    /**
+     * The data used to update ContentResources.
+     */
+    data: XOR<ContentResourceUpdateManyMutationInput, ContentResourceUncheckedUpdateManyInput>
+    /**
+     * Filter which ContentResources to update
+     */
+    where?: ContentResourceWhereInput
+    /**
+     * Limit how many ContentResources to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ContentResource upsert
+   */
+  export type ContentResourceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResource
+     */
+    select?: ContentResourceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResource
+     */
+    omit?: ContentResourceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ContentResource to update in case it exists.
+     */
+    where: ContentResourceWhereUniqueInput
+    /**
+     * In case the ContentResource found by the `where` argument doesn't exist, create a new ContentResource with this data.
+     */
+    create: XOR<ContentResourceCreateInput, ContentResourceUncheckedCreateInput>
+    /**
+     * In case the ContentResource was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ContentResourceUpdateInput, ContentResourceUncheckedUpdateInput>
+  }
+
+  /**
+   * ContentResource delete
+   */
+  export type ContentResourceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResource
+     */
+    select?: ContentResourceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResource
+     */
+    omit?: ContentResourceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceInclude<ExtArgs> | null
+    /**
+     * Filter which ContentResource to delete.
+     */
+    where: ContentResourceWhereUniqueInput
+  }
+
+  /**
+   * ContentResource deleteMany
+   */
+  export type ContentResourceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContentResources to delete
+     */
+    where?: ContentResourceWhereInput
+    /**
+     * Limit how many ContentResources to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContentResource.author
+   */
+  export type ContentResource$authorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * ContentResource without action
+   */
+  export type ContentResourceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContentResource
+     */
+    select?: ContentResourceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContentResource
+     */
+    omit?: ContentResourceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContentResourceInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -35133,6 +39964,15 @@ export namespace Prisma {
   };
 
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+  export const SettingsScalarFieldEnum: {
+    id: 'id',
+    key: 'key',
+    value: 'value'
+  };
+
+  export type SettingsScalarFieldEnum = (typeof SettingsScalarFieldEnum)[keyof typeof SettingsScalarFieldEnum]
 
 
   export const CountryScalarFieldEnum: {
@@ -35446,6 +40286,41 @@ export namespace Prisma {
   export type PathwayCategoriesScalarFieldEnum = (typeof PathwayCategoriesScalarFieldEnum)[keyof typeof PathwayCategoriesScalarFieldEnum]
 
 
+  export const ContentResourceTypeScalarFieldEnum: {
+    id: 'id',
+    type: 'type',
+    icon: 'icon',
+    color: 'color'
+  };
+
+  export type ContentResourceTypeScalarFieldEnum = (typeof ContentResourceTypeScalarFieldEnum)[keyof typeof ContentResourceTypeScalarFieldEnum]
+
+
+  export const ContentResourceAreaScalarFieldEnum: {
+    id: 'id',
+    area: 'area',
+    tagline: 'tagline'
+  };
+
+  export type ContentResourceAreaScalarFieldEnum = (typeof ContentResourceAreaScalarFieldEnum)[keyof typeof ContentResourceAreaScalarFieldEnum]
+
+
+  export const ContentResourceScalarFieldEnum: {
+    id: 'id',
+    href: 'href',
+    title: 'title',
+    subtitle: 'subtitle',
+    typeId: 'typeId',
+    icon: 'icon',
+    authorId: 'authorId',
+    date: 'date',
+    areaId: 'areaId',
+    authorString: 'authorString'
+  };
+
+  export type ContentResourceScalarFieldEnum = (typeof ContentResourceScalarFieldEnum)[keyof typeof ContentResourceScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -35460,6 +40335,13 @@ export namespace Prisma {
   };
 
   export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
   export const QueryMode: {
@@ -35493,20 +40375,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'String'
-   */
-  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
-    
-
-
-  /**
-   * Reference to a field of type 'String[]'
-   */
-  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -35517,6 +40385,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'String'
+   */
+  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+    
+
+
+  /**
+   * Reference to a field of type 'String[]'
+   */
+  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
     
 
 
@@ -35641,6 +40523,50 @@ export namespace Prisma {
    * Deep Input Types
    */
 
+
+  export type SettingsWhereInput = {
+    AND?: SettingsWhereInput | SettingsWhereInput[]
+    OR?: SettingsWhereInput[]
+    NOT?: SettingsWhereInput | SettingsWhereInput[]
+    id?: IntFilter<"Settings"> | number
+    key?: StringFilter<"Settings"> | string
+    value?: StringFilter<"Settings"> | string
+  }
+
+  export type SettingsOrderByWithRelationInput = {
+    id?: SortOrder
+    key?: SortOrder
+    value?: SortOrder
+  }
+
+  export type SettingsWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    key?: string
+    AND?: SettingsWhereInput | SettingsWhereInput[]
+    OR?: SettingsWhereInput[]
+    NOT?: SettingsWhereInput | SettingsWhereInput[]
+    value?: StringFilter<"Settings"> | string
+  }, "id" | "key">
+
+  export type SettingsOrderByWithAggregationInput = {
+    id?: SortOrder
+    key?: SortOrder
+    value?: SortOrder
+    _count?: SettingsCountOrderByAggregateInput
+    _avg?: SettingsAvgOrderByAggregateInput
+    _max?: SettingsMaxOrderByAggregateInput
+    _min?: SettingsMinOrderByAggregateInput
+    _sum?: SettingsSumOrderByAggregateInput
+  }
+
+  export type SettingsScalarWhereWithAggregatesInput = {
+    AND?: SettingsScalarWhereWithAggregatesInput | SettingsScalarWhereWithAggregatesInput[]
+    OR?: SettingsScalarWhereWithAggregatesInput[]
+    NOT?: SettingsScalarWhereWithAggregatesInput | SettingsScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Settings"> | number
+    key?: StringWithAggregatesFilter<"Settings"> | string
+    value?: StringWithAggregatesFilter<"Settings"> | string
+  }
 
   export type CountryWhereInput = {
     AND?: CountryWhereInput | CountryWhereInput[]
@@ -36856,6 +41782,7 @@ export namespace Prisma {
     socials?: UserSocialListRelationFilter
     Pathway?: PathwayListRelationFilter
     resources?: ResourceListRelationFilter
+    contentResources?: ContentResourceListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -36877,6 +41804,7 @@ export namespace Prisma {
     socials?: UserSocialOrderByRelationAggregateInput
     Pathway?: PathwayOrderByRelationAggregateInput
     resources?: ResourceOrderByRelationAggregateInput
+    contentResources?: ContentResourceOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -36901,6 +41829,7 @@ export namespace Prisma {
     socials?: UserSocialListRelationFilter
     Pathway?: PathwayListRelationFilter
     resources?: ResourceListRelationFilter
+    contentResources?: ContentResourceListRelationFilter
   }, "id" | "name">
 
   export type UserOrderByWithAggregationInput = {
@@ -37349,6 +42278,232 @@ export namespace Prisma {
     NOT?: PathwayCategoriesScalarWhereWithAggregatesInput | PathwayCategoriesScalarWhereWithAggregatesInput[]
     pathwayId?: IntWithAggregatesFilter<"PathwayCategories"> | number
     pathwayTypeId?: IntWithAggregatesFilter<"PathwayCategories"> | number
+  }
+
+  export type ContentResourceTypeWhereInput = {
+    AND?: ContentResourceTypeWhereInput | ContentResourceTypeWhereInput[]
+    OR?: ContentResourceTypeWhereInput[]
+    NOT?: ContentResourceTypeWhereInput | ContentResourceTypeWhereInput[]
+    id?: IntFilter<"ContentResourceType"> | number
+    type?: StringFilter<"ContentResourceType"> | string
+    icon?: StringNullableFilter<"ContentResourceType"> | string | null
+    color?: StringNullableFilter<"ContentResourceType"> | string | null
+    contentResources?: ContentResourceListRelationFilter
+  }
+
+  export type ContentResourceTypeOrderByWithRelationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    icon?: SortOrderInput | SortOrder
+    color?: SortOrderInput | SortOrder
+    contentResources?: ContentResourceOrderByRelationAggregateInput
+  }
+
+  export type ContentResourceTypeWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: ContentResourceTypeWhereInput | ContentResourceTypeWhereInput[]
+    OR?: ContentResourceTypeWhereInput[]
+    NOT?: ContentResourceTypeWhereInput | ContentResourceTypeWhereInput[]
+    type?: StringFilter<"ContentResourceType"> | string
+    icon?: StringNullableFilter<"ContentResourceType"> | string | null
+    color?: StringNullableFilter<"ContentResourceType"> | string | null
+    contentResources?: ContentResourceListRelationFilter
+  }, "id">
+
+  export type ContentResourceTypeOrderByWithAggregationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    icon?: SortOrderInput | SortOrder
+    color?: SortOrderInput | SortOrder
+    _count?: ContentResourceTypeCountOrderByAggregateInput
+    _avg?: ContentResourceTypeAvgOrderByAggregateInput
+    _max?: ContentResourceTypeMaxOrderByAggregateInput
+    _min?: ContentResourceTypeMinOrderByAggregateInput
+    _sum?: ContentResourceTypeSumOrderByAggregateInput
+  }
+
+  export type ContentResourceTypeScalarWhereWithAggregatesInput = {
+    AND?: ContentResourceTypeScalarWhereWithAggregatesInput | ContentResourceTypeScalarWhereWithAggregatesInput[]
+    OR?: ContentResourceTypeScalarWhereWithAggregatesInput[]
+    NOT?: ContentResourceTypeScalarWhereWithAggregatesInput | ContentResourceTypeScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"ContentResourceType"> | number
+    type?: StringWithAggregatesFilter<"ContentResourceType"> | string
+    icon?: StringNullableWithAggregatesFilter<"ContentResourceType"> | string | null
+    color?: StringNullableWithAggregatesFilter<"ContentResourceType"> | string | null
+  }
+
+  export type ContentResourceAreaWhereInput = {
+    AND?: ContentResourceAreaWhereInput | ContentResourceAreaWhereInput[]
+    OR?: ContentResourceAreaWhereInput[]
+    NOT?: ContentResourceAreaWhereInput | ContentResourceAreaWhereInput[]
+    id?: IntFilter<"ContentResourceArea"> | number
+    area?: StringFilter<"ContentResourceArea"> | string
+    tagline?: StringNullableFilter<"ContentResourceArea"> | string | null
+    contentResources?: ContentResourceListRelationFilter
+  }
+
+  export type ContentResourceAreaOrderByWithRelationInput = {
+    id?: SortOrder
+    area?: SortOrder
+    tagline?: SortOrderInput | SortOrder
+    contentResources?: ContentResourceOrderByRelationAggregateInput
+  }
+
+  export type ContentResourceAreaWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: ContentResourceAreaWhereInput | ContentResourceAreaWhereInput[]
+    OR?: ContentResourceAreaWhereInput[]
+    NOT?: ContentResourceAreaWhereInput | ContentResourceAreaWhereInput[]
+    area?: StringFilter<"ContentResourceArea"> | string
+    tagline?: StringNullableFilter<"ContentResourceArea"> | string | null
+    contentResources?: ContentResourceListRelationFilter
+  }, "id">
+
+  export type ContentResourceAreaOrderByWithAggregationInput = {
+    id?: SortOrder
+    area?: SortOrder
+    tagline?: SortOrderInput | SortOrder
+    _count?: ContentResourceAreaCountOrderByAggregateInput
+    _avg?: ContentResourceAreaAvgOrderByAggregateInput
+    _max?: ContentResourceAreaMaxOrderByAggregateInput
+    _min?: ContentResourceAreaMinOrderByAggregateInput
+    _sum?: ContentResourceAreaSumOrderByAggregateInput
+  }
+
+  export type ContentResourceAreaScalarWhereWithAggregatesInput = {
+    AND?: ContentResourceAreaScalarWhereWithAggregatesInput | ContentResourceAreaScalarWhereWithAggregatesInput[]
+    OR?: ContentResourceAreaScalarWhereWithAggregatesInput[]
+    NOT?: ContentResourceAreaScalarWhereWithAggregatesInput | ContentResourceAreaScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"ContentResourceArea"> | number
+    area?: StringWithAggregatesFilter<"ContentResourceArea"> | string
+    tagline?: StringNullableWithAggregatesFilter<"ContentResourceArea"> | string | null
+  }
+
+  export type ContentResourceWhereInput = {
+    AND?: ContentResourceWhereInput | ContentResourceWhereInput[]
+    OR?: ContentResourceWhereInput[]
+    NOT?: ContentResourceWhereInput | ContentResourceWhereInput[]
+    id?: IntFilter<"ContentResource"> | number
+    href?: JsonFilter<"ContentResource">
+    title?: StringFilter<"ContentResource"> | string
+    subtitle?: StringNullableFilter<"ContentResource"> | string | null
+    typeId?: IntFilter<"ContentResource"> | number
+    icon?: StringNullableFilter<"ContentResource"> | string | null
+    authorId?: StringNullableFilter<"ContentResource"> | string | null
+    date?: DateTimeFilter<"ContentResource"> | Date | string
+    areaId?: IntFilter<"ContentResource"> | number
+    authorString?: StringNullableFilter<"ContentResource"> | string | null
+    area?: XOR<ContentResourceAreaScalarRelationFilter, ContentResourceAreaWhereInput>
+    author?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    type?: XOR<ContentResourceTypeScalarRelationFilter, ContentResourceTypeWhereInput>
+  }
+
+  export type ContentResourceOrderByWithRelationInput = {
+    id?: SortOrder
+    href?: SortOrder
+    title?: SortOrder
+    subtitle?: SortOrderInput | SortOrder
+    typeId?: SortOrder
+    icon?: SortOrderInput | SortOrder
+    authorId?: SortOrderInput | SortOrder
+    date?: SortOrder
+    areaId?: SortOrder
+    authorString?: SortOrderInput | SortOrder
+    area?: ContentResourceAreaOrderByWithRelationInput
+    author?: UserOrderByWithRelationInput
+    type?: ContentResourceTypeOrderByWithRelationInput
+  }
+
+  export type ContentResourceWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: ContentResourceWhereInput | ContentResourceWhereInput[]
+    OR?: ContentResourceWhereInput[]
+    NOT?: ContentResourceWhereInput | ContentResourceWhereInput[]
+    href?: JsonFilter<"ContentResource">
+    title?: StringFilter<"ContentResource"> | string
+    subtitle?: StringNullableFilter<"ContentResource"> | string | null
+    typeId?: IntFilter<"ContentResource"> | number
+    icon?: StringNullableFilter<"ContentResource"> | string | null
+    authorId?: StringNullableFilter<"ContentResource"> | string | null
+    date?: DateTimeFilter<"ContentResource"> | Date | string
+    areaId?: IntFilter<"ContentResource"> | number
+    authorString?: StringNullableFilter<"ContentResource"> | string | null
+    area?: XOR<ContentResourceAreaScalarRelationFilter, ContentResourceAreaWhereInput>
+    author?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    type?: XOR<ContentResourceTypeScalarRelationFilter, ContentResourceTypeWhereInput>
+  }, "id">
+
+  export type ContentResourceOrderByWithAggregationInput = {
+    id?: SortOrder
+    href?: SortOrder
+    title?: SortOrder
+    subtitle?: SortOrderInput | SortOrder
+    typeId?: SortOrder
+    icon?: SortOrderInput | SortOrder
+    authorId?: SortOrderInput | SortOrder
+    date?: SortOrder
+    areaId?: SortOrder
+    authorString?: SortOrderInput | SortOrder
+    _count?: ContentResourceCountOrderByAggregateInput
+    _avg?: ContentResourceAvgOrderByAggregateInput
+    _max?: ContentResourceMaxOrderByAggregateInput
+    _min?: ContentResourceMinOrderByAggregateInput
+    _sum?: ContentResourceSumOrderByAggregateInput
+  }
+
+  export type ContentResourceScalarWhereWithAggregatesInput = {
+    AND?: ContentResourceScalarWhereWithAggregatesInput | ContentResourceScalarWhereWithAggregatesInput[]
+    OR?: ContentResourceScalarWhereWithAggregatesInput[]
+    NOT?: ContentResourceScalarWhereWithAggregatesInput | ContentResourceScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"ContentResource"> | number
+    href?: JsonWithAggregatesFilter<"ContentResource">
+    title?: StringWithAggregatesFilter<"ContentResource"> | string
+    subtitle?: StringNullableWithAggregatesFilter<"ContentResource"> | string | null
+    typeId?: IntWithAggregatesFilter<"ContentResource"> | number
+    icon?: StringNullableWithAggregatesFilter<"ContentResource"> | string | null
+    authorId?: StringNullableWithAggregatesFilter<"ContentResource"> | string | null
+    date?: DateTimeWithAggregatesFilter<"ContentResource"> | Date | string
+    areaId?: IntWithAggregatesFilter<"ContentResource"> | number
+    authorString?: StringNullableWithAggregatesFilter<"ContentResource"> | string | null
+  }
+
+  export type SettingsCreateInput = {
+    key: string
+    value: string
+  }
+
+  export type SettingsUncheckedCreateInput = {
+    id?: number
+    key: string
+    value: string
+  }
+
+  export type SettingsUpdateInput = {
+    key?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SettingsUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    key?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SettingsCreateManyInput = {
+    id?: number
+    key: string
+    value: string
+  }
+
+  export type SettingsUpdateManyMutationInput = {
+    key?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SettingsUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    key?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
   }
 
   export type CountryCreateInput = {
@@ -38522,6 +43677,7 @@ export namespace Prisma {
     socials?: UserSocialCreateNestedManyWithoutUserInput
     Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
     resources?: ResourceCreateNestedManyWithoutAuthorInput
+    contentResources?: ContentResourceCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -38543,6 +43699,7 @@ export namespace Prisma {
     socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
     Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
     resources?: ResourceUncheckedCreateNestedManyWithoutAuthorInput
+    contentResources?: ContentResourceUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUpdateInput = {
@@ -38564,6 +43721,7 @@ export namespace Prisma {
     socials?: UserSocialUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
     resources?: ResourceUpdateManyWithoutAuthorNestedInput
+    contentResources?: ContentResourceUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -38585,6 +43743,7 @@ export namespace Prisma {
     socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
     resources?: ResourceUncheckedUpdateManyWithoutAuthorNestedInput
+    contentResources?: ContentResourceUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -39000,6 +44159,195 @@ export namespace Prisma {
     pathwayTypeId?: IntFieldUpdateOperationsInput | number
   }
 
+  export type ContentResourceTypeCreateInput = {
+    type: string
+    icon?: string | null
+    color?: string | null
+    contentResources?: ContentResourceCreateNestedManyWithoutTypeInput
+  }
+
+  export type ContentResourceTypeUncheckedCreateInput = {
+    id?: number
+    type: string
+    icon?: string | null
+    color?: string | null
+    contentResources?: ContentResourceUncheckedCreateNestedManyWithoutTypeInput
+  }
+
+  export type ContentResourceTypeUpdateInput = {
+    type?: StringFieldUpdateOperationsInput | string
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    contentResources?: ContentResourceUpdateManyWithoutTypeNestedInput
+  }
+
+  export type ContentResourceTypeUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    contentResources?: ContentResourceUncheckedUpdateManyWithoutTypeNestedInput
+  }
+
+  export type ContentResourceTypeCreateManyInput = {
+    id?: number
+    type: string
+    icon?: string | null
+    color?: string | null
+  }
+
+  export type ContentResourceTypeUpdateManyMutationInput = {
+    type?: StringFieldUpdateOperationsInput | string
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ContentResourceTypeUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ContentResourceAreaCreateInput = {
+    area: string
+    tagline?: string | null
+    contentResources?: ContentResourceCreateNestedManyWithoutAreaInput
+  }
+
+  export type ContentResourceAreaUncheckedCreateInput = {
+    id?: number
+    area: string
+    tagline?: string | null
+    contentResources?: ContentResourceUncheckedCreateNestedManyWithoutAreaInput
+  }
+
+  export type ContentResourceAreaUpdateInput = {
+    area?: StringFieldUpdateOperationsInput | string
+    tagline?: NullableStringFieldUpdateOperationsInput | string | null
+    contentResources?: ContentResourceUpdateManyWithoutAreaNestedInput
+  }
+
+  export type ContentResourceAreaUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    area?: StringFieldUpdateOperationsInput | string
+    tagline?: NullableStringFieldUpdateOperationsInput | string | null
+    contentResources?: ContentResourceUncheckedUpdateManyWithoutAreaNestedInput
+  }
+
+  export type ContentResourceAreaCreateManyInput = {
+    id?: number
+    area: string
+    tagline?: string | null
+  }
+
+  export type ContentResourceAreaUpdateManyMutationInput = {
+    area?: StringFieldUpdateOperationsInput | string
+    tagline?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ContentResourceAreaUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    area?: StringFieldUpdateOperationsInput | string
+    tagline?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ContentResourceCreateInput = {
+    href?: JsonNullValueInput | InputJsonValue
+    title: string
+    subtitle?: string | null
+    icon?: string | null
+    date?: Date | string
+    authorString?: string | null
+    area: ContentResourceAreaCreateNestedOneWithoutContentResourcesInput
+    author?: UserCreateNestedOneWithoutContentResourcesInput
+    type: ContentResourceTypeCreateNestedOneWithoutContentResourcesInput
+  }
+
+  export type ContentResourceUncheckedCreateInput = {
+    id?: number
+    href?: JsonNullValueInput | InputJsonValue
+    title: string
+    subtitle?: string | null
+    typeId: number
+    icon?: string | null
+    authorId?: string | null
+    date?: Date | string
+    areaId: number
+    authorString?: string | null
+  }
+
+  export type ContentResourceUpdateInput = {
+    href?: JsonNullValueInput | InputJsonValue
+    title?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    authorString?: NullableStringFieldUpdateOperationsInput | string | null
+    area?: ContentResourceAreaUpdateOneRequiredWithoutContentResourcesNestedInput
+    author?: UserUpdateOneWithoutContentResourcesNestedInput
+    type?: ContentResourceTypeUpdateOneRequiredWithoutContentResourcesNestedInput
+  }
+
+  export type ContentResourceUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    href?: JsonNullValueInput | InputJsonValue
+    title?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    typeId?: IntFieldUpdateOperationsInput | number
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    areaId?: IntFieldUpdateOperationsInput | number
+    authorString?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ContentResourceCreateManyInput = {
+    id?: number
+    href?: JsonNullValueInput | InputJsonValue
+    title: string
+    subtitle?: string | null
+    typeId: number
+    icon?: string | null
+    authorId?: string | null
+    date?: Date | string
+    areaId: number
+    authorString?: string | null
+  }
+
+  export type ContentResourceUpdateManyMutationInput = {
+    href?: JsonNullValueInput | InputJsonValue
+    title?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    authorString?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ContentResourceUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    href?: JsonNullValueInput | InputJsonValue
+    title?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    typeId?: IntFieldUpdateOperationsInput | number
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    areaId?: IntFieldUpdateOperationsInput | number
+    authorString?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -39013,6 +44361,66 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type SettingsCountOrderByAggregateInput = {
+    id?: SortOrder
+    key?: SortOrder
+    value?: SortOrder
+  }
+
+  export type SettingsAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type SettingsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    key?: SortOrder
+    value?: SortOrder
+  }
+
+  export type SettingsMinOrderByAggregateInput = {
+    id?: SortOrder
+    key?: SortOrder
+    value?: SortOrder
+  }
+
+  export type SettingsSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
   }
 
   export type CountryCurrencyListRelationFilter = {
@@ -39070,24 +44478,6 @@ export namespace Prisma {
     name?: SortOrder
   }
 
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
   export type CountryScalarRelationFilter = {
     is?: CountryWhereInput
     isNot?: CountryWhereInput
@@ -39141,17 +44531,6 @@ export namespace Prisma {
   export type CountryCurrencyMinOrderByAggregateInput = {
     countryCode?: SortOrder
     currencyCode?: SortOrder
-  }
-
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type EnumPathwayTypeFilter<$PrismaModel = never> = {
@@ -39296,22 +44675,6 @@ export namespace Prisma {
 
   export type PathwaySumOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type EnumPathwayTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -40145,6 +45508,12 @@ export namespace Prisma {
     none?: ResourceWhereInput
   }
 
+  export type ContentResourceListRelationFilter = {
+    every?: ContentResourceWhereInput
+    some?: ContentResourceWhereInput
+    none?: ContentResourceWhereInput
+  }
+
   export type PostOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -40162,6 +45531,10 @@ export namespace Prisma {
   }
 
   export type ResourceOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ContentResourceOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -40476,6 +45849,186 @@ export namespace Prisma {
     pathwayTypeId?: SortOrder
   }
 
+  export type ContentResourceTypeCountOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    icon?: SortOrder
+    color?: SortOrder
+  }
+
+  export type ContentResourceTypeAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type ContentResourceTypeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    icon?: SortOrder
+    color?: SortOrder
+  }
+
+  export type ContentResourceTypeMinOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    icon?: SortOrder
+    color?: SortOrder
+  }
+
+  export type ContentResourceTypeSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type ContentResourceAreaCountOrderByAggregateInput = {
+    id?: SortOrder
+    area?: SortOrder
+    tagline?: SortOrder
+  }
+
+  export type ContentResourceAreaAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type ContentResourceAreaMaxOrderByAggregateInput = {
+    id?: SortOrder
+    area?: SortOrder
+    tagline?: SortOrder
+  }
+
+  export type ContentResourceAreaMinOrderByAggregateInput = {
+    id?: SortOrder
+    area?: SortOrder
+    tagline?: SortOrder
+  }
+
+  export type ContentResourceAreaSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type ContentResourceAreaScalarRelationFilter = {
+    is?: ContentResourceAreaWhereInput
+    isNot?: ContentResourceAreaWhereInput
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
+  export type ContentResourceTypeScalarRelationFilter = {
+    is?: ContentResourceTypeWhereInput
+    isNot?: ContentResourceTypeWhereInput
+  }
+
+  export type ContentResourceCountOrderByAggregateInput = {
+    id?: SortOrder
+    href?: SortOrder
+    title?: SortOrder
+    subtitle?: SortOrder
+    typeId?: SortOrder
+    icon?: SortOrder
+    authorId?: SortOrder
+    date?: SortOrder
+    areaId?: SortOrder
+    authorString?: SortOrder
+  }
+
+  export type ContentResourceAvgOrderByAggregateInput = {
+    id?: SortOrder
+    typeId?: SortOrder
+    areaId?: SortOrder
+  }
+
+  export type ContentResourceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    subtitle?: SortOrder
+    typeId?: SortOrder
+    icon?: SortOrder
+    authorId?: SortOrder
+    date?: SortOrder
+    areaId?: SortOrder
+    authorString?: SortOrder
+  }
+
+  export type ContentResourceMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    subtitle?: SortOrder
+    typeId?: SortOrder
+    icon?: SortOrder
+    authorId?: SortOrder
+    date?: SortOrder
+    areaId?: SortOrder
+    authorString?: SortOrder
+  }
+
+  export type ContentResourceSumOrderByAggregateInput = {
+    id?: SortOrder
+    typeId?: SortOrder
+    areaId?: SortOrder
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type CountryCurrencyCreateNestedManyWithoutCountryInput = {
     create?: XOR<CountryCurrencyCreateWithoutCountryInput, CountryCurrencyUncheckedCreateWithoutCountryInput> | CountryCurrencyCreateWithoutCountryInput[] | CountryCurrencyUncheckedCreateWithoutCountryInput[]
     connectOrCreate?: CountryCurrencyCreateOrConnectWithoutCountryInput | CountryCurrencyCreateOrConnectWithoutCountryInput[]
@@ -40530,10 +46083,6 @@ export namespace Prisma {
     connectOrCreate?: PathwayCreateOrConnectWithoutCountryInput | PathwayCreateOrConnectWithoutCountryInput[]
     createMany?: PathwayCreateManyCountryInputEnvelope
     connect?: PathwayWhereUniqueInput | PathwayWhereUniqueInput[]
-  }
-
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
   }
 
   export type CountryCurrencyUpdateManyWithoutCountryNestedInput = {
@@ -40900,14 +46449,6 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutPathwayInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPathwayInput, UserUpdateWithoutPathwayInput>, UserUncheckedUpdateWithoutPathwayInput>
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type PathwayDocumentsUncheckedUpdateManyWithoutPathwayNestedInput = {
@@ -41837,6 +47378,13 @@ export namespace Prisma {
     connect?: ResourceWhereUniqueInput | ResourceWhereUniqueInput[]
   }
 
+  export type ContentResourceCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<ContentResourceCreateWithoutAuthorInput, ContentResourceUncheckedCreateWithoutAuthorInput> | ContentResourceCreateWithoutAuthorInput[] | ContentResourceUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: ContentResourceCreateOrConnectWithoutAuthorInput | ContentResourceCreateOrConnectWithoutAuthorInput[]
+    createMany?: ContentResourceCreateManyAuthorInputEnvelope
+    connect?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+  }
+
   export type PostVersionHistoryUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<PostVersionHistoryCreateWithoutUserInput, PostVersionHistoryUncheckedCreateWithoutUserInput> | PostVersionHistoryCreateWithoutUserInput[] | PostVersionHistoryUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PostVersionHistoryCreateOrConnectWithoutUserInput | PostVersionHistoryCreateOrConnectWithoutUserInput[]
@@ -41884,6 +47432,13 @@ export namespace Prisma {
     connectOrCreate?: ResourceCreateOrConnectWithoutAuthorInput | ResourceCreateOrConnectWithoutAuthorInput[]
     createMany?: ResourceCreateManyAuthorInputEnvelope
     connect?: ResourceWhereUniqueInput | ResourceWhereUniqueInput[]
+  }
+
+  export type ContentResourceUncheckedCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<ContentResourceCreateWithoutAuthorInput, ContentResourceUncheckedCreateWithoutAuthorInput> | ContentResourceCreateWithoutAuthorInput[] | ContentResourceUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: ContentResourceCreateOrConnectWithoutAuthorInput | ContentResourceCreateOrConnectWithoutAuthorInput[]
+    createMany?: ContentResourceCreateManyAuthorInputEnvelope
+    connect?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -41988,6 +47543,20 @@ export namespace Prisma {
     deleteMany?: ResourceScalarWhereInput | ResourceScalarWhereInput[]
   }
 
+  export type ContentResourceUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<ContentResourceCreateWithoutAuthorInput, ContentResourceUncheckedCreateWithoutAuthorInput> | ContentResourceCreateWithoutAuthorInput[] | ContentResourceUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: ContentResourceCreateOrConnectWithoutAuthorInput | ContentResourceCreateOrConnectWithoutAuthorInput[]
+    upsert?: ContentResourceUpsertWithWhereUniqueWithoutAuthorInput | ContentResourceUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: ContentResourceCreateManyAuthorInputEnvelope
+    set?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    disconnect?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    delete?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    connect?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    update?: ContentResourceUpdateWithWhereUniqueWithoutAuthorInput | ContentResourceUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: ContentResourceUpdateManyWithWhereWithoutAuthorInput | ContentResourceUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: ContentResourceScalarWhereInput | ContentResourceScalarWhereInput[]
+  }
+
   export type PostVersionHistoryUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<PostVersionHistoryCreateWithoutUserInput, PostVersionHistoryUncheckedCreateWithoutUserInput> | PostVersionHistoryCreateWithoutUserInput[] | PostVersionHistoryUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PostVersionHistoryCreateOrConnectWithoutUserInput | PostVersionHistoryCreateOrConnectWithoutUserInput[]
@@ -42084,6 +47653,20 @@ export namespace Prisma {
     update?: ResourceUpdateWithWhereUniqueWithoutAuthorInput | ResourceUpdateWithWhereUniqueWithoutAuthorInput[]
     updateMany?: ResourceUpdateManyWithWhereWithoutAuthorInput | ResourceUpdateManyWithWhereWithoutAuthorInput[]
     deleteMany?: ResourceScalarWhereInput | ResourceScalarWhereInput[]
+  }
+
+  export type ContentResourceUncheckedUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<ContentResourceCreateWithoutAuthorInput, ContentResourceUncheckedCreateWithoutAuthorInput> | ContentResourceCreateWithoutAuthorInput[] | ContentResourceUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: ContentResourceCreateOrConnectWithoutAuthorInput | ContentResourceCreateOrConnectWithoutAuthorInput[]
+    upsert?: ContentResourceUpsertWithWhereUniqueWithoutAuthorInput | ContentResourceUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: ContentResourceCreateManyAuthorInputEnvelope
+    set?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    disconnect?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    delete?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    connect?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    update?: ContentResourceUpdateWithWhereUniqueWithoutAuthorInput | ContentResourceUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: ContentResourceUpdateManyWithWhereWithoutAuthorInput | ContentResourceUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: ContentResourceScalarWhereInput | ContentResourceScalarWhereInput[]
   }
 
   export type SocialCreateNestedOneWithoutUsersInput = {
@@ -42382,35 +47965,132 @@ export namespace Prisma {
     update?: XOR<XOR<PathwayTypesUpdateToOneWithWhereWithoutPathwayCategoriesInput, PathwayTypesUpdateWithoutPathwayCategoriesInput>, PathwayTypesUncheckedUpdateWithoutPathwayCategoriesInput>
   }
 
-  export type NestedStringFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringFilter<$PrismaModel> | string
+  export type ContentResourceCreateNestedManyWithoutTypeInput = {
+    create?: XOR<ContentResourceCreateWithoutTypeInput, ContentResourceUncheckedCreateWithoutTypeInput> | ContentResourceCreateWithoutTypeInput[] | ContentResourceUncheckedCreateWithoutTypeInput[]
+    connectOrCreate?: ContentResourceCreateOrConnectWithoutTypeInput | ContentResourceCreateOrConnectWithoutTypeInput[]
+    createMany?: ContentResourceCreateManyTypeInputEnvelope
+    connect?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
   }
 
-  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
+  export type ContentResourceUncheckedCreateNestedManyWithoutTypeInput = {
+    create?: XOR<ContentResourceCreateWithoutTypeInput, ContentResourceUncheckedCreateWithoutTypeInput> | ContentResourceCreateWithoutTypeInput[] | ContentResourceUncheckedCreateWithoutTypeInput[]
+    connectOrCreate?: ContentResourceCreateOrConnectWithoutTypeInput | ContentResourceCreateOrConnectWithoutTypeInput[]
+    createMany?: ContentResourceCreateManyTypeInputEnvelope
+    connect?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+  }
+
+  export type ContentResourceUpdateManyWithoutTypeNestedInput = {
+    create?: XOR<ContentResourceCreateWithoutTypeInput, ContentResourceUncheckedCreateWithoutTypeInput> | ContentResourceCreateWithoutTypeInput[] | ContentResourceUncheckedCreateWithoutTypeInput[]
+    connectOrCreate?: ContentResourceCreateOrConnectWithoutTypeInput | ContentResourceCreateOrConnectWithoutTypeInput[]
+    upsert?: ContentResourceUpsertWithWhereUniqueWithoutTypeInput | ContentResourceUpsertWithWhereUniqueWithoutTypeInput[]
+    createMany?: ContentResourceCreateManyTypeInputEnvelope
+    set?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    disconnect?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    delete?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    connect?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    update?: ContentResourceUpdateWithWhereUniqueWithoutTypeInput | ContentResourceUpdateWithWhereUniqueWithoutTypeInput[]
+    updateMany?: ContentResourceUpdateManyWithWhereWithoutTypeInput | ContentResourceUpdateManyWithWhereWithoutTypeInput[]
+    deleteMany?: ContentResourceScalarWhereInput | ContentResourceScalarWhereInput[]
+  }
+
+  export type ContentResourceUncheckedUpdateManyWithoutTypeNestedInput = {
+    create?: XOR<ContentResourceCreateWithoutTypeInput, ContentResourceUncheckedCreateWithoutTypeInput> | ContentResourceCreateWithoutTypeInput[] | ContentResourceUncheckedCreateWithoutTypeInput[]
+    connectOrCreate?: ContentResourceCreateOrConnectWithoutTypeInput | ContentResourceCreateOrConnectWithoutTypeInput[]
+    upsert?: ContentResourceUpsertWithWhereUniqueWithoutTypeInput | ContentResourceUpsertWithWhereUniqueWithoutTypeInput[]
+    createMany?: ContentResourceCreateManyTypeInputEnvelope
+    set?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    disconnect?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    delete?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    connect?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    update?: ContentResourceUpdateWithWhereUniqueWithoutTypeInput | ContentResourceUpdateWithWhereUniqueWithoutTypeInput[]
+    updateMany?: ContentResourceUpdateManyWithWhereWithoutTypeInput | ContentResourceUpdateManyWithWhereWithoutTypeInput[]
+    deleteMany?: ContentResourceScalarWhereInput | ContentResourceScalarWhereInput[]
+  }
+
+  export type ContentResourceCreateNestedManyWithoutAreaInput = {
+    create?: XOR<ContentResourceCreateWithoutAreaInput, ContentResourceUncheckedCreateWithoutAreaInput> | ContentResourceCreateWithoutAreaInput[] | ContentResourceUncheckedCreateWithoutAreaInput[]
+    connectOrCreate?: ContentResourceCreateOrConnectWithoutAreaInput | ContentResourceCreateOrConnectWithoutAreaInput[]
+    createMany?: ContentResourceCreateManyAreaInputEnvelope
+    connect?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+  }
+
+  export type ContentResourceUncheckedCreateNestedManyWithoutAreaInput = {
+    create?: XOR<ContentResourceCreateWithoutAreaInput, ContentResourceUncheckedCreateWithoutAreaInput> | ContentResourceCreateWithoutAreaInput[] | ContentResourceUncheckedCreateWithoutAreaInput[]
+    connectOrCreate?: ContentResourceCreateOrConnectWithoutAreaInput | ContentResourceCreateOrConnectWithoutAreaInput[]
+    createMany?: ContentResourceCreateManyAreaInputEnvelope
+    connect?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+  }
+
+  export type ContentResourceUpdateManyWithoutAreaNestedInput = {
+    create?: XOR<ContentResourceCreateWithoutAreaInput, ContentResourceUncheckedCreateWithoutAreaInput> | ContentResourceCreateWithoutAreaInput[] | ContentResourceUncheckedCreateWithoutAreaInput[]
+    connectOrCreate?: ContentResourceCreateOrConnectWithoutAreaInput | ContentResourceCreateOrConnectWithoutAreaInput[]
+    upsert?: ContentResourceUpsertWithWhereUniqueWithoutAreaInput | ContentResourceUpsertWithWhereUniqueWithoutAreaInput[]
+    createMany?: ContentResourceCreateManyAreaInputEnvelope
+    set?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    disconnect?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    delete?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    connect?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    update?: ContentResourceUpdateWithWhereUniqueWithoutAreaInput | ContentResourceUpdateWithWhereUniqueWithoutAreaInput[]
+    updateMany?: ContentResourceUpdateManyWithWhereWithoutAreaInput | ContentResourceUpdateManyWithWhereWithoutAreaInput[]
+    deleteMany?: ContentResourceScalarWhereInput | ContentResourceScalarWhereInput[]
+  }
+
+  export type ContentResourceUncheckedUpdateManyWithoutAreaNestedInput = {
+    create?: XOR<ContentResourceCreateWithoutAreaInput, ContentResourceUncheckedCreateWithoutAreaInput> | ContentResourceCreateWithoutAreaInput[] | ContentResourceUncheckedCreateWithoutAreaInput[]
+    connectOrCreate?: ContentResourceCreateOrConnectWithoutAreaInput | ContentResourceCreateOrConnectWithoutAreaInput[]
+    upsert?: ContentResourceUpsertWithWhereUniqueWithoutAreaInput | ContentResourceUpsertWithWhereUniqueWithoutAreaInput[]
+    createMany?: ContentResourceCreateManyAreaInputEnvelope
+    set?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    disconnect?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    delete?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    connect?: ContentResourceWhereUniqueInput | ContentResourceWhereUniqueInput[]
+    update?: ContentResourceUpdateWithWhereUniqueWithoutAreaInput | ContentResourceUpdateWithWhereUniqueWithoutAreaInput[]
+    updateMany?: ContentResourceUpdateManyWithWhereWithoutAreaInput | ContentResourceUpdateManyWithWhereWithoutAreaInput[]
+    deleteMany?: ContentResourceScalarWhereInput | ContentResourceScalarWhereInput[]
+  }
+
+  export type ContentResourceAreaCreateNestedOneWithoutContentResourcesInput = {
+    create?: XOR<ContentResourceAreaCreateWithoutContentResourcesInput, ContentResourceAreaUncheckedCreateWithoutContentResourcesInput>
+    connectOrCreate?: ContentResourceAreaCreateOrConnectWithoutContentResourcesInput
+    connect?: ContentResourceAreaWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutContentResourcesInput = {
+    create?: XOR<UserCreateWithoutContentResourcesInput, UserUncheckedCreateWithoutContentResourcesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutContentResourcesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ContentResourceTypeCreateNestedOneWithoutContentResourcesInput = {
+    create?: XOR<ContentResourceTypeCreateWithoutContentResourcesInput, ContentResourceTypeUncheckedCreateWithoutContentResourcesInput>
+    connectOrCreate?: ContentResourceTypeCreateOrConnectWithoutContentResourcesInput
+    connect?: ContentResourceTypeWhereUniqueInput
+  }
+
+  export type ContentResourceAreaUpdateOneRequiredWithoutContentResourcesNestedInput = {
+    create?: XOR<ContentResourceAreaCreateWithoutContentResourcesInput, ContentResourceAreaUncheckedCreateWithoutContentResourcesInput>
+    connectOrCreate?: ContentResourceAreaCreateOrConnectWithoutContentResourcesInput
+    upsert?: ContentResourceAreaUpsertWithoutContentResourcesInput
+    connect?: ContentResourceAreaWhereUniqueInput
+    update?: XOR<XOR<ContentResourceAreaUpdateToOneWithWhereWithoutContentResourcesInput, ContentResourceAreaUpdateWithoutContentResourcesInput>, ContentResourceAreaUncheckedUpdateWithoutContentResourcesInput>
+  }
+
+  export type UserUpdateOneWithoutContentResourcesNestedInput = {
+    create?: XOR<UserCreateWithoutContentResourcesInput, UserUncheckedCreateWithoutContentResourcesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutContentResourcesInput
+    upsert?: UserUpsertWithoutContentResourcesInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutContentResourcesInput, UserUpdateWithoutContentResourcesInput>, UserUncheckedUpdateWithoutContentResourcesInput>
+  }
+
+  export type ContentResourceTypeUpdateOneRequiredWithoutContentResourcesNestedInput = {
+    create?: XOR<ContentResourceTypeCreateWithoutContentResourcesInput, ContentResourceTypeUncheckedCreateWithoutContentResourcesInput>
+    connectOrCreate?: ContentResourceTypeCreateOrConnectWithoutContentResourcesInput
+    upsert?: ContentResourceTypeUpsertWithoutContentResourcesInput
+    connect?: ContentResourceTypeWhereUniqueInput
+    update?: XOR<XOR<ContentResourceTypeUpdateToOneWithWhereWithoutContentResourcesInput, ContentResourceTypeUpdateWithoutContentResourcesInput>, ContentResourceTypeUncheckedUpdateWithoutContentResourcesInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -42424,22 +48104,18 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type NestedEnumPathwayTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.PathwayType | EnumPathwayTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.PathwayType[] | ListEnumPathwayTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.PathwayType[] | ListEnumPathwayTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumPathwayTypeFilter<$PrismaModel> | $Enums.PathwayType
-  }
-
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  export type NestedStringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringFilter<$PrismaModel> | string
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -42467,6 +48143,41 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPathwayTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.PathwayType | EnumPathwayTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PathwayType[] | ListEnumPathwayTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PathwayType[] | ListEnumPathwayTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPathwayTypeFilter<$PrismaModel> | $Enums.PathwayType
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedEnumPathwayTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -42682,6 +48393,29 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
   export type CountryCurrencyCreateWithoutCountryInput = {
@@ -43232,6 +48966,7 @@ export namespace Prisma {
     roles?: UserRolesCreateNestedManyWithoutUserInput
     socials?: UserSocialCreateNestedManyWithoutUserInput
     resources?: ResourceCreateNestedManyWithoutAuthorInput
+    contentResources?: ContentResourceCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutPathwayInput = {
@@ -43252,6 +48987,7 @@ export namespace Prisma {
     roles?: UserRolesUncheckedCreateNestedManyWithoutUserInput
     socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
     resources?: ResourceUncheckedCreateNestedManyWithoutAuthorInput
+    contentResources?: ContentResourceUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutPathwayInput = {
@@ -43436,6 +49172,7 @@ export namespace Prisma {
     roles?: UserRolesUpdateManyWithoutUserNestedInput
     socials?: UserSocialUpdateManyWithoutUserNestedInput
     resources?: ResourceUpdateManyWithoutAuthorNestedInput
+    contentResources?: ContentResourceUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPathwayInput = {
@@ -43456,6 +49193,7 @@ export namespace Prisma {
     roles?: UserRolesUncheckedUpdateManyWithoutUserNestedInput
     socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
     resources?: ResourceUncheckedUpdateManyWithoutAuthorNestedInput
+    contentResources?: ContentResourceUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type PathwayCreateWithoutPipelinesInput = {
@@ -44148,6 +49886,7 @@ export namespace Prisma {
     socials?: UserSocialCreateNestedManyWithoutUserInput
     Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
     resources?: ResourceCreateNestedManyWithoutAuthorInput
+    contentResources?: ContentResourceCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -44168,6 +49907,7 @@ export namespace Prisma {
     socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
     Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
     resources?: ResourceUncheckedCreateNestedManyWithoutAuthorInput
+    contentResources?: ContentResourceUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -44283,6 +50023,7 @@ export namespace Prisma {
     socials?: UserSocialUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
     resources?: ResourceUpdateManyWithoutAuthorNestedInput
+    contentResources?: ContentResourceUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -44303,6 +50044,7 @@ export namespace Prisma {
     socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
     resources?: ResourceUncheckedUpdateManyWithoutAuthorNestedInput
+    contentResources?: ContentResourceUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type PostCreateWithoutTagsInput = {
@@ -44805,6 +50547,7 @@ export namespace Prisma {
     roles?: UserRolesCreateNestedManyWithoutUserInput
     socials?: UserSocialCreateNestedManyWithoutUserInput
     Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
+    contentResources?: ContentResourceCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutResourcesInput = {
@@ -44825,6 +50568,7 @@ export namespace Prisma {
     roles?: UserRolesUncheckedCreateNestedManyWithoutUserInput
     socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
     Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
+    contentResources?: ContentResourceUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutResourcesInput = {
@@ -44861,6 +50605,7 @@ export namespace Prisma {
     roles?: UserRolesUpdateManyWithoutUserNestedInput
     socials?: UserSocialUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
+    contentResources?: ContentResourceUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutResourcesInput = {
@@ -44881,6 +50626,7 @@ export namespace Prisma {
     roles?: UserRolesUncheckedUpdateManyWithoutUserNestedInput
     socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
+    contentResources?: ContentResourceUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type BlockFieldCreateWithoutBlockInput = {
@@ -45196,6 +50942,7 @@ export namespace Prisma {
     socials?: UserSocialCreateNestedManyWithoutUserInput
     Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
     resources?: ResourceCreateNestedManyWithoutAuthorInput
+    contentResources?: ContentResourceCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -45216,6 +50963,7 @@ export namespace Prisma {
     socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
     Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
     resources?: ResourceUncheckedCreateNestedManyWithoutAuthorInput
+    contentResources?: ContentResourceUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -45252,6 +51000,7 @@ export namespace Prisma {
     socials?: UserSocialUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
     resources?: ResourceUpdateManyWithoutAuthorNestedInput
+    contentResources?: ContentResourceUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -45272,6 +51021,7 @@ export namespace Prisma {
     socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
     resources?: ResourceUncheckedUpdateManyWithoutAuthorNestedInput
+    contentResources?: ContentResourceUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type PostVersionHistoryCreateWithoutUserInput = {
@@ -45494,6 +51244,39 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ContentResourceCreateWithoutAuthorInput = {
+    href?: JsonNullValueInput | InputJsonValue
+    title: string
+    subtitle?: string | null
+    icon?: string | null
+    date?: Date | string
+    authorString?: string | null
+    area: ContentResourceAreaCreateNestedOneWithoutContentResourcesInput
+    type: ContentResourceTypeCreateNestedOneWithoutContentResourcesInput
+  }
+
+  export type ContentResourceUncheckedCreateWithoutAuthorInput = {
+    id?: number
+    href?: JsonNullValueInput | InputJsonValue
+    title: string
+    subtitle?: string | null
+    typeId: number
+    icon?: string | null
+    date?: Date | string
+    areaId: number
+    authorString?: string | null
+  }
+
+  export type ContentResourceCreateOrConnectWithoutAuthorInput = {
+    where: ContentResourceWhereUniqueInput
+    create: XOR<ContentResourceCreateWithoutAuthorInput, ContentResourceUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type ContentResourceCreateManyAuthorInputEnvelope = {
+    data: ContentResourceCreateManyAuthorInput | ContentResourceCreateManyAuthorInput[]
+    skipDuplicates?: boolean
+  }
+
   export type PostVersionHistoryUpsertWithWhereUniqueWithoutUserInput = {
     where: PostVersionHistoryWhereUniqueInput
     update: XOR<PostVersionHistoryUpdateWithoutUserInput, PostVersionHistoryUncheckedUpdateWithoutUserInput>
@@ -45669,6 +51452,38 @@ export namespace Prisma {
     content?: StringFilter<"Resource"> | string
   }
 
+  export type ContentResourceUpsertWithWhereUniqueWithoutAuthorInput = {
+    where: ContentResourceWhereUniqueInput
+    update: XOR<ContentResourceUpdateWithoutAuthorInput, ContentResourceUncheckedUpdateWithoutAuthorInput>
+    create: XOR<ContentResourceCreateWithoutAuthorInput, ContentResourceUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type ContentResourceUpdateWithWhereUniqueWithoutAuthorInput = {
+    where: ContentResourceWhereUniqueInput
+    data: XOR<ContentResourceUpdateWithoutAuthorInput, ContentResourceUncheckedUpdateWithoutAuthorInput>
+  }
+
+  export type ContentResourceUpdateManyWithWhereWithoutAuthorInput = {
+    where: ContentResourceScalarWhereInput
+    data: XOR<ContentResourceUpdateManyMutationInput, ContentResourceUncheckedUpdateManyWithoutAuthorInput>
+  }
+
+  export type ContentResourceScalarWhereInput = {
+    AND?: ContentResourceScalarWhereInput | ContentResourceScalarWhereInput[]
+    OR?: ContentResourceScalarWhereInput[]
+    NOT?: ContentResourceScalarWhereInput | ContentResourceScalarWhereInput[]
+    id?: IntFilter<"ContentResource"> | number
+    href?: JsonFilter<"ContentResource">
+    title?: StringFilter<"ContentResource"> | string
+    subtitle?: StringNullableFilter<"ContentResource"> | string | null
+    typeId?: IntFilter<"ContentResource"> | number
+    icon?: StringNullableFilter<"ContentResource"> | string | null
+    authorId?: StringNullableFilter<"ContentResource"> | string | null
+    date?: DateTimeFilter<"ContentResource"> | Date | string
+    areaId?: IntFilter<"ContentResource"> | number
+    authorString?: StringNullableFilter<"ContentResource"> | string | null
+  }
+
   export type SocialCreateWithoutUsersInput = {
     name: string
     url: string
@@ -45714,6 +51529,7 @@ export namespace Prisma {
     roles?: UserRolesCreateNestedManyWithoutUserInput
     Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
     resources?: ResourceCreateNestedManyWithoutAuthorInput
+    contentResources?: ContentResourceCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutSocialsInput = {
@@ -45734,6 +51550,7 @@ export namespace Prisma {
     roles?: UserRolesUncheckedCreateNestedManyWithoutUserInput
     Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
     resources?: ResourceUncheckedCreateNestedManyWithoutAuthorInput
+    contentResources?: ContentResourceUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutSocialsInput = {
@@ -45803,6 +51620,7 @@ export namespace Prisma {
     roles?: UserRolesUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
     resources?: ResourceUpdateManyWithoutAuthorNestedInput
+    contentResources?: ContentResourceUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSocialsInput = {
@@ -45823,6 +51641,7 @@ export namespace Prisma {
     roles?: UserRolesUncheckedUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
     resources?: ResourceUncheckedUpdateManyWithoutAuthorNestedInput
+    contentResources?: ContentResourceUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type RolesCreateWithoutUserRolesInput = {
@@ -45857,6 +51676,7 @@ export namespace Prisma {
     socials?: UserSocialCreateNestedManyWithoutUserInput
     Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
     resources?: ResourceCreateNestedManyWithoutAuthorInput
+    contentResources?: ContentResourceCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutRolesInput = {
@@ -45877,6 +51697,7 @@ export namespace Prisma {
     socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
     Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
     resources?: ResourceUncheckedCreateNestedManyWithoutAuthorInput
+    contentResources?: ContentResourceUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutRolesInput = {
@@ -45933,6 +51754,7 @@ export namespace Prisma {
     socials?: UserSocialUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
     resources?: ResourceUpdateManyWithoutAuthorNestedInput
+    contentResources?: ContentResourceUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRolesInput = {
@@ -45953,6 +51775,7 @@ export namespace Prisma {
     socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
     resources?: ResourceUncheckedUpdateManyWithoutAuthorNestedInput
+    contentResources?: ContentResourceUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserRolesCreateWithoutRoleInput = {
@@ -46089,6 +51912,7 @@ export namespace Prisma {
     socials?: UserSocialCreateNestedManyWithoutUserInput
     Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
     resources?: ResourceCreateNestedManyWithoutAuthorInput
+    contentResources?: ContentResourceCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutPostVersionHistoryInput = {
@@ -46109,6 +51933,7 @@ export namespace Prisma {
     socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
     Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
     resources?: ResourceUncheckedCreateNestedManyWithoutAuthorInput
+    contentResources?: ContentResourceUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutPostVersionHistoryInput = {
@@ -46197,6 +52022,7 @@ export namespace Prisma {
     socials?: UserSocialUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
     resources?: ResourceUpdateManyWithoutAuthorNestedInput
+    contentResources?: ContentResourceUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostVersionHistoryInput = {
@@ -46217,6 +52043,7 @@ export namespace Prisma {
     socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
     Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
     resources?: ResourceUncheckedUpdateManyWithoutAuthorNestedInput
+    contentResources?: ContentResourceUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type PathwayCategoriesCreateWithoutPathway_categoriesInput = {
@@ -46504,6 +52331,284 @@ export namespace Prisma {
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     children?: PathwayTypesUncheckedUpdateManyWithoutParentNestedInput
+  }
+
+  export type ContentResourceCreateWithoutTypeInput = {
+    href?: JsonNullValueInput | InputJsonValue
+    title: string
+    subtitle?: string | null
+    icon?: string | null
+    date?: Date | string
+    authorString?: string | null
+    area: ContentResourceAreaCreateNestedOneWithoutContentResourcesInput
+    author?: UserCreateNestedOneWithoutContentResourcesInput
+  }
+
+  export type ContentResourceUncheckedCreateWithoutTypeInput = {
+    id?: number
+    href?: JsonNullValueInput | InputJsonValue
+    title: string
+    subtitle?: string | null
+    icon?: string | null
+    authorId?: string | null
+    date?: Date | string
+    areaId: number
+    authorString?: string | null
+  }
+
+  export type ContentResourceCreateOrConnectWithoutTypeInput = {
+    where: ContentResourceWhereUniqueInput
+    create: XOR<ContentResourceCreateWithoutTypeInput, ContentResourceUncheckedCreateWithoutTypeInput>
+  }
+
+  export type ContentResourceCreateManyTypeInputEnvelope = {
+    data: ContentResourceCreateManyTypeInput | ContentResourceCreateManyTypeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ContentResourceUpsertWithWhereUniqueWithoutTypeInput = {
+    where: ContentResourceWhereUniqueInput
+    update: XOR<ContentResourceUpdateWithoutTypeInput, ContentResourceUncheckedUpdateWithoutTypeInput>
+    create: XOR<ContentResourceCreateWithoutTypeInput, ContentResourceUncheckedCreateWithoutTypeInput>
+  }
+
+  export type ContentResourceUpdateWithWhereUniqueWithoutTypeInput = {
+    where: ContentResourceWhereUniqueInput
+    data: XOR<ContentResourceUpdateWithoutTypeInput, ContentResourceUncheckedUpdateWithoutTypeInput>
+  }
+
+  export type ContentResourceUpdateManyWithWhereWithoutTypeInput = {
+    where: ContentResourceScalarWhereInput
+    data: XOR<ContentResourceUpdateManyMutationInput, ContentResourceUncheckedUpdateManyWithoutTypeInput>
+  }
+
+  export type ContentResourceCreateWithoutAreaInput = {
+    href?: JsonNullValueInput | InputJsonValue
+    title: string
+    subtitle?: string | null
+    icon?: string | null
+    date?: Date | string
+    authorString?: string | null
+    author?: UserCreateNestedOneWithoutContentResourcesInput
+    type: ContentResourceTypeCreateNestedOneWithoutContentResourcesInput
+  }
+
+  export type ContentResourceUncheckedCreateWithoutAreaInput = {
+    id?: number
+    href?: JsonNullValueInput | InputJsonValue
+    title: string
+    subtitle?: string | null
+    typeId: number
+    icon?: string | null
+    authorId?: string | null
+    date?: Date | string
+    authorString?: string | null
+  }
+
+  export type ContentResourceCreateOrConnectWithoutAreaInput = {
+    where: ContentResourceWhereUniqueInput
+    create: XOR<ContentResourceCreateWithoutAreaInput, ContentResourceUncheckedCreateWithoutAreaInput>
+  }
+
+  export type ContentResourceCreateManyAreaInputEnvelope = {
+    data: ContentResourceCreateManyAreaInput | ContentResourceCreateManyAreaInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ContentResourceUpsertWithWhereUniqueWithoutAreaInput = {
+    where: ContentResourceWhereUniqueInput
+    update: XOR<ContentResourceUpdateWithoutAreaInput, ContentResourceUncheckedUpdateWithoutAreaInput>
+    create: XOR<ContentResourceCreateWithoutAreaInput, ContentResourceUncheckedCreateWithoutAreaInput>
+  }
+
+  export type ContentResourceUpdateWithWhereUniqueWithoutAreaInput = {
+    where: ContentResourceWhereUniqueInput
+    data: XOR<ContentResourceUpdateWithoutAreaInput, ContentResourceUncheckedUpdateWithoutAreaInput>
+  }
+
+  export type ContentResourceUpdateManyWithWhereWithoutAreaInput = {
+    where: ContentResourceScalarWhereInput
+    data: XOR<ContentResourceUpdateManyMutationInput, ContentResourceUncheckedUpdateManyWithoutAreaInput>
+  }
+
+  export type ContentResourceAreaCreateWithoutContentResourcesInput = {
+    area: string
+    tagline?: string | null
+  }
+
+  export type ContentResourceAreaUncheckedCreateWithoutContentResourcesInput = {
+    id?: number
+    area: string
+    tagline?: string | null
+  }
+
+  export type ContentResourceAreaCreateOrConnectWithoutContentResourcesInput = {
+    where: ContentResourceAreaWhereUniqueInput
+    create: XOR<ContentResourceAreaCreateWithoutContentResourcesInput, ContentResourceAreaUncheckedCreateWithoutContentResourcesInput>
+  }
+
+  export type UserCreateWithoutContentResourcesInput = {
+    id?: string
+    name: string
+    email?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    secret?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    discordHandle?: string | null
+    key?: string | null
+    created?: Date | string
+    postVersionHistory?: PostVersionHistoryCreateNestedManyWithoutUserInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    roles?: UserRolesCreateNestedManyWithoutUserInput
+    socials?: UserSocialCreateNestedManyWithoutUserInput
+    Pathway?: PathwayCreateNestedManyWithoutCMS_UserInput
+    resources?: ResourceCreateNestedManyWithoutAuthorInput
+  }
+
+  export type UserUncheckedCreateWithoutContentResourcesInput = {
+    id?: string
+    name: string
+    email?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    secret?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    discordHandle?: string | null
+    key?: string | null
+    created?: Date | string
+    postVersionHistory?: PostVersionHistoryUncheckedCreateNestedManyWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    roles?: UserRolesUncheckedCreateNestedManyWithoutUserInput
+    socials?: UserSocialUncheckedCreateNestedManyWithoutUserInput
+    Pathway?: PathwayUncheckedCreateNestedManyWithoutCMS_UserInput
+    resources?: ResourceUncheckedCreateNestedManyWithoutAuthorInput
+  }
+
+  export type UserCreateOrConnectWithoutContentResourcesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutContentResourcesInput, UserUncheckedCreateWithoutContentResourcesInput>
+  }
+
+  export type ContentResourceTypeCreateWithoutContentResourcesInput = {
+    type: string
+    icon?: string | null
+    color?: string | null
+  }
+
+  export type ContentResourceTypeUncheckedCreateWithoutContentResourcesInput = {
+    id?: number
+    type: string
+    icon?: string | null
+    color?: string | null
+  }
+
+  export type ContentResourceTypeCreateOrConnectWithoutContentResourcesInput = {
+    where: ContentResourceTypeWhereUniqueInput
+    create: XOR<ContentResourceTypeCreateWithoutContentResourcesInput, ContentResourceTypeUncheckedCreateWithoutContentResourcesInput>
+  }
+
+  export type ContentResourceAreaUpsertWithoutContentResourcesInput = {
+    update: XOR<ContentResourceAreaUpdateWithoutContentResourcesInput, ContentResourceAreaUncheckedUpdateWithoutContentResourcesInput>
+    create: XOR<ContentResourceAreaCreateWithoutContentResourcesInput, ContentResourceAreaUncheckedCreateWithoutContentResourcesInput>
+    where?: ContentResourceAreaWhereInput
+  }
+
+  export type ContentResourceAreaUpdateToOneWithWhereWithoutContentResourcesInput = {
+    where?: ContentResourceAreaWhereInput
+    data: XOR<ContentResourceAreaUpdateWithoutContentResourcesInput, ContentResourceAreaUncheckedUpdateWithoutContentResourcesInput>
+  }
+
+  export type ContentResourceAreaUpdateWithoutContentResourcesInput = {
+    area?: StringFieldUpdateOperationsInput | string
+    tagline?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ContentResourceAreaUncheckedUpdateWithoutContentResourcesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    area?: StringFieldUpdateOperationsInput | string
+    tagline?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type UserUpsertWithoutContentResourcesInput = {
+    update: XOR<UserUpdateWithoutContentResourcesInput, UserUncheckedUpdateWithoutContentResourcesInput>
+    create: XOR<UserCreateWithoutContentResourcesInput, UserUncheckedCreateWithoutContentResourcesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutContentResourcesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutContentResourcesInput, UserUncheckedUpdateWithoutContentResourcesInput>
+  }
+
+  export type UserUpdateWithoutContentResourcesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
+    key?: NullableStringFieldUpdateOperationsInput | string | null
+    created?: DateTimeFieldUpdateOperationsInput | Date | string
+    postVersionHistory?: PostVersionHistoryUpdateManyWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    roles?: UserRolesUpdateManyWithoutUserNestedInput
+    socials?: UserSocialUpdateManyWithoutUserNestedInput
+    Pathway?: PathwayUpdateManyWithoutCMS_UserNestedInput
+    resources?: ResourceUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutContentResourcesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    discordHandle?: NullableStringFieldUpdateOperationsInput | string | null
+    key?: NullableStringFieldUpdateOperationsInput | string | null
+    created?: DateTimeFieldUpdateOperationsInput | Date | string
+    postVersionHistory?: PostVersionHistoryUncheckedUpdateManyWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    roles?: UserRolesUncheckedUpdateManyWithoutUserNestedInput
+    socials?: UserSocialUncheckedUpdateManyWithoutUserNestedInput
+    Pathway?: PathwayUncheckedUpdateManyWithoutCMS_UserNestedInput
+    resources?: ResourceUncheckedUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type ContentResourceTypeUpsertWithoutContentResourcesInput = {
+    update: XOR<ContentResourceTypeUpdateWithoutContentResourcesInput, ContentResourceTypeUncheckedUpdateWithoutContentResourcesInput>
+    create: XOR<ContentResourceTypeCreateWithoutContentResourcesInput, ContentResourceTypeUncheckedCreateWithoutContentResourcesInput>
+    where?: ContentResourceTypeWhereInput
+  }
+
+  export type ContentResourceTypeUpdateToOneWithWhereWithoutContentResourcesInput = {
+    where?: ContentResourceTypeWhereInput
+    data: XOR<ContentResourceTypeUpdateWithoutContentResourcesInput, ContentResourceTypeUncheckedUpdateWithoutContentResourcesInput>
+  }
+
+  export type ContentResourceTypeUpdateWithoutContentResourcesInput = {
+    type?: StringFieldUpdateOperationsInput | string
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ContentResourceTypeUncheckedUpdateWithoutContentResourcesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CountryCurrencyCreateManyCountryInput = {
@@ -47196,6 +53301,18 @@ export namespace Prisma {
     content: string
   }
 
+  export type ContentResourceCreateManyAuthorInput = {
+    id?: number
+    href?: JsonNullValueInput | InputJsonValue
+    title: string
+    subtitle?: string | null
+    typeId: number
+    icon?: string | null
+    date?: Date | string
+    areaId: number
+    authorString?: string | null
+  }
+
   export type PostVersionHistoryUpdateWithoutUserInput = {
     action?: StringFieldUpdateOperationsInput | string
     instanceAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47416,6 +53533,41 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
   }
 
+  export type ContentResourceUpdateWithoutAuthorInput = {
+    href?: JsonNullValueInput | InputJsonValue
+    title?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    authorString?: NullableStringFieldUpdateOperationsInput | string | null
+    area?: ContentResourceAreaUpdateOneRequiredWithoutContentResourcesNestedInput
+    type?: ContentResourceTypeUpdateOneRequiredWithoutContentResourcesNestedInput
+  }
+
+  export type ContentResourceUncheckedUpdateWithoutAuthorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    href?: JsonNullValueInput | InputJsonValue
+    title?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    typeId?: IntFieldUpdateOperationsInput | number
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    areaId?: IntFieldUpdateOperationsInput | number
+    authorString?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ContentResourceUncheckedUpdateManyWithoutAuthorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    href?: JsonNullValueInput | InputJsonValue
+    title?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    typeId?: IntFieldUpdateOperationsInput | number
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    areaId?: IntFieldUpdateOperationsInput | number
+    authorString?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type UserRolesCreateManyRoleInput = {
     userId: string
   }
@@ -47493,6 +53645,100 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ContentResourceCreateManyTypeInput = {
+    id?: number
+    href?: JsonNullValueInput | InputJsonValue
+    title: string
+    subtitle?: string | null
+    icon?: string | null
+    authorId?: string | null
+    date?: Date | string
+    areaId: number
+    authorString?: string | null
+  }
+
+  export type ContentResourceUpdateWithoutTypeInput = {
+    href?: JsonNullValueInput | InputJsonValue
+    title?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    authorString?: NullableStringFieldUpdateOperationsInput | string | null
+    area?: ContentResourceAreaUpdateOneRequiredWithoutContentResourcesNestedInput
+    author?: UserUpdateOneWithoutContentResourcesNestedInput
+  }
+
+  export type ContentResourceUncheckedUpdateWithoutTypeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    href?: JsonNullValueInput | InputJsonValue
+    title?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    areaId?: IntFieldUpdateOperationsInput | number
+    authorString?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ContentResourceUncheckedUpdateManyWithoutTypeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    href?: JsonNullValueInput | InputJsonValue
+    title?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    areaId?: IntFieldUpdateOperationsInput | number
+    authorString?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ContentResourceCreateManyAreaInput = {
+    id?: number
+    href?: JsonNullValueInput | InputJsonValue
+    title: string
+    subtitle?: string | null
+    typeId: number
+    icon?: string | null
+    authorId?: string | null
+    date?: Date | string
+    authorString?: string | null
+  }
+
+  export type ContentResourceUpdateWithoutAreaInput = {
+    href?: JsonNullValueInput | InputJsonValue
+    title?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    authorString?: NullableStringFieldUpdateOperationsInput | string | null
+    author?: UserUpdateOneWithoutContentResourcesNestedInput
+    type?: ContentResourceTypeUpdateOneRequiredWithoutContentResourcesNestedInput
+  }
+
+  export type ContentResourceUncheckedUpdateWithoutAreaInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    href?: JsonNullValueInput | InputJsonValue
+    title?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    typeId?: IntFieldUpdateOperationsInput | number
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    authorString?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ContentResourceUncheckedUpdateManyWithoutAreaInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    href?: JsonNullValueInput | InputJsonValue
+    title?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    typeId?: IntFieldUpdateOperationsInput | number
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    authorString?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 

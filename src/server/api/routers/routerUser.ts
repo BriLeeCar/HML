@@ -20,14 +20,14 @@ const getUserRoles = async ({ ctx }: CTXProps) => {
 		select: {
 			roles: {
 				select: {
-					roleId: true,
+					role: true,
 				},
 			},
 		},
 	})
 
 	return {
-		roles: roles?.roles.map(r => r.roleId) || [],
+		roles: roles?.roles.map(r => r) || [],
 	}
 }
 
@@ -38,6 +38,13 @@ const getCurrent = async ({ ctx }: CTXProps) => {
 		&& (await ctx.db.user.findUnique({
 			where: {
 				id: userId.id,
+			},
+			include: {
+				roles: {
+					include: {
+						role: true,
+					},
+				},
 			},
 		}))
 	)
@@ -61,7 +68,20 @@ const createUserKey = async ({
 		name: string
 	}
 }) => {
-	return await ctx.db.user.create(queryCreateUserKey(input.name))
+	const key = queryCreateUserKey(input.name)
+
+	const newUser = await ctx.db.user.create({
+		data: key.data,
+		include: {
+			roles: {
+				include: {
+					role: true,
+				},
+			},
+		},
+	})
+
+	return newUser
 }
 
 const getUsers = async ({
@@ -75,7 +95,6 @@ const getUsers = async ({
 		orderBy: {
 			key: 'desc',
 		},
-		take: 10,
 		include: {
 			roles: true,
 		},
@@ -85,7 +104,9 @@ const getUsers = async ({
 export const UserRouter = createTRPCRouter({
 	current: publicProcedure.query(getCurrent),
 	getUserById: publicProcedure.input(z.string().or(z.undefined())).query(getUserById),
-	createUserKey: protectedProcedure.input(z.object({ name: z.string() })).mutation(createUserKey),
+	createUserKey: protectedProcedure
+		.input(z.object({ name: z.string() }))
+		.mutation(createUserKey as AnySafe),
 	getUserRoles: publicProcedure.query(async ({ ctx }) => {
 		return await ctx.db.roles.findMany()
 	}),

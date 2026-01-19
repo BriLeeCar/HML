@@ -2,14 +2,9 @@ import fs from 'fs'
 import { type Metadata } from 'next'
 import { getFrontmatter } from 'next-mdx-remote-client/utils'
 import { Suspense } from 'react'
-import {
-	AlertCallout,
-	Icon,
-	InlineLink,
-	Page as PageEl,
-	PageHeading,
-	SectionHeading,
-} from '~/components'
+import { AlertCallout, Icon, InlineLink } from '~/components'
+import { Page as PageEl, PageHeading } from '~/components/Structure/Page'
+import { Section } from '~/components/Structure/Section'
 import { MDXProcessor, MDXProvider } from '~/lib/mdx'
 import { toTitleCase } from '~/lib/text'
 
@@ -55,7 +50,7 @@ const Page = async (props: PageProps<'/[slug]'>) => {
 		.replaceSubSections()
 		.replaceCustomMDX()
 		.setComponents({
-			h2: props => <SectionHeading {...props} />,
+			h2: props => <Section.Heading {...props} />,
 		})
 
 	const { subtitle, type, title, description, warnings } = data.frontmatter as {

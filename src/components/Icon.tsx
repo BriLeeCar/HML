@@ -13,6 +13,12 @@ export { AllIcons }
  * Icon colors are controlled by the `text-[COLOR_NAME]-[COLOR_SHADE]` class through TailWindCSS
  */
 
+const IconInner = ({ IconName, solid, children }: Props.Icon) => {
+	if (!IconName) return children
+	const SelectedIcon = AllIcons[IconName]
+	return <SelectedIcon solid={solid ?? false} />
+}
+
 export const Icon = ({
 	as,
 	btnTitle,
@@ -20,15 +26,12 @@ export const Icon = ({
 	IconName,
 	...props
 }: Props.Icon & { as?: 'button'; btnTitle?: string }) => {
-	const SelectedIcon = AllIcons[IconName]
-
 	if (as === 'button') {
 		return (
 			<button
 				title={btnTitle}
 				aria-label={btnTitle}>
 				<svg
-					{...props}
 					xmlns='http://www.w3.org/2000/svg'
 					width='24'
 					height='24'
@@ -36,8 +39,15 @@ export const Icon = ({
 					fill='currentColor'
 					strokeLinecap='round'
 					strokeLinejoin='round'
+					stroke='currentColor'
+					strokeWidth={0}
+					{...props}
 					className={cn('click', props.className)}>
-					<SelectedIcon solid={solid ?? false} />
+					<IconInner
+						IconName={IconName}
+						solid={solid}
+						children={props.children}
+					/>
 				</svg>
 			</button>
 		)
@@ -52,8 +62,14 @@ export const Icon = ({
 			fill='currentColor'
 			strokeLinecap='round'
 			strokeLinejoin='round'
+			stroke='currentColor'
+			strokeWidth={0}
 			{...props}>
-			<SelectedIcon solid={solid ?? false} />
+			<IconInner
+				IconName={IconName}
+				solid={solid}
+				children={props.children}
+			/>
 		</svg>
 	)
 }

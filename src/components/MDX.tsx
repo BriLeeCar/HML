@@ -1,25 +1,9 @@
 import { Children } from 'react'
 import { cn } from '~/lib/cn'
-import {
-	Blockquote,
-	Bold,
-	Button,
-	CTA,
-	Heading,
-	InlineLink,
-	Large,
-	Li,
-	OL,
-	P,
-	Page,
-	PageHeading,
-	Section,
-	SectionHeading,
-	SubSection,
-	Sup,
-	U,
-	UL,
-} from '.'
+import { Blockquote, Bold, Button, CTA, Heading, InlineLink, Large, Li, OL, Text, U, UL } from '.'
+import { Page, PageHeading } from './Structure/Page'
+import { Section, SectionHeading } from './Structure/Section'
+import { Subsection } from './Structure/Subsection'
 
 export function mdxComponents() {
 	return {
@@ -40,8 +24,8 @@ export function mdxComponents() {
 				level={4}
 			/>
 		),
-		p: ({ ...props }) => <P {...props} />,
-		P: ({ ...props }) => <P {...props} />,
+		p: ({ ...props }) => <Text {...props} />,
+		P: ({ ...props }) => <Text {...props} />,
 		blockquote: ({ ...props }) => <Blockquote {...props} />,
 		U: ({ ...props }) => <U {...props} />,
 		Card: ({
@@ -133,10 +117,9 @@ export function mdxComponents() {
 				</Button>
 			)
 		},
-		sup: ({ ...props }: Props<'sup'>) => <Sup {...props} />,
 		Section: ({ ...props }: Props<typeof Section>) => <Section {...props} />,
 		SectionHeading: ({ ...props }: Props<typeof SectionHeading>) => <SectionHeading {...props} />,
-		SubSection: ({ ...props }: Props<typeof SubSection>) => <SubSection {...props} />,
+		Subsection: ({ ...props }: Props<typeof Subsection>) => <Subsection {...props} />,
 		Page: ({ ...props }: Props<typeof Page>) => <Page {...props} />,
 		PageHeading: ({ ...props }: Props<typeof PageHeading>) => <PageHeading {...props} />,
 		InlineLink: ({ ...props }: Props<typeof InlineLink>) => <InlineLink {...props} />,

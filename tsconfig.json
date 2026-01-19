@@ -1,7 +1,11 @@
 {
 	"compilerOptions": {
 		"target": "ES2017",
-		"lib": ["dom", "dom.iterable", "esnext"],
+		"lib": [
+			"dom",
+			"dom.iterable",
+			"esnext"
+		],
 		"allowJs": true,
 		"skipLibCheck": true,
 		"strict": true,
@@ -20,19 +24,44 @@
 			}
 		],
 		"paths": {
-			"@/*": ["./src/app/*"],
-			"www/*": ["./src/app/(www)/(Content)/*"],
-
-			"@/data-collection/*": ["./src/app/admin/data-collection/*"],
-			"~/*": ["./src/*"],
-			"~/components/*": ["./src/components/*"],
-			"~/components": ["./src/components/index.ts"],
-			"~/server/*": ["./src/server/*"],
-			"~/trpc": ["./src/server/api/*"],
-			"~/clientQuery": ["./src/trpc/react.tsx"],
-			"~/serverQuery": ["./src/trpc/server.ts"]
+			"@/*": [
+				"./src/app/*"
+			],
+			"www/*": [
+				"./src/app/(www)/(Content)/*"
+			],
+			"@/data-collection/*": [
+				"./src/app/admin/data-collection/*"
+			],
+			"~/*": [
+				"./src/*"
+			],
+			"~/components/*": [
+				"./src/components/*"
+			],
+			"~/components": [
+				"./src/components/index.ts"
+			],
+			"~/server/*": [
+				"./src/server/*"
+			],
+			"~/trpc": [
+				"./src/server/api/*"
+			],
+			"~/types/*": [
+				"./@types/*.d.ts"
+			],
+			"~/clientQuery": [
+				"./src/trpc/react.tsx"
+			],
+			"~/serverQuery": [
+				"./src/trpc/server.ts"
+			]
 		},
-		"typeRoots": ["./node_modules/@types", "./@types"]
+		"typeRoots": [
+			"./node_modules/@types",
+			"./@types"
+		]
 	},
 	"include": [
 		"next-env.d.ts",
@@ -42,5 +71,7 @@
 		"src/**/*.d.ts",
 		".next/dev/types/**/*.ts"
 	],
-	"exclude": ["node_modules"]
+	"exclude": [
+		"node_modules"
+	]
 }

@@ -3,9 +3,9 @@ import z from 'zod'
 import { verify } from '~/lib/security/hashAndSalt'
 import { User } from '~/server/api/zod'
 import db from '~/server/prisma/db'
-import type { CredentialsBase } from './credentials'
+import type { CredentialsBase } from '../../types'
 
-export const SignInPath = async (data: CredentialsBase) => {
+export const SignInPath = async (data: CredentialsBase): Promise<Auth.User | null> => {
 	const validated = z
 		.object({
 			username: User.shape.name,
@@ -25,11 +25,16 @@ export const SignInPath = async (data: CredentialsBase) => {
 				},
 			},
 			include: {
-				roles: true,
+				roles: {
+					include: {
+						role: true,
+					},
+				},
 			},
 		})
+
 		if (returningUser && (await verify(returningUser.secret, password))) {
-			return returningUser
+			return returningUser as unknown as Auth.User
 		} else {
 			throw new SignInError('password')
 		}

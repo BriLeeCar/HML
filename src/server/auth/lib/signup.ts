@@ -3,7 +3,7 @@ import z from 'zod'
 import { hash } from '~/lib/security/hashAndSalt'
 import { User, UserKey } from '~/server/api/zod'
 import db from '~/server/prisma/db'
-import type { CredentialsBase } from './credentials'
+import type { CredentialsBase } from '../../types'
 
 const validateSignUpInput = (data: { username: string; password: string; key: string }) => {
 	const validated = z

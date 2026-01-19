@@ -1,27 +1,8 @@
 import { PrismaAdapter } from '@auth/prisma-adapter'
-import { type DefaultSession, type NextAuthConfig } from 'next-auth'
-
+import { type NextAuthConfig, type User } from 'next-auth'
 import db from '~/server/prisma/db'
-import type { Roles } from '~/server/prisma/generated'
+import type { tTokenCB } from '~/server/types'
 import { CredentialsConfig } from './lib/credentials'
-
-/**
- * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
- * object and keep type safety.
- *
- * @see https://next-auth.js.org/getting-started/typescript#module-augmentation
- */
-declare module 'next-auth' {
-	interface Session extends DefaultSession {
-		user: {
-			id: string
-			role: Roles['id']
-		} & DefaultSession['user']
-	}
-	interface User {
-		role?: Roles['id']
-	}
-}
 
 /**
  * Options for NextAuth.js used to configure adapters, providers, callbacks, etc.
@@ -35,26 +16,28 @@ export const authConfig = {
 		strategy: 'jwt',
 	},
 	callbacks: {
-		session: data => {
+		session: ({ token, session }) => {
+			Object.assign(session.user, {
+				roles: mergeUserRoles(token, session.user as User),
+				sessionId: session.user.id ?? 0,
+				id: token.sub,
+			})
+
 			return {
-				token: data.token,
-				...data.session,
-				user: {
-					sessionId: data.session.user.id ?? 0,
-					id: data.token.sub,
-					role: data.token.role as Roles['id'],
-				},
+				...session,
+				token: token,
 			}
 		},
-		jwt: data => {
-			const token = data.token
-			if (data.user) {
-				token.role = (data.user as { role: Roles['id'] }).role
-			}
+		jwt: ({ token, user }: { token: tTokenCB; user: User }) => {
+			if (Object.keys(token).includes('picture')) delete (token as AnySafe).picture
+
+			token.roles = mergeUserRoles(token, user)
 			return token
 		},
-		redirect: async data => {
-			return data.baseUrl + '/admin'
-		},
+		redirect: async data => data.baseUrl + '/admin',
 	},
 } satisfies NextAuthConfig
+
+const mergeUserRoles = (token: tTokenCB, user: User): Auth.Role[] => [
+	...new Set([...(user?.roles ?? []), ...(token.roles ?? [])]),
+]

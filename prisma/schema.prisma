@@ -9,6 +9,15 @@ datasource db {
   schemas  = ["public"]
 }
 
+model Settings {
+  id    Int    @id @default(autoincrement())
+  key   String @unique
+  value String
+
+  @@map("settings")
+  @@schema("public")
+}
+
 model Country {
   code               String                         @id(map: "Country_pkey") @unique(map: "Country_code_key")
   name               String
@@ -270,27 +279,6 @@ model PostBlock {
   @@schema("public")
 }
 
-// model Account {
-//   id                       String  @id(map: "Account_pkey") @default(cuid())
-//   userId                   String
-//   type                     String
-//   provider                 String
-//   providerAccountId        String
-//   refresh_token            String?
-//   access_token             String?
-//   expires_at               Int?
-//   token_type               String?
-//   scope                    String?
-//   id_token                 String?
-//   session_state            String?
-//   refresh_token_expires_in Int?
-//   user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade, map: "Account_userId_fkey")
-
-//   @@unique([provider, providerAccountId], map: "Account_provider_providerAccountId_key")
-//   @@map("cms__accounts")
-//   @@schema("public")
-// }
-
 model Session {
   id           String   @id(map: "Session_pkey") @default(cuid())
   sessionToken String   @unique(map: "Session_sessionToken_key")
@@ -322,6 +310,7 @@ model User {
   socials            UserSocial[]
   Pathway            Pathway[]
   resources          Resource[]
+  contentResources   ContentResource[]    @relation(map: "content_resource_author_fkey")
 
   @@map("cms__users")
   @@schema("public")
@@ -336,19 +325,6 @@ model VerificationToken {
   @@map("cms__verification_tokens")
   @@schema("public")
 }
-
-// model UserKey {
-//   key    String  @id(map: "UserKey_pkey") @default(cuid())
-//   name   String
-//   userId String? @unique(map: "UserKey_userId_key")
-
-//   roleId Int
-//   role   Roles @relation(fields: [roleId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "CMS_UserKey_Role")
-//   user   User? @relation(fields: [userId], references: [id], onDelete: Cascade, map: "UserKey_userId_fkey")
-
-//   @@map("cms__user_keys")
-//   @@schema("public")
-// }
 
 model UserSocial {
   userId     String
@@ -431,6 +407,48 @@ model PathwayCategories {
 
   @@id([pathwayId, pathwayTypeId], map: "PathwayCategories_pkey")
   @@map("pathway__pathways_pathway_categories")
+  @@schema("public")
+}
+
+model ContentResourceType {
+  id               Int               @id @default(autoincrement())
+  type             String
+  icon             String?
+  color            String?
+  contentResources ContentResource[] @relation(map: "content_resource_type_fkey")
+
+  @@map("content_resource_types")
+  @@schema("public")
+}
+
+model ContentResourceArea {
+  id               Int               @id @default(autoincrement())
+  area             String
+  tagline          String?
+  contentResources ContentResource[] @relation(map: "content_resource_area_fkey")
+
+  @@map("content_resource_areas")
+  @@schema("public")
+}
+
+model ContentResource {
+  id           Int      @id @default(autoincrement())
+  href         Json     @default("{\"url\": \"\", \"target\": \"_self\"}")
+  title        String
+  subtitle     String?
+  typeId       Int      @map("type_id")
+  icon         String?
+  authorId     String?  @map("author_id")
+  date         DateTime @default(now())
+  areaId       Int      @map("area_id")
+  authorString String?  @map("author_string")
+
+  area   ContentResourceArea @relation(fields: [areaId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "content_resource_area_fkey")
+  author User?               @relation(fields: [authorId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "content_resource_author_fkey")
+
+  type ContentResourceType @relation(fields: [typeId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "content_resource_type_fkey")
+
+  @@map("content_resources")
   @@schema("public")
 }
 
