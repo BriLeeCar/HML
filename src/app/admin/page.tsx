@@ -10,6 +10,8 @@ export default async function AdminPage() {
 		},
 	})
 
+	console.log({ isAdmin, supportForm })
+
 	if (supportForm && isAdmin) {
 		return (
 			<>
