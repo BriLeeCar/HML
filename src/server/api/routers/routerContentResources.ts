@@ -85,6 +85,9 @@ export const ContentResources = createTRPCRouter({
 				},
 				type: true,
 			},
+			orderBy: {
+				date: 'desc',
+			},
 		})
 		type ResourceParse = z.infer<typeof parseResource>
 		return resources.map(resource => {
