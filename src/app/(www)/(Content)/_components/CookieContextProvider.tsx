@@ -17,6 +17,7 @@ export const CookieContextProvider = ({ children }: { children: React.ReactNode 
 			explorerFilters,
 			setExplorerFilters,
 		}),
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[allow, explorerFilters]
 	)
 

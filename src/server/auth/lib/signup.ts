@@ -23,7 +23,7 @@ const validateSignUpInput = (data: { username: string; password: string; key: st
 	}
 }
 
-export const SignUpPath = async (data: CredentialsBase) => {
+export const SignUpPath = async (data: Required<CredentialsBase>) => {
 	const validated = validateSignUpInput(data)
 	if (validated) {
 		const { username, password, key } = validated
@@ -46,7 +46,7 @@ export const SignUpPath = async (data: CredentialsBase) => {
 				throw new SignUpError('invalid key')
 			}
 
-			return await tx.user.update({
+			return (await tx.user.update({
 				where: { id: userKey.id },
 				data: {
 					secret: await hash(password),
@@ -55,7 +55,7 @@ export const SignUpPath = async (data: CredentialsBase) => {
 				include: {
 					roles: true,
 				},
-			})
+			})) as unknown as Auth.User
 		})
 
 		if (!query) throw new SignUpError('invalid entry')

@@ -29,8 +29,9 @@ export const CredentialsConfig = Credentials({
 		if (!credentials.key) {
 			user = SignInPath(credentials as CredentialsBase)
 		} else {
-			user = SignUpPath(credentials as CredentialsBase)
+			if (credentials.key != undefined) user = SignUpPath(credentials as Required<CredentialsBase>)
 		}
+
 		if (user != null) {
 			Object.entries(user).forEach(([key, value]) => {
 				if (key == 'roles' && Array.isArray(value)) {

@@ -3,7 +3,7 @@ import { type ztUser, type ztUserKey } from '~/server/api/zod'
 export type CredentialsBase = {
 	username: ztUser['name']
 	password: ztUser['secret']
-	key: ztUserKey['key']
+	key?: ztUserKey['key']
 }
 
 export type tTokenCB = {

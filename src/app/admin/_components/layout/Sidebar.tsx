@@ -2,6 +2,7 @@
 
 import { SidebarItem } from '@/admin/_components/catalyst'
 import { navList, navListSections } from '@/admin/_lib/navLinks'
+import { UserRoleContext } from '@/admin/_providers/RoleContext'
 import Link from 'next/link'
 import { useContext, type ReactNode } from 'react'
 import { Icon } from '~/components'
@@ -14,7 +15,9 @@ import { SideBarProvider } from './SideBarProvider'
 import { SidebarSection } from './SidebarSection'
 import type { tSidebarReceiverItem } from './types'
 
-export const Sidebar = ({ userRoles }: { userRoles: string[] }) => {
+export const Sidebar = () => {
+	const userRoles = useContext(UserRoleContext).roles
+
 	const sections = [
 		{
 			key: 'general',

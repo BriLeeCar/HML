@@ -26,9 +26,14 @@ const getUserRoles = async ({ ctx }: CTXProps) => {
 		},
 	})
 
-	return {
-		roles: roles?.roles.map(r => r) || [],
+	if (roles && roles.roles.length > 0) {
+		const mappedRoles = roles.roles.map(r => r.role.name)
+		console.log('Mapped Roles:', mappedRoles)
+
+		return { roles: mappedRoles }
 	}
+
+	return { roles: [] }
 }
 
 const getCurrent = async ({ ctx }: CTXProps) => {

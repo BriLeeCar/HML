@@ -10,7 +10,7 @@ import { TRPCReactProvider } from '~/trpc/react'
 import { MobileNav } from './_components/client/MobileNav'
 import { Sidebar } from './_components/layout/Sidebar'
 import { navList } from './_lib/navLinks'
-import { verifyRoles } from './_lib/verify'
+import { UserRoleProvider } from './_providers/RoleProvider'
 
 export const metadata: Metadata = {
 	title: {
@@ -81,8 +81,6 @@ const NavbarLink = ({
 }
 
 export default async function Layout({ children }: { children: ReactNode }) {
-	const userRoles = await verifyRoles()
-
 	return (
 		<body
 			className={cn(
@@ -91,12 +89,14 @@ export default async function Layout({ children }: { children: ReactNode }) {
 			<TopNav />
 			<Providers>
 				<TRPCReactProvider>
-					<div className='grid max-h-[calc(100vh-3rem)] w-full gap-x-4 md:max-h-screen md:grid-cols-[3.5rem_auto] md:has-data-pinned:grid-cols-[14rem_auto]'>
-						<Sidebar userRoles={userRoles} />
-						<Page className='mx-auto flex w-full flex-col overflow-x-hidden overflow-y-auto *:last:mb-12'>
-							{children}
-						</Page>
-					</div>
+					<UserRoleProvider>
+						<div className='grid max-h-[calc(100vh-3rem)] w-full gap-x-4 md:max-h-screen md:grid-cols-[3.5rem_auto] md:has-data-pinned:grid-cols-[14rem_auto]'>
+							<Sidebar />
+							<Page className='mx-auto flex w-full flex-col overflow-x-hidden overflow-y-auto *:last:mb-12'>
+								{children}
+							</Page>
+						</div>
+					</UserRoleProvider>
 				</TRPCReactProvider>
 			</Providers>
 		</body>
