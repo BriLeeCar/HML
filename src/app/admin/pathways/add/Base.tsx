@@ -30,6 +30,7 @@ const handlePrismaBase = (setData: (value: SetStateAction<Query>) => void, newDa
 }
 
 const handleSubmitBase = async (
+	toast: ReturnType<typeof useToast>,
 	data: Query,
 	setData: (value: SetStateAction<Query>) => void,
 	mutate: ReturnType<typeof api.dataCollection.CreatePathway.useMutation>['mutate']
@@ -78,13 +79,22 @@ const handleSubmitBase = async (
 				})
 			})
 
-		setData({
+		const newData = {
 			...data,
 			errors: {
 				...createTracker().errors,
 				...zodErrors,
 			},
+		}
+
+		console.warn(newData)
+		window.scrollTo(0, 0)
+		toast.fireToast({
+			title: 'Error creating pathway',
+			status: 'error',
+			body: <>Your pathway entry contained errors. Please check your fields.</>,
 		})
+		setData(newData)
 	}
 }
 
@@ -129,7 +139,7 @@ export const Base = ({
 
 	const handlePrisma = (newData: Query) => handlePrismaBase(setData, newData)
 
-	const handleSubmit = async () => handleSubmitBase(data, setData, mutate)
+	const handleSubmit = async () => handleSubmitBase(toast, data, setData, mutate)
 
 	return (
 		<>
