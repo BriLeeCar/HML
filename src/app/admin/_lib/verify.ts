@@ -1,5 +1,4 @@
 import { redirect } from 'next/navigation'
-import { auth } from '~/server/auth'
 import { api } from '~/serverQuery'
 
 export const verify = async (params?: string[]) => {
@@ -22,13 +21,8 @@ export const verifyAdmin = async () => {
 	return authed.includes('admin')
 }
 
-export const verifyRoles = async (): Promise<Auth.Role['name'][]> => {
-	const authed = await auth()
-	if (authed) {
-		return getRoles(authed) as Auth.Role['name'][]
-	} else {
-		return []
-	}
+export const verifyRoles = async (): Promise<string[]> => {
+	return (await api.user.getUsersRoles()).roles
 }
 
 export const getRoles = (
