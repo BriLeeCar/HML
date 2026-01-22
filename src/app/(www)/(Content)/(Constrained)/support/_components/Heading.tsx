@@ -1,7 +1,7 @@
 'use client'
 
 import { Page } from '~/components/Structure/Page'
-import { Bold } from '~/components/Text'
+import { Bold } from '~/components/Text/Bold'
 
 export const SupportHeading = () => {
 	return (

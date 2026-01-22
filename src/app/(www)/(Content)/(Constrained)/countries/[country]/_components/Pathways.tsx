@@ -1,5 +1,6 @@
-import { InlineLink, Li, UL } from '~/components'
 import { Section } from '~/components/Structure/Section'
+import { InlineLink } from '~/components/Text/Link'
+import { Li, UL } from '~/components/Text/List'
 
 export const Pathways = ({ pathways, name }: { pathways: ApiData.Pathway[]; name: string }) => {
 	return (

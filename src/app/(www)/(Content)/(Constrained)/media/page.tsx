@@ -1,5 +1,4 @@
 import { type Metadata } from 'next'
-import { InlineLink } from '~/components'
 import {
 	Page,
 	PageEyebrow,
@@ -13,6 +12,7 @@ import {
 	SectionHeading,
 	SectionHGroup,
 } from '~/components/Structure/Section'
+import { InlineLink } from '~/components/Text/Link'
 import { api } from '~/trpc/server'
 import { Resource } from '../guides-resources/_components/ResourceList'
 

@@ -30,6 +30,7 @@ type DateType = (typeof dateTypes)[number]
 
 export const Input = forwardRef(function Input(
 	{
+		readOnly,
 		className,
 		...props
 	}: {
@@ -49,6 +50,7 @@ export const Input = forwardRef(function Input(
 			])}>
 			<Headless.Input
 				ref={ref}
+				readOnly={readOnly}
 				{...props}
 				className={cn([
 					// Date classes

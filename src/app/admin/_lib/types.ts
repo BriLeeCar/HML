@@ -1,4 +1,4 @@
-import type { PageHeading } from '~/components'
+import type { PageHeading } from '~/components/Structure/Page'
 
 type tBreadcrumb = {
 	label: string

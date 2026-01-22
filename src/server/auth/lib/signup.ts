@@ -46,17 +46,21 @@ export const SignUpPath = async (data: Required<CredentialsBase>) => {
 				throw new SignUpError('invalid key')
 			}
 
-			return (await tx.user.update({
-				where: { id: userKey.id },
-				data: {
-					secret: await hash(password),
-					key: null,
-				},
-				include: {
-					roles: true,
-				},
-			})) as unknown as Auth.User
-		})
+				return (await tx.user.update({
+					where: { id: userKey.id },
+					data: {
+						secret: await hash(password),
+						key: null,
+					},
+					include: {
+						roles: {
+							include: {
+								role: true,
+							},
+						},
+					},
+				})) as unknown as Auth.User
+			})
 
 		if (!query) throw new SignUpError('invalid entry')
 		return query

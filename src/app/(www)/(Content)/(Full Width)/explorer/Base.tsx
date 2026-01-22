@@ -2,7 +2,7 @@
 
 import { AnimatePresence } from 'motion/react'
 import { Suspense, useContext, useReducer, useRef } from 'react'
-import { PageHeading } from '~/components'
+import { PageHeading } from '~/components/Text/Heading'
 import { useLocalData } from '~/hooks/useLocalData'
 import { DBContext } from '~/server/db/provider'
 import { FilterBtn } from './_components/Filter'

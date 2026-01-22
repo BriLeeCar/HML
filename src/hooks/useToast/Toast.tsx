@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react'
 
 import { type Dispatch, type ReactNode, type SetStateAction } from 'react'
-import { Icon } from '~/components'
+import { Icon } from '~/components/Icon'
 import { cn } from '~/lib/cn'
 import type { ToastTypes } from '.'
 

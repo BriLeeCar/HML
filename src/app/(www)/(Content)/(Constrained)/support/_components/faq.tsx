@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { Section } from '~/components/Structure/Section'
 import { Subsection, SubsectionContent, SubsectionHeading } from '~/components/Structure/Subsection'
-import { MDXProcessor } from '~/lib/mdx'
+import { MDXProcessor } from '~/lib/mdx/ProcessMDX'
 
 export const FAQ = () => {
 	const questions: Array<{

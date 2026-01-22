@@ -1,7 +1,7 @@
 import { FormSection } from '@/admin/_components/_form/clientFieldset'
+import type { ElPrismaProps } from '@/admin/pathways/_lib/types'
 import { ApplicationCost } from '@/admin/pathways/add/_components/Application/_components/Cost'
-import type { Country, Currency } from '~/server/prisma/generated'
-import type { ElPrismaProps } from '../../_lib'
+import type { Country, Currency } from '~/server/prisma/generated/browser'
 import { Duration } from './_components/Duration'
 import { ProcessingTime } from './ProcessingTime'
 

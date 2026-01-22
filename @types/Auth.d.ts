@@ -1,5 +1,4 @@
 import type { DefaultSession, Session as NextAuthSession, User as NextAuthUser } from 'next-auth'
-import type { Roles } from '~/server/prisma/generated'
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`

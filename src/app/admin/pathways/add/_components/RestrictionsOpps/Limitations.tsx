@@ -6,7 +6,8 @@ import {
 	SubSectionFieldset,
 } from '@/admin/_components'
 import { Field, Textarea } from '@/admin/_components/catalyst'
-import { type ElPrismaProps, note } from '@/admin/pathways/add'
+import { note } from '@/admin/pathways/_lib/refresh'
+import type { ElPrismaProps } from '@/admin/pathways/_lib/types'
 
 export const Limitations = ({ data, handlePrisma }: ElPrismaProps) => {
 	return (

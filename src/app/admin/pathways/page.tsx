@@ -34,7 +34,10 @@ const PathwayPage = async ({ searchParams }: PageProps<'/admin/pathways'>) => {
 			}>
 			{Object.keys(grouped).map(k => {
 				const countryCode = k as keyof typeof grouped
-				const country = grouped[countryCode] && grouped[countryCode][0]?.country.name
+				const country =
+					grouped[countryCode]
+					// @ts-expect-error mistyped
+					&& grouped[countryCode][0]?.country.name
 				return (
 					<Section
 						key={countryCode}
@@ -73,7 +76,7 @@ const UserRow = ({ pathway }: { pathway: TRPC.RouterOutputs['pathway']['page'][n
 			className='*:align-text-top'>
 			<TableCell width={'100%'}>
 				<InlineLink
-					href={`/admin/pathways/${pathway.id}`}
+					href={`/admin/pathways/view?pathwayId=${pathway.id}`}
 					className='block w-full whitespace-break-spaces decoration-1 lg:max-w-[20vw]'>
 					{pathway.name}
 				</InlineLink>

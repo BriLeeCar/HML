@@ -1,5 +1,5 @@
 'use client'
-import { cn } from '~/lib'
+import { cn } from '~/lib/cn'
 
 export function SidebarSpacer({ className, ...props }: Props<'div'>) {
 	return (

@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { cn } from '~/lib'
+import { cn } from '~/lib/cn'
 import { Icon } from '../Icon'
 
 export const PageBreadcrumb = ({ ...props }: Props<'nav'>) => {

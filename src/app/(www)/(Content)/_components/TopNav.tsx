@@ -5,7 +5,7 @@ import { motion } from 'motion/react'
 import Link from 'next/link'
 import { useState } from 'react'
 import { links } from 'www/_lib/navLinks'
-import { Button } from '~/components'
+import { Button } from '~/components/Button'
 import { cn } from '~/lib/cn'
 import { MenuIcon } from './MenuIcon'
 

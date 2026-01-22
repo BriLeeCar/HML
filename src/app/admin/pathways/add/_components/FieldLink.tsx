@@ -1,8 +1,7 @@
 import { Input, InputGroup } from '@/admin/_components/catalyst/input'
-
+import type { NewData } from '@/admin/pathways/_lib/types'
 import z from 'zod'
-import { Icon } from '~/components'
-import type { NewData } from '..'
+import { Icon } from '~/components/Icon'
 
 type FieldLinkProps = Omit<Props<typeof Input>, 'onBlur'> & {
 	errors?: boolean

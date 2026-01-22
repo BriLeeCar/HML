@@ -1,6 +1,8 @@
 import { AnimatePresence, motion, type MotionProps } from 'motion/react'
 import { type ReactNode, useReducer } from 'react'
-import { Button, Icon, Input } from '~/components'
+import { Button } from '~/components/Button'
+import { Input } from '~/components/Form/Input'
+import { Icon } from '~/components/Icon'
 import { cn } from '~/lib/cn'
 
 // #region ? TYPES

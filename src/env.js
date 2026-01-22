@@ -16,6 +16,7 @@ export const env = createEnv({
                 ? z.string()
                 : z.string().optional(),
         PRISMA_DATABASE_URL: z.string(),
+        PRISMA_ACCELERATE_URL: z.string(),
         R2_ACCT: z.string(),
         R2_TOKEN: z.string(),
         R2_ACCESS_KEY_ID: z.string(),
@@ -44,6 +45,7 @@ export const env = createEnv({
         AUTH_SECRET: process.env.AUTH_SECRET,
         NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
         PRISMA_DATABASE_URL: process.env.PRISMA_DATABASE_URL,
+        PRISMA_ACCELERATE_URL: process.env.PRISMA_ACCELERATE_URL,
 
         NODE_ENV: process.env.NODE_ENV,
         R2_ACCT: process.env.R2_ACCT,

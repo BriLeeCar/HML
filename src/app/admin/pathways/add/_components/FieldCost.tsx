@@ -1,5 +1,5 @@
 import { Input, InputGroup } from '@/admin/_components/catalyst'
-import { type ElPrismaProps } from '..'
+import type { ElPrismaProps } from '@/admin/pathways/_lib/types'
 
 export const FieldCost = ({
 	data,

@@ -1,7 +1,7 @@
 import { type Metadata } from 'next'
-import { Text } from '~/components/index'
 import { Section } from '~/components/Structure/Section'
 import { Subsection, SubsectionHeading, SubsectionList } from '~/components/Structure/Subsection'
+import { Text } from '~/components/Text/Text'
 
 export const metadata: Metadata = {
 	title: 'How to Start',

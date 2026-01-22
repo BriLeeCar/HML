@@ -24,7 +24,7 @@ export function Legend({
 			data-slot='legend'
 			{...props}
 			className={cn(
-				'text-base/6 font-semibold text-zinc-950 data-disabled:opacity-50 sm:text-sm/6 dark:text-white',
+				'text-base/6 font-semibold text-zinc-950 data-disabled:not-data-readonly:opacity-50 sm:text-sm/6 dark:text-white',
 				className
 			)}
 		/>
@@ -44,11 +44,17 @@ export function FieldGroup({ className, ...props }: Props<'div'>) {
 export function Field({
 	className,
 	as,
+	readOnly,
 	...props
-}: { className?: string; as?: ElementType } & Omit<Headless.FieldProps, 'as' | 'className'>) {
+}: { readOnly?: boolean; className?: string; as?: ElementType } & Omit<
+	Headless.FieldProps,
+	'as' | 'className'
+>) {
 	return (
 		<Headless.Field
 			{...props}
+			data-readonly={readOnly == true ? '' : undefined}
+			aria-readonly={readOnly == true ? 'true' : undefined}
 			as={as}
 			className={cn(
 				'[&>[data-slot=label]+[data-slot=control]]:mt-3',
@@ -80,7 +86,7 @@ export function Label({
 			as={as}
 			{...props}
 			className={cn(
-				'text-base/6 font-semibold text-zinc-950 select-none data-disabled:opacity-50 sm:text-sm/6 dark:text-white',
+				'text-base/6 font-semibold text-zinc-950 select-none data-disabled:not-data-readonly:opacity-50 sm:text-sm/6 dark:text-white',
 				[
 					'aria-required:after:ml-1',
 					'aria-required:after:align-middle',
@@ -104,7 +110,7 @@ export function Description({
 			{...props}
 			className={cn(
 				className,
-				'text-base/6 text-zinc-500 data-disabled:opacity-50 sm:text-sm/6 dark:text-zinc-400'
+				'text-base/6 text-zinc-500 data-disabled:not-data-readonly:opacity-50 sm:text-sm/6 dark:text-zinc-400'
 			)}
 		/>
 	)
@@ -120,7 +126,7 @@ export function ErrorMessage({
 			{...props}
 			className={cn(
 				className,
-				'text-base/6 text-red-600 data-disabled:opacity-50 sm:text-sm/6 dark:text-red-500'
+				'text-base/6 text-red-600 data-disabled:not-data-readonly:opacity-50 sm:text-sm/6 dark:text-red-500'
 			)}
 		/>
 	)

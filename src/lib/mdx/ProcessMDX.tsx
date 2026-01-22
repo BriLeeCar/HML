@@ -1,14 +1,10 @@
 import { type MDXRemoteProps } from 'next-mdx-remote-client/rsc'
 import { Suspense } from 'react'
-import { Loading, mdxComponents } from '~/components'
-import {
-	getPrelimSource,
-	getSourceRaw,
-	MDXProvider,
-	recmaPlugins,
-	rehypePlugins,
-	remarkPlugins,
-} from '~/lib/mdx'
+import { Loading } from '~/components/Loading'
+import { mdxComponents } from '~/components/MDX'
+import { MDXProvider } from '~/lib/mdx/MDXProvider'
+import { getPrelimSource, getSourceRaw } from '~/lib/mdx/getSourceRaw'
+import { recmaPlugins, rehypePlugins, remarkPlugins } from '~/lib/mdx/plugins'
 
 interface iMDXProcessor {
 	sourceType: 'path' | 'raw'

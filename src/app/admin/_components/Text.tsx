@@ -54,7 +54,7 @@ export const PageHeading = ({
 const PageTitle = ({ ...props }) => <h1 className={props.className}>{props.children}</h1>
 
 const Subtitle = ({ ...props }: Props<'p'>) => (
-	<p className={cn('subtitle', props.className)}>{props.children}</p>
+	<p className={cn('subtitle text-balance', props.className)}>{props.children}</p>
 )
 
 const Eyebrow = ({ ...props }: Props<'p'>) => {

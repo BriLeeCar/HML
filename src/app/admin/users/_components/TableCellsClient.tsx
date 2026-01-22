@@ -2,7 +2,7 @@
 import { Bold, Button } from '@/admin/_components'
 import { Alert, AlertActions, AlertDescription, AlertTitle } from '@/admin/_components/catalyst'
 import { useState } from 'react'
-import { Icon } from '~/components'
+import { Icon } from '~/components/Icon'
 import type { UserTable } from '../_lib/types'
 
 export const DeleteBtn = ({ user }: UserTable) => {

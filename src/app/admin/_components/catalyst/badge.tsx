@@ -1,6 +1,6 @@
 import * as Headless from '@headlessui/react'
 import { forwardRef, type ForwardedRef } from 'react'
-import { TouchTarget } from '~/components'
+import { TouchTarget } from '~/components/Button'
 import { cn } from '~/lib/cn'
 import { Link } from './link'
 

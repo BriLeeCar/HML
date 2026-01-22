@@ -1,4 +1,5 @@
-import { CTA, InlineLink } from '~/components'
+import { CTA } from '~/components/CTA'
+import { InlineLink } from '~/components/Text/Link'
 
 export const OnHold = ({ reason }: { reason?: string }) => {
 	return (

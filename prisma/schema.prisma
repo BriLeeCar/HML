@@ -1,11 +1,10 @@
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
   output   = "../src/server/prisma/generated"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("PRISMA_DATABASE_URL")
   schemas  = ["public"]
 }
 
@@ -111,7 +110,7 @@ model PathwayDocuments {
   pathwayId   Int
   documentId  Int       @default(1)
   description String?
-  cost        Decimal   @default(0.00)
+  cost        Float     @default(0.00)
   isRequired  Boolean   @default(true)
   link        String?
   title       String?

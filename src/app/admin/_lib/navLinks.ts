@@ -16,7 +16,7 @@ export type tNavListSection = {
 
 export const navList: tNavListItem[] = [
 	{ name: 'Dashboard', href: '/admin', icon: 'GlobeIcon', solid: true, roles: [] },
-	{ name: 'Pathways', href: '/admin/pathways/add', icon: 'PlaneIcon', solid: true, roles: [] },
+	{ name: 'Pathways', href: '/admin/pathways/', icon: 'PlaneIcon', solid: true, roles: [] },
 	{
 		name: 'Profile',
 		href: '/admin/users/settings',

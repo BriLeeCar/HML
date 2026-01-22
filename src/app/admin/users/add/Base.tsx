@@ -5,7 +5,7 @@ import { Field, Input, InputGroup, Label, Strong } from '@/admin/_components/cat
 import { Form } from '@/admin/_components/Form'
 import { AnimatePresence, motion } from 'motion/react'
 import { useState, type ReactNode } from 'react'
-import { Icon } from '~/components'
+import { Icon } from '~/components/Icon'
 import { useToast } from '~/hooks/useToast'
 import { api } from '~/lib/api'
 import { cn } from '~/lib/cn'

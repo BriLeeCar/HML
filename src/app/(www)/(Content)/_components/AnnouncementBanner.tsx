@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Icon, InlineLink } from '~/components'
+import { Icon } from '~/components/Icon'
+import { InlineLink } from '~/components/Text/Link'
 import { topBarAnnouncement } from '~/data/announcement'
 
 export const AnnouncementBanner = () => {

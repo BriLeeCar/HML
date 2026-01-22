@@ -1,5 +1,6 @@
 import z from 'zod/v4'
-import { createTRPCRouter, protectedProcedure, publicProcedure } from '.'
+import { createTRPCRouter, protectedProcedure, publicProcedure } from '../trpc'
+import { processPathwayTypes } from './_lib/processPathwayTypes'
 
 export const PathwayRouter = createTRPCRouter({
 	createPathway: protectedProcedure
@@ -29,4 +30,43 @@ export const PathwayRouter = createTRPCRouter({
 				},
 			})
 		}),
+	getById: publicProcedure.input(z.coerce.number<string>()).query(async ({ ctx, input }) => {
+		const pathway = await ctx.db.$transaction(async tx => {
+			const pathwayQuery = await tx.pathway.findUnique({
+				where: {
+					id: input,
+				},
+				include: {
+					country: true,
+					categories: {
+						include: {
+							pathway_categories: true,
+						},
+					},
+					currency: true,
+					documents: {
+						include: {
+							document: true,
+						},
+					},
+					pipelines: true,
+					restrictedNationalities: true,
+					CMS_User: {
+						select: {
+							name: true,
+							id: true,
+						},
+					},
+				},
+			})
+
+			const pathwayTypesQuery = await tx.pathwayTypes.findMany({
+				orderBy: [{ parentId: 'asc' }, { name: 'asc' }],
+			})
+
+			return { pathway: pathwayQuery, pathwayTypes: processPathwayTypes(pathwayTypesQuery) }
+		})
+
+		return pathway
+	}),
 })

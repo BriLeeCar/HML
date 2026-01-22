@@ -1,4 +1,5 @@
-import { CTA, Divider } from '~/components'
+import { CTA } from '~/components/CTA'
+import { Divider } from '~/components/Divider'
 import { Page } from '~/components/Structure/Page'
 
 const Layout = ({ children }: { children?: ReactNode }) => (

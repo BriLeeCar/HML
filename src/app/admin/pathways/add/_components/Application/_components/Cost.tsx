@@ -1,7 +1,8 @@
 import { SubSectionFieldset } from '@/admin/_components'
 import { Checkbox, CheckboxField, Label, Select } from '@/admin/_components/catalyst'
-import { CostInput, CostRangeFieldsGroup, refresh, type ElPrismaProps } from '@/admin/pathways/add'
-import type { Country, Currency } from '~/server/prisma/generated'
+import type { ElPrismaProps } from '@/admin/pathways/_lib/types'
+import { CostInput, CostRangeFieldsGroup, refresh } from '@/admin/pathways/add'
+import type { Country, Currency } from '~/server/prisma/generated/browser'
 
 export const ApplicationCost = ({
 	data,

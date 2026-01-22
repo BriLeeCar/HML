@@ -3,14 +3,25 @@ import type { UserTable } from '../_lib/types'
 import { TableCellOptions } from './TableCells'
 import { TableHeaderRow, type TableColumn } from './TableHeaders'
 
-const CellComponent = ({
-	user,
+const CellComponent = <C extends TableColumn>({
 	column,
+	...props
 }: UserTable & {
-	column: TableColumn
+	column: C
+	fn?: (user: UserTable['user']) => string
 }) => {
-	const Cell = TableCellOptions[column as keyof typeof TableCellOptions]
-	return Cell ? <Cell user={user} /> : <></>
+	if (typeof column == 'string' && column == 'array') {
+		const Cell = TableCellOptions['array']
+		return props.fn ?
+				<Cell
+					fn={props.fn}
+					user={props.user}
+				/>
+			:	<></>
+	} else if (typeof column == 'string' && column != 'array') {
+		const Cell = TableCellOptions[column as Exclude<keyof typeof TableCellOptions, 'array'>]
+		return Cell ? <Cell user={props.user} /> : <></>
+	}
 }
 
 export const TableDetails = ({
@@ -31,6 +42,12 @@ export const TableDetails = ({
 							key={`${key}-cell-${index}`}
 							user={user}
 							column={column}
+							fn={
+								typeof column !== 'string' && column.key === 'array' ?
+									// @ts-expect-error mistyped
+									user => user.roles.join(', ')
+								:	undefined
+							}
 						/>
 					))
 					return columnCells.length ? <tr key={key}>{columnCells}</tr> : null

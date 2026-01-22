@@ -1,4 +1,5 @@
 import { TableHead, TableHeader, TableRow } from '@/admin/_components/catalyst/client/table'
+import type { UserTable } from '../_lib/types'
 
 const HeaderOptions = {
 	name: () => <TableHeader>Name</TableHeader>,
@@ -6,10 +7,14 @@ const HeaderOptions = {
 	edit: () => <TableHeader className='w-px'></TableHeader>,
 	date: () => <TableHeader>Created</TableHeader>,
 	custom: (label: string) => <TableHeader>{label}</TableHeader>,
+	array: (label: string) => <TableHeader>{label}</TableHeader>,
 }
 
-type TableColumnKeys = Exclude<keyof typeof HeaderOptions, 'custom'>
-export type TableColumn = TableColumnKeys | { key: 'custom'; label: string }
+type TableColumnKeys = Exclude<keyof typeof HeaderOptions, 'custom' | 'array'>
+export type TableColumn =
+	| TableColumnKeys
+	| { key: 'custom'; label: string }
+	| { key: 'array'; label: string; fn: (user: UserTable['user']) => string }
 
 export const TableHeaderRow = ({
 	rows,
@@ -25,6 +30,13 @@ export const TableHeaderRow = ({
 						const HeaderComponent = HeaderOptions[rowKey as TableColumnKeys]
 						return <HeaderComponent key={rowKey} />
 					} else if (rowKey.key === 'custom') {
+						return (
+							<CustomColumn
+								key={rowKey.label}
+								label={rowKey.label}
+							/>
+						)
+					} else if (rowKey.key === 'array') {
 						return (
 							<CustomColumn
 								key={rowKey.label}

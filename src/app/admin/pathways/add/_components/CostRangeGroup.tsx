@@ -1,7 +1,8 @@
 import { FormError } from '@/admin/_components'
 import { Field, Label, type Input } from '@/admin/_components/catalyst'
+import type { ElPrismaProps, FieldElProps } from '@/admin/pathways/_lib/types'
 import { zMinMax } from '~/server/api/zod'
-import { FieldCost, type ElPrismaProps, type FieldElProps } from '..'
+import { FieldCost } from '..'
 
 export const CostRangeFieldsGroup = ({ ...props }: FieldElProps & { disabled?: boolean }) => {
 	return (

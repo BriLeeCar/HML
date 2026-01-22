@@ -1,5 +1,5 @@
+import { Button } from '~/components/Button'
 import { cn } from '~/lib/cn'
-import { Button } from '.'
 import { Section, SectionHeading } from './Structure/Section'
 
 type CTAProps = Props<'div'> & {

@@ -2,7 +2,6 @@
 
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import type { ComponentProps } from 'react'
-
 import { DBProvider } from '~/server/db/provider'
 import { TRPCReactProvider } from '~/trpc/react'
 

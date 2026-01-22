@@ -8,10 +8,14 @@ import { Group, type Categories } from '.'
 export const CategoryCheckboxes = ({
 	cb,
 	handleCheck,
+	readOnly,
+	data,
 	...props
 }: Props<typeof Checkbox> & {
 	handleCheck: (id: number, status: boolean) => void
 	cb: Categories
+	readOnly?: boolean
+	data: Query
 }) => {
 	const [cbStatus, setCbStatus] = useState({
 		checked: false,
@@ -47,12 +51,14 @@ export const CategoryCheckboxes = ({
 	return (
 		<CheckboxField className='my-0 h-max gap-y-1 has-data-checked:has-[div]:col-span-full'>
 			<Checkbox
+				disabled={readOnly ? true : false}
 				className='h-max'
 				id={cb.name.split(' ').join('-').toLowerCase()}
 				name={cb.name.split(' ').join('-').toLowerCase()}
 				{...props}
 				onChange={handle}
 				color={'brand'}
+				defaultChecked={props.defaultChecked}
 			/>
 			<Label
 				htmlFor={cb.name.split(' ').join('-').toLowerCase()}
@@ -73,6 +79,7 @@ export const CategoryCheckboxes = ({
 					checked={cbStatus.checked}
 					kids={cb.children}
 					handleCheck={handleCheck}
+					data={data}
 				/>
 			)}
 		</CheckboxField>
@@ -83,11 +90,13 @@ const CheckboxInnerGrp = ({
 	kids,
 	open,
 	checked,
+	data,
 }: {
 	handleCheck: (id: number, status: boolean) => void
 	kids: PathwayTypeRecursive[]
 	open: boolean
 	checked: boolean
+	data: Query
 }) => {
 	const hasKids = kids.length > 0
 	if (checked && hasKids) {
@@ -96,6 +105,7 @@ const CheckboxInnerGrp = ({
 					className='gap-y-1'
 					handleCheck={handleCheck}
 					checkBoxes={kids}
+					data={data}
 				/>
 			:	<div />
 	}

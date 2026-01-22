@@ -2,11 +2,10 @@
 
 import { notFound } from 'next/navigation'
 import { useContext } from 'react'
+import { IconAttributes } from '~/components/Flag'
+import { Page, PageEyebrow, PageHeading, PageHGroup } from '~/components/Structure/Page'
 import { toTitleCase } from '~/lib/text'
 import { DBContext } from '~/server/db/provider'
-
-import { IconAttributes, PageEyebrow } from '~/components'
-import { Page, PageHeading, PageHGroup } from '~/components/Structure/Page'
 import { Stats } from './_components/Stats'
 import { SubMenu } from './_components/SubMenu'
 
@@ -29,16 +28,14 @@ export const Base = ({
 	return (
 		<Page>
 			<PageHGroup>
-				<PageHeading>
-					<PageEyebrow>
-						<IconAttributes
-							as='span'
-							attr={db.getCommunityAttributes(country)}
-							className='text-foreground w-max'
-						/>
-					</PageEyebrow>
-					{toTitleCase(country.name)}
-				</PageHeading>
+				<PageEyebrow>
+					<IconAttributes
+						as='span'
+						attr={db.getCommunityAttributes(country)}
+						className='text-foreground w-max'
+					/>
+				</PageEyebrow>
+				<PageHeading>{toTitleCase(country.name)}</PageHeading>
 			</PageHGroup>
 			<SubMenu
 				active={section}

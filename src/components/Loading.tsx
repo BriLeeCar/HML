@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'motion/react'
-import { Icon } from '.'
+import { Icon } from '~/components/Icon'
 
 export const Loading = () => {
 	return (

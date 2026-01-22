@@ -27,22 +27,27 @@ export const CredentialsConfig = Credentials({
 		if (!credentials) return null
 		let user = null
 		if (!credentials.key) {
-			user = SignInPath(credentials as CredentialsBase)
+			user = await SignInPath(credentials as CredentialsBase)
 		} else {
-			if (credentials.key != undefined) user = SignUpPath(credentials as Required<CredentialsBase>)
+			if (credentials.key != undefined) {
+				user = await SignUpPath(credentials as Required<CredentialsBase>)
+			}
 		}
 
-		if (user != null) {
-			Object.entries(user).forEach(([key, value]) => {
-				if (key == 'roles' && Array.isArray(value)) {
-					Object.assign(user, {
-						roles: value.map(r => ({
-							id: r.role.id,
-							name: r.role.name,
-						})),
-					})
-				}
-			})
+		if (user?.roles?.length) {
+			const roles = user.roles
+				.map(role => {
+					if (role && typeof role === 'object' && 'role' in role) {
+						return (role as { role?: Auth.Role }).role ?? null
+					}
+					if (role && typeof role === 'object' && 'id' in role && 'name' in role) {
+						return role as Auth.Role
+					}
+					return null
+				})
+				.filter((role): role is Auth.Role => Boolean(role))
+
+			Object.assign(user, { roles })
 		}
 
 		return user as unknown as Auth.User | null

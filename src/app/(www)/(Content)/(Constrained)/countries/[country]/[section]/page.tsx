@@ -12,7 +12,7 @@ import {
 	SectionSubtitle,
 } from '~/components/Structure/Section'
 import { InlineLink } from '~/components/Text/Link'
-import { MDXProcessor } from '~/lib/mdx'
+import { MDXProcessor } from '~/lib/mdx/ProcessMDX'
 import { toTitleCase } from '~/lib/text'
 import countriesMeta from '~/server/db/countries.json'
 import db from '~/server/db/db'

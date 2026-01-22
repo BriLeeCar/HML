@@ -6,11 +6,13 @@ import {
 	Description,
 	Label,
 } from '@/admin/_components/catalyst'
-import type { ElPrismaProps } from '../..'
+import type { ElPrismaProps } from '@/admin/pathways/_lib/types'
 
-export const Renewable = ({ data, handlePrisma }: ElPrismaProps) => {
+export const Renewable = ({ data, handlePrisma, canEdit, type }: ElPrismaProps) => {
 	return (
-		<FormSection aria-label='Renewal'>
+		<FormSection
+			aria-label='Renewal'
+			disabled={!canEdit}>
 			<FormSection.Legend
 				description={
 					<>
@@ -28,7 +30,7 @@ export const Renewable = ({ data, handlePrisma }: ElPrismaProps) => {
 					data-slot='control'
 					className='flex flex-col space-y-6 gap-x-8 md:grid-cols-2 md:flex-row'>
 					<CheckboxGroup>
-						<CheckboxField>
+						<CheckboxField disabled={!canEdit}>
 							<Checkbox
 								color='brand'
 								checked={data.piplines.renewal}
@@ -41,6 +43,7 @@ export const Renewable = ({ data, handlePrisma }: ElPrismaProps) => {
 										},
 									})
 								}}
+								defaultChecked={type == 'view' ? data.piplines.renewal : undefined}
 							/>
 							<Label>Pathway is Renewable</Label>
 							<Description>

@@ -1,4 +1,5 @@
-import { Button as HMLButton, Icon } from '~/components'
+import { Button as HMLButton } from '~/components/Button'
+import { Icon } from '~/components/Icon'
 import { cn } from '~/lib/cn'
 
 export const Button = ({

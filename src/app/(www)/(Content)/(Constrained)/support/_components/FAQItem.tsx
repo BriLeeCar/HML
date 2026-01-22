@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Bold, Text } from '~/components'
+import { Bold } from '~/components/Text/Bold'
+import { Text } from '~/components/Text/Text'
 
 export const FAQItem = ({ question, answer }: { question: string; answer: ReactNode }) => {
 	const [open, setOpen] = useState(false)

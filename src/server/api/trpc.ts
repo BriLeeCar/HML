@@ -1,17 +1,29 @@
 import { initTRPC, TRPCError } from '@trpc/server'
 import superjson from 'superjson'
 import z, { ZodError } from 'zod'
-
 import { auth } from '~/server/auth'
 import db from '~/server/prisma/db'
 
 export const createTRPCContext = async (opts: { headers: Headers }) => {
 	const session = await auth()
-	const userData = await db.user.findFirst({
-		cacheStrategy: {
-			ttl: 300000,
-		},
-		where: { id: session?.user?.id },
+	await maybeLogRoleMismatch(session)
+
+	return {
+		db,
+		session,
+		...opts,
+	}
+}
+
+const maybeLogRoleMismatch = async (session: Auth.Session | null) => {
+	if (process.env.NODE_ENV !== 'production') return
+	if (Math.random() >= 0.05) return
+
+	const userId = session?.user?.id
+	if (!userId) return
+
+	const dbUser = await db.user.findUnique({
+		where: { id: userId },
 		select: {
 			roles: {
 				select: {
@@ -21,11 +33,33 @@ export const createTRPCContext = async (opts: { headers: Headers }) => {
 		},
 	})
 
-	return {
-		db,
-		userRoles: userData?.roles.map(r => r.role) ?? [],
-		session,
-		...opts,
+	const sessionRoleIds = new Set(
+		(session?.user?.roles ?? [])
+			.map(role => role?.id)
+			.filter((roleId): roleId is number => typeof roleId === 'number')
+	)
+	const dbRoleIds = new Set(
+		(dbUser?.roles ?? [])
+			.map(entry => entry.role?.id)
+			.filter((roleId): roleId is number => typeof roleId === 'number')
+	)
+
+	const mismatch =
+		sessionRoleIds.size !== dbRoleIds.size
+		|| [...sessionRoleIds].some(roleId => !dbRoleIds.has(roleId))
+
+	if (mismatch) {
+		console.warn('auth-role-mismatch', {
+			userId,
+			sessionRoles: session?.user?.roles?.map(role => ({
+				id: role.id,
+				name: role.name,
+			})),
+			dbRoles: dbUser?.roles?.map(entry => ({
+				id: entry.role.id,
+				name: entry.role.name,
+			})),
+		})
 	}
 }
 

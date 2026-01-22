@@ -1,7 +1,7 @@
 'use client'
 
 import { useContext, useState } from 'react'
-import { api } from '~/lib'
+import { api } from '~/lib/api'
 import { UserRoleContext } from '../_providers/RoleContext'
 import { Switch } from './catalyst'
 import { LayoutWrapper } from './client/Wrapper'

@@ -1,9 +1,18 @@
 import { Children } from 'react'
+import { Button } from '~/components/Button'
+import { CTA } from '~/components/CTA'
+import { Page, PageHeading } from '~/components/Structure/Page'
+import { Section, SectionHeading } from '~/components/Structure/Section'
+import { Subsection } from '~/components/Structure/Subsection'
+import { Blockquote } from '~/components/Text/Blockquote'
+import { Bold } from '~/components/Text/Bold'
+import { Heading } from '~/components/Text/Heading'
+import { Large } from '~/components/Text/Large'
+import { InlineLink } from '~/components/Text/Link'
+import { Li, OL, UL } from '~/components/Text/List'
+import { Text } from '~/components/Text/Text'
+import { U } from '~/components/Text/Underline'
 import { cn } from '~/lib/cn'
-import { Blockquote, Bold, Button, CTA, Heading, InlineLink, Large, Li, OL, Text, U, UL } from '.'
-import { Page, PageHeading } from './Structure/Page'
-import { Section, SectionHeading } from './Structure/Section'
-import { Subsection } from './Structure/Subsection'
 
 export function mdxComponents() {
 	return {

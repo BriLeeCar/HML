@@ -1,9 +1,8 @@
 import { Button, Page } from '@/admin/_components'
 import type { Metadata } from 'next'
 import 'react'
-
 import { Providers } from '~/app/providers'
-import { Icon } from '~/components'
+import { Icon } from '~/components/Icon'
 import { cn } from '~/lib/cn'
 import '~/style/admin.css'
 import { TRPCReactProvider } from '~/trpc/react'

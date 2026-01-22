@@ -1,4 +1,4 @@
-import { NotFound404 } from '~/components'
+import { NotFound404 } from '~/components/404'
 import { cn } from '~/lib/cn'
 import '~/style/www.css'
 

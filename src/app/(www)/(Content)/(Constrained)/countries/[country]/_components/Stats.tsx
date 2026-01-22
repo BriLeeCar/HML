@@ -1,6 +1,6 @@
 import { LayoutGroup, motion } from 'motion/react'
 import { Section } from '~/components/Structure/Section'
-import { cn } from '~/lib'
+import { cn } from '~/lib/cn'
 import { DB } from '~/server/db/db'
 
 const Stat = ({

@@ -1,7 +1,7 @@
 'use client'
 import { createContext, useCallback, useContext, useMemo, useState } from 'react'
 import { Icon } from '~/components/Icon'
-import { cn } from '~/lib'
+import { cn } from '~/lib/cn'
 
 type tSubSectionContext = {
 	open: boolean

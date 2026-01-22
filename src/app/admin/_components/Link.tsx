@@ -1,4 +1,4 @@
-import { InlineLink as Link } from '~/components'
+import { InlineLink as Link } from '~/components/Text/Link'
 import { cn } from '~/lib/cn'
 
 export const InlineLink = ({ ...props }: Props<typeof Link>) => {

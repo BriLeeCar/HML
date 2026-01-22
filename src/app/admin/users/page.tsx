@@ -4,13 +4,12 @@ import { Table } from '../_components/catalyst/client/table'
 import { LayoutWrapper } from '../_components/client'
 import { TableDetails } from './_components/Table'
 
-const UserPage = async () => {
-	const users = await api.user.getUsers()
-	const grouped = Object.groupBy(users, user => (user.key == null ? 'Active' : 'Pending'))
+const UserPage = async ({ searchParams }: PageProps<'/admin/users'>) => {
+	const { page } = await searchParams
 
-	const pendingUsers = grouped['Pending']?.toSorted((a, b) => a.name.localeCompare(b.name)) || []
-
-	const activeUsers = grouped['Active']?.toSorted((a, b) => a.name.localeCompare(b.name)) || []
+	const { users, pendingUsers, totalPages, userCount } = await api.user.getUsers(
+		parseInt(page as string) || 1
+	)
 
 	return (
 		<LayoutWrapper title={'Current Users'}>
@@ -29,10 +28,24 @@ const UserPage = async () => {
 				<SectionHeading>Active Users</SectionHeading>
 				<Table dense>
 					<TableDetails
-						rows={activeUsers}
-						columns={['edit', 'name', 'handle', 'date']}
+						rows={users}
+						columns={[
+							'edit',
+							'name',
+							'handle',
+							'date',
+							{
+								key: 'array',
+								label: 'Roles',
+								// @ts-expect-error mistyped
+								fn: user => user.roles.join(', '),
+							},
+						]}
 					/>
 				</Table>
+				<div>
+					Page {page || 1} of {totalPages} | Total Users: {userCount}
+				</div>
 			</Section>
 		</LayoutWrapper>
 	)

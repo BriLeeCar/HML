@@ -2,10 +2,14 @@ import { api } from '~/serverQuery'
 import { Base } from './Base'
 
 import { LayoutWrapper } from '@/admin/_components/client'
-import { verifyUser } from '~/server/auth/lib/verifyUser'
+import { redirect } from 'next/navigation'
+import { auth } from '~/server/auth'
 
 const NewPathway = async () => {
-	await verifyUser()
+	const session = await auth()
+	if (!session) {
+		return redirect('/admin/auth/signin')
+	}
 
 	const query = await api.dataCollection.PathwayInit({
 		countries: {
@@ -21,7 +25,10 @@ const NewPathway = async () => {
 
 	return (
 		<LayoutWrapper title='Add Pathway Form'>
-			<Base prisma={query} />
+			<Base
+				prisma={query}
+				user={session.user}
+			/>
 		</LayoutWrapper>
 	)
 }

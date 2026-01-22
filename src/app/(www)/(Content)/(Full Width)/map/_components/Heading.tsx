@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'motion/react'
-import { Heading } from '~/components'
+import { Heading } from '~/components/Text/Heading'
 import { cn } from '~/lib/cn'
 
 export const CountryHeading = ({ hoveredData }: { hoveredData: ApiData.Country | undefined }) => {

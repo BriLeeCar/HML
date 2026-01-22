@@ -1,10 +1,8 @@
-import type { User } from 'next-auth'
 import z from 'zod/v4'
-import type { Country, CountryCurrency, CountryLanguage } from '~/server/prisma/generated'
-import { createTRPCRouter, publicProcedure } from '.'
+import type { Country, CountryCurrency, CountryLanguage } from '~/server/prisma/generated/browser'
+import { createTRPCRouter, publicProcedure } from '../trpc'
 import { transformCountryCurrency } from './routerCurrency'
 import { transformCountryLanguage } from './routerLanguage'
-import type { tCTX } from './types'
 
 type CountryCol = Country & {
 	countryCurrencies: CountryCurrency[]
@@ -18,74 +16,22 @@ const zSelectIncludeKeys = z.partialRecord(
 	z.boolean()
 ) as z.ZodType<Partial<Record<keyof CountryCol, boolean>>>
 
-export const getCountriesByCode = () => {
-	const returnInput = z.object({
-		query: z.preprocess(
-			val => {
-				if (Array.isArray(val)) return val
-				return [val]
-			},
-			z.array(
-				z
-					.object({
-						code: z.string().length(3).toUpperCase(),
-					})
-					.loose()
-			)
-		),
-		select: zSelectIncludeKeys.optional(),
-	})
-
-	const query = async ({
-		input,
-		ctx,
-	}: {
-		input: z.infer<typeof returnInput>
-		ctx:
-			| tCTX
-			| (tCTX & {
-					session: { user: ({ id: string } & User) | undefined }
-			  })
-	}) => {
-		const { query, select } = input
-		const { currencies, languages, ...restSelect } = (select || {}) as CountryOutput
-
-		const result = await ctx.db.country.findMany({
-			where: {
-				code: {
-					in: query.map(c => c.code),
-				},
-			},
-			select: {
-				...restSelect,
-				...(currencies ?
-					{
-						countryCurrencies: {
-							select: {
-								currency: true,
-							},
-						},
-					}
-				:	{}),
-				...(languages ?
-					{
-						countryLanguages: {
-							select: {
-								language: true,
-							},
-						},
-					}
-				:	{}),
-			},
-		})
-		return z.array(schemaCountry).parse(result)
-	}
-
-	return {
-		input: returnInput,
-		query,
-	}
-}
+export const CountryInput = z.object({
+	query: z.preprocess(
+		val => {
+			if (Array.isArray(val)) return val
+			return [val]
+		},
+		z.array(
+			z
+				.object({
+					code: z.string().length(3).toUpperCase(),
+				})
+				.loose()
+		)
+	),
+	select: zSelectIncludeKeys.optional(),
+})
 
 const schemaCountry = z
 	.object({
@@ -119,6 +65,63 @@ const schemaCountry = z
 
 export const CountryRouter = createTRPCRouter({
 	getCountriesByCode: publicProcedure
-		.input(getCountriesByCode().input)
-		.query(getCountriesByCode().query),
+		.input(
+			z.object({
+				query: z.preprocess(
+					val => {
+						if (Array.isArray(val)) return val
+						return [val]
+					},
+					z.array(
+						z
+							.object({
+								code: z.string().length(3).toUpperCase(),
+							})
+							.loose()
+					)
+				),
+				select: zSelectIncludeKeys.optional(),
+			})
+		)
+		.query(
+			async ({
+				input,
+				ctx,
+			}: TRPC.CTX & {
+				input: z.infer<typeof CountryInput>
+			}) => {
+				const { query, select } = input
+				const { currencies, languages, ...restSelect } = (select || {}) as CountryOutput
+
+				const result = await ctx.db.country.findMany({
+					where: {
+						code: {
+							in: query.map(c => c.code),
+						},
+					},
+					select: {
+						...restSelect,
+						...(currencies ?
+							{
+								countryCurrencies: {
+									select: {
+										currency: true,
+									},
+								},
+							}
+						:	{}),
+						...(languages ?
+							{
+								countryLanguages: {
+									select: {
+										language: true,
+									},
+								},
+							}
+						:	{}),
+					},
+				})
+				return z.array(schemaCountry).parse(result)
+			}
+		),
 })

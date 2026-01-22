@@ -1,8 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { TouchTarget } from '~/components/Button'
+import { IconAttributes } from '~/components/Flag'
+import { Heading } from '~/components/Text/Heading'
 import { cn } from '~/lib/cn'
-
-import { Heading, IconAttributes, TouchTarget } from '~/components'
 
 export const Country = ({
 	country,

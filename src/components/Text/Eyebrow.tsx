@@ -1,4 +1,4 @@
-import { cn } from '~/lib'
+import { cn } from '~/lib/cn'
 
 export const Eyebrow = ({ ...props }: Props<'p'>) => {
 	return (

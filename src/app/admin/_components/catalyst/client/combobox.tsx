@@ -14,6 +14,7 @@ export function Combobox<T>({
 	'aria-label': ariaLabel,
 	children,
 	multi,
+	readOnly,
 	...props
 }: {
 	options: T[]
@@ -25,6 +26,7 @@ export function Combobox<T>({
 	'aria-label'?: string
 	multi?: boolean
 	children: (value: NonNullable<T>) => ReactElement
+	readOnly?: boolean
 } & Omit<Headless.ComboboxProps<T, false>, 'multuple' | 'as' | 'children'> & {
 		anchor?: 'top' | 'bottom'
 	}) {
@@ -80,6 +82,7 @@ export function Combobox<T>({
 					displayValue={(option: T) => displayValue(option) ?? ''}
 					onChange={event => setQuery(event.target.value)}
 					placeholder={placeholder}
+					readOnly={readOnly}
 					className={cn([
 						className,
 						// Basic layout
@@ -102,7 +105,9 @@ export function Combobox<T>({
 						'dark:scheme-dark',
 					])}
 				/>
-				<Headless.ComboboxButton className='group absolute inset-y-0 right-0 flex items-center px-2'>
+				<Headless.ComboboxButton
+					disabled={readOnly}
+					className='group absolute inset-y-0 right-0 flex items-center px-2'>
 					<svg
 						className='group-data-category:bg-hml-slate-700/95 size-5 stroke-zinc-500 group-has-data-disabled:stroke-zinc-600 group-data-hover:stroke-zinc-700 sm:size-4 dark:stroke-zinc-400 forced-colors:stroke-[CanvasText]'
 						viewBox='0 0 16 16'

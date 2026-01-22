@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import { Icon } from '~/components'
+import { Icon } from '~/components/Icon'
 import { cn } from '~/lib/cn'
 
 export const FirstVisitOverlay = ({ draggingFirst }: { draggingFirst: boolean }) => {

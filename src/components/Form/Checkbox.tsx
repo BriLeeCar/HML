@@ -2,13 +2,10 @@
 
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox'
 
-import { Icon } from '~/components'
+import { Icon } from '~/components/Icon'
 import { cn } from '~/lib/cn'
 
-function Checkbox({
-	className,
-	...props
-}: Props<typeof CheckboxPrimitive.Root>) {
+function Checkbox({ className, ...props }: Props<typeof CheckboxPrimitive.Root>) {
 	return (
 		<CheckboxPrimitive.Root
 			data-slot='checkbox'

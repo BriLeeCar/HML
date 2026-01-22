@@ -1,25 +1,17 @@
 'use client'
 
-import { Section, SectionHeading } from '@/admin/_components'
-import { Button } from '@/admin/_components/'
-import { Form } from '@/admin/_components/_form/Form'
+import { FormBase } from '@/admin/pathways/_components/FormBase'
+import { createTracker } from '@/admin/pathways/_lib/createTracker'
+import { handleSubmitBase } from '@/admin/pathways/_lib/handleSubmit'
+import type { User } from 'next-auth'
 import { useState, type SetStateAction } from 'react'
 import { useToast, type ToastMessage } from '~/hooks/useToast'
-import { api } from '~/lib'
-import type { CreatePathwayInput } from '~/server/api/routers'
-import { zCreatePathwayInput } from '~/server/api/zod'
-import {
-	Application,
-	CategorySection,
-	createTracker,
-	Documentation,
-	Notes,
-	OverviewSection,
-	Renewable,
-	RestrictionsOpportunities,
-} from '.'
+import { api } from '~/lib/api'
 
-const handlePrismaBase = (setData: (value: SetStateAction<Query>) => void, newData: Query) => {
+export const handlePrismaBase = (
+	setData: (value: SetStateAction<Query>) => void,
+	newData: Query
+) => {
 	if (newData.utilities.countryData && !newData.query.currencyCode) {
 		if (newData.utilities.countryData.currencies.length == 1) {
 			newData.query.currencyCode = newData.utilities.countryData.currencies[0].code
@@ -29,79 +21,15 @@ const handlePrismaBase = (setData: (value: SetStateAction<Query>) => void, newDa
 	setData({ ...newData })
 }
 
-const handleSubmitBase = async (
-	toast: ReturnType<typeof useToast>,
-	data: Query,
-	setData: (value: SetStateAction<Query>) => void,
-	mutate: ReturnType<typeof api.dataCollection.CreatePathway.useMutation>['mutate']
-) => {
-	const submission = { ...data, type: 'VISA' }
-
-	const validation = zCreatePathwayInput.safeParse(submission)
-
-	validation.success && mutate(submission as CreatePathwayInput)
-	if (validation.error) {
-		const zodErrors = {
-			...data.errors,
-			...createTracker().errors,
-		}
-
-		validation.error.issues
-			.filter(issue => {
-				return issue.path.length > 0 && issue.path[0] == 'query'
-			})
-			.forEach(errPath => {
-				const path = errPath.path
-				const pathKey = path[1] as keyof Query['errors']
-				const dataPath = {
-					[pathKey]: data.errors[pathKey],
-				}
-				if (['cost', 'processTime', 'duration'].includes(pathKey)) {
-					const fieldKey = pathKey as 'cost' | 'processTime' | 'duration'
-					const lastKey = path[2] as keyof Query['errors'][typeof fieldKey]
-					if (lastKey == 'min' || lastKey == 'max') {
-						dataPath[fieldKey] = {
-							...data.errors[fieldKey],
-							[lastKey]: [errPath.message],
-						}
-					} else {
-						dataPath[fieldKey] = {
-							...data.errors[fieldKey],
-							base: [errPath.message],
-						}
-					}
-				} else if (Array.isArray(dataPath[pathKey])) {
-					dataPath[pathKey] = [errPath.message] as string[]
-				}
-
-				Object.assign(zodErrors, {
-					...dataPath,
-				})
-			})
-
-		const newData = {
-			...data,
-			errors: {
-				...createTracker().errors,
-				...zodErrors,
-			},
-		}
-
-		console.warn(newData)
-		window.scrollTo(0, 0)
-		toast.fireToast({
-			title: 'Error creating pathway',
-			status: 'error',
-			body: <>Your pathway entry contained errors. Please check your fields.</>,
-		})
-		setData(newData)
-	}
-}
-
 export const Base = ({
 	prisma,
+	user,
 }: {
 	prisma: TRPC.RouterOutputs['dataCollection']['PathwayInit']
+	user: {
+		id: string
+		roles: Auth.Role[]
+	} & User
 }) => {
 	const { documentTypes, countries, pathwayTypes } = prisma
 
@@ -144,66 +72,16 @@ export const Base = ({
 	return (
 		<>
 			<toast.El />
-			<Section className='w-full md:mx-auto lg:max-w-198'>
-				<SectionHeading subtitle='If you have any trouble, please let HML staff members know so that we can either help you, or improve the form!'>
-					Pathway Details
-				</SectionHeading>
-				<Form
-					title='New Pathway Form'
-					className='mx-auto max-w-3xl'>
-					{/* ? OVERVIEW */}
-					<OverviewSection
-						data={data}
-						handlePrisma={handlePrisma}
-						countries={countries}
-					/>
-					{/* ? CATEGORIES */}
-					<CategorySection
-						data={data}
-						handlePrisma={handlePrisma}
-						pathwayTypes={pathwayTypes}
-					/>
-					{/* ? APPLICATION */}
-					<Application
-						data={data}
-						handlePrisma={handlePrisma}
-						countries={countries}
-					/>
-					{/* ? DOCUMENTATION */}
-					<Documentation
-						documentTypes={documentTypes}
-						data={data}
-						handlePrisma={handlePrisma}
-					/>
-					{/* ? RENEWAL */}
-					<Renewable
-						data={data}
-						handlePrisma={handlePrisma}
-					/>
-					{/* ? RESTRICTIONS & OPPORTUNITIES */}
-					<RestrictionsOpportunities
-						data={data}
-						handlePrisma={handlePrisma}
-						countries={countries}
-					/>
-					{/* ? ADDITIONAL NOTES */}
-					<Notes
-						data={data}
-						handlePrisma={handlePrisma}
-					/>
-
-					{/* ? BUTTON */}
-					<Button
-						className='mx-auto mt-8 w-full max-w-lg rounded-xl text-base'
-						type='button'
-						variant='ghost'
-						onClick={async () => {
-							await handleSubmit()
-						}}>
-						Submit Pathway
-					</Button>
-				</Form>
-			</Section>
+			<FormBase
+				data={data}
+				handlePrisma={handlePrisma}
+				countries={countries}
+				pathwayTypes={pathwayTypes}
+				documentTypes={documentTypes}
+				handleSubmit={handleSubmit}
+				type='add'
+				user={user}
+			/>
 		</>
 	)
 }

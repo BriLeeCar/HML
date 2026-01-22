@@ -1,1 +1,1 @@
-export type UserTable = { user: TRPC.RouterOutputs['user']['getUsers'][number] }
+export type UserTable = { user: TRPC.RouterOutputs['user']['getUsers']['users'][number] }

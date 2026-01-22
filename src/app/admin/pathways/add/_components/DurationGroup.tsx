@@ -1,18 +1,12 @@
 import { FormError, FormGroupError, SubSectionFieldset } from '@/admin/_components'
-import {
-	Checkbox,
-	CheckboxField,
-	Field,
-	Input,
-	InputGroup,
-	Label,
-	Select,
-} from '@/admin/_components/catalyst'
-import { Icon } from '~/components'
+import { Checkbox, CheckboxField } from '@/admin/_components/_form/Checkbox'
+import { Field, Input, InputGroup, Label, Select } from '@/admin/_components/catalyst'
+import { timeOptionEls } from '@/admin/pathways/_lib/constants'
+import type { ElPrismaProps, FieldElProps } from '@/admin/pathways/_lib/types'
+import { Icon } from '~/components/Icon'
 import { cn } from '~/lib/cn'
 import { toTitleCase } from '~/lib/text'
 import { zMinMax } from '~/server/api/zod'
-import { timeOptionEls, type ElPrismaProps, type FieldElProps } from '..'
 
 type Key = keyof Query['durations'] & keyof Query['query'] & keyof Query['errors']
 
@@ -139,9 +133,8 @@ export const DurationGroup = ({
 	fieldKey,
 	description,
 	legend,
-}: {
-	data: Query
-	handlePrisma: (data: Query) => void
+	readOnly,
+}: ElPrismaProps & {
 	fieldKey: Key
 	description: string
 	legend: string
@@ -155,6 +148,7 @@ export const DurationGroup = ({
 			<SubSectionFieldset.Details className='gap-x-8 sm:grid-cols-2'>
 				<CheckboxField className='italic'>
 					<Checkbox
+						readOnly={readOnly}
 						color='brand'
 						onChange={e => {
 							handleSeperateUOMChange({
@@ -166,9 +160,10 @@ export const DurationGroup = ({
 						}}
 					/>
 					<Label className='text-interactive'>Use Separate UOM</Label>
-				</CheckboxField>{' '}
+				</CheckboxField>
 				<CheckboxField className='italic'>
 					<Checkbox
+						readOnly={readOnly}
 						color='brand'
 						onChange={e => {
 							const newData = { ...data }
@@ -184,7 +179,7 @@ export const DurationGroup = ({
 					<Label className='text-interactive'>Information Not Available</Label>
 				</CheckboxField>
 				<DurationInputField
-					disabled={disabled}
+					readOnly={disabled}
 					required
 					label='Min'
 					field={fieldKey}
@@ -214,6 +209,7 @@ export const DurationGroup = ({
 					className={cn('in-data-uom:col-1 in-data-uom:row-2')}
 				/>
 				<DurationSelectField
+					readOnly={readOnly}
 					disabled={!separate || disabled}
 					seperateMinMax={separate}
 					required={separate}
@@ -240,11 +236,13 @@ const DurationInputField = ({
 	field,
 	handlePrisma,
 	disabled = false,
+	readOnly = false,
 	...props
 }: {
 	field: Key
 	keyMinMax: 'min' | 'max'
 	disabled?: boolean
+	readOnly?: boolean
 } & Props
 	& Omit<FieldElProps, 'children'>
 	& ElPrismaProps) => {
@@ -260,6 +258,7 @@ const DurationInputField = ({
 
 	return (
 		<Field
+			readOnly={readOnly}
 			disabled={disabled ? disabled : undefined}
 			className={cn(className)}>
 			<Label required={props.required}>{props.label}</Label>
@@ -270,6 +269,7 @@ const DurationInputField = ({
 					data-slot='icon'
 				/>
 				<Input
+					readOnly={readOnly}
 					invalid={data.errors[field][keyMinMax]?.length > 0 ? true : undefined}
 					{...rest}
 					placeholder='0'
@@ -331,6 +331,7 @@ const DurationSelectField = ({
 	data,
 	field,
 	disabled,
+	readOnly,
 	...props
 }: Props
 	& ElPrismaProps & {
@@ -348,6 +349,7 @@ const DurationSelectField = ({
 
 	return (
 		<Field
+			readOnly={readOnly}
 			disabled={disabled ? disabled : undefined}
 			className={cn(props.className)}>
 			<Label required={props.required && props.required == true}>{upperKey}UOM</Label>

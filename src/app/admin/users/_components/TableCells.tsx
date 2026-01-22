@@ -1,5 +1,5 @@
 import { Button } from '@/admin/_components'
-import { Icon } from '~/components'
+import { Icon } from '~/components/Icon'
 import { TableCell } from '../../_components/catalyst/client/table'
 import type { UserTable } from '../_lib/types'
 import { DeleteBtn } from './TableCellsClient'
@@ -60,10 +60,18 @@ export const DateCell = ({ user }: UserTable) => {
 	)
 }
 
+export const ArrayCell = ({
+	user,
+	fn,
+}: UserTable & { fn: (user: UserTable['user']) => string }) => {
+	return <TableCell>{fn(user)}</TableCell>
+}
+
 export const TableCellOptions = {
 	name: NameCell,
 	handle: HandleCell,
 	edit: EditCell,
 	date: DateCell,
 	custom: TableCell,
+	array: ArrayCell,
 }

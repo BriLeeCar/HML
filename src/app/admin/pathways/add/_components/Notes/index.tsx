@@ -1,9 +1,10 @@
 import { AddButton, RemoveButton, RemoveButtonWrapper } from '@/admin/_components'
 import { FormSection } from '@/admin/_components/_form/clientFieldset'
 import { Field, Label, Textarea } from '@/admin/_components/catalyst'
-import { note, type ElPrismaProps } from '../..'
+import type { ElPrismaProps } from '@/admin/pathways/_lib/types'
+import { note } from '../..'
 
-export const Notes = ({ data, handlePrisma }: ElPrismaProps) => {
+export const Notes = ({ data, handlePrisma, type = 'add', canEdit }: ElPrismaProps) => {
 	return (
 		<FormSection
 			title='Additional Notes'
@@ -20,9 +21,12 @@ export const Notes = ({ data, handlePrisma }: ElPrismaProps) => {
 						<div
 							key={n.counter}
 							className='ml-6 grid grid-cols-[auto_max-content] border-b-2 border-[#F0EBF1] pt-4 pb-8 *:grid *:grid-cols-[.15fr_auto] *:items-baseline *:gap-x-8 last:border-0 last:pb-0 *:last:grid-cols-1 md:pl-6 dark:border-b dark:border-current/10'>
-							<Field className='col-start-1 mb-1'>
+							<Field
+								className='col-start-1 mb-1'
+								disabled={!canEdit}>
 								<Label>Details</Label>
 								<Textarea
+									defaultValue={type == 'view' ? n.note : undefined}
 									name={`noteDetails-${n.counter}`}
 									className='mt-1'
 									onBlur={e => {
@@ -41,7 +45,7 @@ export const Notes = ({ data, handlePrisma }: ElPrismaProps) => {
 							<RemoveButtonWrapper>
 								<RemoveButton
 									onClick={() => {
-										handlePrisma(note(data, 'notes', 'remove', undefined, n.counter))
+										canEdit && handlePrisma(note(data, 'notes', 'remove', undefined, n.counter))
 									}}
 								/>
 							</RemoveButtonWrapper>
@@ -51,7 +55,7 @@ export const Notes = ({ data, handlePrisma }: ElPrismaProps) => {
 
 				<AddButton
 					onClick={() => {
-						handlePrisma(note(data, 'notes', 'add'))
+						canEdit && handlePrisma(note(data, 'notes', 'add'))
 					}}>
 					Note
 				</AddButton>
