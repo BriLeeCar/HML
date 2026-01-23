@@ -14,12 +14,12 @@ export const Button = ({
 		<HMLButton
 			{...props}
 			className={cn(
+				'flex items-center gap-x-2 px-4 py-2',
 				iconOnly ?
 					'text-hml-red-500 hover:text-hml-mulberry-500 focus-visible:ring-offset-0'
 				:	'ring-interactive dark:bg-hml-purple-700 bg-hml-slate-700 rounded-lg text-sm text-white transition-colors hover:bg-[#42585E] dark:text-white dark:hover:bg-[#261A28]',
 				innerButton
 					&& 'dark:text-background dark:bg-hml-yellow-300 text-hml-slate-700 bg-hml-grey-50 ml-auto flex w-full items-center justify-center gap-x-2 text-center hover:bg-[#161B1D] hover:text-white dark:hover:bg-[#F0F4A8]',
-
 				props.className
 			)}
 			type='button'

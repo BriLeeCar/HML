@@ -11,7 +11,7 @@ export function Pagination({
 		<nav
 			aria-label={ariaLabel}
 			{...props}
-			className={cn(className, 'flex gap-x-2')}
+			className={cn('flex gap-x-2', className)}
 		/>
 	)
 }

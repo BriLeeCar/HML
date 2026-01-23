@@ -1,6 +1,14 @@
 import { Icon } from '~/components/Icon'
 import { api } from '~/serverQuery'
-import { InlineLink, Section, SectionHeading } from '../_components'
+import { Button, InlineLink, Section, SectionHeading } from '../_components'
+import {
+	Pagination,
+	PaginationGap,
+	PaginationList,
+	PaginationNext,
+	PaginationPage,
+	PaginationPrevious,
+} from '../_components/catalyst'
 import {
 	Dropdown,
 	DropdownButton,
@@ -19,19 +27,37 @@ import {
 import { LayoutWrapper } from '../_components/client'
 
 const PathwayPage = async ({ searchParams }: PageProps<'/admin/pathways'>) => {
-	const { p } = (await searchParams) as { p?: string }
+	const params = await searchParams
+	const take = 10
+	const p = params?.p ? Number(params.p) : 1
 
-	const pathways = await api.pathway.page(p ?? '0')
+	const { pathways, allPathways } = await api.pathway.page({ page: p, take: take })
 
-	const grouped = Object.groupBy(pathways, path => path.countryCode ?? 'Unassigned')
+	const grouped = pathways.reduce(
+		(acc, pathway) => {
+			const countryCode = pathway.countryCode
+			if (!acc[countryCode]) {
+				acc[countryCode] = []
+			}
+			acc[countryCode].push(pathway)
+			return acc
+		},
+		{} as Record<string, typeof pathways>
+	)
 
 	return (
-		<LayoutWrapper
-			subtitle={
-				<>
-					<InlineLink href='/admin/pathways/add'>Add New Pathway</InlineLink>
-				</>
-			}>
+		<LayoutWrapper>
+			<Button
+				href='/admin/pathways/add'
+				className='text-hml-mulberry-500 hover:text-hml-mulberry-900 dark:hover:text-hml-yellow w-max bg-transparent hover:bg-transparent focus-visible:ring-offset-0 dark:bg-transparent dark:hover:bg-transparent'>
+				<Icon
+					IconName='PlusCircleIcon'
+					data-slot='icon'
+					className='mr-2 size-5'
+					solid
+				/>
+				Add Pathway
+			</Button>
 			{Object.keys(grouped).map(k => {
 				const countryCode = k as keyof typeof grouped
 				const country =
@@ -65,11 +91,84 @@ const PathwayPage = async ({ searchParams }: PageProps<'/admin/pathways'>) => {
 					</Section>
 				)
 			})}
+			<PathwayPagination
+				p={p}
+				allPathways={allPathways}
+				take={take}
+			/>
 		</LayoutWrapper>
 	)
 }
 
-const UserRow = ({ pathway }: { pathway: TRPC.RouterOutputs['pathway']['page'][number] }) => {
+const PathwayPagination = ({
+	p,
+	allPathways,
+	take,
+}: {
+	p: number
+	allPathways: number
+	take: number
+}) => {
+	const showPrevious = p > 1
+	const showNext = p < Math.ceil(allPathways / take)
+
+	if (!showPrevious && !showNext) {
+		return null
+	}
+
+	const t = [...new Set([1, p - 2, p - 1, p, p + 1, p + 2, Math.ceil(allPathways / take)])]
+		.filter(ea => ea > 0 && ea <= Math.ceil(allPathways / take))
+		.reduce((acc, curr, idx, arr) => {
+			if (idx == 0) {
+				acc.push(curr)
+				return acc
+			} else if (idx == arr.length - 1) {
+				acc.push(curr)
+				return acc
+			}
+
+			const previousPage = arr[idx - 1]
+			const nextPage = arr[idx + 1]
+
+			if (curr - previousPage > 1) {
+				acc.push(0, curr) // represent gap
+				return acc
+			} else if (nextPage - curr > 1) {
+				acc.push(curr, 0) // represent gap
+				return acc
+			} else {
+				acc.push(curr)
+				return acc
+			}
+		}, [] as number[])
+
+	return (
+		<Pagination className='grid grid-cols-[1fr_max-content_1fr]'>
+			<span>{showPrevious && <PaginationPrevious href={`pathways?p=${p - 1}`} />}</span>
+			<PaginationList>
+				{t.map(x =>
+					x == 0 ?
+						<PaginationGap key={x} />
+					:	<PaginationPage
+							href={`pathways?p=${x}`}
+							key={x}
+							current={x === p}>
+							{x}
+						</PaginationPage>
+				)}
+			</PaginationList>
+			<span>
+				{showNext && <PaginationNext href={showNext ? `pathways?p=${p + 1}` : undefined} />}
+			</span>
+		</Pagination>
+	)
+}
+
+const UserRow = ({
+	pathway,
+}: {
+	pathway: TRPC.RouterOutputs['pathway']['page']['pathways'][number]
+}) => {
 	return (
 		<TableRow
 			key={pathway.id}

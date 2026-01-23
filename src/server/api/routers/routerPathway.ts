@@ -17,17 +17,26 @@ export const PathwayRouter = createTRPCRouter({
 			})
 		}),
 	page: publicProcedure
-		.input(z.coerce.number<string>().prefault('0'))
+		.input(
+			z.object({
+				page: z.number().or(z.string()).prefault(1),
+				take: z.number().or(z.string()).prefault(10),
+			})
+		)
 		.query(async ({ ctx, input }) => {
-			return await ctx.db.pathway.findMany({
-				skip: input,
-				take: 15,
-				orderBy: {
-					countryCode: 'asc',
-				},
-				include: {
-					country: true,
-				},
+			return await ctx.db.$transaction(async tx => {
+				const allPathways = await tx.pathway.count()
+				const pathways = await tx.pathway.findMany({
+					skip: (Number(input.page ?? 1) - 1) * Number(input.take),
+					take: Number(input.take),
+					orderBy: {
+						countryCode: 'asc',
+					},
+					include: {
+						country: true,
+					},
+				})
+				return { pathways, allPathways }
 			})
 		}),
 	getById: publicProcedure.input(z.coerce.number<string>()).query(async ({ ctx, input }) => {
