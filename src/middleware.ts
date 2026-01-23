@@ -13,8 +13,10 @@ export async function middleware(req: NextRequest) {
 	const token = await getToken({
 		req,
 		secret: process.env.AUTH_SECRET ?? process.env.NEXTAUTH_SECRET,
+		secureCookie: req.nextUrl.protocol === 'https:',
 	})
 	if (!token) {
+		console.warn('No token found, redirecting to signin')
 		const newUrl = new URL('/admin/auth/signin', req.nextUrl.origin)
 		return NextResponse.redirect(newUrl)
 	}
