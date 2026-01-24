@@ -1,7 +1,5 @@
 import { Button, Form, Section, SectionHeading } from '@/admin/_components'
-import { UserRoleContext } from '@/admin/_providers/RoleContext'
 import type { User } from 'next-auth'
-import { useContext } from 'react'
 import type { Country, Currency, DocumentType } from '~/server/prisma/generated/browser'
 import {
 	type Categories,
@@ -22,7 +20,6 @@ export const FormBase = ({
 	pathwayTypes,
 	documentTypes,
 	handleSubmit,
-	user,
 }: {
 	type: 'add' | 'view'
 	data: Query
@@ -47,8 +44,7 @@ export const FormBase = ({
 		roles: Auth.Role[]
 	} & User
 }) => {
-	const { roles } = useContext(UserRoleContext)
-	const readOnly = type == 'view' && !roles.includes('admin') && user?.id != data.createdBy
+	const readOnly = false
 	const showDefaults = type == 'view'
 
 	console.log(data.query)
@@ -98,7 +94,7 @@ export const FormBase = ({
 					data={data}
 					handlePrisma={handlePrisma}
 					type={type}
-					canEdit={readOnly}
+					canEdit={true}
 				/>
 				{/* ? RESTRICTIONS & OPPORTUNITIES */}
 				<RestrictionsOpportunities
@@ -106,7 +102,7 @@ export const FormBase = ({
 					handlePrisma={handlePrisma}
 					countries={countries}
 					type={type}
-					canEdit={readOnly}
+					canEdit={true}
 				/>
 				{/* ? ADDITIONAL NOTES */}
 				<Notes
@@ -117,17 +113,15 @@ export const FormBase = ({
 				/>
 
 				{/* ? BUTTON */}
-				{readOnly ?
-					<Button
-						className='mx-auto mt-8 w-full max-w-lg rounded-xl text-base'
-						type='button'
-						variant='ghost'
-						onClick={async () => {
-							await handleSubmit()
-						}}>
-						Submit Pathway
-					</Button>
-				:	null}
+				<Button
+					className='mx-auto mt-8 w-full max-w-lg items-center justify-center rounded-xl text-base'
+					type='button'
+					variant='ghost'
+					onClick={async () => {
+						await handleSubmit()
+					}}>
+					Submit Pathway
+				</Button>
 			</Form>
 		</Section>
 	)
