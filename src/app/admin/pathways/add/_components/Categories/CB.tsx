@@ -8,13 +8,11 @@ import { Group, type Categories } from '.'
 export const CategoryCheckboxes = ({
 	cb,
 	handleCheck,
-	readOnly,
 	data,
 	...props
 }: Props<typeof Checkbox> & {
 	handleCheck: (id: number, status: boolean) => void
 	cb: Categories
-	readOnly?: boolean
 	data: Query
 }) => {
 	const [cbStatus, setCbStatus] = useState({
@@ -51,7 +49,6 @@ export const CategoryCheckboxes = ({
 	return (
 		<CheckboxField className='my-0 h-max gap-y-1 has-data-checked:has-[div]:col-span-full'>
 			<Checkbox
-				disabled={readOnly ? true : false}
 				className='h-max'
 				id={cb.name.split(' ').join('-').toLowerCase()}
 				name={cb.name.split(' ').join('-').toLowerCase()}

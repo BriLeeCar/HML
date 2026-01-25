@@ -8,11 +8,9 @@ import {
 } from '@/admin/_components/catalyst'
 import type { ElPrismaProps } from '@/admin/pathways/_lib/types'
 
-export const Renewable = ({ data, handlePrisma, canEdit, type }: ElPrismaProps) => {
+export const Renewable = ({ data, handlePrisma, type }: ElPrismaProps) => {
 	return (
-		<FormSection
-			aria-label='Renewal'
-			disabled={!canEdit}>
+		<FormSection aria-label='Renewal'>
 			<FormSection.Legend
 				description={
 					<>
@@ -30,7 +28,7 @@ export const Renewable = ({ data, handlePrisma, canEdit, type }: ElPrismaProps) 
 					data-slot='control'
 					className='flex flex-col space-y-6 gap-x-8 md:grid-cols-2 md:flex-row'>
 					<CheckboxGroup>
-						<CheckboxField disabled={!canEdit}>
+						<CheckboxField>
 							<Checkbox
 								color='brand'
 								checked={data.piplines.renewal}

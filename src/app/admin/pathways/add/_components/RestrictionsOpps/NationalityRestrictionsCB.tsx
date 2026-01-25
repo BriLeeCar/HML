@@ -14,7 +14,6 @@ export const NationalityRestrictionsCB = ({
 	handlePrisma,
 	countries,
 	canEdit,
-	type = 'add',
 }: ElPrismaProps & {
 	countries: Country[]
 }) => {
@@ -138,7 +137,6 @@ export const NationalityRestrictionsCB = ({
 											<Label>Details</Label>
 											<Textarea
 												disabled={!canEdit}
-												defaultValue={type == 'view' && n.note ? n.note : undefined}
 												name='nationalityRestrictionDetails'
 												className='mt-1'
 												onBlur={e => handleNoteChange(n.countryCode, e.currentTarget.value)}

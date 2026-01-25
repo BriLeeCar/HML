@@ -21,8 +21,6 @@ export const OverviewSection = ({
 	data,
 	handlePrisma,
 	countries,
-	showDefaults,
-	...props
 }: ElPrismaProps & {
 	countries: Array<
 		Country & {
@@ -47,7 +45,6 @@ export const OverviewSection = ({
 							data-slot='icon'
 						/>
 						<Combobox
-							defaultValue={showDefaults ? data.query.countryCode : undefined}
 							invalid={(data.errors?.countryCode.length ?? 0 > 0) ? true : undefined}
 							name='countryCode'
 							options={countries
@@ -70,7 +67,6 @@ export const OverviewSection = ({
 									handlePrisma(newData)
 								}
 							}}
-							readOnly={props.readOnly}
 							displayValue={(value: string | null) => value?.toString()}>
 							{country => (
 								<ComboboxOption
@@ -86,7 +82,7 @@ export const OverviewSection = ({
 					</InputGroup>
 				</Field>
 				{/* ? OFFICIAL NAME */}
-				<Field readOnly={props.readOnly}>
+				<Field>
 					<Label required>Official Name</Label>
 					<InputGroup>
 						<Icon
@@ -94,24 +90,19 @@ export const OverviewSection = ({
 							data-slot='icon'
 						/>
 						<Input
-							readOnly={props.readOnly}
 							invalid={data.errors.name.length > 0 ? true : undefined}
 							name='pathwayOfficialName'
 							onBlur={e => {
 								handlePrisma(refresh(data, 'name', e.currentTarget.value))
 							}}
-							defaultValue={showDefaults ? data.query.name : undefined}
 						/>
 					</InputGroup>
 					<FormError message={data.errors.name} />
 				</Field>
 				{/* ? OFFICIAL LINK */}
-				<Field
-					className='col-span-full'
-					readOnly={props.readOnly}>
+				<Field className='col-span-full'>
 					<Label required>Official Link</Label>
 					<FieldLink
-						readOnly={props.readOnly}
 						onBlur={newData => {
 							const updatedData = { ...data }
 							updatedData.errors.link = newData.errors ?? []
@@ -120,21 +111,16 @@ export const OverviewSection = ({
 						}}
 						errors={data.errors.link.length > 0}
 						name='pathwayLink'
-						defaultValue={showDefaults ? data.query.link : undefined}
 					/>
 					<FormError message={data.errors.link} />
 				</Field>
 				{/* ? DESCRIPTION */}
-				<Field
-					readOnly={props.readOnly}
-					className='col-span-full'>
+				<Field className='col-span-full'>
 					<Label required>Description</Label>
 					<Textarea
-						readOnly={props.readOnly}
 						invalid={data.errors.description.length > 0 ? true : undefined}
 						name='pathwayDescription'
 						onBlur={e => handlePrisma(refresh(data, 'description', e.currentTarget.value))}
-						defaultValue={showDefaults ? data.query.description : undefined}
 					/>
 					<FormError message={data.errors.description} />
 				</Field>

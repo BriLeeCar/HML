@@ -12,26 +12,23 @@ const DocumentType = ({
 	documentTypes,
 	data,
 	handlePrisma,
-	canEdit,
-	type,
 }: ElPrismaProps & {
 	documentTypes: Documents[]
 	doc: Query['query']['documents'][number]
 }) => {
 	const showPlaceholder = typeof doc.documentId != 'number'
 	const handleChange = (e: EChange<HTMLSelectElement>) => {
-		canEdit
-			&& handlePrisma(
-				document(
-					data,
-					'update',
-					{
-						...doc,
-						documentId: Number(e.currentTarget.value),
-					},
-					doc.id
-				)
+		handlePrisma(
+			document(
+				data,
+				'update',
+				{
+					...doc,
+					documentId: Number(e.currentTarget.value),
+				},
+				doc.id
 			)
+		)
 	}
 
 	return (
@@ -43,8 +40,6 @@ const DocumentType = ({
 					value: '',
 					selected: showPlaceholder,
 				}}
-				disabled={!canEdit}
-				defaultValue={type == 'view' ? doc.id : undefined}
 				onChange={handleChange}>
 				{documentTypes.map(dt => (
 					<option
@@ -62,8 +57,6 @@ export const Documentation = ({
 	documentTypes,
 	data,
 	handlePrisma,
-	canEdit,
-	type,
 }: ElPrismaProps & {
 	documentTypes: Documents[]
 }) => {
@@ -86,7 +79,7 @@ export const Documentation = ({
 								iconOnly
 								className='absolute right-8 mx-auto rounded-full px-1.5 py-0'
 								onClick={() => {
-									canEdit && handlePrisma(document(data, 'remove', undefined, n.id))
+									handlePrisma(document(data, 'remove', undefined, n.id))
 								}}>
 								<Icon
 									IconName='TrashXIcon'
@@ -103,31 +96,26 @@ export const Documentation = ({
 								documentTypes={documentTypes}
 								data={data}
 								handlePrisma={handlePrisma}
-								canEdit={canEdit}
-								type={type}
 							/>
 							{/* ! COST */}
 							<Field>
 								<Label>Cost</Label>
 								<FieldCost
-									defaultValue={type == 'view' ? n.cost : undefined}
-									disabled={!canEdit}
 									className='w-full basis-full'
 									data={data}
 									cost={n.cost}
 									onBlur={e => {
-										canEdit
-											&& handlePrisma(
-												document(
-													data,
-													'update',
-													{
-														...n,
-														cost: Number(e.currentTarget.value),
-													},
-													n.id
-												)
+										handlePrisma(
+											document(
+												data,
+												'update',
+												{
+													...n,
+													cost: Number(e.currentTarget.value),
+												},
+												n.id
 											)
+										)
 									}}
 								/>
 							</Field>
@@ -135,8 +123,6 @@ export const Documentation = ({
 							<Field>
 								<Label>Title</Label>
 								<Input
-									disabled={!canEdit}
-									defaultValue={type == 'view' ? (n.title ?? undefined) : undefined}
 									name={`documentTitle-${n.id}`}
 									className='mt-1'
 									placeholder='ex: Form I-20'

@@ -10,8 +10,6 @@ export const RestrictionsOpportunities = ({
 	data,
 	handlePrisma,
 	countries,
-	type = 'add',
-	canEdit,
 }: ElPrismaProps & {
 	countries: Array<{ code: string; name: string }>
 }) => {
@@ -28,14 +26,10 @@ export const RestrictionsOpportunities = ({
 					data={data}
 					handlePrisma={handlePrisma}
 					countries={countries}
-					type={type}
-					canEdit={canEdit}
 				/>
 				<Limitations
 					data={data}
 					handlePrisma={handlePrisma}
-					type={type}
-					canEdit={canEdit}
 				/>
 				<RestrictionOpportunitiesCB
 					label='Potentially Allows for Reunification'
@@ -43,12 +37,6 @@ export const RestrictionsOpportunities = ({
 					field='reunification'
 					data={data}
 					handlePrisma={handlePrisma}
-					defaultChecked={type == 'view' ? data.piplines.reunification : undefined}
-					type={type}
-					defaultNote={
-						type == 'view' && data.piplines.reunification ? data.query.reunification : undefined
-					}
-					canEdit={canEdit}
 				/>
 				<RestrictionOpportunitiesCB
 					label='Has a Route Towards Residency'
@@ -56,10 +44,6 @@ export const RestrictionsOpportunities = ({
 					field='residency'
 					data={data}
 					handlePrisma={handlePrisma}
-					type={type}
-					defaultChecked={type == 'view' ? data.piplines.residency : undefined}
-					defaultNote={type == 'view' && data.piplines.residency ? data.query.residency : undefined}
-					canEdit={canEdit}
 				/>
 				<RestrictionOpportunitiesCB
 					label='Has a Route Towards Citizenship'
@@ -67,11 +51,6 @@ export const RestrictionsOpportunities = ({
 					field='citizenship'
 					data={data}
 					handlePrisma={handlePrisma}
-					defaultChecked={type == 'view' ? data.piplines.citizenship : undefined}
-					defaultNote={
-						type == 'view' && data.piplines.citizenship ? data.query.citizenship : undefined
-					}
-					canEdit={canEdit}
 				/>
 			</FormSection.Details>
 		</FormSection>
@@ -84,9 +63,6 @@ const RestrictionOpportunitiesCB = <B extends Exclude<keyof Query['piplines'], '
 	field,
 	data,
 	handlePrisma,
-	type = 'add',
-	defaultNote,
-	canEdit,
 	...props
 }: ElPrismaProps
 	& Props<typeof Textarea> & {
@@ -100,10 +76,8 @@ const RestrictionOpportunitiesCB = <B extends Exclude<keyof Query['piplines'], '
 		<>
 			<CheckboxField>
 				<Checkbox
-					disabled={!canEdit}
 					name={field}
 					color='brand'
-					defaultChecked={data.piplines[field]}
 					onChange={e => {
 						const updated = { ...data }
 						// @ts-expect-error mistyped
@@ -116,9 +90,7 @@ const RestrictionOpportunitiesCB = <B extends Exclude<keyof Query['piplines'], '
 			</CheckboxField>
 			{data.piplines[field] == true && (
 				<Textarea
-					disabled={!canEdit}
 					name={`${field}Notes`}
-					defaultValue={type == 'view' ? defaultNote : undefined}
 					{...props}
 					className='mx-auto -mt-4 mb-8 w-full max-w-lg'
 					onBlur={e => {

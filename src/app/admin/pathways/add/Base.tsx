@@ -79,7 +79,6 @@ export const Base = ({
 				pathwayTypes={pathwayTypes}
 				documentTypes={documentTypes}
 				handleSubmit={handleSubmit}
-				type='add'
 				user={user}
 			/>
 		</>

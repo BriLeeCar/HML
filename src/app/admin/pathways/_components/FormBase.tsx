@@ -13,7 +13,6 @@ import {
 import { OverviewSection } from '../add/_components/OverviewSection'
 
 export const FormBase = ({
-	type,
 	data,
 	handlePrisma,
 	countries,
@@ -21,7 +20,6 @@ export const FormBase = ({
 	documentTypes,
 	handleSubmit,
 }: {
-	type: 'add' | 'view'
 	data: Query
 	handlePrisma: (newData: Query) => void
 	// !! CORRECT
@@ -44,11 +42,6 @@ export const FormBase = ({
 		roles: Auth.Role[]
 	} & User
 }) => {
-	const readOnly = false
-	const showDefaults = type == 'view'
-
-	console.log(data.query)
-
 	return (
 		<Section className='w-full md:mx-auto lg:max-w-198'>
 			<SectionHeading subtitle='If you have any trouble, please let HML staff members know so that we can either help you, or improve the form!'>
@@ -60,56 +53,40 @@ export const FormBase = ({
 					data={data}
 					handlePrisma={handlePrisma}
 					countries={countries}
-					type={type}
-					readOnly={readOnly}
-					showDefaults={showDefaults}
 				/>
 				{/* ? CATEGORIES */}
 				<CategorySection
 					data={data}
 					handlePrisma={handlePrisma}
 					pathwayTypes={pathwayTypes}
-					type={type}
-					readOnly={readOnly}
-					showDefaults={showDefaults}
 				/>
 				{/* ? APPLICATION */}
 				<Application
 					data={data}
 					handlePrisma={handlePrisma}
 					countries={countries}
-					type={type}
-					canEdit={readOnly}
 				/>
 				{/* ? DOCUMENTATION */}
 				<Documentation
 					documentTypes={documentTypes}
 					data={data}
 					handlePrisma={handlePrisma}
-					type={type}
-					canEdit={readOnly}
 				/>
 				{/* ? RENEWAL */}
 				<Renewable
 					data={data}
 					handlePrisma={handlePrisma}
-					type={type}
-					canEdit={true}
 				/>
 				{/* ? RESTRICTIONS & OPPORTUNITIES */}
 				<RestrictionsOpportunities
 					data={data}
 					handlePrisma={handlePrisma}
 					countries={countries}
-					type={type}
-					canEdit={true}
 				/>
 				{/* ? ADDITIONAL NOTES */}
 				<Notes
 					data={data}
 					handlePrisma={handlePrisma}
-					type={type}
-					canEdit={readOnly}
 				/>
 
 				{/* ? BUTTON */}

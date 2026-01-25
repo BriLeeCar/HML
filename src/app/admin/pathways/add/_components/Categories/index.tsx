@@ -46,8 +46,6 @@ export const CategorySection = ({
 				{/* ? BASE CATEGORIES */}
 				<Group
 					data={props.data}
-					readOnly={props.readOnly}
-					showDefaults={props.showDefaults}
 					handleCheck={handleCheck}
 					checkBoxes={props.pathwayTypes.sort((a, b) =>
 						a.name == 'Other' ? 1
@@ -64,15 +62,13 @@ export const CategorySection = ({
 export const Group = ({
 	checkBoxes,
 	handleCheck,
-	readOnly,
-	showDefaults,
+
 	data,
 	...props
 }: Props & {
 	handleCheck: (id: number, status: boolean) => void
 	checkBoxes: Categories[]
-	readOnly?: boolean
-	showDefaults?: boolean
+
 	data: Query
 }) => {
 	return (
@@ -91,8 +87,6 @@ export const Group = ({
 				})
 				.map(child => (
 					<CategoryCheckboxes
-						defaultChecked={showDefaults ? data.query.categories?.includes(child.id) : undefined}
-						readOnly={readOnly}
 						onChange={e => {
 							handleCheck(child.id, e)
 						}}
