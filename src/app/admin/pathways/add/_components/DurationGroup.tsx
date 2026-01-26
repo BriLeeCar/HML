@@ -133,14 +133,13 @@ export const DurationGroup = ({
 	fieldKey,
 	description,
 	legend,
-	readOnly,
 }: ElPrismaProps & {
 	fieldKey: Key
 	description: string
 	legend: string
 }) => {
 	const separate = data.durations[fieldKey].separate
-	const disabled = data.query[fieldKey].na
+	const isNA = data.query[fieldKey].na
 
 	return (
 		<SubSectionFieldset>
@@ -148,7 +147,7 @@ export const DurationGroup = ({
 			<SubSectionFieldset.Details className='gap-x-8 sm:grid-cols-2'>
 				<CheckboxField className='italic'>
 					<Checkbox
-						readOnly={readOnly}
+						disabled={isNA}
 						color='brand'
 						onChange={e => {
 							handleSeperateUOMChange({
@@ -163,7 +162,6 @@ export const DurationGroup = ({
 				</CheckboxField>
 				<CheckboxField className='italic'>
 					<Checkbox
-						readOnly={readOnly}
 						color='brand'
 						onChange={e => {
 							const newData = { ...data }
@@ -179,7 +177,7 @@ export const DurationGroup = ({
 					<Label className='text-interactive'>Information Not Available</Label>
 				</CheckboxField>
 				<DurationInputField
-					readOnly={disabled}
+					disabled={isNA}
 					required
 					label='Min'
 					field={fieldKey}
@@ -189,7 +187,7 @@ export const DurationGroup = ({
 					className={cn('md:in-data-uom:col-1 md:in-data-uom:row-1')}
 				/>
 				<DurationSelectField
-					disabled={disabled}
+					disabled={isNA}
 					seperateMinMax={separate}
 					sizeKey='min'
 					field={fieldKey}
@@ -199,9 +197,9 @@ export const DurationGroup = ({
 					className={cn('in-data-uom:col-2 in-data-uom:row-1')}
 				/>
 				<DurationInputField
-					disabled={disabled}
 					label='Max'
 					required={separate}
+					disabled={isNA}
 					field={fieldKey}
 					keyMinMax='max'
 					data={data}
@@ -209,8 +207,7 @@ export const DurationGroup = ({
 					className={cn('in-data-uom:col-1 in-data-uom:row-2')}
 				/>
 				<DurationSelectField
-					readOnly={readOnly}
-					disabled={!separate || disabled}
+					disabled={!separate || data.query[fieldKey].na}
 					seperateMinMax={separate}
 					required={separate}
 					sizeKey='max'
@@ -234,15 +231,13 @@ const DurationInputField = ({
 	keyMinMax,
 	data,
 	field,
-	handlePrisma,
 	disabled = false,
-	readOnly = false,
+	handlePrisma,
 	...props
 }: {
 	field: Key
 	keyMinMax: 'min' | 'max'
 	disabled?: boolean
-	readOnly?: boolean
 } & Props
 	& Omit<FieldElProps, 'children'>
 	& ElPrismaProps) => {
@@ -258,8 +253,7 @@ const DurationInputField = ({
 
 	return (
 		<Field
-			readOnly={readOnly}
-			disabled={disabled ? disabled : undefined}
+			disabled={disabled}
 			className={cn(className)}>
 			<Label required={props.required}>{props.label}</Label>
 
@@ -269,7 +263,6 @@ const DurationInputField = ({
 					data-slot='icon'
 				/>
 				<Input
-					readOnly={readOnly}
 					invalid={data.errors[field][keyMinMax]?.length > 0 ? true : undefined}
 					{...rest}
 					placeholder='0'
@@ -330,16 +323,15 @@ const DurationSelectField = ({
 	handlePrisma,
 	data,
 	field,
-	disabled,
-	readOnly,
+	disabled = false,
 	...props
 }: Props
 	& ElPrismaProps & {
 		seperateMinMax: boolean
 		sizeKey: 'min' | 'max'
 		field: Key
-		disabled?: boolean
 		required?: boolean
+		disabled?: boolean
 	}) => {
 	const upperKey =
 		sizeKey == 'max' ?
@@ -349,8 +341,7 @@ const DurationSelectField = ({
 
 	return (
 		<Field
-			readOnly={readOnly}
-			disabled={disabled ? disabled : undefined}
+			disabled={disabled}
 			className={cn(props.className)}>
 			<Label required={props.required && props.required == true}>{upperKey}UOM</Label>
 			<Select

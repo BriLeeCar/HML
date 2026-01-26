@@ -13,7 +13,6 @@ export const NationalityRestrictionsCB = ({
 	data,
 	handlePrisma,
 	countries,
-	canEdit,
 }: ElPrismaProps & {
 	countries: Country[]
 }) => {
@@ -76,7 +75,6 @@ export const NationalityRestrictionsCB = ({
 	return (
 		<>
 			<CheckBox
-				disabled={!canEdit}
 				name='nationalityCB'
 				color='brand'
 				label='Has Nationality Restrictions'
@@ -116,9 +114,7 @@ export const NationalityRestrictionsCB = ({
 									<div
 										key={n.countryCode}
 										className='grid grid-cols-[auto_.15fr] *:grid *:grid-cols-[3.5rem_auto] *:items-baseline *:gap-x-8 *:last:grid-cols-1'>
-										<Field
-											disabled={!canEdit}
-											className='col-start-1 mb-1'>
+										<Field className='col-start-1 mb-1'>
 											<Label>Country</Label>
 											<Select
 												value={n.countryCode}
@@ -136,14 +132,13 @@ export const NationalityRestrictionsCB = ({
 										<Field className='col-start-1'>
 											<Label>Details</Label>
 											<Textarea
-												disabled={!canEdit}
 												name='nationalityRestrictionDetails'
 												className='mt-1'
 												onBlur={e => handleNoteChange(n.countryCode, e.currentTarget.value)}
 											/>
 										</Field>
 										<RemoveButtonWrapper className='mt-3 self-start'>
-											<RemoveButton onClick={() => canEdit && handleDelete(n.countryCode)} />
+											<RemoveButton onClick={() => handleDelete(n.countryCode)} />
 										</RemoveButtonWrapper>
 									</div>
 								))}
@@ -151,21 +146,20 @@ export const NationalityRestrictionsCB = ({
 
 							<AddButton
 								onClick={() => {
-									canEdit
-										&& handlePrisma({
-											...data,
-											query: {
-												...data.query,
-												restrictedNationalities: [
-													...data.query.restrictedNationalities,
-													{
-														pathwayId: 0,
-														countryCode: '',
-														note: '',
-													},
-												],
-											},
-										})
+									handlePrisma({
+										...data,
+										query: {
+											...data.query,
+											restrictedNationalities: [
+												...data.query.restrictedNationalities,
+												{
+													pathwayId: 0,
+													countryCode: '',
+													note: '',
+												},
+											],
+										},
+									})
 								}}>
 								Nationality
 							</AddButton>
