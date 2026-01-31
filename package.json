@@ -5,7 +5,8 @@
 	"type": "module",
 	"private": true,
 	"scripts": {
-		"build": "cross-env NODE_OPTIONS=--no-deprecation next build",
+		"build:payload": "cross-env NODE_OPTIONS=--no-deprecation next build",
+		"build:production": "cross-env NODE_OPTIONS=--no-deprecation next build",
 		"ci": "payload migrate && pnpm build",
 		"dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
 		"devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev",
@@ -17,6 +18,7 @@
 		"test": "pnpm run test:int && pnpm run test:e2e",
 		"test:e2e": "cross-env NODE_OPTIONS=\"--no-deprecation --no-experimental-strip-types\" pnpm exec playwright test",
 		"test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts",
+		"build": "sh vercel.sh",
 		"knip": "knip"
 	},
 	"dependencies": {
