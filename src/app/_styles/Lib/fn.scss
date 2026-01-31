@@ -1,0 +1,44 @@
+@use 'sass:map';
+@use 'vars.scss' as *;
+
+@function colormix($color1, $alpha1, $color2, $alpha2) {
+    @return (color-mix(in sRgb, $color1 $alpha1, $color2 $alpha2));
+}
+
+@function alpha-mix($color, $alpha) {
+    @return (colormix($color, $alpha, transparent, 0%));
+}
+
+@mixin clickable {
+    cursor: pointer;
+}
+
+@mixin font-size($size) {
+    font-size: map.get($font-sizes, $size);
+}
+
+@mixin description-props($size) {
+    @include font-size($size);
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: var(--theme-elevation-500);
+}
+
+@mixin description-field() {
+    .field-description {
+        @include description-props(xs);
+        @content;
+    }
+}
+
+@mixin dark {
+    @media (prefers-color-scheme: dark) {
+        @content;
+    }
+}
+
+@mixin light {
+    @media (prefers-color-scheme: light) {
+        @content;
+    }
+}

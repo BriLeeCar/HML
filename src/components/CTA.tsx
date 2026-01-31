@@ -1,6 +1,6 @@
-import { Button } from '~/components/Button'
-import { cn } from '~/lib/cn'
-import { Section, SectionHeading } from './Structure/Section'
+import { Button } from '@/components/Button'
+import { Section, SectionHeading } from '@/components/Structure/Section'
+import { cn } from '@/lib/cn'
 
 type CTAProps = Props<'div'> & {
 	primaryAction?: {

@@ -1,0 +1,136 @@
+@use '../Lib/_lib.scss' as *;
+
+.rich-text-lexical__wrap {
+    .editor {
+        --accent-color: var(--color-hml-red);
+        @include dark {
+            --accent-color: var(--color-hml-yellow-500);
+        }
+        font-family: var(--font-sans);
+        border: 1px solid var(--theme-elevation-150);
+        .LexicalEditorTheme__placeholder {
+        }
+
+        &:not(*:has(> .field-editor)) {
+            min-height: 200px;
+            padding-inline: 2rem;
+            padding-block: 1rem;
+            .LexicalEditorTheme__placeholder {
+                top: calc(var(--base) * 0.65);
+                left: 2rem;
+            }
+        }
+        &:has(> .field-editor) {
+            .LexicalEditorTheme__placeholder {
+                line-height: 2;
+                top: 0px;
+                left: 0.25rem;
+            }
+        }
+
+        .ContentEditable__root {
+            padding-inline: 0rem;
+            padding-block: 0rem;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            &::before {
+                border-left-color: transparent;
+            }
+
+            h1 {
+                color: var(--color-hml-slate);
+                @include dark {
+                    color: var(--color-hml-grey);
+                }
+                font-size: 2rem;
+                font-weight: var(--font-weight-semibold);
+                line-height: var(--leading-tight);
+                letter-spacing: -0.02em;
+                text-wrap: pretty;
+                margin-top: 1rem;
+                ~ p {
+                    padding-left: 1rem;
+                }
+            }
+
+            ol,
+            ul {
+                line-height: var(--leading-loose);
+                text-wrap: balance;
+                margin-inline-start: 1rem;
+                list-style-position: outside;
+                ::marker {
+                    font-weight: bold;
+                    color: var(--accent-color);
+                }
+                li {
+                    padding-inline-start: 1rem;
+                }
+            }
+
+            p,
+            p.LexicalEditorTheme__paragraph {
+                line-height: var(--leading-loose);
+                text-wrap: pretty;
+                margin-bottom: 0;
+            }
+
+            strong {
+                color: var(--accent-color);
+                font-weight: var(--font-weight-semibold);
+                @include dark {
+                    color: var(--accent-color);
+                    font-weight: var(--font-weight-normal);
+                }
+            }
+
+            a {
+                @include clickable;
+                font-weight: var(--font-weight-semibold);
+                text-underline-offset: 2px;
+                transition: all 0.2s ease-in-out;
+                color: currentColor;
+                text-decoration: 2px solid underline alpha-mix(var(--color-hml-mulberry), 50%);
+                &:hover {
+                    color: var(--color-hml-mulberry);
+                }
+                @include dark {
+                    font-weight: var(--font-weight-medium);
+                    color: var(--color-hml-grey-100);
+                    text-decoration-color: var(--color-hml-yellow-700);
+                    &:hover {
+                        color: var(--color-hml-yellow);
+                    }
+                }
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-block: 2rem;
+                th,
+                td {
+                    border: 1px solid var(--theme-elevation-200);
+                    padding: 0.5rem 1rem;
+                    text-align: left;
+                }
+                th {
+                    background-color: var(--theme-elevation-100);
+                }
+            }
+
+            &.field-editor {
+                padding-block: 0;
+                padding-inline: 0.25rem;
+                padding-block: 0rem;
+            }
+        }
+        button.icon {
+            &[class*='block-menu'] {
+                z-index: 1;
+            }
+        }
+    }
+}

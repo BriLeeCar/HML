@@ -1,8 +1,8 @@
 'use client'
 
+import { Icon } from '@/components/Icon'
+import { cn } from '@/lib/cn'
 import { usePathname } from 'next/navigation'
-import { cn } from '~/lib/cn'
-import { Icon } from '../Icon'
 
 export const PageBreadcrumb = ({ ...props }: Props<'nav'>) => {
 	const path = usePathname().split('/').filter(Boolean)

@@ -1,0 +1,7 @@
+@use '../root.scss' as *;
+
+@layer hml {
+  .condition-value-number {
+    @include formInput;
+  }
+}

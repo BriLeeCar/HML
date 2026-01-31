@@ -1,0 +1,10 @@
+@use '../root.scss' as *;
+
+@layer hml {
+  .localizer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+}

@@ -1,4 +1,5 @@
-import { cn } from '~/lib/cn'
+import { cn } from '@/lib/cn'
+import type { ReactNode } from 'react'
 
 export const Bold = ({ className, children }: { className?: string; children: ReactNode }) => (
 	<strong

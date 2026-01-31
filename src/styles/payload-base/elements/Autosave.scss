@@ -1,0 +1,7 @@
+@use '../root.scss' as *;
+
+@layer hml {
+  .autosave {
+    white-space: nowrap;
+  }
+}

@@ -1,36 +1,53 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Next JS
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+/.idea/*
+!/.idea/runConfigurations
+
+# testing
+/coverage
+
+# next.js
 /.next/
-/build/
+/out/
 
-# User
-/.vscode/
+# production
+/build
+
+# misc
 .DS_Store
-.docs
+*.pem
 
-# Debugging & Logs
-logs
-*.log
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
-tsconfig.tsbuildinfo
 
-# Dependencies
-/node_modules
-pnpm-*
-*.local
-Dockerfile
+# local env files
+.env*.local
+.env
 
-# Env files
-.env*
-
-# prisma
-
-
-#Vercel
-/.vercel
+# vercel
 .vercel
 
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+
+# Database
+/media
+/src/migrations/
+/src/_drizzle

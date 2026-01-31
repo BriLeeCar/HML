@@ -1,9 +1,9 @@
 'use client'
 
+import { Icon } from '@/components/Icon'
+import { Main } from '@/components/Main'
+import { cn } from '@/lib/cn'
 import { type ReactNode, useState } from 'react'
-import { Icon } from '~/components/Icon'
-import { Main } from '~/components/Main'
-import { cn } from '~/lib/cn'
 
 export const Page = ({ ...props }: Props) => (
 	<Main>

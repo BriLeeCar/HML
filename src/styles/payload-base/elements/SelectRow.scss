@@ -1,0 +1,8 @@
+@layer hml {
+  .select-row {
+    &__checkbox {
+      display: block;
+      width: min-content;
+    }
+  }
+}

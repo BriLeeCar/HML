@@ -1,6 +1,6 @@
+import { Icon } from '@/components/Icon'
+import { cn } from '@/lib/cn'
 import Link from 'next/link'
-import { cn } from '~/lib/cn'
-import { Icon } from './Icon'
 
 export const Tiktok = ({ handle }: { handle: string }) => {
 	return (

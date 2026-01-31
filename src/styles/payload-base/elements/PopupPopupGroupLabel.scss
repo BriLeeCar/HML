@@ -1,0 +1,11 @@
+@use '../root.scss' as *;
+
+@layer hml {
+  .popup-list-group-label {
+    color: var(--theme-elevation-500);
+    font-weight: 500;
+    line-height: 1;
+    margin-top: calc(var(--base) * 0.25);
+    margin-bottom: calc(var(--base) * 0.5);
+  }
+}

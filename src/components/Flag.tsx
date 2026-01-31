@@ -1,5 +1,5 @@
+import { cn } from '@/lib/cn'
 import type { JSX } from 'react'
-import { cn } from '~/lib/cn'
 
 export const JuneteenthFlag = ({ ...props }: Props.IconPath) => {
 	return (

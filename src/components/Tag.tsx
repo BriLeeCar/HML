@@ -1,4 +1,4 @@
-import { Badge, type tBadgeColors } from '~/components/Badge'
+import { Badge, type tBadgeColors } from '@/components/Badge'
 
 const tagGroups = {
 	politics: ['politics', 'political', 'government', 'policy', 'law'],

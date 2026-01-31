@@ -1,11 +1,12 @@
-import { cn } from '~/lib/cn'
+import { cn } from '@/lib/cn'
 import { InlineLink } from './Link'
 
 const listClasses = cn(
 	'leading-8 text-pretty',
-	'my-6 ml-6 marker:font-bold has-[>li.task-list-item]:list-none *:[li]:pl-2 [li>ul,dd>dl,li>ol]:my-0 [&>li,&>dt]:mt-2',
+	'ml-6 marker:font-bold',
 	'list-label:list-none list-label:ml-0',
-	'[:is(h1,h2,h3,h4,h5,h6)+*:is(ul,ol,dl)]:mt-0'
+	'[:is(h1,h2,h3,h4,h5,h6)+*:is(ul,ol,dl)]:mt-0',
+	'*:[li]:ml-8 *:[li]:pl-4 *:[li]:marker:text-hml-red dark:*:[li]:marker:text-hml-yellow-500'
 )
 
 export const List = ({ type, ...props }: Props<'ul'> & { type?: 'numbered' | '' }) => {
@@ -19,7 +20,7 @@ export const List = ({ type, ...props }: Props<'ul'> & { type?: 'numbered' | '' 
 		return (
 			<ol
 				{...props}
-				className={className}
+				className={cn(className, 'list-decimal')}
 			/>
 		)
 	}

@@ -1,4 +1,4 @@
-import { createContext } from 'react'
+import { type ReactNode, createContext } from 'react'
 import db from './db'
 
 export const DBContext = createContext<ReturnType<typeof db>>(

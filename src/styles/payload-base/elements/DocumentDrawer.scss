@@ -1,0 +1,23 @@
+@use '../root.scss' as *;
+
+@layer hml {
+  .doc-drawer {
+    &__toggler {
+      background: transparent;
+      border: 0;
+      margin: 0;
+      padding: 0;
+      cursor: pointer;
+      color: inherit;
+
+      &:focus,
+      &:focus-within {
+        outline: none;
+      }
+
+      &:disabled {
+        pointer-events: none;
+      }
+    }
+  }
+}

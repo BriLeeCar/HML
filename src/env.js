@@ -7,26 +7,31 @@ export const env = createEnv({
      * isn't built with invalid env vars.
      */
     server: {
-        AUTH_SECRET:
-            process.env.NODE_ENV === "production"
-                ? z.string()
-                : z.string().optional(),
-        NEXTAUTH_SECRET:
-            process.env.NODE_ENV === "production"
-                ? z.string()
-                : z.string().optional(),
-        PRISMA_DATABASE_URL: z.string(),
-        PRISMA_ACCELERATE_URL: z.string(),
+        BASE_URL: z.url(),
+        ADMIN_PATH: z.string().default("/admin"),
+
+        DATABASE_URL: z.string(),
+        DATASE_USER: z.string(),
+        DATASE_PASSWORD: z.string(),
+        DATASE_HOST: z.string(),
+        DATASE_PORT: z.string(),
+        DATABASE_PAYLOAD_SCHEMA: z.string(),
+
+        PAYLOAD_SECRET: z.string(),
+
         R2_ACCT: z.string(),
         R2_TOKEN: z.string(),
         R2_ACCESS_KEY_ID: z.string(),
         R2_SECRET_KEY: z.string(),
         R2_BUCKET: z.string(),
+        R2_PUBLIC_URL: z.string(),
 
         NODE_ENV: z
             .enum(["development", "test", "production"])
             .default("development"),
     },
+
+
 
     /**
      * Specify your client-side environment variables schema here. This way you can ensure the app
@@ -42,17 +47,24 @@ export const env = createEnv({
      * middlewares) or client-side so we need to destruct manually.
      */
     runtimeEnv: {
-        AUTH_SECRET: process.env.AUTH_SECRET,
-        NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
-        PRISMA_DATABASE_URL: process.env.PRISMA_DATABASE_URL,
-        PRISMA_ACCELERATE_URL: process.env.PRISMA_ACCELERATE_URL,
+        BASE_URL: process.env.BASE_URL,
+        ADMIN_PATH: process.env.ADMIN_PATH,
 
-        NODE_ENV: process.env.NODE_ENV,
+        DATABASE_URL: process.env.DATABASE_URL,
+        DATASE_USER: process.env.DATASE_USER,
+        DATASE_PASSWORD: process.env.DATASE_PASSWORD,
+        DATASE_HOST: process.env.DATASE_HOST,
+        DATASE_PORT: process.env.DATASE_PORT,
+        DATABASE_PAYLOAD_SCHEMA: process.env.DATABASE_PAYLOAD_SCHEMA,
+
+        PAYLOAD_SECRET: process.env.PAYLOAD_SECRET,
+
         R2_ACCT: process.env.R2_ACCT,
         R2_TOKEN: process.env.R2_TOKEN,
         R2_ACCESS_KEY_ID: process.env.R2_ACCESS_KEY_ID,
         R2_SECRET_KEY: process.env.R2_SECRET_KEY,
         R2_BUCKET: process.env.R2_BUCKET,
+        R2_PUBLIC_URL: process.env.R2_PUBLIC_URL
     },
     /**
      * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

@@ -1,0 +1,119 @@
+@use '../_styles/Fields/root.scss';
+@use '../_styles/Lib/lib';
+@use '../_styles/Views/views';
+
+:root {
+    --base-font-size: 1rem;
+}
+html {
+    font-size: 1rem !important;
+}
+
+.group-field--gutter {
+    border-left-color: transparent;
+}
+
+.tabs-field {
+    &__tabs-wrap {
+        margin-bottom: 1.5lh;
+    }
+    &__tab {
+        > .render-fields .group-field {
+            &--within-tab > .group-field__wrap .group-field__header + * {
+                display: flex;
+                flex-direction: column;
+                row-gap: 0.5rem;
+                padding-left: 2rem;
+                .row .field-type {
+                    margin-top: 0.75rem;
+                    margin-bottom: 0.5rem;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .document-fields {
+        --main-width: 100%;
+        &:has([class*='sidebar-w-']) {
+            display: flex;
+        }
+        &--has-sidebar:has([class*='sidebar-w-']) {
+            --sidebar-min-width: auto;
+            --sidebar-width: auto;
+
+            $sizes: ('2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl');
+
+            @each $size in $sizes {
+                &:has(.sidebar-w-#{$size}) {
+                    --sidebar-min-width: var(--container-#{$size});
+                }
+            }
+
+            --gutter-h: 10px;
+            --sidebar-gutter-h-right: var(--gutter-h);
+            --sidebar-gutter-h-left: var(--gutter-h);
+
+            --sidebar-width: calc((var(--sidebar-min-width) / 1024px) * 100%);
+            --main-width: calc((100vw - var(--sidebar-width)) - (var(--gutter-h)));
+
+            .document-fields__sidebar {
+                &-wrap {
+                    // height: auto;
+                    width: var(--sidebar-width);
+                    max-width: 60%;
+                    min-width: var(--sidebar-width);
+                    overflow-y: scroll;
+                }
+            }
+
+            .tabs-field__content-wrap {
+                padding-inline: calc(var(--gutter-h) / 2);
+            }
+        }
+        &__main:has([class*='sidebar-w-']) > .gutter {
+            overflow-y: scroll;
+        }
+
+        &__main:has([class*='sidebar-w-']) .group-field--top-level,
+        .render-fields.document-fields__fields {
+            max-width: var(--main-width);
+            width: 100%;
+            margin-inline: auto;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+        .render-fields.document-fields__fields:has(.flex-wrapped) {
+            flex-flow: row wrap;
+            column-gap: 1rem;
+            .field-type.row {
+                flex-basis: 100% !important;
+            }
+            .field-type:not(.row, .row *) {
+                --flex-width: calc(--field-width - 0.5rem);
+                width: max-content;
+                flex-grow: 1;
+                flex-shrink: 1;
+                > * {
+                    flex: 1 1 var(--flex-width, 100%) !important;
+                    min-width: var(--flex-width, 100%) !important;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 900px) {
+    .field-type.row .row__fields {
+        display: flex;
+        > .field-type {
+            flex: 1 1 max-content !important;
+        }
+    }
+}
+
+.collection-edit--pathways .field-type.group-field.group-field--top-level {
+    margin-top: 0;
+}

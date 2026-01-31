@@ -1,6 +1,7 @@
-import { Eyebrow } from '~/components/Text/Eyebrow'
-import { Subtitle } from '~/components/Text/Subtitle'
-import { cn } from '~/lib/cn'
+import { Eyebrow } from '@/components/Text/Eyebrow'
+import { Subtitle } from '@/components/Text/Subtitle'
+import { cn } from '@/lib/cn'
+import type { ReactNode } from 'react'
 
 /**
  *

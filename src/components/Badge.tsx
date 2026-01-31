@@ -1,6 +1,6 @@
 'use client'
+import { cn } from '@/lib/cn'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { cn } from '~/lib/cn'
 
 const BadgeVariants = cva(
 	[

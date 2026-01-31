@@ -1,5 +1,5 @@
+import { cn } from '@/lib/cn'
 import Link from 'next/link'
-import { cn } from '~/lib/cn'
 import { Icon } from './Icon'
 
 export const Button = ({
@@ -11,11 +11,13 @@ export const Button = ({
 }) => {
 	const classes = cn(
 		'click relative rounded-md px-3.5 py-2.5 text-xs font-semibold tracking-wide whitespace-nowrap uppercase transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-0 has-[svg]:py-2 dark:tracking-normal',
-		(variant == 'default' || variant == 'bright')
-			&& 'dark:bg-hml-mulberry dark:hover:bg-hml-mulberry-700 bg-hml-red hover:bg-hml-mulberry text-white',
-		variant == 'muted'
-			&& 'text-hml-red hover:bg-muted outline-hml-red dark:text-hml-grey dark:bg-hml-mulberry-100/10 ring-zinc-600 outline-1 hover:outline-current/10 dark:outline-transparent',
-		variant == 'ghost' && 'border-0 bg-transparent text-current',
+		{
+			'text-hml-red hover:bg-muted outline-hml-red dark:text-hml-grey dark:bg-hml-mulberry-100/10 ring-zinc-600 outline-1 hover:outline-current/10 dark:outline-transparent':
+				variant == 'muted',
+			'border-0 bg-transparent text-current': variant == 'ghost',
+			'dark:bg-hml-mulberry dark:hover:bg-hml-mulberry-700 bg-hml-red hover:bg-hml-mulberry text-white':
+				variant == 'bright' || variant == 'default',
+		},
 		props.className
 	)
 

@@ -1,0 +1,21 @@
+@use '../root.scss' as *;
+
+@layer hml {
+  .gutter {
+    &--left {
+      padding-left: var(--gutter-h);
+    }
+
+    &--right {
+      padding-right: var(--gutter-h);
+    }
+
+    &--negative-left {
+      margin-left: calc(-1 * var(--gutter-h));
+    }
+
+    &--negative-right {
+      margin-right: calc(-1 * var(--gutter-h));
+    }
+  }
+}

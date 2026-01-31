@@ -1,0 +1,11 @@
+@use '../root.scss' as *;
+
+@layer hml {
+  .render-title {
+    display: inline-block;
+    &__id {
+      vertical-align: middle;
+      position: relative;
+    }
+  }
+}

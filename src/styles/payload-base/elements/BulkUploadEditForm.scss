@@ -1,0 +1,11 @@
+@use '../root.scss' as *;
+
+@layer hml {
+  .collection-edit {
+    width: 100%;
+
+    &__form {
+      height: auto;
+    }
+  }
+}

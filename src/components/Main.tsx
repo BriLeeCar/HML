@@ -1,4 +1,4 @@
-import { cn } from '~/lib/cn'
+import { cn } from '@/lib/cn'
 
 export const Main = ({ full, children, ...props }: Props & { full?: boolean }) => (
 	<main

@@ -1,0 +1,12 @@
+@use '../root.scss' as *;
+
+@layer hml {
+  .clear-indicator {
+    cursor: pointer;
+    display: flex;
+
+    &:focus-visible {
+      outline: var(--accessibility-outline);
+    }
+  }
+}

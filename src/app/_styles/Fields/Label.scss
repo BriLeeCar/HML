@@ -1,0 +1,33 @@
+@use '../Lib/_lib.scss' as *;
+.field {
+    &-type {
+        label:not(.unstyled) {
+            @include font-size(sm);
+        }
+        &__wrap {
+            &:has(.field-description) {
+                display: flex;
+                flex-direction: column-reverse;
+                @include description-field();
+            }
+            &:not(*:has(.field-description)) {
+                margin-top: calc(0.9rem + 0.5lh);
+            }
+        }
+        .group-field {
+            &__header header {
+                row-gap: 0.05lh;
+                &:has(.field-description) {
+                    @include description-field {
+                        padding-left: 0.5rem;
+                    }
+                }
+            }
+        }
+    }
+    &-label {
+        &:has(+ .field-type__wrap .field-description) {
+            padding-bottom: 0;
+        }
+    }
+}

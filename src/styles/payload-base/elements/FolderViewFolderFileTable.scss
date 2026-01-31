@@ -1,0 +1,11 @@
+@use '../root.scss' as *;
+
+@layer hml {
+  .folder-file-table {
+    &__cell-with-icon {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: calc(var(--base) / 2);
+    }
+  }
+}

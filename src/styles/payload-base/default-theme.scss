@@ -1,0 +1,651 @@
+@use 'root.scss' as *;
+
+@layer hml {
+    :root {
+        --breakpoint-s-width: 76px;
+    }
+    @media (max-width: 1024px) {
+        .field-type.row .row__fields {
+            display: flex;
+            column-gap: calc(var(--base) * 0.8);
+            > * {
+                flex-basis: max-content !important;
+                flex-grow: 1 !important;
+                flex-shrink: 1 !important;
+            }
+        }
+    }
+
+    .template-default {
+        min-height: 100vh;
+        display: grid;
+        position: relative;
+        isolation: isolate;
+        background-color: var(--theme-bg);
+        color: var(--theme-text);
+        &__nav-toggler {
+            display: flex;
+            align-items: center;
+            &-wrapper {
+                position: sticky;
+                z-index: var(--z-modal);
+                top: 0;
+                left: 0;
+                height: 0;
+                width: var(--gutter-h);
+                display: flex;
+                justify-content: center;
+                &*:is([dir='rtl'] *) {
+                    left: unset;
+                    right: 0;
+                }
+            }
+            &-container {
+                height: var(--app-header-height);
+                display: flex;
+                align-items: center;
+            }
+        }
+        &__wrap {
+            min-width: 0;
+            width: 100%;
+            flex-grow: 1;
+            position: relative;
+            background-color: var(--theme-bg);
+            &:before {
+                content: '';
+                display: block;
+                position: absolute;
+                inset: 0;
+                background-color: inherit;
+                opacity: 0;
+                z-index: var(--z-status);
+                visibility: hidden;
+                transition: all var(--nav-trans-time) linear;
+            }
+        }
+        &--nav-animate {
+            transition: grid-template-columns var(--nav-trans-time) linear;
+        }
+        &--nav-open .template-default__nav-overlay {
+            transition: opacity var(--nav-trans-time) linear;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .template-default__nav-toggler-wrapper .hamburger {
+            left: unset;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .template-default {
+            &__nav-toggler-wrapper {
+                width: unset;
+                justify-content: unset;
+                .hamburger {
+                    display: none;
+                }
+            }
+            .template-default__wrap {
+                min-width: 100%;
+            }
+        }
+    }
+
+    .nav {
+        position: sticky;
+        top: 0;
+        left: 0;
+        flex-shrink: 0;
+        height: 100vh;
+        width: var(--nav-width);
+        border-right: 1px solid var(--theme-elevation-100);
+        opacity: 0;
+        overflow: hidden;
+        --nav-padding-inline-start: var(--base);
+        --nav-padding-inline-end: var(--base);
+        --nav-padding-block-start: var(--app-header-height);
+        --nav-padding-block-end: calc(var(--base) * 2);
+        &:is([dir='rtl'] *) {
+            border-right: none;
+            border-left: 1px solid var(--theme-elevation-100);
+        }
+        &--nav-animate {
+            transition: opacity var(--nav-trans-time) ease-in-out;
+        }
+        &--nav-open {
+            opacity: 1;
+        }
+        &__header {
+            position: absolute;
+            top: 0;
+            width: 100vw;
+            height: var(--app-header-height);
+            &-content {
+                z-index: 1;
+                position: relative;
+                height: 100%;
+                width: 100%;
+            }
+        }
+        &__scroll {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: var(--nav-padding-block-start) var(--nav-padding-inline-end) var(--nav-padding-block-end)
+                var(--nav-padding-inline-start);
+            overflow-y: auto;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+        &__mobile-close {
+            display: none;
+            background: none;
+            border: 0;
+            outline: 0;
+            padding: 16px 0;
+        }
+
+        &__wrap {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            flex-grow: 1;
+        }
+
+        &__label {
+            color: var(--theme-elevation-400);
+        }
+
+        &__controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: auto;
+            margin-bottom: 0;
+            > :first-child {
+                margin-top: 20px;
+            }
+            a:focus-visible {
+                outline: var(--accessibility-outline);
+            }
+        }
+
+        &__log-out:hover g {
+            transform: translate(-2.5px);
+        }
+
+        &__link {
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-block: 2.5px;
+            padding-inline-start: 0;
+            padding-inline-end: 30px;
+            text-decoration: none;
+            &:focus:not(:focus-visible) {
+                box-shadow: none;
+                font-weight: 600;
+            }
+            &.active {
+                font-weight: 400;
+                padding-left: 0;
+                font-weight: 600;
+            }
+            &:has(.nav__link-indicator) {
+                font-weight: 600;
+                padding-left: 0;
+            }
+            &-indicator {
+                position: absolute;
+                display: block;
+                inset-inline-start: -20px;
+                width: 2px;
+                height: 16px;
+                border-start-end-radius: 2px;
+                border-end-end-radius: 2px;
+                background: var(--theme-text);
+            }
+        }
+        a.nav__link:hover,
+        a.nav__link:focus-visible {
+            text-decoration: underline;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .nav__scroll {
+            --nav-padding-inline-start: calc(var(--base) * 0.5);
+            --nav-padding-inline-end: calc(var(--base) * 0.5);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .nav__scroll {
+            --nav-padding-inline-start: var(--gutter-h);
+            --nav-padding-inline-end: var(--gutter-h);
+        }
+
+        .nav__link {
+            font-size: 17.5px;
+            line-height: 30px;
+        }
+
+        .nav__mobile-close {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    @media (prefers-reduced-motion) {
+        .template-default {
+            transition: none;
+        }
+    }
+
+    @media (min-width: 1441px) {
+        .template-default {
+            grid-template-columns: 0 auto;
+            &--nav-open {
+                grid-template-columns: var(--nav-width) auto;
+            }
+        }
+    }
+
+    @media (max-width: 1440px) {
+        .template-default--nav-hydrated.template-default--nav-open {
+            grid-template-columns: var(--nav-width) auto;
+        }
+
+        .template-default {
+            grid-template-columns: 1fr auto;
+        }
+
+        .template-default .nav {
+            display: none;
+        }
+
+        .template-default--nav-hydrated {
+            grid-template-columns: 0 auto;
+            .nav {
+                display: unset;
+            }
+        }
+    }
+
+    .settings-menu-button.popup--h-align-left .popup__content {
+        left: calc(var(--nav-padding-inline-start) * -0.5);
+    }
+
+    .doc-tabs {
+        display: flex;
+
+        &__tabs {
+            display: flex;
+            gap: calc(var(--base) / 2);
+            list-style: none;
+            align-items: center;
+            margin: 0;
+            padding-left: 0;
+        }
+
+        @media (max-width: 1024px) {
+            width: 100%;
+            padding: 0;
+            overflow: auto;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            &:after {
+                content: '';
+                display: block;
+                position: sticky;
+                right: 0;
+                width: calc(var(--base) * 2);
+                height: calc(var(--base) * 2);
+                background: linear-gradient(to right, transparent, var(--theme-bg));
+                flex-shrink: 0;
+                z-index: 1111;
+                pointer-events: none;
+            }
+
+            &__tabs {
+                padding: 0;
+            }
+        }
+        @media (max-width: 768px) {
+            &__tabs-container {
+                margin-right: var(--gutter-h);
+            }
+
+            &__tabs {
+                gap: var(--gutter-h);
+            }
+        }
+    }
+
+    .doc-header {
+        width: 100%;
+        margin-top: calc(var(--base) * 0.4);
+        padding-bottom: calc(var(--base) * 1.2);
+        position: relative;
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            height: 1px;
+            background: var(--theme-elevation-100);
+            width: 100%;
+            left: 0;
+            top: calc(100% - 1px);
+        }
+
+        &__header {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--base) / 2);
+        }
+
+        &__title {
+            flex-grow: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin: 0;
+            padding-bottom: calc(var(--base) * 0.4);
+            vertical-align: top;
+            padding-bottom: 0;
+        }
+
+        &__after-header {
+            padding-top: calc(var(--base) * 0.8);
+        }
+        @media (max-width: 768px) {
+            margin-top: 0;
+        }
+
+        @media (max-width: 1024px) {
+            margin-top: calc(var(--base) * 0.25);
+            padding-bottom: calc(var(--base) / 1.5);
+            &__header {
+                flex-direction: column;
+                gap: calc(var(--base) / 2);
+            }
+
+            &__title {
+                width: 100%;
+            }
+
+            &__after-header {
+                padding-top: calc(var(--base) / 4);
+            }
+        }
+    }
+
+    .step-nav {
+        display: flex;
+        align-items: center;
+        gap: calc(var(--base) / 2);
+        &:after {
+            content: ' ';
+            position: sticky;
+            top: 0;
+            right: 0;
+            width: var(--base);
+            background: linear-gradient(to right, transparent, var(--theme-bg));
+        }
+
+        &__home {
+            width: 18px;
+            height: 18px;
+            position: relative;
+            &:focus-visible {
+                outline: none;
+                &:after {
+                    content: '';
+                    border: var(--accessibility-outline);
+                    position: absolute;
+                    inset: 0;
+                    pointer-events: none;
+                }
+            }
+        }
+        * {
+            display: block;
+        }
+
+        a {
+            border: 0;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            text-decoration: none;
+            label {
+                cursor: pointer;
+            }
+            &:hover,
+            &:focus-visible {
+                text-decoration: underline;
+            }
+        }
+        span {
+            max-width: 160px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            &:has(.dashboard-breadcrumb-select, .dashboard-breadcrumb-dropdown__editing) {
+                max-width: none;
+                overflow: visible;
+                white-space: normal;
+            }
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .step-nav .step-nav__home {
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .step-nav {
+            gap: 8px;
+        }
+    }
+
+    .app-header {
+        position: relative;
+        width: 100%;
+        height: var(--app-header-height);
+        z-index: var(--z-modal);
+
+        &__mobile-nav-toggler {
+            display: none;
+        }
+
+        &__localizer.localizer {
+            position: absolute;
+            top: 50%;
+            right: base(4.5);
+            transform: translate3d(0, -50%, 0);
+        }
+
+        // place the localizer outside the `overflow: hidden` container so that the popup is visible
+        // this means we need to use a placeholder div so that the space is retained in the DOM
+        [dir='rtl'] &__localizer {
+            right: unset;
+            left: base(4.5);
+        }
+
+        &__localizer-spacing {
+            visibility: hidden;
+        }
+
+        &__bg {
+            opacity: 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        &--show-bg {
+            opacity: 1;
+        }
+
+        &__content {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding: 0 var(--gutter-h);
+            position: relative;
+            flex-grow: 1;
+        }
+
+        &__wrapper {
+            display: flex;
+            gap: calc(var(--base) / 2);
+            align-items: center;
+            height: 100%;
+            flex-grow: 1;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        &__account {
+            position: relative;
+            flex-shrink: 0;
+
+            &:focus:not(:focus-visible) {
+                opacity: 1;
+            }
+
+            // Use a pseudo element for the accessability so that it doesn't take up DOM space
+            // Also because the parent element has `overflow: hidden` which would clip an outline
+            &:focus-visible {
+                outline: none;
+
+                &::after {
+                    content: '';
+                    border: var(--accessibility-outline);
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    pointer-events: none;
+                }
+            }
+        }
+
+        &__controls-wrapper {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            min-width: 0;
+        }
+
+        &__step-nav-wrapper {
+            flex-grow: 0;
+            display: flex;
+            width: 100%;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        &__actions-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: calc(var(--base) / 2);
+            margin-right: var(--base);
+        }
+
+        &__gradient-placeholder {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: var(--base);
+            height: var(--base);
+            background: linear-gradient(to right, transparent, var(--theme-bg));
+        }
+
+        &__actions {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--base) / 2);
+            flex-shrink: 0;
+            max-width: 600px;
+            white-space: nowrap;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        &__last-action {
+            margin-right: var(--base);
+        }
+
+        @include large-break {
+            &__actions {
+                max-width: 500px;
+            }
+        }
+
+        @include mid-break {
+            &__gradient-placeholder {
+                right: var(--base);
+            }
+
+            &__actions {
+                max-width: 300px;
+                margin-right: var(--base);
+            }
+        }
+
+        @include small-break {
+            &__localizer.localizer {
+                right: base(2);
+            }
+
+            &--nav-open {
+                .app-header__localizer {
+                    display: none;
+                }
+            }
+
+            &__mobile-nav-toggler {
+                display: flex;
+                align-items: center;
+
+                &.nav-toggler--is-open {
+                    opacity: 0.5;
+                }
+            }
+
+            &__step-header {
+                // TODO: overflow the step header instead of hide it
+                display: none;
+            }
+
+            &__gradient-placeholder {
+                right: 0;
+            }
+
+            &__actions {
+                max-width: 150px;
+                margin-right: 0;
+            }
+        }
+    }
+}

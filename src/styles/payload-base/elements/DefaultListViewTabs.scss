@@ -1,0 +1,6 @@
+@layer hml {
+  .default-list-view-tabs {
+    display: flex;
+    gap: calc(var(--base) * 0.5);
+  }
+}

@@ -1,7 +1,7 @@
-import { Main } from '~/components/Main'
-import { Eyebrow } from '~/components/Text/Eyebrow'
-import { Subtitle } from '~/components/Text/Subtitle'
-import { cn } from '~/lib/cn'
+import { Main } from '@/components/Main'
+import { Eyebrow } from '@/components/Text/Eyebrow'
+import { Subtitle } from '@/components/Text/Subtitle'
+import { cn } from '@/lib/cn'
 import { PageBreadcrumb } from './PageBreadcrumb'
 
 export const Page = ({ ...props }: Props) => {

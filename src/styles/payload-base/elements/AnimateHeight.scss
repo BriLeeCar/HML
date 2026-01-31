@@ -1,0 +1,10 @@
+@layer hml {
+  .rah-static {
+    interpolate-size: allow-keywords;
+    height: 0;
+
+    &--height-auto {
+      height: auto;
+    }
+  }
+}

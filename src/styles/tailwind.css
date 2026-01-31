@@ -1,0 +1,190 @@
+@import 'tailwindcss/theme.css' theme(static);
+@import 'tailwindcss/utilities.css' theme(static);
+
+@theme static {
+	--font-sans: var(--font-open-sans);
+	--font-body: var(--font-sans);
+	--color-hml-slate: #222d30;
+	--color-hml-red: #ac162b;
+	--color-hml-mulberry: #7a2235;
+	--color-hml-grey: #e9edf3;
+	--color-hml-yellow: #dae638;
+	--color-hml-purple: #47274e;
+
+	--label-4xl: 2rem;
+	--label-3xl: 1.875rem;
+	--label-2xl: 1.5rem;
+	--label-xl: 1.375rem;
+	--label-lg: 1.2rem;
+	--label-title: 1.32rem;
+	--label-subtitle: 1.2rem;
+	--label-default: var(--text-base);
+	--label-small: var(--text-sm);
+
+	--color-hml-grey-900: #222d30;
+	--color-hml-grey-600: #2a2e34;
+	--color-hml-grey-400: #5e646e;
+	--color-hml-grey-300: #7e8691;
+	--color-hml-grey-200: #a8b0bc;
+	--color-hml-grey-50: var(--color-hml-grey);
+
+	--color-hml-red-900: #2d060b;
+	--color-hml-red-700: #680d1a;
+	--color-hml-red-500: var(--color-hml-red);
+	--color-hml-red-400: #cb374c;
+	--color-hml-red-300: #e9586d;
+	--color-hml-red-100: #f39ba8;
+	--color-hml-red-50: #fbdfe3;
+
+	--color-hml-mulberry-900: #250e11;
+	--color-hml-mulberry-700: #552027;
+	--color-hml-mulberry-500: var(--color-hml-mulberry);
+	--color-hml-mulberry-300: #b7576c;
+	--color-hml-mulberry-100: #dbb3bc;
+	--color-hml-mulberry-50: #f2e8ea;
+
+	--color-hml-yellow-900: #222404;
+	--color-hml-yellow-700: #5a5f0c;
+	--color-hml-yellow-500: #a2ac15;
+	--color-hml-yellow-300: var(--color-hml-yellow);
+	--color-hml-yellow-100: #f0f4a8;
+	--color-hml-yellow-50: #f9fbe1;
+
+	--color-hml-purple-900: #261a28;
+	--color-hml-purple-700: var(--color-hml-purple);
+	--color-hml-purple-500: #74447e;
+	--color-hml-purple-300: #ae8bb6;
+	--color-hml-purple-100: #ccbdd0;
+	--color-hml-purple-50: #f0ebf1;
+
+	--color-hml-slate-900: #161b1d;
+	--color-hml-slate-800: #1d2426;
+	--color-hml-slate-700: var(--color-hml-slate);
+	--color-hml-slate-600: #324146;
+	--color-hml-slate-500: #42585e;
+	--color-hml-slate-400: #5f7a80;
+	--color-hml-slate-300: #81989e;
+	--color-hml-slate-100: #d4dadc;
+	--color-hml-slate-50: #edf1f2;
+}
+
+@theme static {
+	--sidebar-width: 60%;
+}
+
+:root {
+	--theme-success-400: var(--color-hml-red-400);
+	--base-body-side: 1rem;
+}
+
+@utility label-* {
+	> * > [class*='wrap'] {
+		font-size: --value(--label-*);
+		.field-label {
+			line-height: 20px;
+			letter-spacing: -0.375px;
+			font-weight: 500;
+		}
+	}
+}
+
+@layer payload-default {
+	:root {
+		--ac-light: var(--color-hml-red);
+		--ac-dark: var(--color-hml-yellow);
+		--accent-color: light-dark(var(--ac-light), var(--ac-dark));
+		--accent-offset: light-dark(white, black);
+		--accessibility-outline: 2px solid var(--accent-color);
+
+		--theme-text: light-dark(var(--color-base-850), var(--color-base-100)) !important;
+		--theme-bg: light-dark(var(--color-base-0), var(--color-base-900)) !important;
+	}
+
+	/* #region CHECKBOXES */
+	.checkbox-input:not(.checkbox-input--read-only) {
+		&:active,
+		&:focus-within,
+		&:focus {
+			.checkbox-input__input,
+			input[type='checkbox'] {
+				box-shadow: 0 0 6px 2px --alpha(var(--accent-color) / 100%) !important;
+			}
+		}
+		.check {
+			left: -1px;
+		}
+		&.checkbox-input--checked > .checkbox-input__input {
+			border-left-color: --alpha(var(--accent-color) / 50%);
+			border-right-color: --alpha(var(--accent-color) / 50%);
+			border-top-color: --alpha(var(--accent-color) / 50%);
+			border-bottom-color: --alpha(var(--accent-color) / 50%);
+			background-color: var(--accent-color);
+			color: var(--accent-offset);
+		}
+	}
+	/* #endregion */
+
+	/* #region ! INPUT FOCUS FIELDS */
+	*:is(
+		.react-select .rs__control,
+		.field-type.number:not(.has-many) input,
+		.field-type.text:not(.has-many) input,
+		.field-type.textarea textarea
+	) {
+		&:focus,
+		&:focus-within,
+		&:active {
+			border-color: --alpha(var(--accent-color) / 50%) !important;
+		}
+	}
+	/* #endregion */
+
+	/* #region ! TABS */
+	.tabs-field__tabs-wrap {
+		.tabs-field__tab-button {
+			transition: all 0.2s ease;
+			border-radius: 8px 8px 0 0;
+			align-items: flex-start;
+			padding-bottom: 1.5rem;
+			min-height: 40px;
+			&:not([class*='--active']) {
+				align-items: flex-end;
+				padding-bottom: 0.5rem;
+			}
+		}
+		button:focus-visible {
+			outline: none;
+			color: var(--accent-color);
+			&.tabs-field__tab-button--active {
+				background-color: var(--accent-color);
+				color: var(--accent-offset);
+			}
+		}
+		.tabs-field__tabs {
+			justify-content: space-evenly;
+			.tabs-field__tab-button {
+				margin-top: 2px;
+				padding-inline: 1%;
+				margin-right: 0px;
+			}
+		}
+	}
+	/* #endregion */
+}
+
+.collapsible__toggle-wrap,
+.collapsible__content {
+	background-color: transparent;
+}
+
+.tabs-field__tab-button:after {
+	background-color: var(--accent-color);
+}
+
+.field-label {
+	font-weight: 500;
+}
+
+@utility sidebar-w-* {
+	--sidebar-width: --value(--container-*);
+}

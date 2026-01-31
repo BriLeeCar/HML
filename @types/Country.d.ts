@@ -1,4 +1,4 @@
-import db from '~/server/db/db'
+import db from '@/server/db/db'
 declare global {
 	namespace ApiData {
 		export type DB = ReturnType<typeof db>
@@ -108,10 +108,7 @@ declare global {
 			study: boolean
 		}
 
-		type CountryApi = Omit<
-			tPreCountryApi,
-			'languages' | 'currencies' | 'abbr' | 'isUn'
-		> & {
+		type CountryApi = Omit<tPreCountryApi, 'languages' | 'currencies' | 'abbr' | 'isUn'> & {
 			languages: Array<{
 				abbr: string
 				name: string

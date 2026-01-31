@@ -1,0 +1,11 @@
+@use '../Lib/lib' as *;
+
+@media (min-width: 768px) {
+    .document-fields__main > .gutter {
+        padding-bottom: 60px;
+    }
+}
+
+.custom-view-description {
+    @include description-props(sm);
+}

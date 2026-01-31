@@ -1,0 +1,66 @@
+@import 'tailwindcss/theme.css' theme(static);
+@import 'tailwindcss/utilities.css' theme(static);
+
+/* #region TYPES */
+@theme static {
+	--font-sans: var(--font-open-sans);
+	--font-body: var(--font-sans);
+}
+/* #endregion */
+
+/* #region ! COLORS */
+@theme static {
+	--color-hml-slate: #222d30;
+	--color-hml-red: #ac162b;
+	--color-hml-mulberry: #7a2235;
+	--color-hml-grey: #e9edf3;
+	--color-hml-yellow: #dae638;
+	--color-hml-purple: #47274e;
+
+	--color-hml-grey-900: #222d30;
+	--color-hml-grey-600: #2a2e34;
+	--color-hml-grey-400: #5e646e;
+	--color-hml-grey-300: #7e8691;
+	--color-hml-grey-200: #a8b0bc;
+	--color-hml-grey-50: var(--color-hml-grey);
+
+	--color-hml-red-900: #2d060b;
+	--color-hml-red-700: #680d1a;
+	--color-hml-red-500: var(--color-hml-red);
+	--color-hml-red-400: #cb374c;
+	--color-hml-red-300: #e9586d;
+	--color-hml-red-100: #f39ba8;
+	--color-hml-red-50: #fbdfe3;
+
+	--color-hml-mulberry-900: #250e11;
+	--color-hml-mulberry-700: #552027;
+	--color-hml-mulberry-500: var(--color-hml-mulberry);
+	--color-hml-mulberry-300: #b7576c;
+	--color-hml-mulberry-100: #dbb3bc;
+	--color-hml-mulberry-50: #f2e8ea;
+
+	--color-hml-yellow-900: #222404;
+	--color-hml-yellow-700: #5a5f0c;
+	--color-hml-yellow-500: #a2ac15;
+	--color-hml-yellow-300: var(--color-hml-yellow);
+	--color-hml-yellow-100: #f0f4a8;
+	--color-hml-yellow-50: #f9fbe1;
+
+	--color-hml-purple-900: #261a28;
+	--color-hml-purple-700: var(--color-hml-purple);
+	--color-hml-purple-500: #74447e;
+	--color-hml-purple-300: #ae8bb6;
+	--color-hml-purple-100: #ccbdd0;
+	--color-hml-purple-50: #f0ebf1;
+
+	--color-hml-slate-900: #161b1d;
+	--color-hml-slate-800: #1d2426;
+	--color-hml-slate-700: var(--color-hml-slate);
+	--color-hml-slate-600: #324146;
+	--color-hml-slate-500: #42585e;
+	--color-hml-slate-400: #5f7a80;
+	--color-hml-slate-300: #81989e;
+	--color-hml-slate-100: #d4dadc;
+	--color-hml-slate-50: #edf1f2;
+}
+/* #endregion */

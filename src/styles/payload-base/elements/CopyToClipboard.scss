@@ -1,0 +1,20 @@
+@use '../root.scss' as *;
+
+@layer hml {
+  .copy-to-clipboard {
+    @extend %btn-reset;
+    position: relative;
+    cursor: pointer;
+    vertical-align: middle;
+    border-radius: 100%;
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: var(--accessibility-outline);
+    }
+  }
+}

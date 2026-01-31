@@ -1,0 +1,12 @@
+@use '../Lib/lib' as *;
+
+input,
+[class*='rs__value-container'],
+.rs__menu {
+    @include font-size(sm);
+    color: var(--theme-elevation-700);
+}
+
+.rs__menu {
+    color: var(--theme-elevation-600);
+}

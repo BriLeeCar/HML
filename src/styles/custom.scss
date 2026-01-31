@@ -1,0 +1,23 @@
+@import './payload-base/app.scss';
+@import './payload-base/default-theme.scss';
+
+@import './payload-base/elements.scss';
+
+@media (max-width: 1024px) {
+    .collection-list .table {
+        padding-right: var(--gutter-h);
+    }
+}
+
+.step-nav .dashboard-breadcrumb-select .rs__control {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.document-fields__sidebar-wrap:has(.sidebar-main) {
+    width: 60%;
+}
