@@ -5,6 +5,8 @@
 	"scripts": {
 		"dev": "prisma generate && pnpm next dev",
 		"build": "next build",
+		"build:production": "prisma generate && next build",
+		"build:payload": "next build",
 		"start": "next start",
 		"lint": "eslint --c eslint.config.mjs .",
 		"types": "tsc --noEmit",
