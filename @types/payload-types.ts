@@ -545,7 +545,7 @@ export interface Page {
   /**
    * The URL path for this page (e.g., about would target the url: helpmeleave.us/about).
    */
-  path: string;
+  path?: string | null;
   /**
    * The title of the page. Used within the H1 tag.
    */

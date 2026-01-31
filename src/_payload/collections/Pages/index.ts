@@ -44,7 +44,7 @@ export const PagesCollection: CollectionConfig = {
 		{
 			name: 'path',
 			type: 'text',
-			required: true,
+			// required: true,
 			unique: true,
 			index: true,
 			admin: {

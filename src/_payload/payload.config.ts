@@ -22,11 +22,10 @@ const baseDir = process.cwd()
 
 const config = buildConfig({
 	admin: {
-		autoLogin: {
-			email: 'test@test.com',
-			password: 'test',
-			username: 'Bri',
-		},
+		// autoLogin: {
+		// 	password: 'mySecretPassword',
+		// 	username: 'Bri',
+		// },
 		user: 'users',
 		importMap: {
 			autoGenerate: true,
@@ -41,6 +40,7 @@ const config = buildConfig({
 		outputFile: path.resolve(baseDir, '@types', 'payload-types.ts'),
 	},
 	db: postgresAdapter({
+		schemaName: process.env.DATABASE_SCHEMA || 'payload',
 		pool: {
 			connectionString: process.env.DATABASE_URL || '',
 		},
