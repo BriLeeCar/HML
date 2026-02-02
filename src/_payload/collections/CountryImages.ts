@@ -6,6 +6,7 @@ export const CountryImagesCollection: CollectionConfig = {
 	slug: CountryImagesSlug,
 	admin: {
 		useAsTitle: 'country',
+		group: 'Data',
 	},
 	fields: [
 		{

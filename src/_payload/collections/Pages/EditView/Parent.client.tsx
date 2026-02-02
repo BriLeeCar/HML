@@ -11,11 +11,6 @@ export const ParentClientField = ({
 	const field = useField<FieldRef<Page, typeof path>>({ path })
 	const fieldValues = field.value ? field.value.toString().split('/') : []
 
-	const filterParents = parents.filter(p => {
-		console.log(p.parent)
-		return true
-	})
-
 	return (
 		<SelectInput
 			options={parents.map(p => ({

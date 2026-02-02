@@ -1,4 +1,4 @@
-import { toTitleCaseHook } from '@/_payload/hooks/toTitleCase'
+import { toTitleCase } from '@/lib/toTitleCase'
 import type { TextField } from 'payload'
 
 export const NameField = ({ ...options }: Omit<TextField, 'type'>): TextField => {
@@ -9,7 +9,7 @@ export const NameField = ({ ...options }: Omit<TextField, 'type'>): TextField =>
 		type: 'text',
 		hooks: {
 			...options.hooks,
-			beforeChange: [...beforeChangeHooks, toTitleCaseHook],
+			beforeChange: [...beforeChangeHooks, ({ value }) => toTitleCase(value as string)],
 		},
 	} as TextField
 }

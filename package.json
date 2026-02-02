@@ -8,6 +8,7 @@
 		"build:payload": "cross-env NODE_OPTIONS=--no-deprecation next build",
 		"build:production": "cross-env NODE_OPTIONS=--no-deprecation next build",
 		"ci": "payload migrate && pnpm build",
+		"go": "cross-env NODE_OPTIONS=--no-deprecation pnpm types && pnpm imports && pnpm dev",
 		"dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
 		"devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev",
 		"imports": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",

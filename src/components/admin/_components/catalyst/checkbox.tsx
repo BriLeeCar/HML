@@ -135,7 +135,9 @@ export function Checkbox({
 					}
 				:	undefined
 			}
+			id={props.name}
 			aria-label={props.name}
+			aria-describedby={props.name}
 			data-slot='control'
 			{...props}
 			className={cn('group inline-flex focus:outline-hidden', className)}>

@@ -9,6 +9,11 @@ export const CountriesCollection: CollectionConfig = {
 		useAsTitle: 'name',
 		defaultColumns: ['idString', 'name'],
 		description: 'A list of countries with their associated languages and currencies.',
+		group: 'Data',
+	},
+	access: {
+		admin: () => false,
+		read: () => false,
 	},
 	defaultSort: 'name',
 	fields: [

@@ -25,12 +25,16 @@ export const UsersCollection: CollectionConfig = {
 	admin: {
 		useAsTitle: 'username',
 		defaultColumns: ['username', 'discordHandle', 'pronounsString'],
+		group: 'General',
 	},
 	auth: {
 		loginWithUsername: {
 			requireEmail: false,
 		},
 		verify: false,
+	},
+	folders: {
+		browseByFolder: true,
 	},
 
 	fields: [
@@ -39,6 +43,13 @@ export const UsersCollection: CollectionConfig = {
 			type: 'text',
 			required: true,
 			unique: true,
+		},
+		{
+			name: 'pending',
+			type: 'checkbox',
+			admin: {
+				readOnly: true,
+			},
 		},
 		{
 			name: 'key',

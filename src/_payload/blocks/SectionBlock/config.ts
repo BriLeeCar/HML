@@ -41,7 +41,7 @@ const sectionFields: Field[] = [
 		label: false,
 	},
 	{
-		name: 'title',
+		name: 'mainTitle',
 		type: 'richText',
 		label: 'Section Heading',
 		editor: fieldLexical({}),

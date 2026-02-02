@@ -1,0 +1,24 @@
+.step-nav {
+    .step-nav__home {
+        height: 25px;
+        min-width: max-content;
+        * {
+            color: var(--color-hml-red);
+            @media (prefers-color-scheme: dark) {
+                color: var(--color-hml-yellow);
+            }
+            height: 100%;
+            margin-left: 0.5rem;
+            :hover {
+                cursor: pointer;
+                color: var(--text-foreground);
+            }
+        }
+    }
+    > span,
+    a {
+        font-size: 0.875rem;
+        font-family: monospace;
+        font-weight: 300;
+    }
+}

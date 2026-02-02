@@ -98,7 +98,7 @@ export interface Config {
       attributes: 'country-attribute-values';
     };
     'payload-folders': {
-      documentsAndFolders: 'payload-folders' | 'media';
+      documentsAndFolders: 'payload-folders' | 'media' | 'users';
     };
   };
   collectionsSelect: {
@@ -217,7 +217,7 @@ export interface SectionBlock {
     type: 'custom' | 'none';
     content?: string | null;
   };
-  title: {
+  mainTitle: {
     root: {
       type: string;
       children: {
@@ -404,296 +404,15 @@ export interface FolderInterface {
           relationTo?: 'media';
           value: number | Media;
         }
+      | {
+          relationTo?: 'users';
+          value: number | User;
+        }
     )[];
     hasNextPage?: boolean;
     totalDocs?: number;
   };
-  folderType?: 'media'[] | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "languages".
- */
-export interface Language {
-  name: string;
-  /**
-   * ISO 639-2 language code (e.g., 'ENG' for English)
-   */
-  id: string;
-  idString?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "currencies".
- */
-export interface Currency {
-  name: string;
-  /**
-   * ISO 4217 currency code (e.g., 'USD' for US Dollar)
-   */
-  id: string;
-  idString?: string | null;
-  symbol: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "country-attribute-values".
- */
-export interface CountryAttributeValue {
-  id: number;
-  idString?: string | null;
-  nameString?: string | null;
-  description?: string | null;
-  dataType?: string | null;
-  exampleValue?: string | null;
-  sourceInfo?: string | null;
-  country: string | Country;
-  attribute: number | CountryAttribute;
-  value: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "country-attributes".
- */
-export interface CountryAttribute {
-  id: number;
-  attribute: string;
-  description?: string | null;
-  exampleValue?: string | null;
-  source?: {
-    noSingleSource?: boolean | null;
-    name?: string | null;
-    url?: string | null;
-  };
-  dataType?: ('string' | 'number' | 'percentage' | 'currency' | 'boolean' | 'date' | 'link' | 'other') | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "guides".
- */
-export interface Guide {
-  id: number;
-  title: string;
-  /**
-   * Overview text that appears below the title.
-   */
-  subtitle?: string | null;
-  /**
-   * Appears above the title in smaller text.
-   */
-  eyebrow?: string | null;
-  sections?:
-    | {
-        sectionSectionHeading: {
-          title: string;
-          /**
-           * Overview text that appears below the title.
-           */
-          subtitle?: string | null;
-          /**
-           * Appears above the title in smaller text.
-           */
-          eyebrow?: string | null;
-        };
-        content: {
-          root: {
-            type: string;
-            children: {
-              type: any;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        };
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages".
- */
-export interface Page {
-  id: number;
-  /**
-   * When enabled, the slug will auto-generate from the title field on save and autosave.
-   */
-  generateSlug?: boolean | null;
-  slug: string;
-  status?: boolean | null;
-  /**
-   * Select a parent page to nest this page under.
-   */
-  parent?: (number | null) | Page;
-  /**
-   * The URL path for this page (e.g., about would target the url: helpmeleave.us/about).
-   */
-  path?: string | null;
-  /**
-   * The title of the page. Used within the H1 tag.
-   */
-  title: string;
-  brow?: string | null;
-  subtitle?: string | null;
-  content?: (SectionBlock | ToggleListBlock | ToggleListItemBlock | RichTextBlock)[] | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pathway-categories".
- */
-export interface PathwayCategory {
-  id: number;
-  title: string;
-  description?: string | null;
-  parent?: (number | null) | PathwayCategory;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pathway-documents".
- */
-export interface PathwayDocument {
-  id: number;
-  title: string;
-  description?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pathways".
- */
-export interface Pathway {
-  id: number;
-  name: string;
-  country: string | Country;
-  currency?: (string | null) | Currency;
-  useUsd?: boolean | null;
-  link: string;
-  description: string;
-  processingTime: {
-    na?: boolean | null;
-    minQty: number;
-    minUom: '1' | '7' | '30.4583333333' | '365';
-    maxQty: number;
-    maxUom?: ('1' | '7' | '30.4583333333' | '365') | null;
-    minMaxEqual?: boolean | null;
-    sameUOM?: boolean | null;
-  };
-  duration: {
-    na?: boolean | null;
-    minQty: number;
-    minUom: '1' | '7' | '30.4583333333' | '365';
-    maxQty: number;
-    maxUom?: ('1' | '7' | '30.4583333333' | '365') | null;
-    minMaxEqual?: boolean | null;
-    sameUOM?: boolean | null;
-  };
-  categories?: (number | PathwayCategory)[] | null;
-  cost: {
-    na?: boolean | null;
-    minMaxEqual?: boolean | null;
-    minQty: number;
-    maxQty?: number | null;
-  };
-  documents?:
-    | {
-        required?: boolean | null;
-        type: number | PathwayDocument;
-        name: string;
-        link?: string | null;
-        cost?: number | null;
-        notes?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  renewable?: boolean | null;
-  citizenshipPathway?: boolean | null;
-  residencyPathway?: boolean | null;
-  reunificationPathway?: boolean | null;
-  hasNationalityRestrictions?: boolean | null;
-  restrictedNationalities?:
-    | {
-        nationality: string | Country;
-        notes?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  restrictions?:
-    | {
-        restriction?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  notes?:
-    | {
-        note?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "roles".
- */
-export interface Role {
-  id: number;
-  name: string;
-  permissions?:
-    | {
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "teams".
- */
-export interface Team {
-  id: number;
-  name: string;
-  parentTeam?: (number | null) | Team;
-  collections?: {
-    countries?: boolean | null;
-    'country-attributes'?: boolean | null;
-    'country-attribute-values'?: boolean | null;
-    'country-images'?: boolean | null;
-    currencies?: boolean | null;
-    languages?: boolean | null;
-    media?: boolean | null;
-    pages?: boolean | null;
-    pathways?: boolean | null;
-    'pathway-documents'?: boolean | null;
-    'pathway-categories'?: boolean | null;
-    roles?: boolean | null;
-    teams?: boolean | null;
-    users?: boolean | null;
-    guides?: boolean | null;
-  };
+  folderType?: ('media' | 'users')[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -703,6 +422,7 @@ export interface Team {
  */
 export interface User {
   id: number;
+  pending?: boolean | null;
   key?: string | null;
   teams?: (number | Team)[] | null;
   firstName?: string | null;
@@ -1142,6 +862,7 @@ export interface User {
     theirs?: boolean | null;
   };
   pronounsString?: string | null;
+  folder?: (number | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
   email?: string | null;
@@ -1160,6 +881,316 @@ export interface User {
       }[]
     | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "teams".
+ */
+export interface Team {
+  id: number;
+  name: string;
+  parentTeam?: (number | null) | Team;
+  collections?: {
+    countries?: boolean | null;
+    'country-attributes'?: boolean | null;
+    'country-attribute-values'?: boolean | null;
+    'country-images'?: boolean | null;
+    currencies?: boolean | null;
+    languages?: boolean | null;
+    media?: boolean | null;
+    pages?: boolean | null;
+    pathways?: boolean | null;
+    'pathway-documents'?: boolean | null;
+    'pathway-categories'?: boolean | null;
+    roles?: boolean | null;
+    teams?: boolean | null;
+    users?: boolean | null;
+    guides?: boolean | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "languages".
+ */
+export interface Language {
+  name: string;
+  /**
+   * ISO 639-2 language code (e.g., 'ENG' for English)
+   */
+  id: string;
+  idString?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "currencies".
+ */
+export interface Currency {
+  name: string;
+  /**
+   * ISO 4217 currency code (e.g., 'USD' for US Dollar)
+   */
+  id: string;
+  idString?: string | null;
+  symbol: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "country-attribute-values".
+ */
+export interface CountryAttributeValue {
+  id: number;
+  idString?: string | null;
+  nameString?: string | null;
+  description?: string | null;
+  dataType?: string | null;
+  exampleValue?: string | null;
+  sourceInfo?: string | null;
+  country: string | Country;
+  attribute: number | CountryAttribute;
+  value: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "country-attributes".
+ */
+export interface CountryAttribute {
+  id: number;
+  attribute: string;
+  description?: string | null;
+  exampleValue?: string | null;
+  source?: {
+    noSingleSource?: boolean | null;
+    name?: string | null;
+    url?: string | null;
+  };
+  dataType?: ('string' | 'number' | 'percentage' | 'currency' | 'boolean' | 'date' | 'link' | 'other') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "guides".
+ */
+export interface Guide {
+  id: number;
+  title: string;
+  /**
+   * Overview text that appears below the title.
+   */
+  subtitle?: string | null;
+  /**
+   * Appears above the title in smaller text.
+   */
+  eyebrow?: string | null;
+  sections?:
+    | {
+        sectionSectionHeading: {
+          title: string;
+          /**
+           * Overview text that appears below the title.
+           */
+          subtitle?: string | null;
+          /**
+           * Appears above the title in smaller text.
+           */
+          eyebrow?: string | null;
+        };
+        content: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  status?: boolean | null;
+  /**
+   * Select a parent page to nest this page under.
+   */
+  parent?: (number | null) | Page;
+  /**
+   * The URL path for this page (e.g., about would target the url: helpmeleave.us/about).
+   */
+  path?: string | null;
+  /**
+   * The title of the page. Used within the H1 tag.
+   */
+  title: string;
+  brow?: string | null;
+  subtitle?: string | null;
+  content?: (SectionBlock | ToggleListBlock | ToggleListItemBlock | RichTextBlock)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pathway-categories".
+ */
+export interface PathwayCategory {
+  id: number;
+  title: string;
+  description?: string | null;
+  parent?: (number | null) | PathwayCategory;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pathway-documents".
+ */
+export interface PathwayDocument {
+  id: number;
+  title: string;
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pathways".
+ */
+export interface Pathway {
+  id: number;
+  name: string;
+  country: string | Country;
+  currency?: (string | null) | Currency;
+  useUsd?: boolean | null;
+  link: string;
+  description: string;
+  processingTime: {
+    na?: boolean | null;
+    minQty: number;
+    minUom: '1' | '7' | '30.4583333333' | '365';
+    maxQty: number;
+    maxUom?: ('1' | '7' | '30.4583333333' | '365') | null;
+    minMaxEqual?: boolean | null;
+    sameUOM?: boolean | null;
+  };
+  duration: {
+    na?: boolean | null;
+    minQty: number;
+    minUom: '1' | '7' | '30.4583333333' | '365';
+    maxQty: number;
+    maxUom?: ('1' | '7' | '30.4583333333' | '365') | null;
+    minMaxEqual?: boolean | null;
+    sameUOM?: boolean | null;
+  };
+  categories?: (number | PathwayCategory)[] | null;
+  cost: {
+    na?: boolean | null;
+    minMaxEqual?: boolean | null;
+    minQty: number;
+    maxQty?: number | null;
+  };
+  documents?:
+    | {
+        required?: boolean | null;
+        type: number | PathwayDocument;
+        name: string;
+        link?: string | null;
+        cost?: number | null;
+        notes?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  renewable?: boolean | null;
+  citizenshipPathway?: boolean | null;
+  residencyPathway?: boolean | null;
+  reunificationPathway?: boolean | null;
+  hasNationalityRestrictions?: boolean | null;
+  restrictedNationalities?:
+    | {
+        nationality: string | Country;
+        notes?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  restrictions?:
+    | {
+        restriction?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  notes?:
+    | {
+        note?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "roles".
+ */
+export interface Role {
+  id: number;
+  title?: string | null;
+  description?: string | null;
+  allPermissions?: boolean | null;
+  permission?: {
+    users?: {
+      canDelete?: boolean | null;
+      canCreate?: boolean | null;
+      canUpdate?: boolean | null;
+    };
+    pages?: {
+      canDelete?: boolean | null;
+      canCreate?: boolean | null;
+      canUpdate?: boolean | null;
+      canPublish?: boolean | null;
+    };
+    pathways?: {
+      canDelete?: boolean | null;
+      canCreate?: boolean | null;
+      canUpdate?: boolean | null;
+    };
+    settings?: {
+      canDelete?: boolean | null;
+      canCreate?: boolean | null;
+      canUpdate?: boolean | null;
+    };
+    resources?: {
+      canDelete?: boolean | null;
+      canCreate?: boolean | null;
+      canUpdate?: boolean | null;
+    };
+  };
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1455,7 +1486,7 @@ export interface SectionBlockSelect<T extends boolean = true> {
         type?: T;
         content?: T;
       };
-  title?: T;
+  mainTitle?: T;
   subtitle?: T;
   content?:
     | T
@@ -1606,11 +1637,48 @@ export interface PathwaysSelect<T extends boolean = true> {
  * via the `definition` "roles_select".
  */
 export interface RolesSelect<T extends boolean = true> {
-  name?: T;
-  permissions?:
+  title?: T;
+  description?: T;
+  allPermissions?: T;
+  permission?:
     | T
     | {
-        id?: T;
+        users?:
+          | T
+          | {
+              canDelete?: T;
+              canCreate?: T;
+              canUpdate?: T;
+            };
+        pages?:
+          | T
+          | {
+              canDelete?: T;
+              canCreate?: T;
+              canUpdate?: T;
+              canPublish?: T;
+            };
+        pathways?:
+          | T
+          | {
+              canDelete?: T;
+              canCreate?: T;
+              canUpdate?: T;
+            };
+        settings?:
+          | T
+          | {
+              canDelete?: T;
+              canCreate?: T;
+              canUpdate?: T;
+            };
+        resources?:
+          | T
+          | {
+              canDelete?: T;
+              canCreate?: T;
+              canUpdate?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1649,6 +1717,7 @@ export interface TeamsSelect<T extends boolean = true> {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  pending?: T;
   key?: T;
   teams?: T;
   firstName?: T;
@@ -1669,6 +1738,7 @@ export interface UsersSelect<T extends boolean = true> {
         theirs?: T;
       };
   pronounsString?: T;
+  folder?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

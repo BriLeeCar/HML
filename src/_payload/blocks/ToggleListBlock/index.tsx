@@ -1,15 +1,15 @@
 import RichText from '@/components/RichText'
 import { Section, SectionHeading } from '@/components/Structure/Section'
 import type { ToggleListBlock } from '@/payload-types'
-import { ToggleListItem } from '../ToggleListItemBlock/Component'
+import { ToggleListItemComponent } from '../ToggleListItemBlock'
 
-export const ToggleList = ({ ...props }: ToggleListBlock) => {
+export const ToggleListComponent = ({ ...props }: ToggleListBlock) => {
 	return props.items && props.items.length > 0 ?
 			<Section>
 				<ToggleTitle {...props} />
 
 				{props.items.map(c => (
-					<ToggleListItem
+					<ToggleListItemComponent
 						key={c.id}
 						{...c}
 					/>

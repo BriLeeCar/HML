@@ -1,7 +1,7 @@
 import type { TextFieldServerProps } from 'payload'
 import { ParentClientField } from './Parent.client'
 
-const ParentField = async ({ req, data, path, ...props }: TextFieldServerProps) => {
+const ParentField = async ({ req, data, ...props }: TextFieldServerProps) => {
 	const payload = req.payload
 
 	const parents = await payload.find({

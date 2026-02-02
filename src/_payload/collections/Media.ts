@@ -4,6 +4,9 @@ export const MediaSlug = 'media' as CollectionSlug
 
 export const MediaCollection: CollectionConfig = {
 	slug: MediaSlug,
+	admin: {
+		group: 'Content',
+	},
 	access: {
 		read: () => true,
 	},

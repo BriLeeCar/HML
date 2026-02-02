@@ -10,6 +10,7 @@ export const CurrenciesCollection: CollectionConfig = {
 	admin: {
 		useAsTitle: 'name',
 		defaultColumns: ['idString', 'name', 'symbol'],
+		group: 'Data',
 	},
 	fields: [
 		NameField({

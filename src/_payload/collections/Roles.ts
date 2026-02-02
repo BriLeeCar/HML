@@ -1,30 +1,103 @@
-import type { CollectionConfig, CollectionSlug } from 'payload'
+import type { CollectionConfig, CollectionSlug, GroupField } from 'payload'
 
 export const RolesSlug = 'roles' as CollectionSlug
+const permissionCbs: GroupField['fields'] = [
+	{
+		name: 'canDelete',
+		type: 'checkbox',
+		defaultValue: false,
+	},
+	{
+		name: 'canCreate',
+		type: 'checkbox',
+		defaultValue: false,
+	},
+	{
+		name: 'canUpdate',
+		type: 'checkbox',
+		defaultValue: false,
+	},
+]
 
-export const RolesCollection: CollectionConfig = {
+const RolesCollection: CollectionConfig = {
 	slug: RolesSlug,
 	admin: {
-		useAsTitle: 'name',
+		useAsTitle: 'title',
+		defaultColumns: ['title', 'description'],
+		group: undefined,
 	},
 	custom: {
 		parent: 'teams',
 	},
 	fields: [
 		{
-			name: 'name',
+			name: 'title',
 			type: 'text',
-			required: true,
 			unique: true,
 		},
 		{
-			name: 'permissions',
-			type: 'array',
-			label: 'Permissions',
-			minRows: 1,
-			maxRows: 10,
-			fields: [],
-			virtual: true,
+			name: 'description',
+			type: 'textarea',
+		},
+		{
+			type: 'checkbox',
+			name: 'allPermissions',
+			label: 'All Permissions',
+		},
+		{
+			name: 'permission',
+			type: 'group',
+			fields: [
+				{
+					type: 'group',
+					name: 'users',
+					admin: {
+						className: '*:*:[.render-fields]:flex *:*:[.render-fields]:flex-col',
+					},
+					fields: permissionCbs,
+				},
+				{
+					type: 'group',
+					name: 'pages',
+					admin: {
+						className: '*:*:[.render-fields]:flex *:*:[.render-fields]:flex-col',
+					},
+					fields: [
+						...permissionCbs,
+						{
+							name: 'canPublish',
+							type: 'checkbox',
+							defaultValue: false,
+						},
+					],
+				},
+				{
+					type: 'group',
+					name: 'pathways',
+					fields: permissionCbs,
+					admin: {
+						className: '*:*:[.render-fields]:flex *:*:[.render-fields]:flex-col',
+					},
+				},
+				{
+					type: 'group',
+					name: 'settings',
+					fields: permissionCbs,
+					admin: {
+						className: '*:*:[.render-fields]:flex *:*:[.render-fields]:flex-col',
+					},
+				},
+				{
+					type: 'group',
+					name: 'resources',
+					fields: permissionCbs,
+					admin: {
+						className: '*:*:[.render-fields]:flex *:*:[.render-fields]:flex-col',
+					},
+				},
+			],
 		},
 	],
 }
+
+export default RolesCollection

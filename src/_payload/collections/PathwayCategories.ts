@@ -10,6 +10,7 @@ export const PathwayCategoriesCollection: CollectionConfig = {
 	admin: {
 		useAsTitle: 'title',
 		defaultColumns: ['title', 'description'],
+		group: 'Data',
 	},
 	fields: [
 		{

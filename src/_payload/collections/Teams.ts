@@ -25,6 +25,7 @@ export const TeamsCollection: CollectionConfig = {
 	},
 	admin: {
 		useAsTitle: 'name',
+		group: 'General',
 	},
 	fields: [
 		{

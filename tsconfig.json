@@ -30,9 +30,13 @@
       "@/blocks/*": [
         "./src/_payload/blocks/*"
       ],
+      "@/globals/*": [
+        "./src/_payload/globals/*"
+      ],
       "@/*": [
         "./src/*",
-        "./@types/*"
+        "./@types/*",
+        "./src/_payload/*"
       ],
       "@payload-config": [
         "./src/_payload/payload.config.ts"

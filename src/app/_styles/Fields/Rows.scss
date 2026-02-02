@@ -1,0 +1,19 @@
+.collection-edit--roles .document-fields__fields {
+    #field-permission > .group-field__wrap > .render-fields {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 0.5fr));
+        row-gap: 2rem;
+        column-gap: 1rem;
+        white-space: nowrap;
+        .group-field__header {
+            white-space: nowrap;
+            margin-bottom: 1rem;
+            font-weight: var(--font-weight-semibold);
+            border-bottom: 0.5px solid;
+            border-color: color-mix(in srgb, currentColor 10%, transparent 0%);
+            line-height: var(--leading-loose);
+            padding-bottom: 0.5rem;
+        }
+    }
+}

@@ -6,7 +6,14 @@ const Label: FC<
 		field: CollapsibleFieldServerProps['field']
 	} & GenericLabelProps
 > = ({ ...props }) => {
-	const data = props.field.admin?.components?.Label as Record<string, any> | undefined
+	const data = props.field.admin?.components?.Label as
+		| Record<
+				string,
+				{
+					[key: string]: string
+				}
+		  >
+		| undefined
 
 	const className = data?.serverProps?.className || ''
 

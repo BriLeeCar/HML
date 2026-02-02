@@ -10,6 +10,7 @@ export const LanguagesCollection: CollectionConfig = {
 	admin: {
 		useAsTitle: 'name',
 		defaultColumns: ['idString', 'name'],
+		group: 'Data',
 	},
 	fields: [
 		NameField({

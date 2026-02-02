@@ -49,9 +49,6 @@ declare module 'payload' {
 		readonly path: string
 		readonly validate?: TextFieldValidation
 	}
-
-	type TextFieldClientProps<F> = ClientFieldBase<TextFieldClientWithoutType>
-		& TextFieldBaseClientProps
 }
 
 declare module '@payloadcms/storage-s3' {

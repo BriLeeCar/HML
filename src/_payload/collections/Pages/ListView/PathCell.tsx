@@ -1,10 +1,6 @@
 import { Icon } from '@/components/Icon'
 import { InlineLink } from '@/components/Text'
-import type {
-	DefaultCellComponentProps,
-	DefaultServerCellComponentProps,
-	TextFieldClient,
-} from 'payload'
+import type { DefaultCellComponentProps, TextFieldClient } from 'payload'
 
 const PathCell = ({ cellData, rowData }: DefaultCellComponentProps<TextFieldClient>) => {
 	return rowData.status == true ?
@@ -19,22 +15,6 @@ const PathCell = ({ cellData, rowData }: DefaultCellComponentProps<TextFieldClie
 				/{cellData}
 			</InlineLink>
 		:	<span className='italic opacity-75 text-sm flex items-center pl-4.5'>/{cellData}</span>
-}
-
-const InnerCell = ({
-	cellData,
-	rowData,
-}: DefaultServerCellComponentProps | DefaultCellComponentProps) => {
-	return (
-		<>
-			<Icon
-				IconName='BinocularIcon'
-				className='size-4 opacity-75'
-				solid
-			/>
-			/{cellData}
-		</>
-	)
 }
 
 export default PathCell

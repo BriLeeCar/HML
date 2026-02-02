@@ -6,6 +6,7 @@ export const CountryAttributesCollection: CollectionConfig = {
 	slug: 'country-attributes',
 	admin: {
 		useAsTitle: 'attribute',
+		group: 'Data',
 	},
 	fields: [
 		{

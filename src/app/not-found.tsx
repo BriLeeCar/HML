@@ -1,6 +1,6 @@
 import { NotFound404 } from '@/components/404'
 import { cn } from '@/lib/cn'
-import '@/styles/old/www.css'
+// import '@/styles/old/www.css'
 
 const NotFound = () => {
 	return (

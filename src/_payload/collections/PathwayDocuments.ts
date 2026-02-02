@@ -4,10 +4,12 @@ export const PathwayDocumentsSlug = 'pathway-documents' as CollectionSlug
 
 export const PathwayDocumentsCollection: CollectionConfig = {
 	slug: PathwayDocumentsSlug,
+
 	custom: {
 		parent: 'pathways',
 	},
 	admin: {
+		group: 'Data',
 		useAsTitle: 'title',
 		defaultColumns: ['title', 'description'],
 	},

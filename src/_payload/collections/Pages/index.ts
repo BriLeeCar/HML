@@ -11,6 +11,8 @@ export const PagesCollection: CollectionConfig = {
 	admin: {
 		useAsTitle: 'title',
 		defaultColumns: ['title', 'status', 'path'],
+		groupBy: true,
+		group: 'Content',
 	},
 	fields: [
 		slugField({

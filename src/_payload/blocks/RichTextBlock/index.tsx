@@ -1,7 +1,7 @@
 import RichText from '@/components/RichText'
 import type { RichTextBlock } from '@/payload-types'
 
-const RichTextComponent = ({ content }: RichTextBlock) => {
+const RichTextBlockComponent = ({ content }: RichTextBlock) => {
 	return (
 		<RichText
 			data={content}
@@ -10,4 +10,4 @@ const RichTextComponent = ({ content }: RichTextBlock) => {
 	)
 }
 
-export default RichTextComponent
+export default RichTextBlockComponent

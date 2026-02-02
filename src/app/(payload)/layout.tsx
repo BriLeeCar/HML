@@ -8,7 +8,7 @@ import React from 'react'
 import { importMap } from './admin/importMap.js'
 
 import '@/app/_styles/tw.css'
-import './custom.scss'
+import './src-app-(payload).scss'
 
 import { Open_Sans } from 'next/font/google'
 

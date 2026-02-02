@@ -2,7 +2,7 @@ import RichText from '@/components/RichText'
 import { Subsection, SubsectionContent, SubsectionHeading } from '@/components/Structure/Subsection'
 import type { ToggleListItemBlock } from '@/payload-types'
 
-export const ToggleListItem = ({ ...props }: ToggleListItemBlock) => {
+export const ToggleListItemComponent = ({ ...props }: ToggleListItemBlock) => {
 	return (
 		<Subsection
 			defaultOpen={false}

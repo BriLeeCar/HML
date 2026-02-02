@@ -1,7 +1,7 @@
-import { PathwayDocumentsSlug } from '@/_payload/collections/PathwayDocuments'
-import { DurationTimeOptions } from '@/_payload/fields/DurationField'
-import { MinMaxDurationFields } from '@/_payload/fields/MinMaxField/MinMaxDurationField'
-import { NameField } from '@/_payload/fields/NameField'
+import { PathwayDocumentsSlug } from '@/collections/PathwayDocuments'
+import { DurationTimeOptions } from '@/fields/DurationField'
+import { MinMaxDurationFields } from '@/fields/MinMaxField'
+import { NameField } from '@/fields/NameField'
 import { cls } from '@/lib/cls'
 import type { Currency } from '@/payload-types'
 import type { CollectionConfig, CollectionSlug, GroupField, Tab } from 'payload'
@@ -146,7 +146,8 @@ const cost: Tab = {
 			admin: {
 				hideGutter: true,
 			},
-			validate: (value: any) => {
+			// @ts-expect-error weird typing by Payload
+			validate: (value: { maxQty: number; minQty: number }) => {
 				if (value.maxQty < value.minQty) {
 					return 'Maximum must be greater than or equal to minimum'
 				}
@@ -419,6 +420,7 @@ export const PathwaysCollection: CollectionConfig = {
 		useAsTitle: 'name',
 		defaultColumns: ['country', 'name', 'description', 'categories'],
 		hideAPIURL: true,
+		group: 'Data',
 	},
 	fields: [
 		NameField({

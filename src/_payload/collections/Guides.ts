@@ -7,6 +7,7 @@ export const GuidesCollection: CollectionConfig = {
 	slug: GuidesSlug,
 	admin: {
 		useAsTitle: 'title',
+		group: 'Content',
 	},
 	fields: [
 		{
