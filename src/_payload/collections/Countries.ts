@@ -11,10 +11,6 @@ export const CountriesCollection: CollectionConfig = {
 		description: 'A list of countries with their associated languages and currencies.',
 		group: 'Data',
 	},
-	access: {
-		admin: () => false,
-		read: () => false,
-	},
 	defaultSort: 'name',
 	fields: [
 		{
