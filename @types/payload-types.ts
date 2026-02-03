@@ -74,7 +74,6 @@ export interface Config {
     countries: Country;
     'country-attribute-values': CountryAttributeValue;
     'country-attributes': CountryAttribute;
-    'country-images': CountryImage;
     currencies: Currency;
     guides: Guide;
     languages: Language;
@@ -104,7 +103,6 @@ export interface Config {
     countries: CountriesSelect<false> | CountriesSelect<true>;
     'country-attribute-values': CountryAttributeValuesSelect<false> | CountryAttributeValuesSelect<true>;
     'country-attributes': CountryAttributesSelect<false> | CountryAttributesSelect<true>;
-    'country-images': CountryImagesSelect<false> | CountryImagesSelect<true>;
     currencies: CurrenciesSelect<false> | CurrenciesSelect<true>;
     guides: GuidesSelect<false> | GuidesSelect<true>;
     languages: LanguagesSelect<false> | LanguagesSelect<true>;
@@ -1005,17 +1003,6 @@ export interface CountryAttribute {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "country-images".
- */
-export interface CountryImage {
-  id: number;
-  country: string | Country;
-  image: number | Media;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "guides".
  */
 export interface Guide {
@@ -1228,10 +1215,6 @@ export interface PayloadLockedDocument {
         value: number | CountryAttribute;
       } | null)
     | ({
-        relationTo: 'country-images';
-        value: number | CountryImage;
-      } | null)
-    | ({
         relationTo: 'currencies';
         value: string | Currency;
       } | null)
@@ -1371,16 +1354,6 @@ export interface CountryAttributesSelect<T extends boolean = true> {
         url?: T;
       };
   dataType?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "country-images_select".
- */
-export interface CountryImagesSelect<T extends boolean = true> {
-  country?: T;
-  image?: T;
   updatedAt?: T;
   createdAt?: T;
 }

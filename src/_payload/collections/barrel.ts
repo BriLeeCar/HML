@@ -5,7 +5,6 @@ export {
 	CountryAttributeValuesSlug,
 } from './CountryAttributeValues'
 
-export { CountryImagesCollection, CountryImagesSlug } from './CountryImages'
 export { CurrenciesCollection, CurrenciesSlug } from './Currencies'
 export { GuidesCollection, GuidesSlug } from './Guides'
 export { LanguagesCollection, LanguagesSlug } from './Languages'
