@@ -17,11 +17,11 @@ export const metadata: Metadata = {
 }
 
 export default async function SupportTeam() {
-	const supportForm = await db.settings.findUnique({
-		where: {
-			key: 'contact-form',
-		},
-	})
+	// const supportForm = await db.settings.findUnique({
+	// 	where: {
+	// 		key: 'contact-form',
+	// 	},
+	// })
 
 	// const isOn = supportForm?.value === 'on'
 	// Quick github change on the fly
