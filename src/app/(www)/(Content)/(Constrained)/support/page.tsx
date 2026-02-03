@@ -23,7 +23,10 @@ export default async function SupportTeam() {
 		},
 	})
 
-	const isOn = supportForm?.value === 'on'
+	// const isOn = supportForm?.value === 'on'
+	// Quick github change on the fly
+	// FIX ME LATER
+	const isOn = true
 
 	return (
 		<Page>
