@@ -1,6 +1,7 @@
+import { Auth } from '@/access'
 import { TimeZone } from '@/lib/getTimezone'
 import { toTitleCase } from '@/lib/toTitleCase'
-import type { CollectionConfig, CollectionSlug, Field } from 'payload'
+import { type CollectionConfig, type CollectionSlug, type Field } from 'payload'
 
 const PronounGroups: Field[] = [
 	['he', 'him', 'his'],
@@ -36,6 +37,11 @@ export const UsersCollection: CollectionConfig = {
 	folders: {
 		browseByFolder: true,
 	},
+	access: {
+		create: Auth.minRole('head'),
+		delete: Auth.role('admin'),
+		update: Auth.minRole('lead') || Auth.self,
+	},
 
 	fields: [
 		{
@@ -43,21 +49,29 @@ export const UsersCollection: CollectionConfig = {
 			type: 'text',
 			required: true,
 			unique: true,
+			admin: {
+				components: {
+					beforeInput: ['@/collections/Users/BeforeInput'],
+					Cell: '@/collections/Users/ListNameCell',
+					Description: '@/collections/Users/BeforeInput',
+				},
+			},
 		},
 		{
 			name: 'pending',
 			type: 'checkbox',
 			admin: {
 				readOnly: true,
+				hidden: true,
 			},
 		},
 		{
 			name: 'key',
 			type: 'text',
-			// required: true,
 			unique: true,
 			admin: {
 				readOnly: true,
+				condition: (_, siblingData) => siblingData?.pending,
 			},
 		},
 		{
@@ -65,6 +79,20 @@ export const UsersCollection: CollectionConfig = {
 			type: 'relationship',
 			relationTo: 'teams',
 			hasMany: true,
+			access: {
+				update: Auth.minRole('lead'),
+				create: Auth.role('admin'),
+			},
+		},
+		{
+			name: 'roles',
+			type: 'relationship',
+			relationTo: 'roles',
+			hasMany: true,
+			access: {
+				update: Auth.minRole('lead'),
+				create: Auth.role('admin'),
+			},
 		},
 		{
 			type: 'row',

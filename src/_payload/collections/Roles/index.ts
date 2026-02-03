@@ -1,25 +1,34 @@
 import type { CollectionConfig, CollectionSlug, GroupField } from 'payload'
 
 export const RolesSlug = 'roles' as CollectionSlug
-const permissionCbs: GroupField['fields'] = [
-	{
-		name: 'canDelete',
-		type: 'checkbox',
+
+const basePermissions = ['canDelete', 'canPublish', 'canCreate', 'canUpdate'] as const
+
+const permissionCbs: GroupField['fields'] = basePermissions.map(p => ({
+	name: p,
+	type: 'checkbox',
+}))
+
+const permissionFields = (name: string): GroupField => ({
+	name,
+	type: 'group',
+	fields: permissionCbs,
+	admin: {
+		components: {
+			Label: '@/components/FieldLabel/Large',
+		},
+		className:
+			'*:*:[.render-fields]:flex *:*:[.render-fields]:flex-row *:*:[.render-fields]:flex-wrap',
 	},
-	{
-		name: 'canCreate',
-		type: 'checkbox',
-	},
-	{
-		name: 'canUpdate',
-		type: 'checkbox',
-	},
-]
+})
 
 export const RolesCollection: CollectionConfig = {
 	slug: RolesSlug,
 	admin: {
 		useAsTitle: 'title',
+		defaultColumns: ['title', 'description'],
+		group: 'General',
+		hideAPIURL: true,
 	},
 	custom: {
 		parent: 'teams',
@@ -40,6 +49,9 @@ export const RolesCollection: CollectionConfig = {
 			label: 'All Permissions',
 			virtual: true,
 			admin: {
+				disableListColumn: true,
+				description:
+					'If checked, this role will have all permissions. This is automatically managed based on individual permissions.',
 				components: {
 					Field: '@/collections/Roles/AllPermissionsCB',
 				},
@@ -47,54 +59,14 @@ export const RolesCollection: CollectionConfig = {
 		},
 		{
 			name: 'permission',
+			label: 'Base Permissions',
 			type: 'group',
 			fields: [
-				{
-					type: 'group',
-					name: 'users',
-					admin: {
-						className: '*:*:[.render-fields]:flex *:*:[.render-fields]:flex-col',
-					},
-					fields: permissionCbs,
-				},
-				{
-					type: 'group',
-					name: 'pages',
-					admin: {
-						className: '*:*:[.render-fields]:flex *:*:[.render-fields]:flex-col',
-					},
-					fields: [
-						...permissionCbs,
-						{
-							name: 'canPublish',
-							type: 'checkbox',
-						},
-					],
-				},
-				{
-					type: 'group',
-					name: 'pathways',
-					fields: permissionCbs,
-					admin: {
-						className: '*:*:[.render-fields]:flex *:*:[.render-fields]:flex-col',
-					},
-				},
-				{
-					type: 'group',
-					name: 'settings',
-					fields: permissionCbs,
-					admin: {
-						className: '*:*:[.render-fields]:flex *:*:[.render-fields]:flex-col',
-					},
-				},
-				{
-					type: 'group',
-					name: 'resources',
-					fields: permissionCbs,
-					admin: {
-						className: '*:*:[.render-fields]:flex *:*:[.render-fields]:flex-col',
-					},
-				},
+				permissionFields('users'),
+				permissionFields('pages'),
+				permissionFields('pathways'),
+				permissionFields('settings'),
+				permissionFields('resources'),
 			],
 		},
 	],

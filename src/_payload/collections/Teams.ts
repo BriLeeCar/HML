@@ -26,6 +26,8 @@ export const TeamsCollection: CollectionConfig = {
 	admin: {
 		useAsTitle: 'name',
 		group: 'General',
+		defaultColumns: ['name', 'parentTeam'],
+		hideAPIURL: true,
 	},
 	fields: [
 		{

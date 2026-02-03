@@ -27,7 +27,7 @@ const config = buildConfig({
 	globals: [BannerGlobalConfig],
 	plugins: [s3Storage(S3StorageConfig)],
 	folders: {
-		browseByFolder: true,
+		browseByFolder: false,
 	},
 	admin: {
 		dashboard: {
@@ -59,6 +59,7 @@ const config = buildConfig({
 					path: '/hub',
 				},
 			},
+			afterNavLinks: ['@/views/Logo'],
 		},
 	},
 

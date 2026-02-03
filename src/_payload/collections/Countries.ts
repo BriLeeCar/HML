@@ -7,26 +7,36 @@ export const CountriesCollection: CollectionConfig = {
 	slug: 'countries',
 	admin: {
 		useAsTitle: 'name',
-		defaultColumns: ['idString', 'name'],
+
 		description: 'A list of countries with their associated languages and currencies.',
 		group: 'Data',
+	},
+	versions: {
+		maxPerDoc: 10,
+		drafts: true,
+	},
+	access: {
+		read: () => true,
+		create: () => true,
+		update: () => true,
+		delete: () => true,
+		readVersions: () => true,
 	},
 	defaultSort: 'name',
 	fields: [
 		{
-			name: 'image',
-			type: 'join',
-			collection: 'country-images',
-			on: 'country',
-			label: 'Country Image',
-			virtual: true,
+			name: 'photo',
+			type: 'upload',
+			relationTo: 'media',
+			label: 'Country Photo',
 			admin: {
-				width: '100%',
-				className: 'basis-full',
-				style: {
-					width: '100%',
-				},
+				width: '50%',
 			},
+			filterOptions: {
+				mimeType: { contains: 'image/' },
+				'folder.name': { equals: 'Country Images' },
+			},
+			displayPreview: true,
 		},
 		...ISOField({
 			admin: {
@@ -93,14 +103,4 @@ export const CountriesCollection: CollectionConfig = {
 			],
 		},
 	],
-	// hooks: {
-	// 	beforeOperation: [
-	// 		({ req, operation, args }) => {
-	// 			if (req.file && (operation == 'create' || operation == 'update')) {
-	// 				req.file.name = `${args.data.id}.jpeg`
-	// 				req.file.mimetype = 'image/jpeg'
-	// 			}
-	// 		},
-	// 	] as CollectionBeforeOperationHook<'countries'>[],
-	// },
 }

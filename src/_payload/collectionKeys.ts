@@ -4,7 +4,6 @@ export const CollectionKeys = {
 	Countries: 'countries',
 	CountryAttributes: 'country-attributes',
 	CountryAttributeValues: 'country-attribute-values',
-	CountryImages: 'country-images',
 	Currencies: 'currencies',
 	Languages: 'languages',
 	Media: 'media',

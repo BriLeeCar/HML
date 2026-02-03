@@ -7,6 +7,7 @@ export const CountryAttributesCollection: CollectionConfig = {
 	admin: {
 		useAsTitle: 'attribute',
 		group: 'Data',
+		hideAPIURL: true,
 	},
 	fields: [
 		{

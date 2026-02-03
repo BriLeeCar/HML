@@ -7,9 +7,6 @@ export const MediaCollection: CollectionConfig = {
 	admin: {
 		group: 'Content',
 	},
-	access: {
-		read: () => true,
-	},
 	folders: {
 		browseByFolder: true,
 	},
@@ -17,15 +14,10 @@ export const MediaCollection: CollectionConfig = {
 		{
 			name: 'alt',
 			type: 'text',
-			required: true,
-		},
-		{
-			name: 'fileName',
-			type: 'text',
-			admin: {
-				description: 'Alternative file name (optional)',
-			},
 		},
 	],
-	upload: true,
+	upload: {
+		bulkUpload: true,
+		mimeTypes: ['image/*', 'video/*', 'audio/*', 'application/pdf'],
+	},
 }

@@ -9,6 +9,8 @@ declare global {
 		params: Promise<V>
 	}
 
+	type Valid<T> = Exclude<T, null | undefined>
+
 	interface Window {
 		db: typeof import('@/server/db/db').default
 	}

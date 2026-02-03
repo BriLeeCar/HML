@@ -94,7 +94,6 @@ export interface Config {
   };
   collectionsJoins: {
     countries: {
-      image: 'country-images';
       attributes: 'country-attribute-values';
     };
     'payload-folders': {
@@ -326,11 +325,7 @@ export interface SectionHeadingBlock {
  * via the `definition` "countries".
  */
 export interface Country {
-  image?: {
-    docs?: (number | CountryImage)[];
-    hasNextPage?: boolean;
-    totalDocs?: number;
-  };
+  photo?: (number | null) | Media;
   /**
    * ISO 3-letter alpha code
    */
@@ -350,17 +345,7 @@ export interface Country {
   mapSvgPath?: string | null;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "country-images".
- */
-export interface CountryImage {
-  id: number;
-  country: string | Country;
-  image: number | Media;
-  updatedAt: string;
-  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -368,11 +353,7 @@ export interface CountryImage {
  */
 export interface Media {
   id: number;
-  alt: string;
-  /**
-   * Alternative file name (optional)
-   */
-  fileName?: string | null;
+  alt?: string | null;
   folder?: (number | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
@@ -425,6 +406,7 @@ export interface User {
   pending?: boolean | null;
   key?: string | null;
   teams?: (number | Team)[] | null;
+  roles?: (number | Role)[] | null;
   firstName?: string | null;
   lastName?: string | null;
   timezone?:
@@ -894,7 +876,6 @@ export interface Team {
     countries?: boolean | null;
     'country-attributes'?: boolean | null;
     'country-attribute-values'?: boolean | null;
-    'country-images'?: boolean | null;
     currencies?: boolean | null;
     languages?: boolean | null;
     media?: boolean | null;
@@ -906,6 +887,53 @@ export interface Team {
     teams?: boolean | null;
     users?: boolean | null;
     guides?: boolean | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "roles".
+ */
+export interface Role {
+  id: number;
+  title?: string | null;
+  description?: string | null;
+  /**
+   * If checked, this role will have all permissions. This is automatically managed based on individual permissions.
+   */
+  allPermissions?: boolean | null;
+  permission?: {
+    users?: {
+      canDelete?: boolean | null;
+      canPublish?: boolean | null;
+      canCreate?: boolean | null;
+      canUpdate?: boolean | null;
+    };
+    pages?: {
+      canDelete?: boolean | null;
+      canPublish?: boolean | null;
+      canCreate?: boolean | null;
+      canUpdate?: boolean | null;
+    };
+    pathways?: {
+      canDelete?: boolean | null;
+      canPublish?: boolean | null;
+      canCreate?: boolean | null;
+      canUpdate?: boolean | null;
+    };
+    settings?: {
+      canDelete?: boolean | null;
+      canPublish?: boolean | null;
+      canCreate?: boolean | null;
+      canUpdate?: boolean | null;
+    };
+    resources?: {
+      canDelete?: boolean | null;
+      canPublish?: boolean | null;
+      canCreate?: boolean | null;
+      canUpdate?: boolean | null;
+    };
   };
   updatedAt: string;
   createdAt: string;
@@ -972,6 +1000,17 @@ export interface CountryAttribute {
     url?: string | null;
   };
   dataType?: ('string' | 'number' | 'percentage' | 'currency' | 'boolean' | 'date' | 'link' | 'other') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "country-images".
+ */
+export interface CountryImage {
+  id: number;
+  country: string | Country;
+  image: number | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -1154,46 +1193,6 @@ export interface Pathway {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "roles".
- */
-export interface Role {
-  id: number;
-  title?: string | null;
-  description?: string | null;
-  allPermissions?: boolean | null;
-  permission?: {
-    users?: {
-      canDelete?: boolean | null;
-      canCreate?: boolean | null;
-      canUpdate?: boolean | null;
-    };
-    pages?: {
-      canDelete?: boolean | null;
-      canCreate?: boolean | null;
-      canUpdate?: boolean | null;
-      canPublish?: boolean | null;
-    };
-    pathways?: {
-      canDelete?: boolean | null;
-      canCreate?: boolean | null;
-      canUpdate?: boolean | null;
-    };
-    settings?: {
-      canDelete?: boolean | null;
-      canCreate?: boolean | null;
-      canUpdate?: boolean | null;
-    };
-    resources?: {
-      canDelete?: boolean | null;
-      canCreate?: boolean | null;
-      canUpdate?: boolean | null;
-    };
-  };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -1327,7 +1326,7 @@ export interface PayloadMigration {
  * via the `definition` "countries_select".
  */
 export interface CountriesSelect<T extends boolean = true> {
-  image?: T;
+  photo?: T;
   id?: T;
   idString?: T;
   name?: T;
@@ -1337,6 +1336,7 @@ export interface CountriesSelect<T extends boolean = true> {
   mapSvgPath?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1437,7 +1437,6 @@ export interface LanguagesSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
-  fileName?: T;
   folder?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1647,6 +1646,7 @@ export interface RolesSelect<T extends boolean = true> {
           | T
           | {
               canDelete?: T;
+              canPublish?: T;
               canCreate?: T;
               canUpdate?: T;
             };
@@ -1654,14 +1654,15 @@ export interface RolesSelect<T extends boolean = true> {
           | T
           | {
               canDelete?: T;
+              canPublish?: T;
               canCreate?: T;
               canUpdate?: T;
-              canPublish?: T;
             };
         pathways?:
           | T
           | {
               canDelete?: T;
+              canPublish?: T;
               canCreate?: T;
               canUpdate?: T;
             };
@@ -1669,6 +1670,7 @@ export interface RolesSelect<T extends boolean = true> {
           | T
           | {
               canDelete?: T;
+              canPublish?: T;
               canCreate?: T;
               canUpdate?: T;
             };
@@ -1676,6 +1678,7 @@ export interface RolesSelect<T extends boolean = true> {
           | T
           | {
               canDelete?: T;
+              canPublish?: T;
               canCreate?: T;
               canUpdate?: T;
             };
@@ -1696,7 +1699,6 @@ export interface TeamsSelect<T extends boolean = true> {
         countries?: T;
         'country-attributes'?: T;
         'country-attribute-values'?: T;
-        'country-images'?: T;
         currencies?: T;
         languages?: T;
         media?: T;
@@ -1720,6 +1722,7 @@ export interface UsersSelect<T extends boolean = true> {
   pending?: T;
   key?: T;
   teams?: T;
+  roles?: T;
   firstName?: T;
   lastName?: T;
   timezone?: T;
