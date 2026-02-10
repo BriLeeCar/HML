@@ -59,6 +59,16 @@ export const resources: tResource = {
 				date: 'January 16, 2026',
 				Icon: { name: 'GlobeIcon', color: 'text-current' },
 			},
+			{
+				title: 'Coordinated International Action Can Help More People Escape Persecution by US Federal Agents',
+				subtitle: 'The pattern of persecution being carried out by federal agents warrants action.',
+				href: '/pdf/Coordinated-International-Action-Can-Help-More-People-Escape-Persecution-by-US-Federal-Agents.pdf',
+				target: '_blank',
+				type: 'press release',
+				author: 'HelpMeLeave Team',
+				date: 'February 2, 2026',
+				Icon: { name: 'GlobeIcon', color: 'text-current' },
+			}
 		],
 	},
 	'Creating Community': {
@@ -72,6 +82,13 @@ export const resources: tResource = {
 				Icon: { name: 'DiscordIcon', color: 'text-indigo-500' },
 				target: '_blank',
 			},
+			{
+				title: 'Mutual Aid Networks',
+				href: '/pdf/Mutual Aid Network - 02-03-2026.pdf',
+				subtitle: 'How To Set Up A Mutual Aid Network',
+				type: 'guide',
+				target: '_blank',
+			}
 		],
 	},
 	'Asylum Information': {
