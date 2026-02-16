@@ -1,10 +1,10 @@
 export const betaCountries = [
 	{ name: 'Albania', code: 'ALB' },
+	{ name: 'Belgium', code: 'BEL' },
 	{ name: 'Brazil', code: 'BRA' },
 	{ name: 'Canada', code: 'CAN' },
 	{ name: 'Costa Rica', code: 'CRI' },
 	{ name: 'Estonia', code: 'EST' },
-	{ name: 'Spain', code: 'ESP' },
 	{ name: 'Finland', code: 'FIN' },
 	{ name: 'France', code: 'FRA' },
 	{ name: 'Ireland', code: 'IRL' },
@@ -12,9 +12,21 @@ export const betaCountries = [
 	{ name: 'Mexico', code: 'MEX' },
 	{ name: 'Norway', code: 'NOR' },
 	{ name: 'Portugal', code: 'PRT' },
-	{ name: 'Uruguay', code: 'URY' },
 	{ name: 'South Africa', code: 'ZAF' },
-	{ name: 'Belgium', code: 'BEL' },
+	{ name: 'Spain', code: 'ESP' },
+	{ name: 'Uruguay', code: 'URY' },
+	{
+		name: 'New Zealand',
+		code: 'NZL',
+	},
+	{
+		name: 'Thailand',
+		code: 'THA',
+	},
+	{
+		name: 'Vietnam',
+		code: 'VNM',
+	},
 ]
 
 export const timeOptionEls = [
