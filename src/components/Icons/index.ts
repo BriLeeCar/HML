@@ -1,4 +1,5 @@
 export * from './AlertTriangle'
+export * from './Announcement'
 export * from './ArrowLeftStroke'
 export * from './ArrowRight'
 export * from './Binocular'
