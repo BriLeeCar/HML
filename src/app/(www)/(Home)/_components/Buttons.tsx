@@ -37,23 +37,24 @@ export const SmallBtns = () => {
 		{
 			main: 'SOON',
 			sub: 'I Need to Leave in 2-6 Months',
-			onClick: undefined,
+			onClick: '/leave-now/start',
 		},
 		{
 			main: 'EXPLORE',
 			sub: "I'm Curious About My Options",
-			onClick: undefined,
+			onClick: '/explorer',
 		},
 	]
 
 	return (
-		<span className='*:[button]:bg-muted/50 text-background *:hover:[button]:bg-foreground/20 z-10 grid w-full grid-cols-1 gap-4 opacity-50 *:[button]:cursor-not-allowed'>
+		<span className='z-10 grid w-full grid-cols-1 gap-4'>
 			{btns.map((btn, i) => {
 				return (
 					<Button
-						variant={'ghost'}
+						variant='muted'
 						key={i}
-						className='flex w-full grow flex-col gap-0 px-4 py-2 tracking-tighter'>
+						href={btn.onClick}
+						className='hover:text-background hover:bg-hml-mulberry dark:bg-hml-mulberry-700 dark:hover:bg-hml-mulberry-700/50 flex w-full grow flex-col items-center justify-center gap-0 px-4 py-2 tracking-tighter dark:outline-2'>
 						<span className='text-lg sm:text-xl'>
 							Help Me {btn.main == 'SOON' && 'LEAVE '}
 							<b className='font-extrabold'>{btn.main}</b>
