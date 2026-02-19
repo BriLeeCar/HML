@@ -5,7 +5,7 @@ export const P = ({ ...props }: Props<'p'>) => {
 		<p
 			{...props}
 			className={cn(
-				'leading-8 text-pretty [&:not(:first-child,:is(h1,h2,h3,h4,h5,h6)+p)]:mt-6',
+				'leading-8 text-pretty [&:not(:first-child,:is(h1,h2,h3,h4,h5,h6,hgroup)+p,section>p)]:mt-6',
 				props.className
 			)}
 		/>

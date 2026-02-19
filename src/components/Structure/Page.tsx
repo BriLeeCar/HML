@@ -11,7 +11,8 @@ export const Page = ({ ...props }: Props) => {
 				data-layout='page'
 				className={cn(
 					'mx-auto flex w-full max-w-2xl flex-col gap-y-6 px-6 lg:max-w-7xl lg:px-8',
-					'*:data-section:mt-8',
+					'*:data-section:not-[hgroup+section]:mt-8',
+					'*:data-section:[hgroup+section]:mt-4',
 					props.className
 				)}>
 				{props.children}
