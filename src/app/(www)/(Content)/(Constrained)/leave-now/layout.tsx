@@ -17,12 +17,22 @@ const Layout = ({ children }: { children?: ReactNode }) => (
 
 		<Divider />
 		<CTA
-			subtitle='We appreciate that information overwhelm can come on very easily – the stakes are high and  there are a lot of things to consider. The Help Me Leave Support team provides 1-1 support to help you understand your options and make the choices that are best for you.'
+			subtitle={
+				<>
+					Find verified country safety data and visa pathways that align with your needs using our
+					Visa Explorer. We also have a growing library of resources and guides to get you started
+					on your journey.
+				</>
+			}
+			secondaryAction={{
+				href: '/guides-resources',
+				label: 'Browse the Library',
+			}}
 			primaryAction={{
-				href: '/support',
-				label: 'Get In Touch',
+				href: '/explorer',
+				label: 'Explore Now',
 			}}>
-			How To Get Support
+			Explore Your Options
 		</CTA>
 	</Page>
 )
