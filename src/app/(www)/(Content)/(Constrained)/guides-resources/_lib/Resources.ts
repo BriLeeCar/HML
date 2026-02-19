@@ -67,7 +67,24 @@ export const resources: tResource = {
 				target: '_blank',
 				type: 'press release',
 				author: 'HelpMeLeave Team',
-				date: 'February 2, 2026',
+				date: 'February 9, 2026',
+				Icon: { name: 'GlobeIcon', color: 'text-current' },
+			},
+		],
+	},
+	'Declaraciones Oficiales': {
+		image: '',
+		links: [
+			{
+				title:
+					'La acción internacional coordinada puede ayudar a más personas a escapar de la persecución por parte de agentes federales de EE. UU.',
+				subtitle:
+					'El patrón de persecución llevado a cabo por agentes federales exige acción tanto de civiles como de cuerpos gubernamentales, dentro y fuera de los Estados Unidos.',
+				href: '/pdf/HML%20Report-02-19-2026-español.pdf',
+				target: '_blank',
+				type: 'press release',
+				author: 'HelpMeLeave Equipo',
+				date: 'February 9, 2026',
 				Icon: { name: 'GlobeIcon', color: 'text-current' },
 			},
 		],
