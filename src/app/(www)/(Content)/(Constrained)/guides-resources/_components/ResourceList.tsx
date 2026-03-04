@@ -32,7 +32,7 @@ export const ResourceLink = ({
 					<span className='block font-semibold text-balance italic dark:text-zinc-200'>
 						{author && author}
 						{date && author && ' • '}
-						{date && date}
+						{date && new Date(date).toLocaleDateString()}
 					</span>
 				:	<></>}
 				{subtitle}
