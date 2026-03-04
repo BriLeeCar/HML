@@ -23,6 +23,27 @@ export const resources: tResource = {
 				Icon: { name: 'TransFlag', color: 'text-current' },
 				target: '_blank',
 			},
+			{
+				title: 'How to File a United Nations Human Rights Complaint',
+				href: '/pdf/How to File a UNHRC Complaint on Letterhead.pdf',
+				type: 'link',
+				target: '_blank',
+				author: 'D. Jey Poston',
+				Icon: { name: 'BookLibraryIcon', color: 'text-hml-red' },
+				date: 'March 3rd, 2026',
+				subtitle: 'A guide on human rights, the UN, and how you can make a difference',
+			},
+			{
+				title:
+					'Persecution of Transgender, Gender-expansive, and Intersex (TGI) People in the U.S.',
+				author: 'D. Jey Poston, Fleurian Filkins, & Qira',
+				subtitle: 'A report on the TGI to prison torture pipeline',
+				type: 'link',
+				date: 'March 3rd, 2026',
+				href: '/pdf/TGI Persecution Report Feb 2026.pdf',
+				Icon: { name: 'TransFlag', color: 'text-current' },
+				target: '_blank',
+			},
 		],
 	},
 	'Official Statements': {

@@ -15,16 +15,15 @@ type Announcement = {
 }
 
 export const topBarAnnouncement: Announcement = {
-	message: 'International Support Needed Against Escalation of Violence from Federal Agents',
+	message: 'Transgender, Gender-expansive, and Intersex to Prison Torture Pipeline',
 	type: {
-		full: 'call to action',
-		abbreviated: 'cta',
+		full: 'Report Released',
+		abbreviated: 'Report',
 		icon: 'AnnouncementIcon',
 	},
 	link: {
 		folder: 'pdf',
-		fileName:
-			'Coordinated-International-Action-Can-Help-More-People-Escape-Persecution-by-US-Federal-Agents',
+		fileName: 'TGI Persecution Report Feb 2026',
 		ext: 'pdf',
 		target: '_blank',
 	},
