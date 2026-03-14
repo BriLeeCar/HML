@@ -7,7 +7,7 @@ import { Button } from '~/components/Button'
 import { cn } from '~/lib/cn'
 import { DBContext } from '~/server/db/provider'
 import { MapBtn, NowBtn, SmallBtns } from './_components/Buttons'
-import { HeadingText, TopText } from './_components/HeadingText'
+import { HeadingText, subheading, TopText } from './_components/HeadingText'
 import { BottomPlane } from './_components/MobileText'
 import { Img } from './_components/SidebarImg'
 
@@ -73,7 +73,7 @@ const MobileHome = () => {
 					<h1 className='sr-only'>Help Me Leave</h1>
 
 					<span className='-mt-6 block px-4 text-xl leading-[1.25lh] font-medium text-black italic dark:text-white dark:text-shadow-xs'>
-						A resource hub for at-risk Americans seeking safety abroad
+						{subheading}
 					</span>
 				</hgroup>
 				<Link

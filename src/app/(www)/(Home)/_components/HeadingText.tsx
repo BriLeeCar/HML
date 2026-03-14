@@ -1,3 +1,5 @@
+export const subheading = 'A resource hub for at-risk people in the U.S. seeking safety abroad'
+
 export const HeadingText = () => {
 	return (
 		<hgroup className='relative py-6'>
@@ -6,7 +8,7 @@ export const HeadingText = () => {
 			<Text className='text-hml-red dark:text-hml-grey h-auto w-full md:hidden' />
 			<WithDashed className='text-hml-red dark:text-hml-grey hidden h-auto w-full pr-3 md:block' />
 			<p className='text-foreground/70 bg-background/75 top-[70%] block w-full justify-start p-2 font-sans text-base/4 italic md:absolute lg:top-[75%] 2xl:bg-transparent'>
-				A resource hub for at-risk people in the U.S. seeking safety abroad
+				{subheading}
 			</p>
 		</hgroup>
 	)
