@@ -11,18 +11,24 @@ import { Button, CloseButton } from '../Button';
 
 export const Modal = ({ ...props }: Props) => {
     const [open, setOpen] = useState(false);
+    function handleClose (){
+        setOpen(false)
+    }
     return (
         <div>
             <Button
                 onClick={() => setOpen(!open)}
             >Open me</Button>
-            <MuiModal open={open} className="w-full h-full bg-background/50 m-0 p-0 flex justify-center items-center">
+            <MuiModal
+                open={open}
+                onClose={handleClose}
+                className="w-full h-full bg-background/50 m-0 p-0 flex justify-center items-center"
+            >
                 <div className="modal__body bg-background flex flex-col gap-6 size-9/10 flex-shrink-0 rounded-xl pt-0 pb-10 px-6">
-                    <div className="modal__header flex w-full justify-between">
-                        <Heading className="h2">Heading</Heading>
-                        <CloseButton />
+                    <div className="modal__header flex w-full justify-between my-2 items-center">
+                        <Heading className="h2 m-0">Heading</Heading>
+                        <CloseButton onClick={handleClose} />
                     </div>/
-
                         {props.children}
                 </div>
             </MuiModal>
