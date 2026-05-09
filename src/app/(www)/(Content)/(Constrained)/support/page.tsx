@@ -32,7 +32,7 @@ export default async function SupportTeam() {
 	return (
 		<Page>
 			<SupportHeading />
-			<Modal><p>foo</p></Modal>
+			<Modal id="triage"><p>foo</p></Modal>
 			<Text>
 				We’ll help you identify your most important support needs, explore which pathways may suit
 				you best, and then walk with you through the steps of organizing, arranging, and planning
