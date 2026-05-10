@@ -1,16 +1,20 @@
 "use client"
 
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import MuiModal from '@mui/material/Modal';
 
-import { Eyebrow } from '~/components/Text/Eyebrow'
 import { Heading } from '~/components/Text/Heading'
-import { Subtitle } from '~/components/Text/Subtitle'
-import { cn } from '~/lib/cn'
 import { Button, CloseButton } from '../Button';
 
-export const Modal = ({ ...props }: Props) => {
-    const { id, btnText } = props;
+export const Modal = ({
+    id,
+    btnText = 'Open Modal',
+    children,
+}: {
+    id: string,
+    btnText?: string,
+    children: ReactNode
+}) => {
     const [open, setOpen] = useState(false);
 
     function handleClose (){
@@ -28,7 +32,7 @@ export const Modal = ({ ...props }: Props) => {
                 id={`modal-${id}__open-btn`}
                 onClick={() => setOpen(!open)}
 
-            >{btnText || 'Open Modal'}</Button>
+            >{btnText}</Button>
             <MuiModal
                 open={open}
                 onClose={handleClose}
@@ -43,7 +47,7 @@ export const Modal = ({ ...props }: Props) => {
                         <Heading className="h2 m-0">Heading</Heading>
                         <CloseButton onClick={handleClose} />
                     </div>/
-                        {props.children}
+                        {children}
                 </div>
             </MuiModal>
         </div>
