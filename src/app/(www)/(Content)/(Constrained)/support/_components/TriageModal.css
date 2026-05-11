@@ -11,3 +11,12 @@ ul li {
     margin-left: 24px;
     list-style: disc;
 }
+
+a {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: var(--text-foreground);
+}
