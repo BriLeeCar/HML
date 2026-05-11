@@ -21,6 +21,7 @@ export function TriageModal() {
     return (<Modal
         id="onsite-triage"
         btnText="triage"
+        heading="Is HML right for you?"
     >
         {branchContent.body && (
             <Markdown>{branchContent.body}</Markdown>

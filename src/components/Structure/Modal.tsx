@@ -9,10 +9,12 @@ import { Button, CloseButton } from '../Button';
 export const Modal = ({
     id,
     btnText = 'Open Modal',
+    heading = 'Heading',
     children,
 }: {
-    id: string,
-    btnText?: string,
+    id: string
+    btnText?: string
+    heading?: string
     children: ReactNode
 }) => {
     const [open, setOpen] = useState(false);
@@ -44,7 +46,7 @@ export const Modal = ({
                     id={`modal-${id}__body`}    
                 >
                     <div className="modal__header flex w-full justify-between my-2 items-center">
-                        <Heading className="h2 m-0">Heading</Heading>
+                        <Heading className="text-hml-slate dark:text-hml-grey text-[2rem] font-semibold tracking-tight text-pretty">{heading}</Heading>
                         <CloseButton onClick={handleClose} />
                     </div>
                     <div className="modal__content overflow-scroll">
