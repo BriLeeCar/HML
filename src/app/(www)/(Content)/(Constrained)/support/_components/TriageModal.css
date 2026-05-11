@@ -18,5 +18,5 @@ a {
 }
 
 a:hover {
-    color: var(--text-foreground);
+    color: var(--color-hml-yellow);
 }
