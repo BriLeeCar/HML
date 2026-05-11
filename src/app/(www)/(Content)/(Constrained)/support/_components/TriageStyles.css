@@ -1,0 +1,13 @@
+p {
+    margin-bottom: 24px;
+}
+
+ul {
+    list-style: disc;
+    margin-bottom: 24px;
+}
+
+ul li {
+    margin-left: 24px;
+    list-style: disc;
+}
