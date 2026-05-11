@@ -1,0 +1,26 @@
+:root {
+    --anim-ease: cubic-bezier(0.390, 0.575, 0.565, 1.000);
+}
+
+@keyframes modal-appear {
+    0% {
+        opacity: 0;
+        transform: scale3d(0.9, 0.9, 1);
+    }
+        100% {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+
+@keyframes modal-vanish {
+    0% {
+        opacity: 0;
+        transform: scale3d(0.9, 0.9, 1);
+    }
+        100% {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+    }
+}
