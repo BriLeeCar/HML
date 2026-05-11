@@ -46,8 +46,10 @@ export const Modal = ({
                     <div className="modal__header flex w-full justify-between my-2 items-center">
                         <Heading className="h2 m-0">Heading</Heading>
                         <CloseButton onClick={handleClose} />
-                    </div>/
+                    </div>
+                    <div className="modal__content overflow-scroll">
                         {children}
+                    </div>
                 </div>
             </MuiModal>
         </div>
