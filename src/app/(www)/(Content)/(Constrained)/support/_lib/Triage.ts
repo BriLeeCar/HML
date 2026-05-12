@@ -49,7 +49,7 @@ Do you understand how *Help Me Leave* can help you?
         ]
     },
     'redirect-about': {
-        redirect: '/about'
+        redirect: '/our-mission'
     },
     funding: {
         body: `
