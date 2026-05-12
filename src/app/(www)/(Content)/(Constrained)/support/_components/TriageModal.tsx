@@ -30,6 +30,7 @@ export function TriageModal() {
             <div className="flex gap-3">
                 {branchContent.choices.map((choice) => (
                     <Button
+                        key={`triage-option-${choice.text}`}
                         onClick={() => setBranch(choice.next)}
                     >
                         {choice.text}
