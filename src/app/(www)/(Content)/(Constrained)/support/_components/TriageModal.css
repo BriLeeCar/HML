@@ -18,5 +18,5 @@ a {
 }
 
 a:hover {
-    color: var(--color-hml-yellow);
+    color: light-dark(var(--color-hml-mulberry), var(--color-hml-yellow));
 }
