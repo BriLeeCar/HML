@@ -16,6 +16,7 @@ export const Button = ({
 		variant == 'muted'
 			&& 'text-hml-red hover:bg-muted outline-hml-red dark:text-hml-grey dark:bg-hml-mulberry-100/10 ring-zinc-600 outline-1 hover:outline-current/10 dark:outline-transparent',
 		variant == 'ghost' && 'border-0 bg-transparent text-current',
+		variant == 'close' && 'dark:bg-hml-mulberry dark:hover:bg-hml-mulberry-700 bg-hml-red hover:bg-hml-mulberry m-0 size-9 flex justify-center items-center rounded-full',
 		props.className
 	)
 
@@ -41,13 +42,24 @@ export const Button = ({
 			{...buttonProps}
 			className={classes}>
 			<TouchTarget>
-				<Inner
-					children={props.children}
-					preIcon={preIcon}
-				/>
+				{
+					variant === 'close' ? (
+						<Icon IconName={preIcon} className="m-0 flex-shrink-0" />
+					) : (
+						<Inner
+							children={props.children}
+							preIcon={preIcon}
+						/> 
+					)
+				}
 			</TouchTarget>
 		</button>
 	)
+}
+
+export function CloseButton(props: Props) {
+	const buttonProps = props as Props<'button'>
+	return <Button {...buttonProps} variant={"close"} preIcon='XIcon' />
 }
 
 export function TouchTarget({
@@ -71,7 +83,7 @@ export function TouchTarget({
 }
 
 type tBtnProps<T extends 'button' | 'link'> = {
-	variant?: 'default' | 'muted' | 'ghost' | 'bright'
+	variant?: 'default' | 'muted' | 'ghost' | 'bright' | 'close'
 } & (T extends 'link' ? Omit<Props.Link, 'as'> & { as: 'link'; href: string }
 : T extends 'button' ? Props<'button'>
 : never)

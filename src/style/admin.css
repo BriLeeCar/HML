@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "./style.css";
 @import "./colors.css";
+@import "./animations.css";
 
 @theme {
 	--animate-nav-open: nav-open cubic-bezier(0.6, -0.28, 0.74, 0.05) forwards;

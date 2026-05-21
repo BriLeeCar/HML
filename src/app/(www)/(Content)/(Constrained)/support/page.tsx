@@ -9,6 +9,7 @@ import { Text } from '~/components/Text/Text'
 import { FAQ } from './_components/faq'
 import { SupportHeading } from './_components/Heading'
 import { OnHold } from './_components/OnHold'
+import { TriageModal } from './_components/TriageModal'
 
 export const metadata: Metadata = {
 	title: 'Support Team',
@@ -31,7 +32,7 @@ export default async function SupportTeam() {
 	return (
 		<Page>
 			<SupportHeading />
-
+			<TriageModal />
 			<Text>
 				We’ll help you identify your most important support needs, explore which pathways may suit
 				you best, and then walk with you through the steps of organizing, arranging, and planning
