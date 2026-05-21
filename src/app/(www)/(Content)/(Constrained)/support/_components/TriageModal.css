@@ -1,22 +1,22 @@
-p {
+#onsite-triage p {
     margin-bottom: 24px;
 }
 
-ul {
+#onsite-triage ul {
     list-style: disc;
     margin-bottom: 24px;
 }
 
-ul li {
+#onsite-triage ul li {
     margin-left: 24px;
     list-style: disc;
 }
 
-a {
+#onsite-triage a {
     font-weight: bold;
     text-decoration: underline;
 }
 
-a:hover {
+#onsite-triage a:hover {
     color: light-dark(var(--color-hml-mulberry), var(--color-hml-yellow));
 }
